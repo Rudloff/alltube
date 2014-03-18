@@ -124,12 +124,16 @@ Class VideoDownload
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
-        $cmd .=' --dump-json '.escapeshellarg($url);
+        $cmd .=' --dump-json '.escapeshellarg($url)." 2>&1";
         exec(
             $cmd,
-            $json
+            $json, $code
         );
-        return $json[0];
+	if ($code>0) {
+            return array('success'=>false, 'error'=>$json);
+        } else {
+            return json_decode($json[0]);
+        }
     }
 
     /**

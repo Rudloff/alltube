@@ -14,7 +14,7 @@ $python="/usr/bin/python";
 require_once 'download.php';
 if (isset($_GET["url"])) {
     if (isset($_GET["format"]) || isset($_GET['audio'])) {
-        $video = json_decode(VideoDownload::getJSON($_GET["url"], $_GET["format"]));
+        $video = VideoDownload::getJSON($_GET["url"], $_GET["format"]);
         
         if (isset($video->url)) {
             //Vimeo needs a correct user-agent
@@ -124,7 +124,7 @@ if (isset($_GET["url"])) {
             $error=true;
         }
     } else {
-        $video = json_decode(VideoDownload::getJSON($_GET["url"]));
+        $video = VideoDownload::getJSON($_GET["url"]);
         if (isset($video->webpage_url)) {
             include 'head.php';
             ?>
