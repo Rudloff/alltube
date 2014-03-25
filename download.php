@@ -129,7 +129,7 @@ Class VideoDownload
             $cmd,
             $json, $code
         );
-	if ($code>0) {
+        if ($code>0) {
             return array('success'=>false, 'error'=>$json);
         } else {
             return json_decode($json[0]);
@@ -162,7 +162,7 @@ Class VideoDownload
      * 
      * @return string Title
      * */
-    function getAvailabeFormats ($url)
+    function getAvailableFormats ($url)
     {
         exec(
             VideoDownload::$_python.' youtube-dl -F '.
