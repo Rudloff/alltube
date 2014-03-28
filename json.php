@@ -5,6 +5,6 @@ require_once 'download.php';
 if (isset($_GET["url"])) {
     header('Content-Type: application/json');
     $video = VideoDownload::getJSON($_GET["url"]);
-    echo $video;
+    echo json_encode($video);
 }
 ?>
