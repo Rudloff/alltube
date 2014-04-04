@@ -21,6 +21,8 @@ href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 <meta name="twitter:image" content="http://www.alltubedownload.net/img/logo.png" />
 <meta name="twitter:creator" content="@Tael67" />
 <meta name="twitter:description" content="Easily download videos from Youtube, Dailymotion, Vimeo and other websites." />
+<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+<script src="cast.js"></script>
 </head>
 
 

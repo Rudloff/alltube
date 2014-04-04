@@ -1,9 +1,9 @@
 <?php
 /**
  * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
- * 
+ *
  * PHP Version 5.3.10
- * 
+ *
  * @category Youtube-dl
  * @package  Youtubedl
  * @author   Pierre Rudloff <rudloff@strasweb.fr>
@@ -15,7 +15,7 @@ require_once 'download.php';
 if (isset($_GET["url"])) {
     if (isset($_GET["format"]) || isset($_GET['audio'])) {
         $video = VideoDownload::getJSON($_GET["url"], $_GET["format"]);
-        
+
         if (isset($video->url)) {
             //Vimeo needs a correct user-agent
             $UA = VideoDownload::getUA();
@@ -57,7 +57,7 @@ if (isset($_GET["url"])) {
                     );
                     exit;
                 }
-                
+
             } else {
                 if (isset($_GET['audio'])) {
                     header(
@@ -135,12 +135,12 @@ if (isset($_GET["url"])) {
                 include 'logo.php';
                 ?>
             <p>You are going to download<i>
-                <a href="<?php echo $video->webpage_url; ?>">
+                <a id="video_link" data-ext="<?php echo $video->ext; ?>" data-video="<?php echo $video->url; ?>" href="<?php echo $video->webpage_url; ?>">
             <?php
             echo $video->title;
-            ?></a></i>.</p>
+            ?></a></i>. <img class="cast_icon" id="cast_disabled" src="img/ic_media_route_disabled_holo_light.png" alt="Google Cast™ is disabled" title="Google Cast is not supported on this browser." /><img class="cast_btn cast_hidden cast_icon" id="cast_btn_launch" src="img/ic_media_route_off_holo_light.png" title="Cast to ChromeCast" alt="Google Cast™" /><img src="img/ic_media_route_on_holo_light.png" alt="Casting to ChromeCast…" title="Stop casting" id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" /></p>
             <?php
-            echo '<img class="thumb" src="', 
+            echo '<img class="thumb" src="',
                 $video->thumbnail, '" alt="" />';
             ?><br/>
             <form action="api.php">
@@ -184,7 +184,7 @@ if (isset($_GET["url"])) {
             $error=true;
         }
     }
-} 
+}
 if (isset($error)) {
     include 'head.php';
     ?>
