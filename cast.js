@@ -3,19 +3,39 @@
 var launchBtn, disabledBtn, stopBtn;
 var session, currentMedia;
 
-function receiverListener() {
+function receiverListener(e) {
     'use strict';
-    console.log('receiverListener');
-}
-
-function sessionListener() {
-    'use strict';
-    console.log('sessionListener');
+    console.log('receiverListener', e);
 }
 
 function onMediaDiscovered(how, media) {
     'use strict';
+    console.log('onMediaDiscovered', how);
     currentMedia = media;
+    if (launchBtn) {
+        stopBtn.classList.remove('cast_hidden');
+        launchBtn.classList.add('cast_hidden');
+    }
+}
+
+function sessionListener(e) {
+    'use strict';
+    session = e;
+    session.addMediaListener(onMediaDiscovered.bind(this, 'addMediaListener'));
+    if (session.media.length !== 0) {
+        onMediaDiscovered('onRequestSessionSuccess', session.media[0]);
+    }
+}
+
+function onStopCast() {
+    'use strict';
+    stopBtn.classList.add('cast_hidden');
+    launchBtn.classList.remove('cast_hidden');
+}
+
+function stopCast() {
+    'use strict';
+    session.stop(onStopCast);
 }
 
 function onMediaError() {
@@ -28,44 +48,20 @@ function onRequestSessionSuccess(e) {
     'use strict';
     session = e;
     var videoLink = document.getElementById('video_link'), videoURL = videoLink.dataset.video, mediaInfo = new chrome.cast.media.MediaInfo(videoURL, 'video/' + videoLink.dataset.ext), request = new chrome.cast.media.LoadRequest(mediaInfo);
-    stopBtn.classList.remove('cast_hidden');
-    launchBtn.classList.add('cast_hidden');
     session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError);
 }
 
-function onLaunchError() {
+function onLaunchError(e) {
     'use strict';
-    console.log('onLaunchError');
-}
-
-function onInitSuccess() {
-    'use strict';
-    chrome.cast.requestSession(onRequestSessionSuccess, onLaunchError);
-}
-
-function onError() {
-    'use strict';
-    console.log('onError');
-}
-
-function onStopCast() {
-    'use strict';
-    stopBtn.classList.add('cast_hidden');
-    launchBtn.classList.remove('cast_hidden');
+    console.log('onLaunchError', e.description);
 }
 
 function launchCast() {
     'use strict';
-    var sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID), apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener, chrome.cast.AutoJoinPolicy.PAGE_SCOPED);
-    chrome.cast.initialize(apiConfig, onInitSuccess, onError);
+    chrome.cast.requestSession(onRequestSessionSuccess, onLaunchError);
 }
 
-function stopCast() {
-    'use strict';
-    session.stop(onStopCast);
-}
-
-function initializeCastApi() {
+function onInitSuccess() {
     'use strict';
     launchBtn = document.getElementById('cast_btn_launch');
     disabledBtn = document.getElementById('cast_disabled');
@@ -76,6 +72,17 @@ function initializeCastApi() {
         launchBtn.addEventListener('click', launchCast, false);
         stopBtn.addEventListener('click', stopCast, false);
     }
+}
+
+function onError() {
+    'use strict';
+    console.log('onError');
+}
+
+function initializeCastApi() {
+    'use strict';
+    var sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID), apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener, chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED);
+    chrome.cast.initialize(apiConfig, onInitSuccess, onError);
 }
 
 function loadCastApi(loaded, errorInfo) {
