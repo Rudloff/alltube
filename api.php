@@ -13,113 +13,12 @@
 $python="/usr/bin/python";
 require_once 'download.php';
 if (isset($_GET["url"])) {
-    if (isset($_GET["format"]) || isset($_GET['audio'])) {
+    if (isset($_GET["format"])) {
         $video = VideoDownload::getJSON($_GET["url"], $_GET["format"]);
 
         if (isset($video->url)) {
-            //Vimeo needs a correct user-agent
-            $UA = VideoDownload::getUA();
-            ini_set(
-                'user_agent',
-                $UA
-            );
-            $url_info = parse_url($video->url);
-            if ($url_info['scheme'] == 'rtmp') {
-                if (isset($_GET['audio'])) {
-                    header(
-                        'Content-Disposition: attachment; filename="'.
-                        html_entity_decode(
-                            pathinfo(
-                                VideoDownload::getFilename(
-                                    $video->webpage_url
-                                ), PATHINFO_FILENAME
-                            ).'.mp3', ENT_COMPAT, 'ISO-8859-1'
-                        ).'"'
-                    );
-                    header("Content-Type: audio/mpeg");
-                    passthru(
-                        '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                        '   |  /usr/bin/avconv -v quiet -i - -f mp3 pipe:1'
-                    );
-                    exit;
-                } else {
-                    header(
-                        'Content-Disposition: attachment; filename="'.
-                        html_entity_decode(
-                            VideoDownload::getFilename(
-                                $video->webpage_url, $video->format_id
-                            ), ENT_COMPAT, 'ISO-8859-1'
-                        ).'"'
-                    );
-                    header("Content-Type: application/octet-stream");
-                    passthru(
-                        '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url)
-                    );
-                    exit;
-                }
-
-            } else {
-                if (isset($_GET['audio'])) {
-                    header(
-                        'Content-Disposition: attachment; filename="'.
-                        html_entity_decode(
-                            pathinfo(
-                                VideoDownload::getFilename(
-                                    $video->webpage_url
-                                ), PATHINFO_FILENAME
-                            ).'.mp3', ENT_COMPAT, 'ISO-8859-1'
-                        ).'"'
-                    );
-                    header("Content-Type: audio/mpeg");
-                    passthru(
-                        '/usr/bin/wget -q --user-agent='.escapeshellarg($UA).
-                        '  -O - '.escapeshellarg($video->url).
-                        '   |  /usr/bin/avconv -v quiet -i - -f mp3 pipe:1'
-                    );
-                    exit;
-                } else if (pathinfo($video->url, PATHINFO_EXTENSION) == 'm3u8') {
-                    header(
-                        'Content-Disposition: attachment; filename="'.
-                        html_entity_decode(
-                            pathinfo(
-                                VideoDownload::getFilename(
-                                    $video->webpage_url
-                                ), PATHINFO_FILENAME
-                            ).'.mp4', ENT_COMPAT, 'ISO-8859-1'
-                        ).'"'
-                    );
-                    header("Content-Type: video/mp4");
-                    passthru(
-                        '/usr/bin/avconv -v quiet -i '.
-                        escapeshellarg($video->url).' -f h264 pipe:1'
-                    );
-                    exit;
-                } else {
-                    $headers = get_headers($video->url, 1);
-                    header(
-                        'Content-Disposition: attachment; filename="'.
-                        html_entity_decode(
-                            VideoDownload::getFilename(
-                                $video->webpage_url, $video->format_id
-                            ), ENT_COMPAT, 'ISO-8859-1'
-                        ).'"'
-                    );
-                    if (is_string($headers['Content-Type'])
-                        && isset($headers['Content-Type'])
-                    ) {
-                        header("Content-Type: ".$headers['Content-Type']);
-                    } else {
-                        header("Content-Type: application/octet-stream");
-                    }
-                    if (is_string($headers['Content-Length'])
-                        && isset($headers['Content-Length'])
-                    ) {
-                        header("Content-Length: ".$headers['Content-Length']);
-                    }
-                    readfile($video->url);
-                    exit;
-                }
-            }
+            header("Location: ".$video->url);
+            exit;
         } else {
             $error=true;
         }
