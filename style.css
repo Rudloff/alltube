@@ -538,6 +538,10 @@ h1 {
     vertical-align:middle;
 }
 
+.format {
+    text-align:left;
+}
+
 @media (max-width: 640px) {
     .thumb {
         width:90%;

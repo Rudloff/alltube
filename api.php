@@ -48,20 +48,18 @@ if (isset($_GET["url"])) {
             <?php
             if (isset($video->formats)) {
                 ?>
-                <legend for="format">Select format</legend>
-                <select id="format" name="format">
+                <h3>Available formats:</h3>
+                <p>(You might have to do a <i>Right click > Save as</i>)</p>
+                <ul id="format" class="format">
                 <?php
                 foreach ($video->formats as $format) {
-                    echo '<option value="', $format->format_id, '"';
-                    if ($format->format_id == $video->format_id) {
-                        echo ' selected ';
-                    }
-                    echo '>';
+                    echo '<li>';
+                    echo '<a href="', $format->url ,'">';
                     echo $format->format, ' (',  $format->ext, ')';
-                    echo '</option>';
+                    echo '</a></li>';
                 }
                 ?>
-                </select><br/><br/>
+                </ul><br/><br/>
             <?php
             } else {
                 ?>
