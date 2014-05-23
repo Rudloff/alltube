@@ -66,8 +66,12 @@ if (isset($_GET["url"])) {
                 <input type="hidden" name="format" value="best" />
             <?php
             }
+            if (!isset($video->formats)) {
             ?>
             <input class="downloadBtn" type="submit" value="Download" /><br/>
+            <?php
+            }
+            ?>
             </form>
             </div>
             </div>
