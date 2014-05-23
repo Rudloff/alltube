@@ -68,7 +68,7 @@ if (isset($_GET["url"])) {
             }
             if (!isset($video->formats)) {
             ?>
-            <input class="downloadBtn" type="submit" value="Download" /><br/>
+            <a class="downloadBtn" href="<?php echo $video->url; ?>">Download</a><br/>
             <?php
             }
             ?>
