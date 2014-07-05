@@ -10,7 +10,6 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-$python="/usr/bin/python";
 require_once 'download.php';
 if (isset($_GET["url"])) {
     if (isset($_GET["format"]) || isset($_GET['audio'])) {
