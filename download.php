@@ -11,7 +11,7 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
- 
+require_once 'config.php';
 /**
  * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
  * Main class
@@ -26,9 +26,6 @@
  * */
 Class VideoDownload
 {
-    static private $_python="/usr/bin/python";
-    static private $_params="--no-playlist";
-    
     /**
      * Get version of youtube-dl
      * 
@@ -37,7 +34,7 @@ Class VideoDownload
     function getVersion ()
     {
         exec(
-            VideoDownload::$_python.' youtube-dl --version',
+            PYTHON.' '.YOUTUBE_DL.' --version',
             $version, $code
         );
         return $version[0];
@@ -50,7 +47,7 @@ Class VideoDownload
     function getUA ()
     {
         exec(
-            VideoDownload::$_python.' youtube-dl --dump-user-agent',
+            PYTHON.' '.YOUTUBE_DL.' --dump-user-agent',
             $version, $code
         );
         return $version[0];
@@ -64,7 +61,7 @@ Class VideoDownload
     function listExtractors ()
     {
         exec(
-            VideoDownload::$_python.' youtube-dl --list-extractors',
+            PYTHON.' '.YOUTUBE_DL.' --list-extractors',
             $extractors, $code
         );
         return $extractors;
@@ -80,7 +77,7 @@ Class VideoDownload
      * */
     function getFilename ($url, $format=null)
     {
-        $cmd=VideoDownload::$_python.' youtube-dl';
+        $cmd=PYTHON.' youtube-dl';
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
@@ -102,7 +99,7 @@ Class VideoDownload
     function getTitle ($url)
     {
         exec(
-            VideoDownload::$_python.' youtube-dl --get-title '.
+            PYTHON.' '.YOUTUBE_DL.' --get-title '.
             escapeshellarg($url),
             $title
         );
@@ -120,11 +117,11 @@ Class VideoDownload
      * */
     function getJSON ($url, $format=null)
     {
-        $cmd=VideoDownload::$_python.' youtube-dl '.VideoDownload::$_params;
+        $cmd=PYTHON.' '.YOUTUBE_DL.' '.PARAMS;
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
-        $cmd .=' --no-warnings --dump-json '.escapeshellarg($url)." 2>&1";
+        $cmd .=' --dump-json '.escapeshellarg($url)." 2>&1";
         exec(
             $cmd,
             $json, $code
@@ -146,7 +143,7 @@ Class VideoDownload
     function getThumbnail ($url)
     {
         exec(
-            VideoDownload::$_python.' youtube-dl --get-thumbnail '.
+            PYTHON.' '.YOUTUBE_DL.' --get-thumbnail '.
             escapeshellarg($url),
             $thumb
         );
@@ -165,7 +162,7 @@ Class VideoDownload
     function getAvailableFormats ($url)
     {
         exec(
-            VideoDownload::$_python.' youtube-dl -F '.
+            PYTHON.' '.YOUTUBE_DL.' -F '.
             escapeshellarg($url),
             $formats
         );
@@ -195,7 +192,7 @@ Class VideoDownload
      * */
     function getURL ($url, $format=null)
     {
-        $cmd=VideoDownload::$_python.' youtube-dl';
+        $cmd=PYTHON.' '.YOUTUBE_DL;
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
