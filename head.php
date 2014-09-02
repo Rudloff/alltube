@@ -9,6 +9,7 @@
 href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 <link rel="author" href="https://plus.google.com/110403274854419000481?rel=author" />
 <link rel="author" href="https://plus.google.com/103696815796116179392?rel=author" />
+<link href="https://plus.google.com/108799967445657477255" rel="publisher" />
 <title itemprop="name">AllTube Download</title>
 <meta itemprop="url" content="http://alltubedownload.net/" />
 <link rel="icon" href="img/favicon.png" />
