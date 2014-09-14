@@ -2,3 +2,4 @@ AddType application/x-web-app-manifest+json .webapp
 RewriteEngine On
 RewriteCond %{REQUEST_URI} !=/maintenance.php
 RewriteRule ^(.*)\.php$ /maintenance.php [R=301]
+RewriteRule ^$ /maintenance.php [R=301]
