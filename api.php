@@ -51,6 +51,10 @@ if (isset($_GET["url"])) {
                 <p>(You might have to do a <i>Right click > Save as</i>)</p>
                 <ul id="format" class="format">
                 <?php
+                echo '<li class="best" itemprop="encoding" itemscope itemtype="http://schema.org/VideoObject">';
+                echo '<a itemprop="contentUrl" href="', $video->url ,'">';
+                echo '<b>Best</b> (<span itemprop="encodingFormat">',  $video->ext, '</span>)';
+                echo '</a></li>';
                 foreach ($video->formats as $format) {
                     echo '<li itemprop="encoding" itemscope itemtype="http://schema.org/VideoObject">';
                     echo '<a itemprop="contentUrl" href="', $format->url ,'">';
