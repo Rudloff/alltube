@@ -27,16 +27,30 @@ if (isset($_GET["url"])) {
             include 'head.php';
             ?>
             <body>
-                <div itemscope itemtype="http://schema.org/VideoObject" class="wrapper">
+                <div itemscope
+                    itemtype="http://schema.org/VideoObject" class="wrapper">
             <div class="main">
                 <?php
                 include 'logo.php';
                 ?>
             <p>You are going to download<i itemprop="name">
-                <a itemprop="url" id="video_link" data-ext="<?php echo $video->ext; ?>" data-video="<?php echo $video->url; ?>" href="<?php echo $video->webpage_url; ?>">
+                <a itemprop="url" id="video_link"
+                    data-ext="<?php echo $video->ext; ?>"
+                    data-video="<?php echo $video->url; ?>"
+                    href="<?php echo $video->webpage_url; ?>">
             <?php
             echo $video->title;
-            ?></a></i>. <img class="cast_icon" id="cast_disabled" src="img/ic_media_route_disabled_holo_light.png" alt="Google Cast™ is disabled" title="Google Cast is not supported on this browser." /><img class="cast_btn cast_hidden cast_icon" id="cast_btn_launch" src="img/ic_media_route_off_holo_light.png" title="Cast to ChromeCast" alt="Google Cast™" /><img src="img/ic_media_route_on_holo_light.png" alt="Casting to ChromeCast…" title="Stop casting" id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" /></p>
+            ?></a></i>.
+            <img class="cast_icon" id="cast_disabled"
+                src="img/ic_media_route_disabled_holo_light.png"
+                alt="Google Cast™ is disabled"
+                title="Google Cast is not supported on this browser." />
+            <img class="cast_btn cast_hidden cast_icon" id="cast_btn_launch"
+                src="img/ic_media_route_off_holo_light.png"
+                title="Cast to ChromeCast" alt="Google Cast™" />
+            <img src="img/ic_media_route_on_holo_light.png"
+                alt="Casting to ChromeCast…" title="Stop casting"
+                id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" /></p>
             <?php
             echo '<img itemprop="image" class="thumb" src="',
                 $video->thumbnail, '" alt="" />';
@@ -51,14 +65,19 @@ if (isset($_GET["url"])) {
                 <p>(You might have to do a <i>Right click > Save as</i>)</p>
                 <ul id="format" class="format">
                 <?php
-                echo '<li class="best" itemprop="encoding" itemscope itemtype="http://schema.org/VideoObject">';
+                echo '<li class="best" itemprop="encoding" itemscope
+                itemtype="http://schema.org/VideoObject">';
                 echo '<a itemprop="contentUrl" href="', $video->url ,'">';
-                echo '<b>Best</b> (<span itemprop="encodingFormat">',  $video->ext, '</span>)';
+                echo '<b>Best</b> (<span itemprop="encodingFormat">', 
+                    $video->ext, '</span>)';
                 echo '</a></li>';
                 foreach ($video->formats as $format) {
-                    echo '<li itemprop="encoding" itemscope itemtype="http://schema.org/VideoObject">';
+                    echo '<li itemprop="encoding"
+                        itemscope itemtype="http://schema.org/VideoObject">';
                     echo '<a itemprop="contentUrl" href="', $format->url ,'">';
-                    echo '<span itemprop="videoQuality">', $format->format, '</span> (<span itemprop="encodingFormat">',  $format->ext, '</span>)';
+                    echo '<span itemprop="videoQuality">', $format->format,
+                        '</span> (<span itemprop="encodingFormat">', 
+                        $format->ext, '</span>)';
                     echo '</a></li>';
                 }
                 ?>
@@ -70,9 +89,10 @@ if (isset($_GET["url"])) {
             <?php
             }
             if (!isset($video->formats)) {
-            ?>
-            <a class="downloadBtn" href="<?php echo $video->url; ?>">Download</a><br/>
-            <?php
+                ?>
+                <a class="downloadBtn"
+                    href="<?php echo $video->url; ?>">Download</a><br/>
+                <?php
             }
             ?>
             </form>
