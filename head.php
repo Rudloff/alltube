@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="description" content="Easily download videos from Youtube, Dailymotion, Vimeo and other websites." />
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="dist/main.css" />
 <link rel="stylesheet"
 href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 <link rel="author" href="https://plus.google.com/110403274854419000481?rel=author" />
@@ -22,7 +22,7 @@ href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 <meta name="twitter:creator" content="@Tael67" />
 <meta name="twitter:description" content="Easily download videos from Youtube, Dailymotion, Vimeo and other websites." />
 <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
-<script src="cast.js"></script>
+<script src="dist/main.js"></script>
 </head>
 
 

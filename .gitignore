@@ -1,1 +1,3 @@
 youtube-dl
+dist/
+node_modules/
