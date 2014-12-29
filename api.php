@@ -36,7 +36,7 @@ if (isset($_GET["url"])) {
             <p>You are going to download<i itemprop="name">
                 <a itemprop="url" id="video_link"
                     data-ext="<?php echo $video->ext; ?>"
-                    data-video="<?php echo $video->url; ?>"
+                    data-video="<?php echo htmlentities($video->url); ?>"
                     href="<?php echo $video->webpage_url; ?>">
             <?php
             echo $video->title;
@@ -67,14 +67,16 @@ if (isset($_GET["url"])) {
                 <?php
                 echo '<li class="best" itemprop="encoding" itemscope
                 itemtype="http://schema.org/VideoObject">';
-                echo '<a itemprop="contentUrl" href="', $video->url ,'">';
+                echo '<a itemprop="contentUrl"
+                    href="', htmlentities($video->url) ,'">';
                 echo '<b>Best</b> (<span itemprop="encodingFormat">', 
                     $video->ext, '</span>)';
                 echo '</a></li>';
                 foreach ($video->formats as $format) {
                     echo '<li itemprop="encoding"
                         itemscope itemtype="http://schema.org/VideoObject">';
-                    echo '<a itemprop="contentUrl" href="', $format->url ,'">';
+                    echo '<a itemprop="contentUrl"
+                        href="', htmlentities($format->url) ,'">';
                     echo '<span itemprop="videoQuality">', $format->format,
                         '</span> (<span itemprop="encodingFormat">', 
                         $format->ext, '</span>)';
