@@ -1,7 +1,7 @@
 
 body {
     text-align:center;
-    background-image:url('img/fond.jpg');
+    background-image:url('../img/fond.jpg');
     font-family: 'Open Sans', sans-serif;
     font-weight:400;
 }
@@ -50,7 +50,7 @@ header a:hover
 }
 
 .share
-{background-image:url('img/share.png');}
+{background-image:url('../img/share.png');}
     
 .sharemask  
 {
@@ -60,13 +60,13 @@ position:absolute;
 top:0;
 left:0;
 z-index:10;
-background-image:url('img/sharemask.png');
+background-image:url('../img/sharemask.png');
 background-position:top left;
 background-repeat:no-repeat;
 }
     
 .facebook
-{background-image:url('img/facebook.png');}
+{background-image:url('../img/facebook.png');}
     
 .facebookmask   
 {
@@ -76,13 +76,13 @@ position:absolute;
 top:0;
 left:0;
 z-index:10;
-background-image:url('img/facebookmask.png');
+background-image:url('../img/facebookmask.png');
 background-position:top left;
 background-repeat:no-repeat;
 }   
     
 .twitter
-{background-image:url('img/twitter.png');}
+{background-image:url('../img/twitter.png');}
     
 .twittermask    
 {
@@ -92,7 +92,7 @@ position:absolute;
 top:0;
 left:0;
 z-index:10;
-background-image:url('img/twittermask.png');
+background-image:url('../img/twittermask.png');
 background-position:top left;
 background-repeat:no-repeat;
 }   
@@ -107,7 +107,7 @@ footer {
     bottom:0;
     text-align:center;
     width:100%;
-    background-image:url('img/fondfooter.png');
+    background-image:url('../img/fondfooter.png');
     background-repeat:repeat-x;
     background-position:top left;
     padding-top:20px;
@@ -227,7 +227,7 @@ color:#a5a5a5;
 font-size:13px;
 z-index:10;
 text-decoration:none;
-background-image:url('img/compatiblerouage.png');
+background-image:url('../img/compatiblerouage.png');
 background-position:0 100%;
 background-repeat:no-repeat;
 padding-left:41px;
@@ -352,7 +352,7 @@ padding:3px;
         left: 0;
         padding-left:23px;
         padding-top:2px;
-        background-image:url('img/mp3hover.png');
+        background-image:url('../img/mp3hover.png');
         background-repeat:no-repeat;
         background-position:right top;
         width:56px;
@@ -365,7 +365,7 @@ padding:3px;
     .audio:checked + label .ui:after {
         content: "yes";
         color: #fff;
-        background-image:url('img/mp3.png');
+        background-image:url('../img/mp3.png');
         background-repeat:no-repeat;
         background-position:right top;
         width:73px;
@@ -402,7 +402,7 @@ margin:0 auto 10px auto;
 {
 width:447px;
 height:107px;
-background-image:url('img/logocompatible.png');
+background-image:url('../img/logocompatible.png');
 background-repeat:repeat-y;
 background-position:0 0;
   -webkit-transition: all 0.1s ease-in;
@@ -428,7 +428,7 @@ top:0;
 left:0;
 width:447px;
 height:107px;
-background-image:url('img/logocompatiblemask.png');
+background-image:url('../img/logocompatiblemask.png');
 background-position:0 100%;
 background-repeat:no-repeat;
 }
