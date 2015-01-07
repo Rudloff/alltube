@@ -1,7 +1,7 @@
 <?php
 /**
  * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
- * JSON API
+ * Config file
  *
  * PHP Version 5.3.10
  *
@@ -11,10 +11,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-require_once 'download.php';
-if (isset($_GET["url"])) {
-    header('Content-Type: application/json');
-    $video = VideoDownload::getJSON($_GET["url"]);
-    echo json_encode($video);
-}
+define('YOUTUBE_DL', './youtube-dl');
+define('PYTHON', '/usr/bin/python');
+define('PARAMS', '--no-playlist --no-warnings');
+define('CONVERT', true);
 ?>

@@ -9,7 +9,8 @@
         "32": "/img/favicon.png",
         "60": "/img/logo_60.png",
         "90": "/img/logo_90.png",
-        "243": "/img/logo_app.png"
+        "243": "/img/logo_app.png",
+        "250": "/img/logo_250.png"
     },
     "default_locale": "en",
     "launch_path": "/index.php"

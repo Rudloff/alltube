@@ -19,6 +19,7 @@ require 'head.php';
 
 <?php
     require 'header.php';
+    require 'config.php';
 ?>
     
 <div class="wrapper">
@@ -35,10 +36,17 @@ require 'head.php';
         required placeholder="http://website.com/video" />
         </span>
         <input class="downloadBtn" type="submit" value="Download" /><br/>
-        <div class="mp3">
-            <p><input type="checkbox" id="audio" class="audio" name="audio">
-            <label for="audio"><span class="ui"></span>Audio only (MP3)</label></p>
-        </div>
+        <?php
+        if (CONVERT) {
+            ?>
+            <div class="mp3">
+                <p><input type="checkbox" id="audio" class="audio" name="audio">
+                <label for="audio"><span class="ui"></span>
+                    Audio only (MP3)</label></p>
+            </div>
+            <?php
+        }
+        ?>
     </div>
     </form>
     <a class="combatiblelink" href="extractors.php">See all supported websites</a>

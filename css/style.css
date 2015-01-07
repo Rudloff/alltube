@@ -174,10 +174,12 @@ margin-top:8px;
     font-size:24px;
     font-weight:800;
     cursor:pointer;
-  -webkit-transition: all 0.1s ease-in;
-  -moz-transition: all 0.1s ease-in;
-  -o-transition: all 0.1s ease-in;
-    }
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    -o-transition: all 0.1s ease-in;
+    text-decoration:none;
+    display:inline-block;
+}
     
 .downloadBtn:focus,
 .downloadBtn:hover
@@ -536,6 +538,14 @@ h1 {
 
 .cast_icon {
     vertical-align:middle;
+}
+
+.format {
+    text-align:left;
+}
+
+.best {
+    margin-bottom: 1em;
 }
 
 @media (max-width: 640px) {
