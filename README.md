@@ -11,4 +11,7 @@ The only thing you need to get Alltube working is to download [youtube-dl](https
 ##License
 This software is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
 
-__Please use a different name and logo if you run it on your server.__
+__Please use a different name and logo if you run it on a public server.__
+
+##Other dependencies
+You need [avconv](https://libav.org/avconv.html) and [rtmpdump](http://rtmpdump.mplayerhq.hu/) in order to enable conversions.
