@@ -1,3 +1,4 @@
 youtube-dl
 dist/
 node_modules/
+config.php
