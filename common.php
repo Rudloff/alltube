@@ -7,7 +7,7 @@
  *
  * @category Youtube-dl
  * @package  Youtubedl
- * @author   Pierre Rudloff <rudloff@strasweb.fr>
+ * @author   Pierre Rudloff <contact@rudloff.pro>
  * @author   Olivier Haquette <contact@olivierhaquette.fr>
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
