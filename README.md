@@ -4,9 +4,19 @@ alltube
 HTML GUI for youtube-dl (http://alltubedownload.net/)
 
 ##Setup
-The only thing you need to get Alltube working is to download [youtube-dl](https://rg3.github.io/youtube-dl/):
+In order to get AllTube working, you need to download [youtube-dl](https://rg3.github.io/youtube-dl/):
 
     wget https://yt-dl.org/downloads/latest/youtube-dl
+
+You then need [npm](https://www.npmjs.com/) and [Grunt](http://gruntjs.com/):
+
+    npm install
+    grunt
+
+You also need to create the config file:
+
+    cp config.example.php config.php
+
 
 ##License
 This software is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
