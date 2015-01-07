@@ -14,4 +14,5 @@
 define('YOUTUBE_DL', './youtube-dl');
 define('PYTHON', '/usr/bin/python');
 define('PARAMS', '--no-playlist --no-warnings');
+define('CONVERT', true);
 ?>
