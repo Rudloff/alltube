@@ -12,7 +12,9 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-if (MAINTENANCE) {
+if (DISABLED) {
+    header('Location: disabled.php'); exit;
+} else if (MAINTENANCE) {
     header('Location: maintenance.php'); exit;
 }
 ?>

@@ -16,4 +16,5 @@ define('PYTHON', '/usr/bin/python');
 define('PARAMS', '--no-playlist --no-warnings');
 define('CONVERT', true);
 define('MAINTENANCE', false);
+define('DISABLED', false);
 ?>
