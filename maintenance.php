@@ -12,6 +12,10 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
+require_once 'config.php';
+if (!MAINTENANCE) {
+    header('Location: index.php'); exit;
+}
 require 'head.php';
 ?>
 
@@ -25,7 +29,9 @@ require 'head.php';
     <div class="main">
     <h1><img itemprop="image" class="logo" src="img/logo.png"
     alt="AllTube Download" width="328" height="284"></h1>
-    <div>Due to some issues with our server, we have to disable AllTube for a few days. Sorry for the inconvenience.</div>
+    <div>Due to some issues with our server,
+        we have to disable AllTube for a few days.
+        Sorry for the inconvenience.</div>
 </div>
 </div>
         

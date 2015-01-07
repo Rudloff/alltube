@@ -12,6 +12,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
+require_once 'config.php';
+require_once 'common.php';
 require 'head.php';
 ?>
 
@@ -19,7 +21,6 @@ require 'head.php';
 
 <?php
     require 'header.php';
-    require 'config.php';
 ?>
     
 <div class="wrapper">
