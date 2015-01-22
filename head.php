@@ -24,6 +24,9 @@ href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 <meta name="twitter:description" content="Easily download videos from Youtube, Dailymotion, Vimeo and other websites." />
 <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 <script src="dist/main.js"></script>
+<meta itemprop="applicationCategory" content="Download" />
+<meta itemprop="operatingSystem" content="Linux" />
+<meta itemprop="operatingSystem" content="Mac OS X" />
 </head>
 
 
