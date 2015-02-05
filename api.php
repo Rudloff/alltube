@@ -167,8 +167,6 @@ if (isset($error)) {
         ?>
     <h2>An error occured</h2>
     Please check the URL of your video.
-    If you think this is a bug, please report the following error
-    to <a href="mailto:contact@rudloff.pro"><i>contact@rudloff.pro</i></a>:
     <p><i>
     <?php
     foreach ($video['error'] as $error) {
