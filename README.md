@@ -3,6 +3,8 @@ alltube
 
 HTML GUI for youtube-dl (http://alltubedownload.net/)
 
+![Screenshot](img/screenshot.png "Alltube GUI screenshot")
+
 ##Setup
 In order to get AllTube working, you need to download [youtube-dl](https://rg3.github.io/youtube-dl/):
 
