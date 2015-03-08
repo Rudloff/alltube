@@ -1,6 +1,6 @@
 {
     "name": "alltube",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "devDependencies": {
         "grunt": "^0.4.5",
         "grunt-contrib-cssmin": "^0.10.0",
