@@ -6,5 +6,9 @@
         "grunt-contrib-cssmin": "^0.10.0",
         "grunt-contrib-uglify": "^0.6.0",
         "grunt-contrib-watch": "^0.6.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Rudloff/alltube.git"
     }
 }
