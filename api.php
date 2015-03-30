@@ -170,7 +170,7 @@ if (isset($error)) {
     <p><i>
     <?php
     foreach ($video['error'] as $error) {
-        print $error;
+        print htmlspecialchars($error);
         ?>
         <br/>
         <?php
