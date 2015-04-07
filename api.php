@@ -15,7 +15,7 @@ require_once 'common.php';
 require_once 'download.php';
 if (isset($_GET["url"])) {
     if (isset($_GET['audio'])) {
-        $video = VideoDownload::getJSON($_GET["url"], $_GET["format"]);
+        $video = VideoDownload::getJSON($_GET["url"]);
 
         if (isset($video->url)) {
             //Vimeo needs a correct user-agent
