@@ -28,3 +28,7 @@ __Please use a different name and logo if you run it on a public server.__
 ##Other dependencies
 You need [avconv](https://libav.org/avconv.html) and [rtmpdump](http://rtmpdump.mplayerhq.hu/) in order to enable conversions.
 If you don't want to enable conversions, you can disable it in *config.php*.
+
+On Debian-based systems:
+
+    sudo apt-get install libavcodec-extra rtmpdump
