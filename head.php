@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="description" content="Easily download videos from Youtube, Dailymotion, Vimeo and other websites." />
-<link rel="stylesheet" href="dist/main.css" />
+<link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet"
 href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 <link rel="author" href="https://plus.google.com/110403274854419000481?rel=author" />
