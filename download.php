@@ -11,7 +11,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-require_once 'config.php';
+require_once 'config.example.php';
+@include_once 'config.php';
 /**
  * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
  * Main class

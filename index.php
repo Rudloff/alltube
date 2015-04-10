@@ -12,7 +12,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-require_once 'config.php';
+require_once 'config.example.php';
+@include_once 'config.php';
 require_once 'common.php';
 require 'head.php';
 ?>
