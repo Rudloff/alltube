@@ -99,7 +99,6 @@ if (isset($_GET["url"])) {
             echo '<img itemprop="image" class="thumb" src="',
                 $video->thumbnail, '" alt="" />';
             ?><br/>
-            <form action="api.php">
             <input type="hidden" name="url"
             value="<?php echo $video->webpage_url; ?>" />
             <?php
@@ -143,7 +142,6 @@ if (isset($_GET["url"])) {
                 <?php
             }
             ?>
-            </form>
             </div>
             </div>
             <?php

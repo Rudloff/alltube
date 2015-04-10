@@ -26,8 +26,8 @@ require 'head.php';
     
 <div class="wrapper">
     <div class="main">
-    <h1><img itemprop="image" class="logo" src="img/logo.png"
-    alt="AllTube Download" width="328" height="284"></h1>
+    <div><img itemprop="image" class="logo" src="img/logo.png"
+    alt="AllTube Download" width="328" height="284"></div>
     <form action="api.php">
     <label class="labelurl" for="url">
         Copy here the URL of your video (Youtube, Dailymotion, etc.)
