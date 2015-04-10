@@ -11,7 +11,6 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-$baseURL = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['REQUEST_URI']);
 ?>
 <footer>
     <div class="footer_wrapper">
@@ -29,6 +28,6 @@ $baseURL = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['REQUEST_URI']);
      &middot;
      Based on <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
      &middot;
-     <a href="javascript:window.location='<?php echo $baseURL; ?>/api.php?url='+location.href;">Bookmarklet</a>
+     <a href="javascript:window.location='<?php echo BASE_URL; ?>/api.php?url='+location.href;">Bookmarklet</a>
      </div>
 </footer>

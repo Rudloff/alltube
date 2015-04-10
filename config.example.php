@@ -17,4 +17,5 @@ define('PARAMS', '--no-playlist --no-warnings');
 define('CONVERT', false);
 define('MAINTENANCE', false);
 define('DISABLED', false);
+define('BASE_URL', 'http://alltubedownload.net/');
 ?>
