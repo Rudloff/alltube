@@ -2,3 +2,5 @@ youtube-dl
 dist/
 node_modules/
 config.php
+vendor/
+templates_c/

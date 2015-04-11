@@ -11,8 +11,7 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-require_once 'config.example.php';
-@include_once 'config.php';
+
 /**
  * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
  * Main class
@@ -32,7 +31,7 @@ Class VideoDownload
      * 
      * @return string Version
      * */
-    function getVersion ()
+    function getVersion()
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --version',
@@ -45,7 +44,7 @@ Class VideoDownload
      * 
      * @return string UA
      * */
-    function getUA ()
+    function getUA()
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --dump-user-agent',
@@ -59,7 +58,7 @@ Class VideoDownload
      * 
      * @return array Extractors
      * */
-    function listExtractors ()
+    function listExtractors()
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --list-extractors',
@@ -76,7 +75,7 @@ Class VideoDownload
      * 
      * @return string Filename
      * */
-    function getFilename ($url, $format=null)
+    function getFilename($url, $format=null)
     {
         $cmd=PYTHON.' youtube-dl';
         if (isset($format)) {
@@ -97,7 +96,7 @@ Class VideoDownload
      * 
      * @return string Title
      * */
-    function getTitle ($url)
+    function getTitle($url)
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --get-title '.
@@ -116,7 +115,7 @@ Class VideoDownload
      * 
      * @return string JSON
      * */
-    function getJSON ($url, $format=null)
+    function getJSON($url, $format=null)
     {
         $cmd=PYTHON.' '.YOUTUBE_DL.' '.PARAMS;
         if (isset($format)) {
@@ -141,7 +140,7 @@ Class VideoDownload
      * 
      * @return string URL of image
      * */
-    function getThumbnail ($url)
+    function getThumbnail($url)
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --get-thumbnail '.
@@ -160,7 +159,7 @@ Class VideoDownload
      * 
      * @return string Title
      * */
-    function getAvailableFormats ($url)
+    function getAvailableFormats($url)
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' -F '.
@@ -191,7 +190,7 @@ Class VideoDownload
      * 
      * @return string URL of video
      * */
-    function getURL ($url, $format=null)
+    function getURL($url, $format=null)
     {
         $cmd=PYTHON.' '.YOUTUBE_DL;
         if (isset($format)) {
@@ -209,5 +208,3 @@ Class VideoDownload
         
     }
 }
-
-?>

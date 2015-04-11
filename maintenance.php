@@ -12,33 +12,11 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-require_once 'config.php';
+require_once 'common.php';
 if (!MAINTENANCE) {
     header('Location: index.php'); exit;
 }
-require 'head.php';
-?>
-
-<body>
-
-<?php
-    require 'header.php';
-?>
-    
-<div class="wrapper">
-    <div class="main">
-    <h1><img itemprop="image" class="logo" src="img/logo.png"
-    alt="AllTube Download" width="328" height="284"></h1>
-    <div>Due to some issues with our server,
-        we have to disable AllTube for a few days.
-        Sorry for the inconvenience.</div>
-</div>
-</div>
-        
-    <?php
-        require 'footer.php';
-    ?>
-    
-</body>
-
-</html>
+$smarty->display('head.tpl');
+$smarty->display('header.tpl');
+$smarty->display('maintenance.tpl');
+$smarty->display('footer.tpl');

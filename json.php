@@ -17,4 +17,3 @@ if (isset($_GET["url"])) {
     $video = VideoDownload::getJSON($_GET["url"]);
     echo json_encode($video);
 }
-?>

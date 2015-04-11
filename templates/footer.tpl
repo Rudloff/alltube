@@ -1,17 +1,4 @@
-<?php
-/**
- * Footer
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @author   Olivier Haquette <contact@olivierhaquette.fr>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
-?>
+</div>
 <footer>
     <div class="footer_wrapper">
      Code by <a rel="author" target="blank" itemprop="author"
@@ -28,6 +15,8 @@
      &middot;
      Based on <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
      &middot;
-     <a href="javascript:window.location='<?php echo BASE_URL; ?>/api.php?url='+location.href;">Bookmarklet</a>
+     <a href="javascript:window.location='{$base_url}/api.php?url='+location.href;">Bookmarklet</a>
      </div>
 </footer>
+</body>
+</html>

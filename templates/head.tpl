@@ -26,5 +26,4 @@
 <meta itemprop="operatingSystem" content="Linux" />
 <meta itemprop="operatingSystem" content="Mac OS X" />
 </head>
-
-
+<body class="{$class}">

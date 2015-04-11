@@ -12,47 +12,12 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-require_once 'config.example.php';
-@include_once 'config.php';
 require_once 'common.php';
-require 'head.php';
-?>
-
-<body class="extractors">
-
-<?php
-    require 'header.php';
-?>
-    
-    <div class="wrapper">
-
-
-    <?php
-    require 'logo.php';
-    ?>
-
-
-    <h2 class="titre">Supported websites</h2>
-    
-    <div class="tripleliste">
-    
-    
-            <ul>
-            <?php
-            require_once 'download.php';
-            $extractors=(VideoDownload::listExtractors());
-            foreach ($extractors as $extractor) {
-                echo '<li>'.$extractor.'</li>';
-            }
-            ?>
-            </ul>
-    </div>
-    </div>
-
-    <?php
-        require 'footer.php';
-    ?>
-
-</body>
-
-</html>
+$smarty->assign('class', 'extractors');
+require_once 'download.php';
+$smarty->display('head.tpl');
+$smarty->display('header.tpl');
+$smarty->display('logo.tpl');
+$smarty->assign('extractors', VideoDownload::listExtractors());
+$smarty->display('extractors.tpl');
+$smarty->display('footer.tpl');

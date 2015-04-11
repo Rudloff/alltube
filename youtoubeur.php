@@ -12,4 +12,3 @@
  * @link     http://rudloff.pro
  * */
 header('Location: index.php');
-?>
