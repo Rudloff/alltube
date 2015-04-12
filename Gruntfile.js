@@ -1,43 +1,45 @@
 /*jslint node: true */
 module.exports = function (grunt) {
     'use strict';
-    grunt.initConfig({
-        uglify: {
-            combine: {
-                files: {
-                    'dist/main.js': ['js/cast.js']
+    grunt.initConfig(
+        {
+            uglify: {
+                combine: {
+                    files: {
+                        'dist/main.js': ['js/cast.js']
+                    }
                 }
-            }
-        },
-        cssmin: {
-            combine: {
-                files: {
-                    'dist/main.css': ['css/*.css']
+            },
+            cssmin: {
+                combine: {
+                    files: {
+                        'dist/main.css': ['css/*.css']
+                    }
                 }
-            }
-        },
-        watch: {
-            scripts: {
-                files: ['js/*.js'],
-                tasks: ['uglify']
             },
-            styles: {
-                files: ['css/*.css'],
-                tasks: ['cssmin']
-            }
-        },
-        phpcs: {
-            php: {
-                src: ['*.php']
+            watch: {
+                scripts: {
+                    files: ['js/*.js'],
+                    tasks: ['uglify']
+                },
+                styles: {
+                    files: ['css/*.css'],
+                    tasks: ['cssmin']
+                }
             },
-            js: {
-                src: ['js/*.js']
-            },
-            Gruntfile: {
-                src: ['Gruntfile.js']
+            phpcs: {
+                php: {
+                    src: ['*.php']
+                },
+                js: {
+                    src: ['js/*.js']
+                },
+                Gruntfile: {
+                    src: ['Gruntfile.js']
+                }
             }
         }
-    });
+    );
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
