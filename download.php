@@ -31,7 +31,7 @@ Class VideoDownload
      * 
      * @return string Version
      * */
-    function getVersion()
+    static function getVersion()
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --version',
@@ -44,7 +44,7 @@ Class VideoDownload
      * 
      * @return string UA
      * */
-    function getUA()
+    static function getUA()
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --dump-user-agent',
@@ -58,7 +58,7 @@ Class VideoDownload
      * 
      * @return array Extractors
      * */
-    function listExtractors()
+    static function listExtractors()
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --list-extractors',
@@ -75,7 +75,7 @@ Class VideoDownload
      * 
      * @return string Filename
      * */
-    function getFilename($url, $format=null)
+    static function getFilename($url, $format=null)
     {
         $cmd=PYTHON.' youtube-dl';
         if (isset($format)) {
@@ -96,7 +96,7 @@ Class VideoDownload
      * 
      * @return string Title
      * */
-    function getTitle($url)
+    static function getTitle($url)
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --get-title '.
@@ -115,7 +115,7 @@ Class VideoDownload
      * 
      * @return string JSON
      * */
-    function getJSON($url, $format=null)
+    static function getJSON($url, $format=null)
     {
         $cmd=PYTHON.' '.YOUTUBE_DL.' '.PARAMS;
         if (isset($format)) {
@@ -140,7 +140,7 @@ Class VideoDownload
      * 
      * @return string URL of image
      * */
-    function getThumbnail($url)
+    static function getThumbnail($url)
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' --get-thumbnail '.
@@ -159,7 +159,7 @@ Class VideoDownload
      * 
      * @return string Title
      * */
-    function getAvailableFormats($url)
+    static function getAvailableFormats($url)
     {
         exec(
             PYTHON.' '.YOUTUBE_DL.' -F '.
@@ -190,7 +190,7 @@ Class VideoDownload
      * 
      * @return string URL of video
      * */
-    function getURL($url, $format=null)
+    static function getURL($url, $format=null)
     {
         $cmd=PYTHON.' '.YOUTUBE_DL;
         if (isset($format)) {
