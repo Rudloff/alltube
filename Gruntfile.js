@@ -25,12 +25,25 @@ module.exports = function (grunt) {
                 files: ['css/*.css'],
                 tasks: ['cssmin']
             }
+        },
+        phpcs: {
+            php: {
+                src: ['*.php']
+            },
+            js: {
+                src: ['js/*.js']
+            },
+            Gruntfile: {
+                src: ['Gruntfile.js']
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-phpcs');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
+    grunt.registerTask('lint', ['phpcs']);
 };
