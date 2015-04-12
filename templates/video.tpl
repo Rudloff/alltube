@@ -22,7 +22,7 @@
 <br/>
 <input type="hidden" name="url"
 value="{$video->webpage_url}" />
-{if $video->formats}
+{if isset($video->formats)}
     <h3>Available formats:</h3>
     <p>(You might have to do a <i>Right click > Save as</i>)</p>
     <ul id="format" class="format">
@@ -43,8 +43,6 @@ value="{$video->webpage_url}" />
     </ul><br/><br/>
 {else}
     <input type="hidden" name="format" value="best" />
-{/if}
-{if $video->formats}
     <a class="downloadBtn"
         href="{$video->url|escape}">Download</a><br/>
 {/if}
