@@ -1,4 +1,9 @@
 {
+    "name": "rudloff/alltube",
+    "description": "HTML GUI for youtube-dl",
+    "license": "GPL-3.0",
+    "homepage": "http://alltubedownload.net/",
+    "type": "project",
     "require": {
         "smarty/smarty": "~3.1"
     },
@@ -8,5 +13,13 @@
                 "nginx.conf"
             ]
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "Pierre Rudloff",
+            "email": "contact@rudloff.pro",
+            "homepage": "https://rudloff.pro/",
+            "role": "Developer"
+        }
+    ]
 }
