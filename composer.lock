@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "1d95265fc34ff6df149985554a8ba0d6",
     "packages": [
         {
             "name": "smarty/smarty",
-            "version": "v3.1.21",
+            "version": "v3.1.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "1f878e6d746ecc8ec8d00d9c75044cf7d23ad94a"
+                "reference": "ab93b0feee7841e2b692160f9585189b272a0cd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/1f878e6d746ecc8ec8d00d9c75044cf7d23ad94a",
-                "reference": "1f878e6d746ecc8ec8d00d9c75044cf7d23ad94a",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/ab93b0feee7841e2b692160f9585189b272a0cd2",
+                "reference": "ab93b0feee7841e2b692160f9585189b272a0cd2",
                 "shasum": ""
             },
             "require": {
@@ -33,7 +33,7 @@
                 "classmap": [
                     "libs/Smarty.class.php",
                     "libs/SmartyBC.class.php",
-                    "libs/sysplugins/smarty_security.php"
+                    "libs/sysplugins/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -59,7 +59,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-10-31 04:22:20"
+            "time": "2015-05-10 10:18:41"
         }
     ],
     "packages-dev": [],
