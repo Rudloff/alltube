@@ -14,7 +14,12 @@
 define('YOUTUBE_DL', './youtube-dl');
 define('PYTHON', '/usr/bin/python');
 define('PARAMS', '--no-playlist --no-warnings');
-define('CONVERT', false);
+if (getenv('CONVERT')) {
+    define('CONVERT', getenv('CONVERT'));
+} else {
+    define('CONVERT', false);
+}
+define('AVCONV', __DIR__.'/ffmpeg-2.6.2-64bit-static/ffmpeg');
 define('MAINTENANCE', false);
 define('DISABLED', false);
 define('BASE_URL', 'http://alltubedownload.net/');

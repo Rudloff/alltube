@@ -39,7 +39,7 @@ if (isset($_GET["url"])) {
                 header("Content-Type: audio/mpeg");
                 passthru(
                     '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                    '   |  /usr/bin/avconv -v quiet -i - -f mp3 -vn pipe:1'
+                    '   |  '.AVCONV.' -v quiet -i - -f mp3 -vn pipe:1'
                 );
                 exit;
             } else {
@@ -57,7 +57,7 @@ if (isset($_GET["url"])) {
                 passthru(
                     '/usr/bin/wget -q --user-agent='.escapeshellarg($UA).
                     '  -O - '.escapeshellarg($video->url).
-                    '   |  /usr/bin/avconv -v quiet -i - -f mp3 -vn pipe:1'
+                    '   |  '.AVCONV.' -v quiet -i - -f mp3 -vn pipe:1'
                 );
                 exit;
             }
