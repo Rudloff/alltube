@@ -5,4 +5,4 @@ config.php
 vendor/
 templates_c/
 ffmpeg.tar.xz
-ffmpeg-2.6.2-64bit-static/
+ffmpeg-*/
