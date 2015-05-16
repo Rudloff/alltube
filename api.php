@@ -55,8 +55,8 @@ if (isset($_GET["url"])) {
                 );
                 header("Content-Type: audio/mpeg");
                 passthru(
-                    '/usr/bin/wget -q --user-agent='.escapeshellarg($UA).
-                    '  -O - '.escapeshellarg($video->url).
+                    'curl  --user-agent '.escapeshellarg($UA).
+                    ' '.escapeshellarg($video->url).
                     '   |  '.AVCONV.' -v quiet -i - -f mp3 -vn pipe:1'
                 );
                 exit;
