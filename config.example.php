@@ -19,7 +19,7 @@ if (getenv('CONVERT')) {
 } else {
     define('CONVERT', false);
 }
-define('AVCONV', __DIR__.'/ffmpeg-2.6.2-64bit-static/ffmpeg');
+define('AVCONV', __DIR__.'/ffmpeg/ffmpeg');
 define('MAINTENANCE', false);
 define('DISABLED', false);
 define('BASE_URL', 'http://alltubedownload.net/');
