@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "smarty/smarty",
-            "version": "v3.1.23",
+            "version": "v3.1.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "04f0090c40b1a0e1fb55dbe0297f08386b36de21"
+                "reference": "b58771e31b11c721f6aa8e574e16e4058f9edc5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/04f0090c40b1a0e1fb55dbe0297f08386b36de21",
-                "reference": "04f0090c40b1a0e1fb55dbe0297f08386b36de21",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/b58771e31b11c721f6aa8e574e16e4058f9edc5f",
+                "reference": "b58771e31b11c721f6aa8e574e16e4058f9edc5f",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-05-12 02:08:22"
+            "time": "2015-05-23 17:22:14"
         }
     ],
     "packages-dev": [],
