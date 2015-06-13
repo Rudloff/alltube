@@ -8,7 +8,7 @@
     <div class="champs">
         <span class="URLinput_wrapper">
         <input class="URLinput" type="url" name="url" id="url"
-        required placeholder="http://example.com/video" />
+        required autofocus placeholder="http://example.com/video" />
         </span>
         <input class="downloadBtn" type="submit" value="Download" /><br/>
         {if $convert}
