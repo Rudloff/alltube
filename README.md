@@ -6,16 +6,18 @@ HTML GUI for youtube-dl (http://alltubedownload.net/)
 ![Screenshot](img/screenshot.png "Alltube GUI screenshot")
 
 ##Setup
-In order to get AllTube working, you need to download [youtube-dl](https://rg3.github.io/youtube-dl/):
-
-    wget https://yt-dl.org/downloads/latest/youtube-dl
-
-You then need [npm](https://www.npmjs.com/) and [Grunt](http://gruntjs.com/):
+In order to get AllTube working, you need to use [npm](https://www.npmjs.com/) and [Composer](https://getcomposer.org/):
 
     npm install
-    grunt
+    composer install
 
-You also need to create the config file:
+This will download all the required dependencies.
+
+(Note that it will download the ffmpeg binary for 64-bits Linux. If you are on another platform, you might want to specify the path to avconv/ffmpeg in your config file.)
+
+##Config
+
+If you want to use a custom config, you need to create a config file:
 
     cp config.example.php config.php
 
