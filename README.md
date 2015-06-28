@@ -15,6 +15,10 @@ This will download all the required dependencies.
 
 (Note that it will download the ffmpeg binary for 64-bits Linux. If you are on another platform, you might want to specify the path to avconv/ffmpeg in your config file.)
 
+You should also ensure that the *templates_c* folder has the right permissions:
+
+    chmod 777 templates_c/
+
 ##Config
 
 If you want to use a custom config, you need to create a config file:
