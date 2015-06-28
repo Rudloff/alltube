@@ -35,7 +35,7 @@ value="{$video->webpage_url}" />
     {foreach $video->formats as $format}
         <li itemprop="encoding"
             itemscope itemtype="http://schema.org/VideoObject">
-        <a download="{$video->ext|replace:$format->ext:$video->_filename}" itemprop="contentUrl"
+        <a download="{$video->_filename|replace:$video->ext:$format->ext}" itemprop="contentUrl"
             href="{$format->url|escape}">
         <span itemprop="videoQuality">{$format->format}</span> (<span itemprop="encodingFormat">{$format->ext}</span>)
         </a></li>
