@@ -13,7 +13,7 @@
  * */
 define('YOUTUBE_DL', './youtube-dl');
 define('PYTHON', '/usr/bin/python');
-define('PARAMS', '--no-playlist --no-warnings');
+define('PARAMS', '--no-playlist --no-warnings -f best');
 if (getenv('CONVERT')) {
     define('CONVERT', getenv('CONVERT'));
 } else {
