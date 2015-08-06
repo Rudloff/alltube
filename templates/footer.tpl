@@ -15,7 +15,7 @@
      &middot;
      Based on <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
      &middot;
-     <a href="javascript:window.location='{$base_url}/api.php?url='+location.href;">Bookmarklet</a>
+     <a href="javascript:window.location='{$base_url}/api.php?url='+encodeURIComponent(location.href);">Bookmarklet</a>
      </div>
 </footer>
 </body>
