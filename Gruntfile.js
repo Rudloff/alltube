@@ -31,11 +31,19 @@ module.exports = function (grunt) {
                 php: {
                     src: ['*.php']
                 },
+                tests: {
+                    src: ['tests/*.php']
+                },
                 js: {
                     src: ['js/*.js']
                 },
                 Gruntfile: {
                     src: ['Gruntfile.js']
+                }
+            },
+            phpunit: {
+                classes: {
+                    dir: 'tests/'
                 }
             }
         }
@@ -45,7 +53,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
+    grunt.loadNpmTasks('grunt-phpunit');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
     grunt.registerTask('lint', ['phpcs']);
+    grunt.registerTask('test', ['phpunit']);
 };
