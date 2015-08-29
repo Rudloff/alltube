@@ -12,7 +12,7 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-require_once 'vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 if (is_file('config.php')) {
     include_once 'config.php';
 } else {
