@@ -15,5 +15,9 @@ require_once 'common.php';
 require_once 'download.php';
 if (isset($_GET["url"])) {
     $video = VideoDownload::getURL($_GET["url"]);
-    header('Location: '.$video['url']);
+    if (isset($video['url'])) {
+        header('Location: '.$video['url']);
+    } else {
+        echo "Can't find video";
+    }
 }
