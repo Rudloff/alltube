@@ -27,17 +27,6 @@ require_once __DIR__.'/../download.php';
  * */
 class VideoDownloadTest extends PHPUnit_Framework_TestCase
 {
-    static private $_testVideoURL = 'https://www.youtube.com/watch?v=RJJ6FCAXvKg';
-
-    /**
-     * Test getVersion function
-     * @return void
-     */
-    public function testGetVersion()
-    {
-        $this->assertStringMatchesFormat('%i.%i.%i', VideoDownload::getVersion());
-    }
-
     /**
      * Test getUA function
      * @return void
@@ -54,18 +43,110 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
     public function testListExtractors()
     {
         $extractors = VideoDownload::listExtractors();
-        $this->assertNotEmpty($extractors);
-        $this->assertInternalType('array', $extractors);
+        $this->assertContains('youtube', $extractors);
     }
 
     /**
      * Test getURL function
+     * @param string $url    URL
+     * @param string $format Format
+     * @return void
+     * @dataProvider URLProvider
+     */
+    public function testGetURL($url, $format)
+    {
+        $videoURL = VideoDownload::getURL($url, $format);
+        $this->assertArrayHasKey('success', $videoURL);
+        $this->assertArrayHasKey('url', $videoURL);
+    }
+
+    /**
+     * Test getURL function errors
+     * @param string $url URL
+     * @return void
+     * @expectedException Exception
+     * @dataProvider ErrorURLProvider
+     */
+    public function testGetURLError($url)
+    {
+        $videoURL = VideoDownload::getURL($url);
+    }
+
+    /**
+     * Provides URLs for tests
      * @return void
      */
-    public function testGetURL()
+    public function URLProvider()
     {
-        $url = VideoDownload::getURL(self::$_testVideoURL);
-        $this->assertArrayHasKey('success', $url);
-        $this->assertArrayHasKey('url', $url);
+        return array(
+            array(
+                'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
+                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4"
+            ),
+            array(
+                'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
+                "'Heart Attack' - Demi Lovato ".
+                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4"
+            ),
+            array(
+                'https://vimeo.com/24195442', null,
+                "Carving the Mountains-24195442.mp4"
+            ),
+        );
+    }
+
+    /**
+     * Provides incorrect URLs for tests
+     * @return void
+     */
+    public function errorURLProvider()
+    {
+        return array(
+            array('http://example.com/video')
+        );
+    }
+
+    /**
+     * Test getFilename function
+     * @param string $url    URL
+     * @param string $format Format
+     * @param string $result Expected filename
+     * @return void
+     * @dataProvider URLProvider
+     */
+    public function testGetFilename($url, $format, $result)
+    {
+        $filename = VideoDownload::getFilename($url, $format);
+        $this->assertEquals($filename, $result);
+    }
+
+    /**
+     * Test getJSON function
+     * @param string $url    URL
+     * @param string $format Format
+     * @return void
+     * @dataProvider URLProvider
+     */
+    public function testGetJSON($url, $format)
+    {
+        $info = VideoDownload::getJSON($url, $format);
+        $this->assertObjectHasAttribute('webpage_url', $info);
+        $this->assertObjectHasAttribute('url', $info);
+        $this->assertObjectHasAttribute('ext', $info);
+        $this->assertObjectHasAttribute('title', $info);
+        $this->assertObjectHasAttribute('formats', $info);
+        $this->assertObjectHasAttribute('_filename', $info);
+    }
+
+    /**
+     * Test getJSON function errors
+     * @param string $url URL
+     * @return void
+     * @expectedException Exception
+     * @dataProvider ErrorURLProvider
+     */
+    public function testGetJSONError($url)
+    {
+        $videoURL = VideoDownload::getJSON($url);
     }
 }

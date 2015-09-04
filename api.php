@@ -15,9 +15,9 @@ $smarty->assign('class', 'video');
 require_once 'download.php';
 if (isset($_GET["url"])) {
     if (isset($_GET['audio'])) {
-        $video = VideoDownload::getJSON($_GET["url"]);
+        try {
+            $video = VideoDownload::getJSON($_GET["url"]);
 
-        if (isset($video->url)) {
             //Vimeo needs a correct user-agent
             $UA = VideoDownload::getUA();
             ini_set(
@@ -61,24 +61,24 @@ if (isset($_GET["url"])) {
                 );
                 exit;
             }
-        } else {
-            $error=true;
+        } catch (Exception $e) {
+            $error = $e->getMessage();
         }
     } else {
-        $video = VideoDownload::getJSON($_GET["url"]);
-        if (isset($video->webpage_url)) {
+        try {
+            $video = VideoDownload::getJSON($_GET["url"]);
             $smarty->display('head.tpl');
             $smarty->assign('video', $video);
             $smarty->display('video.tpl');
             $smarty->display('footer.tpl');
-        } else {
-            $error=true;
+        } catch (Exception $e) {
+            $error = $e->getMessage();
         }
     }
 }
 if (isset($error)) {
     $smarty->display('head.tpl');
-    $smarty->assign('errors', $video['error']);
+    $smarty->assign('errors', $error);
     $smarty->display('error.tpl');
     $smarty->display('footer.tpl');
 }

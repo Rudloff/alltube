@@ -15,6 +15,10 @@ require_once 'common.php';
 require_once 'download.php';
 if (isset($_GET["url"])) {
     header('Content-Type: application/json');
-    $video = VideoDownload::getJSON($_GET["url"]);
-    echo json_encode($video);
+    try {
+        $video = VideoDownload::getJSON($_GET["url"]);
+        echo json_encode($video);
+    } catch (Exception $e) {
+        echo json_encode(array('success'=>false, 'error'=>$e->getMessage()));
+    }
 }
