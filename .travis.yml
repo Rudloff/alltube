@@ -2,4 +2,3 @@ language: php
 install:
     - composer install
     - npm install
-script: phpunit tests/
