@@ -21,6 +21,9 @@
     </div>
     </form>
     <a class="combatiblelink" href="extractors.php">See all supported websites</a>
-    <div id="bookmarklet"> <a class="bookmarklet" href="javascript:window.location='{$base_url}/api.php?url='+encodeURIComponent(location.href);">Bookmarklet</a> </div>
+    <div id="bookmarklet">
+        <p> Drag this to your bookmarks bar: </p>
+        <a class="bookmarklet" href="javascript:window.location='{$base_url}/api.php?url='+encodeURIComponent(location.href);">Bookmarklet</a>
+    </div>
 
 </div>
