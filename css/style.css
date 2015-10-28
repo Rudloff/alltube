@@ -248,7 +248,24 @@ color:#f2084a;
   -moz-transition: all 0.1s ease-in;
   -o-transition: all 0.1s ease-in;
 }
-    
+ 
+#bookmarklet{
+padding:15px;
+}
+
+.bookmarklet{
+position:relative;
+font-size:13px;
+color:gray;
+z-index:10;
+text-decoration:none;
+padding-left:30px;
+padding-right:30px;
+padding-top:10px;
+padding-bottom:10px;
+border: 2px dotted;
+}
+   
 .mp3
 {
     position:relative;
