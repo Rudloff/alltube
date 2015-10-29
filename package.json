@@ -18,6 +18,6 @@
         "url": "https://github.com/Rudloff/alltube.git"
     },
     "scripts": {
-        "postinstall": "./node_modules/grunt-cli/bin/grunt; curl -L https://yt-dl.org/downloads/latest/youtube-dl -o youtube-dl; curl http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -o ffmpeg.tar.xz; tar xJf ffmpeg.tar.xz -C ffmpeg --strip-components=1"
+        "postinstall": "./node_modules/grunt-cli/bin/grunt; curl http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -o ffmpeg.tar.xz; tar xJf ffmpeg.tar.xz -C ffmpeg --strip-components=1"
     }
 }

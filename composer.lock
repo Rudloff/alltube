@@ -1,11 +1,22 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d95265fc34ff6df149985554a8ba0d6",
+    "hash": "0f26a6f71839164cb9ca3b6905832232",
+    "content-hash": "34cc3c83cf4cbf26da3aa7c8f15a4b50",
     "packages": [
+        {
+            "name": "rg3/youtube-dl",
+            "version": "2015.10.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rg3/youtube-dl.git",
+                "reference": "2015.10.24"
+            },
+            "type": "library"
+        },
         {
             "name": "smarty/smarty",
             "version": "v3.1.27",
@@ -60,6 +71,62 @@
                 "templating"
             ],
             "time": "2015-06-18 00:55:59"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v2.7.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "eb033050050916b6bfa51be71009ef67b16046c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eb033050050916b6bfa51be71009ef67b16046c9",
+                "reference": "eb033050050916b6bfa51be71009ef67b16046c9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "suggest": {
+                "ext-symfony_debug": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony mechanism for exploring and dumping PHP variables",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "time": "2015-10-25 17:17:38"
         }
     ],
     "packages-dev": [],

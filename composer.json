@@ -5,7 +5,9 @@
     "homepage": "http://alltubedownload.net/",
     "type": "project",
     "require": {
-        "smarty/smarty": "~3.1"
+        "smarty/smarty": "~3.1",
+        "rg3/youtube-dl": "2015.10.24",
+        "symfony/var-dumper": "~2.7.6"
     },
     "extra": {
         "paas": {
@@ -14,6 +16,20 @@
             ]
         }
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "rg3/youtube-dl",
+                "version": "2015.10.24",
+                "source": {
+                    "url": "https://github.com/rg3/youtube-dl.git",
+                    "type": "git",
+                    "reference": "2015.10.24"
+                }
+            }
+        }
+    ],
     "authors": [
         {
             "name": "Pierre Rudloff",

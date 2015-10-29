@@ -64,7 +64,7 @@ Class VideoDownload
      * */
     static function getFilename($url, $format=null)
     {
-        $cmd=PYTHON.' youtube-dl';
+        $cmd=PYTHON.' '.YOUTUBE_DL;
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
