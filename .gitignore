@@ -8,3 +8,4 @@ ffmpeg.tar.xz
 ffmpeg-*/
 alltube-release.zip
 coverage/
+bower_components/
