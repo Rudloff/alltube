@@ -11,8 +11,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
+use Alltube\VideoDownload;
 require_once 'common.php';
-require_once 'download.php';
 if (isset($_GET["url"])) {
     try {
         $video = VideoDownload::getURL($_GET["url"]);
