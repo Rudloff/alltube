@@ -57,6 +57,7 @@ class FrontController {
                     );
                     $url_info = parse_url($video->url);
                     if ($url_info['scheme'] == 'rtmp') {
+                        ob_end_flush();
                         header(
                             'Content-Disposition: attachment; filename="'.
                             html_entity_decode(
@@ -74,6 +75,7 @@ class FrontController {
                         );
                         exit;
                     } else {
+                        ob_end_flush();
                         header(
                             'Content-Disposition: attachment; filename="'.
                             html_entity_decode(
