@@ -8,3 +8,6 @@ AddType application/x-web-app-manifest+json .webapp
     ExpiresByType image/svg+xml "access plus 1 week"
 </ifmodule>
 FileETag None
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

@@ -22,4 +22,3 @@ if (getenv('CONVERT')) {
 define('AVCONV', __DIR__.'/ffmpeg/ffmpeg');
 define('MAINTENANCE', false);
 define('DISABLED', false);
-define('BASE_URL', 'http://alltubedownload.net/');
