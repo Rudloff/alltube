@@ -10,9 +10,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-
+use Alltube\VideoDownload;
 require_once __DIR__.'/../common.php';
-require_once __DIR__.'/../download.php';
 
 /**
  * Unit tests for the VideoDownload class

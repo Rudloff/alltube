@@ -11,7 +11,7 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-
+namespace Alltube;
 /**
  * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
  * Main class
@@ -95,7 +95,7 @@ Class VideoDownload
             $cmd, $result, $code
         );
         if ($code>0) {
-            throw new Exception(implode(PHP_EOL, $result));
+            throw new \Exception(implode(PHP_EOL, $result));
         } else {
             return json_decode($result[0]);
         }
@@ -120,7 +120,7 @@ Class VideoDownload
             $cmd, $result, $code
         );
         if ($code>0) {
-            throw new Exception(implode(PHP_EOL, $result));
+            throw new \Exception(implode(PHP_EOL, $result));
         } else {
             return array('success'=>true, 'url'=>end($result));
         }

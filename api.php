@@ -10,9 +10,9 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
+use Alltube\VideoDownload;
 require_once 'common.php';
 $smarty->assign('class', 'video');
-require_once 'download.php';
 if (isset($_GET["url"])) {
     if (isset($_GET['audio'])) {
         try {

@@ -39,5 +39,10 @@
             "homepage": "https://rudloff.pro/",
             "role": "Developer"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Alltube\\": "classes/"
+        }
+    }
 }
