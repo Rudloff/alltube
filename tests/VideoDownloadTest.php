@@ -53,7 +53,7 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
      * @param string $url    URL
      * @param string $format Format
      *
-     * @return void
+     * @return       void
      * @dataProvider urlProvider
      */
     public function testGetURL($url, $format)
@@ -68,9 +68,9 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
      *
      * @param string $url URL
      *
-     * @return void
+     * @return            void
      * @expectedException Exception
-     * @dataProvider ErrorUrlProvider
+     * @dataProvider      ErrorUrlProvider
      */
     public function testGetURLError($url)
     {
@@ -120,7 +120,7 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
      * @param string $format Format
      * @param string $result Expected filename
      *
-     * @return void
+     * @return       void
      * @dataProvider URLProvider
      */
     public function testGetFilename($url, $format, $result)
@@ -135,7 +135,7 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
      * @param string $url    URL
      * @param string $format Format
      *
-     * @return void
+     * @return       void
      * @dataProvider URLProvider
      */
     public function testGetJSON($url, $format)
@@ -154,9 +154,9 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
      *
      * @param string $url URL
      *
-     * @return void
+     * @return            void
      * @expectedException Exception
-     * @dataProvider ErrorURLProvider
+     * @dataProvider      ErrorURLProvider
      */
     public function testGetJSONError($url)
     {
