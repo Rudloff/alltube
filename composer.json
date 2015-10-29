@@ -44,7 +44,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Alltube\\": "classes/"
+            "Alltube\\": "classes/",
+            "Alltube\\Controller\\": "controllers/"
         }
     }
 }
