@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f26a6f71839164cb9ca3b6905832232",
-    "content-hash": "34cc3c83cf4cbf26da3aa7c8f15a4b50",
+    "hash": "3dbe1326b363d56d544801b87ad0ee5e",
+    "content-hash": "30052efb27250d4c6eb0a5bb39518987",
     "packages": [
         {
             "name": "rg3/youtube-dl",
@@ -71,7 +71,9 @@
                 "templating"
             ],
             "time": "2015-06-18 00:55:59"
-        },
+        }
+    ],
+    "packages-dev": [
         {
             "name": "symfony/var-dumper",
             "version": "v2.7.6",
@@ -129,7 +131,6 @@
             "time": "2015-10-25 17:17:38"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
