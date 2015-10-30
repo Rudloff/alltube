@@ -22,7 +22,8 @@ $app = new \Slim\Slim(
 );
 $view = $app->view();
 $view->parserExtensions = array(
-    __DIR__.'/vendor/slim/views/SmartyPlugins'
+    __DIR__.'/vendor/slim/views/SmartyPlugins',
+    __DIR__.'/smarty'
 );
 $app->get(
     '/',
