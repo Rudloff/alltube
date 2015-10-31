@@ -134,4 +134,30 @@ class FrontController {
             $app->render('footer.tpl');
         }
     }
+
+    static function redirect() {
+        global $app;
+        if (isset($_GET["url"])) {
+            try {
+                $video = VideoDownload::getURL($_GET["url"]);
+                $app->redirect($video['url']);
+            } catch (\Exception $e) {
+                $app->response->headers->set('Content-Type', 'text/plain');
+                echo $e->getMessage();
+            }
+        }
+    }
+
+    static function json() {
+        global $app;
+        if (isset($_GET["url"])) {
+            $app->response->headers->set('Content-Type', 'application/json');
+            try {
+                $video = VideoDownload::getJSON($_GET["url"]);
+                echo json_encode($video);
+            } catch (\Exception $e) {
+                echo json_encode(array('success'=>false, 'error'=>$e->getMessage()));
+            }
+        }
+    }
 }

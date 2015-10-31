@@ -37,4 +37,12 @@ $app->get(
     '/video',
     array('Alltube\Controller\FrontController', 'video')
 )->name('video');
+$app->get(
+    '/redirect',
+    array('Alltube\Controller\FrontController', 'redirect')
+);
+$app->get(
+    '/json',
+    array('Alltube\Controller\FrontController', 'json')
+);
 $app->run();
