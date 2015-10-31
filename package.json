@@ -9,7 +9,8 @@
         "grunt-contrib-watch": "~0.6.1",
         "grunt-phpcs": "~0.4.0",
         "grunt-phpunit": "~0.3.6",
-        "grunt-contrib-compress": "~0.13.0"
+        "grunt-contrib-compress": "~0.13.0",
+        "bower": "~1.6.3"
     },
     "engines": {
         "node": "~0.10.29"
@@ -19,6 +20,6 @@
         "url": "https://github.com/Rudloff/alltube.git"
     },
     "scripts": {
-        "postinstall": "./node_modules/grunt-cli/bin/grunt; curl http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -o ffmpeg.tar.xz; tar xJf ffmpeg.tar.xz -C ffmpeg --strip-components=1"
+        "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/grunt-cli/bin/grunt; curl http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -o ffmpeg.tar.xz; tar xJf ffmpeg.tar.xz -C ffmpeg --strip-components=1"
     }
 }
