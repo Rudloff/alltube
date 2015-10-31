@@ -10,7 +10,7 @@
 <link href="https://plus.google.com/108799967445657477255" rel="publisher" />
 <title itemprop="name">AllTube Download</title>
 <meta itemprop="url" content="http://alltubedownload.net/" />
-<link rel="icon" href="{siteUrl url='img/favicon.png'}" />
+<link rel="icon" href="{siteUrl|noscheme url='img/favicon.png'}" />
 <meta property="og:url" content="http://www.alltubedownload.net/" />
 <meta property="og:title" content="AllTube Download" />
 <meta property="og:description" content="Easily download videos from Youtube, Dailymotion, Vimeo and other websites." />
