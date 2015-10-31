@@ -23,7 +23,7 @@
     <a class="combatiblelink" href="{urlFor name="extractors"}">See all supported websites</a>
     <div id="bookmarklet">
         <p> Drag this to your bookmarks bar: </p>
-        <a class="bookmarklet" href="javascript:window.location='{siteUrl withUri=false url='img/logo.png'}{urlFor name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
+        <a class="bookmarklet" href="javascript:window.location='{siteUrl withUri=false}{urlFor name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
     </div>
 
 </div>
