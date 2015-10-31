@@ -27,11 +27,11 @@ Class Config
 {
     private static $_instance;
 
-    public $youtubedl = __DIR__.'/../vendor/rg3/youtube-dl/youtube_dl/__main__.py';
+    public $youtubedl = 'vendor/rg3/youtube-dl/youtube_dl/__main__.py';
     public $python = '/usr/bin/python';
     public $params = '--no-playlist --no-warnings -f best';
     public $convert = false;
-    public $avconv = __DIR__.'/ffmpeg/ffmpeg';
+    public $avconv = 'ffmpeg/ffmpeg';
 
     /**
      * Config constructor
