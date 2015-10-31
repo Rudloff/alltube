@@ -33,7 +33,11 @@ Class Config
     public $convert = false;
     public $avconv = __DIR__.'/ffmpeg/ffmpeg';
 
-    private function __construct() {
+    /**
+     * Config constructor
+     */
+    private function __construct()
+    {
         $yaml = Yaml::parse(__DIR__.'/../config.yml');
         foreach ($yaml as $param=>$value) {
             if (isset($this->$param)) {
@@ -45,8 +49,13 @@ Class Config
         }
     }
 
-    public static function getInstance() {
-        if(is_null(self::$_instance)) {
+    /**
+     * Get singleton instance
+     * @return Config
+     */
+    public static function getInstance()
+    {
+        if (is_null(self::$_instance)) {
             self::$_instance = new Config();
         }
         return self::$_instance;

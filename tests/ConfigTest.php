@@ -25,6 +25,11 @@ use Alltube\Config;
  * */
 class ConfigTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * Test the getInstance function
+     * @return void
+     */
     public function testGetInstance()
     {
         putenv('CONVERT=1');
