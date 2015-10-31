@@ -51,7 +51,7 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-release.zip'
                     },
-                    src: ['*.php', '!config.php', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**']
+                    src: ['*.php', '!config.php', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**']
                 }
             }
         }
@@ -67,5 +67,5 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['uglify', 'cssmin']);
     grunt.registerTask('lint', ['phpcs']);
     grunt.registerTask('test', ['phpunit']);
-    grunt.registerTask('release', ['compress']);
+    grunt.registerTask('release', ['default', 'compress']);
 };
