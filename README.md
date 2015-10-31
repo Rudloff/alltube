@@ -23,7 +23,7 @@ You should also ensure that the *templates_c* folder has the right permissions:
 
 If you want to use a custom config, you need to create a config file:
 
-    cp config.example.php config.php
+    cp config.example.yml config.yml
 
 
 ##License
@@ -33,7 +33,7 @@ __Please use a different name and logo if you run it on a public server.__
 
 ##Other dependencies
 You need [avconv](https://libav.org/avconv.html) and [rtmpdump](http://rtmpdump.mplayerhq.hu/) in order to enable conversions.
-If you don't want to enable conversions, you can disable it in *config.php*.
+If you don't want to enable conversions, you can disable it in *config.yml*.
 
 On Debian-based systems:
 

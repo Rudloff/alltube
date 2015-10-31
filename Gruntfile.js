@@ -29,7 +29,7 @@ module.exports = function (grunt) {
             },
             phpcs: {
                 php: {
-                    src: ['*.php']
+                    src: ['*.php', 'classes/*.php', 'controllers/*.php']
                 },
                 tests: {
                     src: ['tests/*.php']
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-release.zip'
                     },
-                    src: ['*.php', '!config.php', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**']
+                    src: ['*.php', '!config.yml', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**']
                 }
             }
         }

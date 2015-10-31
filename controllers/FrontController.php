@@ -1,10 +1,12 @@
 <?php
 namespace Alltube\Controller;
 use Alltube\VideoDownload;
+use Alltube\Config;
 
 class FrontController {
     static function index() {
         global $app;
+        $config = Config::getInstance();
         $app->render(
             'head.tpl',
             array(
@@ -17,7 +19,7 @@ class FrontController {
         $app->render(
             'index.tpl',
             array(
-                'convert'=>CONVERT
+                'convert'=>$config->convert
             )
         );
         $app->render('footer.tpl');
@@ -44,6 +46,7 @@ class FrontController {
 
     static function video() {
         global $app;
+        $config = Config::getInstance();
         if (isset($_GET["url"])) {
             if (isset($_GET['audio'])) {
                 try {
@@ -71,7 +74,7 @@ class FrontController {
                         header("Content-Type: audio/mpeg");
                         passthru(
                             '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                            '   |  '.AVCONV.' -v quiet -i - -f mp3 -vn pipe:1'
+                            '   |  '.$config->avconv.' -v quiet -i - -f mp3 -vn pipe:1'
                         );
                         exit;
                     } else {
@@ -90,7 +93,7 @@ class FrontController {
                         passthru(
                             'curl  --user-agent '.escapeshellarg($UA).
                             ' '.escapeshellarg($video->url).
-                            '   |  '.AVCONV.' -v quiet -i - -f mp3 -vn pipe:1'
+                            '   |  '.$config->avconv.' -v quiet -i - -f mp3 -vn pipe:1'
                         );
                         exit;
                     }

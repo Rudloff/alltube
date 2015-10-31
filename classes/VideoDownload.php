@@ -1,7 +1,6 @@
 <?php
 /**
- * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
- * Main class
+ * VideoDownload class
  *
  * PHP Version 5.3.10
  *
@@ -13,7 +12,6 @@
  * */
 namespace Alltube;
 /**
- * PHP web interface for youtube-dl (http://rg3.github.com/youtube-dl/)
  * Main class
  *
  * PHP Version 5.3.10
@@ -33,8 +31,9 @@ Class VideoDownload
      * */
     static function getUA()
     {
+        $config = Config::getInstance();
         exec(
-            PYTHON.' '.YOUTUBE_DL.' --dump-user-agent',
+            $config->python.' '.$config->youtubedl.' --dump-user-agent',
             $version
         );
         return $version[0];
@@ -47,8 +46,9 @@ Class VideoDownload
      * */
     static function listExtractors()
     {
+        $config = Config::getInstance();
         exec(
-            PYTHON.' '.YOUTUBE_DL.' --list-extractors',
+            $config->python.' '.$config->youtubedl.' --list-extractors',
             $extractors
         );
         return $extractors;
@@ -64,7 +64,8 @@ Class VideoDownload
      * */
     static function getFilename($url, $format=null)
     {
-        $cmd=PYTHON.' '.YOUTUBE_DL;
+        $config = Config::getInstance();
+        $cmd=$config->python.' '.$config->youtubedl;
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
@@ -86,7 +87,8 @@ Class VideoDownload
      * */
     static function getJSON($url, $format=null)
     {
-        $cmd=PYTHON.' '.YOUTUBE_DL.' '.PARAMS;
+        $config = Config::getInstance();
+        $cmd=$config->python.' '.$config->youtubedl.' '.$config->params;
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
@@ -111,7 +113,8 @@ Class VideoDownload
      * */
     static function getURL($url, $format=null)
     {
-        $cmd=PYTHON.' '.YOUTUBE_DL.' '.PARAMS;
+        $config = Config::getInstance();
+        $cmd=$config->python.' '.$config->youtubedl.' '.$config->params;
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }

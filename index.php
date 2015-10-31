@@ -12,8 +12,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
+require_once __DIR__.'/vendor/autoload.php';
 use Alltube\VideoDownload;
-require_once 'common.php';
 
 $app = new \Slim\Slim(
     array(
