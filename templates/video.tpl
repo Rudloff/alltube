@@ -18,7 +18,9 @@
 <img src="{siteUrl|noscheme url='img/ic_media_route_on_holo_light.png'}"
     alt="Casting to ChromeCast…" title="Stop casting"
     id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" /></p>
-<img itemprop="image" class="thumb" src="{$video->thumbnail}" alt="" />
+{if isset($video->thumbnail)}
+    <img itemprop="image" class="thumb" src="{$video->thumbnail}" alt="" />
+{/if}
 <br/>
 <input type="hidden" name="url"
 value="{$video->webpage_url}" />
