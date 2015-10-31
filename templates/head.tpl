@@ -9,12 +9,13 @@
 <link rel="author" href="https://plus.google.com/103696815796116179392?rel=author" />
 <link href="https://plus.google.com/108799967445657477255" rel="publisher" />
 <title itemprop="name">AllTube Download</title>
-<meta itemprop="url" content="http://alltubedownload.net/" />
+<meta itemprop="url" content="{siteUrl}" />
+<link rel="canonical" href="{currentUrl|replace:{siteUrl}:'http://www.alltubedownload.net/'}" />
 <link rel="icon" href="{siteUrl|noscheme url='img/favicon.png'}" />
-<meta property="og:url" content="http://www.alltubedownload.net/" />
+<meta property="og:url" content="{siteUrl}" />
 <meta property="og:title" content="AllTube Download" />
 <meta property="og:description" content="Easily download videos from Youtube, Dailymotion, Vimeo and other websites." />
-<meta property="og:image" content="http://www.alltubedownload.net/img/logo.png" />
+<meta property="og:image" content="{siteUrl url='img/logo.png'}" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="AllTube Download" />
 <meta name="twitter:image" content="{siteUrl url='img/logo.png'}" />
