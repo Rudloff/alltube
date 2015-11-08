@@ -7,3 +7,6 @@ templates_c/
 ffmpeg.tar.xz
 ffmpeg-*/
 alltube-release.zip
+coverage/
+bower_components/
+config.yml

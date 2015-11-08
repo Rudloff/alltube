@@ -1,8 +1,13 @@
 AddType application/x-web-app-manifest+json .webapp
-ExpiresActive On
-ExpiresByType application/javascript "access plus 1 week"
-ExpiresByType text/css "access plus 1 week"
-ExpiresByType image/png "access plus 1 week"
-ExpiresByType image/jpeg "access plus 1 week"
-ExpiresByType image/svg+xml "access plus 1 week"
+<ifmodule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType image/png "access plus 1 week"
+    ExpiresByType image/jpeg "access plus 1 week"
+    ExpiresByType image/svg+xml "access plus 1 week"
+</ifmodule>
 FileETag None
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

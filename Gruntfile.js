@@ -29,7 +29,7 @@ module.exports = function (grunt) {
             },
             phpcs: {
                 php: {
-                    src: ['*.php']
+                    src: ['*.php', 'classes/*.php', 'controllers/*.php']
                 },
                 tests: {
                     src: ['tests/*.php']
@@ -45,6 +45,14 @@ module.exports = function (grunt) {
                 classes: {
                     dir: 'tests/'
                 }
+            },
+            compress: {
+                release: {
+                    options: {
+                        archive: 'alltube-release.zip'
+                    },
+                    src: ['*.php', '!config.yml', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**']
+                }
             }
         }
     );
@@ -54,8 +62,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
     grunt.loadNpmTasks('grunt-phpunit');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
     grunt.registerTask('lint', ['phpcs']);
     grunt.registerTask('test', ['phpunit']);
+    grunt.registerTask('release', ['default', 'compress']);
 };

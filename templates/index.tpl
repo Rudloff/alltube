@@ -1,7 +1,7 @@
     <div class="main">
-    <div><img itemprop="image" class="logo" src="img/logo.png"
+    <div><img itemprop="image" class="logo" src="{siteUrl|noscheme url='img/logo.png'}"
     alt="AllTube Download" width="328" height="284"></div>
-    <form action="api.php">
+    <form action="{urlFor name="video"}">
     <label class="labelurl" for="url">
         Copy here the URL of your video (Youtube, Dailymotion, etc.)
     </label>
@@ -20,5 +20,10 @@
         {/if}
     </div>
     </form>
-    <a class="combatiblelink" href="extractors.php">See all supported websites</a>
+    <a class="combatiblelink" href="{urlFor name="extractors"}">See all supported websites</a>
+    <div id="bookmarklet">
+        <p> Drag this to your bookmarks bar: </p>
+        <a class="bookmarklet" href="javascript:window.location='{siteUrl withUri=false}{urlFor name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
+    </div>
+
 </div>
