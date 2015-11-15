@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7e5944a818030d017d39d13b9ec0ffd",
-    "content-hash": "2d61af9410d3e5f69fa0d6a956210a83",
+    "hash": "9e5e7fd038b781a2e3d8225c106c4cf8",
+    "content-hash": "f12c36b7fa62650562772e94d85a1a8a",
     "packages": [
         {
             "name": "jeremykendall/php-domain-parser",
@@ -71,16 +71,16 @@
         },
         {
             "name": "league/uri",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri.git",
-                "reference": "a22120c5937814dbadaffccef32bf11040f46c0b"
+                "reference": "671150fbd1d4120746195d6bec1aa78b95b14104"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/a22120c5937814dbadaffccef32bf11040f46c0b",
-                "reference": "a22120c5937814dbadaffccef32bf11040f46c0b",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/671150fbd1d4120746195d6bec1aa78b95b14104",
+                "reference": "671150fbd1d4120746195d6bec1aa78b95b14104",
                 "shasum": ""
             },
             "require": {
@@ -121,6 +121,8 @@
             "description": "URI manipulation library",
             "homepage": "http://url.thephpleague.com",
             "keywords": [
+                "data",
+                "data-uri",
                 "ftp",
                 "http",
                 "parse_url",
@@ -130,7 +132,7 @@
                 "url",
                 "ws"
             ],
-            "time": "2015-09-23 11:09:45"
+            "time": "2015-11-03 07:54:30"
         },
         {
             "name": "psr/http-message",
@@ -183,11 +185,11 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2015.10.24",
+            "version": "2015.11.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rg3/youtube-dl.git",
-                "reference": "2015.10.24"
+                "reference": "2015.11.13"
             },
             "type": "library"
         },
