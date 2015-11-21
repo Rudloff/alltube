@@ -4,9 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9e5e7fd038b781a2e3d8225c106c4cf8",
-    "content-hash": "f12c36b7fa62650562772e94d85a1a8a",
+    "hash": "f0413ea9f5a3839553b545d6f8d97a04",
+    "content-hash": "17101d634f04111528073e6c9e5dcb8c",
     "packages": [
+        {
+            "name": "ffmpeg/ffmpeg",
+            "version": "2.8.2",
+            "dist": {
+                "type": "xz",
+                "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
         {
             "name": "jeremykendall/php-domain-parser",
             "version": "3.0.0",

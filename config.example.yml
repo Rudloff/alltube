@@ -2,4 +2,4 @@ youtubedl: vendor/rg3/youtube-dl/youtube_dl/__main__.py
 python: /usr/bin/python
 params: --no-playlist --no-warnings -f best
 convert: false
-avconv: ffmpeg/ffmpeg
+avconv: vendor/ffmpeg/ffmpeg/ffmpeg
