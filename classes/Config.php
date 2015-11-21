@@ -31,7 +31,7 @@ Class Config
     public $python = '/usr/bin/python';
     public $params = '--no-playlist --no-warnings -f best';
     public $convert = false;
-    public $avconv = 'vendor/ffmpeg/ffmpeg/ffmpeg';
+    public $avconv = 'vendor/bin/ffmpeg';
 
     /**
      * Config constructor

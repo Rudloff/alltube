@@ -44,7 +44,10 @@
                 "dist": {
                     "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
                     "type": "xz"
-                }
+                },
+                "bin": [
+                    "ffmpeg"
+                ]
             }
         }
     ],

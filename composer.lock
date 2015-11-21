@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0413ea9f5a3839553b545d6f8d97a04",
-    "content-hash": "17101d634f04111528073e6c9e5dcb8c",
+    "hash": "a4d07c0b568b699f11966a06bb02c01a",
+    "content-hash": "d44f2b04ee42d003e6c04dbde30106c5",
     "packages": [
         {
             "name": "ffmpeg/ffmpeg",
@@ -16,6 +16,9 @@
                 "reference": null,
                 "shasum": null
             },
+            "bin": [
+                "ffmpeg"
+            ],
             "type": "library"
         },
         {
