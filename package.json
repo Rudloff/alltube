@@ -1,6 +1,6 @@
 {
     "name": "alltube",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "dependencies": {
         "grunt": "~0.4.5",
         "grunt-cli": "~0.1.13",
@@ -20,6 +20,6 @@
         "url": "https://github.com/Rudloff/alltube.git"
     },
     "scripts": {
-        "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/grunt-cli/bin/grunt; curl http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -o ffmpeg.tar.xz; tar xJf ffmpeg.tar.xz -C ffmpeg --strip-components=1"
+        "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/grunt-cli/bin/grunt"
     }
 }
