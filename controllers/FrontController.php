@@ -191,7 +191,7 @@ class FrontController
                 $app->redirect($video['url']);
             } catch (\Exception $e) {
                 $app->response->headers->set('Content-Type', 'text/plain');
-                echo $e->getMessage();
+                echo $e->getMessage().PHP_EOL;
             }
         }
     }
