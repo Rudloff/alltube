@@ -1,5 +1,5 @@
     <div class="main">
-    <div><img itemprop="image" class="logo" src="{siteUrl url='img/logo.png'}"
+    <div><img itemprop="image" class="logo" src="{siteUrl|noscheme url='img/logo.png'}"
     alt="AllTube Download" width="328" height="284"></div>
     <form action="{urlFor name="video"}">
     <label class="labelurl" for="url">
@@ -23,7 +23,7 @@
     <a class="combatiblelink" href="{urlFor name="extractors"}">See all supported websites</a>
     <div id="bookmarklet">
         <p> Drag this to your bookmarks bar: </p>
-        <a class="bookmarklet" href="javascript:window.location='{siteUrl withUri=false url='img/logo.png'}{urlFor name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
+        <a class="bookmarklet" href="javascript:window.location='{siteUrl withUri=false}{urlFor name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
     </div>
 
 </div>

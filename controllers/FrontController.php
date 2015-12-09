@@ -1,10 +1,40 @@
 <?php
+/**
+ * FrontController class
+ *
+ * PHP Version 5.3.10
+ *
+ * @category Youtube-dl
+ * @package  Youtubedl
+ * @author   Pierre Rudloff <contact@rudloff.pro>
+ * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
+ * @link     http://rudloff.pro
+ * */
 namespace Alltube\Controller;
 use Alltube\VideoDownload;
+use Alltube\Config;
+/**
+ * Main controller
+ *
+ * PHP Version 5.3.10
+ *
+ * @category Youtube-dl
+ * @package  Youtubedl
+ * @author   Pierre Rudloff <contact@rudloff.pro>
+ * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
+ * @link     http://rudloff.pro
+ * */
+class FrontController
+{
 
-class FrontController {
-    static function index() {
+    /**
+     * Display index page
+     * @return void
+     */
+    static function index()
+    {
         global $app;
+        $config = Config::getInstance();
         $app->render(
             'head.tpl',
             array(
@@ -17,13 +47,18 @@ class FrontController {
         $app->render(
             'index.tpl',
             array(
-                'convert'=>CONVERT
+                'convert'=>$config->convert
             )
         );
         $app->render('footer.tpl');
     }
 
-    static function extractors() {
+    /**
+     * Display a list of extractors
+     * @return void
+     */
+    static function extractors()
+    {
         global $app;
         $app->render(
             'head.tpl',
@@ -42,8 +77,14 @@ class FrontController {
         $app->render('footer.tpl');
     }
 
-    static function video() {
+    /**
+     * Dislay information about the video
+     * @return void
+     */
+    static function video()
+    {
         global $app;
+        $config = Config::getInstance();
         if (isset($_GET["url"])) {
             if (isset($_GET['audio'])) {
                 try {
@@ -71,7 +112,8 @@ class FrontController {
                         header("Content-Type: audio/mpeg");
                         passthru(
                             '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                            '   |  '.AVCONV.' -v quiet -i - -f mp3 -vn pipe:1'
+                            '   |  '.$config->avconv.
+                            ' -v quiet -i - -f mp3 -vn pipe:1'
                         );
                         exit;
                     } else {
@@ -90,7 +132,8 @@ class FrontController {
                         passthru(
                             'curl  --user-agent '.escapeshellarg($UA).
                             ' '.escapeshellarg($video->url).
-                            '   |  '.AVCONV.' -v quiet -i - -f mp3 -vn pipe:1'
+                            '   |  '.$config->avconv.
+                            ' -v quiet -i - -f mp3 -vn pipe:1'
                         );
                         exit;
                     }
@@ -132,6 +175,42 @@ class FrontController {
                 )
             );
             $app->render('footer.tpl');
+        }
+    }
+
+    /**
+     * Redirect to video file
+     * @return void
+     */
+    static function redirect()
+    {
+        global $app;
+        if (isset($_GET["url"])) {
+            try {
+                $video = VideoDownload::getURL($_GET["url"]);
+                $app->redirect($video['url']);
+            } catch (\Exception $e) {
+                $app->response->headers->set('Content-Type', 'text/plain');
+                echo $e->getMessage().PHP_EOL;
+            }
+        }
+    }
+
+    /**
+     * Output JSON info about the video
+     * @return void
+     */
+    static function json()
+    {
+        global $app;
+        if (isset($_GET["url"])) {
+            $app->response->headers->set('Content-Type', 'application/json');
+            try {
+                $video = VideoDownload::getJSON($_GET["url"]);
+                echo json_encode($video);
+            } catch (\Exception $e) {
+                echo json_encode(array('success'=>false, 'error'=>$e->getMessage()));
+            }
         }
     }
 }

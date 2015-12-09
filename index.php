@@ -12,8 +12,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
+require_once __DIR__.'/vendor/autoload.php';
 use Alltube\VideoDownload;
-require_once 'common.php';
 
 $app = new \Slim\Slim(
     array(
@@ -23,7 +23,7 @@ $app = new \Slim\Slim(
 $view = $app->view();
 $view->parserExtensions = array(
     __DIR__.'/vendor/slim/views/SmartyPlugins',
-    __DIR__.'/smarty'
+    __DIR__.'/vendor/rudloff/smarty-plugin-noscheme/'
 );
 $app->get(
     '/',
@@ -37,4 +37,12 @@ $app->get(
     '/video',
     array('Alltube\Controller\FrontController', 'video')
 )->name('video');
+$app->get(
+    '/redirect',
+    array('Alltube\Controller\FrontController', 'redirect')
+);
+$app->get(
+    '/json',
+    array('Alltube\Controller\FrontController', 'json')
+);
 $app->run();

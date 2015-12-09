@@ -2,3 +2,5 @@ language: php
 install:
     - composer install
     - npm install
+before_install:
+    - composer selfupdate

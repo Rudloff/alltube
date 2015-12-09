@@ -11,7 +11,6 @@
  * @link     http://rudloff.pro
  * */
 use Alltube\VideoDownload;
-require_once __DIR__.'/../common.php';
 
 /**
  * Unit tests for the VideoDownload class
@@ -80,7 +79,7 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
     /**
      * Provides URLs for tests
      *
-     * @return void
+     * @return array
      */
     public function urlProvider()
     {
@@ -104,7 +103,7 @@ class VideoDownloadTest extends PHPUnit_Framework_TestCase
     /**
      * Provides incorrect URLs for tests
      *
-     * @return void
+     * @return array
      */
     public function errorUrlProvider()
     {

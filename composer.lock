@@ -4,9 +4,199 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ddee3cb49e77224263b84bcdab2a5cef",
-    "content-hash": "edd3cd78a8d70a2c889bf867d611c950",
+    "hash": "c7b053d687208446a7f7456623d6e888",
+    "content-hash": "2ed45cb5e9f8cb491d41f4272a543c5c",
     "packages": [
+        {
+            "name": "ffmpeg/ffmpeg",
+            "version": "2.8.2",
+            "dist": {
+                "type": "xz",
+                "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
+                "reference": null,
+                "shasum": null
+            },
+            "bin": [
+                "ffmpeg"
+            ],
+            "type": "library"
+        },
+        {
+            "name": "jeremykendall/php-domain-parser",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykendall/php-domain-parser.git",
+                "reference": "896e7e70f02bd4fd77190052799bc61e4d779672"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/896e7e70f02bd4fd77190052799bc61e4d779672",
+                "reference": "896e7e70f02bd4fd77190052799bc61e4d779672",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "jeremykendall/debug-die": "0.0.1.*",
+                "mikey179/vfsstream": "~1.4",
+                "phpunit/phpunit": "~4.4"
+            },
+            "bin": [
+                "bin/parse",
+                "bin/update-psl"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Pdp\\": "src/"
+                },
+                "files": [
+                    "src/pdp-parse-url.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Kendall",
+                    "homepage": "http://about.me/jeremykendall",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/jeremykendall/php-domain-parser/graphs/contributors"
+                }
+            ],
+            "description": "Public Suffix List based URL parsing implemented in PHP.",
+            "homepage": "https://github.com/jeremykendall/php-domain-parser",
+            "keywords": [
+                "Public Suffix List",
+                "domain parsing",
+                "url parsing"
+            ],
+            "time": "2015-03-30 12:49:45"
+        },
+        {
+            "name": "league/uri",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/uri.git",
+                "reference": "671150fbd1d4120746195d6bec1aa78b95b14104"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/671150fbd1d4120746195d6bec1aa78b95b14104",
+                "reference": "671150fbd1d4120746195d6bec1aa78b95b14104",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "jeremykendall/php-domain-parser": "^3.0",
+                "php": ">=5.5.9",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.9",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Uri\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "URI manipulation library",
+            "homepage": "http://url.thephpleague.com",
+            "keywords": [
+                "data",
+                "data-uri",
+                "ftp",
+                "http",
+                "parse_url",
+                "psr-7",
+                "rfc3986",
+                "uri",
+                "url",
+                "ws"
+            ],
+            "time": "2015-11-03 07:54:30"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2015-05-04 20:22:00"
+        },
         {
             "name": "rg3/youtube-dl",
             "version": "2015.12.06",
@@ -16,6 +206,42 @@
                 "reference": "2015.12.06"
             },
             "type": "library"
+        },
+        {
+            "name": "rudloff/smarty-plugin-noscheme",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Rudloff/smarty-plugin-noscheme.git",
+                "reference": "537bcb2f7576252af70d8f9f817bfe050d873072"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rudloff/smarty-plugin-noscheme/zipball/537bcb2f7576252af70d8f9f817bfe050d873072",
+                "reference": "537bcb2f7576252af70d8f9f817bfe050d873072",
+                "shasum": ""
+            },
+            "require": {
+                "league/uri": "~4.0"
+            },
+            "require-dev": {
+                "symfony/var-dumper": "~2.7.6"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Rudloff",
+                    "email": "contact@rudloff.pro",
+                    "homepage": "https://rudloff.pro/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Smarty modifier that removes the scheme in URLs",
+            "time": "2015-10-31 10:25:47"
         },
         {
             "name": "slim/slim",
@@ -170,25 +396,134 @@
                 "templating"
             ],
             "time": "2015-06-18 00:55:59"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
+                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-11-30 12:36:17"
         }
     ],
     "packages-dev": [
         {
-            "name": "symfony/var-dumper",
-            "version": "v2.7.7",
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "72bcb27411780eaee9469729aace73c0d46fb2b8"
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/72bcb27411780eaee9469729aace73c0d46fb2b8",
-                "reference": "72bcb27411780eaee9469729aace73c0d46fb2b8",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0b6a8940385311a24e060ec1fe35680e17c74497",
+                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2015-11-04 20:28:58"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "737e07704cca83f9dd0af926d45ce27eedc25657"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/737e07704cca83f9dd0af926d45ce27eedc25657",
+                "reference": "737e07704cca83f9dd0af926d45ce27eedc25657",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "twig/twig": "~1.20|~2.0"
             },
             "suggest": {
                 "ext-symfony_debug": ""
@@ -196,7 +531,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -230,7 +565,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2015-11-18 13:41:01"
+            "time": "2015-11-18 13:48:51"
         }
     ],
     "aliases": [],
