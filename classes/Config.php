@@ -38,11 +38,14 @@ Class Config
      */
     private function __construct()
     {
-        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../config.yml'));
-        if (isset($yaml) && is_array($yaml)) {
-            foreach ($yaml as $param=>$value) {
-                if (isset($this->$param)) {
-                    $this->$param = $value;
+        $yamlfile = __DIR__.'/../config.yml';
+        if (is_file($yamlfile)) {
+            $yaml = Yaml::parse(file_get_contents($yamlfile));
+            if (isset($yaml) && is_array($yaml)) {
+                foreach ($yaml as $param=>$value) {
+                    if (isset($this->$param)) {
+                        $this->$param = $value;
+                    }
                 }
             }
         }
