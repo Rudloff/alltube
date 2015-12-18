@@ -38,7 +38,7 @@ Class Config
      */
     private function __construct()
     {
-        $yaml = Yaml::parse(__DIR__.'/../config.yml');
+        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../config.yml'));
         if (isset($yaml) && is_array($yaml)) {
             foreach ($yaml as $param=>$value) {
                 if (isset($this->$param)) {
