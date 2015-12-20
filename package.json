@@ -1,6 +1,7 @@
 {
     "name": "alltube",
     "version": "0.4.3",
+    "license": "GPL-3.0",
     "dependencies": {
         "grunt": "~0.4.5",
         "grunt-cli": "~0.1.13",
