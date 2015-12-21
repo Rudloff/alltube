@@ -344,16 +344,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v3.1.28",
+            "version": "v3.1.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "d234f79203ca236093989c579c824a1a882d1153"
+                "reference": "35480f10e7ce9b0fdaf23d3799d7b79463919b1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/d234f79203ca236093989c579c824a1a882d1153",
-                "reference": "d234f79203ca236093989c579c824a1a882d1153",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/35480f10e7ce9b0fdaf23d3799d7b79463919b1e",
+                "reference": "35480f10e7ce9b0fdaf23d3799d7b79463919b1e",
                 "shasum": ""
             },
             "require": {
@@ -395,7 +395,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-12-13 14:19:58"
+            "time": "2015-12-21 01:57:06"
         },
         {
             "name": "symfony/yaml",
