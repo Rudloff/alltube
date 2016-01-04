@@ -37,6 +37,6 @@ If you don't want to enable conversions, you can disable it in *config.yml*.
 
 On Debian-based systems:
 
-    sudo apt-get install libavcodec-extra rtmpdump
+    sudo apt-get install libav-tools rtmpdump
 
 You also probably need to edit the *avconv* variable in *config.yml* so that it points to your ffmpeg/avconv binary (*/usr/bin/avconv* on Debian/Ubuntu).
