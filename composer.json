@@ -5,7 +5,7 @@
     "homepage": "http://alltubedownload.net/",
     "type": "project",
     "require": {
-        "smarty/smarty": "~3.1",
+        "smarty/smarty": "~3.1.29",
         "rg3/youtube-dl": "2016.01.09",
         "slim/slim": "~2.6.2",
         "slim/views": "~0.1.3",
