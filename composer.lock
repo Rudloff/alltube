@@ -4,12 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53dc045ca69db48893c7180e8438f057",
-    "content-hash": "4bf259cef086300ca805e36de4052949",
+    "hash": "62297a3aedba705d16d04e1b21e75b84",
+    "content-hash": "08b11c4af74e3edc8c9be95631a424f3",
     "packages": [
         {
             "name": "ffmpeg/ffmpeg",
-            "version": "2.8.2",
+            "version": "2.8.4",
             "dist": {
                 "type": "xz",
                 "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
