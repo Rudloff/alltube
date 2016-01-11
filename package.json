@@ -13,9 +13,6 @@
         "grunt-contrib-compress": "~0.14.0",
         "bower": "~1.7.1"
     },
-    "engines": {
-        "node": "~0.10.29"
-    },
     "repository": {
         "type": "git",
         "url": "https://github.com/Rudloff/alltube.git"
