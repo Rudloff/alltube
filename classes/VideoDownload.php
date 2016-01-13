@@ -33,7 +33,7 @@ Class VideoDownload
     {
         $config = Config::getInstance();
         exec(
-            $config->python.' '.$config->youtubedl.' --dump-user-agent',
+            escapeshellcmd($config->python).' '.escapeshellarg($config->youtubedl).' --dump-user-agent',
             $version
         );
         return $version[0];
@@ -48,7 +48,7 @@ Class VideoDownload
     {
         $config = Config::getInstance();
         exec(
-            $config->python.' '.$config->youtubedl.' --list-extractors',
+            escapeshellcmd($config->python).' '.escapeshellarg($config->youtubedl).' --list-extractors',
             $extractors
         );
         return $extractors;
@@ -65,7 +65,7 @@ Class VideoDownload
     static function getFilename($url, $format=null)
     {
         $config = Config::getInstance();
-        $cmd=$config->python.' '.$config->youtubedl;
+        $cmd = escapeshellcmd($config->python).' '.escapeshellarg($config->youtubedl);
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
@@ -88,7 +88,7 @@ Class VideoDownload
     static function getJSON($url, $format=null)
     {
         $config = Config::getInstance();
-        $cmd=$config->python.' '.$config->youtubedl.' '.$config->params;
+        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
@@ -114,7 +114,7 @@ Class VideoDownload
     static function getURL($url, $format=null)
     {
         $config = Config::getInstance();
-        $cmd=$config->python.' '.$config->youtubedl.' '.$config->params;
+        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
