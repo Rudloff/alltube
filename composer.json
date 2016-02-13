@@ -53,6 +53,11 @@
 		"email": "contact@rudloff.pro",
 		"homepage": "https://rudloff.pro/",
 		"role": "Developer"
+	}, {
+		"name": "Olivier Haquette",
+		"email": "contact@olivierhaquette.fr",
+		"homepage": "http://olivierhaquette.fr/",
+		"role": "Designer"
 	}],
 	"autoload": {
 		"psr-4": {
