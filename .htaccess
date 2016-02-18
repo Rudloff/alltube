@@ -12,5 +12,5 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 
-Redirect /api.php /video
-Redirect /extractors.php /extractors
+Redirect permanent /api.php /video
+Redirect permanent /extractors.php /extractors
