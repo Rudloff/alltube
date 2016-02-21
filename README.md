@@ -19,6 +19,8 @@ You should also ensure that the *templates_c* folder has the right permissions:
 
     chmod 777 templates_c/
 
+If your web server is Apache, you need to set the `AllowOverride` setting to `All` or `FileInfo`.
+
 ##Config
 
 If you want to use a custom config, you need to create a config file:
