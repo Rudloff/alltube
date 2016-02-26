@@ -27,5 +27,6 @@
 <meta itemprop="operatingSystem" content="Linux" />
 <meta itemprop="operatingSystem" content="Mac OS X" />
 <meta name="theme-color" content="#4F4F4F">
+<link rel="manifest" href="manifest.json" />
 </head>
 <body class="{$class}">
