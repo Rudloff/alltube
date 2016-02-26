@@ -64,5 +64,8 @@
 			"Alltube\\": "classes/",
 			"Alltube\\Controller\\": "controllers/"
 		}
+	},
+	"config": {
+		"secure-http": false
 	}
 }
