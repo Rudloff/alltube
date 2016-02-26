@@ -26,5 +26,6 @@
 <meta itemprop="applicationCategory" content="Download" />
 <meta itemprop="operatingSystem" content="Linux" />
 <meta itemprop="operatingSystem" content="Mac OS X" />
+<meta name="theme-color" content="#4F4F4F">
 </head>
 <body class="{$class}">
