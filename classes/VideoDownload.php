@@ -69,7 +69,7 @@ Class VideoDownload
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
-        $cmd .=' --get-filename '.escapeshellarg($url)." 2>&1";
+        $cmd .='--force-ipv4 --get-filename '.escapeshellarg($url)." 2>&1";
         exec(
             $cmd,
             $filename
