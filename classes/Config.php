@@ -32,6 +32,7 @@ Class Config
     public $params = '--no-playlist --no-warnings -f best';
     public $convert = false;
     public $avconv = 'vendor/bin/ffmpeg';
+    public $curl_params = '';
 
     /**
      * Config constructor

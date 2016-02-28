@@ -32,8 +32,9 @@ Class VideoDownload
     static function getUA()
     {
         $config = Config::getInstance();
+        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
         exec(
-            escapeshellcmd($config->python).' '.escapeshellarg($config->youtubedl).' --dump-user-agent',
+            $cmd.' --dump-user-agent',
             $version
         );
         return $version[0];
@@ -47,8 +48,9 @@ Class VideoDownload
     static function listExtractors()
     {
         $config = Config::getInstance();
+        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
         exec(
-            escapeshellcmd($config->python).' '.escapeshellarg($config->youtubedl).' --list-extractors',
+            $cmd.' --list-extractors',
             $extractors
         );
         return $extractors;
@@ -65,7 +67,7 @@ Class VideoDownload
     static function getFilename($url, $format=null)
     {
         $config = Config::getInstance();
-        $cmd = escapeshellcmd($config->python).' '.escapeshellarg($config->youtubedl);
+        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
