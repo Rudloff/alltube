@@ -1,5 +1,5 @@
 youtubedl: vendor/rg3/youtube-dl/youtube_dl/__main__.py
 python: /usr/bin/python
-params: --no-playlist --no-warnings -f best
+params: --no-playlist --force-ipv4 --no-warnings -f best
 convert: false
 avconv: vendor/bin/ffmpeg
