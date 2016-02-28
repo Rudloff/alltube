@@ -130,7 +130,7 @@ class FrontController
                         );
                         header("Content-Type: audio/mpeg");
                         passthru(
-                            'curl  --user-agent '.escapeshellarg($UA).
+                            'curl --ipv4 --user-agent '.escapeshellarg($UA).
                             ' '.escapeshellarg($video->url).
                             '   |  '.$config->avconv.
                             ' -v quiet -i - -f mp3 -vn pipe:1'
