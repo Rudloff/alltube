@@ -57,6 +57,7 @@ Class Config
 
     /**
      * Get singleton instance
+     *
      * @return Config
      */
     public static function getInstance()

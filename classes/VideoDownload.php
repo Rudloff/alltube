@@ -32,7 +32,10 @@ Class VideoDownload
     static function getUA()
     {
         $config = Config::getInstance();
-        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
+        $cmd = escapeshellcmd(
+            $config->python.' '.escapeshellarg($config->youtubedl).
+                ' '.$config->params
+        );
         exec(
             $cmd.' --dump-user-agent',
             $version
@@ -48,7 +51,10 @@ Class VideoDownload
     static function listExtractors()
     {
         $config = Config::getInstance();
-        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
+        $cmd = escapeshellcmd(
+            $config->python.' '.escapeshellarg($config->youtubedl).
+                ' '.$config->params
+        );
         exec(
             $cmd.' --list-extractors',
             $extractors
@@ -67,7 +73,10 @@ Class VideoDownload
     static function getFilename($url, $format=null)
     {
         $config = Config::getInstance();
-        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
+        $cmd = escapeshellcmd(
+            $config->python.' '.escapeshellarg($config->youtubedl).
+                ' '.$config->params
+        );
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
@@ -90,7 +99,10 @@ Class VideoDownload
     static function getJSON($url, $format=null)
     {
         $config = Config::getInstance();
-        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
+        $cmd = escapeshellcmd(
+            $config->python.' '.escapeshellarg($config->youtubedl).
+                ' '.$config->params
+        );
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
@@ -116,7 +128,10 @@ Class VideoDownload
     static function getURL($url, $format=null)
     {
         $config = Config::getInstance();
-        $cmd = escapeshellcmd($config->python.' '.escapeshellarg($config->youtubedl).' '.$config->params);
+        $cmd = escapeshellcmd(
+            $config->python.' '.escapeshellarg($config->youtubedl).
+                ' '.$config->params
+        );
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
         }
