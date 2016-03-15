@@ -18,6 +18,6 @@
         "url": "https://github.com/Rudloff/alltube.git"
     },
     "scripts": {
-        "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/grunt-cli/bin/grunt"
+        "postinstall": "node node_modules/bower/bin/bower install && node node_modules/grunt-cli/bin/grunt"
     }
 }
