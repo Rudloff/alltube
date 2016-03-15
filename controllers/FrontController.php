@@ -29,6 +29,7 @@ class FrontController
 
     /**
      * Display index page
+     *
      * @return void
      */
     static function index()
@@ -55,6 +56,7 @@ class FrontController
 
     /**
      * Display a list of extractors
+     *
      * @return void
      */
     static function extractors()
@@ -79,6 +81,7 @@ class FrontController
 
     /**
      * Dislay information about the video
+     *
      * @return void
      */
     static function video()
@@ -130,7 +133,8 @@ class FrontController
                         );
                         header("Content-Type: audio/mpeg");
                         passthru(
-                            'curl  --user-agent '.escapeshellarg($UA).
+                            'curl '.$config->curl_params.
+                            ' --user-agent '.escapeshellarg($UA).
                             ' '.escapeshellarg($video->url).
                             '   |  '.$config->avconv.
                             ' -v quiet -i - -f mp3 -vn pipe:1'
@@ -180,6 +184,7 @@ class FrontController
 
     /**
      * Redirect to video file
+     *
      * @return void
      */
     static function redirect()
@@ -198,6 +203,7 @@ class FrontController
 
     /**
      * Output JSON info about the video
+     *
      * @return void
      */
     static function json()

@@ -9,13 +9,13 @@
         href="{$video->webpage_url}">
 {$video->title}</a></i>.
 <img class="cast_icon" id="cast_disabled"
-    src="{siteUrl|noscheme url='img/ic_media_route_disabled_holo_light.png'}"
+    src="{siteUrl|noscheme|replace:'index.php':'' url='img/ic_media_route_disabled_holo_light.png'}"
     alt="Google Cast™ is disabled"
     title="Google Cast is not supported on this browser." />
 <img class="cast_btn cast_hidden cast_icon" id="cast_btn_launch"
-    src="{siteUrl|noscheme url='img/ic_media_route_off_holo_light.png'}"
+    src="{siteUrl|noscheme|replace:'index.php':'' url='img/ic_media_route_off_holo_light.png'}"
     title="Cast to ChromeCast" alt="Google Cast™" />
-<img src="{siteUrl|noscheme url='img/ic_media_route_on_holo_light.png'}"
+<img src="{siteUrl|noscheme|replace:'index.php':'' url='img/ic_media_route_on_holo_light.png'}"
     alt="Casting to ChromeCast…" title="Stop casting"
     id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" /></p>
 {if isset($video->thumbnail)}

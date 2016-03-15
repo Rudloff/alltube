@@ -1,5 +1,5 @@
     <div class="main">
-    <div><img itemprop="image" class="logo" src="{siteUrl|noscheme url='img/logo.png'}"
+    <div><img itemprop="image" class="logo" src="{siteUrl|noscheme|replace:'index.php':'' url='img/logo.png'}"
     alt="AllTube Download" width="328" height="284"></div>
     <form action="{urlFor name="video"}">
     <label class="labelurl" for="url">

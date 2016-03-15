@@ -19,6 +19,8 @@ You should also ensure that the *templates_c* folder has the right permissions:
 
     chmod 777 templates_c/
 
+If your web server is Apache, you need to set the `AllowOverride` setting to `All` or `FileInfo`.
+
 ##Config
 
 If you want to use a custom config, you need to create a config file:
@@ -37,4 +39,6 @@ If you don't want to enable conversions, you can disable it in *config.yml*.
 
 On Debian-based systems:
 
-    sudo apt-get install libavcodec-extra rtmpdump
+    sudo apt-get install libav-tools rtmpdump
+
+You also probably need to edit the *avconv* variable in *config.yml* so that it points to your ffmpeg/avconv binary (*/usr/bin/avconv* on Debian/Ubuntu).
