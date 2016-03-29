@@ -4,10 +4,10 @@
     "license": "GPL-3.0",
     "dependencies": {
         "grunt": "~0.4.5",
-        "grunt-cli": "~0.1.13",
+        "grunt-cli": "~1.1.0",
         "grunt-contrib-cssmin": "~1.0.0",
         "grunt-contrib-uglify": "~1.0.0",
-        "grunt-contrib-watch": "~0.6.1",
+        "grunt-contrib-watch": "~1.0.0",
         "grunt-phpcs": "~0.4.0",
         "grunt-phpunit": "~0.3.6",
         "grunt-contrib-compress": "~1.1.1",
