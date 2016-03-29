@@ -30,63 +30,77 @@ class FrontController
     /**
      * Display index page
      *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     *
      * @return void
      */
-    static function index()
+    static function index($request, $response)
     {
-        global $app;
+        global $container;
         $config = Config::getInstance();
-        $app->render(
+        $container->view->render(
+            $response,
             'head.tpl',
             array(
                 'class'=>'index'
             )
         );
-        $app->render(
+        $container->view->render(
+            $response,
             'header.tpl'
         );
-        $app->render(
+        $container->view->render(
+            $response,
             'index.tpl',
             array(
                 'convert'=>$config->convert
             )
         );
-        $app->render('footer.tpl');
+        $container->view->render($response, 'footer.tpl');
     }
 
     /**
      * Display a list of extractors
      *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     *
      * @return void
      */
-    static function extractors()
+    static function extractors($request, $response)
     {
-        global $app;
-        $app->render(
+        global $container;
+        $container->view->render(
+            $response,
             'head.tpl',
             array(
                 'class'=>'extractors'
             )
         );
-        $app->render('header.tpl');
-        $app->render('logo.tpl');
-        $app->render(
+        $container->view->render($response, 'header.tpl');
+        $container->view->render($response, 'logo.tpl');
+        $container->view->render(
+            $response,
             'extractors.tpl',
             array(
                 'extractors'=>VideoDownload::listExtractors()
             )
         );
-        $app->render('footer.tpl');
+        $container->view->render($response, 'footer.tpl');
     }
 
     /**
      * Dislay information about the video
      *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     *
      * @return void
      */
-    static function video()
+    static function video($request, $response)
     {
-        global $app;
+        global $container;
         $config = Config::getInstance();
         if (isset($_GET["url"])) {
             if (isset($_GET['audio'])) {
@@ -147,56 +161,63 @@ class FrontController
             } else {
                 try {
                     $video = VideoDownload::getJSON($_GET["url"]);
-                    $app->render(
+                    $container->view->render(
+                        $response,
                         'head.tpl',
                         array(
                             'class'=>'video'
                         )
                     );
-                    $app->render(
+                    $container->view->render(
+                        $response,
                         'video.tpl',
                         array(
                             'video'=>$video
                         )
                     );
-                    $app->render('footer.tpl');
+                    $container->view->render($response, 'footer.tpl');
                 } catch (\Exception $e) {
                     $error = $e->getMessage();
                 }
             }
         }
         if (isset($error)) {
-            $app->render(
+            $container->view->render(
+                $response,
                 'head.tpl',
                 array(
                     'class'=>'video'
                 )
             );
-            $app->render(
+            $container->view->render(
+                $response,
                 'error.tpl',
                 array(
                     'errors'=>$error
                 )
             );
-            $app->render('footer.tpl');
+            $container->view->render($response, 'footer.tpl');
         }
     }
 
     /**
      * Redirect to video file
      *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     *
      * @return void
      */
-    static function redirect()
+    static function redirect($request, $response)
     {
         global $app;
         if (isset($_GET["url"])) {
             try {
                 $video = VideoDownload::getURL($_GET["url"]);
-                $app->redirect($video['url']);
+                return $response->withRedirect($video['url']);
             } catch (\Exception $e) {
-                $app->response->headers->set('Content-Type', 'text/plain');
                 echo $e->getMessage().PHP_EOL;
+                return $response->withHeader('Content-Type', 'text/plain');
             }
         }
     }
@@ -204,18 +225,22 @@ class FrontController
     /**
      * Output JSON info about the video
      *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     *
      * @return void
      */
-    static function json()
+    static function json($request, $response)
     {
         global $app;
         if (isset($_GET["url"])) {
-            $app->response->headers->set('Content-Type', 'application/json');
             try {
                 $video = VideoDownload::getJSON($_GET["url"]);
-                echo json_encode($video);
+                return $response->withJson($video);
             } catch (\Exception $e) {
-                echo json_encode(array('success'=>false, 'error'=>$e->getMessage()));
+                return $response->withJson(
+                    array('success'=>false, 'error'=>$e->getMessage())
+                );
             }
         }
     }

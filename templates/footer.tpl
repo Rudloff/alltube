@@ -17,6 +17,6 @@
      &middot;
      </div>
 </footer>
-<script src="{siteUrl|noscheme|replace:'index.php':'' url='dist/main.js'}"></script>
+<script src="{base_url}/dist/main.js"></script>
 </body>
 </html>

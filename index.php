@@ -15,16 +15,16 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\VideoDownload;
 
-$app = new \Slim\Slim(
-    array(
-        'view' => new \Slim\Views\Smarty()
-    )
-);
-$view = $app->view();
-$view->parserExtensions = array(
-    __DIR__.'/vendor/slim/views/SmartyPlugins',
-    __DIR__.'/vendor/rudloff/smarty-plugin-noscheme/'
-);
+$app = new \Slim\App();
+$container = $app->getContainer();
+$container['view'] = function ($c) {
+    $view = new \Slim\Views\Smarty(__DIR__.'/templates/');
+
+    $view->addSlimPlugins($c['router'], $c['request']->getUri());
+
+    return $view;
+};
+
 $app->get(
     '/',
     array('Alltube\Controller\FrontController', 'index')
@@ -32,11 +32,11 @@ $app->get(
 $app->get(
     '/extractors',
     array('Alltube\Controller\FrontController', 'extractors')
-)->name('extractors');
+)->setName('extractors');
 $app->get(
     '/video',
     array('Alltube\Controller\FrontController', 'video')
-)->name('video');
+)->setName('video');
 $app->get(
     '/redirect',
     array('Alltube\Controller\FrontController', 'redirect')
