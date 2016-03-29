@@ -11,8 +11,10 @@
  * @link     http://rudloff.pro
  * */
 namespace Alltube\Controller;
+
 use Alltube\VideoDownload;
 use Alltube\Config;
+
 /**
  * Main controller
  *
@@ -35,7 +37,7 @@ class FrontController
      *
      * @return void
      */
-    static function index($request, $response)
+    public static function index($request, $response)
     {
         global $container;
         $config = Config::getInstance();
@@ -68,7 +70,7 @@ class FrontController
      *
      * @return void
      */
-    static function extractors($request, $response)
+    public static function extractors($request, $response)
     {
         global $container;
         $container->view->render(
@@ -98,7 +100,7 @@ class FrontController
      *
      * @return void
      */
-    static function video($request, $response)
+    public static function video($request, $response)
     {
         global $container;
         $config = Config::getInstance();
@@ -122,8 +124,11 @@ class FrontController
                                 pathinfo(
                                     VideoDownload::getFilename(
                                         $video->webpage_url
-                                    ), PATHINFO_FILENAME
-                                ).'.mp3', ENT_COMPAT, 'ISO-8859-1'
+                                    ),
+                                    PATHINFO_FILENAME
+                                ).'.mp3',
+                                ENT_COMPAT,
+                                'ISO-8859-1'
                             ).'"'
                         );
                         header("Content-Type: audio/mpeg");
@@ -141,8 +146,11 @@ class FrontController
                                 pathinfo(
                                     VideoDownload::getFilename(
                                         $video->webpage_url
-                                    ), PATHINFO_FILENAME
-                                ).'.mp3', ENT_COMPAT, 'ISO-8859-1'
+                                    ),
+                                    PATHINFO_FILENAME
+                                ).'.mp3',
+                                ENT_COMPAT,
+                                'ISO-8859-1'
                             ).'"'
                         );
                         header("Content-Type: audio/mpeg");
@@ -208,7 +216,7 @@ class FrontController
      *
      * @return void
      */
-    static function redirect($request, $response)
+    public static function redirect($request, $response)
     {
         global $app;
         if (isset($_GET["url"])) {
@@ -230,7 +238,7 @@ class FrontController
      *
      * @return void
      */
-    static function json($request, $response)
+    public static function json($request, $response)
     {
         global $app;
         if (isset($_GET["url"])) {

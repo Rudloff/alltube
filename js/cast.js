@@ -3,12 +3,14 @@
 var launchBtn, disabledBtn, stopBtn;
 var session, currentMedia;
 
-function receiverListener(e) {
+function receiverListener(e)
+{
     'use strict';
     console.log('receiverListener', e);
 }
 
-function onMediaDiscovered(how, media) {
+function onMediaDiscovered(how, media)
+{
     'use strict';
     console.log('onMediaDiscovered', how);
     currentMedia = media;
@@ -18,7 +20,8 @@ function onMediaDiscovered(how, media) {
     }
 }
 
-function sessionListener(e) {
+function sessionListener(e)
+{
     'use strict';
     session = e;
     session.addMediaListener(onMediaDiscovered.bind(this, 'addMediaListener'));
@@ -27,41 +30,48 @@ function sessionListener(e) {
     }
 }
 
-function onStopCast() {
+function onStopCast()
+{
     'use strict';
     stopBtn.classList.add('cast_hidden');
     launchBtn.classList.remove('cast_hidden');
 }
 
-function stopCast() {
+function stopCast()
+{
     'use strict';
     session.stop(onStopCast);
 }
 
-function onMediaError() {
+function onMediaError()
+{
     'use strict';
     console.log('onMediaError');
     stopCast();
 }
 
-function onRequestSessionSuccess(e) {
+function onRequestSessionSuccess(e)
+{
     'use strict';
     session = e;
     var videoLink = document.getElementById('video_link'), videoURL = videoLink.dataset.video, mediaInfo = new chrome.cast.media.MediaInfo(videoURL, 'video/' + videoLink.dataset.ext), request = new chrome.cast.media.LoadRequest(mediaInfo);
     session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError);
 }
 
-function onLaunchError(e) {
+function onLaunchError(e)
+{
     'use strict';
     console.log('onLaunchError', e.description);
 }
 
-function launchCast() {
+function launchCast()
+{
     'use strict';
     chrome.cast.requestSession(onRequestSessionSuccess, onLaunchError);
 }
 
-function onInitSuccess() {
+function onInitSuccess()
+{
     'use strict';
     launchBtn = document.getElementById('cast_btn_launch');
     disabledBtn = document.getElementById('cast_disabled');
@@ -74,18 +84,21 @@ function onInitSuccess() {
     }
 }
 
-function onError() {
+function onError()
+{
     'use strict';
     console.log('onError');
 }
 
-function initializeCastApi() {
+function initializeCastApi()
+{
     'use strict';
     var sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID), apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener, chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED);
     chrome.cast.initialize(apiConfig, onInitSuccess, onError);
 }
 
-function loadCastApi(loaded, errorInfo) {
+function loadCastApi(loaded, errorInfo)
+{
     'use strict';
     if (loaded) {
         initializeCastApi();

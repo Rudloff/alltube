@@ -11,6 +11,7 @@
  * @link     http://rudloff.pro
  * */
 namespace Alltube;
+
 /**
  * Main class
  *
@@ -22,14 +23,14 @@ namespace Alltube;
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-Class VideoDownload
+class VideoDownload
 {
     /**
      * Get the user agent used youtube-dl
      *
      * @return string UA
      * */
-    static function getUA()
+    public static function getUA()
     {
         $config = Config::getInstance();
         $cmd = escapeshellcmd(
@@ -48,7 +49,7 @@ Class VideoDownload
      *
      * @return array Extractors
      * */
-    static function listExtractors()
+    public static function listExtractors()
     {
         $config = Config::getInstance();
         $cmd = escapeshellcmd(
@@ -70,7 +71,7 @@ Class VideoDownload
      *
      * @return string Filename
      * */
-    static function getFilename($url, $format=null)
+    public static function getFilename($url, $format = null)
     {
         $config = Config::getInstance();
         $cmd = escapeshellcmd(
@@ -96,7 +97,7 @@ Class VideoDownload
      *
      * @return string JSON
      * */
-    static function getJSON($url, $format=null)
+    public static function getJSON($url, $format = null)
     {
         $config = Config::getInstance();
         $cmd = escapeshellcmd(
@@ -108,7 +109,9 @@ Class VideoDownload
         }
         $cmd .=' --dump-json '.escapeshellarg($url)." 2>&1";
         exec(
-            $cmd, $result, $code
+            $cmd,
+            $result,
+            $code
         );
         if ($code>0) {
             throw new \Exception(implode(PHP_EOL, $result));
@@ -125,7 +128,7 @@ Class VideoDownload
      *
      * @return string URL of video
      * */
-    static function getURL($url, $format=null)
+    public static function getURL($url, $format = null)
     {
         $config = Config::getInstance();
         $cmd = escapeshellcmd(
@@ -137,7 +140,9 @@ Class VideoDownload
         }
         $cmd .=' -g '.escapeshellarg($url)." 2>&1";
         exec(
-            $cmd, $result, $code
+            $cmd,
+            $result,
+            $code
         );
         if ($code>0) {
             throw new \Exception(implode(PHP_EOL, $result));

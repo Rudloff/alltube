@@ -28,6 +28,9 @@ module.exports = function (grunt) {
                 }
             },
             phpcs: {
+                options: {
+                    standard: 'PSR2'
+                },
                 php: {
                     src: ['*.php', 'classes/*.php', 'controllers/*.php']
                 },

@@ -10,6 +10,8 @@
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
+namespace Alltube\Test;
+
 use Alltube\VideoDownload;
 
 /**
@@ -23,7 +25,7 @@ use Alltube\VideoDownload;
  * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
  * @link     http://rudloff.pro
  * */
-class VideoDownloadTest extends PHPUnit_Framework_TestCase
+class VideoDownloadTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test getUA function
