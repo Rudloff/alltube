@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5ba1de7cdc94a679d3cbea5aa73db0d5",
-    "content-hash": "f2b2cf7d6170452e2cfc4dfde5fd6b5f",
+    "hash": "30a773acbc1f648f298cf6d8965f5220",
+    "content-hash": "b3d64cff4caffcaf3bb1d6cfa6712054",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -50,16 +50,16 @@
         },
         {
             "name": "mathmarques/smarty-view",
-            "version": "1.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mathmarques/Smarty-View.git",
-                "reference": "0e7e34611d78183efbf748fa351be3faf09bcbce"
+                "reference": "66f4d28c564c0363eda18d3f5b85a4241b1c4ad1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mathmarques/Smarty-View/zipball/0e7e34611d78183efbf748fa351be3faf09bcbce",
-                "reference": "0e7e34611d78183efbf748fa351be3faf09bcbce",
+                "url": "https://api.github.com/repos/mathmarques/Smarty-View/zipball/66f4d28c564c0363eda18d3f5b85a4241b1c4ad1",
+                "reference": "66f4d28c564c0363eda18d3f5b85a4241b1c4ad1",
                 "shasum": ""
             },
             "require": {
@@ -91,11 +91,12 @@
             "keywords": [
                 "framework",
                 "slim",
+                "slim 3",
                 "smarty",
                 "template",
                 "view"
             ],
-            "time": "2015-12-07 21:31:37"
+            "time": "2016-03-31 00:41:59"
         },
         {
             "name": "nikic/fast-route",
