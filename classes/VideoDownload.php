@@ -12,6 +12,8 @@
  * */
 namespace Alltube;
 
+use Symfony\Component\Process\Process;
+
 /**
  * Main class
  *
@@ -37,11 +39,9 @@ class VideoDownload
             $config->python.' '.escapeshellarg($config->youtubedl).
                 ' '.$config->params
         );
-        exec(
-            $cmd.' --dump-user-agent',
-            $version
-        );
-        return $version[0];
+        $process = new Process($cmd.' --dump-user-agent');
+        $process->run();
+        return trim($process->getOutput());
     }
 
     /**
@@ -56,11 +56,9 @@ class VideoDownload
             $config->python.' '.escapeshellarg($config->youtubedl).
                 ' '.$config->params
         );
-        exec(
-            $cmd.' --list-extractors',
-            $extractors
-        );
-        return $extractors;
+        $process = new Process($cmd.' --list-extractors');
+        $process->run();
+        return explode(PHP_EOL, $process->getOutput());
     }
 
     /**
@@ -82,11 +80,9 @@ class VideoDownload
             $cmd .= ' -f '.escapeshellarg($format);
         }
         $cmd .=' --get-filename '.escapeshellarg($url)." 2>&1";
-        exec(
-            $cmd,
-            $filename
-        );
-        return end($filename);
+        $process = new Process($cmd);
+        $process->run();
+        return trim($process->getOutput());
     }
 
     /**
@@ -108,15 +104,12 @@ class VideoDownload
             $cmd .= ' -f '.escapeshellarg($format);
         }
         $cmd .=' --dump-json '.escapeshellarg($url)." 2>&1";
-        exec(
-            $cmd,
-            $result,
-            $code
-        );
-        if ($code>0) {
-            throw new \Exception(implode(PHP_EOL, $result));
+        $process = new Process($cmd);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new \Exception($process->getOutput());
         } else {
-            return json_decode($result[0]);
+            return json_decode($process->getOutput());
         }
     }
 
@@ -139,15 +132,12 @@ class VideoDownload
             $cmd .= ' -f '.escapeshellarg($format);
         }
         $cmd .=' -g '.escapeshellarg($url)." 2>&1";
-        exec(
-            $cmd,
-            $result,
-            $code
-        );
-        if ($code>0) {
-            throw new \Exception(implode(PHP_EOL, $result));
+        $process = new Process($cmd);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new \Exception($process->getOutput());
         } else {
-            return array('success'=>true, 'url'=>end($result));
+            return array('success'=>true, 'url'=>$process->getOutput());
         }
 
     }
