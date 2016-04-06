@@ -13,6 +13,7 @@
  * @link     http://rudloff.pro
  * */
 require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/vendor/rudloff/smarty-plugin-noscheme/modifier.noscheme.php';
 use Alltube\VideoDownload;
 
 $app = new \Slim\App();
@@ -21,6 +22,8 @@ $container['view'] = function ($c) {
     $view = new \Slim\Views\Smarty(__DIR__.'/templates/');
 
     $view->addSlimPlugins($c['router'], $c['request']->getUri());
+    $view->registerPlugin('modifier', 'noscheme',  'Smarty_Modifier_noscheme');
+
 
     return $view;
 };

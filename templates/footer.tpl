@@ -17,6 +17,6 @@
      &middot;
      </div>
 </footer>
-<script src="{base_url}/dist/main.js"></script>
+<script src="{base_url|noscheme}/dist/main.js"></script>
 </body>
 </html>
