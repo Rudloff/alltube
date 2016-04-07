@@ -12,7 +12,8 @@
 		"symfony/yaml": "~3.0.0",
 		"symfony/process": "~3.0.0",
 		"ffmpeg/ffmpeg": "~2.8.2",
-		"rudloff/smarty-plugin-noscheme": "~0.1.0"
+		"rudloff/smarty-plugin-noscheme": "~0.1.0",
+		"guzzlehttp/guzzle": "~6.2.0"
 	},
 	"require-dev": {
 		"symfony/var-dumper": "~3.0.0"

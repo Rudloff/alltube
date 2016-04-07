@@ -103,11 +103,12 @@ class FrontController
     public static function video($request, $response)
     {
         global $container;
+        $params = $request->getQueryParams();
         $config = Config::getInstance();
-        if (isset($_GET["url"])) {
-            if (isset($_GET['audio'])) {
+        if (isset($params["url"])) {
+            if (isset($params['audio'])) {
                 try {
-                    $video = VideoDownload::getJSON($_GET["url"]);
+                    $video = VideoDownload::getJSON($params["url"]);
 
                     //Vimeo needs a correct user-agent
                     $UA = VideoDownload::getUA();
@@ -168,7 +169,7 @@ class FrontController
                 }
             } else {
                 try {
-                    $video = VideoDownload::getJSON($_GET["url"]);
+                    $video = VideoDownload::getJSON($params["url"]);
                     $container->view->render(
                         $response,
                         'head.tpl',
@@ -219,12 +220,22 @@ class FrontController
     public static function redirect($request, $response)
     {
         global $app;
-        if (isset($_GET["url"])) {
+        $params = $request->getQueryParams();
+        if (isset($params["url"])) {
             try {
-                $video = VideoDownload::getURL($_GET["url"]);
-                return $response->withRedirect($video['url']);
+                $format = isset($params["format"]) ? $params["format"] : 'best';
+                $video = VideoDownload::getJSON($params["url"], $format);
+                $client = new \GuzzleHttp\Client();
+                $stream = $client->request('GET', $video->url, array('stream'=>true));
+                $response = $response->withHeader('Content-Disposition', 'inline; filename="'.$video->_filename.'"');
+                $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
+                $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
+                if ($request->isGet()) {
+                    $response = $response->withBody($stream->getBody());
+                }
+                return $response;
             } catch (\Exception $e) {
-                echo $e->getMessage().PHP_EOL;
+                $response->getBody()->write($e->getMessage().PHP_EOL);
                 return $response->withHeader('Content-Type', 'text/plain');
             }
         }
@@ -241,9 +252,10 @@ class FrontController
     public static function json($request, $response)
     {
         global $app;
-        if (isset($_GET["url"])) {
+        $params = $request->getQueryParams();
+        if (isset($params["url"])) {
             try {
-                $video = VideoDownload::getJSON($_GET["url"]);
+                $video = VideoDownload::getJSON($params["url"]);
                 return $response->withJson($video);
             } catch (\Exception $e) {
                 return $response->withJson(

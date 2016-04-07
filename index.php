@@ -22,7 +22,7 @@ $container['view'] = function ($c) {
     $view = new \Slim\Views\Smarty(__DIR__.'/templates/');
 
     $view->addSlimPlugins($c['router'], $c['request']->getUri());
-    $view->registerPlugin('modifier', 'noscheme',  'Smarty_Modifier_noscheme');
+    $view->registerPlugin('modifier', 'noscheme', 'Smarty_Modifier_noscheme');
 
 
     return $view;
@@ -43,7 +43,7 @@ $app->get(
 $app->get(
     '/redirect',
     array('Alltube\Controller\FrontController', 'redirect')
-);
+)->setName('redirect');
 $app->get(
     '/json',
     array('Alltube\Controller\FrontController', 'json')
