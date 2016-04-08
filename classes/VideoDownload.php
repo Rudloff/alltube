@@ -13,6 +13,7 @@
 namespace Alltube;
 
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * Main class
@@ -30,6 +31,13 @@ class VideoDownload
     public function __construct()
     {
         $this->config = Config::getInstance();
+        $this->procBuilder = new ProcessBuilder();
+        $this->procBuilder->setPrefix(
+            array_merge(
+                array($this->config->python, $this->config->youtubedl),
+                $this->config->params
+            )
+        );
     }
 
     /**
@@ -39,11 +47,12 @@ class VideoDownload
      * */
     public function getUA()
     {
-        $cmd = escapeshellcmd(
-            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
-            ' '.$this->config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--dump-user-agent'
+            )
         );
-        $process = new Process($cmd.' --dump-user-agent');
+        $process = $this->procBuilder->getProcess();
         $process->run();
         return trim($process->getOutput());
     }
@@ -55,11 +64,12 @@ class VideoDownload
      * */
     public function listExtractors()
     {
-        $cmd = escapeshellcmd(
-            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
-            ' '.$this->config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--list-extractors'
+            )
         );
-        $process = new Process($cmd.' --list-extractors');
+        $process = $this->procBuilder->getProcess();
         $process->run();
         return explode(PHP_EOL, $process->getOutput());
     }
@@ -74,15 +84,16 @@ class VideoDownload
      * */
     public function getFilename($url, $format = null)
     {
-        $cmd = escapeshellcmd(
-            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
-            ' '.$this->config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--get-filename',
+                $url
+            )
         );
         if (isset($format)) {
-            $cmd .= ' -f '.escapeshellarg($format);
+            $this->procBuilder->add('-f '.$format);
         }
-        $cmd .=' --get-filename '.escapeshellarg($url)." 2>&1";
-        $process = new Process($cmd);
+        $process = $this->procBuilder->getProcess();
         $process->run();
         return trim($process->getOutput());
     }
@@ -97,18 +108,19 @@ class VideoDownload
      * */
     public function getJSON($url, $format = null)
     {
-        $cmd = escapeshellcmd(
-            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
-            ' '.$this->config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--dump-json',
+                $url
+            )
         );
         if (isset($format)) {
-            $cmd .= ' -f '.escapeshellarg($format);
+            $this->procBuilder->add('-f '.$format);
         }
-        $cmd .=' --dump-json '.escapeshellarg($url)." 2>&1";
-        $process = new Process($cmd);
+        $process = $this->procBuilder->getProcess();
         $process->run();
         if (!$process->isSuccessful()) {
-            throw new \Exception($process->getOutput());
+            throw new \Exception($process->getErrorOutput());
         } else {
             return json_decode($process->getOutput());
         }
@@ -124,18 +136,19 @@ class VideoDownload
      * */
     public function getURL($url, $format = null)
     {
-        $cmd = escapeshellcmd(
-            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
-            ' '.$this->config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--get-url',
+                $url
+            )
         );
         if (isset($format)) {
-            $cmd .= ' -f '.escapeshellarg($format);
+            $this->procBuilder->add('-f '.$format);
         }
-        $cmd .=' -g '.escapeshellarg($url)." 2>&1";
-        $process = new Process($cmd);
+        $process = $this->procBuilder->getProcess();
         $process->run();
         if (!$process->isSuccessful()) {
-            throw new \Exception($process->getOutput());
+            throw new \Exception($process->getErrorOutput());
         } else {
             return array('success'=>true, 'url'=>$process->getOutput());
         }
