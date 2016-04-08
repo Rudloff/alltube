@@ -15,6 +15,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/vendor/rudloff/smarty-plugin-noscheme/modifier.noscheme.php';
 use Alltube\VideoDownload;
+use Alltube\Controller\FrontController;
 
 $app = new \Slim\App();
 $container = $app->getContainer();
@@ -22,30 +23,32 @@ $container['view'] = function ($c) {
     $view = new \Slim\Views\Smarty(__DIR__.'/templates/');
 
     $view->addSlimPlugins($c['router'], $c['request']->getUri());
-    $view->registerPlugin('modifier', 'noscheme',  'Smarty_Modifier_noscheme');
+    $view->registerPlugin('modifier', 'noscheme', 'Smarty_Modifier_noscheme');
 
 
     return $view;
 };
 
+$controller = new FrontController();
+
 $app->get(
     '/',
-    array('Alltube\Controller\FrontController', 'index')
+    array($controller, 'index')
 );
 $app->get(
     '/extractors',
-    array('Alltube\Controller\FrontController', 'extractors')
+    array($controller, 'extractors')
 )->setName('extractors');
 $app->get(
     '/video',
-    array('Alltube\Controller\FrontController', 'video')
+    array($controller, 'video')
 )->setName('video');
 $app->get(
     '/redirect',
-    array('Alltube\Controller\FrontController', 'redirect')
+    array($controller, 'redirect')
 );
 $app->get(
     '/json',
-    array('Alltube\Controller\FrontController', 'json')
+    array($controller, 'json')
 );
 $app->run();

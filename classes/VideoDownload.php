@@ -27,17 +27,21 @@ use Symfony\Component\Process\Process;
  * */
 class VideoDownload
 {
+    public function __construct()
+    {
+        $this->config = Config::getInstance();
+    }
+
     /**
      * Get the user agent used youtube-dl
      *
      * @return string UA
      * */
-    public static function getUA()
+    public function getUA()
     {
-        $config = Config::getInstance();
         $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
+            ' '.$this->config->params
         );
         $process = new Process($cmd.' --dump-user-agent');
         $process->run();
@@ -49,12 +53,11 @@ class VideoDownload
      *
      * @return array Extractors
      * */
-    public static function listExtractors()
+    public function listExtractors()
     {
-        $config = Config::getInstance();
         $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
+            ' '.$this->config->params
         );
         $process = new Process($cmd.' --list-extractors');
         $process->run();
@@ -69,12 +72,11 @@ class VideoDownload
      *
      * @return string Filename
      * */
-    public static function getFilename($url, $format = null)
+    public function getFilename($url, $format = null)
     {
-        $config = Config::getInstance();
         $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
+            ' '.$this->config->params
         );
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
@@ -93,12 +95,11 @@ class VideoDownload
      *
      * @return string JSON
      * */
-    public static function getJSON($url, $format = null)
+    public function getJSON($url, $format = null)
     {
-        $config = Config::getInstance();
         $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
+            ' '.$this->config->params
         );
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);
@@ -121,12 +122,11 @@ class VideoDownload
      *
      * @return string URL of video
      * */
-    public static function getURL($url, $format = null)
+    public function getURL($url, $format = null)
     {
-        $config = Config::getInstance();
         $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+            $this->config->python.' '.escapeshellarg($this->config->youtubedl).
+            ' '.$this->config->params
         );
         if (isset($format)) {
             $cmd .= ' -f '.escapeshellarg($format);

@@ -27,6 +27,11 @@ use Alltube\VideoDownload;
  * */
 class VideoDownloadTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        $this->download = new VideoDownload();
+    }
+
     /**
      * Test getUA function
      *
@@ -34,7 +39,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUA()
     {
-        $this->assertStringStartsWith('Mozilla/', VideoDownload::getUA());
+        $this->assertStringStartsWith('Mozilla/', $this->download->getUA());
     }
 
     /**
@@ -44,7 +49,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testListExtractors()
     {
-        $extractors = VideoDownload::listExtractors();
+        $extractors = $this->download->listExtractors();
         $this->assertContains('youtube', $extractors);
     }
 
@@ -59,7 +64,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetURL($url, $format)
     {
-        $videoURL = VideoDownload::getURL($url, $format);
+        $videoURL = $this->download->getURL($url, $format);
         $this->assertArrayHasKey('success', $videoURL);
         $this->assertArrayHasKey('url', $videoURL);
     }
@@ -75,7 +80,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetURLError($url)
     {
-        $videoURL = VideoDownload::getURL($url);
+        $videoURL = $this->download->getURL($url);
     }
 
     /**
@@ -126,7 +131,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFilename($url, $format, $result)
     {
-        $filename = VideoDownload::getFilename($url, $format);
+        $filename = $this->download->getFilename($url, $format);
         $this->assertEquals($filename, $result);
     }
 
@@ -141,7 +146,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetJSON($url, $format)
     {
-        $info = VideoDownload::getJSON($url, $format);
+        $info = $this->download->getJSON($url, $format);
         $this->assertObjectHasAttribute('webpage_url', $info);
         $this->assertObjectHasAttribute('url', $info);
         $this->assertObjectHasAttribute('ext', $info);
@@ -161,6 +166,6 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetJSONError($url)
     {
-        $videoURL = VideoDownload::getJSON($url);
+        $videoURL = $this->download->getJSON($url);
     }
 }
