@@ -17,7 +17,13 @@ require_once __DIR__.'/vendor/rudloff/smarty-plugin-noscheme/modifier.noscheme.p
 use Alltube\VideoDownload;
 use Alltube\Controller\FrontController;
 
-$app = new \Slim\App();
+$app = new \Slim\App(
+    array(
+        'settings'=>array(
+            'responseChunkSize'=>1024
+        )
+    )
+);
 $container = $app->getContainer();
 $container['view'] = function ($c) {
     $view = new \Slim\Views\Smarty(__DIR__.'/templates/');
