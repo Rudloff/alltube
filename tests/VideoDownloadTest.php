@@ -27,6 +27,11 @@ use Alltube\VideoDownload;
  * */
 class VideoDownloadTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        $this->download = new VideoDownload();
+    }
+
     /**
      * Test getUA function
      *
@@ -34,7 +39,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUA()
     {
-        $this->assertStringStartsWith('Mozilla/', VideoDownload::getUA());
+        $this->assertStringStartsWith('Mozilla/', $this->download->getUA());
     }
 
     /**
@@ -44,7 +49,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testListExtractors()
     {
-        $extractors = VideoDownload::listExtractors();
+        $extractors = $this->download->listExtractors();
         $this->assertContains('youtube', $extractors);
     }
 
@@ -57,11 +62,10 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @return       void
      * @dataProvider urlProvider
      */
-    public function testGetURL($url, $format)
+    public function testGetURL($url, $format, $filename, $domain)
     {
-        $videoURL = VideoDownload::getURL($url, $format);
-        $this->assertArrayHasKey('success', $videoURL);
-        $this->assertArrayHasKey('url', $videoURL);
+        $videoURL = $this->download->getURL($url, $format);
+        $this->assertContains($domain, $videoURL);
     }
 
     /**
@@ -75,7 +79,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetURLError($url)
     {
-        $videoURL = VideoDownload::getURL($url);
+        $this->download->getURL($url);
     }
 
     /**
@@ -88,16 +92,19 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return array(
             array(
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
-                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4"
+                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4",
+                'googlevideo.com'
             ),
             array(
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
                 "'Heart Attack' - Demi Lovato ".
-                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4"
+                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4",
+                'googlevideo.com'
             ),
             array(
                 'https://vimeo.com/24195442', null,
-                "Carving the Mountains-24195442.mp4"
+                "Carving the Mountains-24195442.mp4",
+                'vimeocdn.com'
             ),
         );
     }
@@ -126,7 +133,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFilename($url, $format, $result)
     {
-        $filename = VideoDownload::getFilename($url, $format);
+        $filename = $this->download->getFilename($url, $format);
         $this->assertEquals($filename, $result);
     }
 
@@ -141,7 +148,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetJSON($url, $format)
     {
-        $info = VideoDownload::getJSON($url, $format);
+        $info = $this->download->getJSON($url, $format);
         $this->assertObjectHasAttribute('webpage_url', $info);
         $this->assertObjectHasAttribute('url', $info);
         $this->assertObjectHasAttribute('ext', $info);
@@ -161,6 +168,6 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetJSONError($url)
     {
-        $videoURL = VideoDownload::getJSON($url);
+        $videoURL = $this->download->getJSON($url);
     }
 }

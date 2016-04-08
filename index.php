@@ -15,6 +15,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/vendor/rudloff/smarty-plugin-noscheme/modifier.noscheme.php';
 use Alltube\VideoDownload;
+use Alltube\Controller\FrontController;
 
 $app = new \Slim\App();
 $container = $app->getContainer();
@@ -28,24 +29,26 @@ $container['view'] = function ($c) {
     return $view;
 };
 
+$controller = new FrontController();
+
 $app->get(
     '/',
-    array('Alltube\Controller\FrontController', 'index')
+    array($controller, 'index')
 );
 $app->get(
     '/extractors',
-    array('Alltube\Controller\FrontController', 'extractors')
+    array($controller, 'extractors')
 )->setName('extractors');
 $app->get(
     '/video',
-    array('Alltube\Controller\FrontController', 'video')
+    array($controller, 'video')
 )->setName('video');
 $app->get(
     '/redirect',
-    array('Alltube\Controller\FrontController', 'redirect')
+    array($controller, 'redirect')
 )->setName('redirect');
 $app->get(
     '/json',
-    array('Alltube\Controller\FrontController', 'json')
+    array($controller, 'json')
 );
 $app->run();

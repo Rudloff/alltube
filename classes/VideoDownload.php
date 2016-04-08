@@ -13,6 +13,7 @@
 namespace Alltube;
 
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * Main class
@@ -27,19 +28,31 @@ use Symfony\Component\Process\Process;
  * */
 class VideoDownload
 {
+    public function __construct()
+    {
+        $this->config = Config::getInstance();
+        $this->procBuilder = new ProcessBuilder();
+        $this->procBuilder->setPrefix(
+            array_merge(
+                array($this->config->python, $this->config->youtubedl),
+                $this->config->params
+            )
+        );
+    }
+
     /**
      * Get the user agent used youtube-dl
      *
      * @return string UA
      * */
-    public static function getUA()
+    public function getUA()
     {
-        $config = Config::getInstance();
-        $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--dump-user-agent'
+            )
         );
-        $process = new Process($cmd.' --dump-user-agent');
+        $process = $this->procBuilder->getProcess();
         $process->run();
         return trim($process->getOutput());
     }
@@ -49,14 +62,14 @@ class VideoDownload
      *
      * @return array Extractors
      * */
-    public static function listExtractors()
+    public function listExtractors()
     {
-        $config = Config::getInstance();
-        $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--list-extractors'
+            )
         );
-        $process = new Process($cmd.' --list-extractors');
+        $process = $this->procBuilder->getProcess();
         $process->run();
         return explode(PHP_EOL, $process->getOutput());
     }
@@ -69,18 +82,18 @@ class VideoDownload
      *
      * @return string Filename
      * */
-    public static function getFilename($url, $format = null)
+    public function getFilename($url, $format = null)
     {
-        $config = Config::getInstance();
-        $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--get-filename',
+                $url
+            )
         );
         if (isset($format)) {
-            $cmd .= ' -f '.escapeshellarg($format);
+            $this->procBuilder->add('-f '.$format);
         }
-        $cmd .=' --get-filename '.escapeshellarg($url)." 2>&1";
-        $process = new Process($cmd);
+        $process = $this->procBuilder->getProcess();
         $process->run();
         return trim($process->getOutput());
     }
@@ -91,23 +104,23 @@ class VideoDownload
      * @param string $url    URL of page
      * @param string $format Format to use for the video
      *
-     * @return string JSON
+     * @return object Decoded JSON
      * */
-    public static function getJSON($url, $format = null)
+    public function getJSON($url, $format = null)
     {
-        $config = Config::getInstance();
-        $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--dump-json',
+                $url
+            )
         );
         if (isset($format)) {
-            $cmd .= ' -f '.escapeshellarg($format);
+            $this->procBuilder->add('-f '.$format);
         }
-        $cmd .=' --dump-json '.escapeshellarg($url)." 2>&1";
-        $process = new Process($cmd);
+        $process = $this->procBuilder->getProcess();
         $process->run();
         if (!$process->isSuccessful()) {
-            throw new \Exception($process->getOutput());
+            throw new \Exception($process->getErrorOutput());
         } else {
             return json_decode($process->getOutput());
         }
@@ -121,23 +134,23 @@ class VideoDownload
      *
      * @return string URL of video
      * */
-    public static function getURL($url, $format = null)
+    public function getURL($url, $format = null)
     {
-        $config = Config::getInstance();
-        $cmd = escapeshellcmd(
-            $config->python.' '.escapeshellarg($config->youtubedl).
-                ' '.$config->params
+        $this->procBuilder->setArguments(
+            array(
+                '--get-url',
+                $url
+            )
         );
         if (isset($format)) {
-            $cmd .= ' -f '.escapeshellarg($format);
+            $this->procBuilder->add('-f '.$format);
         }
-        $cmd .=' -g '.escapeshellarg($url)." 2>&1";
-        $process = new Process($cmd);
+        $process = $this->procBuilder->getProcess();
         $process->run();
         if (!$process->isSuccessful()) {
-            throw new \Exception($process->getOutput());
+            throw new \Exception($process->getErrorOutput());
         } else {
-            return array('success'=>true, 'url'=>$process->getOutput());
+            return $process->getOutput();
         }
 
     }

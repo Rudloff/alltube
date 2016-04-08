@@ -28,6 +28,11 @@ use Alltube\Config;
  * */
 class FrontController
 {
+    public function __construct()
+    {
+        $this->config = Config::getInstance();
+        $this->download = new VideoDownload();
+    }
 
     /**
      * Display index page
@@ -37,10 +42,9 @@ class FrontController
      *
      * @return void
      */
-    public static function index($request, $response)
+    public function index($request, $response)
     {
         global $container;
-        $config = Config::getInstance();
         $container->view->render(
             $response,
             'head.tpl',
@@ -56,7 +60,7 @@ class FrontController
             $response,
             'index.tpl',
             array(
-                'convert'=>$config->convert
+                'convert'=>$this->config->convert
             )
         );
         $container->view->render($response, 'footer.tpl');
@@ -70,7 +74,7 @@ class FrontController
      *
      * @return void
      */
-    public static function extractors($request, $response)
+    public function extractors($request, $response)
     {
         global $container;
         $container->view->render(
@@ -86,7 +90,7 @@ class FrontController
             $response,
             'extractors.tpl',
             array(
-                'extractors'=>VideoDownload::listExtractors()
+                'extractors'=>$this->download->listExtractors()
             )
         );
         $container->view->render($response, 'footer.tpl');
@@ -100,18 +104,18 @@ class FrontController
      *
      * @return void
      */
-    public static function video($request, $response)
+    public function video($request, $response)
     {
         global $container;
         $params = $request->getQueryParams();
-        $config = Config::getInstance();
+        $this->config = Config::getInstance();
         if (isset($params["url"])) {
             if (isset($params['audio'])) {
                 try {
-                    $video = VideoDownload::getJSON($params["url"]);
+                    $video = $this->download->getJSON($params["url"]);
 
                     //Vimeo needs a correct user-agent
-                    $UA = VideoDownload::getUA();
+                    $UA = $this->download->getUA();
                     ini_set(
                         'user_agent',
                         $UA
@@ -123,7 +127,7 @@ class FrontController
                             'Content-Disposition: attachment; filename="'.
                             html_entity_decode(
                                 pathinfo(
-                                    VideoDownload::getFilename(
+                                    $this->download->getFilename(
                                         $video->webpage_url
                                     ),
                                     PATHINFO_FILENAME
@@ -135,7 +139,7 @@ class FrontController
                         header("Content-Type: audio/mpeg");
                         passthru(
                             '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                            '   |  '.$config->avconv.
+                            '   |  '.$this->config->avconv.
                             ' -v quiet -i - -f mp3 -vn pipe:1'
                         );
                         exit;
@@ -145,7 +149,7 @@ class FrontController
                             'Content-Disposition: attachment; filename="'.
                             html_entity_decode(
                                 pathinfo(
-                                    VideoDownload::getFilename(
+                                    $this->download->getFilename(
                                         $video->webpage_url
                                     ),
                                     PATHINFO_FILENAME
@@ -156,10 +160,10 @@ class FrontController
                         );
                         header("Content-Type: audio/mpeg");
                         passthru(
-                            'curl '.$config->curl_params.
+                            'curl '.$this->config->curl_params.
                             ' --user-agent '.escapeshellarg($UA).
                             ' '.escapeshellarg($video->url).
-                            '   |  '.$config->avconv.
+                            '   |  '.$this->config->avconv.
                             ' -v quiet -i - -f mp3 -vn pipe:1'
                         );
                         exit;
@@ -169,7 +173,7 @@ class FrontController
                 }
             } else {
                 try {
-                    $video = VideoDownload::getJSON($params["url"]);
+                    $video = $this->download->getJSON($params["url"]);
                     $container->view->render(
                         $response,
                         'head.tpl',
@@ -217,14 +221,14 @@ class FrontController
      *
      * @return void
      */
-    public static function redirect($request, $response)
+    public function redirect($request, $response)
     {
         global $app;
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {
                 $format = isset($params["format"]) ? $params["format"] : 'best';
-                $video = VideoDownload::getJSON($params["url"], $format);
+                $video = $this->download->getJSON($params["url"], $format);
                 $client = new \GuzzleHttp\Client();
                 $stream = $client->request('GET', $video->url, array('stream'=>true));
                 $response = $response->withHeader('Content-Disposition', 'inline; filename="'.$video->_filename.'"');
@@ -249,13 +253,13 @@ class FrontController
      *
      * @return void
      */
-    public static function json($request, $response)
+    public function json($request, $response)
     {
         global $app;
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {
-                $video = VideoDownload::getJSON($params["url"]);
+                $video = $this->download->getJSON($params["url"]);
                 return $response->withJson($video);
             } catch (\Exception $e) {
                 return $response->withJson(

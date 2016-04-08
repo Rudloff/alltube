@@ -1,6 +1,9 @@
 youtubedl: vendor/rg3/youtube-dl/youtube_dl/__main__.py
 python: /usr/bin/python
-params: --no-playlist --no-warnings -f best
+params:
+    - --no-playlist
+    - --no-warnings
+    - -f best
 curl_params:
 convert: false
 avconv: vendor/bin/ffmpeg
