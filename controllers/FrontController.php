@@ -107,11 +107,12 @@ class FrontController
     public function video($request, $response)
     {
         global $container;
+        $params = $request->getQueryParams();
         $this->config = Config::getInstance();
-        if (isset($_GET["url"])) {
-            if (isset($_GET['audio'])) {
+        if (isset($params["url"])) {
+            if (isset($params['audio'])) {
                 try {
-                    $video = $this->download->getJSON($_GET["url"]);
+                    $video = $this->download->getJSON($params["url"]);
 
                     //Vimeo needs a correct user-agent
                     $UA = $this->download->getUA();
@@ -172,7 +173,7 @@ class FrontController
                 }
             } else {
                 try {
-                    $video = $this->download->getJSON($_GET["url"]);
+                    $video = $this->download->getJSON($params["url"]);
                     $container->view->render(
                         $response,
                         'head.tpl',
@@ -223,9 +224,10 @@ class FrontController
     public function redirect($request, $response)
     {
         global $app;
-        if (isset($_GET["url"])) {
+        $params = $request->getQueryParams();
+        if (isset($params["url"])) {
             try {
-                $url = $this->download->getURL($_GET["url"]);
+                $url = $this->download->getURL($params["url"]);
                 return $response->withRedirect($url);
             } catch (\Exception $e) {
                 echo $e->getMessage().PHP_EOL;
@@ -245,9 +247,10 @@ class FrontController
     public function json($request, $response)
     {
         global $app;
-        if (isset($_GET["url"])) {
+        $params = $request->getQueryParams();
+        if (isset($params["url"])) {
             try {
-                $video = $this->download->getJSON($_GET["url"]);
+                $video = $this->download->getJSON($params["url"]);
                 return $response->withJson($video);
             } catch (\Exception $e) {
                 return $response->withJson(
