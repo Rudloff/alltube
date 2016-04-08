@@ -225,8 +225,8 @@ class FrontController
         global $app;
         if (isset($_GET["url"])) {
             try {
-                $video = $this->download->getURL($_GET["url"]);
-                return $response->withRedirect($video['url']);
+                $url = $this->download->getURL($_GET["url"]);
+                return $response->withRedirect($url);
             } catch (\Exception $e) {
                 echo $e->getMessage().PHP_EOL;
                 return $response->withHeader('Content-Type', 'text/plain');

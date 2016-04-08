@@ -62,11 +62,10 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @return       void
      * @dataProvider urlProvider
      */
-    public function testGetURL($url, $format)
+    public function testGetURL($url, $format, $filename, $domain)
     {
         $videoURL = $this->download->getURL($url, $format);
-        $this->assertArrayHasKey('success', $videoURL);
-        $this->assertArrayHasKey('url', $videoURL);
+        $this->assertContains($domain, $videoURL);
     }
 
     /**
@@ -80,7 +79,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetURLError($url)
     {
-        $videoURL = $this->download->getURL($url);
+        $this->download->getURL($url);
     }
 
     /**
@@ -93,16 +92,19 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return array(
             array(
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
-                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4"
+                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4",
+                'googlevideo.com'
             ),
             array(
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
                 "'Heart Attack' - Demi Lovato ".
-                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4"
+                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4",
+                'googlevideo.com'
             ),
             array(
                 'https://vimeo.com/24195442', null,
-                "Carving the Mountains-24195442.mp4"
+                "Carving the Mountains-24195442.mp4",
+                'vimeocdn.com'
             ),
         );
     }

@@ -104,7 +104,7 @@ class VideoDownload
      * @param string $url    URL of page
      * @param string $format Format to use for the video
      *
-     * @return string JSON
+     * @return object Decoded JSON
      * */
     public function getJSON($url, $format = null)
     {
@@ -150,7 +150,7 @@ class VideoDownload
         if (!$process->isSuccessful()) {
             throw new \Exception($process->getErrorOutput());
         } else {
-            return array('success'=>true, 'url'=>$process->getOutput());
+            return $process->getOutput();
         }
 
     }
