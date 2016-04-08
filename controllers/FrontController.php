@@ -115,58 +115,58 @@ class FrontController
                     $video = $this->download->getJSON($params["url"]);
 
                     //Vimeo needs a correct user-agent
-                    $UA = $this->download->getUA();
                     ini_set(
                         'user_agent',
-                        $UA
+                        $video->http_headers->{'User-Agent'}
                     );
                     $url_info = parse_url($video->url);
-                    if ($url_info['scheme'] == 'rtmp') {
-                        ob_end_flush();
-                        header(
-                            'Content-Disposition: attachment; filename="'.
-                            html_entity_decode(
-                                pathinfo(
-                                    $this->download->getFilename(
-                                        $video->webpage_url
-                                    ),
-                                    PATHINFO_FILENAME
-                                ).'.mp3',
-                                ENT_COMPAT,
-                                'ISO-8859-1'
-                            ).'"'
-                        );
-                        header("Content-Type: audio/mpeg");
-                        passthru(
-                            '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                            '   |  '.$this->config->avconv.
-                            ' -v quiet -i - -f mp3 -vn pipe:1'
-                        );
-                        exit;
-                    } else {
-                        ob_end_flush();
-                        header(
-                            'Content-Disposition: attachment; filename="'.
-                            html_entity_decode(
-                                pathinfo(
-                                    $this->download->getFilename(
-                                        $video->webpage_url
-                                    ),
-                                    PATHINFO_FILENAME
-                                ).'.mp3',
-                                ENT_COMPAT,
-                                'ISO-8859-1'
-                            ).'"'
-                        );
-                        header("Content-Type: audio/mpeg");
-                        passthru(
-                            'curl '.$this->config->curl_params.
-                            ' --user-agent '.escapeshellarg($UA).
-                            ' '.escapeshellarg($video->url).
-                            '   |  '.$this->config->avconv.
-                            ' -v quiet -i - -f mp3 -vn pipe:1'
-                        );
-                        exit;
+
+                    try {
+                        return $this->getStream($params["url"], 'bestaudio', $response, $request);
+                    } catch (\Exception $e) {
+                        if ($url_info['scheme'] == 'rtmp') {
+                            ob_end_flush();
+                            header(
+                                'Content-Disposition: attachment; filename="'.
+                                html_entity_decode(
+                                    pathinfo(
+                                        $video->_filename,
+                                        PATHINFO_FILENAME
+                                    ).'.mp3',
+                                    ENT_COMPAT,
+                                    'ISO-8859-1'
+                                ).'"'
+                            );
+                            header("Content-Type: audio/mpeg");
+                            passthru(
+                                '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
+                                '   |  '.$this->config->avconv.
+                                ' -v quiet -i - -f mp3 -vn pipe:1'
+                            );
+                            exit;
+                        } else {
+                            ob_end_flush();
+                            header(
+                                'Content-Disposition: attachment; filename="'.
+                                html_entity_decode(
+                                    pathinfo(
+                                        $video->_filename,
+                                        PATHINFO_FILENAME
+                                    ).'.mp3',
+                                    ENT_COMPAT,
+                                    'ISO-8859-1'
+                                ).'"'
+                            );
+                            header("Content-Type: audio/mpeg");
+                            passthru(
+                                'curl '.$this->config->curl_params.
+                                ' --user-agent '.escapeshellarg($video->http_headers->{'User-Agent'}).
+                                ' '.escapeshellarg($video->url).
+                                '   |  '.$this->config->avconv.
+                                ' -v quiet -i - -f mp3 -vn pipe:1'
+                            );
+                            exit;
+                        }
                     }
                 } catch (\Exception $e) {
                     $error = $e->getMessage();
@@ -213,6 +213,23 @@ class FrontController
         }
     }
 
+    private function getStream($url, $format, $response, $request)
+    {
+        if (!isset($format)) {
+            $format = 'best';
+        }
+        $video = $this->download->getJSON($url, $format);
+        $client = new \GuzzleHttp\Client();
+        $stream = $client->request('GET', $video->url, array('stream'=>true));
+        $response = $response->withHeader('Content-Disposition', 'inline; filename="'.$video->_filename.'"');
+        $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
+        $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
+        if ($request->isGet()) {
+            $response = $response->withBody($stream->getBody());
+        }
+        return $response;
+    }
+
     /**
      * Redirect to video file
      *
@@ -227,17 +244,7 @@ class FrontController
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {
-                $format = isset($params["format"]) ? $params["format"] : 'best';
-                $video = $this->download->getJSON($params["url"], $format);
-                $client = new \GuzzleHttp\Client();
-                $stream = $client->request('GET', $video->url, array('stream'=>true));
-                $response = $response->withHeader('Content-Disposition', 'inline; filename="'.$video->_filename.'"');
-                $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
-                $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
-                if ($request->isGet()) {
-                    $response = $response->withBody($stream->getBody());
-                }
-                return $response;
+                return $this->getStream($params["url"], $params["format"], $response, $request);
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage().PHP_EOL);
                 return $response->withHeader('Content-Type', 'text/plain');
