@@ -221,9 +221,9 @@ class FrontController
         $video = $this->download->getJSON($url, $format);
         $client = new \GuzzleHttp\Client();
         $stream = $client->request('GET', $video->url, array('stream'=>true));
-        $response = $response->withHeader('Content-Disposition', 'inline; filename="'.$video->_filename.'"');
+        $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
         $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
-        $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
+        //$response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
         if ($request->isGet()) {
             $response = $response->withBody($stream->getBody());
         }
