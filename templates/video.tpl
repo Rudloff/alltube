@@ -30,7 +30,10 @@
             <option value="best">
                 Best ({$video->ext})
             </option>
-            <optgroup>
+            <option value="worst">
+                Worst
+            </option>
+            <optgroup label="Other formats">
                 {foreach $video->formats as $format}
                     <option value="{$format->format_id}">
                         {$format->format} ({$format->ext})
