@@ -13,7 +13,6 @@
  * @link     http://rudloff.pro
  * */
 require_once __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/vendor/rudloff/smarty-plugin-noscheme/modifier.noscheme.php';
 use Alltube\VideoDownload;
 use Alltube\Controller\FrontController;
 
