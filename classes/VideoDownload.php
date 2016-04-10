@@ -41,23 +41,6 @@ class VideoDownload
     }
 
     /**
-     * Get the user agent used youtube-dl
-     *
-     * @return string UA
-     * */
-    public function getUA()
-    {
-        $this->procBuilder->setArguments(
-            array(
-                '--dump-user-agent'
-            )
-        );
-        $process = $this->procBuilder->getProcess();
-        $process->run();
-        return trim($process->getOutput());
-    }
-
-    /**
      * List all extractors
      *
      * @return array Extractors
@@ -72,30 +55,6 @@ class VideoDownload
         $process = $this->procBuilder->getProcess();
         $process->run();
         return explode(PHP_EOL, $process->getOutput());
-    }
-
-    /**
-     * Get filename of video
-     *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
-     *
-     * @return string Filename
-     * */
-    public function getFilename($url, $format = null)
-    {
-        $this->procBuilder->setArguments(
-            array(
-                '--get-filename',
-                $url
-            )
-        );
-        if (isset($format)) {
-            $this->procBuilder->add('-f '.$format);
-        }
-        $process = $this->procBuilder->getProcess();
-        $process->run();
-        return trim($process->getOutput());
     }
 
     /**
