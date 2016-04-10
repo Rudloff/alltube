@@ -112,18 +112,17 @@ class FrontController
         if (isset($params["url"])) {
             if (isset($params['audio'])) {
                 try {
-                    $video = $this->download->getJSON($params["url"]);
-
-                    //Vimeo needs a correct user-agent
-                    ini_set(
-                        'user_agent',
-                        $video->http_headers->{'User-Agent'}
-                    );
-                    $url_info = parse_url($video->url);
-
                     try {
                         return $this->getStream($params["url"], 'bestaudio', $response, $request);
                     } catch (\Exception $e) {
+                        $video = $this->download->getJSON($params["url"]);
+
+                        //Vimeo needs a correct user-agent
+                        ini_set(
+                            'user_agent',
+                            $video->http_headers->{'User-Agent'}
+                        );
+                        $url_info = parse_url($video->url);
                         if ($url_info['scheme'] == 'rtmp') {
                             ob_end_flush();
                             header(
@@ -246,7 +245,7 @@ class FrontController
             try {
                 return $this->getStream($params["url"], $params["format"], $response, $request);
             } catch (\Exception $e) {
-                $response->getBody()->write($e->getMessage().PHP_EOL);
+                $response->getBody()->write($e->getMessage());
                 return $response->withHeader('Content-Type', 'text/plain');
             }
         }
