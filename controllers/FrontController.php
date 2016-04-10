@@ -122,8 +122,7 @@ class FrontController
                             'user_agent',
                             $video->http_headers->{'User-Agent'}
                         );
-                        $url_info = parse_url($video->url);
-                        if ($url_info['scheme'] == 'rtmp') {
+                        if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
                             ob_end_flush();
                             header(
                                 'Content-Disposition: attachment; filename="'.
