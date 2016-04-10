@@ -113,7 +113,7 @@ class FrontController
             if (isset($params['audio'])) {
                 try {
                     try {
-                        $url = $this->download->getURL($params["url"], 'bestaudio');
+                        $url = $this->download->getURL($params["url"], 'bestaudio[protocol^=http]');
                         return $response->withRedirect($url);
                     } catch (\Exception $e) {
                         $video = $this->download->getJSON($params["url"]);

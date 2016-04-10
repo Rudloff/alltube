@@ -26,25 +26,65 @@
     <h3><label for="format">Available formats:</label></h3>
     <form action="{path_for name="redirect"}">
         <input type="hidden" name="url" value="{$video->webpage_url}" />
-        <select name="format" id="format">
-            <option value="best">
-                Best ({$video->ext})
-            </option>
-            <option value="worst">
-                Worst
-            </option>
-            <optgroup label="Other formats">
+        <select name="format" id="format" class="monospace">
+            <optgroup label="Generic formats">
+                <option value="best[protocol^=http]">
+                    {strip}
+                        Best ({$video->ext}
+                        {if isset($video->filesize)}
+                            {$video->filesize}
+                        {/if}
+                        )
+                    {/strip}
+                </option>
+                <option value="worst[protocol^=http]">
+                    Worst
+                </option>
+            </optgroup>
+            <optgroup label="Detailed formats" class="monospace">
                 {foreach $video->formats as $format}
-                    <option value="{$format->format_id}">
-                        {$format->format} ({$format->ext})
-                    </option>
+                    {$format->protocol}
+                    {if $format->protocol|in_array:array('http', 'https')}
+                        {strip}
+                        <option value="{$format->format_id}">
+                            {$format->ext}
+                            {for $foo=1 to (5 - ($format->ext|strlen))}
+                                &nbsp;
+                            {/for}
+                            {if isset($format->width)}
+                                {$format->width}x{$format->height}
+                                {for $foo=1 to (10 - (("{$format->width}x{$format->height}")|strlen))}
+                                    &nbsp;
+                                {/for}
+                            {else}
+                                {for $foo=1 to 10}
+                                    &nbsp;
+                                {/for}
+                            {/if}
+                            {if isset($format->filesize)}
+                                {($format->filesize/1000000)|round:2} MB
+                                {for $foo=1 to (7 - (($format->filesize/1000000)|round:2|strlen))}
+                                    &nbsp;
+                                {/for}
+                            {else}
+                                {for $foo=1 to 10}
+                                    &nbsp;
+                                {/for}
+                            {/if}
+                            {if isset($format->format_note)}
+                                {$format->format_note}
+                            {/if}
+                            &nbsp;({$format->format_id})
+                        </option>
+                        {/strip}
+                    {/if}
                 {/foreach}
             </optgroup>
         </select><br/><br/>
         <input class="downloadBtn" type="submit" value="Download" /><br/>
     </form>
 {else}
-    <input type="hidden" name="format" value="best" />
+    <input type="hidden" name="format" value="best[protocol^=http]" />
     <a class="downloadBtn"
         href="{$video->url|escape}">Download</a><br/>
 {/if}

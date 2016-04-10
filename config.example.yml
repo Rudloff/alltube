@@ -3,7 +3,7 @@ python: /usr/bin/python
 params:
     - --no-playlist
     - --no-warnings
-    - -f best
+    - -f best[protocol^=http]
 curl_params:
 convert: false
 avconv: vendor/bin/ffmpeg
