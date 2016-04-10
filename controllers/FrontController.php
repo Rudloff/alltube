@@ -130,9 +130,7 @@ class FrontController
                                 'Content-Disposition: attachment; filename="'.
                                 html_entity_decode(
                                     pathinfo(
-                                        $this->download->getFilename(
-                                            $video->webpage_url
-                                        ),
+                                        $video->_filename,
                                         PATHINFO_FILENAME
                                     ).'.mp3',
                                     ENT_COMPAT,
@@ -152,9 +150,7 @@ class FrontController
                                 'Content-Disposition: attachment; filename="'.
                                 html_entity_decode(
                                     pathinfo(
-                                        $this->download->getFilename(
-                                            $video->webpage_url
-                                        ),
+                                        $video->_filename,
                                         PATHINFO_FILENAME
                                     ).'.mp3',
                                     ENT_COMPAT,
