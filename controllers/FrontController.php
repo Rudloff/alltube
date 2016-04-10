@@ -115,10 +115,9 @@ class FrontController
                     $video = $this->download->getJSON($params["url"]);
 
                     //Vimeo needs a correct user-agent
-                    $UA = $this->download->getUA();
                     ini_set(
                         'user_agent',
-                        $UA
+                        $video->http_headers->{'User-Agent'}
                     );
                     $url_info = parse_url($video->url);
                     if ($url_info['scheme'] == 'rtmp') {
@@ -161,7 +160,7 @@ class FrontController
                         header("Content-Type: audio/mpeg");
                         passthru(
                             'curl '.$this->config->curl_params.
-                            ' --user-agent '.escapeshellarg($UA).
+                            ' --user-agent '.escapeshellarg($video->http_headers->{'User-Agent'}).
                             ' '.escapeshellarg($video->url).
                             '   |  '.$this->config->avconv.
                             ' -v quiet -i - -f mp3 -vn pipe:1'
