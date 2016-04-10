@@ -8,8 +8,8 @@ body {
 
 
 
-/************************HEADER******************************/  
-    
+/************************HEADER******************************/
+
 header {
     position:absolute;
     top:0;
@@ -17,11 +17,11 @@ header {
     width:100%;
     padding:0;
     }
-    
+
 .social
 {padding-right:21px;}
 
-    
+
 header a
 {
 overflow:hidden;
@@ -37,7 +37,7 @@ background-repeat:no-repeat;
   -webkit-transition: all 0.1s ease-in;
   -moz-transition: all 0.1s ease-in;
   -o-transition: all 0.1s ease-in;
-}   
+}
 
 header a:focus,
 header a:hover
@@ -51,8 +51,8 @@ header a:hover
 
 .share
 {background-image:url('../img/share.png');}
-    
-.sharemask  
+
+.sharemask
 {
 height:38px;
 width:38px;
@@ -64,11 +64,11 @@ background-image:url('../img/sharemask.png');
 background-position:top left;
 background-repeat:no-repeat;
 }
-    
+
 .facebook
 {background-image:url('../img/facebook.png');}
-    
-.facebookmask   
+
+.facebookmask
 {
 height:38px;
 width:38px;
@@ -79,12 +79,12 @@ z-index:10;
 background-image:url('../img/facebookmask.png');
 background-position:top left;
 background-repeat:no-repeat;
-}   
-    
+}
+
 .twitter
 {background-image:url('../img/twitter.png');}
-    
-.twittermask    
+
+.twittermask
 {
 height:38px;
 width:38px;
@@ -95,13 +95,13 @@ z-index:10;
 background-image:url('../img/twittermask.png');
 background-position:top left;
 background-repeat:no-repeat;
-}   
+}
 
 
-    
+
 /*************************FOOTER****************************/
-    
-    
+
+
 footer {
     position:fixed;
     bottom:0;
@@ -119,7 +119,7 @@ footer {
 .footer_wrapper {
     height:28px;
 }
-    
+
 footer a{
     color:#adadad;
   -webkit-transition: all 0.1s ease-in;
@@ -137,7 +137,7 @@ color:#f2084a;
   -moz-transition: all 0.1s ease-in;
   -o-transition: all 0.1s ease-in;
 }
-    
+
 
 
 
@@ -180,7 +180,7 @@ margin-top:8px;
     text-decoration:none;
     display:inline-block;
 }
-    
+
 .downloadBtn:focus,
 .downloadBtn:hover
 {
@@ -248,7 +248,7 @@ color:#f2084a;
   -moz-transition: all 0.1s ease-in;
   -o-transition: all 0.1s ease-in;
 }
- 
+
 #bookmarklet{
 padding:15px;
 }
@@ -265,7 +265,7 @@ padding-top:10px;
 padding-bottom:10px;
 border: 2px dotted;
 }
-   
+
 .mp3
 {
     position:relative;
@@ -279,17 +279,17 @@ border: 2px dotted;
     text-align:left;
     font-weight:300;
 }
-    
+
 .mp3 p
 {
 padding:3px;
-} 
+}
 
 
     /*
         Demo CSS code
     */
-    
+
     .audio:not(:checked),
     .audio:checked {
         position: absolute;
@@ -337,10 +337,10 @@ padding:3px;
     .audio:focus + label {
         color:black;
     }
-    
+
     /* on checked */
     .audio:checked + label:before {
-        background:#f2084a; 
+        background:#f2084a;
     }
     .audio:checked + label:after {
         background: #fff;
@@ -402,7 +402,7 @@ padding:3px;
 
 
 
-    
+
 
 /*************************CONTENT COMPATIBLES****************************/
 
@@ -565,24 +565,28 @@ h1 {
     margin-bottom: 1em;
 }
 
+.monospace {
+    font-family:monospace;
+}
+
 @media (max-width: 640px) {
     .thumb {
         width:90%;
     }
-    
+
     .URLinput{
         min-width:0;
     }
-    
+
     .logo {
         max-width:330px;
     }
-    
+
     .logocompatible,
     .logocompatible img {
         max-width:447px;
     }
-    
+
     .logocompatible,
     .logo,
     .champs,
@@ -592,64 +596,64 @@ h1 {
         margin:auto;
         height:auto;
     }
-    
+
     .logo {
         margin-top:50px;
     }
-    
+
     .logocompatible img {
         width:100%;
         height: auto;
     }
-    
+
     .downloadBtn {
         margin-top: 0.3em;
     }
     .mp3 {
         margin-bottom: 1em;
     }
-    
+
     footer {
         display:none;
     }
-    
+
     .tripleliste ul,
     .tripleliste {
         width:auto;
         margin-left:auto;
         margin-top:auto;
     }
-    
+
     .logocompatiblemask {
         background:none;
     }
-    
+
     .logocompatible {
         height:auto;
         background-image:none;
         background-color:#4F4F4F;
     }
-    
+
     .logocompatiblemask,
     .logobis {
         width:auto;
     }
-    
+
     .logocompatiblemask {
         position:static;
     }
-    
+
     .logobis {
         height:auto;
     }
-    
+
     .titre {
         margin:auto;
     }
-    
+
     .error p {
         padding:0.5em;
         text-align:left;
     }
-    
+
 }

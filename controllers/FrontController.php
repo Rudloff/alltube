@@ -113,7 +113,7 @@ class FrontController
             if (isset($params['audio'])) {
                 try {
                     try {
-                        return $this->getStream($params["url"], 'bestaudio', $response, $request);
+                        return $this->getStream($params["url"], 'bestaudio[protocol^=http]', $response, $request);
                     } catch (\Exception $e) {
                         $video = $this->download->getJSON($params["url"]);
 

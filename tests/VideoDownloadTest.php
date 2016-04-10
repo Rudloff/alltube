@@ -33,17 +33,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getUA function
-     *
-     * @return void
-     */
-    public function testGetUA()
-    {
-        $this->assertStringStartsWith('Mozilla/', $this->download->getUA());
-    }
-
-    /**
-     * Test listExtractors funtion
+     * Test listExtractors function
      *
      * @return void
      */
@@ -119,22 +109,6 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return array(
             array('http://example.com/video')
         );
-    }
-
-    /**
-     * Test getFilename function
-     *
-     * @param string $url    URL
-     * @param string $format Format
-     * @param string $result Expected filename
-     *
-     * @return       void
-     * @dataProvider URLProvider
-     */
-    public function testGetFilename($url, $format, $result)
-    {
-        $filename = $this->download->getFilename($url, $format);
-        $this->assertEquals($filename, $result);
     }
 
     /**
