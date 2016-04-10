@@ -22,8 +22,6 @@
     <img itemprop="image" class="thumb" src="{$video->thumbnail}" alt="" />
 {/if}
 <br/>
-<input type="hidden" name="url"
-value="{$video->webpage_url}" />
 {if isset($video->formats)}
     <h3>Available formats:</h3>
     <p>(You might have to do a <i>Right click > Save as</i>)</p>
