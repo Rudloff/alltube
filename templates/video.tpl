@@ -23,24 +23,26 @@
 {/if}
 <br/>
 {if isset($video->formats)}
-    <h3>Available formats:</h3>
-    <p>(You might have to do a <i>Right click > Save as</i>)</p>
-    <ul id="format" class="format">
-    <li class="best" itemprop="encoding" itemscope
-    itemtype="http://schema.org/VideoObject">
-    <a download="{$video->_filename}" itemprop="contentUrl"
-        href="{$video->url|escape}">
-    <b>Best</b> (<span itemprop="encodingFormat">{$video->ext}</span>)
-    </a></li>
-    {foreach $video->formats as $format}
-        <li itemprop="encoding"
-            itemscope itemtype="http://schema.org/VideoObject">
-        <a download="{$video->_filename|replace:$video->ext:$format->ext}" itemprop="contentUrl"
-            href="{$format->url|escape}">
-        <span itemprop="videoQuality">{$format->format}</span> (<span itemprop="encodingFormat">{$format->ext}</span>)
-        </a></li>
-    {/foreach}
-    </ul><br/><br/>
+    <h3><label for="format">Available formats:</label></h3>
+    <form action="{path_for name="redirect"}">
+        <input type="hidden" name="url" value="{$video->webpage_url}" />
+        <select name="format" id="format">
+            <option value="best">
+                Best ({$video->ext})
+            </option>
+            <option value="worst">
+                Worst
+            </option>
+            <optgroup label="Other formats">
+                {foreach $video->formats as $format}
+                    <option value="{$format->format_id}">
+                        {$format->format} ({$format->ext})
+                    </option>
+                {/foreach}
+            </optgroup>
+        </select><br/><br/>
+        <input class="downloadBtn" type="submit" value="Download" /><br/>
+    </form>
 {else}
     <input type="hidden" name="format" value="best" />
     <a class="downloadBtn"

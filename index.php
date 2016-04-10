@@ -45,7 +45,7 @@ $app->get(
 $app->get(
     '/redirect',
     array($controller, 'redirect')
-);
+)->setName('redirect');
 $app->get(
     '/json',
     array($controller, 'json')

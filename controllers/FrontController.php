@@ -226,7 +226,7 @@ class FrontController
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {
-                $url = $this->download->getURL($params["url"]);
+                $url = $this->download->getURL($params["url"], $params["format"]);
                 return $response->withRedirect($url);
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
