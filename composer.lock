@@ -545,25 +545,30 @@
         },
         {
             "name": "rudloff/smarty-plugin-noscheme",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Rudloff/smarty-plugin-noscheme.git",
-                "reference": "537bcb2f7576252af70d8f9f817bfe050d873072"
+                "reference": "7b64350bd255690e44db497e50bb5edc5e87d5e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Rudloff/smarty-plugin-noscheme/zipball/537bcb2f7576252af70d8f9f817bfe050d873072",
-                "reference": "537bcb2f7576252af70d8f9f817bfe050d873072",
+                "url": "https://api.github.com/repos/Rudloff/smarty-plugin-noscheme/zipball/7b64350bd255690e44db497e50bb5edc5e87d5e6",
+                "reference": "7b64350bd255690e44db497e50bb5edc5e87d5e6",
                 "shasum": ""
             },
             "require": {
-                "league/uri": "~4.0"
+                "league/uri": "~4.1.1"
             },
             "require-dev": {
-                "symfony/var-dumper": "~2.7.6"
+                "symfony/var-dumper": "~3.0.1"
             },
             "type": "library",
+            "autoload": {
+                "files": [
+                    "modifier.noscheme.php"
+                ]
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0"
@@ -577,7 +582,7 @@
                 }
             ],
             "description": "Smarty modifier that removes the scheme in URLs",
-            "time": "2015-10-31 10:25:47"
+            "time": "2016-04-09 00:40:13"
         },
         {
             "name": "slim/slim",
