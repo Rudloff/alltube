@@ -229,7 +229,7 @@ class FrontController
                 $url = $this->download->getURL($params["url"]);
                 return $response->withRedirect($url);
             } catch (\Exception $e) {
-                echo $e->getMessage().PHP_EOL;
+                $response->getBody()->write($e->getMessage());
                 return $response->withHeader('Content-Type', 'text/plain');
             }
         }
