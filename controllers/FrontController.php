@@ -112,60 +112,65 @@ class FrontController
         if (isset($params["url"])) {
             if (isset($params['audio'])) {
                 try {
-                    $video = $this->download->getJSON($params["url"]);
+                    try {
+                        $url = $this->download->getURL($params["url"], 'bestaudio');
+                        return $response->withRedirect($url);
+                    } catch (\Exception $e) {
+                        $video = $this->download->getJSON($params["url"]);
 
-                    //Vimeo needs a correct user-agent
-                    ini_set(
-                        'user_agent',
-                        $video->http_headers->{'User-Agent'}
-                    );
-                    $url_info = parse_url($video->url);
-                    if ($url_info['scheme'] == 'rtmp') {
-                        ob_end_flush();
-                        header(
-                            'Content-Disposition: attachment; filename="'.
-                            html_entity_decode(
-                                pathinfo(
-                                    $this->download->getFilename(
-                                        $video->webpage_url
-                                    ),
-                                    PATHINFO_FILENAME
-                                ).'.mp3',
-                                ENT_COMPAT,
-                                'ISO-8859-1'
-                            ).'"'
+                        //Vimeo needs a correct user-agent
+                        ini_set(
+                            'user_agent',
+                            $video->http_headers->{'User-Agent'}
                         );
-                        header("Content-Type: audio/mpeg");
-                        passthru(
-                            '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                            '   |  '.$this->config->avconv.
-                            ' -v quiet -i - -f mp3 -vn pipe:1'
-                        );
-                        exit;
-                    } else {
-                        ob_end_flush();
-                        header(
-                            'Content-Disposition: attachment; filename="'.
-                            html_entity_decode(
-                                pathinfo(
-                                    $this->download->getFilename(
-                                        $video->webpage_url
-                                    ),
-                                    PATHINFO_FILENAME
-                                ).'.mp3',
-                                ENT_COMPAT,
-                                'ISO-8859-1'
-                            ).'"'
-                        );
-                        header("Content-Type: audio/mpeg");
-                        passthru(
-                            'curl '.$this->config->curl_params.
-                            ' --user-agent '.escapeshellarg($video->http_headers->{'User-Agent'}).
-                            ' '.escapeshellarg($video->url).
-                            '   |  '.$this->config->avconv.
-                            ' -v quiet -i - -f mp3 -vn pipe:1'
-                        );
-                        exit;
+                        $url_info = parse_url($video->url);
+                        if ($url_info['scheme'] == 'rtmp') {
+                            ob_end_flush();
+                            header(
+                                'Content-Disposition: attachment; filename="'.
+                                html_entity_decode(
+                                    pathinfo(
+                                        $this->download->getFilename(
+                                            $video->webpage_url
+                                        ),
+                                        PATHINFO_FILENAME
+                                    ).'.mp3',
+                                    ENT_COMPAT,
+                                    'ISO-8859-1'
+                                ).'"'
+                            );
+                            header("Content-Type: audio/mpeg");
+                            passthru(
+                                '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
+                                '   |  '.$this->config->avconv.
+                                ' -v quiet -i - -f mp3 -vn pipe:1'
+                            );
+                            exit;
+                        } else {
+                            ob_end_flush();
+                            header(
+                                'Content-Disposition: attachment; filename="'.
+                                html_entity_decode(
+                                    pathinfo(
+                                        $this->download->getFilename(
+                                            $video->webpage_url
+                                        ),
+                                        PATHINFO_FILENAME
+                                    ).'.mp3',
+                                    ENT_COMPAT,
+                                    'ISO-8859-1'
+                                ).'"'
+                            );
+                            header("Content-Type: audio/mpeg");
+                            passthru(
+                                'curl '.$this->config->curl_params.
+                                ' --user-agent '.escapeshellarg($video->http_headers->{'User-Agent'}).
+                                ' '.escapeshellarg($video->url).
+                                '   |  '.$this->config->avconv.
+                                ' -v quiet -i - -f mp3 -vn pipe:1'
+                            );
+                            exit;
+                        }
                     }
                 } catch (\Exception $e) {
                     $error = $e->getMessage();
