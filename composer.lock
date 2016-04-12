@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b8327e8b80a073db8e2a9f5fdd0c750e",
-    "content-hash": "b1a553391862fc80a83960f27c5fd530",
+    "hash": "d8b87df7911542ff8a9c7323fcc22949",
+    "content-hash": "52dc356edd823568af9aca1e95032cfd",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -36,7 +36,7 @@
         },
         {
             "name": "ffmpeg/ffmpeg",
-            "version": "2.8.4",
+            "version": "dev-release",
             "dist": {
                 "type": "xz",
                 "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
@@ -796,7 +796,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ffmpeg/ffmpeg": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
