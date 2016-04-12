@@ -4,6 +4,8 @@ params:
     - --no-playlist
     - --no-warnings
     - -f best[protocol^=http]
+    - --playlist-end
+    - 1
 curl_params:
 convert: false
 avconv: vendor/bin/ffmpeg
