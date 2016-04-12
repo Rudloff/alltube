@@ -140,7 +140,7 @@ class FrontController
                             $builder = new ProcessBuilder(
                                 array(
                                     '/usr/bin/rtmpdump',
-                                    //'-q',
+                                    '-q',
                                     '-r',
                                     $video->url,
                                     '--pageUrl', $video->webpage_url
