@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0a09fa0b589ef92192be06b640a2e7e5",
-    "content-hash": "7e43db00a5d5e02e3bcd909198e0f98f",
+    "hash": "b8327e8b80a073db8e2a9f5fdd0c750e",
+    "content-hash": "b1a553391862fc80a83960f27c5fd530",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -361,6 +361,42 @@
                 "response"
             ],
             "time": "2015-05-04 20:22:00"
+        },
+        {
+            "name": "ptachoire/process-builder-chain",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/krichprollsch/process-builder-chain.git",
+                "reference": "465055dbcc3b5ef792a768df935571551de4781a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/krichprollsch/process-builder-chain/zipball/465055dbcc3b5ef792a768df935571551de4781a",
+                "reference": "465055dbcc3b5ef792a768df935571551de4781a",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/process": "~2.5 || ~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Chain": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Tachoire",
+                    "email": "pierre.tachoire@gmail.com"
+                }
+            ],
+            "description": "Add ability to chain symfony processes",
+            "time": "2016-04-10 08:33:20"
         },
         {
             "name": "rg3/youtube-dl",

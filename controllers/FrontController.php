@@ -14,6 +14,8 @@ namespace Alltube\Controller;
 
 use Alltube\VideoDownload;
 use Alltube\Config;
+use Symfony\Component\Process\ProcessBuilder;
+use Chain\Chain;
 
 /**
  * Main controller
@@ -116,7 +118,18 @@ class FrontController
                         $url = $this->download->getURL($params["url"], 'bestaudio[protocol^=http]');
                         return $response->withRedirect($url);
                     } catch (\Exception $e) {
-                        $video = $this->download->getJSON($params["url"]);
+                        $video = $this->download->getJSON($params["url"], 'best');
+
+                        $avconvProc = ProcessBuilder::create(
+                            array(
+                                $this->config->avconv,
+                                '-v', 'quiet',
+                                '-i', '-',
+                                '-f', 'mp3',
+                                '-vn',
+                                'pipe:1'
+                            )
+                        );
 
                         //Vimeo needs a correct user-agent
                         ini_set(
@@ -124,6 +137,33 @@ class FrontController
                             $video->http_headers->{'User-Agent'}
                         );
                         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
+                            $builder = new ProcessBuilder(
+                                array(
+                                    '/usr/bin/rtmpdump',
+                                    //'-q',
+                                    '-r',
+                                    $video->url,
+                                    '--pageUrl', $video->webpage_url
+                                )
+                            );
+                            if (isset($video->player_url)) {
+                                $builder->add('--swfVfy');
+                                $builder->add($video->player_url);
+                            }
+                            if (isset($video->flash_version)) {
+                                $builder->add('--flashVer');
+                                $builder->add($video->flash_version);
+                            }
+                            if (isset($video->play_path)) {
+                                $builder->add('--playpath');
+                                $builder->add($video->play_path);
+                            }
+                            foreach ($video->rtmp_conn as $conn) {
+                                $builder->add('--conn');
+                                $builder->add($conn);
+                            }
+                            $chain = new Chain($builder->getProcess());
+                            $chain->add('|', $avconvProc);
                             ob_end_flush();
                             header(
                                 'Content-Disposition: attachment; filename="'.
@@ -137,13 +177,22 @@ class FrontController
                                 ).'"'
                             );
                             header("Content-Type: audio/mpeg");
-                            passthru(
-                                '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                                '   |  '.$this->config->avconv.
-                                ' -v quiet -i - -f mp3 -vn pipe:1'
-                            );
+                            passthru($chain->getProcess()->getCommandLine());
                             exit;
                         } else {
+                            $chain = new Chain(
+                                ProcessBuilder::create(
+                                    array_merge(
+                                        array('curl'),
+                                        $this->config->curl_params,
+                                        array(
+                                            '--user-agent', $video->http_headers->{'User-Agent'},
+                                            $video->url
+                                        )
+                                    )
+                                )
+                            );
+                            $chain->add('|', $avconvProc);
                             ob_end_flush();
                             header(
                                 'Content-Disposition: attachment; filename="'.
@@ -157,13 +206,7 @@ class FrontController
                                 ).'"'
                             );
                             header("Content-Type: audio/mpeg");
-                            passthru(
-                                'curl '.$this->config->curl_params.
-                                ' --user-agent '.escapeshellarg($video->http_headers->{'User-Agent'}).
-                                ' '.escapeshellarg($video->url).
-                                '   |  '.$this->config->avconv.
-                                ' -v quiet -i - -f mp3 -vn pipe:1'
-                            );
+                            passthru($chain->getProcess()->getCommandLine());
                             exit;
                         }
                     }
