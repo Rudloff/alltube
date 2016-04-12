@@ -14,7 +14,7 @@
 		"ptachoire/process-builder-chain": "~1.2.0",
 		"ffmpeg/ffmpeg": "dev-release",
 		"rudloff/smarty-plugin-noscheme": "~0.1.0",
-		"rudloff/rtmpdump-bin": "dev-develop"
+		"rudloff/rtmpdump-bin": "~2.3"
 	},
 	"require-dev": {
 		"symfony/var-dumper": "~3.0.0"
@@ -50,9 +50,6 @@
 				"ffmpeg"
 			]
 		}
-	}, {
-		"type": "git",
-		"url": "https://github.com/Rudloff/rtmpdump-bin.git"
 	}],
 	"authors": [{
 		"name": "Pierre Rudloff",

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1556bc08c5018e6085a715a783097d9d",
-    "content-hash": "91451f1d1fc10a7b09efb3511e4b7324",
+    "hash": "a0c23015c2a2bbb700ae566a04ca8679",
+    "content-hash": "42d3272dbfe226c0ef3da4e135e2dae3",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -410,11 +410,17 @@
         },
         {
             "name": "rudloff/rtmpdump-bin",
-            "version": "dev-develop",
+            "version": "2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Rudloff/rtmpdump-bin.git",
-                "reference": "c701e4f7cfae2ffbe6ab898768d27301d537d4c3"
+                "reference": "133cdd80e3bab66593e88a5276158596383afd97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rudloff/rtmpdump-bin/zipball/133cdd80e3bab66593e88a5276158596383afd97",
+                "reference": "133cdd80e3bab66593e88a5276158596383afd97",
+                "shasum": ""
             },
             "require-dev": {
                 "rtmpdump/rtmpdump": "2.3"
@@ -423,17 +429,12 @@
                 "rtmpdump"
             ],
             "type": "library",
-            "scripts": {
-                "build": [
-                    "cd vendor/rtmpdump/rtmpdump/ && make",
-                    "cp vendor/rtmpdump/rtmpdump/rtmpdump ."
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0"
             ],
             "description": "rtmpdump binary for Linux 64 bit",
-            "time": "2016-04-12 18:52:03"
+            "time": "2016-04-12 19:17:32"
         },
         {
             "name": "rudloff/smarty-plugin-noscheme",
@@ -824,8 +825,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "ffmpeg/ffmpeg": 20,
-        "rudloff/rtmpdump-bin": 20
+        "ffmpeg/ffmpeg": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
