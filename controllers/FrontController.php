@@ -139,7 +139,7 @@ class FrontController
                         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
                             $builder = new ProcessBuilder(
                                 array(
-                                    '/usr/bin/rtmpdump',
+                                    $this->config->rtmpdump,
                                     '-q',
                                     '-r',
                                     $video->url,

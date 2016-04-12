@@ -34,6 +34,7 @@ class Config
     public $params = array('--no-playlist', '--no-warnings', '-f best[protocol^=http]', '--playlist-end', 1);
     public $convert = false;
     public $avconv = 'vendor/bin/ffmpeg';
+    public $rtmpdump = 'vendor/bin/rtmpdump';
     public $curl_params = array();
 
     /**

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d8b87df7911542ff8a9c7323fcc22949",
-    "content-hash": "52dc356edd823568af9aca1e95032cfd",
+    "hash": "1556bc08c5018e6085a715a783097d9d",
+    "content-hash": "91451f1d1fc10a7b09efb3511e4b7324",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -409,6 +409,33 @@
             "type": "library"
         },
         {
+            "name": "rudloff/rtmpdump-bin",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Rudloff/rtmpdump-bin.git",
+                "reference": "c701e4f7cfae2ffbe6ab898768d27301d537d4c3"
+            },
+            "require-dev": {
+                "rtmpdump/rtmpdump": "2.3"
+            },
+            "bin": [
+                "rtmpdump"
+            ],
+            "type": "library",
+            "scripts": {
+                "build": [
+                    "cd vendor/rtmpdump/rtmpdump/ && make",
+                    "cp vendor/rtmpdump/rtmpdump/rtmpdump ."
+                ]
+            },
+            "license": [
+                "GPL-2.0"
+            ],
+            "description": "rtmpdump binary for Linux 64 bit",
+            "time": "2016-04-12 18:52:03"
+        },
+        {
             "name": "rudloff/smarty-plugin-noscheme",
             "version": "0.1.1",
             "source": {
@@ -797,7 +824,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "ffmpeg/ffmpeg": 20
+        "ffmpeg/ffmpeg": 20,
+        "rudloff/rtmpdump-bin": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
