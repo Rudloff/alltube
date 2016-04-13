@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9363b8befa358a89f849785a6399698a",
-    "content-hash": "6304d9a80a90da1095ba8512bba2f166",
+    "hash": "411e020d026dab32ecc2bb6c2c059f22",
+    "content-hash": "1442dea55dfe2b876dd29d0af142ec28",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -650,16 +650,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.3.0",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "939f2e85d57508de9cff241d10091cd972f221c3"
+                "reference": "a810d837adc0e5cf7fba72815a6213fe50e15cc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/939f2e85d57508de9cff241d10091cd972f221c3",
-                "reference": "939f2e85d57508de9cff241d10091cd972f221c3",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/a810d837adc0e5cf7fba72815a6213fe50e15cc8",
+                "reference": "a810d837adc0e5cf7fba72815a6213fe50e15cc8",
                 "shasum": ""
             },
             "require": {
@@ -713,7 +713,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-03-10 21:37:40"
+            "time": "2016-04-13 08:33:19"
         },
         {
             "name": "smarty/smarty",
@@ -996,6 +996,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "slim/slim": 20,
         "ffmpeg/ffmpeg": 20
     },
     "prefer-stable": false,
