@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e1cdeb4248ab93397c2fa390a76b0c62",
-    "content-hash": "8ad4495699681f4ade03f5e0fbe0b074",
+    "hash": "9363b8befa358a89f849785a6399698a",
+    "content-hash": "6304d9a80a90da1095ba8512bba2f166",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -578,6 +578,34 @@
                 "reference": "2016.04.06"
             },
             "type": "library"
+        },
+        {
+            "name": "rudloff/rtmpdump-bin",
+            "version": "2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Rudloff/rtmpdump-bin.git",
+                "reference": "133cdd80e3bab66593e88a5276158596383afd97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rudloff/rtmpdump-bin/zipball/133cdd80e3bab66593e88a5276158596383afd97",
+                "reference": "133cdd80e3bab66593e88a5276158596383afd97",
+                "shasum": ""
+            },
+            "require-dev": {
+                "rtmpdump/rtmpdump": "2.3"
+            },
+            "bin": [
+                "rtmpdump"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "description": "rtmpdump binary for Linux 64 bit",
+            "time": "2016-04-12 19:17:32"
         },
         {
             "name": "rudloff/smarty-plugin-noscheme",
