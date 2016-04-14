@@ -14,7 +14,8 @@
 		"ptachoire/process-builder-chain": "~1.2.0",
 		"ffmpeg/ffmpeg": "dev-release",
 		"rudloff/smarty-plugin-noscheme": "~0.1.0",
-		"rudloff/rtmpdump-bin": "~2.3"
+		"rudloff/rtmpdump-bin": "~2.3",
+		"rudloff/psr7-process-stream": "~0.1.0"
 	},
 	"require-dev": {
 		"symfony/var-dumper": "~3.0.0"
