@@ -184,12 +184,13 @@ class FrontController
                             $chain = new Chain(
                                 ProcessBuilder::create(
                                     array_merge(
-                                        array('curl'),
-                                        $this->config->curl_params,
                                         array(
+                                            'curl',
+                                            '--silent',
                                             '--user-agent', $video->http_headers->{'User-Agent'},
                                             $video->url
-                                        )
+                                        ),
+                                        $this->config->curl_params
                                     )
                                 )
                             );
