@@ -11,7 +11,8 @@
         "grunt-phpcs": "~0.4.0",
         "grunt-phpunit": "~0.3.6",
         "grunt-contrib-compress": "~1.2.0",
-        "bower": "~1.7.1"
+        "bower": "~1.7.1",
+        "grunt-githash": "~0.1.3"
     },
     "repository": {
         "type": "git",
