@@ -195,7 +195,10 @@ class FrontController
                             );
                             $chain->add('|', $avconvProc);
                         }
-                        return $response->withBody(new PopenStream($chain->getProcess()->getCommandLine()));
+                        if ($request->isGet()) {
+                            $response = $response->withBody(new PopenStream($chain->getProcess()->getCommandLine()));
+                        }
+                        return $response;
                     }
                 } catch (\Exception $e) {
                     $error = $e->getMessage();
