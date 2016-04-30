@@ -16,6 +16,7 @@ use Alltube\VideoDownload;
 use Alltube\Config;
 use Symfony\Component\Process\ProcessBuilder;
 use Chain\Chain;
+use ProcessStream\PopenStream;
 
 /**
  * Main controller
@@ -135,6 +136,21 @@ class FrontController
                             'user_agent',
                             $video->http_headers->{'User-Agent'}
                         );
+
+                        $response = $response->withHeader(
+                            'Content-Disposition',
+                            'attachment; filename="'.
+                            html_entity_decode(
+                                pathinfo(
+                                    $video->_filename,
+                                    PATHINFO_FILENAME
+                                ).'.mp3',
+                                ENT_COMPAT,
+                                'ISO-8859-1'
+                            ).'"'
+                        );
+                        $response = $response->withHeader('Content-Type', 'audio/mpeg');
+
                         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
                             $builder = new ProcessBuilder(
                                 array(
@@ -163,51 +179,23 @@ class FrontController
                             }
                             $chain = new Chain($builder->getProcess());
                             $chain->add('|', $avconvProc);
-                            ob_end_flush();
-                            header(
-                                'Content-Disposition: attachment; filename="'.
-                                html_entity_decode(
-                                    pathinfo(
-                                        $video->_filename,
-                                        PATHINFO_FILENAME
-                                    ).'.mp3',
-                                    ENT_COMPAT,
-                                    'ISO-8859-1'
-                                ).'"'
-                            );
-                            header("Content-Type: audio/mpeg");
-                            passthru($chain->getProcess()->getCommandLine());
-                            exit;
                         } else {
                             $chain = new Chain(
                                 ProcessBuilder::create(
                                     array_merge(
-                                        array('curl'),
-                                        $this->config->curl_params,
                                         array(
+                                            'curl',
+                                            '--silent',
                                             '--user-agent', $video->http_headers->{'User-Agent'},
                                             $video->url
-                                        )
+                                        ),
+                                        $this->config->curl_params
                                     )
                                 )
                             );
                             $chain->add('|', $avconvProc);
-                            ob_end_flush();
-                            header(
-                                'Content-Disposition: attachment; filename="'.
-                                html_entity_decode(
-                                    pathinfo(
-                                        $video->_filename,
-                                        PATHINFO_FILENAME
-                                    ).'.mp3',
-                                    ENT_COMPAT,
-                                    'ISO-8859-1'
-                                ).'"'
-                            );
-                            header("Content-Type: audio/mpeg");
-                            passthru($chain->getProcess()->getCommandLine());
-                            exit;
                         }
+                        return $response->withBody(new PopenStream($chain->getProcess()->getCommandLine()));
                     }
                 } catch (\Exception $e) {
                     $error = $e->getMessage();

@@ -3,6 +3,11 @@ module.exports = function (grunt) {
     'use strict';
     grunt.initConfig(
         {
+            githash: {
+                main: {
+                    options: {}
+                }
+            },
             uglify: {
                 combine: {
                     files: {
@@ -52,7 +57,7 @@ module.exports = function (grunt) {
             compress: {
                 release: {
                     options: {
-                        archive: 'alltube-release.zip'
+                        archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
                     src: ['*.php', '!config.yml', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg']
                 }
@@ -60,6 +65,7 @@ module.exports = function (grunt) {
         }
     );
 
+    grunt.loadNpmTasks('grunt-githash');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -70,5 +76,5 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['uglify', 'cssmin']);
     grunt.registerTask('lint', ['phpcs']);
     grunt.registerTask('test', ['phpunit']);
-    grunt.registerTask('release', ['default', 'compress']);
+    grunt.registerTask('release', ['default', 'githash', 'compress']);
 };
