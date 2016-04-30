@@ -14,6 +14,10 @@ Addtype font/truetype .ttf
 FileETag None
 
 RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^alltube\.herokuapp\.com$ [NC]
+RewriteRule ^(.*)$ https://www.alltubedownload.net/$1 [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 
