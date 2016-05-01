@@ -49,7 +49,6 @@
             </optgroup>
             <optgroup label="Detailed formats" class="monospace">
                 {foreach $video->formats as $format}
-                    {$format->protocol}
                     {if $format->protocol|in_array:array('http', 'https')}
                         {strip}
                         <option value="{$format->format_id}">
