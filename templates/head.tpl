@@ -12,7 +12,6 @@
 <title>AllTube Download{if isset($title)} - {$title|escape}{/if}</title>
 <link rel="canonical" href="//{$smarty.server.HTTP_HOST|cat:$smarty.server.REQUEST_URI|replace:{base_url|noscheme}:'http://www.alltubedownload.net'}" />
 <link rel="icon" href="{base_url|noscheme}/img/favicon.png" />
-<meta property="og:url" content="{base_url}" />
 <meta property="og:title" content="AllTube Download{if isset($title)} - {$title|escape}{/if}" />
 <meta property="og:image" content="{base_url}/img/logo.png" />
 <meta name="twitter:card" content="summary" />
