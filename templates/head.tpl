@@ -9,9 +9,6 @@
     <meta property="og:description" content="{$description|escape}" />
 {/if}
 <link rel="stylesheet" href="{base_url|noscheme}/dist/main.css" />
-<link rel="author" href="https://plus.google.com/110403274854419000481?rel=author" />
-<link rel="author" href="https://plus.google.com/103696815796116179392?rel=author" />
-<link href="https://plus.google.com/108799967445657477255" rel="publisher" />
 <title>AllTube Download{if isset($title)} - {$title|escape}{/if}</title>
 <link rel="canonical" href="//{$smarty.server.HTTP_HOST|cat:$smarty.server.REQUEST_URI|replace:{base_url|noscheme}:'http://www.alltubedownload.net'}" />
 <link rel="icon" href="{base_url|noscheme}/img/favicon.png" />
