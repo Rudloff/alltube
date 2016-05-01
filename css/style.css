@@ -570,6 +570,7 @@ h1 {
 }
 
 @media (max-width: 640px) {
+    .formats,
     .thumb {
         width:90%;
     }
