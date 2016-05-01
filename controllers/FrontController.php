@@ -52,7 +52,8 @@ class FrontController
             $response,
             'head.tpl',
             array(
-                'class'=>'index'
+                'class'=>'index',
+                'description'=>'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
             )
         );
         $container->view->render(
@@ -84,7 +85,10 @@ class FrontController
             $response,
             'head.tpl',
             array(
-                'class'=>'extractors'
+                'class'=>'extractors',
+                'title'=>'Supported websites',
+                'description'
+                    =>'List of all supported websites from which Alltube Download can extract video or audio files'
             )
         );
         $container->view->render($response, 'header.tpl');
@@ -206,7 +210,9 @@ class FrontController
                     $response,
                     'head.tpl',
                     array(
-                        'class'=>'video'
+                        'class'=>'video',
+                        'title'=>$video->title,
+                        'description'=>'Download "'.$video->title.'" from '.$video->extractor_key
                     )
                 );
                 $container->view->render(
@@ -228,7 +234,8 @@ class FrontController
             $response,
             'head.tpl',
             array(
-                'class'=>'video'
+                'class'=>'video',
+                'title'=>'Error'
             )
         );
         $container->view->render(
@@ -239,7 +246,7 @@ class FrontController
             )
         );
         $container->view->render($response, 'footer.tpl');
-        return $response;
+        return $response->withStatus(500);
     }
 
     /**
