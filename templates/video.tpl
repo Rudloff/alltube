@@ -19,7 +19,13 @@
     alt="Casting to ChromeCast…" title="Stop casting"
     id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" /></p>
 {if isset($video->thumbnail)}
-    <img itemprop="image" class="thumb" src="{$video->thumbnail}" alt="" />
+    <img itemprop="thumbnailUrl" class="thumb" src="{$video->thumbnail}" alt="" />
+{/if}
+{if isset($video->description)}
+    <meta itemprop="description" content="{$video->description|escape}" />
+{/if}
+{if isset($video->upload_date)}
+    <meta itemprop="uploadDate" content="{$video->upload_date}" />
 {/if}
 <br/>
 {if isset($video->formats)}
