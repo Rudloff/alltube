@@ -30,6 +30,8 @@ $container['view'] = function ($c) {
 
 $controller = new FrontController();
 
+$container['errorHandler'] = array($controller, 'error');
+
 $app->get(
     '/',
     array($controller, 'index')
