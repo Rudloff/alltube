@@ -122,7 +122,7 @@ class FrontController
                     $url = $this->download->getURL($params["url"], 'mp3[protocol^=http]');
                     return $response->withRedirect($url);
                 } catch (\Exception $e) {
-                    $video = $this->download->getJSON($params["url"], 'best');
+                    $video = $this->download->getJSON($params["url"], 'bestaudio/best');
 
                     $avconvProc = ProcessBuilder::create(
                         array(
