@@ -16,7 +16,7 @@ use Alltube\VideoDownload;
 use Alltube\Config;
 use Symfony\Component\Process\ProcessBuilder;
 use Chain\Chain;
-use ProcessStream\PopenStream;
+use Slim\Http\Stream;
 
 /**
  * Main controller
@@ -200,7 +200,7 @@ class FrontController
                         $chain->add('|', $avconvProc);
                     }
                     if ($request->isGet()) {
-                        $response = $response->withBody(new PopenStream($chain->getProcess()->getCommandLine()));
+                        $response = $response->withBody(new Stream(popen($chain->getProcess()->getCommandLine(), 'r')));
                     }
                     return $response;
                 }
