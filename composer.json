@@ -7,7 +7,7 @@
 	"require": {
 		"smarty/smarty": "~3.1.29",
 		"rg3/youtube-dl": "2016.04.13",
-		"slim/slim": "1838.x-dev as 3.3.0",
+		"slim/slim": "3.x-dev",
 		"mathmarques/smarty-view": "~1.1.0",
 		"symfony/yaml": "~3.0.0",
 		"symfony/process": "~3.0.0",
@@ -50,9 +50,6 @@
 				"ffmpeg"
 			]
 		}
-	}, {
-		"type": "vcs",
-		"url": "https://github.com/llvdl/Slim.git"
 	}],
 	"authors": [{
 		"name": "Pierre Rudloff",
