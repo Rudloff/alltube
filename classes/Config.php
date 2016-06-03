@@ -31,10 +31,11 @@ class Config
 
     public $youtubedl = 'vendor/rg3/youtube-dl/youtube_dl/__main__.py';
     public $python = '/usr/bin/python';
-    public $params = array('--no-playlist', '--no-warnings', '-f best');
+    public $params = array('--no-playlist', '--no-warnings', '-f best[protocol^=http]', '--playlist-end', 1);
     public $convert = false;
     public $avconv = 'vendor/bin/ffmpeg';
-    public $curl_params = '';
+    public $rtmpdump = 'vendor/bin/rtmpdump';
+    public $curl_params = array();
 
     /**
      * Config constructor

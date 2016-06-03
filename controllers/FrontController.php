@@ -14,6 +14,9 @@ namespace Alltube\Controller;
 
 use Alltube\VideoDownload;
 use Alltube\Config;
+use Symfony\Component\Process\ProcessBuilder;
+use Chain\Chain;
+use Slim\Http\Stream;
 
 /**
  * Main controller
@@ -49,7 +52,8 @@ class FrontController
             $response,
             'head.tpl',
             array(
-                'class'=>'index'
+                'class'=>'index',
+                'description'=>'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
             )
         );
         $container->view->render(
@@ -81,7 +85,10 @@ class FrontController
             $response,
             'head.tpl',
             array(
-                'class'=>'extractors'
+                'class'=>'extractors',
+                'title'=>'Supported websites',
+                'description'
+                    =>'List of all supported websites from which Alltube Download can extract video or audio files'
             )
         );
         $container->view->render($response, 'header.tpl');
@@ -112,104 +119,134 @@ class FrontController
         if (isset($params["url"])) {
             if (isset($params['audio'])) {
                 try {
-                    try {
-                        $url = $this->download->getURL($params["url"], 'bestaudio[protocol^=http]');
-                        return $response->withRedirect($url);
-                    } catch (\Exception $e) {
-                        $video = $this->download->getJSON($params["url"]);
-
-                        //Vimeo needs a correct user-agent
-                        ini_set(
-                            'user_agent',
-                            $video->http_headers->{'User-Agent'}
-                        );
-                        if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
-                            ob_end_flush();
-                            header(
-                                'Content-Disposition: attachment; filename="'.
-                                html_entity_decode(
-                                    pathinfo(
-                                        $video->_filename,
-                                        PATHINFO_FILENAME
-                                    ).'.mp3',
-                                    ENT_COMPAT,
-                                    'ISO-8859-1'
-                                ).'"'
-                            );
-                            header("Content-Type: audio/mpeg");
-                            passthru(
-                                '/usr/bin/rtmpdump -q -r '.escapeshellarg($video->url).
-                                '   |  '.$this->config->avconv.
-                                ' -v quiet -i - -f mp3 -vn pipe:1'
-                            );
-                            exit;
-                        } else {
-                            ob_end_flush();
-                            header(
-                                'Content-Disposition: attachment; filename="'.
-                                html_entity_decode(
-                                    pathinfo(
-                                        $video->_filename,
-                                        PATHINFO_FILENAME
-                                    ).'.mp3',
-                                    ENT_COMPAT,
-                                    'ISO-8859-1'
-                                ).'"'
-                            );
-                            header("Content-Type: audio/mpeg");
-                            passthru(
-                                'curl '.$this->config->curl_params.
-                                ' --user-agent '.escapeshellarg($video->http_headers->{'User-Agent'}).
-                                ' '.escapeshellarg($video->url).
-                                '   |  '.$this->config->avconv.
-                                ' -v quiet -i - -f mp3 -vn pipe:1'
-                            );
-                            exit;
-                        }
-                    }
+                    $url = $this->download->getURL($params["url"], 'mp3[protocol^=http]');
+                    return $response->withRedirect($url);
                 } catch (\Exception $e) {
-                    $error = $e->getMessage();
+                    $video = $this->download->getJSON($params["url"], 'bestaudio/best');
+
+                    $avconvProc = ProcessBuilder::create(
+                        array(
+                            $this->config->avconv,
+                            '-v', 'quiet',
+                            '-i', '-',
+                            '-f', 'mp3',
+                            '-vn',
+                            'pipe:1'
+                        )
+                    );
+
+                    //Vimeo needs a correct user-agent
+                    ini_set(
+                        'user_agent',
+                        $video->http_headers->{'User-Agent'}
+                    );
+
+                    $response = $response->withHeader(
+                        'Content-Disposition',
+                        'attachment; filename="'.
+                        html_entity_decode(
+                            pathinfo(
+                                $video->_filename,
+                                PATHINFO_FILENAME
+                            ).'.mp3',
+                            ENT_COMPAT,
+                            'ISO-8859-1'
+                        ).'"'
+                    );
+                    $response = $response->withHeader('Content-Type', 'audio/mpeg');
+
+                    if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
+                        $builder = new ProcessBuilder(
+                            array(
+                                $this->config->rtmpdump,
+                                '-q',
+                                '-r',
+                                $video->url,
+                                '--pageUrl', $video->webpage_url
+                            )
+                        );
+                        if (isset($video->player_url)) {
+                            $builder->add('--swfVfy');
+                            $builder->add($video->player_url);
+                        }
+                        if (isset($video->flash_version)) {
+                            $builder->add('--flashVer');
+                            $builder->add($video->flash_version);
+                        }
+                        if (isset($video->play_path)) {
+                            $builder->add('--playpath');
+                            $builder->add($video->play_path);
+                        }
+                        foreach ($video->rtmp_conn as $conn) {
+                            $builder->add('--conn');
+                            $builder->add($conn);
+                        }
+                        $chain = new Chain($builder->getProcess());
+                        $chain->add('|', $avconvProc);
+                    } else {
+                        $chain = new Chain(
+                            ProcessBuilder::create(
+                                array_merge(
+                                    array(
+                                        'curl',
+                                        '--silent',
+                                        '--user-agent', $video->http_headers->{'User-Agent'},
+                                        $video->url
+                                    ),
+                                    $this->config->curl_params
+                                )
+                            )
+                        );
+                        $chain->add('|', $avconvProc);
+                    }
+                    if ($request->isGet()) {
+                        $response = $response->withBody(new Stream(popen($chain->getProcess()->getCommandLine(), 'r')));
+                    }
+                    return $response;
                 }
             } else {
-                try {
-                    $video = $this->download->getJSON($params["url"]);
-                    $container->view->render(
-                        $response,
-                        'head.tpl',
-                        array(
-                            'class'=>'video'
-                        )
-                    );
-                    $container->view->render(
-                        $response,
-                        'video.tpl',
-                        array(
-                            'video'=>$video
-                        )
-                    );
-                    $container->view->render($response, 'footer.tpl');
-                } catch (\Exception $e) {
-                    $error = $e->getMessage();
-                }
+                $video = $this->download->getJSON($params["url"]);
+                $container->view->render(
+                    $response,
+                    'head.tpl',
+                    array(
+                        'class'=>'video',
+                        'title'=>$video->title,
+                        'description'=>'Download "'.$video->title.'" from '.$video->extractor_key
+                    )
+                );
+                $container->view->render(
+                    $response,
+                    'video.tpl',
+                    array(
+                        'video'=>$video
+                    )
+                );
+                $container->view->render($response, 'footer.tpl');
             }
         }
-        if (isset($error)) {
-            $container->view->render(
-                $response,
-                'head.tpl',
-                array(
-                    'class'=>'video'
-                )
-            );
-            $container->view->render(
-                $response,
-                'error.tpl',
-                array(
-                    'errors'=>$error
-                )
-            );
-            $container->view->render($response, 'footer.tpl');
-        }
+    }
+
+    public function error($request, $response, $exception)
+    {
+        global $container;
+        $container->view->render(
+            $response,
+            'head.tpl',
+            array(
+                'class'=>'video',
+                'title'=>'Error'
+            )
+        );
+        $container->view->render(
+            $response,
+            'error.tpl',
+            array(
+                'errors'=>$exception->getMessage()
+            )
+        );
+        $container->view->render($response, 'footer.tpl');
+        return $response->withStatus(500);
     }
 
     /**

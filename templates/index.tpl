@@ -1,5 +1,5 @@
     <div class="main">
-    <div><img itemprop="image" class="logo" src="{base_url|noscheme}/img/logo.png"
+    <div><img class="logo" src="{base_url|noscheme}/img/logo.png"
     alt="AllTube Download" width="328" height="284"></div>
     <form action="{path_for name="video"}">
     <label class="labelurl" for="url">

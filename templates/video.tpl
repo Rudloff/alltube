@@ -19,14 +19,20 @@
     alt="Casting to ChromeCast…" title="Stop casting"
     id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" /></p>
 {if isset($video->thumbnail)}
-    <img itemprop="image" class="thumb" src="{$video->thumbnail}" alt="" />
+    <img itemprop="thumbnailUrl" class="thumb" src="{$video->thumbnail}" alt="" />
+{/if}
+{if isset($video->description)}
+    <meta itemprop="description" content="{$video->description|escape}" />
+{/if}
+{if isset($video->upload_date)}
+    <meta itemprop="uploadDate" content="{$video->upload_date}" />
 {/if}
 <br/>
 {if isset($video->formats)}
     <h3><label for="format">Available formats:</label></h3>
     <form action="{path_for name="redirect"}">
         <input type="hidden" name="url" value="{$video->webpage_url}" />
-        <select name="format" id="format" class="monospace">
+        <select name="format" id="format" class="formats monospace">
             <optgroup label="Generic formats">
                 <option value="best[protocol^=http]">
                     {strip}
@@ -43,7 +49,6 @@
             </optgroup>
             <optgroup label="Detailed formats" class="monospace">
                 {foreach $video->formats as $format}
-                    {$format->protocol}
                     {if $format->protocol|in_array:array('http', 'https')}
                         {strip}
                         <option value="{$format->format_id}">
