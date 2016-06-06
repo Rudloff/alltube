@@ -6,6 +6,13 @@ HTML GUI for youtube-dl (http://alltubedownload.net/)
 ![Screenshot](img/screenshot.png "Alltube GUI screenshot")
 
 ##Setup
+
+### From a release package
+You can download the latest release package [here](https://github.com/Rudloff/alltube/releases).
+
+You just have to unzip it on your server and it should be ready to use.
+
+### From Git
 In order to get AllTube working, you need to use [npm](https://www.npmjs.com/) and [Composer](https://getcomposer.org/):
 
     npm install
