@@ -224,6 +224,8 @@ class FrontController
                 );
                 $container->view->render($response, 'footer.tpl');
             }
+        } else {
+            return $response->withRedirect($container->get('router')->pathFor('index'));
         }
     }
 

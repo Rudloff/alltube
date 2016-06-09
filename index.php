@@ -35,7 +35,7 @@ $container['errorHandler'] = array($controller, 'error');
 $app->get(
     '/',
     array($controller, 'index')
-);
+)->setName('index');
 $app->get(
     '/extractors',
     array($controller, 'extractors')
