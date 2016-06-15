@@ -34,7 +34,7 @@ This software is available under the [GNU General Public License](http://www.gnu
 __Please use a different name and logo if you run it on a public server.__
 
 ##Other dependencies
-You need [avconv](https://libav.org/avconv.html), [rtmpdump](http://rtmpdump.mplayerhq.hu/) and curl (https://curl.haxx.se/) in order to enable conversions.
+You need [avconv](https://libav.org/avconv.html), [rtmpdump](http://rtmpdump.mplayerhq.hu/) and [curl](https://curl.haxx.se/) in order to enable conversions.
 If you don't want to enable conversions, you can disable it in *config.yml*.
 
 On Debian-based systems:
