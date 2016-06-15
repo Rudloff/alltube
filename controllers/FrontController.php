@@ -124,6 +124,10 @@ class FrontController
                 } catch (\Exception $e) {
                     $video = $this->download->getJSON($params["url"], 'bestaudio/best');
 
+                    if (!shell_exec('which '.$this->config->avconv)) {
+                        throw(new \Exception('Can\'t find avconv or ffmpeg'));
+                    }
+
                     $avconvProc = ProcessBuilder::create(
                         array(
                             $this->config->avconv,
@@ -156,6 +160,9 @@ class FrontController
                     $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
                     if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
+                        if (!shell_exec('which '.$this->config->rtmpdump)) {
+                            throw(new \Exception('Can\'t find rtmpdump'));
+                        }
                         $builder = new ProcessBuilder(
                             array(
                                 $this->config->rtmpdump,
@@ -184,6 +191,9 @@ class FrontController
                         $chain = new Chain($builder->getProcess());
                         $chain->add('|', $avconvProc);
                     } else {
+                        if (!shell_exec('which curl')) {
+                            throw(new \Exception('Can\'t find curl'));
+                        }
                         $chain = new Chain(
                             ProcessBuilder::create(
                                 array_merge(
