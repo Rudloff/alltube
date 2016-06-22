@@ -91,4 +91,13 @@ function loadCastApi(loaded, errorInfo) {
     }
 }
 
-window.__onGCastApiAvailable = loadCastApi;
+function initCast() {
+    'use strict';
+    var intro = document.getElementById('download_intro');
+    if (intro) {
+        intro.insertAdjacentHTML('beforeend', '<img class="cast_icon" id="cast_disabled" src="img/ic_media_route_disabled_holo_light.png" alt="" title="Google Cast is not supported on this browser." /> <img class="cast_btn cast_hidden cast_icon" id="cast_btn_launch" src="img/ic_media_route_off_holo_light.png" title="Cast to ChromeCast" alt="Google Cast™" /> <img src="img/ic_media_route_on_holo_light.png" alt="Casting to ChromeCast…" title="Stop casting" id="cast_btn_stop" class="cast_btn cast_hidden cast_icon" />');
+        window.__onGCastApiAvailable = loadCastApi;
+    }
+}
+
+window.addEventListener('load', initCast, false);
