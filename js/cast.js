@@ -44,8 +44,9 @@ var castModule = (function () {
         session.stop(onStopCast, onStopCastError);
     }
 
-    function onMediaError() {
+    function onMediaError(e) {
         stopCast();
+        throw e.description;
     }
 
     function onRequestSessionSuccess(e) {
