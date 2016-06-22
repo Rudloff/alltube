@@ -1,17 +1,15 @@
 /*global chrome*/
-/*jslint devel: true, browser: true */
+/*jslint browser: true */
 var launchBtn, disabledBtn, stopBtn;
-var session, currentMedia;
+var session;
 
 function receiverListener(e) {
     'use strict';
-    console.log('receiverListener', e);
+    return (e === chrome.cast.ReceiverAvailability.AVAILABLE);
 }
 
-function onMediaDiscovered(how, media) {
+function onMediaDiscovered() {
     'use strict';
-    console.log('onMediaDiscovered', how);
-    currentMedia = media;
     if (launchBtn) {
         stopBtn.classList.remove('cast_hidden');
         launchBtn.classList.add('cast_hidden');
@@ -40,7 +38,6 @@ function stopCast() {
 
 function onMediaError() {
     'use strict';
-    console.log('onMediaError');
     stopCast();
 }
 
@@ -53,7 +50,7 @@ function onRequestSessionSuccess(e) {
 
 function onLaunchError(e) {
     'use strict';
-    console.log('onLaunchError', e.description);
+    throw e.description;
 }
 
 function launchCast() {
@@ -74,9 +71,9 @@ function onInitSuccess() {
     }
 }
 
-function onError() {
+function onError(e) {
     'use strict';
-    console.log('onError');
+    throw e.code;
 }
 
 function initializeCastApi() {
@@ -90,7 +87,7 @@ function loadCastApi(loaded, errorInfo) {
     if (loaded) {
         initializeCastApi();
     } else {
-        console.log(errorInfo);
+        throw errorInfo;
     }
 }
 
