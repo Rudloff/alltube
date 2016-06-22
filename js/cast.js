@@ -16,19 +16,27 @@ function onMediaDiscovered() {
     }
 }
 
-function sessionListener(e) {
-    'use strict';
-    session = e;
-    session.addMediaListener(onMediaDiscovered.bind(this, 'addMediaListener'));
-    if (session.media.length !== 0) {
-        onMediaDiscovered('onRequestSessionSuccess', session.media[0]);
-    }
-}
-
 function onStopCast() {
     'use strict';
     stopBtn.classList.add('cast_hidden');
     launchBtn.classList.remove('cast_hidden');
+}
+
+function updateListener() {
+    'use strict';
+    if (session.status !== chrome.cast.SessionStatus.CONNECTED) {
+        onStopCast();
+    }
+}
+
+function sessionListener(e) {
+    'use strict';
+    session = e;
+    session.addMediaListener(onMediaDiscovered.bind(this, 'addMediaListener'));
+    session.addUpdateListener(updateListener.bind(this));
+    if (session.media.length !== 0) {
+        onMediaDiscovered('onRequestSessionSuccess', session.media[0]);
+    }
 }
 
 function stopCast() {
