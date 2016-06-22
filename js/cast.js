@@ -20,6 +20,11 @@ var castModule = (function () {
         launchBtn.classList.remove('cast_hidden');
     }
 
+    function onStopCastError(e) {
+        onStopCast();
+        throw e.description;
+    }
+
     function updateListener() {
         if (session.status !== chrome.cast.SessionStatus.CONNECTED) {
             onStopCast();
@@ -36,7 +41,7 @@ var castModule = (function () {
     }
 
     function stopCast() {
-        session.stop(onStopCast);
+        session.stop(onStopCast, onStopCastError);
     }
 
     function onMediaError() {
