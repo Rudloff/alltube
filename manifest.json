@@ -1,6 +1,7 @@
 {
 	"short_name": "AllTube",
 	"name": "AllTube Download",
+	"description": "Easily download videos from Youtube, Dailymotion, Vimeo and other websites",
 	"display": "standalone",
 	"icons": [{
 		"src": "img/favicon.png",
