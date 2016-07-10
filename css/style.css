@@ -658,3 +658,9 @@ h1 {
     }
 
 }
+
+@media all and (display-mode: standalone) {
+    .bookmarklet {
+        display: none;
+    }
+}
