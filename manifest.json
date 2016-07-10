@@ -25,5 +25,6 @@
 	}],
 	"lang": "en",
 	"start_url": "./",
-	"theme_color": "#4F4F4F"
+	"theme_color": "#4F4F4F",
+	"orientation": "portrait"
 }
