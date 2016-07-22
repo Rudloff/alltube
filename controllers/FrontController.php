@@ -33,10 +33,11 @@ use Slim\Http\Response;
  * */
 class FrontController
 {
-    public function __construct()
+    public function __construct($container)
     {
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
+        $this->container = $container;
     }
 
     /**
@@ -49,8 +50,7 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
-        global $container;
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'head.tpl',
             array(
@@ -58,18 +58,18 @@ class FrontController
                 'description'=>'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
             )
         );
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'header.tpl'
         );
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'index.tpl',
             array(
                 'convert'=>$this->config->convert
             )
         );
-        $container->view->render($response, 'footer.tpl');
+        $this->container->view->render($response, 'footer.tpl');
     }
 
     /**
@@ -82,8 +82,7 @@ class FrontController
      */
     public function extractors(Request $request, Response $response)
     {
-        global $container;
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'head.tpl',
             array(
@@ -93,16 +92,16 @@ class FrontController
                     =>'List of all supported websites from which Alltube Download can extract video or audio files'
             )
         );
-        $container->view->render($response, 'header.tpl');
-        $container->view->render($response, 'logo.tpl');
-        $container->view->render(
+        $this->container->view->render($response, 'header.tpl');
+        $this->container->view->render($response, 'logo.tpl');
+        $this->container->view->render(
             $response,
             'extractors.tpl',
             array(
                 'extractors'=>$this->download->listExtractors()
             )
         );
-        $container->view->render($response, 'footer.tpl');
+        $this->container->view->render($response, 'footer.tpl');
     }
 
     /**
@@ -115,7 +114,6 @@ class FrontController
      */
     public function video(Request $request, Response $response)
     {
-        global $container;
         $params = $request->getQueryParams();
         $this->config = Config::getInstance();
         if (isset($params["url"])) {
@@ -218,7 +216,7 @@ class FrontController
                 }
             } else {
                 $video = $this->download->getJSON($params["url"]);
-                $container->view->render(
+                $this->container->view->render(
                     $response,
                     'head.tpl',
                     array(
@@ -227,24 +225,23 @@ class FrontController
                         'description'=>'Download "'.$video->title.'" from '.$video->extractor_key
                     )
                 );
-                $container->view->render(
+                $this->container->view->render(
                     $response,
                     'video.tpl',
                     array(
                         'video'=>$video
                     )
                 );
-                $container->view->render($response, 'footer.tpl');
+                $this->container->view->render($response, 'footer.tpl');
             }
         } else {
-            return $response->withRedirect($container->get('router')->pathFor('index'));
+            return $response->withRedirect($this->container->get('router')->pathFor('index'));
         }
     }
 
     public function error(Request $request, Response $response, \Exception $exception)
     {
-        global $container;
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'head.tpl',
             array(
@@ -252,14 +249,14 @@ class FrontController
                 'title'=>'Error'
             )
         );
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'error.tpl',
             array(
                 'errors'=>$exception->getMessage()
             )
         );
-        $container->view->render($response, 'footer.tpl');
+        $this->container->view->render($response, 'footer.tpl');
         return $response->withStatus(500);
     }
 
@@ -273,7 +270,6 @@ class FrontController
      */
     public function redirect(Request $request, Response $response)
     {
-        global $app;
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {
@@ -296,7 +292,6 @@ class FrontController
      */
     public function json(Request $request, Response $response)
     {
-        global $app;
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {
