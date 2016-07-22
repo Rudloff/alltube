@@ -17,6 +17,8 @@ use Alltube\Config;
 use Symfony\Component\Process\ProcessBuilder;
 use Chain\Chain;
 use Slim\Http\Stream;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 /**
  * Main controller
@@ -45,7 +47,7 @@ class FrontController
      *
      * @return void
      */
-    public function index($request, $response)
+    public function index(Request $request, Response $response)
     {
         global $container;
         $container->view->render(
@@ -78,7 +80,7 @@ class FrontController
      *
      * @return void
      */
-    public function extractors($request, $response)
+    public function extractors(Request $request, Response $response)
     {
         global $container;
         $container->view->render(
@@ -111,7 +113,7 @@ class FrontController
      *
      * @return void
      */
-    public function video($request, $response)
+    public function video(Request $request, Response $response)
     {
         global $container;
         $params = $request->getQueryParams();
@@ -239,7 +241,7 @@ class FrontController
         }
     }
 
-    public function error($request, $response, $exception)
+    public function error(Request $request, Response $response, \Exception $exception)
     {
         global $container;
         $container->view->render(
@@ -269,7 +271,7 @@ class FrontController
      *
      * @return void
      */
-    public function redirect($request, $response)
+    public function redirect(Request $request, Response $response)
     {
         global $app;
         $params = $request->getQueryParams();
@@ -292,7 +294,7 @@ class FrontController
      *
      * @return void
      */
-    public function json($request, $response)
+    public function json(Request $request, Response $response)
     {
         global $app;
         $params = $request->getQueryParams();
