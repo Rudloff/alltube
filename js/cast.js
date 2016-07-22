@@ -1,5 +1,5 @@
 /*global chrome*/
-/*jslint browser: true */
+/*jslint browser: true, nomen: true */
 var castModule = (function () {
     'use strict';
     var launchBtn, disabledBtn, stopBtn, session;
