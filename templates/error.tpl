@@ -10,4 +10,3 @@
     {/foreach}
     </i></p>
     </div>
-</div>

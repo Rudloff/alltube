@@ -1,10 +1,10 @@
 </div>
 <footer>
     <div class="footer_wrapper">
-     Code by <a rel="author" target="blank" itemprop="author"
+     Code by <a rel="author" target="blank"
         href="http://rudloff.pro/">Pierre Rudloff</a>
      &middot; Design by
-     <a rel="author" itemprop="author" target="blank"
+     <a rel="author" target="blank"
         href="http://olivierhaquette.fr">Olivier Haquette</a>
      &middot;
      <a target="_blank"
@@ -17,5 +17,6 @@
      &middot;
      </div>
 </footer>
+<script src="{base_url|noscheme}/dist/main.js"></script>
 </body>
 </html>

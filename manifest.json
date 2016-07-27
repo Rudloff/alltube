@@ -1,7 +1,8 @@
 {
 	"short_name": "AllTube",
 	"name": "AllTube Download",
-	"display": "minimal-ui",
+	"description": "Easily download videos from Youtube, Dailymotion, Vimeo and other websites",
+	"display": "standalone",
 	"icons": [{
 		"src": "img/favicon.png",
 		"sizes": "32x32",
@@ -24,6 +25,7 @@
 		"type": "image/png"
 	}],
 	"lang": "en",
-	"start_url": "./index.php",
-	"theme_color": "#4F4F4F"
+	"start_url": "./",
+	"theme_color": "#4F4F4F",
+	"orientation": "portrait"
 }

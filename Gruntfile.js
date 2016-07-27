@@ -3,6 +3,11 @@ module.exports = function (grunt) {
     'use strict';
     grunt.initConfig(
         {
+            githash: {
+                main: {
+                    options: {}
+                }
+            },
             uglify: {
                 combine: {
                     files: {
@@ -28,12 +33,17 @@ module.exports = function (grunt) {
                 }
             },
             phpcs: {
+                options: {
+                    standard: 'PSR2'
+                },
                 php: {
                     src: ['*.php', 'classes/*.php', 'controllers/*.php']
                 },
                 tests: {
                     src: ['tests/*.php']
-                },
+                }
+            },
+            jslint: {
                 js: {
                     src: ['js/*.js']
                 },
@@ -49,7 +59,7 @@ module.exports = function (grunt) {
             compress: {
                 release: {
                     options: {
-                        archive: 'alltube-release.zip'
+                        archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
                     src: ['*.php', '!config.yml', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg']
                 }
@@ -57,15 +67,17 @@ module.exports = function (grunt) {
         }
     );
 
+    grunt.loadNpmTasks('grunt-githash');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
     grunt.loadNpmTasks('grunt-phpunit');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-jslint');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
-    grunt.registerTask('lint', ['phpcs']);
+    grunt.registerTask('lint', ['phpcs', 'jslint']);
     grunt.registerTask('test', ['phpunit']);
-    grunt.registerTask('release', ['default', 'compress']);
+    grunt.registerTask('release', ['default', 'githash', 'compress']);
 };

@@ -1,7 +1,7 @@
     <div class="main">
-    <div><img itemprop="image" class="logo" src="{siteUrl|noscheme|replace:'index.php':'' url='img/logo.png'}"
+    <div><img class="logo" src="{base_url|noscheme}/img/logo.png"
     alt="AllTube Download" width="328" height="284"></div>
-    <form action="{urlFor name="video"}">
+    <form action="{path_for name="video"}">
     <label class="labelurl" for="url">
         Copy here the URL of your video (Youtube, Dailymotion, etc.)
     </label>
@@ -20,10 +20,10 @@
         {/if}
     </div>
     </form>
-    <a class="combatiblelink" href="{urlFor name="extractors"}">See all supported websites</a>
-    <div id="bookmarklet">
+    <a class="combatiblelink" href="{path_for name="extractors"}">See all supported websites</a>
+    <div id="bookmarklet" class="bookmarklet_wrapper">
         <p> Drag this to your bookmarks bar: </p>
-        <a class="bookmarklet" href="javascript:window.location='{siteUrl withUri=false}{urlFor name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
+        <a class="bookmarklet" href="javascript:window.location='{base_url|noscheme}{path_for name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
     </div>
 
 </div>
