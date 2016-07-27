@@ -199,6 +199,7 @@ class FrontController
                                     array(
                                         'curl',
                                         '--silent',
+                                        '--location',
                                         '--user-agent', $video->http_headers->{'User-Agent'},
                                         $video->url
                                     ),

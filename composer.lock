@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f4935b8a1ed3005a51f97b4da89cb34",
-    "content-hash": "9f3900f56384d5e60c097ca719c0af08",
+    "hash": "c4eb7b9cf1322b024130fba8517794f3",
+    "content-hash": "3608a48b9ac14ccba68577310338f6b7",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -571,11 +571,11 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2016.07.26",
+            "version": "2016.07.26.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rg3/youtube-dl.git",
-                "reference": "2016.07.26"
+                "reference": "2016.07.26.2"
             },
             "type": "library"
         },

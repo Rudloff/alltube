@@ -1,11 +1,11 @@
-alltube
+Alltube Download
 =======
 
 HTML GUI for youtube-dl (http://alltubedownload.net/)
 
 ![Screenshot](img/screenshot.png "Alltube GUI screenshot")
 
-##Setup
+## Setup
 
 ### From a release package
 You can download the latest release package [here](https://github.com/Rudloff/alltube/releases).
@@ -28,20 +28,20 @@ You should also ensure that the *templates_c* folder has the right permissions:
 
 If your web server is Apache, you need to set the `AllowOverride` setting to `All` or `FileInfo`.
 
-##Config
+## Config
 
 If you want to use a custom config, you need to create a config file:
 
     cp config.example.yml config.yml
 
-##Web server configuration
-###Apache
+## Web server configuration
+### Apache
 You will need the following modules:
 
 * mod_mime
 * mod_rewrite
 
-###Nginx
+### Nginx
 Here is an exemple Nginx configuration:
 
     server {
@@ -90,12 +90,12 @@ Here is an exemple Nginx configuration:
     }
 
 
-##License
+## License
 This software is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
 
 __Please use a different name and logo if you run it on a public server.__
 
-##Other dependencies
+## Other dependencies
 You need [avconv](https://libav.org/avconv.html), [rtmpdump](http://rtmpdump.mplayerhq.hu/) and [curl](https://curl.haxx.se/) in order to enable conversions.
 If you don't want to enable conversions, you can disable it in *config.yml*.
 

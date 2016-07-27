@@ -47,7 +47,7 @@ class Config
             $yaml = Yaml::parse(file_get_contents($yamlfile));
             if (isset($yaml) && is_array($yaml)) {
                 foreach ($yaml as $param => $value) {
-                    if (isset($this->$param)) {
+                    if (isset($this->$param) && isset($value)) {
                         $this->$param = $value;
                     }
                 }
