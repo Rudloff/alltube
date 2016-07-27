@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "19bf8d61960475e79792cb0718198f21",
-    "content-hash": "de1c44fd5ca25ea1b71d0252d3b68cd7",
+    "hash": "3f4935b8a1ed3005a51f97b4da89cb34",
+    "content-hash": "9f3900f56384d5e60c097ca719c0af08",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -578,39 +578,6 @@
                 "reference": "2016.07.26"
             },
             "type": "library"
-        },
-        {
-            "name": "rudloff/psr7-process-stream",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Rudloff/psr7-process-stream.git",
-                "reference": "055ecbdadee9b43904aed75d5a548c277cac10a8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Rudloff/psr7-process-stream/zipball/055ecbdadee9b43904aed75d5a548c277cac10a8",
-                "reference": "055ecbdadee9b43904aed75d5a548c277cac10a8",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/psr7": "~1.3.0"
-            },
-            "require-dev": {
-                "symfony/var-dumper": "~3.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ProcessStream\\": "classes/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "description": "PSR-7 stream implementation that can be used to manage processes",
-            "time": "2016-04-14 10:36:10"
         },
         {
             "name": "rudloff/rtmpdump-bin",
