@@ -16,7 +16,9 @@ use Alltube\VideoDownload;
 use Alltube\Config;
 use Symfony\Component\Process\ProcessBuilder;
 use Chain\Chain;
-use ProcessStream\PopenStream;
+use Slim\Http\Stream;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 /**
  * Main controller
@@ -31,10 +33,11 @@ use ProcessStream\PopenStream;
  * */
 class FrontController
 {
-    public function __construct()
+    public function __construct($container)
     {
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
+        $this->container = $container;
     }
 
     /**
@@ -45,28 +48,28 @@ class FrontController
      *
      * @return void
      */
-    public function index($request, $response)
+    public function index(Request $request, Response $response)
     {
-        global $container;
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'head.tpl',
             array(
-                'class'=>'index'
+                'class'=>'index',
+                'description'=>'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
             )
         );
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'header.tpl'
         );
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'index.tpl',
             array(
                 'convert'=>$this->config->convert
             )
         );
-        $container->view->render($response, 'footer.tpl');
+        $this->container->view->render($response, 'footer.tpl');
     }
 
     /**
@@ -77,26 +80,28 @@ class FrontController
      *
      * @return void
      */
-    public function extractors($request, $response)
+    public function extractors(Request $request, Response $response)
     {
-        global $container;
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'head.tpl',
             array(
-                'class'=>'extractors'
+                'class'=>'extractors',
+                'title'=>'Supported websites',
+                'description'
+                    =>'List of all supported websites from which Alltube Download can extract video or audio files'
             )
         );
-        $container->view->render($response, 'header.tpl');
-        $container->view->render($response, 'logo.tpl');
-        $container->view->render(
+        $this->container->view->render($response, 'header.tpl');
+        $this->container->view->render($response, 'logo.tpl');
+        $this->container->view->render(
             $response,
             'extractors.tpl',
             array(
                 'extractors'=>$this->download->listExtractors()
             )
         );
-        $container->view->render($response, 'footer.tpl');
+        $this->container->view->render($response, 'footer.tpl');
     }
 
     /**
@@ -107,17 +112,20 @@ class FrontController
      *
      * @return void
      */
-    public function video($request, $response)
+    public function video(Request $request, Response $response)
     {
-        global $container;
         $params = $request->getQueryParams();
         $this->config = Config::getInstance();
         if (isset($params["url"])) {
             if (isset($params['audio'])) {
                 try {
-                    return $this->getStream($params["url"], 'bestaudio[protocol^=http]', $response, $request);
+                    return $this->getStream($params["url"], 'mp3[protocol^=http]', $response, $request);
                 } catch (\Exception $e) {
-                    $video = $this->download->getJSON($params["url"], 'best');
+                    $video = $this->download->getJSON($params["url"], 'bestaudio/best');
+
+                    if (!shell_exec('which '.$this->config->avconv)) {
+                        throw(new \Exception('Can\'t find avconv or ffmpeg'));
+                    }
 
                     $avconvProc = ProcessBuilder::create(
                         array(
@@ -151,6 +159,9 @@ class FrontController
                     $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
                     if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
+                        if (!shell_exec('which '.$this->config->rtmpdump)) {
+                            throw(new \Exception('Can\'t find rtmpdump'));
+                        }
                         $builder = new ProcessBuilder(
                             array(
                                 $this->config->rtmpdump,
@@ -179,6 +190,9 @@ class FrontController
                         $chain = new Chain($builder->getProcess());
                         $chain->add('|', $avconvProc);
                     } else {
+                        if (!shell_exec('which curl')) {
+                            throw(new \Exception('Can\'t find curl'));
+                        }
                         $chain = new Chain(
                             ProcessBuilder::create(
                                 array_merge(
@@ -195,50 +209,54 @@ class FrontController
                         $chain->add('|', $avconvProc);
                     }
                     if ($request->isGet()) {
-                        $response = $response->withBody(new PopenStream($chain->getProcess()->getCommandLine()));
+                        $response = $response->withBody(new Stream(popen($chain->getProcess()->getCommandLine(), 'r')));
                     }
                     return $response;
                 }
             } else {
                 $video = $this->download->getJSON($params["url"]);
-                $container->view->render(
+                $this->container->view->render(
                     $response,
                     'head.tpl',
                     array(
-                        'class'=>'video'
+                        'class'=>'video',
+                        'title'=>$video->title,
+                        'description'=>'Download "'.$video->title.'" from '.$video->extractor_key
                     )
                 );
-                $container->view->render(
+                $this->container->view->render(
                     $response,
                     'video.tpl',
                     array(
                         'video'=>$video
                     )
                 );
-                $container->view->render($response, 'footer.tpl');
+                $this->container->view->render($response, 'footer.tpl');
             }
+        } else {
+            return $response->withRedirect($this->container->get('router')->pathFor('index'));
         }
     }
 
-    public function error($request, $response, $exception)
+    public function error(Request $request, Response $response, \Exception $exception)
     {
-        global $container;
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'head.tpl',
             array(
-                'class'=>'video'
+                'class'=>'video',
+                'title'=>'Error'
             )
         );
-        $container->view->render(
+        $this->container->view->render(
             $response,
             'error.tpl',
             array(
                 'errors'=>$exception->getMessage()
             )
         );
-        $container->view->render($response, 'footer.tpl');
-        return $response;
+        $this->container->view->render($response, 'footer.tpl');
+        return $response->withStatus(500);
     }
 
     private function getStream($url, $format, $response, $request)
@@ -266,9 +284,8 @@ class FrontController
      *
      * @return void
      */
-    public function redirect($request, $response)
+    public function redirect(Request $request, Response $response)
     {
-        global $app;
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {
@@ -288,9 +305,8 @@ class FrontController
      *
      * @return void
      */
-    public function json($request, $response)
+    public function json(Request $request, Response $response)
     {
-        global $app;
         $params = $request->getQueryParams();
         if (isset($params["url"])) {
             try {

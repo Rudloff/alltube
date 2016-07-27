@@ -41,7 +41,9 @@ module.exports = function (grunt) {
                 },
                 tests: {
                     src: ['tests/*.php']
-                },
+                }
+            },
+            jslint: {
                 js: {
                     src: ['js/*.js']
                 },
@@ -72,9 +74,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-phpcs');
     grunt.loadNpmTasks('grunt-phpunit');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-jslint');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
-    grunt.registerTask('lint', ['phpcs']);
+    grunt.registerTask('lint', ['phpcs', 'jslint']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
 };

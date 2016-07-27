@@ -570,6 +570,7 @@ h1 {
 }
 
 @media (max-width: 640px) {
+    .formats,
     .thumb {
         width:90%;
     }
@@ -656,4 +657,10 @@ h1 {
         text-align:left;
     }
 
+}
+
+@media all and (display-mode: standalone) {
+    .bookmarklet_wrapper {
+        display: none;
+    }
 }

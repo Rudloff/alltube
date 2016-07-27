@@ -6,6 +6,13 @@ HTML GUI for youtube-dl (http://alltubedownload.net/)
 ![Screenshot](img/screenshot.png "Alltube GUI screenshot")
 
 ##Setup
+
+### From a release package
+You can download the latest release package [here](https://github.com/Rudloff/alltube/releases).
+
+You just have to unzip it on your server and it should be ready to use.
+
+### From Git
 In order to get AllTube working, you need to use [npm](https://www.npmjs.com/) and [Composer](https://getcomposer.org/):
 
     npm install
@@ -89,11 +96,11 @@ This software is available under the [GNU General Public License](http://www.gnu
 __Please use a different name and logo if you run it on a public server.__
 
 ##Other dependencies
-You need [avconv](https://libav.org/avconv.html) and [rtmpdump](http://rtmpdump.mplayerhq.hu/) in order to enable conversions.
+You need [avconv](https://libav.org/avconv.html), [rtmpdump](http://rtmpdump.mplayerhq.hu/) and [curl](https://curl.haxx.se/) in order to enable conversions.
 If you don't want to enable conversions, you can disable it in *config.yml*.
 
 On Debian-based systems:
 
-    sudo apt-get install libav-tools rtmpdump
+    sudo apt-get install libav-tools rtmpdump curl
 
 You also probably need to edit the *avconv* variable in *config.yml* so that it points to your ffmpeg/avconv binary (*/usr/bin/avconv* on Debian/Ubuntu).

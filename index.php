@@ -16,6 +16,11 @@ require_once __DIR__.'/vendor/autoload.php';
 use Alltube\VideoDownload;
 use Alltube\Controller\FrontController;
 
+if (strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
+    header('Location: '.str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
+    die;
+}
+
 $app = new \Slim\App();
 $container = $app->getContainer();
 $container['view'] = function ($c) {
@@ -28,14 +33,14 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-$controller = new FrontController();
+$controller = new FrontController($container);
 
 $container['errorHandler'] = array($controller, 'error');
 
 $app->get(
     '/',
     array($controller, 'index')
-);
+)->setName('index');
 $app->get(
     '/extractors',
     array($controller, 'extractors')
