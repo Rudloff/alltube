@@ -7,7 +7,7 @@ You can ususally download the video by doing *File > Save to* or *ctrl + S*.
 ## How do I change config parameters?
 You need to create a YAML file called `config.yml` at the root of your project.
 Here are the parameters that you can set:
-* youtubedl: path to youtube-dl's binary of `__main__.py` file
+* youtubedl: path to your youtube-dl binary
 * python: path to your python binary
 * params: an array of parameters to pass to youtube-dl
 * curl_params: an array of parameters to pass to curl
@@ -21,6 +21,7 @@ See [config.example.yml](config.example.yml) for default values.
 In order to enable audio conversion, you need to add this to your `config.yml` file:
 ```yaml
 convert: true
+avconv: path/to/avconv
 ```
 You will also need to install `avconv` and `curl` on your server:
 ```bash
