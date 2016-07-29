@@ -131,7 +131,7 @@ class VideoDownload
         if (!$process->isSuccessful()) {
             throw new \Exception($process->getErrorOutput());
         } else {
-            return $process->getOutput();
+            return trim($process->getOutput());
         }
     }
 
@@ -147,7 +147,7 @@ class VideoDownload
         );
     }
 
-    public function getConversionProcess($url, $format)
+    public function getAudioStream($url, $format)
     {
         if (!shell_exec('which '.$this->config->avconv)) {
             throw(new \Exception('Can\'t find avconv or ffmpeg'));

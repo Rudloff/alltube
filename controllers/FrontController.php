@@ -129,7 +129,7 @@ class FrontController
                     $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
                     if ($request->isGet()) {
-                        $process = $this->download->getConversionProcess($params["url"], 'bestaudio/best');
+                        $process = $this->download->getAudioStream($params["url"], 'bestaudio/best');
                         $response = $response->withBody(new Stream($process));
                     }
                     return $response;
