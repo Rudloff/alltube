@@ -14,8 +14,6 @@ namespace Alltube\Controller;
 
 use Alltube\VideoDownload;
 use Alltube\Config;
-use Symfony\Component\Process\ProcessBuilder;
-use Chain\Chain;
 use Slim\Http\Stream;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -122,96 +120,17 @@ class FrontController
                     $url = $this->download->getURL($params["url"], 'mp3[protocol^=http]');
                     return $response->withRedirect($url);
                 } catch (\Exception $e) {
-                    $video = $this->download->getJSON($params["url"], 'bestaudio/best');
-
-                    if (!shell_exec('which '.$this->config->avconv)) {
-                        throw(new \Exception('Can\'t find avconv or ffmpeg'));
-                    }
-
-                    $avconvProc = ProcessBuilder::create(
-                        array(
-                            $this->config->avconv,
-                            '-v', 'quiet',
-                            '-i', '-',
-                            '-f', 'mp3',
-                            '-vn',
-                            'pipe:1'
-                        )
-                    );
-
-                    //Vimeo needs a correct user-agent
-                    ini_set(
-                        'user_agent',
-                        $video->http_headers->{'User-Agent'}
-                    );
 
                     $response = $response->withHeader(
                         'Content-Disposition',
                         'attachment; filename="'.
-                        html_entity_decode(
-                            pathinfo(
-                                $video->_filename,
-                                PATHINFO_FILENAME
-                            ).'.mp3',
-                            ENT_COMPAT,
-                            'ISO-8859-1'
-                        ).'"'
+                        $this->download->getAudioFilename($params["url"], 'bestaudio/best').'"'
                     );
                     $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
-                    if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
-                        if (!shell_exec('which '.$this->config->rtmpdump)) {
-                            throw(new \Exception('Can\'t find rtmpdump'));
-                        }
-                        $builder = new ProcessBuilder(
-                            array(
-                                $this->config->rtmpdump,
-                                '-q',
-                                '-r',
-                                $video->url,
-                                '--pageUrl', $video->webpage_url
-                            )
-                        );
-                        if (isset($video->player_url)) {
-                            $builder->add('--swfVfy');
-                            $builder->add($video->player_url);
-                        }
-                        if (isset($video->flash_version)) {
-                            $builder->add('--flashVer');
-                            $builder->add($video->flash_version);
-                        }
-                        if (isset($video->play_path)) {
-                            $builder->add('--playpath');
-                            $builder->add($video->play_path);
-                        }
-                        foreach ($video->rtmp_conn as $conn) {
-                            $builder->add('--conn');
-                            $builder->add($conn);
-                        }
-                        $chain = new Chain($builder->getProcess());
-                        $chain->add('|', $avconvProc);
-                    } else {
-                        if (!shell_exec('which curl')) {
-                            throw(new \Exception('Can\'t find curl'));
-                        }
-                        $chain = new Chain(
-                            ProcessBuilder::create(
-                                array_merge(
-                                    array(
-                                        'curl',
-                                        '--silent',
-                                        '--location',
-                                        '--user-agent', $video->http_headers->{'User-Agent'},
-                                        $video->url
-                                    ),
-                                    $this->config->curl_params
-                                )
-                            )
-                        );
-                        $chain->add('|', $avconvProc);
-                    }
                     if ($request->isGet()) {
-                        $response = $response->withBody(new Stream(popen($chain->getProcess()->getCommandLine(), 'r')));
+                        $process = $this->download->getConversionProcess($params["url"], 'bestaudio/best');
+                        $response = $response->withBody(new Stream($process));
                     }
                     return $response;
                 }
