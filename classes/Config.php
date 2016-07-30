@@ -70,4 +70,9 @@ class Config
         }
         return self::$instance;
     }
+
+    public static function destroyInstance()
+    {
+        self::$instance = null;
+    }
 }

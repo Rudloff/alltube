@@ -32,6 +32,11 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $this->download = new VideoDownload();
     }
 
+    protected function tearDown()
+    {
+        \Alltube\Config::destroyInstance();
+    }
+
     /**
      * Test listExtractors function
      *
