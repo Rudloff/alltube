@@ -105,6 +105,24 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
                 'vimeocdn.com',
                 "Carving the Mountains-24195442.mp3"
             ),
+            array(
+                'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
+                "Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.flv",
+                'bbcodspdns.fcod.llnwd.net',
+                "Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.mp3"
+            ),
+            array(
+                'http://www.arte.tv/guide/de/sendungen/XEN/xenius/?vid=055918-015_PLUS7-D', 'RTMP_MQ_1',
+                "Xenius-063945-044-A.flv",
+                'edgefcs.net',
+                "Xenius-063945-044-A.mp3"
+            ),
+            array(
+                'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
+                "GRIP sucht den Sommerkönig-folge-203-0.f4v",
+                'edgefcs.net',
+                "GRIP sucht den Sommerkönig-folge-203-0.mp3"
+            )
         );
     }
 
@@ -209,12 +227,13 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStream($url, $format)
     {
-        $process = $this->download->getAudioStream($url, $format);
-        $this->assertInternalType('resource', $process);
+        $stream = $this->download->getAudioStream($url, $format);
+        $this->assertInternalType('resource', $stream);
+        $this->assertNotEmpty(fread($stream, 100));
     }
 
     /**
-     * Test getAudioStream function
+     * Test getAudioStream function without avconv
      *
      * @param string $url    URL
      * @param string $format Format
@@ -227,6 +246,24 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         $config = \Alltube\Config::getInstance();
         $config->avconv = 'foobar';
+        $this->download->getAudioStream($url, $format);
+    }
+
+    /**
+     * Test getAudioStream function without curl or rtmpdump
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return            void
+     * @expectedException Exception
+     * @dataProvider      urlProvider
+     */
+    public function testGetAudioStreamCurlError($url, $format)
+    {
+        $config = \Alltube\Config::getInstance();
+        $config->curl = 'foobar';
+        $config->rtmpdump = 'foobar';
         $this->download->getAudioStream($url, $format);
     }
 }

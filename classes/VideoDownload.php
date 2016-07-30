@@ -196,21 +196,27 @@ class VideoDownload
                 $builder->add('--playpath');
                 $builder->add($video->play_path);
             }
-            foreach ($video->rtmp_conn as $conn) {
-                $builder->add('--conn');
-                $builder->add($conn);
+            if (isset($video->rtmp_conn)) {
+                foreach ($video->rtmp_conn as $conn) {
+                    $builder->add('--conn');
+                    $builder->add($conn);
+                }
+            }
+            if (isset($video->app)) {
+                $builder->add('--app');
+                $builder->add($video->app);
             }
             $chain = new Chain($builder->getProcess());
             $chain->add('|', $avconvProc);
         } else {
-            if (!shell_exec('which curl')) {
+            if (!shell_exec('which '.$this->config->curl)) {
                 throw(new \Exception('Can\'t find curl'));
             }
             $chain = new Chain(
                 ProcessBuilder::create(
                     array_merge(
                         array(
-                            'curl',
+                            $this->config->curl,
                             '--silent',
                             '--location',
                             '--user-agent', $video->http_headers->{'User-Agent'},

@@ -35,6 +35,7 @@ class Config
     public $convert = false;
     public $avconv = 'vendor/bin/ffmpeg';
     public $rtmpdump = 'vendor/bin/rtmpdump';
+    public $curl = '/usr/bin/curl';
     public $curl_params = array();
 
     /**
