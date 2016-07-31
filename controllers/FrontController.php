@@ -50,24 +50,13 @@ class FrontController
     {
         $this->container->view->render(
             $response,
-            'head.tpl',
+            'index.tpl',
             array(
+                'convert'=>$this->config->convert,
                 'class'=>'index',
                 'description'=>'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
             )
         );
-        $this->container->view->render(
-            $response,
-            'header.tpl'
-        );
-        $this->container->view->render(
-            $response,
-            'index.tpl',
-            array(
-                'convert'=>$this->config->convert
-            )
-        );
-        $this->container->view->render($response, 'footer.tpl');
     }
 
     /**
@@ -82,24 +71,15 @@ class FrontController
     {
         $this->container->view->render(
             $response,
-            'head.tpl',
+            'extractors.tpl',
             array(
+                'extractors'=>$this->download->listExtractors(),
                 'class'=>'extractors',
                 'title'=>'Supported websites',
                 'description'
                     =>'List of all supported websites from which Alltube Download can extract video or audio files'
             )
         );
-        $this->container->view->render($response, 'header.tpl');
-        $this->container->view->render($response, 'logo.tpl');
-        $this->container->view->render(
-            $response,
-            'extractors.tpl',
-            array(
-                'extractors'=>$this->download->listExtractors()
-            )
-        );
-        $this->container->view->render($response, 'footer.tpl');
     }
 
     /**
@@ -137,21 +117,14 @@ class FrontController
                 $video = $this->download->getJSON($params["url"]);
                 $this->container->view->render(
                     $response,
-                    'head.tpl',
+                    'video.tpl',
                     array(
+                        'video'=>$video,
                         'class'=>'video',
                         'title'=>$video->title,
                         'description'=>'Download "'.$video->title.'" from '.$video->extractor_key
                     )
                 );
-                $this->container->view->render(
-                    $response,
-                    'video.tpl',
-                    array(
-                        'video'=>$video
-                    )
-                );
-                $this->container->view->render($response, 'footer.tpl');
             }
         } else {
             return $response->withRedirect($this->container->get('router')->pathFor('index'));
@@ -162,20 +135,13 @@ class FrontController
     {
         $this->container->view->render(
             $response,
-            'head.tpl',
+            'error.tpl',
             array(
+                'errors'=>$exception->getMessage(),
                 'class'=>'video',
                 'title'=>'Error'
             )
         );
-        $this->container->view->render(
-            $response,
-            'error.tpl',
-            array(
-                'errors'=>$exception->getMessage()
-            )
-        );
-        $this->container->view->render($response, 'footer.tpl');
         return $response->withStatus(500);
     }
 

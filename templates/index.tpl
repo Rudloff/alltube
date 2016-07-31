@@ -1,4 +1,6 @@
-    <div class="main">
+{include file='inc/head.tpl'}
+{include file='inc/header.tpl'}
+<div class="main">
     <div><img class="logo" src="{base_url|noscheme}/img/logo.png"
     alt="AllTube Download" width="328" height="284"></div>
     <form action="{path_for name="video"}">
@@ -27,3 +29,4 @@
     </div>
 
 </div>
+{include file='inc/footer.tpl'}

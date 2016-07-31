@@ -1,7 +1,8 @@
+{include file="inc/head.tpl"}
 <div class="wrapper">
 <div itemscope itemtype="http://schema.org/VideoObject">
 <div class="main">
-{include file="logo.tpl"}
+{include file="inc/logo.tpl"}
 <p id="download_intro">You are going to download<i itemprop="name">
     <a itemprop="url" id="video_link"
         data-ext="{$video->ext}"
@@ -86,3 +87,4 @@
 {/if}
 </div>
 </div>
+{include file="inc/footer.tpl"}
