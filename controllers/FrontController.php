@@ -17,6 +17,7 @@ use Alltube\Config;
 use Slim\Http\Stream;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Container;
 
 /**
  * Main controller
@@ -31,7 +32,7 @@ use Slim\Http\Response;
  * */
 class FrontController
 {
-    public function __construct($container)
+    public function __construct(Container $container)
     {
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
