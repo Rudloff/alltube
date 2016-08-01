@@ -112,7 +112,6 @@ class VideoDownload
         } else {
             return $process->getOutput();
         }
-
     }
 
     public function getFilename($url, $format = null)

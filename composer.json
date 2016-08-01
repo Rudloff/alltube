@@ -17,7 +17,8 @@
 		"rudloff/rtmpdump-bin": "~2.3"
 	},
 	"require-dev": {
-		"symfony/var-dumper": "~3.1.0"
+		"symfony/var-dumper": "~3.1.0",
+		"squizlabs/php_codesniffer": "~2.6.2"
 	},
 	"extra": {
 		"paas": {
