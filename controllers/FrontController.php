@@ -32,6 +32,10 @@ use Slim\Container;
  * */
 class FrontController
 {
+    private $config;
+    private $download;
+    private $container;
+
     public function __construct(Container $container)
     {
         $this->config = Config::getInstance();
