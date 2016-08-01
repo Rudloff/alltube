@@ -54,7 +54,7 @@ module.exports = function (grunt) {
             },
             phpunit: {
                 options: {
-                    bin: './vendor/bin/phpunit',
+                    bin: 'php -dzend_extension=xdebug.so ./vendor/bin/phpunit',
                     stopOnError: true,
                     stopOnFailure: true,
                     followOutput: true
