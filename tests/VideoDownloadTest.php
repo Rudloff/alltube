@@ -225,7 +225,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         $stream = $this->download->getAudioStream($url, $format);
         $this->assertInternalType('resource', $stream);
-        $this->assertNotEmpty(fread($stream, 100));
+        $this->assertFalse(feof($stream));
     }
 
     /**
