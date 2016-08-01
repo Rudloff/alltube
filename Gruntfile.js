@@ -68,7 +68,7 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
-                    src: ['*.php', '!config.yml', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg']
+                    src: ['*.php', '!config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg']
                 }
             },
             phpdocumentor: {
