@@ -1,15 +1,7 @@
 <?php
 /**
  * VideoDownload class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 namespace Alltube;
 
 use Symfony\Component\Process\Process;
@@ -17,18 +9,14 @@ use Symfony\Component\Process\ProcessBuilder;
 use Chain\Chain;
 
 /**
- * Main class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ * Extract info about videos
+ */
 class VideoDownload
 {
+
+    /**
+     * VideoDownload constructor
+     */
     public function __construct()
     {
         $this->config = Config::getInstance();
@@ -44,7 +32,7 @@ class VideoDownload
     /**
      * List all extractors
      *
-     * @return array Extractors
+     * @return string[] Extractors
      * */
     public function listExtractors()
     {
@@ -114,6 +102,14 @@ class VideoDownload
         }
     }
 
+    /**
+     * Get filename of video file from URL of page
+     *
+     * @param string $url    URL of page
+     * @param string $format Format to use for the video
+     *
+     * @return string Filename of extracted video
+     * */
     public function getFilename($url, $format = null)
     {
         $this->procBuilder->setArguments(
@@ -134,6 +130,14 @@ class VideoDownload
         }
     }
 
+    /**
+     * Get filename of audio from URL of page
+     *
+     * @param string $url    URL of page
+     * @param string $format Format to use for the video
+     *
+     * @return string Filename of converted audio file
+     * */
     public function getAudioFilename($url, $format = null)
     {
         return html_entity_decode(
@@ -146,6 +150,14 @@ class VideoDownload
         );
     }
 
+    /**
+     * Get audio stream of converted video
+     *
+     * @param string $url    URL of page
+     * @param string $format Format to use for the video
+     *
+     * @return resource popen stream
+     */
     public function getAudioStream($url, $format)
     {
         if (!shell_exec('which '.$this->config->avconv)) {

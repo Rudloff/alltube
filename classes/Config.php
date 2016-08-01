@@ -1,41 +1,68 @@
 <?php
 /**
  * Config class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 namespace Alltube;
 
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class to manage config parameters
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ * Manage config parameters
+ */
 class Config
 {
+    /**
+     * Singleton instance
+     * @var Config
+     */
     private static $instance;
 
+    /**
+     * youtube-dl binary path
+     * @var string
+     */
     public $youtubedl = 'vendor/rg3/youtube-dl/youtube_dl/__main__.py';
+
+    /**
+     * python binary path
+     * @var string
+     */
     public $python = '/usr/bin/python';
+
+    /**
+     * youtube-dl parameters
+     * @var array
+     */
     public $params = array('--no-playlist', '--no-warnings', '-f best[protocol^=http]', '--playlist-end', 1);
+
+    /**
+     * Enable audio conversion
+     * @var bool
+     */
     public $convert = false;
+
+    /**
+     * avconv or ffmpeg binary path
+     * @var string
+     */
     public $avconv = 'vendor/bin/ffmpeg';
+
+    /**
+     * rtmpdump binary path
+     * @var string
+     */
     public $rtmpdump = 'vendor/bin/rtmpdump';
+
+    /**
+     * curl binary path
+     * @var string
+     */
     public $curl = '/usr/bin/curl';
+
+    /**
+     * curl parameters
+     * @var array
+     */
     public $curl_params = array();
 
     /**
@@ -72,6 +99,10 @@ class Config
         return self::$instance;
     }
 
+    /**
+     * Destroy singleton instance
+     * @return void
+     */
     public static function destroyInstance()
     {
         self::$instance = null;

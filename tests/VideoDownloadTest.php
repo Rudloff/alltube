@@ -1,37 +1,33 @@
 <?php
 /**
  * VideoDownloadTest class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 namespace Alltube\Test;
 
 use Alltube\VideoDownload;
 
 /**
  * Unit tests for the VideoDownload class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 class VideoDownloadTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * VideoDownload instance
+     * @var VideoDownload
+     */
+    private $download;
+
+    /**
+     * Initialize properties used by test
+     */
     protected function setUp()
     {
         $this->download = new VideoDownload();
     }
 
+    /**
+     * Destroy properties after test
+     */
     protected function tearDown()
     {
         \Alltube\Config::destroyInstance();
@@ -53,6 +49,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $url    URL
      * @param string $format Format
+     * @param string $filename Filename
+     * @param string $domain Domain
      *
      * @return       void
      * @dataProvider urlProvider
@@ -80,7 +78,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Provides URLs for tests
      *
-     * @return array
+     * @return array[]
      */
     public function urlProvider()
     {
@@ -123,7 +121,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Provides incorrect URLs for tests
      *
-     * @return array
+     * @return array[]
      */
     public function errorUrlProvider()
     {
@@ -171,6 +169,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $url    URL
      * @param string $format Format
+     * @param string $filename Filename
      *
      * @return       void
      * @dataProvider urlProvider
@@ -200,6 +199,9 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $url    URL
      * @param string $format Format
+     * @param string $filename Filename
+     * @param string $domain Domain
+     * @param string $audioFilename MP3 audio file name
      *
      * @return       void
      * @dataProvider urlProvider

@@ -1,15 +1,7 @@
 <?php
 /**
  * FrontController class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 namespace Alltube\Controller;
 
 use Alltube\VideoDownload;
@@ -21,21 +13,31 @@ use Slim\Container;
 
 /**
  * Main controller
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 class FrontController
 {
+    /**
+     * Config instance
+     * @var Config
+     */
     private $config;
+
+    /**
+     * VideoDownload instance
+     * @var VideoDownload
+     */
     private $download;
+
+    /**
+     * Slim dependency container
+     * @var Container
+     */
     private $container;
 
+    /**
+     * FrontController constructor
+     * @param Container $container Slim dependency container
+     */
     public function __construct(Container $container)
     {
         $this->config = Config::getInstance();
@@ -93,7 +95,7 @@ class FrontController
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
      *
-     * @return void
+     * @return Response HTTP response
      */
     public function video(Request $request, Response $response)
     {
@@ -136,6 +138,13 @@ class FrontController
         }
     }
 
+    /**
+     * Display an error page
+     * @param  Request   $request   PSR-7 request
+     * @param  Response  $response  PSR-7 response
+     * @param  \Exception $exception Error to display
+     * @return Response HTTP response
+     */
     public function error(Request $request, Response $response, \Exception $exception)
     {
         $this->container->view->render(
@@ -156,7 +165,7 @@ class FrontController
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
      *
-     * @return void
+     * @return Response HTTP response
      */
     public function redirect(Request $request, Response $response)
     {
@@ -178,7 +187,7 @@ class FrontController
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
      *
-     * @return void
+     * @return Response HTTP response
      */
     public function json(Request $request, Response $response)
     {
