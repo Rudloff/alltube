@@ -74,7 +74,6 @@ module.exports = function (grunt) {
             phpdocumentor: {
                 doc: {
                     options: {
-                        target: 'doc/',
                         directory: 'classes/,controllers/,tests/'
                     }
                 }
