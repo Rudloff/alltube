@@ -70,6 +70,14 @@ module.exports = function (grunt) {
                     },
                     src: ['*.php', '!config.yml', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg']
                 }
+            },
+            phpdocumentor: {
+                doc: {
+                    options: {
+                        target: 'doc/',
+                        directory: 'classes/,controllers/,tests/'
+                    }
+                }
             }
         }
     );
@@ -82,9 +90,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-phpunit');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-jslint');
+    grunt.loadNpmTasks('grunt-phpdocumentor');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
     grunt.registerTask('lint', ['phpcs', 'jslint']);
     grunt.registerTask('test', ['phpunit']);
+    grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
 };
