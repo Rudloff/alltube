@@ -53,6 +53,12 @@ module.exports = function (grunt) {
                 }
             },
             phpunit: {
+                options: {
+                    bin: './vendor/bin/phpunit',
+                    stopOnError: true,
+                    stopOnFailure: true,
+                    followOutput: true
+                },
                 classes: {
                     dir: 'tests/'
                 }
