@@ -112,12 +112,6 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
                 "Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.mp3"
             ),
             array(
-                'http://www.arte.tv/guide/de/sendungen/XEN/xenius/?vid=055918-015_PLUS7-D', 'RTMP_MQ_1',
-                "Xenius-063945-044-A.flv",
-                'edgefcs.net',
-                "Xenius-063945-044-A.mp3"
-            ),
-            array(
                 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
                 "GRIP sucht den Sommerkönig-folge-203-0.f4v",
                 'edgefcs.net',
