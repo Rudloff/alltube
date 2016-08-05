@@ -43,7 +43,7 @@ class VideoDownload
         );
         $process = $this->procBuilder->getProcess();
         $process->run();
-        return explode(PHP_EOL, $process->getOutput());
+        return explode(PHP_EOL, trim($process->getOutput()));
     }
 
     /**
