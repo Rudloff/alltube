@@ -10,3 +10,4 @@ alltube-*.zip
 coverage/
 bower_components/
 config.yml
+docs/

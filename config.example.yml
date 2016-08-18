@@ -10,3 +10,4 @@ curl_params:
 convert: false
 avconv: vendor/bin/ffmpeg
 rtmpdump: vendor/bin/rtmpdump
+curl: /usr/bin/curl

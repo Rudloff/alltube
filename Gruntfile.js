@@ -34,7 +34,8 @@ module.exports = function (grunt) {
             },
             phpcs: {
                 options: {
-                    standard: 'PSR2'
+                    standard: 'PSR2',
+                    bin: 'vendor/bin/phpcs'
                 },
                 php: {
                     src: ['*.php', 'classes/*.php', 'controllers/*.php']
@@ -52,6 +53,12 @@ module.exports = function (grunt) {
                 }
             },
             phpunit: {
+                options: {
+                    bin: 'php -dzend_extension=xdebug.so ./vendor/bin/phpunit',
+                    stopOnError: true,
+                    stopOnFailure: true,
+                    followOutput: true
+                },
                 classes: {
                     dir: 'tests/'
                 }
@@ -61,7 +68,14 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
-                    src: ['*.php', '!config.yml', 'dist/**', 'fonts/**', '.htaccess', 'img/**', 'js/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg']
+                    src: ['*.php', '!config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg']
+                }
+            },
+            phpdocumentor: {
+                doc: {
+                    options: {
+                        directory: 'classes/,controllers/,tests/'
+                    }
                 }
             }
         }
@@ -75,9 +89,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-phpunit');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-jslint');
+    grunt.loadNpmTasks('grunt-phpdocumentor');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
     grunt.registerTask('lint', ['phpcs', 'jslint']);
     grunt.registerTask('test', ['phpunit']);
+    grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
 };
