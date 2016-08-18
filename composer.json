@@ -19,7 +19,7 @@
 	"require-dev": {
 		"symfony/var-dumper": "~3.1.0",
 		"squizlabs/php_codesniffer": "~2.6.2",
-		"phpunit/phpunit": "~5.4.8"
+		"phpunit/phpunit": "~5.5.2"
 	},
 	"extra": {
 		"paas": {
