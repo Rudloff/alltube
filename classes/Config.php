@@ -65,12 +65,14 @@ class Config
      */
     public $curl_params = array();
 
+    private $configFile;
+
     /**
      * Config constructor
      */
-    private function __construct()
+    private function __construct($yamlfile)
     {
-        $yamlfile = __DIR__.'/../config.yml';
+        $this->file = $yamlfile;
         if (is_file($yamlfile)) {
             $yaml = Yaml::parse(file_get_contents($yamlfile));
             if (isset($yaml) && is_array($yaml)) {
@@ -91,10 +93,11 @@ class Config
      *
      * @return Config
      */
-    public static function getInstance()
+    public static function getInstance($yamlfile = 'config.yml')
     {
-        if (is_null(self::$instance)) {
-            self::$instance = new Config();
+        $yamlfile = __DIR__.'/../'.$yamlfile;
+        if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
+            self::$instance = new Config($yamlfile);
         }
         return self::$instance;
     }
