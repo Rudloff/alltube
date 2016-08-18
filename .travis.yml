@@ -3,3 +3,5 @@ install:
     - composer install --no-dev
 before_install:
     - composer selfupdate
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
