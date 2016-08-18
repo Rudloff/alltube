@@ -93,8 +93,9 @@ class Config
      *
      * @return Config
      */
-    public static function getInstance($yamlfile = __DIR__.'/../config.yml')
+    public static function getInstance($yamlfile = 'config.yml')
     {
+        $yamlfile = __DIR__.'/../'.$yamlfile;
         if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
             self::$instance = new Config($yamlfile);
         }

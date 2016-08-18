@@ -16,7 +16,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->config = Config::getInstance(__DIR__.'/../config_test.yml');
+        $this->config = Config::getInstance('config_test.yml');
     }
 
     /**
@@ -39,7 +39,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         putenv('CONVERT=1');
         Config::destroyInstance();
-        $config = Config::getInstance(__DIR__.'/../config_test.yml');
+        $config = Config::getInstance('config_test.yml');
         $this->assertEquals($config->convert, true);
     }
 }
