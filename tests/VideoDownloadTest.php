@@ -1,35 +1,36 @@
 <?php
 /**
  * VideoDownloadTest class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 namespace Alltube\Test;
 
 use Alltube\VideoDownload;
 
 /**
  * Unit tests for the VideoDownload class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 class VideoDownloadTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * VideoDownload instance
+     * @var VideoDownload
+     */
+    private $download;
+
+    /**
+     * Initialize properties used by test
+     */
     protected function setUp()
     {
         $this->download = new VideoDownload();
+    }
+
+    /**
+     * Destroy properties after test
+     */
+    protected function tearDown()
+    {
+        \Alltube\Config::destroyInstance();
     }
 
     /**
@@ -48,6 +49,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $url    URL
      * @param string $format Format
+     * @param string $filename Filename
+     * @param string $domain Domain
      *
      * @return       void
      * @dataProvider urlProvider
@@ -75,7 +78,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Provides URLs for tests
      *
-     * @return array
+     * @return array[]
      */
     public function urlProvider()
     {
@@ -83,26 +86,42 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
             array(
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
                 "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4",
-                'googlevideo.com'
+                'googlevideo.com',
+                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp3"
             ),
             array(
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
                 "'Heart Attack' - Demi Lovato ".
                 "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4",
-                'googlevideo.com'
+                'googlevideo.com',
+                "'Heart Attack' - Demi Lovato ".
+                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp3"
             ),
             array(
                 'https://vimeo.com/24195442', null,
                 "Carving the Mountains-24195442.mp4",
-                'vimeocdn.com'
+                'vimeocdn.com',
+                "Carving the Mountains-24195442.mp3"
             ),
+            array(
+                'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
+                "Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.flv",
+                'bbcodspdns.fcod.llnwd.net',
+                "Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.mp3"
+            ),
+            array(
+                'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
+                "GRIP sucht den Sommerkönig-folge-203-0.f4v",
+                'edgefcs.net',
+                "GRIP sucht den Sommerkönig-folge-203-0.mp3"
+            )
         );
     }
 
     /**
      * Provides incorrect URLs for tests
      *
-     * @return array
+     * @return array[]
      */
     public function errorUrlProvider()
     {
@@ -143,5 +162,104 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     public function testGetJSONError($url)
     {
         $videoURL = $this->download->getJSON($url);
+    }
+
+    /**
+     * Test getFilename function
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     * @param string $filename Filename
+     *
+     * @return       void
+     * @dataProvider urlProvider
+     */
+    public function testGetFilename($url, $format, $filename)
+    {
+        $videoFilename = $this->download->getFilename($url, $format);
+        $this->assertEquals($videoFilename, $filename);
+    }
+
+    /**
+     * Test getFilename function errors
+     *
+     * @param string $url URL
+     *
+     * @return            void
+     * @expectedException Exception
+     * @dataProvider      ErrorUrlProvider
+     */
+    public function testGetFilenameError($url)
+    {
+        $this->download->getFilename($url);
+    }
+
+    /**
+     * Test getAudioFilename function
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     * @param string $filename Filename
+     * @param string $domain Domain
+     * @param string $audioFilename MP3 audio file name
+     *
+     * @return       void
+     * @dataProvider urlProvider
+     */
+    public function testGetAudioFilename($url, $format, $filename, $domain, $audioFilename)
+    {
+        $videoFilename = $this->download->getAudioFilename($url, $format);
+        $this->assertEquals($videoFilename, $audioFilename);
+    }
+
+    /**
+     * Test getAudioStream function
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return       void
+     * @dataProvider urlProvider
+     */
+    public function testGetAudioStream($url, $format)
+    {
+        $stream = $this->download->getAudioStream($url, $format);
+        $this->assertInternalType('resource', $stream);
+        $this->assertFalse(feof($stream));
+    }
+
+    /**
+     * Test getAudioStream function without avconv
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return            void
+     * @expectedException Exception
+     * @dataProvider      urlProvider
+     */
+    public function testGetAudioStreamAvconvError($url, $format)
+    {
+        $config = \Alltube\Config::getInstance();
+        $config->avconv = 'foobar';
+        $this->download->getAudioStream($url, $format);
+    }
+
+    /**
+     * Test getAudioStream function without curl or rtmpdump
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return            void
+     * @expectedException Exception
+     * @dataProvider      urlProvider
+     */
+    public function testGetAudioStreamCurlError($url, $format)
+    {
+        $config = \Alltube\Config::getInstance();
+        $config->curl = 'foobar';
+        $config->rtmpdump = 'foobar';
+        $this->download->getAudioStream($url, $format);
     }
 }

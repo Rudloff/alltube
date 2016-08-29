@@ -1,32 +1,23 @@
 <?php
 /**
  * ConfigTest class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 namespace Alltube\Test;
 
 use Alltube\Config;
 
 /**
  * Unit tests for the Config class
- *
- * PHP Version 5.3.10
- *
- * @category Youtube-dl
- * @package  Youtubedl
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GNU General Public License http://www.gnu.org/licenses/gpl.html
- * @link     http://rudloff.pro
- * */
+ */
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
+
+    private $config;
+
+    protected function setUp()
+    {
+        $this->config = Config::getInstance('config_test.yml');
+    }
 
     /**
      * Test the getInstance function
@@ -35,8 +26,20 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstance()
     {
+        $this->assertEquals($this->config->convert, false);
+        $this->assertInternalType('array', $this->config->curl_params);
+        $this->assertInternalType('array', $this->config->params);
+        $this->assertInternalType('string', $this->config->youtubedl);
+        $this->assertInternalType('string', $this->config->python);
+        $this->assertInternalType('string', $this->config->avconv);
+        $this->assertInternalType('string', $this->config->rtmpdump);
+    }
+
+    public function testGetInstanceWithEnv()
+    {
         putenv('CONVERT=1');
-        $config = Config::getInstance();
+        Config::destroyInstance();
+        $config = Config::getInstance('config_test.yml');
         $this->assertEquals($config->convert, true);
     }
 }
