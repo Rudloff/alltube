@@ -12,8 +12,15 @@ use Alltube\Config;
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * Config class instance
+     * @var Config
+     */
     private $config;
 
+    /**
+     * Prepare tests
+     */
     protected function setUp()
     {
         $this->config = Config::getInstance('config_test.yml');
@@ -35,6 +42,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $this->config->rtmpdump);
     }
 
+    /**
+     * Test the getInstance function with the CONVERT environment variable
+     * @return void
+     */
     public function testGetInstanceWithEnv()
     {
         putenv('CONVERT=1');

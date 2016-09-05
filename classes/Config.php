@@ -65,10 +65,16 @@ class Config
      */
     public $curl_params = array();
 
-    private $configFile;
+    /**
+     * YAML config file path
+     * @var string
+     */
+    private $file;
 
     /**
      * Config constructor
+     *
+     * @param string $yamlfile YAML config file path
      */
     private function __construct($yamlfile)
     {
@@ -90,6 +96,8 @@ class Config
 
     /**
      * Get singleton instance
+     *
+     * @param string $yamlfile YAML config file name
      *
      * @return Config
      */
