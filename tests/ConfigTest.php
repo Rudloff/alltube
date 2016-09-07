@@ -1,25 +1,25 @@
 <?php
 /**
- * ConfigTest class
+ * ConfigTest class.
  */
 namespace Alltube\Test;
 
 use Alltube\Config;
 
 /**
- * Unit tests for the Config class
+ * Unit tests for the Config class.
  */
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     * Config class instance
+     * Config class instance.
+     *
      * @var Config
      */
     private $config;
 
     /**
-     * Prepare tests
+     * Prepare tests.
      */
     protected function setUp()
     {
@@ -27,7 +27,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the getInstance function
+     * Test the getInstance function.
      *
      * @return void
      */
@@ -43,7 +43,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the getInstance function with the CONVERT environment variable
+     * Test the getInstance function with the CONVERT environment variable.
+     *
      * @return void
      */
     public function testGetInstanceWithEnv()

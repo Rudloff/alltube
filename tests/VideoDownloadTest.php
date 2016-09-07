@@ -1,24 +1,25 @@
 <?php
 /**
- * VideoDownloadTest class
+ * VideoDownloadTest class.
  */
 namespace Alltube\Test;
 
 use Alltube\VideoDownload;
 
 /**
- * Unit tests for the VideoDownload class
+ * Unit tests for the VideoDownload class.
  */
 class VideoDownloadTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * VideoDownload instance
+     * VideoDownload instance.
+     *
      * @var VideoDownload
      */
     private $download;
 
     /**
-     * Initialize properties used by test
+     * Initialize properties used by test.
      */
     protected function setUp()
     {
@@ -26,7 +27,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Destroy properties after test
+     * Destroy properties after test.
      */
     protected function tearDown()
     {
@@ -34,7 +35,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test listExtractors function
+     * Test listExtractors function.
      *
      * @return void
      */
@@ -45,14 +46,14 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getURL function
+     * Test getURL function.
      *
-     * @param string $url    URL
-     * @param string $format Format
+     * @param string $url      URL
+     * @param string $format   Format
      * @param string $filename Filename
-     * @param string $domain Domain
+     * @param string $domain   Domain
      *
-     * @return       void
+     * @return void
      * @dataProvider urlProvider
      */
     public function testGetURL($url, $format, $filename, $domain)
@@ -62,11 +63,11 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getURL function errors
+     * Test getURL function errors.
      *
      * @param string $url URL
      *
-     * @return            void
+     * @return void
      * @expectedException Exception
      * @dataProvider      ErrorUrlProvider
      */
@@ -76,67 +77,67 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Provides URLs for tests
+     * Provides URLs for tests.
      *
      * @return array[]
      */
     public function urlProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
                 "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4",
                 'googlevideo.com',
-                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp3"
-            ),
-            array(
+                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp3",
+            ],
+            [
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
                 "'Heart Attack' - Demi Lovato ".
-                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4",
+                '(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4',
                 'googlevideo.com',
                 "'Heart Attack' - Demi Lovato ".
-                "(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp3"
-            ),
-            array(
+                '(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp3',
+            ],
+            [
                 'https://vimeo.com/24195442', null,
-                "Carving the Mountains-24195442.mp4",
+                'Carving the Mountains-24195442.mp4',
                 'vimeocdn.com',
-                "Carving the Mountains-24195442.mp3"
-            ),
-            array(
+                'Carving the Mountains-24195442.mp3',
+            ],
+            [
                 'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
-                "Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.flv",
+                'Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.flv',
                 'bbcodspdns.fcod.llnwd.net',
-                "Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.mp3"
-            ),
-            array(
+                'Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.mp3',
+            ],
+            [
                 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
-                "GRIP sucht den Sommerkönig-folge-203-0.f4v",
+                'GRIP sucht den Sommerkönig-folge-203-0.f4v',
                 'edgefcs.net',
-                "GRIP sucht den Sommerkönig-folge-203-0.mp3"
-            )
-        );
+                'GRIP sucht den Sommerkönig-folge-203-0.mp3',
+            ],
+        ];
     }
 
     /**
-     * Provides incorrect URLs for tests
+     * Provides incorrect URLs for tests.
      *
      * @return array[]
      */
     public function errorUrlProvider()
     {
-        return array(
-            array('http://example.com/video')
-        );
+        return [
+            ['http://example.com/video'],
+        ];
     }
 
     /**
-     * Test getJSON function
+     * Test getJSON function.
      *
      * @param string $url    URL
      * @param string $format Format
      *
-     * @return       void
+     * @return void
      * @dataProvider URLProvider
      */
     public function testGetJSON($url, $format)
@@ -151,11 +152,11 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getJSON function errors
+     * Test getJSON function errors.
      *
      * @param string $url URL
      *
-     * @return            void
+     * @return void
      * @expectedException Exception
      * @dataProvider      ErrorURLProvider
      */
@@ -165,13 +166,13 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getFilename function
+     * Test getFilename function.
      *
-     * @param string $url    URL
-     * @param string $format Format
+     * @param string $url      URL
+     * @param string $format   Format
      * @param string $filename Filename
      *
-     * @return       void
+     * @return void
      * @dataProvider urlProvider
      */
     public function testGetFilename($url, $format, $filename)
@@ -181,11 +182,11 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getFilename function errors
+     * Test getFilename function errors.
      *
      * @param string $url URL
      *
-     * @return            void
+     * @return void
      * @expectedException Exception
      * @dataProvider      ErrorUrlProvider
      */
@@ -195,15 +196,15 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getAudioFilename function
+     * Test getAudioFilename function.
      *
-     * @param string $url    URL
-     * @param string $format Format
-     * @param string $filename Filename
-     * @param string $domain Domain
+     * @param string $url           URL
+     * @param string $format        Format
+     * @param string $filename      Filename
+     * @param string $domain        Domain
      * @param string $audioFilename MP3 audio file name
      *
-     * @return       void
+     * @return void
      * @dataProvider urlProvider
      */
     public function testGetAudioFilename($url, $format, $filename, $domain, $audioFilename)
@@ -213,12 +214,12 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getAudioStream function
+     * Test getAudioStream function.
      *
      * @param string $url    URL
      * @param string $format Format
      *
-     * @return       void
+     * @return void
      * @dataProvider urlProvider
      */
     public function testGetAudioStream($url, $format)
@@ -229,12 +230,12 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getAudioStream function without avconv
+     * Test getAudioStream function without avconv.
      *
      * @param string $url    URL
      * @param string $format Format
      *
-     * @return            void
+     * @return void
      * @expectedException Exception
      * @dataProvider      urlProvider
      */
@@ -246,12 +247,12 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getAudioStream function without curl or rtmpdump
+     * Test getAudioStream function without curl or rtmpdump.
      *
      * @param string $url    URL
      * @param string $format Format
      *
-     * @return            void
+     * @return void
      * @expectedException Exception
      * @dataProvider      urlProvider
      */
