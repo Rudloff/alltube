@@ -1,6 +1,6 @@
 <?php
+
 require_once __DIR__.'/vendor/autoload.php';
-use Alltube\VideoDownload;
 use Alltube\Controller\FrontController;
 
 if (strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
@@ -22,26 +22,26 @@ $container['view'] = function ($c) {
 
 $controller = new FrontController($container);
 
-$container['errorHandler'] = array($controller, 'error');
+$container['errorHandler'] = [$controller, 'error'];
 
 $app->get(
     '/',
-    array($controller, 'index')
+    [$controller, 'index']
 )->setName('index');
 $app->get(
     '/extractors',
-    array($controller, 'extractors')
+    [$controller, 'extractors']
 )->setName('extractors');
 $app->get(
     '/video',
-    array($controller, 'video')
+    [$controller, 'video']
 )->setName('video');
 $app->get(
     '/redirect',
-    array($controller, 'redirect')
+    [$controller, 'redirect']
 )->setName('redirect');
 $app->get(
     '/json',
-    array($controller, 'json')
+    [$controller, 'json']
 );
 $app->run();
