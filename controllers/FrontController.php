@@ -87,7 +87,8 @@ class FrontController
                 'extractors'  => $this->download->listExtractors(),
                 'class'       => 'extractors',
                 'title'       => 'Supported websites',
-                'description' => 'List of all supported websites from which Alltube Download can extract video or audio files',
+                'description' => 'List of all supported websites from which Alltube Download '.
+                    'can extract video or audio files',
             ]
         );
     }
