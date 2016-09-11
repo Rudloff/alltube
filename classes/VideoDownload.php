@@ -1,21 +1,19 @@
 <?php
 /**
- * VideoDownload class
+ * VideoDownload class.
  */
 namespace Alltube;
 
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 use Chain\Chain;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
- * Extract info about videos
+ * Extract info about videos.
  */
 class VideoDownload
 {
-
     /**
-     * VideoDownload constructor
+     * VideoDownload constructor.
      */
     public function __construct()
     {
@@ -23,31 +21,32 @@ class VideoDownload
         $this->procBuilder = new ProcessBuilder();
         $this->procBuilder->setPrefix(
             array_merge(
-                array($this->config->python, $this->config->youtubedl),
+                [$this->config->python, $this->config->youtubedl],
                 $this->config->params
             )
         );
     }
 
     /**
-     * List all extractors
+     * List all extractors.
      *
      * @return string[] Extractors
      * */
     public function listExtractors()
     {
         $this->procBuilder->setArguments(
-            array(
-                '--list-extractors'
-            )
+            [
+                '--list-extractors',
+            ]
         );
         $process = $this->procBuilder->getProcess();
         $process->run();
+
         return explode(PHP_EOL, trim($process->getOutput()));
     }
 
     /**
-     * Get all information about a video
+     * Get all information about a video.
      *
      * @param string $url    URL of page
      * @param string $format Format to use for the video
@@ -57,10 +56,10 @@ class VideoDownload
     public function getJSON($url, $format = null)
     {
         $this->procBuilder->setArguments(
-            array(
+            [
                 '--dump-json',
-                $url
-            )
+                $url,
+            ]
         );
         if (isset($format)) {
             $this->procBuilder->add('-f '.$format);
@@ -75,7 +74,7 @@ class VideoDownload
     }
 
     /**
-     * Get URL of video from URL of page
+     * Get URL of video from URL of page.
      *
      * @param string $url    URL of page
      * @param string $format Format to use for the video
@@ -85,10 +84,10 @@ class VideoDownload
     public function getURL($url, $format = null)
     {
         $this->procBuilder->setArguments(
-            array(
+            [
                 '--get-url',
-                $url
-            )
+                $url,
+            ]
         );
         if (isset($format)) {
             $this->procBuilder->add('-f '.$format);
@@ -103,7 +102,7 @@ class VideoDownload
     }
 
     /**
-     * Get filename of video file from URL of page
+     * Get filename of video file from URL of page.
      *
      * @param string $url    URL of page
      * @param string $format Format to use for the video
@@ -113,10 +112,10 @@ class VideoDownload
     public function getFilename($url, $format = null)
     {
         $this->procBuilder->setArguments(
-            array(
+            [
                 '--get-filename',
-                $url
-            )
+                $url,
+            ]
         );
         if (isset($format)) {
             $this->procBuilder->add('-f '.$format);
@@ -131,7 +130,7 @@ class VideoDownload
     }
 
     /**
-     * Get filename of audio from URL of page
+     * Get filename of audio from URL of page.
      *
      * @param string $url    URL of page
      * @param string $format Format to use for the video
@@ -151,7 +150,7 @@ class VideoDownload
     }
 
     /**
-     * Get audio stream of converted video
+     * Get audio stream of converted video.
      *
      * @param string $url    URL of page
      * @param string $format Format to use for the video
@@ -172,14 +171,14 @@ class VideoDownload
             $video->http_headers->{'User-Agent'}
         );
         $avconvProc = ProcessBuilder::create(
-            array(
+            [
                 $this->config->avconv,
                 '-v', 'quiet',
                 '-i', '-',
                 '-f', 'mp3',
                 '-vn',
-                'pipe:1'
-            )
+                'pipe:1',
+            ]
         );
 
         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
@@ -187,13 +186,13 @@ class VideoDownload
                 throw(new \Exception('Can\'t find rtmpdump'));
             }
             $builder = new ProcessBuilder(
-                array(
+                [
                     $this->config->rtmpdump,
                     '-q',
                     '-r',
                     $video->url,
-                    '--pageUrl', $video->webpage_url
-                )
+                    '--pageUrl', $video->webpage_url,
+                ]
             );
             if (isset($video->player_url)) {
                 $builder->add('--swfVfy');
@@ -226,19 +225,20 @@ class VideoDownload
             $chain = new Chain(
                 ProcessBuilder::create(
                     array_merge(
-                        array(
+                        [
                             $this->config->curl,
                             '--silent',
                             '--location',
                             '--user-agent', $video->http_headers->{'User-Agent'},
-                            $video->url
-                        ),
+                            $video->url,
+                        ],
                         $this->config->curl_params
                     )
                 )
             );
             $chain->add('|', $avconvProc);
         }
+
         return popen($chain->getProcess()->getCommandLine(), 'r');
     }
 }

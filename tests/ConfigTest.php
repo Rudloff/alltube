@@ -1,26 +1,33 @@
 <?php
 /**
- * ConfigTest class
+ * ConfigTest class.
  */
 namespace Alltube\Test;
 
 use Alltube\Config;
 
 /**
- * Unit tests for the Config class
+ * Unit tests for the Config class.
  */
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
-
+    /**
+     * Config class instance.
+     *
+     * @var Config
+     */
     private $config;
 
+    /**
+     * Prepare tests.
+     */
     protected function setUp()
     {
         $this->config = Config::getInstance('config_test.yml');
     }
 
     /**
-     * Test the getInstance function
+     * Test the getInstance function.
      *
      * @return void
      */
@@ -35,6 +42,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $this->config->rtmpdump);
     }
 
+    /**
+     * Test the getInstance function with the CONVERT environment variable.
+     *
+     * @return void
+     */
     public function testGetInstanceWithEnv()
     {
         putenv('CONVERT=1');
