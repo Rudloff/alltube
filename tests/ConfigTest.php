@@ -1,32 +1,57 @@
 <?php
 /**
- * ConfigTest class
+ * ConfigTest class.
  */
 namespace Alltube\Test;
 
 use Alltube\Config;
 
 /**
- * Unit tests for the Config class
+ * Unit tests for the Config class.
  */
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Config class instance.
+     *
+     * @var Config
+     */
+    private $config;
 
     /**
-     * Test the getInstance function
+     * Prepare tests.
+     */
+    protected function setUp()
+    {
+        $this->config = Config::getInstance('config_test.yml');
+    }
+
+    /**
+     * Test the getInstance function.
      *
      * @return void
      */
     public function testGetInstance()
     {
+        $this->assertEquals($this->config->convert, false);
+        $this->assertInternalType('array', $this->config->curl_params);
+        $this->assertInternalType('array', $this->config->params);
+        $this->assertInternalType('string', $this->config->youtubedl);
+        $this->assertInternalType('string', $this->config->python);
+        $this->assertInternalType('string', $this->config->avconv);
+        $this->assertInternalType('string', $this->config->rtmpdump);
+    }
+
+    /**
+     * Test the getInstance function with the CONVERT environment variable.
+     *
+     * @return void
+     */
+    public function testGetInstanceWithEnv()
+    {
         putenv('CONVERT=1');
-        $config = Config::getInstance();
+        Config::destroyInstance();
+        $config = Config::getInstance('config_test.yml');
         $this->assertEquals($config->convert, true);
-        $this->assertInternalType('array', $config->curl_params);
-        $this->assertInternalType('array', $config->params);
-        $this->assertInternalType('string', $config->youtubedl);
-        $this->assertInternalType('string', $config->python);
-        $this->assertInternalType('string', $config->avconv);
-        $this->assertInternalType('string', $config->rtmpdump);
     }
 }

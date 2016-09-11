@@ -77,6 +77,19 @@ module.exports = function (grunt) {
                         directory: 'classes/,controllers/,tests/'
                     }
                 }
+            },
+            jsonlint: {
+                manifests: {
+                    src: ['*.json', '*.webapp'],
+                    options: {
+                        format: true
+                    }
+                }
+            },
+            fixpack: {
+                package: {
+                    src: 'package.json'
+                }
             }
         }
     );
@@ -90,9 +103,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-phpdocumentor');
+    grunt.loadNpmTasks('grunt-jsonlint');
+    grunt.loadNpmTasks('grunt-fixpack');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
-    grunt.registerTask('lint', ['phpcs', 'jslint']);
+    grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);

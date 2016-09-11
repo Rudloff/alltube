@@ -1,76 +1,94 @@
 <?php
 /**
- * Config class
+ * Config class.
  */
 namespace Alltube;
 
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Manage config parameters
+ * Manage config parameters.
  */
 class Config
 {
     /**
-     * Singleton instance
+     * Singleton instance.
+     *
      * @var Config
      */
     private static $instance;
 
     /**
-     * youtube-dl binary path
+     * youtube-dl binary path.
+     *
      * @var string
      */
     public $youtubedl = 'vendor/rg3/youtube-dl/youtube_dl/__main__.py';
 
     /**
-     * python binary path
+     * python binary path.
+     *
      * @var string
      */
     public $python = '/usr/bin/python';
 
     /**
-     * youtube-dl parameters
+     * youtube-dl parameters.
+     *
      * @var array
      */
-    public $params = array('--no-playlist', '--no-warnings', '-f best[protocol^=http]', '--playlist-end', 1);
+    public $params = ['--no-playlist', '--no-warnings', '-f best[protocol^=http]', '--playlist-end', 1];
 
     /**
-     * Enable audio conversion
+     * Enable audio conversion.
+     *
      * @var bool
      */
     public $convert = false;
 
     /**
-     * avconv or ffmpeg binary path
+     * avconv or ffmpeg binary path.
+     *
      * @var string
      */
     public $avconv = 'vendor/bin/ffmpeg';
 
     /**
-     * rtmpdump binary path
+     * rtmpdump binary path.
+     *
      * @var string
      */
     public $rtmpdump = 'vendor/bin/rtmpdump';
 
     /**
-     * curl binary path
+     * curl binary path.
+     *
      * @var string
      */
     public $curl = '/usr/bin/curl';
 
     /**
-     * curl parameters
+     * curl parameters.
+     *
      * @var array
      */
-    public $curl_params = array();
+    public $curl_params = [];
 
     /**
-     * Config constructor
+     * YAML config file path.
+     *
+     * @var string
      */
-    private function __construct()
+    private $file;
+
+    /**
+     * Config constructor.
+     *
+     * @param string $yamlfile YAML config file path
+     */
+    private function __construct($yamlfile)
     {
-        $yamlfile = __DIR__.'/../config.yml';
+        $this->file = $yamlfile;
         if (is_file($yamlfile)) {
             $yaml = Yaml::parse(file_get_contents($yamlfile));
             if (isset($yaml) && is_array($yaml)) {
@@ -87,20 +105,25 @@ class Config
     }
 
     /**
-     * Get singleton instance
+     * Get singleton instance.
+     *
+     * @param string $yamlfile YAML config file name
      *
      * @return Config
      */
-    public static function getInstance()
+    public static function getInstance($yamlfile = 'config.yml')
     {
-        if (is_null(self::$instance)) {
-            self::$instance = new Config();
+        $yamlfile = __DIR__.'/../'.$yamlfile;
+        if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
+            self::$instance = new self($yamlfile);
         }
+
         return self::$instance;
     }
 
     /**
-     * Destroy singleton instance
+     * Destroy singleton instance.
+     *
      * @return void
      */
     public static function destroyInstance()

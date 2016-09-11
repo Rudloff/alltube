@@ -1,6 +1,6 @@
 {
-    "name": "alltube",
-    "dependencies": {
-        "opensans-googlefont": "*"
-    }
+  "name": "alltube",
+  "dependencies": {
+    "opensans-googlefont": "*"
+  }
 }

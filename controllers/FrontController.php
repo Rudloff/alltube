@@ -1,41 +1,45 @@
 <?php
 /**
- * FrontController class
+ * FrontController class.
  */
 namespace Alltube\Controller;
 
-use Alltube\VideoDownload;
 use Alltube\Config;
-use Slim\Http\Stream;
+use Alltube\VideoDownload;
+use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Container;
+use Slim\Http\Stream;
 
 /**
- * Main controller
+ * Main controller.
  */
 class FrontController
 {
     /**
-     * Config instance
+     * Config instance.
+     *
      * @var Config
      */
     private $config;
 
     /**
-     * VideoDownload instance
+     * VideoDownload instance.
+     *
      * @var VideoDownload
      */
     private $download;
 
     /**
-     * Slim dependency container
+     * Slim dependency container.
+     *
      * @var Container
      */
     private $container;
 
     /**
-     * FrontController constructor
+     * FrontController constructor.
+     *
      * @param Container $container Slim dependency container
      */
     public function __construct(Container $container)
@@ -46,7 +50,7 @@ class FrontController
     }
 
     /**
-     * Display index page
+     * Display index page.
      *
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
@@ -58,16 +62,16 @@ class FrontController
         $this->container->view->render(
             $response,
             'index.tpl',
-            array(
-                'convert'=>$this->config->convert,
-                'class'=>'index',
-                'description'=>'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
-            )
+            [
+                'convert'     => $this->config->convert,
+                'class'       => 'index',
+                'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+            ]
         );
     }
 
     /**
-     * Display a list of extractors
+     * Display a list of extractors.
      *
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
@@ -79,18 +83,17 @@ class FrontController
         $this->container->view->render(
             $response,
             'extractors.tpl',
-            array(
-                'extractors'=>$this->download->listExtractors(),
-                'class'=>'extractors',
-                'title'=>'Supported websites',
-                'description'
-                    =>'List of all supported websites from which Alltube Download can extract video or audio files'
-            )
+            [
+                'extractors'  => $this->download->listExtractors(),
+                'class'       => 'extractors',
+                'title'       => 'Supported websites',
+                'description' => 'List of all supported websites from which Alltube Download can extract video or audio files',
+            ]
         );
     }
 
     /**
-     * Dislay information about the video
+     * Dislay information about the video.
      *
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
@@ -101,7 +104,7 @@ class FrontController
     {
         $params = $request->getQueryParams();
         $this->config = Config::getInstance();
-        if (isset($params["url"])) {
+        if (isset($params['url'])) {
             if (isset($params['audio'])) {
                 try {
                     return $this->getStream($params["url"], 'mp3[protocol^=http]', $response, $request);
@@ -109,27 +112,28 @@ class FrontController
                     $response = $response->withHeader(
                         'Content-Disposition',
                         'attachment; filename="'.
-                        $this->download->getAudioFilename($params["url"], 'bestaudio/best').'"'
+                        $this->download->getAudioFilename($params['url'], 'bestaudio/best').'"'
                     );
                     $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
                     if ($request->isGet()) {
-                        $process = $this->download->getAudioStream($params["url"], 'bestaudio/best');
+                        $process = $this->download->getAudioStream($params['url'], 'bestaudio/best');
                         $response = $response->withBody(new Stream($process));
                     }
+
                     return $response;
                 }
             } else {
-                $video = $this->download->getJSON($params["url"]);
+                $video = $this->download->getJSON($params['url']);
                 $this->container->view->render(
                     $response,
                     'video.tpl',
-                    array(
-                        'video'=>$video,
-                        'class'=>'video',
-                        'title'=>$video->title,
-                        'description'=>'Download "'.$video->title.'" from '.$video->extractor_key
-                    )
+                    [
+                        'video'       => $video,
+                        'class'       => 'video',
+                        'title'       => $video->title,
+                        'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                    ]
                 );
             }
         } else {
@@ -138,10 +142,12 @@ class FrontController
     }
 
     /**
-     * Display an error page
-     * @param  Request   $request   PSR-7 request
-     * @param  Response  $response  PSR-7 response
-     * @param  \Exception $exception Error to display
+     * Display an error page.
+     *
+     * @param Request    $request   PSR-7 request
+     * @param Response   $response  PSR-7 response
+     * @param \Exception $exception Error to display
+     *
      * @return Response HTTP response
      */
     public function error(Request $request, Response $response, \Exception $exception)
@@ -149,12 +155,13 @@ class FrontController
         $this->container->view->render(
             $response,
             'error.tpl',
-            array(
-                'errors'=>$exception->getMessage(),
-                'class'=>'video',
-                'title'=>'Error'
-            )
+            [
+                'errors' => $exception->getMessage(),
+                'class'  => 'video',
+                'title'  => 'Error',
+            ]
         );
+
         return $response->withStatus(500);
     }
 
@@ -176,7 +183,7 @@ class FrontController
     }
 
     /**
-     * Redirect to video file
+     * Redirect to video file.
      *
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
@@ -186,18 +193,19 @@ class FrontController
     public function redirect(Request $request, Response $response)
     {
         $params = $request->getQueryParams();
-        if (isset($params["url"])) {
+        if (isset($params['url'])) {
             try {
                 return $this->getStream($params["url"], $params["format"], $response, $request);
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
+
                 return $response->withHeader('Content-Type', 'text/plain');
             }
         }
     }
 
     /**
-     * Output JSON info about the video
+     * Output JSON info about the video.
      *
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
@@ -207,13 +215,14 @@ class FrontController
     public function json(Request $request, Response $response)
     {
         $params = $request->getQueryParams();
-        if (isset($params["url"])) {
+        if (isset($params['url'])) {
             try {
-                $video = $this->download->getJSON($params["url"]);
+                $video = $this->download->getJSON($params['url']);
+
                 return $response->withJson($video);
             } catch (\Exception $e) {
                 return $response->withJson(
-                    array('success'=>false, 'error'=>$e->getMessage())
+                    ['success' => false, 'error' => $e->getMessage()]
                 );
             }
         }
