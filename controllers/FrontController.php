@@ -107,7 +107,7 @@ class FrontController
         if (isset($params['url'])) {
             if (isset($params['audio'])) {
                 try {
-                    return $this->getStream($params["url"], 'mp3[protocol^=http]', $response, $request);
+                    return $this->getStream($params['url'], 'mp3[protocol^=http]', $response, $request);
                 } catch (\Exception $e) {
                     $response = $response->withHeader(
                         'Content-Disposition',
@@ -172,13 +172,14 @@ class FrontController
         }
         $video = $this->download->getJSON($url, $format);
         $client = new \GuzzleHttp\Client();
-        $stream = $client->request('GET', $video->url, array('stream'=>true));
+        $stream = $client->request('GET', $video->url, ['stream' => true]);
         $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
         $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
         $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
         if ($request->isGet()) {
             $response = $response->withBody($stream->getBody());
         }
+
         return $response;
     }
 
@@ -195,7 +196,7 @@ class FrontController
         $params = $request->getQueryParams();
         if (isset($params['url'])) {
             try {
-                return $this->getStream($params["url"], $params["format"], $response, $request);
+                return $this->getStream($params['url'], $params['format'], $response, $request);
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
 
