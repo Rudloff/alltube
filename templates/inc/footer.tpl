@@ -14,7 +14,6 @@
      <a href="https://github.com/Rudloff/alltube">Get the code</a>
      &middot;
      Based on <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
-     &middot;
      </div>
 </footer>
 <script src="{base_url|noscheme}/dist/main.js"></script>
