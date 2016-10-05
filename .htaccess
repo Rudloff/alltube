@@ -24,4 +24,4 @@ RewriteRule ^ index.php [QSA,L]
 Redirect permanent /api.php /video
 Redirect permanent /extractors.php /extractors
 
-AddOutputFilterByType DEFLATE text/css text/html application/javascript
+AddOutputFilterByType DEFLATE text/css text/html application/javascript font/truetype
