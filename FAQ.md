@@ -36,3 +36,12 @@ You will also need to install `avconv` and `curl` on your server:
 ```bash
 sudo apt-get install libav-tools curl
 ```
+
+## How do I deploy Alltube on Heroku?
+
+Create a dyno with the following buildpacks:
+
+* `heroku/php`
+* `https://github.com/heroku/heroku-buildpack-nodejs`
+
+Then push the code to Heroku and it should work out of the box.
