@@ -41,6 +41,15 @@ If you want to use a custom config, you need to create a config file:
 cp config.example.yml config.yml
 ```
 
+## PHP requirements
+
+You will need PHP 5.5 (or higher) and the following PHP modules:
+
+* fileinfo
+* intl
+* mbstring
+* curl
+
 ## Web server configuration
 
 ### Apache
