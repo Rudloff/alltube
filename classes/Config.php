@@ -100,7 +100,7 @@ class Config
             }
         }
         if (getenv('CONVERT')) {
-            $this->convert = getenv('CONVERT');
+            $this->convert = (bool) getenv('CONVERT');
         }
     }
 
