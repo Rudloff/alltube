@@ -45,3 +45,13 @@ Create a dyno with the following buildpacks:
 * `https://github.com/heroku/heroku-buildpack-nodejs`
 
 Then push the code to Heroku and it should work out of the box.
+
+## Why can't I download videos from some websites (e.g. Dailymotion)
+
+Some websites generate an unique video URL for each IP address. When using Alltube, the URL is generated for our server's IP address and your computer is not allowed to use it.
+
+There are two known workarounds:
+
+* You can run Alltube locally on your computer.
+* You can use the experimental `feature/stream` branch which streams the video through the server in order to bypass IP restrictions.
+  Please note that this can use a lot of resources on the server (which is why we won't enable it on alltubedownload.net).
