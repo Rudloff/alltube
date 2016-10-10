@@ -12,6 +12,9 @@ use Symfony\Component\Process\ProcessBuilder;
  */
 class VideoDownload
 {
+    private $config;
+    private $procBuilder;
+
     /**
      * VideoDownload constructor.
      */
