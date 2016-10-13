@@ -22,6 +22,9 @@
     "grunt-phpdocumentor": "~0.4.1",
     "grunt-phpunit": "~0.3.6"
   },
+  "engines": {
+    "npm": "~3"
+  },
   "homepage": "https://www.alltubedownload.net/",
   "keywords": [
     "alltube",
