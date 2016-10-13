@@ -6,6 +6,7 @@ namespace Alltube\Controller;
 
 use Alltube\Config;
 use Alltube\VideoDownload;
+use Interop\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -33,7 +34,7 @@ class FrontController
     /**
      * Slim dependency container.
      *
-     * @var Container
+     * @var ContainerInterface
      */
     private $container;
 
@@ -42,11 +43,13 @@ class FrontController
      *
      * @param Container $container Slim dependency container
      */
-    public function __construct(Container $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
-        $this->container = $container;
+        if ($container instanceof Container) {
+            $this->container = $container;
+        }
     }
 
     /**

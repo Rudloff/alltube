@@ -1,19 +1,21 @@
-Alltube Download
-=======
+# Alltube Download
 
-HTML GUI for youtube-dl (http://alltubedownload.net/)
+HTML GUI for youtube-dl ([alltubedownload.net](http://alltubedownload.net/))
 
 ![Screenshot](img/screenshot.png "Alltube GUI screenshot")
 
 ## Setup
 
 ### From a release package
+
 You can download the latest release package [here](https://github.com/Rudloff/alltube/releases).
 
 You just have to unzip it on your server and it should be ready to use.
 
 ### From Git
+
 In order to get AllTube working, you need to use [npm](https://www.npmjs.com/) and [Composer](https://getcomposer.org/):
+
 ```bash
 npm install
 composer install
@@ -24,6 +26,7 @@ This will download all the required dependencies.
 (Note that it will download the ffmpeg binary for 64-bits Linux. If you are on another platform, you might want to specify the path to avconv/ffmpeg in your config file.)
 
 You should also ensure that the *templates_c* folder has the right permissions:
+
 ```bash
 chmod 777 templates_c/
 ```
@@ -33,19 +36,33 @@ If your web server is Apache, you need to set the `AllowOverride` setting to `Al
 ## Config
 
 If you want to use a custom config, you need to create a config file:
+
 ```bash
 cp config.example.yml config.yml
 ```
 
+## PHP requirements
+
+You will need PHP 5.5 (or higher) and the following PHP modules:
+
+* fileinfo
+* intl
+* mbstring
+* curl
+
 ## Web server configuration
+
 ### Apache
+
 You will need the following modules:
 
 * mod_mime
 * mod_rewrite
 
 ### Nginx
+
 Here is an exemple Nginx configuration:
+
 ```nginx
 server {
         server_name localhost;
@@ -94,16 +111,24 @@ server {
 ```
 
 ## License
+
 This software is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
 
-__Please use a different name and logo if you run it on a public server.__
+Please __use a different name and logo__ if you run it on a public server.
 
 ## Other dependencies
+
 You need [avconv](https://libav.org/avconv.html), [rtmpdump](http://rtmpdump.mplayerhq.hu/) and [curl](https://curl.haxx.se/) in order to enable conversions.
-If you don't want to enable conversions, you can disable it in *config.yml*.
+If you don't want to enable conversions, you can disable it in `config.yml`.
 
 On Debian-based systems:
+
 ```bash
 sudo apt-get install libav-tools rtmpdump curl
 ```
-You also probably need to edit the *avconv* variable in *config.yml* so that it points to your ffmpeg/avconv binary (*/usr/bin/avconv* on Debian/Ubuntu).
+
+You also probably need to edit the `avconv` variable in `config.yml` so that it points to your ffmpeg/avconv binary (`/usr/bin/avconv` on Debian/Ubuntu).
+
+## FAQ
+
+Please read the [FAQ](FAQ.md) before reporting any issue.

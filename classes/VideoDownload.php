@@ -12,6 +12,9 @@ use Symfony\Component\Process\ProcessBuilder;
  */
 class VideoDownload
 {
+    private $config;
+    private $procBuilder;
+
     /**
      * VideoDownload constructor.
      */
@@ -45,47 +48,11 @@ class VideoDownload
         return explode(PHP_EOL, trim($process->getOutput()));
     }
 
-    /**
-     * Get all information about a video.
-     *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
-     *
-     * @return object Decoded JSON
-     * */
-    public function getJSON($url, $format = null)
+    private function getProp($url, $format = null, $prop = 'dump-json')
     {
         $this->procBuilder->setArguments(
             [
-                '--dump-json',
-                $url,
-            ]
-        );
-        if (isset($format)) {
-            $this->procBuilder->add('-f '.$format);
-        }
-        $process = $this->procBuilder->getProcess();
-        $process->run();
-        if (!$process->isSuccessful()) {
-            throw new \Exception($process->getErrorOutput());
-        } else {
-            return json_decode($process->getOutput());
-        }
-    }
-
-    /**
-     * Get URL of video from URL of page.
-     *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
-     *
-     * @return string URL of video
-     * */
-    public function getURL($url, $format = null)
-    {
-        $this->procBuilder->setArguments(
-            [
-                '--get-url',
+                '--'.$prop,
                 $url,
             ]
         );
@@ -102,6 +69,32 @@ class VideoDownload
     }
 
     /**
+     * Get all information about a video.
+     *
+     * @param string $url    URL of page
+     * @param string $format Format to use for the video
+     *
+     * @return object Decoded JSON
+     * */
+    public function getJSON($url, $format = null)
+    {
+        return json_decode($this->getProp($url, $format, 'dump-json'));
+    }
+
+    /**
+     * Get URL of video from URL of page.
+     *
+     * @param string $url    URL of page
+     * @param string $format Format to use for the video
+     *
+     * @return string URL of video
+     * */
+    public function getURL($url, $format = null)
+    {
+        return $this->getProp($url, $format, 'get-url');
+    }
+
+    /**
      * Get filename of video file from URL of page.
      *
      * @param string $url    URL of page
@@ -111,22 +104,7 @@ class VideoDownload
      * */
     public function getFilename($url, $format = null)
     {
-        $this->procBuilder->setArguments(
-            [
-                '--get-filename',
-                $url,
-            ]
-        );
-        if (isset($format)) {
-            $this->procBuilder->add('-f '.$format);
-        }
-        $process = $this->procBuilder->getProcess();
-        $process->run();
-        if (!$process->isSuccessful()) {
-            throw new \Exception($process->getErrorOutput());
-        } else {
-            return trim($process->getOutput());
-        }
+        return trim($this->getProp($url, $format, 'get-filename'));
     }
 
     /**
