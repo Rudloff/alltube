@@ -33,7 +33,7 @@ class FrontController
     /**
      * Slim dependency container.
      *
-     * @var Container
+     * @var ContainerInterface
      */
     private $container;
 
