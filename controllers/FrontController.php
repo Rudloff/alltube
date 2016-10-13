@@ -7,6 +7,7 @@ namespace Alltube\Controller;
 use Alltube\Config;
 use Alltube\VideoDownload;
 use Interop\Container\ContainerInterface;
+use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\Stream;
@@ -46,7 +47,9 @@ class FrontController
     {
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
-        $this->container = $container;
+        if ($container instanceof Container) {
+            $this->container = $container;
+        }
     }
 
     /**
