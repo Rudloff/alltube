@@ -162,7 +162,7 @@ class FrontController
      */
     public function error(Request $request, Response $response, \Exception $exception)
     {
-        if ($container instanceof Container) {
+        if ($this->container instanceof Container) {
             $this->container->view->render(
                 $response,
                 'error.tpl',
