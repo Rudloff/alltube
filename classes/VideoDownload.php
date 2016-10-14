@@ -148,8 +148,10 @@ class VideoDownload
     }
 
     /**
-     * Get a process that runs rtmp in order to download a video
-     * @param  object $video Video object returned by youtube-dl
+     * Get a process that runs rtmp in order to download a video.
+     *
+     * @param object $video Video object returned by youtube-dl
+     *
      * @return \Symfony\Component\Process\Process Process
      */
     private function getRtmpProcess($video)
@@ -188,12 +190,15 @@ class VideoDownload
             $builder->add('--app');
             $builder->add($video->app);
         }
+
         return $builder->getProcess();
     }
 
     /**
-     * Get a process that runs curl in order to download a video
-     * @param  object $video Video object returned by youtube-dl
+     * Get a process that runs curl in order to download a video.
+     *
+     * @param object $video Video object returned by youtube-dl
+     *
      * @return \Symfony\Component\Process\Process Process
      */
     private function getCurlProcess($video)
@@ -213,6 +218,7 @@ class VideoDownload
                 $this->config->curl_params
             )
         );
+
         return $builder->getProcess();
     }
 
