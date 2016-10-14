@@ -255,12 +255,12 @@ class VideoDownload
         );
 
         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
-            $chain = new Chain($this->getRtmpProcess($video));
-            $chain->add('|', $avconvProc);
+            $process = $this->getRtmpProcess($video);
         } else {
-            $chain = new Chain($this->getCurlProcess($video));
-            $chain->add('|', $avconvProc);
+            $process = $this->getCurlProcess($video);
         }
+        $chain = new Chain($process);
+        $chain->add('|', $avconvProc);
 
         return popen($chain->getProcess()->getCommandLine(), 'r');
     }
