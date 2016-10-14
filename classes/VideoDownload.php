@@ -13,13 +13,15 @@ use Symfony\Component\Process\ProcessBuilder;
 class VideoDownload
 {
     /**
-     * Config instance
+     * Config instance.
+     *
      * @var Config
      */
     private $config;
 
     /**
-     * ProcessBuilder instance used to call Python
+     * ProcessBuilder instance used to call Python.
+     *
      * @var ProcessBuilder
      */
     private $procBuilder;
@@ -58,10 +60,12 @@ class VideoDownload
     }
 
     /**
-     * Get a property from youtube-dl
-     * @param  string $url    URL to parse
-     * @param  string $format Format
-     * @param  string $prop   Property
+     * Get a property from youtube-dl.
+     *
+     * @param string $url    URL to parse
+     * @param string $format Format
+     * @param string $prop   Property
+     *
      * @return string
      */
     private function getProp($url, $format = null, $prop = 'dump-json')
