@@ -148,6 +148,75 @@ class VideoDownload
     }
 
     /**
+     * Get a process that runs rtmp in order to download a video
+     * @param  object $video Video object returned by youtube-dl
+     * @return \Symfony\Component\Process\Process Process
+     */
+    private function getRtmpProcess($video)
+    {
+        if (!shell_exec('which '.$this->config->rtmpdump)) {
+            throw(new \Exception('Can\'t find rtmpdump'));
+        }
+        $builder = new ProcessBuilder(
+            [
+                $this->config->rtmpdump,
+                '-q',
+                '-r',
+                $video->url,
+                '--pageUrl', $video->webpage_url,
+            ]
+        );
+        if (isset($video->player_url)) {
+            $builder->add('--swfVfy');
+            $builder->add($video->player_url);
+        }
+        if (isset($video->flash_version)) {
+            $builder->add('--flashVer');
+            $builder->add($video->flash_version);
+        }
+        if (isset($video->play_path)) {
+            $builder->add('--playpath');
+            $builder->add($video->play_path);
+        }
+        if (isset($video->rtmp_conn)) {
+            foreach ($video->rtmp_conn as $conn) {
+                $builder->add('--conn');
+                $builder->add($conn);
+            }
+        }
+        if (isset($video->app)) {
+            $builder->add('--app');
+            $builder->add($video->app);
+        }
+        return $builder->getProcess();
+    }
+
+    /**
+     * Get a process that runs curl in order to download a video
+     * @param  object $video Video object returned by youtube-dl
+     * @return \Symfony\Component\Process\Process Process
+     */
+    private function getCurlProcess($video)
+    {
+        if (!shell_exec('which '.$this->config->curl)) {
+            throw(new \Exception('Can\'t find curl'));
+        }
+        $builder = ProcessBuilder::create(
+            array_merge(
+                [
+                    $this->config->curl,
+                    '--silent',
+                    '--location',
+                    '--user-agent', $video->http_headers->{'User-Agent'},
+                    $video->url,
+                ],
+                $this->config->curl_params
+            )
+        );
+        return $builder->getProcess();
+    }
+
+    /**
      * Get audio stream of converted video.
      *
      * @param string $url    URL of page
@@ -180,60 +249,10 @@ class VideoDownload
         );
 
         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
-            if (!shell_exec('which '.$this->config->rtmpdump)) {
-                throw(new \Exception('Can\'t find rtmpdump'));
-            }
-            $builder = new ProcessBuilder(
-                [
-                    $this->config->rtmpdump,
-                    '-q',
-                    '-r',
-                    $video->url,
-                    '--pageUrl', $video->webpage_url,
-                ]
-            );
-            if (isset($video->player_url)) {
-                $builder->add('--swfVfy');
-                $builder->add($video->player_url);
-            }
-            if (isset($video->flash_version)) {
-                $builder->add('--flashVer');
-                $builder->add($video->flash_version);
-            }
-            if (isset($video->play_path)) {
-                $builder->add('--playpath');
-                $builder->add($video->play_path);
-            }
-            if (isset($video->rtmp_conn)) {
-                foreach ($video->rtmp_conn as $conn) {
-                    $builder->add('--conn');
-                    $builder->add($conn);
-                }
-            }
-            if (isset($video->app)) {
-                $builder->add('--app');
-                $builder->add($video->app);
-            }
-            $chain = new Chain($builder->getProcess());
+            $chain = new Chain($this->getRtmpProcess($video));
             $chain->add('|', $avconvProc);
         } else {
-            if (!shell_exec('which '.$this->config->curl)) {
-                throw(new \Exception('Can\'t find curl'));
-            }
-            $chain = new Chain(
-                ProcessBuilder::create(
-                    array_merge(
-                        [
-                            $this->config->curl,
-                            '--silent',
-                            '--location',
-                            '--user-agent', $video->http_headers->{'User-Agent'},
-                            $video->url,
-                        ],
-                        $this->config->curl_params
-                    )
-                )
-            );
+            $chain = new Chain($this->getCurlProcess($video));
             $chain->add('|', $avconvProc);
         }
 
