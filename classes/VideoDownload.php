@@ -170,6 +170,7 @@ class VideoDownload
                 $builder->add($video->{$property});
             }
         }
+
         return $builder;
     }
 
@@ -188,7 +189,7 @@ class VideoDownload
         $builder = new ProcessBuilder(
             [
                 $this->config->rtmpdump,
-                '-q'
+                '-q',
             ]
         );
         $builder = $this->addOptionsToRtmpProcess($builder, $video);
