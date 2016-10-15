@@ -148,6 +148,32 @@ class VideoDownload
     }
 
     /**
+     * Add options to a process builder running rtmp.
+     *
+     * @param ProcessBuilder $builder Process builder
+     * @param object         $video   Video object returned by youtube-dl
+     *
+     * @return ProcessBuilder
+     */
+    private function addOptionsToRtmpProcess(ProcessBuilder $builder, $video)
+    {
+        foreach ([
+            'url'           => 'rtmp',
+            'webpage_url'   => 'pageUrl',
+            'player_url'    => 'swfVfy',
+            'flash_version' => 'flashVer',
+            'play_path'     => 'playpath',
+            'app'           => 'app',
+        ] as $property => $option) {
+            if (isset($video->{$property})) {
+                $builder->add('--'.$option);
+                $builder->add($video->{$property});
+            }
+        }
+        return $builder;
+    }
+
+    /**
      * Get a process that runs rtmp in order to download a video.
      *
      * @param object $video Video object returned by youtube-dl
@@ -162,33 +188,15 @@ class VideoDownload
         $builder = new ProcessBuilder(
             [
                 $this->config->rtmpdump,
-                '-q',
-                '-r',
-                $video->url,
-                '--pageUrl', $video->webpage_url,
+                '-q'
             ]
         );
-        if (isset($video->player_url)) {
-            $builder->add('--swfVfy');
-            $builder->add($video->player_url);
-        }
-        if (isset($video->flash_version)) {
-            $builder->add('--flashVer');
-            $builder->add($video->flash_version);
-        }
-        if (isset($video->play_path)) {
-            $builder->add('--playpath');
-            $builder->add($video->play_path);
-        }
+        $builder = $this->addOptionsToRtmpProcess($builder, $video);
         if (isset($video->rtmp_conn)) {
             foreach ($video->rtmp_conn as $conn) {
                 $builder->add('--conn');
                 $builder->add($conn);
             }
-        }
-        if (isset($video->app)) {
-            $builder->add('--app');
-            $builder->add($video->app);
         }
 
         return $builder->getProcess();
