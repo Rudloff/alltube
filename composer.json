@@ -11,15 +11,15 @@
     "symfony/yaml": "~3.1.0",
     "symfony/process": "~3.1.0",
     "ptachoire/process-builder-chain": "~1.2.0",
-    "rudloff/smarty-plugin-noscheme": "~0.1.0",
-    "rudloff/rtmpdump-bin": "~2.3"
+    "rudloff/smarty-plugin-noscheme": "~0.1.0"
   },
   "require-dev": {
     "symfony/var-dumper": "~3.1.0",
     "squizlabs/php_codesniffer": "~2.7.0",
     "phpunit/phpunit": "~5.5.2",
     "ffmpeg/ffmpeg": "dev-release",
-    "rg3/youtube-dl": "~2016.09.08"
+    "rg3/youtube-dl": "~2016.09.08",
+    "rudloff/rtmpdump-bin": "~2.3"
   },
   "extra": {
     "paas": {
