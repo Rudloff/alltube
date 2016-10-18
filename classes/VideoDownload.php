@@ -33,6 +33,9 @@ class VideoDownload
     {
         $this->config = Config::getInstance();
         $this->procBuilder = new ProcessBuilder();
+        if (!is_file($this->config->youtubedl)) {
+            throw new \Exception("Can't find youtube-dl at ".$this->config->youtubedl);
+        }
         $this->procBuilder->setPrefix(
             array_merge(
                 [$this->config->python, $this->config->youtubedl],
