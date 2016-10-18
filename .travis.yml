@@ -1,6 +1,6 @@
 language: php
 install:
-    - composer install --no-dev
+    - composer install
 before_install:
     - composer selfupdate
 after_success:

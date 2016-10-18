@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02cf80c6d4373a564269fea77fcd50a5",
-    "content-hash": "efbcfe87c3855d9559551638e85519f3",
+    "hash": "186f884cc6378240af71c2f966772e91",
+    "content-hash": "f247f0e474ec96305a224fdce94e0dae",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -33,20 +33,6 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
-        },
-        {
-            "name": "ffmpeg/ffmpeg",
-            "version": "dev-release",
-            "dist": {
-                "type": "xz",
-                "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
-                "reference": null,
-                "shasum": null
-            },
-            "bin": [
-                "ffmpeg"
-            ],
-            "type": "library"
         },
         {
             "name": "jeremykendall/php-domain-parser",
@@ -400,16 +386,6 @@
             "time": "2016-04-10 08:33:20"
         },
         {
-            "name": "rg3/youtube-dl",
-            "version": "2016.09.08",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rg3/youtube-dl.git",
-                "reference": "2016.09.08"
-            },
-            "type": "library"
-        },
-        {
             "name": "rudloff/rtmpdump-bin",
             "version": "2.3",
             "source": {
@@ -756,6 +732,20 @@
                 "instantiate"
             ],
             "time": "2015-06-14 21:17:01"
+        },
+        {
+            "name": "ffmpeg/ffmpeg",
+            "version": "dev-release",
+            "dist": {
+                "type": "xz",
+                "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
+                "reference": null,
+                "shasum": null
+            },
+            "bin": [
+                "ffmpeg"
+            ],
+            "type": "library"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1392,6 +1382,16 @@
                 "xunit"
             ],
             "time": "2016-10-09 07:01:45"
+        },
+        {
+            "name": "rg3/youtube-dl",
+            "version": "2016.09.08",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rg3/youtube-dl.git",
+                "reference": "2016.09.08"
+            },
+            "type": "library"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
