@@ -4,8 +4,8 @@
  */
 namespace Alltube\Test;
 
-use Alltube\VideoDownload;
 use Alltube\Config;
+use Alltube\VideoDownload;
 
 /**
  * Unit tests for the VideoDownload class.
@@ -44,7 +44,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithMissingYoutubedl()
     {
         new VideoDownload(
-            new Config(['youtubedl'=>'foo'])
+            new Config(['youtubedl' => 'foo'])
         );
     }
 
@@ -57,7 +57,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithMissingPython()
     {
         new VideoDownload(
-            new Config(['python'=>'foo'])
+            new Config(['python' => 'foo'])
         );
     }
 
