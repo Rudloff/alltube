@@ -29,9 +29,13 @@ class VideoDownload
     /**
      * VideoDownload constructor.
      */
-    public function __construct()
+    public function __construct(Config $config = null)
     {
-        $this->config = Config::getInstance();
+        if (isset($config)) {
+            $this->config = $config;
+        } else {
+            $this->config = Config::getInstance();
+        }
         $this->procBuilder = new ProcessBuilder();
         if (!is_file($this->config->youtubedl)) {
             throw new \Exception("Can't find youtube-dl at ".$this->config->youtubedl);
