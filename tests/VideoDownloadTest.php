@@ -5,6 +5,7 @@
 namespace Alltube\Test;
 
 use Alltube\VideoDownload;
+use Alltube\Config;
 
 /**
  * Unit tests for the VideoDownload class.
@@ -31,7 +32,33 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        \Alltube\Config::destroyInstance();
+        Config::destroyInstance();
+    }
+
+    /**
+     * Test VideoDownload constructor with wrong youtube-dl path.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testConstructorWithMissingYoutubedl()
+    {
+        new VideoDownload(
+            new Config(['youtubedl'=>'foo'])
+        );
+    }
+
+    /**
+     * Test VideoDownload constructor with wrong Python path.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testConstructorWithMissingPython()
+    {
+        new VideoDownload(
+            new Config(['python'=>'foo'])
+        );
     }
 
     /**
