@@ -7,7 +7,6 @@
   "dependencies": {
     "bower": "~1.7.1",
     "grunt": "~1.0.1",
-    "grunt-cli": "~1.2.0",
     "grunt-contrib-cssmin": "~1.0.0",
     "grunt-contrib-uglify": "~2.0.0"
   },
@@ -39,6 +38,6 @@
     "url": "https://github.com/Rudloff/alltube.git"
   },
   "scripts": {
-    "postinstall": "node node_modules/bower/bin/bower install && node node_modules/grunt-cli/bin/grunt"
+    "postinstall": "node node_modules/.bin/bower install && node node_modules/.bin/grunt"
   }
 }
