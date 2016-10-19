@@ -43,6 +43,17 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the getInstance function with a missing config file.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testGetInstanceWithMissingFile()
+    {
+        Config::getInstance('foo');
+    }
+
+    /**
      * Test the getInstance function with the CONVERT environment variable.
      *
      * @return void

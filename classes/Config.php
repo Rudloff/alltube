@@ -84,28 +84,34 @@ class Config
     /**
      * Config constructor.
      *
-     * @param string $yamlfile YAML config file path
+     * Available options:
+     * * youtubedl: youtube-dl binary path
+     * * python: Python binary path
+     * * avconv: avconv or ffmpeg binary path
+     * * rtmpdump: rtmpdump binary path
+     * * curl: curl binary path
+     * * params: Array of youtube-dl parameters
+     * * curl_params: Array of curl parameters
+     * * convert: Enable conversion?
+     *
+     * @param array $options Options
      */
-    private function __construct($yamlfile)
+    public function __construct(array $options)
     {
-        $this->file = $yamlfile;
-        if (is_file($yamlfile)) {
-            $yaml = Yaml::parse(file_get_contents($yamlfile));
-            if (isset($yaml) && is_array($yaml)) {
-                foreach ($yaml as $param => $value) {
-                    if (isset($this->$param) && isset($value)) {
-                        $this->$param = $value;
-                    }
+        if (isset($options) && is_array($options)) {
+            foreach ($options as $option => $value) {
+                if (isset($this->$option) && isset($value)) {
+                    $this->$option = $value;
                 }
             }
         }
         if (getenv('CONVERT')) {
-            $this->convert = getenv('CONVERT');
+            $this->convert = (bool) getenv('CONVERT');
         }
     }
 
     /**
-     * Get singleton instance.
+     * Get Config singleton instance from YAML config file.
      *
      * @param string $yamlfile YAML config file name
      *
@@ -113,9 +119,21 @@ class Config
      */
     public static function getInstance($yamlfile = 'config.yml')
     {
-        $yamlfile = __DIR__.'/../'.$yamlfile;
+        $yamlPath = __DIR__.'/../'.$yamlfile;
         if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
-            self::$instance = new self($yamlfile);
+            if (is_file($yamlfile)) {
+                $options = Yaml::parse(file_get_contents($yamlPath));
+            } elseif ($yamlfile == 'config.yml') {
+                /*
+                Allow for the default file to be missing in order to
+                not surprise users that did not create a config file
+                 */
+                $options = [];
+            } else {
+                throw new \Exception("Can't find config file at ".$yamlPath);
+            }
+            self::$instance = new self($options);
+            self::$instance->file = $yamlfile;
         }
 
         return self::$instance;

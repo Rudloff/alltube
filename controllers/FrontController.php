@@ -6,6 +6,7 @@ namespace Alltube\Controller;
 
 use Alltube\Config;
 use Alltube\VideoDownload;
+use Interop\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -33,7 +34,7 @@ class FrontController
     /**
      * Slim dependency container.
      *
-     * @var Container
+     * @var ContainerInterface
      */
     private $container;
 
@@ -42,7 +43,7 @@ class FrontController
      *
      * @param Container $container Slim dependency container
      */
-    public function __construct(Container $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
@@ -59,15 +60,17 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
-        $this->container->view->render(
-            $response,
-            'index.tpl',
-            [
-                'convert'     => $this->config->convert,
-                'class'       => 'index',
-                'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
-            ]
-        );
+        if ($this->container instanceof Container) {
+            $this->container->view->render(
+                $response,
+                'index.tpl',
+                [
+                    'convert'     => $this->config->convert,
+                    'class'       => 'index',
+                    'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+                ]
+            );
+        }
     }
 
     /**
@@ -80,17 +83,19 @@ class FrontController
      */
     public function extractors(Request $request, Response $response)
     {
-        $this->container->view->render(
-            $response,
-            'extractors.tpl',
-            [
-                'extractors'  => $this->download->listExtractors(),
-                'class'       => 'extractors',
-                'title'       => 'Supported websites',
-                'description' => 'List of all supported websites from which Alltube Download '.
-                    'can extract video or audio files',
-            ]
-        );
+        if ($this->container instanceof Container) {
+            $this->container->view->render(
+                $response,
+                'extractors.tpl',
+                [
+                    'extractors'  => $this->download->listExtractors(),
+                    'class'       => 'extractors',
+                    'title'       => 'Supported websites',
+                    'description' => 'List of all supported websites from which Alltube Download '.
+                        'can extract video or audio files',
+                ]
+            );
+        }
     }
 
     /**
@@ -128,16 +133,18 @@ class FrontController
                 }
             } else {
                 $video = $this->download->getJSON($params['url']);
-                $this->container->view->render(
-                    $response,
-                    'video.tpl',
-                    [
-                        'video'       => $video,
-                        'class'       => 'video',
-                        'title'       => $video->title,
-                        'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
-                    ]
-                );
+                if ($this->container instanceof Container) {
+                    $this->container->view->render(
+                        $response,
+                        'video.tpl',
+                        [
+                            'video'       => $video,
+                            'class'       => 'video',
+                            'title'       => $video->title,
+                            'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                        ]
+                    );
+                }
             }
         } else {
             return $response->withRedirect($this->container->get('router')->pathFor('index'));
@@ -155,15 +162,17 @@ class FrontController
      */
     public function error(Request $request, Response $response, \Exception $exception)
     {
-        $this->container->view->render(
-            $response,
-            'error.tpl',
-            [
-                'errors' => $exception->getMessage(),
-                'class'  => 'video',
-                'title'  => 'Error',
-            ]
-        );
+        if ($this->container instanceof Container) {
+            $this->container->view->render(
+                $response,
+                'error.tpl',
+                [
+                    'errors' => $exception->getMessage(),
+                    'class'  => 'video',
+                    'title'  => 'Error',
+                ]
+            );
+        }
 
         return $response->withStatus(500);
     }
