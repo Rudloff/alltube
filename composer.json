@@ -78,5 +78,8 @@
   },
   "config": {
     "secure-http": false
+  },
+  "scripts": {
+    "compile": "composer install --dev"
   }
 }
