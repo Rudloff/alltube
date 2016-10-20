@@ -90,7 +90,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getURL function with a protected video
+     * Test getURL function with a protected video.
      *
      * @return void
      */

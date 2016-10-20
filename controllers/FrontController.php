@@ -5,8 +5,8 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
-use Alltube\VideoDownload;
 use Alltube\PasswordException;
+use Alltube\VideoDownload;
 use Interop\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
@@ -49,7 +49,7 @@ class FrontController
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
         $this->container = $container;
-        $session_factory = new \Aura\Session\SessionFactory;
+        $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($_COOKIE);
         $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
     }
@@ -103,9 +103,10 @@ class FrontController
     }
 
     /**
-     * Display a password prompt
-     * @param  Request  $request  PSR-7 request
-     * @param  Response $response PSR-7 response
+     * Display a password prompt.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
      */
