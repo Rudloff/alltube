@@ -40,6 +40,12 @@ class FrontController
     private $container;
 
     /**
+     * Session segment used to store session variables
+     * @var \Aura\Session\Segment
+     */
+    private $sessionSegment;
+
+    /**
      * FrontController constructor.
      *
      * @param Container $container Slim dependency container
