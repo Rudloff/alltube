@@ -40,7 +40,8 @@ class FrontController
     private $container;
 
     /**
-     * Session segment used to store session variables
+     * Session segment used to store session variables.
+     *
      * @var \Aura\Session\Segment
      */
     private $sessionSegment;
