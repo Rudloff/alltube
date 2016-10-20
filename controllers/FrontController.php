@@ -143,19 +143,21 @@ class FrontController
             }
             if (isset($params['audio'])) {
                 try {
-                    $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]');
+                    $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
 
                     return $response->withRedirect($url);
+                } catch (PasswordException $e) {
+                    return $this->password($request, $response);
                 } catch (\Exception $e) {
                     $response = $response->withHeader(
                         'Content-Disposition',
                         'attachment; filename="'.
-                        $this->download->getAudioFilename($params['url'], 'bestaudio/best').'"'
+                        $this->download->getAudioFilename($params['url'], 'bestaudio/best', $password).'"'
                     );
                     $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
-                    if ($request->isGet()) {
-                        $process = $this->download->getAudioStream($params['url'], 'bestaudio/best');
+                    if ($request->isGet() || $request->isPost()) {
+                        $process = $this->download->getAudioStream($params['url'], 'bestaudio/best', $password);
                         $response = $response->withBody(new Stream($process));
                     }
 

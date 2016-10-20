@@ -154,16 +154,17 @@ class VideoDownload
     /**
      * Get filename of audio from URL of page.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return string Filename of converted audio file
      * */
-    public function getAudioFilename($url, $format = null)
+    public function getAudioFilename($url, $format = null, $password = null)
     {
         return html_entity_decode(
             pathinfo(
-                $this->getFilename($url, $format),
+                $this->getFilename($url, $format, $password),
                 PATHINFO_FILENAME
             ).'.mp3',
             ENT_COMPAT,
@@ -258,18 +259,19 @@ class VideoDownload
     /**
      * Get audio stream of converted video.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return resource popen stream
      */
-    public function getAudioStream($url, $format)
+    public function getAudioStream($url, $format, $password = null)
     {
         if (!shell_exec('which '.$this->config->avconv)) {
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
-        $video = $this->getJSON($url, $format);
+        $video = $this->getJSON($url, $format, $password);
 
         //Vimeo needs a correct user-agent
         ini_set(
