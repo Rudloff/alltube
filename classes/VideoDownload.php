@@ -71,13 +71,14 @@ class VideoDownload
     /**
      * Get a property from youtube-dl.
      *
-     * @param string $url    URL to parse
-     * @param string $format Format
-     * @param string $prop   Property
+     * @param string $url      URL to parse
+     * @param string $format   Format
+     * @param string $prop     Property
+     * @param string $password Video password
      *
      * @return string
      */
-    private function getProp($url, $format = null, $prop = 'dump-json')
+    private function getProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
         $this->procBuilder->setArguments(
             [
@@ -88,10 +89,21 @@ class VideoDownload
         if (isset($format)) {
             $this->procBuilder->add('-f '.$format);
         }
+        if (isset($password)) {
+            $this->procBuilder->add('--video-password');
+            $this->procBuilder->add($password);
+        }
         $process = $this->procBuilder->getProcess();
         $process->run();
         if (!$process->isSuccessful()) {
-            throw new \Exception($process->getErrorOutput());
+            $errorOutput = trim($process->getErrorOutput());
+            if ($errorOutput == 'ERROR: This video is protected by a password, use the --video-password option') {
+                throw new PasswordException($errorOutput);
+            } elseif (substr($errorOutput, 0, 21) == 'ERROR: Wrong password') {
+                throw new \Exception('Wrong password');
+            } else {
+                throw new \Exception($errorOutput);
+            }
         } else {
             return $process->getOutput();
         }
@@ -100,40 +112,43 @@ class VideoDownload
     /**
      * Get all information about a video.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return object Decoded JSON
      * */
-    public function getJSON($url, $format = null)
+    public function getJSON($url, $format = null, $password = null)
     {
-        return json_decode($this->getProp($url, $format, 'dump-json'));
+        return json_decode($this->getProp($url, $format, 'dump-json', $password));
     }
 
     /**
      * Get URL of video from URL of page.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return string URL of video
      * */
-    public function getURL($url, $format = null)
+    public function getURL($url, $format = null, $password = null)
     {
-        return $this->getProp($url, $format, 'get-url');
+        return $this->getProp($url, $format, 'get-url', $password);
     }
 
     /**
      * Get filename of video file from URL of page.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return string Filename of extracted video
      * */
-    public function getFilename($url, $format = null)
+    public function getFilename($url, $format = null, $password = null)
     {
-        return trim($this->getProp($url, $format, 'get-filename'));
+        return trim($this->getProp($url, $format, 'get-filename', $password));
     }
 
     /**

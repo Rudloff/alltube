@@ -11,7 +11,8 @@
     "symfony/yaml": "~3.1.0",
     "symfony/process": "~3.1.0",
     "ptachoire/process-builder-chain": "~1.2.0",
-    "rudloff/smarty-plugin-noscheme": "~0.1.0"
+    "rudloff/smarty-plugin-noscheme": "~0.1.0",
+    "aura/session": "~2.1.0"
   },
   "require-dev": {
     "symfony/var-dumper": "~3.1.0",

@@ -90,6 +90,38 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test getURL function with a protected video
+     *
+     * @return void
+     */
+    public function testGetURLWithPassword()
+    {
+        $this->assertContains('vimeocdn.com', $this->download->getURL('http://vimeo.com/68375962', null, 'youtube-dl'));
+    }
+
+    /**
+     * Test getURL function with a protected video and no password.
+     *
+     * @return void
+     * @expectedException \Alltube\PasswordException
+     */
+    public function testGetURLWithMissingPassword()
+    {
+        $this->download->getURL('http://vimeo.com/68375962');
+    }
+
+    /**
+     * Test getURL function with a protected video and a wrong password.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testGetURLWithWrongPassword()
+    {
+        $this->download->getURL('http://vimeo.com/68375962', null, 'foo');
+    }
+
+    /**
      * Test getURL function errors.
      *
      * @param string $url URL

@@ -28,11 +28,7 @@
             <optgroup label="Generic formats">
                 <option value="best[protocol^=http]">
                     {strip}
-                        Best ({$video->ext}
-                        {if isset($video->filesize)}
-                            {$video->filesize}
-                        {/if}
-                        )
+                        Best ({$video->ext})
                     {/strip}
                 </option>
                 <option value="worst[protocol^=http]">

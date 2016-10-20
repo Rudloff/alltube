@@ -6,6 +6,7 @@ namespace Alltube\Controller;
 
 use Alltube\Config;
 use Alltube\VideoDownload;
+use Alltube\PasswordException;
 use Interop\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
@@ -48,6 +49,9 @@ class FrontController
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
         $this->container = $container;
+        $session_factory = new \Aura\Session\SessionFactory;
+        $session = $session_factory->newInstance($_COOKIE);
+        $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
     }
 
     /**
@@ -99,6 +103,28 @@ class FrontController
     }
 
     /**
+     * Display a password prompt
+     * @param  Request  $request  PSR-7 request
+     * @param  Response $response PSR-7 response
+     *
+     * @return Response HTTP response
+     */
+    public function password(Request $request, Response $response)
+    {
+        if ($this->container instanceof Container) {
+            $this->container->view->render(
+                $response,
+                'password.tpl',
+                [
+                    'class'       => 'password',
+                    'title'       => 'Password prompt',
+                    'description' => 'You need a password in order to download this video with Alltube Download',
+                ]
+            );
+        }
+    }
+
+    /**
      * Dislay information about the video.
      *
      * @param Request  $request  PSR-7 request
@@ -109,8 +135,11 @@ class FrontController
     public function video(Request $request, Response $response)
     {
         $params = $request->getQueryParams();
-        $this->config = Config::getInstance();
         if (isset($params['url'])) {
+            $password = $request->getParam('password');
+            if (isset($password)) {
+                $this->sessionSegment->setFlash($params['url'], $password);
+            }
             if (isset($params['audio'])) {
                 try {
                     $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]');
@@ -132,7 +161,11 @@ class FrontController
                     return $response;
                 }
             } else {
-                $video = $this->download->getJSON($params['url']);
+                try {
+                    $video = $this->download->getJSON($params['url'], null, $password);
+                } catch (PasswordException $e) {
+                    return $this->password($request, $response);
+                }
                 if ($this->container instanceof Container) {
                     $this->container->view->render(
                         $response,
@@ -190,9 +223,11 @@ class FrontController
         $params = $request->getQueryParams();
         if (isset($params['url'])) {
             try {
-                $url = $this->download->getURL($params['url'], $params['format']);
+                $url = $this->download->getURL($params['url'], $request->getParam('format'), $this->sessionSegment->getFlash($params['url']));
 
                 return $response->withRedirect($url);
+            } catch (PasswordException $e) {
+                return $response->withRedirect($this->container->get('router')->pathFor('video').'?url='.urlencode($params['url']));
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
 

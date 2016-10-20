@@ -35,7 +35,7 @@ $app->get(
     '/extractors',
     [$controller, 'extractors']
 )->setName('extractors');
-$app->get(
+$app->any(
     '/video',
     [$controller, 'video']
 )->setName('video');
