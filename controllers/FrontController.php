@@ -47,6 +47,12 @@ class FrontController
     private $sessionSegment;
 
     /**
+     * Smarty view
+     * @var \Slim\Views\Smarty
+     */
+    private $view;
+
+    /**
      * FrontController constructor.
      *
      * @param Container $container Slim dependency container
@@ -56,6 +62,7 @@ class FrontController
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
         $this->container = $container;
+        $this->view = $this->container->get('view');
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($_COOKIE);
         $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
@@ -71,17 +78,15 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
-        if ($this->container instanceof Container) {
-            $this->container->view->render(
-                $response,
-                'index.tpl',
-                [
-                    'convert'     => $this->config->convert,
-                    'class'       => 'index',
-                    'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
-                ]
-            );
-        }
+        $this->view->render(
+            $response,
+            'index.tpl',
+            [
+                'convert'     => $this->config->convert,
+                'class'       => 'index',
+                'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+            ]
+        );
     }
 
     /**
@@ -94,19 +99,17 @@ class FrontController
      */
     public function extractors(Request $request, Response $response)
     {
-        if ($this->container instanceof Container) {
-            $this->container->view->render(
-                $response,
-                'extractors.tpl',
-                [
-                    'extractors'  => $this->download->listExtractors(),
-                    'class'       => 'extractors',
-                    'title'       => 'Supported websites',
-                    'description' => 'List of all supported websites from which Alltube Download '.
-                        'can extract video or audio files',
-                ]
-            );
-        }
+        $this->view->render(
+            $response,
+            'extractors.tpl',
+            [
+                'extractors'  => $this->download->listExtractors(),
+                'class'       => 'extractors',
+                'title'       => 'Supported websites',
+                'description' => 'List of all supported websites from which Alltube Download '.
+                    'can extract video or audio files',
+            ]
+        );
     }
 
     /**
@@ -119,17 +122,15 @@ class FrontController
      */
     public function password(Request $request, Response $response)
     {
-        if ($this->container instanceof Container) {
-            $this->container->view->render(
-                $response,
-                'password.tpl',
-                [
-                    'class'       => 'password',
-                    'title'       => 'Password prompt',
-                    'description' => 'You need a password in order to download this video with Alltube Download',
-                ]
-            );
-        }
+        $this->view->render(
+            $response,
+            'password.tpl',
+            [
+                'class'       => 'password',
+                'title'       => 'Password prompt',
+                'description' => 'You need a password in order to download this video with Alltube Download',
+            ]
+        );
     }
 
     /**
@@ -176,18 +177,16 @@ class FrontController
                 } catch (PasswordException $e) {
                     return $this->password($request, $response);
                 }
-                if ($this->container instanceof Container) {
-                    $this->container->view->render(
-                        $response,
-                        'video.tpl',
-                        [
-                            'video'       => $video,
-                            'class'       => 'video',
-                            'title'       => $video->title,
-                            'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
-                        ]
-                    );
-                }
+                $this->view->render(
+                    $response,
+                    'video.tpl',
+                    [
+                        'video'       => $video,
+                        'class'       => 'video',
+                        'title'       => $video->title,
+                        'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                    ]
+                );
             }
         } else {
             return $response->withRedirect($this->container->get('router')->pathFor('index'));
@@ -205,17 +204,15 @@ class FrontController
      */
     public function error(Request $request, Response $response, \Exception $exception)
     {
-        if ($this->container instanceof Container) {
-            $this->container->view->render(
-                $response,
-                'error.tpl',
-                [
-                    'errors' => $exception->getMessage(),
-                    'class'  => 'video',
-                    'title'  => 'Error',
-                ]
-            );
-        }
+        $this->view->render(
+            $response,
+            'error.tpl',
+            [
+                'errors' => $exception->getMessage(),
+                'class'  => 'video',
+                'title'  => 'Error',
+            ]
+        );
 
         return $response->withStatus(500);
     }
