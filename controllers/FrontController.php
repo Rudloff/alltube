@@ -47,7 +47,8 @@ class FrontController
     private $sessionSegment;
 
     /**
-     * Smarty view
+     * Smarty view.
+     *
      * @var \Slim\Views\Smarty
      */
     private $view;
