@@ -57,15 +57,7 @@ class VideoDownload
      * */
     public function listExtractors()
     {
-        $this->procBuilder->setArguments(
-            [
-                '--list-extractors',
-            ]
-        );
-        $process = $this->procBuilder->getProcess();
-        $process->run();
-
-        return explode(PHP_EOL, trim($process->getOutput()));
+        return explode(PHP_EOL, trim($this->getProp($url, null, 'list-extractors')));
     }
 
     /**
