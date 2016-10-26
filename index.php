@@ -3,7 +3,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Controller\FrontController;
 
-if (strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
+if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
     header('Location: '.str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
     die;
 }
