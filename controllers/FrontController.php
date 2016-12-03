@@ -231,11 +231,17 @@ class FrontController
         $params = $request->getQueryParams();
         if (isset($params['url'])) {
             try {
-                $url = $this->download->getURL($params['url'], $request->getParam('format'), $this->sessionSegment->getFlash($params['url']));
+                $url = $this->download->getURL(
+                    $params['url'],
+                    $request->getParam('format'),
+                    $this->sessionSegment->getFlash($params['url'])
+                );
 
                 return $response->withRedirect($url);
             } catch (PasswordException $e) {
-                return $response->withRedirect($this->container->get('router')->pathFor('video').'?url='.urlencode($params['url']));
+                return $response->withRedirect(
+                    $this->container->get('router')->pathFor('video').'?url='.urlencode($params['url'])
+                );
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
 
