@@ -2,6 +2,7 @@
 /**
  * PasswordException class.
  */
+
 namespace Alltube;
 
 /**

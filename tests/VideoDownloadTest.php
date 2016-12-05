@@ -2,6 +2,7 @@
 /**
  * VideoDownloadTest class.
  */
+
 namespace Alltube\Test;
 
 use Alltube\Config;

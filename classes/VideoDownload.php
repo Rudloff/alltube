@@ -2,6 +2,7 @@
 /**
  * VideoDownload class.
  */
+
 namespace Alltube;
 
 use Chain\Chain;

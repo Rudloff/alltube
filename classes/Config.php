@@ -2,6 +2,7 @@
 /**
  * Config class.
  */
+
 namespace Alltube;
 
 use Symfony\Component\Yaml\Yaml;

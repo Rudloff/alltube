@@ -2,6 +2,7 @@
 /**
  * FrontController class.
  */
+
 namespace Alltube\Controller;
 
 use Alltube\Config;

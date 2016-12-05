@@ -19,7 +19,6 @@ $container['view'] = function ($c) {
 
     $view->registerPlugin('modifier', 'noscheme', 'Smarty_Modifier_noscheme');
 
-
     return $view;
 };
 
