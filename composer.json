@@ -36,8 +36,8 @@
         "name": "rg3/youtube-dl",
         "version": "2016.09.08",
         "dist": {
-          "type": "tar",
-          "url": "https://github.com/rg3/youtube-dl/archive/2016.09.08.tar.gz"
+          "type": "zip",
+          "url": "https://github.com/rg3/youtube-dl/archive/2016.12.18.zip"
         }
       }
     },
