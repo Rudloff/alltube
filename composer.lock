@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a16b07104a463e2beb02558d3c6d97b1",
-    "content-hash": "ed2f2e09c9147797cc42a8ffb8d878bb",
+    "hash": "93c64a5b8450d9279bf29ae4d05608ed",
+    "content-hash": "d794caceda089ec4e2c36948997362ae",
     "packages": [
         {
             "name": "aura/session",
@@ -1038,16 +1038,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929"
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/903fd6318d0a90b4770a009ff73e4a4e9c437929",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c14196e64a78570034afd0b7a9f3757ba71c2a0a",
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a",
                 "shasum": ""
             },
             "require": {
@@ -1097,7 +1097,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-11-28 16:00:31"
+            "time": "2016-12-20 15:22:42"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1423,10 +1423,10 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2016.09.08",
+            "version": "2016.12.20",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2016.12.18.zip",
+                "url": "https://github.com/rg3/youtube-dl/archive/2016.12.20.zip",
                 "reference": null,
                 "shasum": null
             },
