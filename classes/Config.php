@@ -109,6 +109,9 @@ class Config
         if (getenv('CONVERT')) {
             $this->convert = (bool) getenv('CONVERT');
         }
+        if (getenv('PYTHON')) {
+            $this->python = getenv('PYTHON');
+        }
     }
 
     /**
