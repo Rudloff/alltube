@@ -176,8 +176,18 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
                 'edgefcs.net',
                 'GRIP sucht den Sommerkönig-folge-203-0.mp3',
             ],
+        ];
+    }
+
+    /**
+     * Provides M3U8 URLs for tests.
+     *
+     * @return array[]
+     */
+    public function M3uUrlProvider()
+    {
+        return [
             [
-                //Only works on the feature/stream branch
                 'https://twitter.com/verge/status/813055465324056576/video/1', null,
                 'The Verge - This tiny origami robot can self-fold and complete tasks-813055465324056576.mp4',
                 'video.twimg.com',
@@ -206,6 +216,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider URLProvider
+     * @dataProvider M3uUrlProvider
      */
     public function testGetJSON($url, $format)
     {
@@ -241,6 +252,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider urlProvider
+     * @dataProvider M3uUrlProvider
      */
     public function testGetFilename($url, $format, $filename)
     {
@@ -273,6 +285,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider urlProvider
+     * @dataProvider M3uUrlProvider
      */
     public function testGetAudioFilename($url, $format, $filename, $domain, $audioFilename)
     {
