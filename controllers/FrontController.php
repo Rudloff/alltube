@@ -217,6 +217,15 @@ class FrontController
         return $response->withStatus(500);
     }
 
+    /**
+     * Get a video/audio stream piped through the server.
+     * @param  string $url      URL of the video
+     * @param  string $format   Requested format
+     * @param  Response   $response  PSR-7 response
+     * @param  Request    $request   PSR-7 request
+     * @param  string $password Video password
+     * @return Response
+     */
     private function getStream($url, $format, $response, $request, $password = null)
     {
         if (!isset($format)) {

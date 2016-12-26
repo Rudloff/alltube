@@ -293,6 +293,13 @@ class VideoDownload
         return popen($chain->getProcess()->getCommandLine(), 'r');
     }
 
+    /**
+     * Get video stream from an M3U playlist.
+     *
+     * @param \stdClass $video Video object returned by getJSON
+     *
+     * @return resource popen stream
+     */
     public function getM3uStream(\stdClass $video)
     {
         if (!shell_exec('which '.$this->config->avconv)) {
@@ -311,8 +318,6 @@ class VideoDownload
                 'pipe:1',
             ]
         );
-
-        //dump($procBuilder->getProcess()->getCommandLine()); die;
 
         return popen($procBuilder->getProcess()->getCommandLine(), 'r');
     }
