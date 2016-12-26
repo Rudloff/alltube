@@ -347,11 +347,50 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Test getAudioStream function with a M3U8 file.
      *
+     * @param string $url    URL
+     * @param string $format Format
+     *
      * @return void
      * @expectedException Exception
+     * @dataProvider M3uUrlProvider
      */
-    public function testGetAudioStreamM3uError()
+    public function testGetAudioStreamM3uError($url, $format)
     {
-        $this->download->getAudioStream('https://twitter.com/verge/status/813055465324056576/video/1', 'best');
+        $this->download->getAudioStream($url, $format);
+    }
+
+    /**
+     * Test getM3uStream function.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @dataProvider M3uUrlProvider
+     */
+    public function testGetM3uStream($url, $format)
+    {
+        $video = $this->download->getJSON($url, $format);
+        $stream = $this->download->getM3uStream($video);
+        $this->assertInternalType('resource', $stream);
+        $this->assertFalse(feof($stream));
+    }
+
+    /**
+     * Test getM3uStream function without avconv.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @expectedException Exception
+     * @dataProvider M3uUrlProvider
+     */
+    public function testGetM3uStreamAvconvError($url, $format)
+    {
+        $config = \Alltube\Config::getInstance();
+        $config->avconv = 'foobar';
+        $video = $this->download->getJSON($url, $format);
+        $this->download->getM3uStream($video);
     }
 }
