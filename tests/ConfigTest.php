@@ -27,6 +27,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->config = Config::getInstance('config_test.yml');
     }
 
+    /**
+     * Destroy variables created by setUp().
+     * @return void
+     */
     protected function tearDown()
     {
         Config::destroyInstance();
