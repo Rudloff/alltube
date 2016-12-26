@@ -38,7 +38,12 @@ class Config
      *
      * @var array
      */
-    public $params = ['--no-playlist', '--no-warnings', '-f best[protocol^=http]', '--playlist-end', 1];
+    public $params = [
+        '--no-playlist', '--no-warnings',
+        //We can allow non-HTTP URLs on the feature/stream branch
+        '-f best',
+        '--playlist-end', 1
+    ];
 
     /**
      * Enable audio conversion.

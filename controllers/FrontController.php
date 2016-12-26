@@ -153,7 +153,7 @@ class FrontController
             }
             if (isset($params['audio'])) {
                 try {
-                    return $this->getStream($params['url'], 'mp3[protocol^=http]', $response, $request, $password);
+                    return $this->getStream($params['url'], 'mp3', $response, $request, $password);
                 } catch (PasswordException $e) {
                     return $this->password($request, $response);
                 } catch (\Exception $e) {
@@ -223,14 +223,22 @@ class FrontController
             $format = 'best';
         }
         $video = $this->download->getJSON($url, $format, $password);
-        $client = new \GuzzleHttp\Client();
-        $stream = $client->request('GET', $video->url, ['stream' => true]);
-        $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
-        $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
-        $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
-        if ($request->isGet()) {
-            $response = $response->withBody($stream->getBody());
+        if ($video->protocol == 'm3u8') {
+            $stream = $this->download->getM3uStream($video);
+            $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
+            if ($request->isGet()) {
+                $response = $response->withBody(new Stream($stream));
+            }
+        } else {
+            $client = new \GuzzleHttp\Client();
+            $stream = $client->request('GET', $video->url, ['stream' => true]);
+            $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
+            $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
+            if ($request->isGet()) {
+                $response = $response->withBody($stream->getBody());
+            }
         }
+        $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
 
         return $response;
     }

@@ -292,4 +292,28 @@ class VideoDownload
 
         return popen($chain->getProcess()->getCommandLine(), 'r');
     }
+
+    public function getM3uStream(\stdClass $video)
+    {
+        if (!shell_exec('which '.$this->config->avconv)) {
+            throw(new \Exception('Can\'t find avconv or ffmpeg'));
+        }
+
+        $procBuilder = ProcessBuilder::create(
+            [
+                $this->config->avconv,
+                '-v', 'quiet',
+                '-i', $video->url,
+                '-f', $video->ext,
+                '-c', 'copy',
+                '-bsf:a', 'aac_adtstoasc',
+                '-movflags', 'frag_keyframe+empty_moov',
+                'pipe:1',
+            ]
+        );
+
+        //dump($procBuilder->getProcess()->getCommandLine()); die;
+
+        return popen($procBuilder->getProcess()->getCommandLine(), 'r');
+    }
 }

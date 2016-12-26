@@ -26,18 +26,17 @@
         <input type="hidden" name="url" value="{$video->webpage_url}" />
         <select name="format" id="format" class="formats monospace">
             <optgroup label="Generic formats">
-                <option value="best[protocol^=http]">
+                <option value="best">
                     {strip}
                         Best ({$video->ext})
                     {/strip}
                 </option>
-                <option value="worst[protocol^=http]">
+                <option value="worst">
                     Worst
                 </option>
             </optgroup>
             <optgroup label="Detailed formats" class="monospace">
                 {foreach $video->formats as $format}
-                    {if $format->protocol|in_array:array('http', 'https')}
                         {strip}
                         <option value="{$format->format_id}">
                             {$format->ext}
@@ -70,14 +69,13 @@
                             &nbsp;({$format->format_id})
                         </option>
                         {/strip}
-                    {/if}
                 {/foreach}
             </optgroup>
         </select><br/><br/>
         <input class="downloadBtn" type="submit" value="Download" /><br/>
     </form>
 {else}
-    <input type="hidden" name="format" value="best[protocol^=http]" />
+    <input type="hidden" name="format" value="best" />
     <a class="downloadBtn"
         href="{$video->url|escape}">Download</a><br/>
 {/if}
