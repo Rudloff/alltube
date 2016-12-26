@@ -153,7 +153,7 @@ class FrontController
             }
             if (isset($params['audio'])) {
                 try {
-                    return $this->getStream($params['url'], 'mp3[protocol^=http]', $response, $request);
+                    return $this->getStream($params['url'], 'mp3[protocol^=http]', $response, $request, $password);
                 } catch (PasswordException $e) {
                     return $this->password($request, $response);
                 } catch (\Exception $e) {
@@ -217,12 +217,12 @@ class FrontController
         return $response->withStatus(500);
     }
 
-    private function getStream($url, $format, $response, $request)
+    private function getStream($url, $format, $response, $request, $password = null)
     {
         if (!isset($format)) {
             $format = 'best';
         }
-        $video = $this->download->getJSON($url, $format);
+        $video = $this->download->getJSON($url, $format, $password);
         $client = new \GuzzleHttp\Client();
         $stream = $client->request('GET', $video->url, ['stream' => true]);
         $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
@@ -248,7 +248,13 @@ class FrontController
         $params = $request->getQueryParams();
         if (isset($params['url'])) {
             try {
-                return $this->getStream($params['url'], $params['format'], $response, $request);
+                return $this->getStream(
+                    $params['url'],
+                    $request->getParam('format'),
+                    $response,
+                    $request,
+                    $this->sessionSegment->getFlash($params['url'])
+                );
             } catch (PasswordException $e) {
                 return $response->withRedirect(
                     $this->container->get('router')->pathFor('video').'?url='.urlencode($params['url'])
