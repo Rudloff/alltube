@@ -265,6 +265,9 @@ class VideoDownload
         }
 
         $video = $this->getJSON($url, $format, $password);
+        if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
+            throw(new \Exception('Conversion of M3U8 files is not supported.'));
+        }
 
         //Vimeo needs a correct user-agent
         ini_set(

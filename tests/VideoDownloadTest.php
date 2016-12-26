@@ -330,4 +330,15 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $config->rtmpdump = 'foobar';
         $this->download->getAudioStream($url, $format);
     }
+
+    /**
+     * Test getAudioStream function with a M3U8 file.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testGetAudioStreamM3uError()
+    {
+        $this->download->getAudioStream('https://twitter.com/verge/status/813055465324056576/video/1', 'best');
+    }
 }
