@@ -42,7 +42,7 @@ class Config
         '--no-playlist', '--no-warnings',
         //We can allow non-HTTP URLs on the feature/stream branch
         '-f best',
-        '--playlist-end', 1
+        '--playlist-end', 1,
     ];
 
     /**
