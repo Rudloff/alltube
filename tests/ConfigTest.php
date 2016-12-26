@@ -2,6 +2,7 @@
 /**
  * ConfigTest class.
  */
+
 namespace Alltube\Test;
 
 use Alltube\Config;
@@ -40,6 +41,17 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $this->config->python);
         $this->assertInternalType('string', $this->config->avconv);
         $this->assertInternalType('string', $this->config->rtmpdump);
+    }
+
+    /**
+     * Test the getInstance function with a missing config file.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testGetInstanceWithMissingFile()
+    {
+        Config::getInstance('foo');
     }
 
     /**

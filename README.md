@@ -110,12 +110,6 @@ server {
 }
 ```
 
-## License
-
-This software is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
-
-Please __use a different name and logo__ if you run it on a public server.
-
 ## Other dependencies
 
 You need [avconv](https://libav.org/avconv.html), [rtmpdump](http://rtmpdump.mplayerhq.hu/) and [curl](https://curl.haxx.se/) in order to enable conversions.
@@ -129,6 +123,45 @@ sudo apt-get install libav-tools rtmpdump curl
 
 You also probably need to edit the `avconv` variable in `config.yml` so that it points to your ffmpeg/avconv binary (`/usr/bin/avconv` on Debian/Ubuntu).
 
+## Use as library
+
+Alltube can also be used as a library to extract a video URL from a webpage.
+
+You can install it with:
+
+```bash
+composer require rudloff/alltube
+```
+
+You can then use it in your PHP code:
+
+```php
+use Alltube\Config;
+use Alltube\VideoDownload;
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$downloader = new VideoDownload(
+    new Config(
+        [
+            'youtubedl' => '/usr/local/bin/youtube-dl',
+        ]
+    )
+);
+
+$downloader->getURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+```
+
+The library documentation is available on [alltube.surge.sh](https://alltube.surge.sh/classes/Alltube.VideoDownload.html).
+
+You can also have a look at this [example project](https://github.com/Rudloff/alltube-example-project).
+
 ## FAQ
 
 Please read the [FAQ](FAQ.md) before reporting any issue.
+
+## License
+
+This software is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
+
+Please __use a different name and logo__ if you run it on a public server.

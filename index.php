@@ -3,7 +3,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Controller\FrontController;
 
-if (strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
+if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
     header('Location: '.str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
     die;
 }
@@ -18,7 +18,6 @@ $container['view'] = function ($c) {
     $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
 
     $view->registerPlugin('modifier', 'noscheme', 'Smarty_Modifier_noscheme');
-
 
     return $view;
 };
@@ -35,7 +34,7 @@ $app->get(
     '/extractors',
     [$controller, 'extractors']
 )->setName('extractors');
-$app->get(
+$app->any(
     '/video',
     [$controller, 'video']
 )->setName('video');

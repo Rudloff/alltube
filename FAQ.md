@@ -55,3 +55,11 @@ There are two known workarounds:
 * You can run Alltube locally on your computer.
 * You can use the experimental `feature/stream` branch which streams the video through the server in order to bypass IP restrictions.
   Please note that this can use a lot of resources on the server (which is why we won't enable it on alltubedownload.net).
+
+## CSS and JavaScript files are missing
+
+You probably don't have the minified files (in the `dist` folder).
+You need to either:
+
+* Use a [release package](https://github.com/Rudloff/alltube/releases)
+* Run `npm install` (see detailed instructions in the [README](README.md#from-git))

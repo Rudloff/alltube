@@ -1,13 +1,12 @@
 {
   "name": "alltube",
   "description": "HTML GUI for youtube-dl",
-  "version": "0.5.2",
+  "version": "0.7.0",
   "author": "Pierre Rudloff",
   "bugs": "https://github.com/Rudloff/alltube/issues",
   "dependencies": {
-    "bower": "~1.7.1",
+    "bower": "~1.8.0",
     "grunt": "~1.0.1",
-    "grunt-cli": "~1.2.0",
     "grunt-contrib-cssmin": "~1.0.0",
     "grunt-contrib-uglify": "~2.0.0"
   },
@@ -39,6 +38,6 @@
     "url": "https://github.com/Rudloff/alltube.git"
   },
   "scripts": {
-    "postinstall": "node node_modules/bower/bin/bower install && node node_modules/grunt-cli/bin/grunt"
+    "postinstall": "node node_modules/.bin/bower install && node node_modules/.bin/grunt"
   }
 }

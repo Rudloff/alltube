@@ -33,5 +33,6 @@
   "lang": "en",
   "start_url": "./",
   "theme_color": "#4F4F4F",
+  "background_color": "#EBEBEB",
   "orientation": "portrait"
 }

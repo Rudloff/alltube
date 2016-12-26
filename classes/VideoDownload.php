@@ -2,6 +2,7 @@
 /**
  * VideoDownload class.
  */
+
 namespace Alltube;
 
 use Chain\Chain;
@@ -29,10 +30,19 @@ class VideoDownload
     /**
      * VideoDownload constructor.
      */
-    public function __construct()
+    public function __construct(Config $config = null)
     {
-        $this->config = Config::getInstance();
+        if (isset($config)) {
+            $this->config = $config;
+        } else {
+            $this->config = Config::getInstance();
+        }
         $this->procBuilder = new ProcessBuilder();
+        if (!is_file($this->config->youtubedl)) {
+            throw new \Exception("Can't find youtube-dl at ".$this->config->youtubedl);
+        } elseif (!is_file($this->config->python)) {
+            throw new \Exception("Can't find Python at ".$this->config->python);
+        }
         $this->procBuilder->setPrefix(
             array_merge(
                 [$this->config->python, $this->config->youtubedl],
@@ -48,27 +58,20 @@ class VideoDownload
      * */
     public function listExtractors()
     {
-        $this->procBuilder->setArguments(
-            [
-                '--list-extractors',
-            ]
-        );
-        $process = $this->procBuilder->getProcess();
-        $process->run();
-
-        return explode(PHP_EOL, trim($process->getOutput()));
+        return explode(PHP_EOL, trim($this->getProp(null, null, 'list-extractors')));
     }
 
     /**
      * Get a property from youtube-dl.
      *
-     * @param string $url    URL to parse
-     * @param string $format Format
-     * @param string $prop   Property
+     * @param string $url      URL to parse
+     * @param string $format   Format
+     * @param string $prop     Property
+     * @param string $password Video password
      *
      * @return string
      */
-    private function getProp($url, $format = null, $prop = 'dump-json')
+    private function getProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
         $this->procBuilder->setArguments(
             [
@@ -79,10 +82,21 @@ class VideoDownload
         if (isset($format)) {
             $this->procBuilder->add('-f '.$format);
         }
+        if (isset($password)) {
+            $this->procBuilder->add('--video-password');
+            $this->procBuilder->add($password);
+        }
         $process = $this->procBuilder->getProcess();
         $process->run();
         if (!$process->isSuccessful()) {
-            throw new \Exception($process->getErrorOutput());
+            $errorOutput = trim($process->getErrorOutput());
+            if ($errorOutput == 'ERROR: This video is protected by a password, use the --video-password option') {
+                throw new PasswordException($errorOutput);
+            } elseif (substr($errorOutput, 0, 21) == 'ERROR: Wrong password') {
+                throw new \Exception('Wrong password');
+            } else {
+                throw new \Exception($errorOutput);
+            }
         } else {
             return $process->getOutput();
         }
@@ -91,55 +105,59 @@ class VideoDownload
     /**
      * Get all information about a video.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return object Decoded JSON
      * */
-    public function getJSON($url, $format = null)
+    public function getJSON($url, $format = null, $password = null)
     {
-        return json_decode($this->getProp($url, $format, 'dump-json'));
+        return json_decode($this->getProp($url, $format, 'dump-json', $password));
     }
 
     /**
      * Get URL of video from URL of page.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return string URL of video
      * */
-    public function getURL($url, $format = null)
+    public function getURL($url, $format = null, $password = null)
     {
-        return $this->getProp($url, $format, 'get-url');
+        return $this->getProp($url, $format, 'get-url', $password);
     }
 
     /**
      * Get filename of video file from URL of page.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return string Filename of extracted video
      * */
-    public function getFilename($url, $format = null)
+    public function getFilename($url, $format = null, $password = null)
     {
-        return trim($this->getProp($url, $format, 'get-filename'));
+        return trim($this->getProp($url, $format, 'get-filename', $password));
     }
 
     /**
      * Get filename of audio from URL of page.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return string Filename of converted audio file
      * */
-    public function getAudioFilename($url, $format = null)
+    public function getAudioFilename($url, $format = null, $password = null)
     {
         return html_entity_decode(
             pathinfo(
-                $this->getFilename($url, $format),
+                $this->getFilename($url, $format, $password),
                 PATHINFO_FILENAME
             ).'.mp3',
             ENT_COMPAT,
@@ -148,20 +166,105 @@ class VideoDownload
     }
 
     /**
+     * Add options to a process builder running rtmp.
+     *
+     * @param ProcessBuilder $builder Process builder
+     * @param object         $video   Video object returned by youtube-dl
+     *
+     * @return ProcessBuilder
+     */
+    private function addOptionsToRtmpProcess(ProcessBuilder $builder, $video)
+    {
+        foreach ([
+            'url'           => 'rtmp',
+            'webpage_url'   => 'pageUrl',
+            'player_url'    => 'swfVfy',
+            'flash_version' => 'flashVer',
+            'play_path'     => 'playpath',
+            'app'           => 'app',
+        ] as $property => $option) {
+            if (isset($video->{$property})) {
+                $builder->add('--'.$option);
+                $builder->add($video->{$property});
+            }
+        }
+
+        return $builder;
+    }
+
+    /**
+     * Get a process that runs rtmp in order to download a video.
+     *
+     * @param object $video Video object returned by youtube-dl
+     *
+     * @return \Symfony\Component\Process\Process Process
+     */
+    private function getRtmpProcess($video)
+    {
+        if (!shell_exec('which '.$this->config->rtmpdump)) {
+            throw(new \Exception('Can\'t find rtmpdump'));
+        }
+        $builder = new ProcessBuilder(
+            [
+                $this->config->rtmpdump,
+                '-q',
+            ]
+        );
+        $builder = $this->addOptionsToRtmpProcess($builder, $video);
+        if (isset($video->rtmp_conn)) {
+            foreach ($video->rtmp_conn as $conn) {
+                $builder->add('--conn');
+                $builder->add($conn);
+            }
+        }
+
+        return $builder->getProcess();
+    }
+
+    /**
+     * Get a process that runs curl in order to download a video.
+     *
+     * @param object $video Video object returned by youtube-dl
+     *
+     * @return \Symfony\Component\Process\Process Process
+     */
+    private function getCurlProcess($video)
+    {
+        if (!shell_exec('which '.$this->config->curl)) {
+            throw(new \Exception('Can\'t find curl'));
+        }
+        $builder = ProcessBuilder::create(
+            array_merge(
+                [
+                    $this->config->curl,
+                    '--silent',
+                    '--location',
+                    '--user-agent', $video->http_headers->{'User-Agent'},
+                    $video->url,
+                ],
+                $this->config->curl_params
+            )
+        );
+
+        return $builder->getProcess();
+    }
+
+    /**
      * Get audio stream of converted video.
      *
-     * @param string $url    URL of page
-     * @param string $format Format to use for the video
+     * @param string $url      URL of page
+     * @param string $format   Format to use for the video
+     * @param string $password Video password
      *
      * @return resource popen stream
      */
-    public function getAudioStream($url, $format)
+    public function getAudioStream($url, $format, $password = null)
     {
         if (!shell_exec('which '.$this->config->avconv)) {
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
-        $video = $this->getJSON($url, $format);
+        $video = $this->getJSON($url, $format, $password);
 
         //Vimeo needs a correct user-agent
         ini_set(
@@ -180,62 +283,12 @@ class VideoDownload
         );
 
         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
-            if (!shell_exec('which '.$this->config->rtmpdump)) {
-                throw(new \Exception('Can\'t find rtmpdump'));
-            }
-            $builder = new ProcessBuilder(
-                [
-                    $this->config->rtmpdump,
-                    '-q',
-                    '-r',
-                    $video->url,
-                    '--pageUrl', $video->webpage_url,
-                ]
-            );
-            if (isset($video->player_url)) {
-                $builder->add('--swfVfy');
-                $builder->add($video->player_url);
-            }
-            if (isset($video->flash_version)) {
-                $builder->add('--flashVer');
-                $builder->add($video->flash_version);
-            }
-            if (isset($video->play_path)) {
-                $builder->add('--playpath');
-                $builder->add($video->play_path);
-            }
-            if (isset($video->rtmp_conn)) {
-                foreach ($video->rtmp_conn as $conn) {
-                    $builder->add('--conn');
-                    $builder->add($conn);
-                }
-            }
-            if (isset($video->app)) {
-                $builder->add('--app');
-                $builder->add($video->app);
-            }
-            $chain = new Chain($builder->getProcess());
-            $chain->add('|', $avconvProc);
+            $process = $this->getRtmpProcess($video);
         } else {
-            if (!shell_exec('which '.$this->config->curl)) {
-                throw(new \Exception('Can\'t find curl'));
-            }
-            $chain = new Chain(
-                ProcessBuilder::create(
-                    array_merge(
-                        [
-                            $this->config->curl,
-                            '--silent',
-                            '--location',
-                            '--user-agent', $video->http_headers->{'User-Agent'},
-                            $video->url,
-                        ],
-                        $this->config->curl_params
-                    )
-                )
-            );
-            $chain->add('|', $avconvProc);
+            $process = $this->getCurlProcess($video);
         }
+        $chain = new Chain($process);
+        $chain->add('|', $avconvProc);
 
         return popen($chain->getProcess()->getCommandLine(), 'r');
     }

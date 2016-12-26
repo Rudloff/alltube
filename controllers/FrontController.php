@@ -2,9 +2,11 @@
 /**
  * FrontController class.
  */
+
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\PasswordException;
 use Alltube\VideoDownload;
 use Interop\Container\ContainerInterface;
 use Slim\Container;
@@ -39,6 +41,20 @@ class FrontController
     private $container;
 
     /**
+     * Session segment used to store session variables.
+     *
+     * @var \Aura\Session\Segment
+     */
+    private $sessionSegment;
+
+    /**
+     * Smarty view.
+     *
+     * @var \Slim\Views\Smarty
+     */
+    private $view;
+
+    /**
      * FrontController constructor.
      *
      * @param Container $container Slim dependency container
@@ -48,6 +64,10 @@ class FrontController
         $this->config = Config::getInstance();
         $this->download = new VideoDownload();
         $this->container = $container;
+        $this->view = $this->container->get('view');
+        $session_factory = new \Aura\Session\SessionFactory();
+        $session = $session_factory->newInstance($_COOKIE);
+        $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
     }
 
     /**
@@ -60,17 +80,15 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
-        if ($this->container instanceof Container) {
-            $this->container->view->render(
-                $response,
-                'index.tpl',
-                [
-                    'convert'     => $this->config->convert,
-                    'class'       => 'index',
-                    'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
-                ]
-            );
-        }
+        $this->view->render(
+            $response,
+            'index.tpl',
+            [
+                'convert'     => $this->config->convert,
+                'class'       => 'index',
+                'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+            ]
+        );
     }
 
     /**
@@ -83,19 +101,38 @@ class FrontController
      */
     public function extractors(Request $request, Response $response)
     {
-        if ($this->container instanceof Container) {
-            $this->container->view->render(
-                $response,
-                'extractors.tpl',
-                [
-                    'extractors'  => $this->download->listExtractors(),
-                    'class'       => 'extractors',
-                    'title'       => 'Supported websites',
-                    'description' => 'List of all supported websites from which Alltube Download '.
-                        'can extract video or audio files',
-                ]
-            );
-        }
+        $this->view->render(
+            $response,
+            'extractors.tpl',
+            [
+                'extractors'  => $this->download->listExtractors(),
+                'class'       => 'extractors',
+                'title'       => 'Supported websites',
+                'description' => 'List of all supported websites from which Alltube Download '.
+                    'can extract video or audio files',
+            ]
+        );
+    }
+
+    /**
+     * Display a password prompt.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     *
+     * @return Response HTTP response
+     */
+    public function password(Request $request, Response $response)
+    {
+        $this->view->render(
+            $response,
+            'password.tpl',
+            [
+                'class'       => 'password',
+                'title'       => 'Password prompt',
+                'description' => 'You need a password in order to download this video with Alltube Download',
+            ]
+        );
     }
 
     /**
@@ -109,40 +146,47 @@ class FrontController
     public function video(Request $request, Response $response)
     {
         $params = $request->getQueryParams();
-        $this->config = Config::getInstance();
         if (isset($params['url'])) {
+            $password = $request->getParam('password');
+            if (isset($password)) {
+                $this->sessionSegment->setFlash($params['url'], $password);
+            }
             if (isset($params['audio'])) {
                 try {
                     return $this->getStream($params['url'], 'mp3[protocol^=http]', $response, $request);
+                } catch (PasswordException $e) {
+                    return $this->password($request, $response);
                 } catch (\Exception $e) {
                     $response = $response->withHeader(
                         'Content-Disposition',
                         'attachment; filename="'.
-                        $this->download->getAudioFilename($params['url'], 'bestaudio/best').'"'
+                        $this->download->getAudioFilename($params['url'], 'bestaudio/best', $password).'"'
                     );
                     $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
-                    if ($request->isGet()) {
-                        $process = $this->download->getAudioStream($params['url'], 'bestaudio/best');
+                    if ($request->isGet() || $request->isPost()) {
+                        $process = $this->download->getAudioStream($params['url'], 'bestaudio/best', $password);
                         $response = $response->withBody(new Stream($process));
                     }
 
                     return $response;
                 }
             } else {
-                $video = $this->download->getJSON($params['url']);
-                if ($this->container instanceof Container) {
-                    $this->container->view->render(
-                        $response,
-                        'video.tpl',
-                        [
-                            'video'       => $video,
-                            'class'       => 'video',
-                            'title'       => $video->title,
-                            'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
-                        ]
-                    );
+                try {
+                    $video = $this->download->getJSON($params['url'], null, $password);
+                } catch (PasswordException $e) {
+                    return $this->password($request, $response);
                 }
+                $this->view->render(
+                    $response,
+                    'video.tpl',
+                    [
+                        'video'       => $video,
+                        'class'       => 'video',
+                        'title'       => $video->title,
+                        'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                    ]
+                );
             }
         } else {
             return $response->withRedirect($this->container->get('router')->pathFor('index'));
@@ -160,17 +204,15 @@ class FrontController
      */
     public function error(Request $request, Response $response, \Exception $exception)
     {
-        if ($this->container instanceof Container) {
-            $this->container->view->render(
-                $response,
-                'error.tpl',
-                [
-                    'errors' => $exception->getMessage(),
-                    'class'  => 'video',
-                    'title'  => 'Error',
-                ]
-            );
-        }
+        $this->view->render(
+            $response,
+            'error.tpl',
+            [
+                'errors' => $exception->getMessage(),
+                'class'  => 'video',
+                'title'  => 'Error',
+            ]
+        );
 
         return $response->withStatus(500);
     }
@@ -207,6 +249,10 @@ class FrontController
         if (isset($params['url'])) {
             try {
                 return $this->getStream($params['url'], $params['format'], $response, $request);
+            } catch (PasswordException $e) {
+                return $response->withRedirect(
+                    $this->container->get('router')->pathFor('video').'?url='.urlencode($params['url'])
+                );
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
 
