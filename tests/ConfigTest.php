@@ -29,6 +29,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Destroy variables created by setUp().
+     *
      * @return void
      */
     protected function tearDown()
