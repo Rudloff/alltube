@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e2dc259a435b944643699141b2a9344",
-    "content-hash": "736c2be881e2080b6e3c3fe770016737",
+    "hash": "4493f6542773480e0317a90a2de2f82e",
+    "content-hash": "73c835f77628ac1e77dee70447711759",
     "packages": [
         {
             "name": "aura/session",
@@ -689,16 +689,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64"
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
-                "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/4254e40d81559e35cdf856bcbaca5f3af468b7ef",
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef",
                 "shasum": ""
             },
             "require": {
@@ -748,14 +748,14 @@
                 }
             ],
             "description": "Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs",
-            "homepage": "http://slimframework.com",
+            "homepage": "https://slimframework.com",
             "keywords": [
                 "api",
                 "framework",
                 "micro",
                 "router"
             ],
-            "time": "2016-11-20 20:48:49"
+            "time": "2016-12-20 20:30:47"
         },
         {
             "name": "smarty/smarty",
