@@ -76,15 +76,16 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Test getURL function.
      *
-     * @param string $url      URL
-     * @param string $format   Format
-     * @param string $filename Filename
-     * @param string $domain   Domain
+     * @param string $url       URL
+     * @param string $format    Format
+     * @param string $filename  Filename
+     * @param string $extension File extension
+     * @param string $domain    Domain
      *
      * @return void
      * @dataProvider urlProvider
      */
-    public function testGetURL($url, $format, $filename, $domain)
+    public function testGetURL($url, $format, $filename, $extension, $domain)
     {
         $videoURL = $this->download->getURL($url, $format);
         $this->assertContains($domain, $videoURL);
@@ -146,35 +147,34 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
-                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp4",
+                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU",
+                'mp4',
                 'googlevideo.com',
-                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU.mp3",
             ],
             [
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
                 "'Heart Attack' - Demi Lovato ".
-                '(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp4',
+                '(Sam Tsui & Against The Current)-RJJ6FCAXvKg',
+                'mp4',
                 'googlevideo.com',
-                "'Heart Attack' - Demi Lovato ".
-                '(Sam Tsui & Against The Current)-RJJ6FCAXvKg.mp3',
             ],
             [
                 'https://vimeo.com/24195442', null,
-                'Carving the Mountains-24195442.mp4',
+                'Carving the Mountains-24195442',
+                'mp4',
                 'vimeocdn.com',
-                'Carving the Mountains-24195442.mp3',
             ],
             [
                 'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
-                'Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.flv',
+                'Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m',
+                'flv',
                 'bbcodspdns.fcod.llnwd.net',
-                'Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m.mp3',
             ],
             [
                 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
-                'GRIP sucht den Sommerkönig-folge-203-0.f4v',
+                'GRIP sucht den Sommerkönig-folge-203-0',
+                'f4v',
                 'edgefcs.net',
-                'GRIP sucht den Sommerkönig-folge-203-0.mp3',
             ],
         ];
     }
@@ -228,17 +228,18 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Test getFilename function.
      *
-     * @param string $url      URL
-     * @param string $format   Format
-     * @param string $filename Filename
+     * @param string $url       URL
+     * @param string $format    Format
+     * @param string $filename  Filename
+     * @param string $extension File extension
      *
      * @return void
      * @dataProvider urlProvider
      */
-    public function testGetFilename($url, $format, $filename)
+    public function testGetFilename($url, $format, $filename, $extension)
     {
         $videoFilename = $this->download->getFilename($url, $format);
-        $this->assertEquals($videoFilename, $filename);
+        $this->assertEquals($videoFilename, $filename.'.'.$extension);
     }
 
     /**
@@ -267,10 +268,10 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @return void
      * @dataProvider urlProvider
      */
-    public function testGetAudioFilename($url, $format, $filename, $domain, $audioFilename)
+    public function testGetAudioFilename($url, $format, $filename)
     {
         $videoFilename = $this->download->getAudioFilename($url, $format);
-        $this->assertEquals($videoFilename, $audioFilename);
+        $this->assertEquals($videoFilename, $filename.'.mp3');
     }
 
     /**
