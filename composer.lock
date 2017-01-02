@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbf8089486d9ab0599ff3d7c22f045a7",
+    "content-hash": "91e14c843bc92c4d5af1ec7abcddf15a",
     "packages": [
         {
             "name": "aura/session",
@@ -783,6 +783,50 @@
                 "ffmpeg"
             ],
             "type": "library"
+        },
+        {
+            "name": "heroku/heroku-buildpack-php",
+            "version": "v117",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heroku/heroku-buildpack-php.git",
+                "reference": "960199a978308c75926fd9bb4775f7113bf1d777"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/960199a978308c75926fd9bb4775f7113bf1d777",
+                "reference": "960199a978308c75926fd9bb4775f7113bf1d777",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/heroku-hhvm-apache2",
+                "bin/heroku-hhvm-nginx",
+                "bin/heroku-php-apache2",
+                "bin/heroku-php-nginx"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Zuelke",
+                    "email": "dz@heroku.com"
+                }
+            ],
+            "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
+            "homepage": "https://github.com/heroku/heroku-buildpack-php",
+            "keywords": [
+                "apache",
+                "apache2",
+                "foreman",
+                "heroku",
+                "hhvm",
+                "nginx",
+                "php"
+            ],
+            "time": "2016-12-09T19:37:38+00:00"
         },
         {
             "name": "myclabs/deep-copy",

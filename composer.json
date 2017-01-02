@@ -20,7 +20,8 @@
     "phpunit/phpunit": "~5.7.2",
     "ffmpeg/ffmpeg": "dev-release",
     "rg3/youtube-dl": "~2016.12.22",
-    "rudloff/rtmpdump-bin": "~2.3"
+    "rudloff/rtmpdump-bin": "~2.3",
+    "heroku/heroku-buildpack-php": "*"
   },
   "extra": {
     "paas": {
