@@ -42,7 +42,15 @@ sudo apt-get install libav-tools curl
 Create a dyno with the following buildpacks:
 
 * `heroku/php`
-* `https://github.com/heroku/heroku-buildpack-nodejs`
+* `heroku/nodejs`
+* `heroku/python`
+
+You might also need to add the following config variables:
+
+```env
+CONVERT=1
+PYTHON=/app/.heroku/python/bin/python
+```
 
 Then push the code to Heroku and it should work out of the box.
 

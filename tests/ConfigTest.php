@@ -28,6 +28,16 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Destroy variables created by setUp().
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        Config::destroyInstance();
+    }
+
+    /**
      * Test the getInstance function.
      *
      * @return void
@@ -55,15 +65,19 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the getInstance function with the CONVERT environment variable.
+     * Test the getInstance function with the CONVERT and PYTHON environment variables.
      *
      * @return void
      */
     public function testGetInstanceWithEnv()
     {
-        putenv('CONVERT=1');
         Config::destroyInstance();
+        putenv('CONVERT=1');
+        putenv('PYTHON=foo');
         $config = Config::getInstance('config_test.yml');
         $this->assertEquals($config->convert, true);
+        $this->assertEquals($config->python, 'foo');
+        putenv('CONVERT');
+        putenv('PYTHON');
     }
 }
