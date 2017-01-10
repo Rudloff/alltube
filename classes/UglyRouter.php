@@ -2,10 +2,11 @@
 /**
  * UglyRouter class.
  */
+
 namespace Alltube;
 
-use Slim\Router;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Router;
 
 /**
  * Extend Slim's router class in order to disable URL rewriting.
@@ -13,9 +14,9 @@ use Psr\Http\Message\ServerRequestInterface;
 class UglyRouter extends Router
 {
     /**
-     * Dispatch router for HTTP request
+     * Dispatch router for HTTP request.
      *
-     * @param  ServerRequestInterface $request The current HTTP request object
+     * @param ServerRequestInterface $request The current HTTP request object
      *
      * @return array
      *
@@ -36,23 +37,23 @@ class UglyRouter extends Router
     }
 
     /**
-     * Build the path for a named route including the base path
+     * Build the path for a named route including the base path.
      *
      * @param string $name        Route name
      * @param array  $data        Named argument replacement data
      * @param array  $queryParams Optional query string parameters
      *
-     * @return string
-     *
      * @throws \RuntimeException         If named route does not exist
      * @throws \InvalidArgumentException If required data not provided
+     *
+     * @return string
      */
     public function pathFor($name, array $data = [], array $queryParams = [])
     {
         $url = str_replace('/', '/?page=', $this->relativePathFor($name, $data, $queryParams));
 
         if ($this->basePath) {
-            $url = $this->basePath . $url;
+            $url = $this->basePath.$url;
         }
 
         return $url;

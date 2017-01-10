@@ -77,7 +77,8 @@ class Config
 
     /**
      * Disable URL rewriting.
-     * @var boolean
+     *
+     * @var bool
      */
     public $uglyUrls = false;
 

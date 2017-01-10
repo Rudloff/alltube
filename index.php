@@ -1,8 +1,8 @@
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
-use Alltube\Controller\FrontController;
 use Alltube\Config;
+use Alltube\Controller\FrontController;
 use Alltube\UglyRouter;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {

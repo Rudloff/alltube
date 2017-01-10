@@ -6,11 +6,11 @@
 namespace Alltube\Test;
 
 use Alltube\UglyRouter;
-use Slim\Http\Request;
-use Slim\Http\Uri;
-use Slim\Http\Headers;
 use Slim\Http\Environment;
+use Slim\Http\Headers;
+use Slim\Http\Request;
 use Slim\Http\Stream;
+use Slim\Http\Uri;
 
 /**
  * Unit tests for the UglyRouter class.
@@ -35,6 +35,7 @@ class UglyRouterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test the dispatch() function.
+     *
      * @return void
      */
     public function testDispatch()
@@ -56,6 +57,7 @@ class UglyRouterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test the pathFor() function.
+     *
      * @return void
      */
     public function testPathFor()
@@ -68,11 +70,11 @@ class UglyRouterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test the pathFor() function with a base path.
+     *
      * @return void
      */
     public function testPathForWithBasePath()
     {
-
         $this->router->setBasePath('/bar');
         $this->assertEquals(
             '/bar/?page=foo',
