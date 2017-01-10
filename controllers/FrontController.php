@@ -84,9 +84,10 @@ class FrontController
             $response,
             'index.tpl',
             [
-                'convert'     => $this->config->convert,
-                'class'       => 'index',
-                'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+                'convert'      => $this->config->convert,
+                'uglyUrls'     => $this->config->uglyUrls,
+                'class'        => 'index',
+                'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
             ]
         );
     }
