@@ -2,6 +2,8 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Controller\FrontController;
+use Alltube\Config;
+use Alltube\UglyRouter;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
     header('Location: '.str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
@@ -10,6 +12,10 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
 
 $app = new \Slim\App();
 $container = $app->getContainer();
+$config = Config::getInstance();
+if ($config->uglyUrls) {
+    $container['router'] = new UglyRouter();
+}
 $container['view'] = function ($c) {
     $view = new \Slim\Views\Smarty(__DIR__.'/templates/');
 

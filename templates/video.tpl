@@ -24,6 +24,9 @@
     <h3><label for="format">Available formats:</label></h3>
     <form action="{path_for name="redirect"}">
         <input type="hidden" name="url" value="{$video->webpage_url}" />
+        {if uglyUrls}
+            <input type="hidden" name="page" value="redirect" />
+        {/if}
         <select name="format" id="format" class="formats monospace">
             <optgroup label="Generic formats">
                 <option value="best[protocol^=http]">
