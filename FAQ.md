@@ -71,3 +71,12 @@ You need to either:
 
 * Use a [release package](https://github.com/Rudloff/alltube/releases)
 * Run `npm install` (see detailed instructions in the [README](README.md#from-git))
+
+## I get a 404 error on every page except the index
+
+This is probably because your server does not have mod_rewrite or AllowOverride is disabled.
+You can work around this by adding this to your `config.yml` file:
+
+```yaml
+uglyUrls: true
+```
