@@ -55,6 +55,12 @@ class FrontController
     private $view;
 
     /**
+     * Default youtube-dl format
+     * @var string
+     */
+    private $defaultFormat = 'best[protocol^=http]';
+
+    /**
      * FrontController constructor.
      *
      * @param Container $container Slim dependency container
@@ -70,8 +76,6 @@ class FrontController
         $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
         if ($this->config->stream) {
             $this->defaultFormat = 'best';
-        } else {
-            $this->defaultFormat = 'best[protocol^=http]';
         }
     }
 
