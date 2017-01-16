@@ -5,8 +5,8 @@
 
 namespace Alltube\Test;
 
-use Alltube\Controller\FrontController;
 use Alltube\Config;
+use Alltube\Controller\FrontController;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -56,7 +56,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the constructor with streams enabled
+     * Test the constructor with streams enabled.
+     *
      * @return void
      */
     public function testConstructorWithStream()
@@ -68,7 +69,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the index() function
+     * Test the index() function.
+     *
      * @return void
      */
     public function testIndex()
@@ -78,7 +80,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the index() function with a custom URI
+     * Test the index() function with a custom URI.
+     *
      * @return void
      */
     public function testIndexWithCustomUri()
@@ -93,7 +96,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the extractors() function
+     * Test the extractors() function.
+     *
      * @return void
      */
     public function testExtractors()
@@ -103,7 +107,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the password() function
+     * Test the password() function.
+     *
      * @return void
      */
     public function testPassword()
@@ -113,7 +118,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function without the url parameter
+     * Test the video() function without the url parameter.
+     *
      * @return void
      */
     public function testVideoWithoutUrl()
@@ -123,7 +129,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function
+     * Test the video() function.
+     *
      * @return void
      */
     public function testVideo()
@@ -136,7 +143,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function with audio conversion
+     * Test the video() function with audio conversion.
+     *
      * @return void
      */
     public function testVideoWithAudio()
@@ -149,15 +157,16 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function with audio enabled and an URL that doesn't need to be converted
+     * Test the video() function with audio enabled and an URL that doesn't need to be converted.
+     *
      * @return void
      */
     public function testVideoWithUnconvertedAudio()
     {
         $result = $this->controller->video(
             $this->request->withQueryParams(
-                ['url'=>'https://soundcloud.com/verwandlungskuenstler/metamorphosis-by-franz-kafka-1',
-                'audio'=>true]
+                ['url' => 'https://soundcloud.com/verwandlungskuenstler/metamorphosis-by-franz-kafka-1',
+                'audio'=> true, ]
             ),
             $this->response
         );
@@ -165,7 +174,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function with a password
+     * Test the video() function with a password.
+     *
      * @return void
      */
     public function testVideoWithPassword()
@@ -179,7 +189,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function with a missing password
+     * Test the video() function with a missing password.
+     *
      * @return void
      */
     public function testVideoWithMissingPassword()
@@ -197,7 +208,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function with streams enabled
+     * Test the video() function with streams enabled.
+     *
      * @return void
      */
     public function testVideoWithStream()
@@ -217,7 +229,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the error() function
+     * Test the error() function.
+     *
      * @return void
      */
     public function testError()
@@ -227,7 +240,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the redirect() function without the URL parameter
+     * Test the redirect() function without the URL parameter.
+     *
      * @return void
      */
     public function testRedirectWithoutUrl()
@@ -237,7 +251,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the redirect() function
+     * Test the redirect() function.
+     *
      * @return void
      */
     public function testRedirect()
@@ -250,7 +265,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the redirect() function with streams enabled
+     * Test the redirect() function with streams enabled.
+     *
      * @return void
      */
     public function testRedirectWithStream()
@@ -265,7 +281,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the redirect() function with an M3U stream
+     * Test the redirect() function with an M3U stream.
+     *
      * @return void
      */
     public function testRedirectWithM3uStream()
@@ -280,7 +297,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the redirect() function with a missing password
+     * Test the redirect() function with a missing password.
+     *
      * @return void
      */
     public function testRedirectWithMissingPassword()
@@ -293,7 +311,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the redirect() function with an error
+     * Test the redirect() function with an error.
+     *
      * @return void
      */
     public function testRedirectWithError()
