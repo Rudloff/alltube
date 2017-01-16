@@ -10,7 +10,7 @@
 {/if}
 <link rel="stylesheet" href="{base_url|noscheme}/dist/main.css" />
 <title>AllTube Download{if isset($title)} - {$title|escape}{/if}</title>
-<link rel="canonical" href="//{$smarty.server.HTTP_HOST|cat:$smarty.server.REQUEST_URI|replace:{base_url|noscheme}:'http://www.alltubedownload.net'|escape}" />
+<link rel="canonical" href="{$canonical}" />
 <link rel="icon" href="{base_url|noscheme}/img/favicon.png" />
 <meta property="og:title" content="AllTube Download{if isset($title)} - {$title|escape}{/if}" />
 <meta property="og:image" content="{base_url}/img/logo.png" />

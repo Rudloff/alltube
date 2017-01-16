@@ -95,6 +95,7 @@ class FrontController
                 'class'        => 'index',
                 'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
                 'domain'       => $uri->getScheme().'://'.$uri->getAuthority(),
+                'canonical'    => $this->getCanonicalUrl($request),
             ]
         );
     }
@@ -118,6 +119,7 @@ class FrontController
                 'title'       => 'Supported websites',
                 'description' => 'List of all supported websites from which Alltube Download '.
                     'can extract video or audio files',
+                'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
     }
@@ -139,6 +141,7 @@ class FrontController
                 'class'       => 'password',
                 'title'       => 'Password prompt',
                 'description' => 'You need a password in order to download this video with Alltube Download',
+                'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
     }
@@ -210,6 +213,7 @@ class FrontController
                 'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
                 'protocol'    => $protocol,
                 'config'      => $this->config,
+                'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
     }
@@ -255,9 +259,10 @@ class FrontController
             $response,
             'error.tpl',
             [
-                'errors' => $exception->getMessage(),
-                'class'  => 'video',
-                'title'  => 'Error',
+                'errors'    => $exception->getMessage(),
+                'class'     => 'video',
+                'title'     => 'Error',
+                'canonical' => $this->getCanonicalUrl($request),
             ]
         );
 
@@ -365,5 +370,28 @@ class FrontController
                 );
             }
         }
+    }
+
+    /**
+     * Generate the canonical URL of the current page
+     * @param  Request $request PSR-7 Request
+     * @return string URL
+     */
+    private function getCanonicalUrl(Request $request)
+    {
+        $uri = $request->getUri();
+        $return = 'https://alltubedownload.net/';
+
+        $path = $uri->getPath();
+        if ($path != '/') {
+            $return .= $path;
+        }
+
+        $query = $uri->getQuery();
+        if (!empty($query)) {
+            $return .= '?'.$query;
+        }
+
+        return $return;
     }
 }
