@@ -84,7 +84,8 @@ class Config
 
     /**
      * Stream downloaded files trough server?
-     * @var boolean
+     *
+     * @var bool
      */
     public $stream = false;
 
