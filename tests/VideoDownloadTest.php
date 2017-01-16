@@ -146,7 +146,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
+                'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'best[protocol^=http]',
                 "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU",
                 'mp4',
                 'googlevideo.com',
@@ -159,7 +159,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
                 'googlevideo.com',
             ],
             [
-                'https://vimeo.com/24195442', null,
+                'https://vimeo.com/24195442', 'best[protocol^=http]',
                 'Carving the Mountains-24195442',
                 'mp4',
                 'vimeocdn.com',
@@ -175,6 +175,23 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
                 'GRIP sucht den Sommerkönig-folge-203-0',
                 'f4v',
                 'edgefcs.net',
+            ],
+        ];
+    }
+
+    /**
+     * Provides M3U8 URLs for tests.
+     *
+     * @return array[]
+     */
+    public function M3uUrlProvider()
+    {
+        return [
+            [
+                'https://twitter.com/verge/status/813055465324056576/video/1', 'best',
+                'The Verge - This tiny origami robot can self-fold and complete tasks-813055465324056576',
+                'mp4',
+                'video.twimg.com',
             ],
         ];
     }
@@ -199,6 +216,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider URLProvider
+     * @dataProvider M3uUrlProvider
      */
     public function testGetJSON($url, $format)
     {
@@ -207,6 +225,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('url', $info);
         $this->assertObjectHasAttribute('ext', $info);
         $this->assertObjectHasAttribute('title', $info);
+        $this->assertObjectHasAttribute('extractor_key', $info);
         $this->assertObjectHasAttribute('formats', $info);
         $this->assertObjectHasAttribute('_filename', $info);
     }
@@ -235,6 +254,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider urlProvider
+     * @dataProvider M3uUrlProvider
      */
     public function testGetFilename($url, $format, $filename, $extension)
     {
@@ -267,6 +287,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider urlProvider
+     * @dataProvider M3uUrlProvider
      */
     public function testGetAudioFilename($url, $format, $filename)
     {
@@ -302,7 +323,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStreamAvconvError($url, $format)
     {
-        $config = \Alltube\Config::getInstance();
+        $config = Config::getInstance();
         $config->avconv = 'foobar';
         $this->download->getAudioStream($url, $format);
     }
@@ -319,7 +340,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStreamCurlError($url, $format)
     {
-        $config = \Alltube\Config::getInstance();
+        $config = Config::getInstance();
         $config->curl = 'foobar';
         $config->rtmpdump = 'foobar';
         $this->download->getAudioStream($url, $format);
@@ -328,11 +349,50 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Test getAudioStream function with a M3U8 file.
      *
+     * @param string $url    URL
+     * @param string $format Format
+     *
      * @return void
      * @expectedException Exception
+     * @dataProvider M3uUrlProvider
      */
-    public function testGetAudioStreamM3uError()
+    public function testGetAudioStreamM3uError($url, $format)
     {
-        $this->download->getAudioStream('https://twitter.com/verge/status/813055465324056576/video/1', 'best');
+        $this->download->getAudioStream($url, $format);
+    }
+
+    /**
+     * Test getM3uStream function.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @dataProvider M3uUrlProvider
+     */
+    public function testGetM3uStream($url, $format)
+    {
+        $video = $this->download->getJSON($url, $format);
+        $stream = $this->download->getM3uStream($video);
+        $this->assertInternalType('resource', $stream);
+        $this->assertFalse(feof($stream));
+    }
+
+    /**
+     * Test getM3uStream function without avconv.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @expectedException Exception
+     * @dataProvider M3uUrlProvider
+     */
+    public function testGetM3uStreamAvconvError($url, $format)
+    {
+        $config = \Alltube\Config::getInstance();
+        $config->avconv = 'foobar';
+        $video = $this->download->getJSON($url, $format);
+        $this->download->getM3uStream($video);
     }
 }

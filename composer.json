@@ -12,6 +12,8 @@
     "symfony/process": "~3.2.0",
     "ptachoire/process-builder-chain": "~1.2.0",
     "rudloff/smarty-plugin-noscheme": "~0.1.0",
+    "guzzlehttp/guzzle": "~6.2.0",
+    "rudloff/rtmpdump-bin": "~2.3",
     "aura/session": "~2.1.0"
   },
   "require-dev": {

@@ -68,6 +68,11 @@ class FrontController
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($_COOKIE);
         $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
+        if ($this->config->stream) {
+            $this->defaultFormat = 'best';
+        } else {
+            $this->defaultFormat = 'best[protocol^=http]';
+        }
     }
 
     /**
@@ -156,9 +161,13 @@ class FrontController
             }
             if (isset($params['audio'])) {
                 try {
-                    $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
+                    if ($this->config->stream) {
+                        return $this->getStream($params['url'], 'mp3', $response, $request, $password);
+                    } else {
+                        $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
 
-                    return $response->withRedirect($url);
+                        return $response->withRedirect($url);
+                    }
                 } catch (PasswordException $e) {
                     return $this->password($request, $response);
                 } catch (\Exception $e) {
@@ -178,9 +187,14 @@ class FrontController
                 }
             } else {
                 try {
-                    $video = $this->download->getJSON($params['url'], null, $password);
+                    $video = $this->download->getJSON($params['url'], $this->defaultFormat, $password);
                 } catch (PasswordException $e) {
                     return $this->password($request, $response);
+                }
+                if ($this->config->stream) {
+                    $protocol = '';
+                } else {
+                    $protocol = '[protocol^=http]';
                 }
                 $this->view->render(
                     $response,
@@ -190,6 +204,8 @@ class FrontController
                         'class'       => 'video',
                         'title'       => $video->title,
                         'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                        'protocol'    => $protocol,
+                        'config'      => $this->config,
                     ]
                 );
             }
@@ -223,6 +239,43 @@ class FrontController
     }
 
     /**
+     * Get a video/audio stream piped through the server.
+     *
+     * @param string   $url      URL of the video
+     * @param string   $format   Requested format
+     * @param Response $response PSR-7 response
+     * @param Request  $request  PSR-7 request
+     * @param string   $password Video password
+     *
+     * @return Response
+     */
+    private function getStream($url, $format, $response, $request, $password = null)
+    {
+        if (!isset($format)) {
+            $format = 'best';
+        }
+        $video = $this->download->getJSON($url, $format, $password);
+        if ($video->protocol == 'm3u8') {
+            $stream = $this->download->getM3uStream($video);
+            $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
+            if ($request->isGet()) {
+                $response = $response->withBody(new Stream($stream));
+            }
+        } else {
+            $client = new \GuzzleHttp\Client();
+            $stream = $client->request('GET', $video->url, ['stream' => true]);
+            $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
+            $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
+            if ($request->isGet()) {
+                $response = $response->withBody($stream->getBody());
+            }
+        }
+        $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
+
+        return $response;
+    }
+
+    /**
      * Redirect to video file.
      *
      * @param Request  $request  PSR-7 request
@@ -235,13 +288,23 @@ class FrontController
         $params = $request->getQueryParams();
         if (isset($params['url'])) {
             try {
-                $url = $this->download->getURL(
-                    $params['url'],
-                    $request->getParam('format'),
-                    $this->sessionSegment->getFlash($params['url'])
-                );
+                if ($this->config->stream) {
+                    return $this->getStream(
+                        $params['url'],
+                        $request->getParam('format'),
+                        $response,
+                        $request,
+                        $this->sessionSegment->getFlash($params['url'])
+                    );
+                } else {
+                    $url = $this->download->getURL(
+                        $params['url'],
+                        $request->getParam('format'),
+                        $this->sessionSegment->getFlash($params['url'])
+                    );
 
-                return $response->withRedirect($url);
+                    return $response->withRedirect($url);
+                }
             } catch (PasswordException $e) {
                 return $response->withRedirect(
                     $this->container->get('router')->pathFor('video').'?url='.urlencode($params['url'])

@@ -38,7 +38,7 @@ class Config
      *
      * @var array
      */
-    public $params = ['--no-playlist', '--no-warnings', '-f best[protocol^=http]', '--playlist-end', 1];
+    public $params = ['--no-playlist', '--no-warnings', '--playlist-end', 1];
 
     /**
      * Enable audio conversion.
@@ -81,6 +81,12 @@ class Config
      * @var bool
      */
     public $uglyUrls = false;
+
+    /**
+     * Stream downloaded files trough server?
+     * @var boolean
+     */
+    public $stream = false;
 
     /**
      * YAML config file path.
