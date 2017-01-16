@@ -282,8 +282,6 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @param string $url           URL
      * @param string $format        Format
      * @param string $filename      Filename
-     * @param string $domain        Domain
-     * @param string $audioFilename MP3 audio file name
      *
      * @return void
      * @dataProvider urlProvider
