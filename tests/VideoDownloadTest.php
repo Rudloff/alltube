@@ -279,9 +279,9 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     /**
      * Test getAudioFilename function.
      *
-     * @param string $url           URL
-     * @param string $format        Format
-     * @param string $filename      Filename
+     * @param string $url      URL
+     * @param string $format   Format
+     * @param string $filename Filename
      *
      * @return void
      * @dataProvider urlProvider
