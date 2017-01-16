@@ -81,6 +81,13 @@ class Config
     public $curl_params = [];
 
     /**
+     * Disable URL rewriting.
+     *
+     * @var bool
+     */
+    public $uglyUrls = false;
+
+    /**
      * YAML config file path.
      *
      * @var string

@@ -80,13 +80,16 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
+        $uri = $request->getUri();
         $this->view->render(
             $response,
             'index.tpl',
             [
-                'convert'     => $this->config->convert,
-                'class'       => 'index',
-                'description' => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+                'convert'      => $this->config->convert,
+                'uglyUrls'     => $this->config->uglyUrls,
+                'class'        => 'index',
+                'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+                'domain'       => $uri->getScheme().'://'.$uri->getAuthority(),
             ]
         );
     }

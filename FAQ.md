@@ -12,15 +12,15 @@ You can ususally download the video by doing *File > Save to* or *ctrl + S*.
 You need to create a YAML file called `config.yml` at the root of your project.
 Here are the parameters that you can set:
 
-* youtubedl: path to your youtube-dl binary
-* python: path to your python binary
-* params: an array of parameters to pass to youtube-dl
-* curl_params: an array of parameters to pass to curl
-* convert: true to enable audio conversion
-* avconv: path to your avconv or ffmpeg binary
-* rtmpdump: path to your rtmpdump binary
+* `youtubedl`: path to your youtube-dl binary
+* `python`: path to your python binary
+* `params`: an array of parameters to pass to youtube-dl
+* `curl_params`: an array of parameters to pass to curl
+* `convert`: true to enable audio conversion
+* `avconv`: path to your avconv or ffmpeg binary
+* `rtmpdump`: path to your rtmpdump binary
 
-See [config.example.yml](config.example.yml) for default values.
+See [`config.example.yml`](config.example.yml) for default values.
 
 ## How do I enable audio conversion?
 
@@ -71,3 +71,12 @@ You need to either:
 
 * Use a [release package](https://github.com/Rudloff/alltube/releases)
 * Run `npm install` (see detailed instructions in the [README](README.md#from-git))
+
+## I get a 404 error on every page except the index
+
+This is probably because your server does not have mod_rewrite or AllowOverride is disabled.
+You can work around this by adding this to your `config.yml` file:
+
+```yaml
+uglyUrls: true
+```
