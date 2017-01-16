@@ -144,6 +144,77 @@ class FrontController
     }
 
     /**
+     * Return the converted MP3 file
+     * @param  Request  $request  PSR-7 request
+     * @param  Response $response PSR-7 response
+     * @param  array    $params   GET query parameters
+     * @param  string   $password Video password
+     * @return Response
+     */
+    private function getAudioResponse(Request $request, Response $response, array $params, $password = null)
+    {
+        try {
+            if ($this->config->stream) {
+                return $this->getStream($params['url'], 'mp3', $response, $request, $password);
+            } else {
+                $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
+
+                return $response->withRedirect($url);
+            }
+        } catch (PasswordException $e) {
+            return $this->password($request, $response);
+        } catch (\Exception $e) {
+            $response = $response->withHeader(
+                'Content-Disposition',
+                'attachment; filename="'.
+                $this->download->getAudioFilename($params['url'], 'bestaudio/best', $password).'"'
+            );
+            $response = $response->withHeader('Content-Type', 'audio/mpeg');
+
+            if ($request->isGet() || $request->isPost()) {
+                $process = $this->download->getAudioStream($params['url'], 'bestaudio/best', $password);
+                $response = $response->withBody(new Stream($process));
+            }
+
+            return $response;
+        }
+    }
+
+    /**
+     * Return the video description page
+     * @param  Request  $request  PSR-7 request
+     * @param  Response $response PSR-7 response
+     * @param  array    $params   GET query parameters
+     * @param  string   $password Video password
+     * @return Response
+     */
+    private function getVideoResponse(Request $request, Response $response, array $params, $password = null)
+    {
+        try {
+            $video = $this->download->getJSON($params['url'], $this->defaultFormat, $password);
+        } catch (PasswordException $e) {
+            return $this->password($request, $response);
+        }
+        if ($this->config->stream) {
+            $protocol = '';
+        } else {
+            $protocol = '[protocol^=http]';
+        }
+        $this->view->render(
+            $response,
+            'video.tpl',
+            [
+                'video'       => $video,
+                'class'       => 'video',
+                'title'       => $video->title,
+                'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                'protocol'    => $protocol,
+                'config'      => $this->config,
+            ]
+        );
+    }
+
+    /**
      * Dislay information about the video.
      *
      * @param Request  $request  PSR-7 request
@@ -160,54 +231,9 @@ class FrontController
                 $this->sessionSegment->setFlash($params['url'], $password);
             }
             if (isset($params['audio'])) {
-                try {
-                    if ($this->config->stream) {
-                        return $this->getStream($params['url'], 'mp3', $response, $request, $password);
-                    } else {
-                        $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
-
-                        return $response->withRedirect($url);
-                    }
-                } catch (PasswordException $e) {
-                    return $this->password($request, $response);
-                } catch (\Exception $e) {
-                    $response = $response->withHeader(
-                        'Content-Disposition',
-                        'attachment; filename="'.
-                        $this->download->getAudioFilename($params['url'], 'bestaudio/best', $password).'"'
-                    );
-                    $response = $response->withHeader('Content-Type', 'audio/mpeg');
-
-                    if ($request->isGet() || $request->isPost()) {
-                        $process = $this->download->getAudioStream($params['url'], 'bestaudio/best', $password);
-                        $response = $response->withBody(new Stream($process));
-                    }
-
-                    return $response;
-                }
+                return $this->getAudioResponse($request, $response, $params, $password);
             } else {
-                try {
-                    $video = $this->download->getJSON($params['url'], $this->defaultFormat, $password);
-                } catch (PasswordException $e) {
-                    return $this->password($request, $response);
-                }
-                if ($this->config->stream) {
-                    $protocol = '';
-                } else {
-                    $protocol = '[protocol^=http]';
-                }
-                $this->view->render(
-                    $response,
-                    'video.tpl',
-                    [
-                        'video'       => $video,
-                        'class'       => 'video',
-                        'title'       => $video->title,
-                        'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
-                        'protocol'    => $protocol,
-                        'config'      => $this->config,
-                    ]
-                );
+                return $this->getVideoResponse($request, $response, $params, $password);
             }
         } else {
             return $response->withRedirect($this->container->get('router')->pathFor('index'));
