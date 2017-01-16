@@ -55,7 +55,8 @@ class FrontController
     private $view;
 
     /**
-     * Default youtube-dl format
+     * Default youtube-dl format.
+     *
      * @var string
      */
     private $defaultFormat = 'best[protocol^=http]';
