@@ -241,7 +241,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetJSONError($url)
     {
-        $videoURL = $this->download->getJSON($url);
+        $this->download->getJSON($url);
     }
 
     /**
