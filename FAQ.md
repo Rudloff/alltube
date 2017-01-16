@@ -80,3 +80,25 @@ You can work around this by adding this to your `config.yml` file:
 ```yaml
 uglyUrls: true
 ```
+
+## How do I enable streaming videos through the server?
+
+You need to add this to your `config.yml` file:
+
+```yaml
+stream: true
+```
+
+Note that this can use a lot of ressources on your server.
+
+## I want to download M3U videos
+
+You need to enable streaming (see above).
+
+## The downloaded videos have a strange name like `videoplayback.mp4`
+
+Alltube can rename videos automatically if you enable streaming (see above).
+
+## I want to download a video that isn't available in my country
+
+If the video is available in the server's country, you can download it if you enable streaming (see above).
