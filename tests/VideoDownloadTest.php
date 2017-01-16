@@ -184,7 +184,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return array[]
      */
-    public function M3uUrlProvider()
+    public function m3uUrlProvider()
     {
         return [
             [
@@ -216,7 +216,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider URLProvider
-     * @dataProvider M3uUrlProvider
+     * @dataProvider m3uUrlProvider
      */
     public function testGetJSON($url, $format)
     {
@@ -254,7 +254,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider urlProvider
-     * @dataProvider M3uUrlProvider
+     * @dataProvider m3uUrlProvider
      */
     public function testGetFilename($url, $format, $filename, $extension)
     {
@@ -287,7 +287,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider urlProvider
-     * @dataProvider M3uUrlProvider
+     * @dataProvider m3uUrlProvider
      */
     public function testGetAudioFilename($url, $format, $filename)
     {
@@ -354,7 +354,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @expectedException Exception
-     * @dataProvider M3uUrlProvider
+     * @dataProvider m3uUrlProvider
      */
     public function testGetAudioStreamM3uError($url, $format)
     {
@@ -368,7 +368,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @param string $format Format
      *
      * @return void
-     * @dataProvider M3uUrlProvider
+     * @dataProvider m3uUrlProvider
      */
     public function testGetM3uStream($url, $format)
     {
@@ -386,7 +386,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @expectedException Exception
-     * @dataProvider M3uUrlProvider
+     * @dataProvider m3uUrlProvider
      */
     public function testGetM3uStreamAvconvError($url, $format)
     {
