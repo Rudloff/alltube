@@ -7,10 +7,7 @@ namespace Alltube\Test;
 
 use Alltube\UglyRouter;
 use Slim\Http\Environment;
-use Slim\Http\Headers;
 use Slim\Http\Request;
-use Slim\Http\Stream;
-use Slim\Http\Uri;
 
 /**
  * Unit tests for the UglyRouter class.
@@ -47,7 +44,7 @@ class UglyRouterTest extends \PHPUnit_Framework_TestCase
                     Environment::mock(
                         [
                             'REQUEST_METHOD' => 'GET',
-                            'QUERY_STRING'=>'page=foo'
+                            'QUERY_STRING'   => 'page=foo',
                         ]
                     )
                 )
