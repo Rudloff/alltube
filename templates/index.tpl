@@ -12,7 +12,7 @@
         <input class="URLinput" type="url" name="url" id="url"
         required autofocus placeholder="http://example.com/video" />
         </span>
-        {if uglyUrls}
+        {if $uglyUrls}
             <input type="hidden" name="page" value="video" />
         {/if}
         <input class="downloadBtn" type="submit" value="Download" /><br/>
