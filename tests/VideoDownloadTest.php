@@ -146,7 +146,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'https://www.youtube.com/watch?v=M7IpKCZ47pU', null,
+                'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'best[protocol^=http]',
                 "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU",
                 'mp4',
                 'googlevideo.com',
@@ -159,7 +159,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
                 'googlevideo.com',
             ],
             [
-                'https://vimeo.com/24195442', null,
+                'https://vimeo.com/24195442', 'best[protocol^=http]',
                 'Carving the Mountains-24195442',
                 'mp4',
                 'vimeocdn.com',
@@ -188,7 +188,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'https://twitter.com/verge/status/813055465324056576/video/1', null,
+                'https://twitter.com/verge/status/813055465324056576/video/1', 'best',
                 'The Verge - This tiny origami robot can self-fold and complete tasks-813055465324056576',
                 'mp4',
                 'video.twimg.com',
@@ -225,6 +225,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('url', $info);
         $this->assertObjectHasAttribute('ext', $info);
         $this->assertObjectHasAttribute('title', $info);
+        $this->assertObjectHasAttribute('extractor_key', $info);
         $this->assertObjectHasAttribute('formats', $info);
         $this->assertObjectHasAttribute('_filename', $info);
     }
@@ -322,7 +323,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStreamAvconvError($url, $format)
     {
-        $config = \Alltube\Config::getInstance();
+        $config = Config::getInstance();
         $config->avconv = 'foobar';
         $this->download->getAudioStream($url, $format);
     }
@@ -339,7 +340,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStreamCurlError($url, $format)
     {
-        $config = \Alltube\Config::getInstance();
+        $config = Config::getInstance();
         $config->curl = 'foobar';
         $config->rtmpdump = 'foobar';
         $this->download->getAudioStream($url, $format);

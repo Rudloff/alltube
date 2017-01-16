@@ -3,7 +3,6 @@ python: /usr/bin/python
 params:
     - --no-playlist
     - --no-warnings
-    - -f best[protocol^=http]
     - --playlist-end
     - 1
 curl_params:
@@ -12,3 +11,4 @@ avconv: vendor/bin/ffmpeg
 rtmpdump: vendor/bin/rtmpdump
 curl: /usr/bin/curl
 uglyUrls: false
+stream: false
