@@ -81,7 +81,7 @@ class FrontController
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
      *
-     * @return void
+     * @return Response HTTP response
      */
     public function index(Request $request, Response $response)
     {
@@ -108,7 +108,7 @@ class FrontController
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
      *
-     * @return void
+     * @return Response HTTP response
      */
     public function extractors(Request $request, Response $response)
     {
@@ -160,7 +160,7 @@ class FrontController
      * @param array    $params   GET query parameters
      * @param string   $password Video password
      *
-     * @return Response
+     * @return Response HTTP response
      */
     private function getAudioResponse(Request $request, Response $response, array $params, $password = null)
     {
@@ -199,7 +199,7 @@ class FrontController
      * @param array    $params   GET query parameters
      * @param string   $password Video password
      *
-     * @return Response
+     * @return Response HTTP response
      */
     private function getVideoResponse(Request $request, Response $response, array $params, $password = null)
     {
@@ -290,7 +290,7 @@ class FrontController
      * @param Request  $request  PSR-7 request
      * @param string   $password Video password
      *
-     * @return Response
+     * @return Response HTTP response
      */
     private function getStream($url, $format, $response, $request, $password = null)
     {
