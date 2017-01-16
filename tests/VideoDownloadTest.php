@@ -189,9 +189,9 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'https://twitter.com/verge/status/813055465324056576/video/1', null,
-                'The Verge - This tiny origami robot can self-fold and complete tasks-813055465324056576.mp4',
+                'The Verge - This tiny origami robot can self-fold and complete tasks-813055465324056576',
+                'mp4',
                 'video.twimg.com',
-                'The Verge - This tiny origami robot can self-fold and complete tasks-813055465324056576.mp3',
             ],
         ];
     }
