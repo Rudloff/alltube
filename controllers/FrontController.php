@@ -348,29 +348,6 @@ class FrontController
         }
     }
 
-    /**
-     * Output JSON info about the video.
-     *
-     * @param Request  $request  PSR-7 request
-     * @param Response $response PSR-7 response
-     *
-     * @return Response HTTP response
-     */
-    public function json(Request $request, Response $response)
-    {
-        $params = $request->getQueryParams();
-        if (isset($params['url'])) {
-            try {
-                $video = $this->download->getJSON($params['url']);
-
-                return $response->withJson($video);
-            } catch (\Exception $e) {
-                return $response->withJson(
-                    ['success' => false, 'error' => $e->getMessage()]
-                );
-            }
-        }
-    }
 
     /**
      * Generate the canonical URL of the current page
