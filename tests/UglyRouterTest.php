@@ -43,13 +43,13 @@ class UglyRouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [1, 'route0', []],
             $this->router->dispatch(
-                new Request(
-                    'GET',
-                    Uri::createFromString('http://example.com/?page=foo'),
-                    Headers::createFromEnvironment(new Environment()),
-                    [],
-                    [],
-                    new Stream(fopen('php://temp', 'r'))
+                Request::createFromEnvironment(
+                    Environment::mock(
+                        [
+                            'REQUEST_METHOD' => 'GET',
+                            'QUERY_STRING'=>'page=foo'
+                        ]
+                    )
                 )
             )
         );
