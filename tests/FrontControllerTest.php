@@ -18,6 +18,30 @@ use Slim\Http\Response;
 class FrontControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Slim dependency container
+     * @var Container
+     */
+    private $container;
+
+    /**
+     * Mock HTTP request
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * Mock HTTP response
+     * @var Response
+     */
+    private $response;
+
+    /**
+     * FrontController instance used in tests
+     * @var FrontController
+     */
+    private $controller;
+
+    /**
      * Prepare tests.
      */
     protected function setUp()
