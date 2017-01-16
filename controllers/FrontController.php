@@ -98,6 +98,7 @@ class FrontController
                 'canonical'    => $this->getCanonicalUrl($request),
             ]
         );
+
         return $response;
     }
 
@@ -123,6 +124,7 @@ class FrontController
                 'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
+
         return $response;
     }
 
@@ -146,15 +148,18 @@ class FrontController
                 'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
+
         return $response;
     }
 
     /**
-     * Return the converted MP3 file
-     * @param  Request  $request  PSR-7 request
-     * @param  Response $response PSR-7 response
-     * @param  array    $params   GET query parameters
-     * @param  string   $password Video password
+     * Return the converted MP3 file.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param array    $params   GET query parameters
+     * @param string   $password Video password
+     *
      * @return Response
      */
     private function getAudioResponse(Request $request, Response $response, array $params, $password = null)
@@ -187,11 +192,13 @@ class FrontController
     }
 
     /**
-     * Return the video description page
-     * @param  Request  $request  PSR-7 request
-     * @param  Response $response PSR-7 response
-     * @param  array    $params   GET query parameters
-     * @param  string   $password Video password
+     * Return the video description page.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param array    $params   GET query parameters
+     * @param string   $password Video password
+     *
      * @return Response
      */
     private function getVideoResponse(Request $request, Response $response, array $params, $password = null)
@@ -219,6 +226,7 @@ class FrontController
                 'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
+
         return $response;
     }
 
@@ -354,10 +362,11 @@ class FrontController
         }
     }
 
-
     /**
-     * Generate the canonical URL of the current page
-     * @param  Request $request PSR-7 Request
+     * Generate the canonical URL of the current page.
+     *
+     * @param Request $request PSR-7 Request
+     *
      * @return string URL
      */
     private function getCanonicalUrl(Request $request)
