@@ -98,6 +98,7 @@ class FrontController
                 'canonical'    => $this->getCanonicalUrl($request),
             ]
         );
+        return $response;
     }
 
     /**
@@ -122,6 +123,7 @@ class FrontController
                 'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
+        return $response;
     }
 
     /**
@@ -144,6 +146,7 @@ class FrontController
                 'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
+        return $response;
     }
 
     /**
@@ -216,6 +219,7 @@ class FrontController
                 'canonical'   => $this->getCanonicalUrl($request),
             ]
         );
+        return $response;
     }
 
     /**
@@ -343,8 +347,10 @@ class FrontController
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
 
-                return $response->withHeader('Content-Type', 'text/plain');
+                return $response->withHeader('Content-Type', 'text/plain')->withStatus(500);
             }
+        } else {
+            return $response->withRedirect($this->container->get('router')->pathFor('index'));
         }
     }
 
