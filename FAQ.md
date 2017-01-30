@@ -61,7 +61,7 @@ Some websites generate an unique video URL for each IP address. When using Alltu
 There are two known workarounds:
 
 * You can run Alltube locally on your computer.
-* You can use the experimental `feature/stream` branch which streams the video through the server in order to bypass IP restrictions.
+* You can enable streaming videos through the server (see below).
   Please note that this can use a lot of resources on the server (which is why we won't enable it on alltubedownload.net).
 
 ## CSS and JavaScript files are missing
@@ -102,3 +102,24 @@ Alltube can rename videos automatically if you enable streaming (see above).
 ## I want to download a video that isn't available in my country
 
 If the video is available in the server's country, you can download it if you enable streaming (see above).
+
+## How do I run Heroku locally?
+
+You should be able to `heroku local` like this:
+
+```bash
+sudo APACHE_LOCK_DIR=. APACHE_PID_FILE=./pid APACHE_RUN_USER=www-data APACHE_RUN_GROUP=www-data APACHE_LOG_DIR=. heroku local
+```
+
+You might need to create some symlinks before that:
+
+```bash
+ln -s /usr/sbin/apache2 /usr/sbin/httpd
+ln -s /usr/sbin/php-fpm7.0 /usr/sbin/php-fpm
+```
+
+And you probably need to run this in another terminal after `heroku local` has finished launching `php-fpm`:
+
+```bash
+chmod 0667 /tmp/heroku.fcgi.5000.sock
+```
