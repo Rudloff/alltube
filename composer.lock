@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6830d80c4401c4b84508cef5e975f030",
+    "content-hash": "5ff95adf3751e6b743e5467142b41ce7",
     "packages": [
         {
             "name": "aura/session",
@@ -1034,7 +1034,7 @@
             "version": "dev-release",
             "dist": {
                 "type": "xz",
-                "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
+                "url": "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
                 "reference": null,
                 "shasum": null
             },

@@ -50,7 +50,7 @@
         "name": "ffmpeg/ffmpeg",
         "version": "dev-release",
         "dist": {
-          "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
+          "url": "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
           "type": "xz"
         },
         "bin": [
@@ -78,9 +78,6 @@
       "Alltube\\": "classes/",
       "Alltube\\Controller\\": "controllers/"
     }
-  },
-  "config": {
-    "secure-http": false
   },
   "scripts": {
     "compile": "composer install --dev"
