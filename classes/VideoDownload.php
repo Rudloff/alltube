@@ -113,7 +113,14 @@ class VideoDownload
      * */
     public function getJSON($url, $format = null, $password = null)
     {
-        return json_decode($this->getProp($url, $format, 'dump-json', $password));
+        $jsonArray = preg_split( "/\r|\n/", $this->getProp($url, $format, 'dump-json', $password), -1,
+                     PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $decodedJson = array();
+        foreach ($jsonArray as $oneJson)
+        {
+            array_push($decodedJson, json_decode($oneJson));
+        }
+        return $decodedJson;
     }
 
     /**
