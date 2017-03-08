@@ -4,8 +4,9 @@
 <div class="main">
 {include file="inc/logo.tpl"}
 {foreach $vidarr as $video}
-    <p id="download_intro">You are going to download<i itemprop="name">
-        <a itemprop="url" id="video_link"
+    <p id="download_intro{$video@index}" class="download_intro">You are going to download<i itemprop="name">
+        <a itemprop="url" id="video_link{$video@index}"
+            class="video_link"
             data-ext="{$video->ext}"
             data-video="{$video->url|escape}"
             href="{$video->webpage_url}">
