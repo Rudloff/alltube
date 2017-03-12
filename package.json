@@ -7,11 +7,11 @@
   "dependencies": {
     "bower": "~1.8.0",
     "grunt": "~1.0.1",
-    "grunt-contrib-cssmin": "~1.0.0",
-    "grunt-contrib-uglify": "~2.0.0"
+    "grunt-contrib-cssmin": "~2.0.0",
+    "grunt-contrib-uglify": "~2.2.0"
   },
   "devDependencies": {
-    "grunt-contrib-compress": "~1.3.0",
+    "grunt-contrib-compress": "~1.4.1",
     "grunt-contrib-watch": "~1.0.0",
     "grunt-fixpack": "~0.1.0",
     "grunt-githash": "~0.1.3",
