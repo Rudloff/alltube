@@ -105,7 +105,7 @@ If the video is available in the server's country, you can download it if you en
 
 ## How do I run Heroku locally?
 
-You should be able to `heroku local` like this:
+You should be able to use `heroku local` like this:
 
 ```bash
 sudo APACHE_LOCK_DIR=. APACHE_PID_FILE=./pid APACHE_RUN_USER=www-data APACHE_RUN_GROUP=www-data APACHE_LOG_DIR=. heroku local
