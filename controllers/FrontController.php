@@ -299,9 +299,6 @@ class FrontController
      */
     private function getStream($url, $format, $response, $request, $password = null)
     {
-        if (!isset($format)) {
-            $format = 'best';
-        }
         $video = $this->download->getJSON($url, $format, $password);
         if ($video->protocol == 'm3u8') {
             $stream = $this->download->getM3uStream($video);
@@ -334,12 +331,17 @@ class FrontController
     public function redirect(Request $request, Response $response)
     {
         $params = $request->getQueryParams();
+        if (isset($params['format'])) {
+            $format = $params['format'];
+        } else {
+            $format = $this->defaultFormat;
+        }
         if (isset($params['url'])) {
             try {
                 if ($this->config->stream) {
                     return $this->getStream(
                         $params['url'],
-                        $request->getParam('format'),
+                        $format,
                         $response,
                         $request,
                         $this->sessionSegment->getFlash($params['url'])
@@ -347,7 +349,7 @@ class FrontController
                 } else {
                     $url = $this->download->getURL(
                         $params['url'],
-                        $request->getParam('format'),
+                        $format,
                         $this->sessionSegment->getFlash($params['url'])
                     );
 

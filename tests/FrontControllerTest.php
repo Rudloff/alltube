@@ -293,6 +293,19 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the redirect() function with a specific format.
+     * @return void
+     */
+    public function testRedirectWithFormat()
+    {
+        $result = $this->controller->redirect(
+            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format'=>'worst']),
+            $this->response
+        );
+        $this->assertTrue($result->isRedirect());
+    }
+
+    /**
      * Test the redirect() function with streams enabled.
      *
      * @return void
@@ -317,7 +330,9 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $config = Config::getInstance();
         $config->stream = true;
-        $result = $this->controller->redirect(
+        //We need to create a new controller instance in order to apply the custom config
+        $controller = new FrontController($this->container);
+        $result = $controller->redirect(
             $this->request->withQueryParams(['url'=>'https://twitter.com/verge/status/813055465324056576/video/1']),
             $this->response
         );
