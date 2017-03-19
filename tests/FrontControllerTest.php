@@ -294,6 +294,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test the redirect() function with a specific format.
+     *
      * @return void
      */
     public function testRedirectWithFormat()
