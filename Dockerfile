@@ -13,3 +13,4 @@ RUN php composer.phar install --prefer-dist
 RUN npm install
 RUN ./node_modules/.bin/bower --allow-root install
 RUN ./node_modules/.bin/grunt
+ENV CONVERT=1
