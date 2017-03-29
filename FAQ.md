@@ -103,6 +103,12 @@ Alltube can rename videos automatically if you enable streaming (see above).
 
 If the video is available in the server's country, you can download it if you enable streaming (see above).
 
+## How do I run the Docker image?
+
+```bash
+docker run -p 8080:80 rudloff/alltube
+```
+
 ## How do I run Heroku locally?
 
 You should be able to use `heroku local` like this:
