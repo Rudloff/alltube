@@ -12,15 +12,15 @@ You can ususally download the video by doing *File > Save to* or *ctrl + S*.
 You need to create a YAML file called `config.yml` at the root of your project.
 Here are the parameters that you can set:
 
-* youtubedl: path to your youtube-dl binary
-* python: path to your python binary
-* params: an array of parameters to pass to youtube-dl
-* curl_params: an array of parameters to pass to curl
-* convert: true to enable audio conversion
-* avconv: path to your avconv or ffmpeg binary
-* rtmpdump: path to your rtmpdump binary
+* `youtubedl`: path to your youtube-dl binary
+* `python`: path to your python binary
+* `params`: an array of parameters to pass to youtube-dl
+* `curl_params`: an array of parameters to pass to curl
+* `convert`: true to enable audio conversion
+* `avconv`: path to your avconv or ffmpeg binary
+* `rtmpdump`: path to your rtmpdump binary
 
-See [config.example.yml](config.example.yml) for default values.
+See [`config.example.yml`](config.example.yml) for default values.
 
 ## How do I enable audio conversion?
 
@@ -61,7 +61,7 @@ Some websites generate an unique video URL for each IP address. When using Alltu
 There are two known workarounds:
 
 * You can run Alltube locally on your computer.
-* You can use the experimental `feature/stream` branch which streams the video through the server in order to bypass IP restrictions.
+* You can enable streaming videos through the server (see below).
   Please note that this can use a lot of resources on the server (which is why we won't enable it on alltubedownload.net).
 
 ## CSS and JavaScript files are missing
@@ -71,3 +71,61 @@ You need to either:
 
 * Use a [release package](https://github.com/Rudloff/alltube/releases)
 * Run `npm install` (see detailed instructions in the [README](README.md#from-git))
+
+## I get a 404 error on every page except the index
+
+This is probably because your server does not have mod_rewrite or AllowOverride is disabled.
+You can work around this by adding this to your `config.yml` file:
+
+```yaml
+uglyUrls: true
+```
+
+## How do I enable streaming videos through the server?
+
+You need to add this to your `config.yml` file:
+
+```yaml
+stream: true
+```
+
+Note that this can use a lot of ressources on your server.
+
+## I want to download M3U videos
+
+You need to enable streaming (see above).
+
+## The downloaded videos have a strange name like `videoplayback.mp4`
+
+Alltube can rename videos automatically if you enable streaming (see above).
+
+## I want to download a video that isn't available in my country
+
+If the video is available in the server's country, you can download it if you enable streaming (see above).
+
+## How do I run the Docker image?
+
+```bash
+docker run -p 8080:80 rudloff/alltube
+```
+
+## How do I run Heroku locally?
+
+You should be able to use `heroku local` like this:
+
+```bash
+sudo APACHE_LOCK_DIR=. APACHE_PID_FILE=./pid APACHE_RUN_USER=www-data APACHE_RUN_GROUP=www-data APACHE_LOG_DIR=. heroku local
+```
+
+You might need to create some symlinks before that:
+
+```bash
+ln -s /usr/sbin/apache2 /usr/sbin/httpd
+ln -s /usr/sbin/php-fpm7.0 /usr/sbin/php-fpm
+```
+
+And you probably need to run this in another terminal after `heroku local` has finished launching `php-fpm`:
+
+```bash
+chmod 0667 /tmp/heroku.fcgi.5000.sock
+```

@@ -12,7 +12,7 @@
         <input class="URLinput" type="url" name="url" id="url"
         required autofocus placeholder="http://example.com/video" />
         </span>
-        {if uglyUrls}
+        {if $uglyUrls}
             <input type="hidden" name="page" value="video" />
         {/if}
         <input class="downloadBtn" type="submit" value="Download" /><br/>
@@ -28,7 +28,7 @@
     <a class="combatiblelink" href="{path_for name="extractors"}">See all supported websites</a>
     <div id="bookmarklet" class="bookmarklet_wrapper">
         <p> Drag this to your bookmarks bar: </p>
-        <a class="bookmarklet" href="javascript:window.location='{base_url|noscheme}{path_for name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
+        <a class="bookmarklet" href="javascript:window.location='{$domain}{path_for name='video'}?url='+encodeURIComponent(location.href);">Bookmarklet</a>
     </div>
 
 </div>

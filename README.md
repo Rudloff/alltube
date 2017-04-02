@@ -33,6 +33,16 @@ chmod 777 templates_c/
 
 If your web server is Apache, you need to set the `AllowOverride` setting to `All` or `FileInfo`.
 
+#### Update
+
+When updating from Git, you need to run npm and Composer again:
+
+```bash
+git pull
+npm install
+composer install
+```
+
 ## Config
 
 If you want to use a custom config, you need to create a config file:

@@ -48,8 +48,4 @@ $app->get(
     '/redirect',
     [$controller, 'redirect']
 )->setName('redirect');
-$app->get(
-    '/json',
-    [$controller, 'json']
-);
 $app->run();

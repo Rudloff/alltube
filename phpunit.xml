@@ -1,7 +1,8 @@
-<phpunit bootstrap="vendor/autoload.php">
+<phpunit bootstrap="tests/bootstrap.php">
     <filter>
         <whitelist>
             <directory>classes/</directory>
+            <directory>controllers/</directory>
         </whitelist>
     </filter>
     <testsuites>

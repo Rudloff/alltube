@@ -12,6 +12,8 @@
     "symfony/process": "~3.2.0",
     "ptachoire/process-builder-chain": "~1.2.0",
     "rudloff/smarty-plugin-noscheme": "~0.1.0",
+    "guzzlehttp/guzzle": "~6.2.0",
+    "rudloff/rtmpdump-bin": "~2.3",
     "aura/session": "~2.1.0"
   },
   "require-dev": {
@@ -19,7 +21,7 @@
     "squizlabs/php_codesniffer": "~2.7.0",
     "phpunit/phpunit": "~5.7.2",
     "ffmpeg/ffmpeg": "dev-release",
-    "rg3/youtube-dl": "~2017.01.10",
+    "rg3/youtube-dl": "~2017.03.07",
     "rudloff/rtmpdump-bin": "~2.3",
     "heroku/heroku-buildpack-php": "*"
   },
@@ -35,10 +37,10 @@
       "type": "package",
       "package": {
         "name": "rg3/youtube-dl",
-        "version": "2017.01.10",
+        "version": "2017.03.07",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/rg3/youtube-dl/archive/2017.01.10.zip"
+          "url": "https://github.com/rg3/youtube-dl/archive/2017.03.07.zip"
         }
       }
     },
@@ -48,7 +50,7 @@
         "name": "ffmpeg/ffmpeg",
         "version": "dev-release",
         "dist": {
-          "url": "http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
+          "url": "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz",
           "type": "xz"
         },
         "bin": [
@@ -76,9 +78,6 @@
       "Alltube\\": "classes/",
       "Alltube\\Controller\\": "controllers/"
     }
-  },
-  "config": {
-    "secure-http": false
   },
   "scripts": {
     "compile": "composer install --dev"
