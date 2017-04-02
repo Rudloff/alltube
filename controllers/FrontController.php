@@ -229,6 +229,7 @@ class FrontController
                 'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
+                'uglyUrls'     => $this->config->uglyUrls,
             ]
         );
 
