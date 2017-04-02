@@ -193,7 +193,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->controller->video(
             $this->request->withQueryParams(
-                ['url' => 'https://soundcloud.com/verwandlungskuenstler/metamorphosis-by-franz-kafka-1',
+                ['url' => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover',
                 'audio'=> true, ]
             ),
             $this->response
