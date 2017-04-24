@@ -88,7 +88,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     public function testGetURL($url, $format, $filename, $extension, $domain)
     {
         $videoURL = $this->download->getURL($url, $format);
-        $this->assertContains($domain, $videoURL);
+        $this->assertContains($domain, $videoURL[0]);
     }
 
     /**
@@ -98,7 +98,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetURLWithPassword()
     {
-        $this->assertContains('vimeocdn.com', $this->download->getURL('http://vimeo.com/68375962', null, 'youtube-dl'));
+        $videoURL = $this->download->getURL('http://vimeo.com/68375962', null, 'youtube-dl');
+        $this->assertContains('vimeocdn.com', $videoURL[0]);
     }
 
     /**
@@ -181,6 +182,23 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Provides M3U8 URLs for tests.
+     *
+     * @return array[]
+     */
+    public function remuxUrlProvider()
+    {
+        return [
+            [
+                'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'bestvideo+bestaudio',
+                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU",
+                'mp4',
+                'googlevideo.com',
+            ],
+        ];
+    }
+
+    /**
+     * Provides URLs for remux tests.
      *
      * @return array[]
      */
@@ -388,6 +406,25 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $stream = $this->download->getM3uStream($video);
         $this->assertInternalType('resource', $stream);
         $this->assertFalse(feof($stream));
+    }
+
+    /**
+     * Test getRemuxStream function.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @dataProvider remuxUrlProvider
+     */
+    public function testGetRemuxStream($url, $format)
+    {
+        $urls = $this->download->getURL($url, $format);
+        if (count($urls) > 1) {
+            $stream = $this->download->getRemuxStream($urls);
+            $this->assertInternalType('resource', $stream);
+            $this->assertFalse(feof($stream));
+        }
     }
 
     /**

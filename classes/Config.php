@@ -76,6 +76,13 @@ class Config
     public $stream = false;
 
     /**
+     * Allow to remux video + audio?
+     *
+     * @var bool
+     */
+    public $remux = false;
+
+    /**
      * YAML config file path.
      *
      * @var string

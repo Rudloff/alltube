@@ -119,15 +119,19 @@ class VideoDownload
     /**
      * Get URL of video from URL of page.
      *
+     * It generally returns only one URL.
+     * But it can return two URLs when multiple formats are specified
+     * (eg. bestvideo+bestaudio).
+     *
      * @param string $url      URL of page
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
-     * @return string URL of video
+     * @return array URLs of video
      * */
     public function getURL($url, $format = null, $password = null)
     {
-        return $this->getProp($url, $format, 'get-url', $password);
+        return explode(PHP_EOL, $this->getProp($url, $format, 'get-url', $password));
     }
 
     /**
@@ -145,6 +149,28 @@ class VideoDownload
     }
 
     /**
+     * Get filename of video with the specified extension
+     *
+     * @param string $extension New file extension
+     * @param string $url       URL of page
+     * @param string $format    Format to use for the video
+     * @param string $password  Video password
+     *
+     * @return string Filename of extracted video with specified extension
+     */
+    public function getFileNameWithExtension($extension, $url, $format = null, $password = null)
+    {
+        return html_entity_decode(
+            pathinfo(
+                $this->getFilename($url, $format, $password),
+                PATHINFO_FILENAME
+            ).'.'.$extension,
+            ENT_COMPAT,
+            'ISO-8859-1'
+        );
+    }
+
+    /**
      * Get filename of audio from URL of page.
      *
      * @param string $url      URL of page
@@ -155,14 +181,7 @@ class VideoDownload
      * */
     public function getAudioFilename($url, $format = null, $password = null)
     {
-        return html_entity_decode(
-            pathinfo(
-                $this->getFilename($url, $format, $password),
-                PATHINFO_FILENAME
-            ).'.mp3',
-            ENT_COMPAT,
-            'ISO-8859-1'
-        );
+        return $this->getFileNameWithExtension('mp3', $url, $format, $password);
     }
 
     /**
@@ -304,6 +323,31 @@ class VideoDownload
             ]
         );
 
+        return popen($procBuilder->getProcess()->getCommandLine(), 'r');
+    }
+
+    /**
+     * Get an avconv stream to remux audio and video.
+     *
+     * @param array $urls URLs of the video ($urls[0]) and audio ($urls[1]) files
+     *
+     * @return resource popen stream
+     */
+    public function getRemuxStream(array $urls)
+    {
+        $procBuilder = ProcessBuilder::create(
+            [
+                $this->config->avconv,
+                '-v', 'quiet',
+                '-i', $urls[0],
+                '-i', $urls[1],
+                '-c', 'copy',
+                '-map', '0:v:0 ',
+                '-map', '1:a:0',
+                '-f', 'matroska',
+                'pipe:1',
+            ]
+        );
         return popen($procBuilder->getProcess()->getCommandLine(), 'r');
     }
 

@@ -362,6 +362,45 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the redirect() function with a remuxed video.
+     *
+     * @return void
+     */
+    public function testRedirectWithRemux()
+    {
+        $controller = new FrontController($this->container, new Config(['remux'=>true]));
+        $result = $controller->redirect(
+            $this->request->withQueryParams(
+                [
+                    'url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                    'format'=>'bestvideo+bestaudio'
+                ]
+            ),
+            $this->response
+        );
+        $this->assertTrue($result->isOk());
+    }
+
+    /**
+     * Test the redirect() function with a remuxed video but remux disabled.
+     *
+     * @return void
+     */
+    public function testRedirectWithRemuxDisabled()
+    {
+        $result = $this->controller->redirect(
+            $this->request->withQueryParams(
+                [
+                    'url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                    'format'=>'bestvideo+bestaudio'
+                ]
+            ),
+            $this->response
+        );
+        $this->assertTrue($result->isServerError());
+    }
+
+    /**
      * Test the redirect() function with a missing password.
      *
      * @return void

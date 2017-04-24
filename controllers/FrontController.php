@@ -177,9 +177,9 @@ class FrontController
             if ($this->config->stream) {
                 return $this->getStream($params['url'], 'mp3', $response, $request, $password);
             } else {
-                $url = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
+                $urls = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
 
-                return $response->withRedirect($url);
+                return $response->withRedirect($urls[0]);
             }
         } catch (PasswordException $e) {
             return $this->password($request, $response);
@@ -234,6 +234,7 @@ class FrontController
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
                 'uglyUrls'    => $this->config->uglyUrls,
+                'remux'       => $this->config->remux,
             ]
         );
 
@@ -358,13 +359,33 @@ class FrontController
                         $this->sessionSegment->getFlash($params['url'])
                     );
                 } else {
-                    $url = $this->download->getURL(
+                    $urls = $this->download->getURL(
                         $params['url'],
                         $format,
                         $this->sessionSegment->getFlash($params['url'])
                     );
+                    if (count($urls) > 1) {
+                        if (!$this->config->remux) {
+                            throw new \Exception('You need to enable remux mode to merge two formats.');
+                        }
+                        $stream = $this->download->getRemuxStream($urls);
+                        $response = $response->withHeader('Content-Type', 'video/x-matroska');
+                        if ($request->isGet()) {
+                            $response = $response->withBody(new Stream($stream));
+                        }
 
-                    return $response->withRedirect($url);
+                        return $response->withHeader('Content-Disposition', 'attachment; filename="'.pathinfo(
+                            $this->download->getFileNameWithExtension(
+                                'mkv',
+                                $params['url'],
+                                $format,
+                                $this->sessionSegment->getFlash($params['url'])
+                            ),
+                            PATHINFO_FILENAME
+                        ).'.mkv"');
+                    } else {
+                        return $response->withRedirect($urls[0]);
+                    }
                 }
             } catch (PasswordException $e) {
                 return $response->withRedirect(
