@@ -305,7 +305,13 @@ class FrontController
     private function getStream($url, $format, $response, $request, $password = null)
     {
         $video = $this->download->getJSON($url, $format, $password);
-        if ($video->protocol == 'm3u8') {
+        if ($video->protocol == 'rtmp') {
+            $stream = $this->download->getRtmpStream($video);
+            $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
+            if ($request->isGet()) {
+                $response = $response->withBody(new Stream($stream));
+            }
+        } elseif ($video->protocol == 'm3u8') {
             $stream = $this->download->getM3uStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
             if ($request->isGet()) {

@@ -324,4 +324,16 @@ class VideoDownload
 
         return popen($procBuilder->getProcess()->getCommandLine(), 'r');
     }
+
+    /**
+     * Get video stream from an RTMP video.
+     *
+     * @param \stdClass $video Video object returned by getJSON
+     *
+     * @return resource popen stream
+     */
+    public function getRtmpStream(\stdClass $video)
+    {
+        return popen($this->getRtmpProcess($video)->getCommandLine(), 'r');
+    }
 }

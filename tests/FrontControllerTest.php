@@ -345,6 +345,21 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the redirect() function with an RTMP stream.
+     *
+     * @return void
+     */
+    public function testRedirectWithRtmpStream()
+    {
+        $controller = new FrontController($this->container, new Config(['stream'=>true]));
+        $result = $controller->redirect(
+            $this->request->withQueryParams(['url'=>'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0']),
+            $this->response
+        );
+        $this->assertTrue($result->isOk());
+    }
+
+    /**
      * Test the redirect() function with a missing password.
      *
      * @return void

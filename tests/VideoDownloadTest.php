@@ -197,6 +197,23 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Provides RTMP URLs for tests.
+     *
+     * @return array[]
+     */
+    public function rtmpUrlProvider()
+    {
+        return [
+            [
+                'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
+                'GRIP sucht den Sommerkönig-folge-203-0',
+                'f4v',
+                'edgefcs.net',
+            ],
+        ];
+    }
+
+    /**
      * Provides incorrect URLs for tests.
      *
      * @return array[]
@@ -369,6 +386,23 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         $video = $this->download->getJSON($url, $format);
         $stream = $this->download->getM3uStream($video);
+        $this->assertInternalType('resource', $stream);
+        $this->assertFalse(feof($stream));
+    }
+
+    /**
+     * Test getRtmpStream function.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @dataProvider rtmpUrlProvider
+     */
+    public function testGetRtmpStream($url, $format)
+    {
+        $video = $this->download->getJSON($url, $format);
+        $stream = $this->download->getRtmpStream($video);
         $this->assertInternalType('resource', $stream);
         $this->assertFalse(feof($stream));
     }
