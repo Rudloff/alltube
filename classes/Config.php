@@ -62,20 +62,6 @@ class Config
     public $rtmpdump = 'vendor/bin/rtmpdump';
 
     /**
-     * curl binary path.
-     *
-     * @var string
-     */
-    public $curl = '/usr/bin/curl';
-
-    /**
-     * curl parameters.
-     *
-     * @var array
-     */
-    public $curl_params = [];
-
-    /**
      * Disable URL rewriting.
      *
      * @var bool
@@ -104,9 +90,7 @@ class Config
      * * python: Python binary path
      * * avconv: avconv or ffmpeg binary path
      * * rtmpdump: rtmpdump binary path
-     * * curl: curl binary path
      * * params: Array of youtube-dl parameters
-     * * curl_params: Array of curl parameters
      * * convert: Enable conversion?
      *
      * @param array $options Options

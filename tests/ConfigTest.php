@@ -45,7 +45,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetInstance()
     {
         $this->assertEquals($this->config->convert, false);
-        $this->assertInternalType('array', $this->config->curl_params);
         $this->assertInternalType('array', $this->config->params);
         $this->assertInternalType('string', $this->config->youtubedl);
         $this->assertInternalType('string', $this->config->python);

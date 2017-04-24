@@ -98,7 +98,7 @@ class VideoDownload
                 throw new \Exception($errorOutput);
             }
         } else {
-            return $process->getOutput();
+            return trim($process->getOutput());
         }
     }
 
@@ -222,31 +222,30 @@ class VideoDownload
     }
 
     /**
-     * Get a process that runs curl in order to download a video.
+     * Get a process that runs avconv in order to convert a video to MP3.
      *
-     * @param object $video Video object returned by youtube-dl
+     * @param string $url URL of the video file
      *
      * @return \Symfony\Component\Process\Process Process
      */
-    private function getCurlProcess($video)
+    private function getAvconvMp3Process($url)
     {
-        if (!shell_exec('which '.$this->config->curl)) {
-            throw(new \Exception('Can\'t find curl'));
+        if (!shell_exec('which '.$this->config->avconv)) {
+            throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
-        $builder = ProcessBuilder::create(
-            array_merge(
-                [
-                    $this->config->curl,
-                    '--silent',
-                    '--location',
-                    '--user-agent', $video->http_headers->{'User-Agent'},
-                    $video->url,
-                ],
-                $this->config->curl_params
-            )
-        );
 
-        return $builder->getProcess();
+        return ProcessBuilder::create(
+            [
+                $this->config->avconv,
+                '-v', 'quiet',
+                //Vimeo needs a correct user-agent
+                '-user-agent', $this->getProp(null, null, 'dump-user-agent'),
+                '-i', $url,
+                '-f', 'mp3',
+                '-vn',
+                'pipe:1',
+            ]
+        );
     }
 
     /**
@@ -260,40 +259,23 @@ class VideoDownload
      */
     public function getAudioStream($url, $format, $password = null)
     {
-        if (!shell_exec('which '.$this->config->avconv)) {
-            throw(new \Exception('Can\'t find avconv or ffmpeg'));
-        }
-
         $video = $this->getJSON($url, $format, $password);
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
             throw(new \Exception('Conversion of M3U8 files is not supported.'));
         }
 
-        //Vimeo needs a correct user-agent
-        ini_set(
-            'user_agent',
-            $video->http_headers->{'User-Agent'}
-        );
-        $avconvProc = ProcessBuilder::create(
-            [
-                $this->config->avconv,
-                '-v', 'quiet',
-                '-i', '-',
-                '-f', 'mp3',
-                '-vn',
-                'pipe:1',
-            ]
-        );
-
         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
             $process = $this->getRtmpProcess($video);
-        } else {
-            $process = $this->getCurlProcess($video);
-        }
-        $chain = new Chain($process);
-        $chain->add('|', $avconvProc);
+            $chain = new Chain($process);
+            $chain->add('|', $this->getAvconvMp3Process('-'));
 
-        return popen($chain->getProcess()->getCommandLine(), 'r');
+            return popen($chain->getProcess()->getCommandLine(), 'r');
+        } else {
+            $avconvProc = $this->getAvconvMp3Process($video->url);
+            //dump($avconvProc->getProcess()); die;
+
+            return popen($avconvProc->getProcess()->getCommandLine(), 'r');
+        }
     }
 
     /**

@@ -15,7 +15,6 @@ Here are the parameters that you can set:
 * `youtubedl`: path to your youtube-dl binary
 * `python`: path to your python binary
 * `params`: an array of parameters to pass to youtube-dl
-* `curl_params`: an array of parameters to pass to curl
 * `convert`: true to enable audio conversion
 * `avconv`: path to your avconv or ffmpeg binary
 * `rtmpdump`: path to your rtmpdump binary
@@ -31,10 +30,10 @@ convert: true
 avconv: path/to/avconv
 ```
 
-You will also need to install `avconv` and `curl` on your server:
+You will also need to install `avconv` on your server:
 
 ```bash
-sudo apt-get install libav-tools curl
+sudo apt-get install libav-tools
 ```
 
 ## How do I deploy Alltube on Heroku?

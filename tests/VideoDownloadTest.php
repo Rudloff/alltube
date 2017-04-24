@@ -350,11 +350,11 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @expectedException Exception
-     * @dataProvider      urlProvider
+     * @dataProvider      rtmpUrlProvider
      */
-    public function testGetAudioStreamCurlError($url, $format)
+    public function testGetAudioStreamRtmpError($url, $format)
     {
-        $download = new VideoDownload(new Config(['curl'=>'foobar', 'rtmpdump'=>'foobar']));
+        $download = new VideoDownload(new Config(['rtmpdump'=>'foobar']));
         $download->getAudioStream($url, $format);
     }
 
