@@ -25,7 +25,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->download = new VideoDownload();
+        $this->download = new VideoDownload(Config::getInstance('config_test.yml'));
     }
 
     /**
@@ -321,9 +321,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStreamAvconvError($url, $format)
     {
-        $config = Config::getInstance();
-        $config->avconv = 'foobar';
-        $this->download->getAudioStream($url, $format);
+        $download = new VideoDownload(new Config(['avconv'=>'foobar']));
+        $download->getAudioStream($url, $format);
     }
 
     /**
@@ -338,10 +337,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStreamCurlError($url, $format)
     {
-        $config = Config::getInstance();
-        $config->curl = 'foobar';
-        $config->rtmpdump = 'foobar';
-        $this->download->getAudioStream($url, $format);
+        $download = new VideoDownload(new Config(['curl'=>'foobar', 'rtmpdump'=>'foobar']));
+        $download->getAudioStream($url, $format);
     }
 
     /**
@@ -388,9 +385,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetM3uStreamAvconvError($url, $format)
     {
-        $config = \Alltube\Config::getInstance();
-        $config->avconv = 'foobar';
-        $video = $this->download->getJSON($url, $format);
-        $this->download->getM3uStream($video);
+        $download = new VideoDownload(new Config(['avconv'=>'foobar']));
+        $video = $download->getJSON($url, $format);
+        $download->getM3uStream($video);
     }
 }

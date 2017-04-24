@@ -84,6 +84,17 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the constructor.
+     *
+     * @return void
+     */
+    public function testConstructor()
+    {
+        $controller = new FrontController($this->container);
+        $this->assertInstanceOf(FrontController::class, $controller);
+    }
+
+    /**
      * Test the constructor with streams enabled.
      *
      * @return void
@@ -325,10 +336,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithM3uStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        //We need to create a new controller instance in order to apply the custom config
-        $controller = new FrontController($this->container);
+        $controller = new FrontController($this->container, new Config(['stream'=>true]));
         $result = $controller->redirect(
             $this->request->withQueryParams(['url'=>'https://twitter.com/verge/status/813055465324056576/video/1']),
             $this->response
