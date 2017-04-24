@@ -84,6 +84,9 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider urlProvider
+     * @dataProvider m3uUrlProvider
+     * @dataProvider rtmpUrlProvider
+     * @dataProvider remuxUrlProvider
      */
     public function testGetURL($url, $format, $filename, $extension, $domain)
     {
@@ -250,8 +253,9 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @param string $format Format
      *
      * @return void
-     * @dataProvider URLProvider
+     * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
+     * @dataProvider rtmpUrlProvider
      */
     public function testGetJSON($url, $format)
     {
@@ -290,6 +294,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
+     * @dataProvider rtmpUrlProvider
+     * @dataProvider remuxUrlProvider
      */
     public function testGetFilename($url, $format, $filename, $extension)
     {
@@ -321,6 +327,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
+     * @dataProvider rtmpUrlProvider
+     * @dataProvider remuxUrlProvider
      */
     public function testGetAudioFilename($url, $format, $filename)
     {
