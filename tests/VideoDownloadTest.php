@@ -266,7 +266,6 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('title', $info);
         $this->assertObjectHasAttribute('extractor_key', $info);
         $this->assertObjectHasAttribute('formats', $info);
-        $this->assertObjectHasAttribute('_filename', $info);
     }
 
     /**

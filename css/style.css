@@ -397,10 +397,34 @@ padding:3px;
 
 
 
+/* Playlists */
+.playlist-entry .thumb {
+    float: left;
+    margin-right: 1em;
+}
 
+.playlist-entry {
+    clear: both;
+    padding-top: 2em;
+    text-align: left;
+}
 
+.playlist-entry h3 {
+    margin-top: 0;
+}
 
+.playlist-entry h3 a {
+    text-decoration: none;
+}
 
+.playlist-entry h3 a:hover {
+    text-decoration: underline;
+}
+
+.playlist-entry .downloadBtn {
+    font-size: 16px;
+    border-width: 2px;
+}
 
 
 

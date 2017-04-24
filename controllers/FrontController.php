@@ -213,7 +213,7 @@ class FrontController
     private function getVideoResponse(Request $request, Response $response, array $params, $password = null)
     {
         try {
-            $vidarr = $this->download->getJSON($params['url'], $this->defaultFormat, $password);
+            $video = $this->download->getJSON($params['url'], $this->defaultFormat, $password);
         } catch (PasswordException $e) {
             return $this->password($request, $response);
         }
@@ -222,14 +222,19 @@ class FrontController
         } else {
             $protocol = '[protocol^=http]';
         }
+        if (isset($video->entries)) {
+            $template = 'playlist.tpl';
+        } else {
+            $template = 'video.tpl';
+        }
         $this->view->render(
             $response,
-            'video.tpl',
+            $template,
             [
-                'vidarr'       => $vidarr,
+                'video'       => $video,
                 'class'       => 'video',
-                'title'       => $vidarr[0]->title,
-                'description' => 'Download "'.$vidarr[0]->title.'" from '.$vidarr[0]->extractor_key,
+                'title'       => $video->title,
+                'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
                 'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
@@ -327,7 +332,11 @@ class FrontController
                 $response = $response->withBody($stream->getBody());
             }
         }
-        $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
+        $response = $response->withHeader(
+            'Content-Disposition',
+            'attachment; filename="'.
+                $this->download->getFilename($url, $format, $password).'"'
+        );
 
         return $response;
     }
