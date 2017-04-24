@@ -149,7 +149,7 @@ class VideoDownload
     }
 
     /**
-     * Get filename of video with the specified extension
+     * Get filename of video with the specified extension.
      *
      * @param string $extension New file extension
      * @param string $url       URL of page
@@ -348,6 +348,7 @@ class VideoDownload
                 'pipe:1',
             ]
         );
+
         return popen($procBuilder->getProcess()->getCommandLine(), 'r');
     }
 

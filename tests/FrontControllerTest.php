@@ -372,8 +372,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $result = $controller->redirect(
             $this->request->withQueryParams(
                 [
-                    'url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU',
-                    'format'=>'bestvideo+bestaudio'
+                    'url'   => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                    'format'=> 'bestvideo+bestaudio',
                 ]
             ),
             $this->response
@@ -391,8 +391,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $result = $this->controller->redirect(
             $this->request->withQueryParams(
                 [
-                    'url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU',
-                    'format'=>'bestvideo+bestaudio'
+                    'url'   => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                    'format'=> 'bestvideo+bestaudio',
                 ]
             ),
             $this->response
