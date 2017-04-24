@@ -64,7 +64,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
 
             return $view;
         };
-        $this->controller = new FrontController($this->container);
+        $this->controller = new FrontController($this->container, Config::getInstance('config_test.yml'));
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
         $this->container['router']->map(['GET'], '/video', [$this->controller, 'video'])
@@ -90,9 +90,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorWithStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        $controller = new FrontController($this->container);
+        $controller = new FrontController($this->container, new Config(['stream'=>true]));
         $this->assertInstanceOf(FrontController::class, $controller);
     }
 
@@ -242,14 +240,13 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        $result = $this->controller->video(
+        $controller = new FrontController($this->container, new Config(['stream'=>true]));
+        $result = $controller->video(
             $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']),
             $this->response
         );
         $this->assertTrue($result->isOk());
-        $result = $this->controller->video(
+        $result = $controller->video(
             $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true]),
             $this->response
         );
@@ -313,9 +310,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        $result = $this->controller->redirect(
+        $controller = new FrontController($this->container, new Config(['stream'=>true]));
+        $result = $controller->redirect(
             $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']),
             $this->response
         );

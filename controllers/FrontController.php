@@ -66,9 +66,13 @@ class FrontController
      *
      * @param Container $container Slim dependency container
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, Config $config = null)
     {
-        $this->config = Config::getInstance();
+        if (isset($config)) {
+            $this->config = $config;
+        } else {
+            $this->config = Config::getInstance();
+        }
         $this->download = new VideoDownload();
         $this->container = $container;
         $this->view = $this->container->get('view');
