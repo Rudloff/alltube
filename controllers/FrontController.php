@@ -213,7 +213,7 @@ class FrontController
     private function getVideoResponse(Request $request, Response $response, array $params, $password = null)
     {
         try {
-            $video = $this->download->getJSON($params['url'], $this->defaultFormat, $password);
+            $vidarr = $this->download->getJSON($params['url'], $this->defaultFormat, $password);
         } catch (PasswordException $e) {
             return $this->password($request, $response);
         }
@@ -226,10 +226,10 @@ class FrontController
             $response,
             'video.tpl',
             [
-                'video'       => $video,
+                'vidarr'       => $vidarr,
                 'class'       => 'video',
-                'title'       => $video->title,
-                'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                'title'       => $vidarr[0]->title,
+                'description' => 'Download "'.$vidarr[0]->title.'" from '.$vidarr[0]->extractor_key,
                 'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
