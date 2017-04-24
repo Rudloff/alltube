@@ -65,6 +65,16 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the getInstance function with aen empty filename.
+     *
+     * @return void
+     */
+    public function testGetInstanceWithEmptyFile()
+    {
+        $config = Config::getInstance('');
+    }
+
+    /**
      * Test the getInstance function with the CONVERT and PYTHON environment variables.
      *
      * @return void

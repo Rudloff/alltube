@@ -141,7 +141,7 @@ class Config
         if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
             if (is_file($yamlfile)) {
                 $options = Yaml::parse(file_get_contents($yamlPath));
-            } elseif ($yamlfile == 'config.yml') {
+            } elseif ($yamlfile == 'config.yml' || empty($yamlfile)) {
                 /*
                 Allow for the default file to be missing in order to
                 not surprise users that did not create a config file
