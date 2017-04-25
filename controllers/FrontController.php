@@ -8,7 +8,7 @@ namespace Alltube\Controller;
 use Alltube\Config;
 use Alltube\PasswordException;
 use Alltube\VideoDownload;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
