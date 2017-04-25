@@ -10,7 +10,8 @@
     <div class="playlist-entry">
         <img class="thumb" src="{$video->thumbnail}" alt="" width="200" />
         <h3><a href="{$video->webpage_url}">{$video->title}</a></h3>
-        <a class="downloadBtn" href="{path_for name="redirect"}?url={$video->webpage_url}">Download</a>
+        <a target="_blank" class="downloadBtn" href="{path_for name="redirect"}?url={$video->webpage_url}">Download</a>
+        <a target="_blank" href="{path_for name="video"}?url={$video->webpage_url}">More options</a>
     </div>
 {/foreach}
 
