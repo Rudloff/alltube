@@ -5,7 +5,7 @@
 
 namespace Alltube;
 
-use Slim\Container;
+use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Views\Smarty;
 use Slim\Views\SmartyPlugins;
@@ -23,7 +23,7 @@ class ViewFactory
      *
      * @return Smarty
      */
-    public static function create(Container $container, Request $request = null)
+    public static function create(ContainerInterface $container, Request $request = null)
     {
         if (!isset($request)) {
             $request = $container['request'];
