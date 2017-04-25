@@ -84,7 +84,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Run controller function with custom query parameters and return the result
+     * Run controller function with custom query parameters and return the result.
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
@@ -97,8 +97,9 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         if (isset($config)) {
             $controller = new FrontController($this->container, $config);
         } else {
-            $controller= $this->controller;
+            $controller = $this->controller;
         }
+
         return $controller->$request(
             $this->request->withQueryParams($params),
             $this->response
@@ -106,7 +107,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that calling controller function with these parameters returns a 200 HTTP response
+     * Assert that calling controller function with these parameters returns a 200 HTTP response.
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
@@ -120,7 +121,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that calling controller function with these parameters returns an HTTP redirect
+     * Assert that calling controller function with these parameters returns an HTTP redirect.
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
@@ -134,7 +135,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that calling controller function with these parameters returns an HTTP redirect
+     * Assert that calling controller function with these parameters returns an HTTP redirect.
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
@@ -264,7 +265,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsRedirect(
             'video',
-            ['url'=>'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover', 'audio'=>true]
+            ['url'=> 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover', 'audio'=>true]
         );
     }
 
@@ -305,7 +306,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertRequestIsOk('video', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU'], $config);
         $this->assertRequestIsOk(
             'video',
-            ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true],
+            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true],
             $config
         );
     }
@@ -319,7 +320,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'video',
-            ['url'=>'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
+            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
     }
 
@@ -363,7 +364,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsRedirect(
             'redirect',
-            ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format'=>'worst']
+            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format'=>'worst']
         );
     }
 
@@ -376,7 +377,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU'],
+            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU'],
             new Config(['stream'=>true])
         );
     }
@@ -390,7 +391,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=>'https://twitter.com/verge/status/813055465324056576/video/1'],
+            ['url'=> 'https://twitter.com/verge/status/813055465324056576/video/1'],
             new Config(['stream'=>true])
         );
     }
@@ -404,7 +405,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=>'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0'],
+            ['url'=> 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0'],
             new Config(['stream'=>true])
         );
     }

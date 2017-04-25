@@ -399,7 +399,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that a stream is valid
+     * Assert that a stream is valid.
      *
      * @param resource $stream Stream
      *
