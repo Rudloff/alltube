@@ -349,6 +349,39 @@ class FrontController
     }
 
     /**
+     * Get a remuxed stream piped through the server.
+     *
+     * @param string   $urls       URLs of the video and audio files
+     * @param string   $webpageUrl URL of the webpage containing the video
+     * @param Response $response   PSR-7 response
+     * @param Request  $request    PSR-7 request
+     *
+     * @return Response HTTP response
+     */
+    private function getRemuxStream(array $urls, $format, Response $response, Request $request)
+    {
+        if (!$this->config->remux) {
+            throw new \Exception('You need to enable remux mode to merge two formats.');
+        }
+        $stream = $this->download->getRemuxStream($urls);
+        $response = $response->withHeader('Content-Type', 'video/x-matroska');
+        if ($request->isGet()) {
+            $response = $response->withBody(new Stream($stream));
+        }
+        $webpageUrl = $request->getQueryParam('url');
+
+        return $response->withHeader('Content-Disposition', 'attachment; filename="'.pathinfo(
+            $this->download->getFileNameWithExtension(
+                'mkv',
+                $webpageUrl,
+                $format,
+                $this->sessionSegment->getFlash($webpageUrl)
+            ),
+            PATHINFO_FILENAME
+        ).'.mkv"');
+    }
+
+    /**
      * Redirect to video file.
      *
      * @param Request  $request  PSR-7 request
@@ -366,7 +399,14 @@ class FrontController
         }
         if (isset($params['url'])) {
             try {
-                if ($this->config->stream) {
+                $urls = $this->download->getURL(
+                    $params['url'],
+                    $format,
+                    $this->sessionSegment->getFlash($params['url'])
+                );
+                if (count($urls) > 1) {
+                    return $this->getRemuxStream($urls, $format, $response, $request);
+                } elseif ($this->config->stream) {
                     return $this->getStream(
                         $params['url'],
                         $format,
@@ -375,33 +415,7 @@ class FrontController
                         $this->sessionSegment->getFlash($params['url'])
                     );
                 } else {
-                    $urls = $this->download->getURL(
-                        $params['url'],
-                        $format,
-                        $this->sessionSegment->getFlash($params['url'])
-                    );
-                    if (count($urls) > 1) {
-                        if (!$this->config->remux) {
-                            throw new \Exception('You need to enable remux mode to merge two formats.');
-                        }
-                        $stream = $this->download->getRemuxStream($urls);
-                        $response = $response->withHeader('Content-Type', 'video/x-matroska');
-                        if ($request->isGet()) {
-                            $response = $response->withBody(new Stream($stream));
-                        }
-
-                        return $response->withHeader('Content-Disposition', 'attachment; filename="'.pathinfo(
-                            $this->download->getFileNameWithExtension(
-                                'mkv',
-                                $params['url'],
-                                $format,
-                                $this->sessionSegment->getFlash($params['url'])
-                            ),
-                            PATHINFO_FILENAME
-                        ).'.mkv"');
-                    } else {
-                        return $response->withRedirect($urls[0]);
-                    }
+                    return $response->withRedirect($urls[0]);
                 }
             } catch (PasswordException $e) {
                 return $response->withRedirect(
