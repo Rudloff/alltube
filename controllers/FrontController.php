@@ -315,7 +315,7 @@ class FrontController
      *
      * @return Response HTTP response
      */
-    private function getStream($url, $format, $response, $request, $password = null)
+    private function getStream($url, $format, Response $response, Request $request, $password = null)
     {
         $video = $this->download->getJSON($url, $format, $password);
         if ($video->protocol == 'rtmp') {
