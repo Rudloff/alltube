@@ -18,5 +18,4 @@
 {/foreach}
 
 </div>
-</div>
 {include file="inc/footer.tpl"}
