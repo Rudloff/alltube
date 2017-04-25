@@ -7,6 +7,7 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\ViewFactory;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -53,17 +54,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->container = new Container();
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
-        $this->container['view'] = function ($c) {
-            $view = new \Slim\Views\Smarty(__DIR__.'/../templates/');
-
-            $smartyPlugins = new \Slim\Views\SmartyPlugins($c['router'], $this->request->getUri());
-            $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
-            $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
-
-            $view->registerPlugin('modifier', 'noscheme', 'Smarty_Modifier_noscheme');
-
-            return $view;
-        };
+        $this->container['view'] = ViewFactory::create($this->container, $this->request);
         $this->controller = new FrontController($this->container, Config::getInstance('config_test.yml'));
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');

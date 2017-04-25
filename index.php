@@ -4,29 +4,21 @@ require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\FrontController;
 use Alltube\UglyRouter;
+use Alltube\ViewFactory;
+use Slim\App;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
     header('Location: '.str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
     die;
 }
 
-$app = new \Slim\App();
+$app = new App();
 $container = $app->getContainer();
 $config = Config::getInstance();
 if ($config->uglyUrls) {
     $container['router'] = new UglyRouter();
 }
-$container['view'] = function ($c) {
-    $view = new \Slim\Views\Smarty(__DIR__.'/templates/');
-
-    $smartyPlugins = new \Slim\Views\SmartyPlugins($c['router'], $c['request']->getUri());
-    $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
-    $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
-
-    $view->registerPlugin('modifier', 'noscheme', 'Smarty_Modifier_noscheme');
-
-    return $view;
-};
+$container['view'] = ViewFactory::create($container);
 
 $controller = new FrontController($container, null, $_COOKIE);
 
