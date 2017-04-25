@@ -127,7 +127,7 @@ class VideoDownload
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
-     * @return array URLs of video
+     * @return string[] URLs of video
      * */
     public function getURL($url, $format = null, $password = null)
     {
