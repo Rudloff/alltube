@@ -227,14 +227,21 @@ class FrontController
         } else {
             $template = 'video.tpl';
         }
+        if (isset($video->title)) {
+            $title = $video->title;
+            $description = 'Download "'.$video->title.'" from '.$video->extractor_key;
+        } else {
+            $title = 'Video download';
+            $description = 'Download video from '.$video->extractor_key;
+        }
         $this->view->render(
             $response,
             $template,
             [
                 'video'       => $video,
                 'class'       => 'video',
-                'title'       => $video->title,
-                'description' => 'Download "'.$video->title.'" from '.$video->extractor_key,
+                'title'       => $title,
+                'description' => $description,
                 'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),

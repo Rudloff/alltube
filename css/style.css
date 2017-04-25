@@ -407,6 +407,7 @@ padding:3px;
     clear: both;
     padding-top: 2em;
     text-align: left;
+    width: 600px;
 }
 
 .playlist-entry h3 {
@@ -680,6 +681,16 @@ h1 {
     .error p {
         padding:0.5em;
         text-align:left;
+    }
+
+    .playlist-entry {
+        text-align: center;
+        width: auto;
+    }
+
+    .playlist-entry .thumb {
+        float: none;
+        margin-right: 0;
     }
 
 }

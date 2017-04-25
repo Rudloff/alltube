@@ -180,6 +180,20 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the video() function with a video that does not have a title.
+     *
+     * @return void
+     */
+    public function testVideoWithoutTitle()
+    {
+        $result = $this->controller->video(
+            $this->request->withQueryParams(['url'=>'http://html5demos.com/video']),
+            $this->response
+        );
+        $this->assertTrue($result->isOk());
+    }
+
+    /**
      * Test the video() function with audio conversion.
      *
      * @return void
