@@ -65,8 +65,10 @@ class FrontController
      * FrontController constructor.
      *
      * @param Container $container Slim dependency container
+     * @param Config    $config    Config instance
+     * @param array     $cookies   Cookie array
      */
-    public function __construct(ContainerInterface $container, Config $config = null)
+    public function __construct(ContainerInterface $container, Config $config = null, array $cookies = [])
     {
         if (isset($config)) {
             $this->config = $config;
@@ -77,7 +79,7 @@ class FrontController
         $this->container = $container;
         $this->view = $this->container->get('view');
         $session_factory = new \Aura\Session\SessionFactory();
-        $session = $session_factory->newInstance($_COOKIE);
+        $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
         if ($this->config->stream) {
             $this->defaultFormat = 'best';

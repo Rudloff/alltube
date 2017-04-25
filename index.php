@@ -28,7 +28,7 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-$controller = new FrontController($container);
+$controller = new FrontController($container, null, $_COOKIE);
 
 $container['errorHandler'] = [$controller, 'error'];
 
