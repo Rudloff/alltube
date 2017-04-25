@@ -291,7 +291,6 @@ class VideoDownload
             return popen($chain->getProcess()->getCommandLine(), 'r');
         } else {
             $avconvProc = $this->getAvconvMp3Process($video->url);
-            //dump($avconvProc->getProcess()); die;
 
             return popen($avconvProc->getProcess()->getCommandLine(), 'r');
         }
