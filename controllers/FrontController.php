@@ -351,8 +351,8 @@ class FrontController
     /**
      * Get a remuxed stream piped through the server.
      *
-     * @param string   $urls       URLs of the video and audio files
-     * @param string   $webpageUrl URL of the webpage containing the video
+     * @param array    $urls       URLs of the video and audio files
+     * @param string   $format     Requested format
      * @param Response $response   PSR-7 response
      * @param Request  $request    PSR-7 request
      *
@@ -382,6 +382,56 @@ class FrontController
     }
 
     /**
+     * Get video format from request parameters or default format if none is specified
+     *
+     * @param Request $request PSR-7 request
+     *
+     * @return string format
+     */
+    private function getFormat(Request $request)
+    {
+        $format = $request->getQueryParam('format');
+        if (!isset($format)) {
+            $format = $this->defaultFormat;
+        }
+
+        return $format;
+    }
+
+    /**
+     * Get approriate HTTP response to redirect query
+     * Depends on whether we want to stream, remux or simply redirect
+     *
+     * @param string   $url      URL of the video
+     * @param string   $format   Requested format
+     * @param Response $response PSR-7 response
+     * @param Request  $request  PSR-7 request
+     *
+     * @return Response HTTP response
+     */
+    private function getRedirectResponse($url, $format, Response $response, Request $request)
+    {
+        $videoUrls = $this->download->getURL(
+            $url,
+            $format,
+            $this->sessionSegment->getFlash($url)
+        );
+        if (count($videoUrls) > 1) {
+            return $this->getRemuxStream($videoUrls, $format, $response, $request);
+        } elseif ($this->config->stream) {
+            return $this->getStream(
+                $url,
+                $format,
+                $response,
+                $request,
+                $this->sessionSegment->getFlash($url)
+            );
+        } else {
+            return $response->withRedirect($videoUrls[0]);
+        }
+    }
+
+    /**
      * Redirect to video file.
      *
      * @param Request  $request  PSR-7 request
@@ -391,35 +441,14 @@ class FrontController
      */
     public function redirect(Request $request, Response $response)
     {
-        $params = $request->getQueryParams();
-        if (isset($params['format'])) {
-            $format = $params['format'];
-        } else {
-            $format = $this->defaultFormat;
-        }
-        if (isset($params['url'])) {
+        $url = $request->getQueryParam('url');
+        $format = $this->getFormat($request);
+        if (isset($url)) {
             try {
-                $urls = $this->download->getURL(
-                    $params['url'],
-                    $format,
-                    $this->sessionSegment->getFlash($params['url'])
-                );
-                if (count($urls) > 1) {
-                    return $this->getRemuxStream($urls, $format, $response, $request);
-                } elseif ($this->config->stream) {
-                    return $this->getStream(
-                        $params['url'],
-                        $format,
-                        $response,
-                        $request,
-                        $this->sessionSegment->getFlash($params['url'])
-                    );
-                } else {
-                    return $response->withRedirect($urls[0]);
-                }
+                return $this->getRedirectResponse($url, $format, $response, $request);
             } catch (PasswordException $e) {
                 return $response->withRedirect(
-                    $this->container->get('router')->pathFor('video').'?url='.urlencode($params['url'])
+                    $this->container->get('router')->pathFor('video').'?url='.urlencode($url)
                 );
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());
