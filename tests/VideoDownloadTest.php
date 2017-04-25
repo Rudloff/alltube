@@ -399,6 +399,19 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Assert that a stream is valid
+     *
+     * @param resource $stream Stream
+     *
+     * @return void
+     */
+    private function assertStream($stream)
+    {
+        $this->assertInternalType('resource', $stream);
+        $this->assertFalse(feof($stream));
+    }
+
+    /**
      * Test getM3uStream function.
      *
      * @param string $url    URL
@@ -409,10 +422,11 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetM3uStream($url, $format)
     {
-        $video = $this->download->getJSON($url, $format);
-        $stream = $this->download->getM3uStream($video);
-        $this->assertInternalType('resource', $stream);
-        $this->assertFalse(feof($stream));
+        $this->assertStream(
+            $this->download->getM3uStream(
+                $this->download->getJSON($url, $format)
+            )
+        );
     }
 
     /**
@@ -428,9 +442,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         $urls = $this->download->getURL($url, $format);
         if (count($urls) > 1) {
-            $stream = $this->download->getRemuxStream($urls);
-            $this->assertInternalType('resource', $stream);
-            $this->assertFalse(feof($stream));
+            $this->assertStream($this->download->getRemuxStream($urls));
         }
     }
 
@@ -445,10 +457,11 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRtmpStream($url, $format)
     {
-        $video = $this->download->getJSON($url, $format);
-        $stream = $this->download->getRtmpStream($video);
-        $this->assertInternalType('resource', $stream);
-        $this->assertFalse(feof($stream));
+        $this->assertStream(
+            $this->download->getRtmpStream(
+                $this->download->getJSON($url, $format)
+            )
+        );
     }
 
     /**
