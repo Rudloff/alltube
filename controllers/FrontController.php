@@ -351,10 +351,10 @@ class FrontController
     /**
      * Get a remuxed stream piped through the server.
      *
-     * @param array    $urls       URLs of the video and audio files
-     * @param string   $format     Requested format
-     * @param Response $response   PSR-7 response
-     * @param Request  $request    PSR-7 request
+     * @param array    $urls     URLs of the video and audio files
+     * @param string   $format   Requested format
+     * @param Response $response PSR-7 response
+     * @param Request  $request  PSR-7 request
      *
      * @return Response HTTP response
      */
@@ -382,7 +382,7 @@ class FrontController
     }
 
     /**
-     * Get video format from request parameters or default format if none is specified
+     * Get video format from request parameters or default format if none is specified.
      *
      * @param Request $request PSR-7 request
      *
@@ -400,7 +400,7 @@ class FrontController
 
     /**
      * Get approriate HTTP response to redirect query
-     * Depends on whether we want to stream, remux or simply redirect
+     * Depends on whether we want to stream, remux or simply redirect.
      *
      * @param string   $url      URL of the video
      * @param string   $format   Requested format
