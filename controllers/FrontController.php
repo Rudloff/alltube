@@ -222,9 +222,14 @@ class FrontController
         } else {
             $protocol = '[protocol^=http]';
         }
+        if (isset($video->entries)) {
+            $template = 'playlist.tpl';
+        } else {
+            $template = 'video.tpl';
+        }
         $this->view->render(
             $response,
-            'video.tpl',
+            $template,
             [
                 'video'       => $video,
                 'class'       => 'video',
@@ -327,7 +332,11 @@ class FrontController
                 $response = $response->withBody($stream->getBody());
             }
         }
-        $response = $response->withHeader('Content-Disposition', 'attachment; filename="'.$video->_filename.'"');
+        $response = $response->withHeader(
+            'Content-Disposition',
+            'attachment; filename="'.
+                $this->download->getFilename($url, $format, $password).'"'
+        );
 
         return $response;
     }

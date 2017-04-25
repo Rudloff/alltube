@@ -265,6 +265,22 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the video() function with a playlist.
+     *
+     * @return void
+     */
+    public function testVideoWithPlaylist()
+    {
+        $result = $this->controller->video(
+            $this->request->withQueryParams(
+                ['url'=>'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
+            ),
+            $this->response
+        );
+        $this->assertTrue($result->isOk());
+    }
+
+    /**
      * Test the error() function.
      *
      * @return void
