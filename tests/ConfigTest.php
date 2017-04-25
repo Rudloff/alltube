@@ -70,7 +70,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstanceWithEmptyFile()
     {
-        $config = Config::getInstance('');
+        Config::getInstance('');
     }
 
     /**
