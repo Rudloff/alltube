@@ -14,7 +14,6 @@ use Slim\Views\Smarty;
  */
 class ViewFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Test the create() function.
      *
