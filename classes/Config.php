@@ -38,7 +38,7 @@ class Config
      *
      * @var array
      */
-    public $params = ['--no-warnings', '--ignore-errors'];
+    public $params = ['--no-warnings', '--ignore-errors', '--flat-playlist'];
 
     /**
      * Enable audio conversion.
