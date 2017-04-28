@@ -18,6 +18,7 @@ Here are the parameters that you can set:
 * `convert`: true to enable audio conversion
 * `avconv`: path to your avconv or ffmpeg binary
 * `rtmpdump`: path to your rtmpdump binary
+* `remux`: enable remux mode (experimental)
 
 See [`config.example.yml`](config.example.yml) for default values.
 
@@ -128,3 +129,12 @@ And you probably need to run this in another terminal after `heroku local` has f
 ```bash
 chmod 0667 /tmp/heroku.fcgi.5000.sock
 ```
+
+## How can I download 1080p videos from Youtube?
+
+Youtube distributes HD content in two separate video and audio files.
+So Alltube will offer you video-only and audio-only formats in the format list.
+
+You then need to merge them together with a tool like ffmpeg.
+
+You can also enable the experimental remux mode that will merge the best video and the best audio format on the fly.
