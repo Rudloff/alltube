@@ -45,7 +45,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetInstance()
     {
         $this->assertEquals($this->config->convert, false);
-        $this->assertInternalType('array', $this->config->curl_params);
         $this->assertInternalType('array', $this->config->params);
         $this->assertInternalType('string', $this->config->youtubedl);
         $this->assertInternalType('string', $this->config->python);
@@ -62,6 +61,16 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetInstanceWithMissingFile()
     {
         Config::getInstance('foo');
+    }
+
+    /**
+     * Test the getInstance function with aen empty filename.
+     *
+     * @return void
+     */
+    public function testGetInstanceWithEmptyFile()
+    {
+        Config::getInstance('');
     }
 
     /**

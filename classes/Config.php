@@ -38,7 +38,7 @@ class Config
      *
      * @var array
      */
-    public $params = ['--no-playlist', '--no-warnings', '--playlist-end', 1];
+    public $params = ['--no-warnings', '--ignore-errors', '--flat-playlist'];
 
     /**
      * Enable audio conversion.
@@ -62,20 +62,6 @@ class Config
     public $rtmpdump = 'vendor/bin/rtmpdump';
 
     /**
-     * curl binary path.
-     *
-     * @var string
-     */
-    public $curl = '/usr/bin/curl';
-
-    /**
-     * curl parameters.
-     *
-     * @var array
-     */
-    public $curl_params = [];
-
-    /**
      * Disable URL rewriting.
      *
      * @var bool
@@ -88,6 +74,13 @@ class Config
      * @var bool
      */
     public $stream = false;
+
+    /**
+     * Allow to remux video + audio?
+     *
+     * @var bool
+     */
+    public $remux = false;
 
     /**
      * YAML config file path.
@@ -104,9 +97,7 @@ class Config
      * * python: Python binary path
      * * avconv: avconv or ffmpeg binary path
      * * rtmpdump: rtmpdump binary path
-     * * curl: curl binary path
      * * params: Array of youtube-dl parameters
-     * * curl_params: Array of curl parameters
      * * convert: Enable conversion?
      *
      * @param array $options Options
@@ -141,7 +132,7 @@ class Config
         if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
             if (is_file($yamlfile)) {
                 $options = Yaml::parse(file_get_contents($yamlPath));
-            } elseif ($yamlfile == 'config.yml') {
+            } elseif ($yamlfile == 'config.yml' || empty($yamlfile)) {
                 /*
                 Allow for the default file to be missing in order to
                 not surprise users that did not create a config file

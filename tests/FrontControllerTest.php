@@ -7,6 +7,7 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\ViewFactory;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -53,18 +54,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->container = new Container();
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
-        $this->container['view'] = function ($c) {
-            $view = new \Slim\Views\Smarty(__DIR__.'/../templates/');
-
-            $smartyPlugins = new \Slim\Views\SmartyPlugins($c['router'], $this->request->getUri());
-            $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
-            $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
-
-            $view->registerPlugin('modifier', 'noscheme', 'Smarty_Modifier_noscheme');
-
-            return $view;
-        };
-        $this->controller = new FrontController($this->container);
+        $this->container['view'] = ViewFactory::create($this->container, $this->request);
+        $this->controller = new FrontController($this->container, Config::getInstance('config_test.yml'));
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
         $this->container['router']->map(['GET'], '/video', [$this->controller, 'video'])
@@ -84,15 +75,89 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Run controller function with custom query parameters and return the result.
+     *
+     * @param string $request Controller function to call
+     * @param array  $params  Query parameters
+     * @param Config $config  Custom config
+     *
+     * @return Response HTTP response
+     */
+    private function getRequestResult($request, array $params, Config $config = null)
+    {
+        if (isset($config)) {
+            $controller = new FrontController($this->container, $config);
+        } else {
+            $controller = $this->controller;
+        }
+
+        return $controller->$request(
+            $this->request->withQueryParams($params),
+            $this->response
+        );
+    }
+
+    /**
+     * Assert that calling controller function with these parameters returns a 200 HTTP response.
+     *
+     * @param string $request Controller function to call
+     * @param array  $params  Query parameters
+     * @param Config $config  Custom config
+     *
+     * @return void
+     */
+    private function assertRequestIsOk($request, array $params = [], Config $config = null)
+    {
+        $this->assertTrue($this->getRequestResult($request, $params, $config)->isOk());
+    }
+
+    /**
+     * Assert that calling controller function with these parameters returns an HTTP redirect.
+     *
+     * @param string $request Controller function to call
+     * @param array  $params  Query parameters
+     * @param Config $config  Custom config
+     *
+     * @return void
+     */
+    private function assertRequestIsRedirect($request, array $params = [], Config $config = null)
+    {
+        $this->assertTrue($this->getRequestResult($request, $params, $config)->isRedirect());
+    }
+
+    /**
+     * Assert that calling controller function with these parameters returns an HTTP redirect.
+     *
+     * @param string $request Controller function to call
+     * @param array  $params  Query parameters
+     * @param Config $config  Custom config
+     *
+     * @return void
+     */
+    private function assertRequestIsServerError($request, array $params = [], Config $config = null)
+    {
+        $this->assertTrue($this->getRequestResult($request, $params, $config)->isServerError());
+    }
+
+    /**
+     * Test the constructor.
+     *
+     * @return void
+     */
+    public function testConstructor()
+    {
+        $controller = new FrontController($this->container);
+        $this->assertInstanceOf(FrontController::class, $controller);
+    }
+
+    /**
      * Test the constructor with streams enabled.
      *
      * @return void
      */
     public function testConstructorWithStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        $controller = new FrontController($this->container);
+        $controller = new FrontController($this->container, new Config(['stream'=>true]));
         $this->assertInstanceOf(FrontController::class, $controller);
     }
 
@@ -103,8 +168,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testIndex()
     {
-        $result = $this->controller->index($this->request, $this->response);
-        $this->assertTrue($result->isOk());
+        $this->assertRequestIsOk('index');
     }
 
     /**
@@ -130,8 +194,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testExtractors()
     {
-        $result = $this->controller->extractors($this->request, $this->response);
-        $this->assertTrue($result->isOk());
+        $this->assertRequestIsOk('extractors');
     }
 
     /**
@@ -141,8 +204,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassword()
     {
-        $result = $this->controller->password($this->request, $this->response);
-        $this->assertTrue($result->isOk());
+        $this->assertRequestIsOk('password');
     }
 
     /**
@@ -152,8 +214,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithoutUrl()
     {
-        $result = $this->controller->video($this->request, $this->response);
-        $this->assertTrue($result->isRedirect());
+        $this->assertRequestIsRedirect('video');
     }
 
     /**
@@ -163,11 +224,17 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideo()
     {
-        $result = $this->controller->video(
-            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']),
-            $this->response
-        );
-        $this->assertTrue($result->isOk());
+        $this->assertRequestIsOk('video', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
+    }
+
+    /**
+     * Test the video() function with a video that does not have a title.
+     *
+     * @return void
+     */
+    public function testVideoWithoutTitle()
+    {
+        $this->assertRequestIsOk('video', ['url'=>'http://html5demos.com/video']);
     }
 
     /**
@@ -177,11 +244,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithAudio()
     {
-        $result = $this->controller->video(
-            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true]),
-            $this->response
-        );
-        $this->assertTrue($result->isOk());
+        $this->assertRequestIsOk('video', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true]);
     }
 
     /**
@@ -191,14 +254,10 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithUnconvertedAudio()
     {
-        $result = $this->controller->video(
-            $this->request->withQueryParams(
-                ['url' => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover',
-                'audio'=> true, ]
-            ),
-            $this->response
+        $this->assertRequestIsRedirect(
+            'video',
+            ['url'=> 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover', 'audio'=>true]
         );
-        $this->assertTrue($result->isRedirect());
     }
 
     /**
@@ -223,16 +282,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithMissingPassword()
     {
-        $result = $this->controller->video(
-            $this->request->withQueryParams(['url'=>'http://vimeo.com/68375962']),
-            $this->response
-        );
-        $this->assertTrue($result->isOk());
-        $result = $this->controller->video(
-            $this->request->withQueryParams(['url'=>'http://vimeo.com/68375962', 'audio'=>true]),
-            $this->response
-        );
-        $this->assertTrue($result->isOk());
+        $this->assertRequestIsOk('video', ['url'=>'http://vimeo.com/68375962']);
+        $this->assertRequestIsOk('video', ['url'=>'http://vimeo.com/68375962', 'audio'=>true]);
     }
 
     /**
@@ -242,18 +293,26 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        $result = $this->controller->video(
-            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']),
-            $this->response
+        $config = new Config(['stream'=>true]);
+        $this->assertRequestIsOk('video', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU'], $config);
+        $this->assertRequestIsOk(
+            'video',
+            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true],
+            $config
         );
-        $this->assertTrue($result->isOk());
-        $result = $this->controller->video(
-            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true]),
-            $this->response
+    }
+
+    /**
+     * Test the video() function with a playlist.
+     *
+     * @return void
+     */
+    public function testVideoWithPlaylist()
+    {
+        $this->assertRequestIsOk(
+            'video',
+            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
-        $this->assertTrue($result->isOk());
     }
 
     /**
@@ -274,8 +333,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithoutUrl()
     {
-        $result = $this->controller->redirect($this->request, $this->response);
-        $this->assertTrue($result->isRedirect());
+        $this->assertRequestIsRedirect('redirect');
     }
 
     /**
@@ -285,11 +343,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirect()
     {
-        $result = $this->controller->redirect(
-            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']),
-            $this->response
-        );
-        $this->assertTrue($result->isRedirect());
+        $this->assertRequestIsRedirect('redirect', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
     }
 
     /**
@@ -299,11 +353,10 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithFormat()
     {
-        $result = $this->controller->redirect(
-            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format'=>'worst']),
-            $this->response
+        $this->assertRequestIsRedirect(
+            'redirect',
+            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format'=>'worst']
         );
-        $this->assertTrue($result->isRedirect());
     }
 
     /**
@@ -313,13 +366,11 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        $result = $this->controller->redirect(
-            $this->request->withQueryParams(['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']),
-            $this->response
+        $this->assertRequestIsOk(
+            'redirect',
+            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU'],
+            new Config(['stream'=>true])
         );
-        $this->assertTrue($result->isOk());
     }
 
     /**
@@ -329,15 +380,58 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithM3uStream()
     {
-        $config = Config::getInstance();
-        $config->stream = true;
-        //We need to create a new controller instance in order to apply the custom config
-        $controller = new FrontController($this->container);
-        $result = $controller->redirect(
-            $this->request->withQueryParams(['url'=>'https://twitter.com/verge/status/813055465324056576/video/1']),
-            $this->response
+        $this->assertRequestIsOk(
+            'redirect',
+            ['url'=> 'https://twitter.com/verge/status/813055465324056576/video/1'],
+            new Config(['stream'=>true])
         );
-        $this->assertTrue($result->isOk());
+    }
+
+    /**
+     * Test the redirect() function with an RTMP stream.
+     *
+     * @return void
+     */
+    public function testRedirectWithRtmpStream()
+    {
+        $this->assertRequestIsOk(
+            'redirect',
+            ['url'=> 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0'],
+            new Config(['stream'=>true])
+        );
+    }
+
+    /**
+     * Test the redirect() function with a remuxed video.
+     *
+     * @return void
+     */
+    public function testRedirectWithRemux()
+    {
+        $this->assertRequestIsOk(
+            'redirect',
+            [
+                'url'   => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                'format'=> 'bestvideo+bestaudio',
+            ],
+            new Config(['remux'=>true])
+        );
+    }
+
+    /**
+     * Test the redirect() function with a remuxed video but remux disabled.
+     *
+     * @return void
+     */
+    public function testRedirectWithRemuxDisabled()
+    {
+        $this->assertRequestIsServerError(
+            'redirect',
+            [
+                'url'   => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                'format'=> 'bestvideo+bestaudio',
+            ]
+        );
     }
 
     /**
@@ -347,11 +441,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithMissingPassword()
     {
-        $result = $this->controller->redirect(
-            $this->request->withQueryParams(['url'=>'http://vimeo.com/68375962']),
-            $this->response
-        );
-        $this->assertTrue($result->isRedirect());
+        $this->assertRequestIsRedirect('redirect', ['url'=>'http://vimeo.com/68375962']);
     }
 
     /**
@@ -361,10 +451,6 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithError()
     {
-        $result = $this->controller->redirect(
-            $this->request->withQueryParams(['url'=>'http://example.com/foo']),
-            $this->response
-        );
-        $this->assertTrue($result->isServerError());
+        $this->assertRequestIsServerError('redirect', ['url'=>'http://example.com/foo']);
     }
 }

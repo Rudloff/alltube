@@ -15,10 +15,10 @@ Here are the parameters that you can set:
 * `youtubedl`: path to your youtube-dl binary
 * `python`: path to your python binary
 * `params`: an array of parameters to pass to youtube-dl
-* `curl_params`: an array of parameters to pass to curl
 * `convert`: true to enable audio conversion
 * `avconv`: path to your avconv or ffmpeg binary
 * `rtmpdump`: path to your rtmpdump binary
+* `remux`: enable remux mode (experimental)
 
 See [`config.example.yml`](config.example.yml) for default values.
 
@@ -31,10 +31,10 @@ convert: true
 avconv: path/to/avconv
 ```
 
-You will also need to install `avconv` and `curl` on your server:
+You will also need to install `avconv` on your server:
 
 ```bash
-sudo apt-get install libav-tools curl
+sudo apt-get install libav-tools
 ```
 
 ## How do I deploy Alltube on Heroku?
@@ -129,3 +129,12 @@ And you probably need to run this in another terminal after `heroku local` has f
 ```bash
 chmod 0667 /tmp/heroku.fcgi.5000.sock
 ```
+
+## How can I download 1080p videos from Youtube?
+
+Youtube distributes HD content in two separate video and audio files.
+So Alltube will offer you video-only and audio-only formats in the format list.
+
+You then need to merge them together with a tool like ffmpeg.
+
+You can also enable the experimental remux mode that will merge the best video and the best audio format on the fly.

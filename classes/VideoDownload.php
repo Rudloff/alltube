@@ -98,7 +98,7 @@ class VideoDownload
                 throw new \Exception($errorOutput);
             }
         } else {
-            return $process->getOutput();
+            return trim($process->getOutput());
         }
     }
 
@@ -113,21 +113,25 @@ class VideoDownload
      * */
     public function getJSON($url, $format = null, $password = null)
     {
-        return json_decode($this->getProp($url, $format, 'dump-json', $password));
+        return json_decode($this->getProp($url, $format, 'dump-single-json', $password));
     }
 
     /**
      * Get URL of video from URL of page.
      *
+     * It generally returns only one URL.
+     * But it can return two URLs when multiple formats are specified
+     * (eg. bestvideo+bestaudio).
+     *
      * @param string $url      URL of page
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
-     * @return string URL of video
+     * @return string[] URLs of video
      * */
     public function getURL($url, $format = null, $password = null)
     {
-        return $this->getProp($url, $format, 'get-url', $password);
+        return explode(PHP_EOL, $this->getProp($url, $format, 'get-url', $password));
     }
 
     /**
@@ -145,6 +149,28 @@ class VideoDownload
     }
 
     /**
+     * Get filename of video with the specified extension.
+     *
+     * @param string $extension New file extension
+     * @param string $url       URL of page
+     * @param string $format    Format to use for the video
+     * @param string $password  Video password
+     *
+     * @return string Filename of extracted video with specified extension
+     */
+    public function getFileNameWithExtension($extension, $url, $format = null, $password = null)
+    {
+        return html_entity_decode(
+            pathinfo(
+                $this->getFilename($url, $format, $password),
+                PATHINFO_FILENAME
+            ).'.'.$extension,
+            ENT_COMPAT,
+            'ISO-8859-1'
+        );
+    }
+
+    /**
      * Get filename of audio from URL of page.
      *
      * @param string $url      URL of page
@@ -155,14 +181,7 @@ class VideoDownload
      * */
     public function getAudioFilename($url, $format = null, $password = null)
     {
-        return html_entity_decode(
-            pathinfo(
-                $this->getFilename($url, $format, $password),
-                PATHINFO_FILENAME
-            ).'.mp3',
-            ENT_COMPAT,
-            'ISO-8859-1'
-        );
+        return $this->getFileNameWithExtension('mp3', $url, $format, $password);
     }
 
     /**
@@ -222,31 +241,30 @@ class VideoDownload
     }
 
     /**
-     * Get a process that runs curl in order to download a video.
+     * Get a process that runs avconv in order to convert a video to MP3.
      *
-     * @param object $video Video object returned by youtube-dl
+     * @param string $url URL of the video file
      *
      * @return \Symfony\Component\Process\Process Process
      */
-    private function getCurlProcess($video)
+    private function getAvconvMp3Process($url)
     {
-        if (!shell_exec('which '.$this->config->curl)) {
-            throw(new \Exception('Can\'t find curl'));
+        if (!shell_exec('which '.$this->config->avconv)) {
+            throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
-        $builder = ProcessBuilder::create(
-            array_merge(
-                [
-                    $this->config->curl,
-                    '--silent',
-                    '--location',
-                    '--user-agent', $video->http_headers->{'User-Agent'},
-                    $video->url,
-                ],
-                $this->config->curl_params
-            )
-        );
 
-        return $builder->getProcess();
+        return ProcessBuilder::create(
+            [
+                $this->config->avconv,
+                '-v', 'quiet',
+                //Vimeo needs a correct user-agent
+                '-user-agent', $this->getProp(null, null, 'dump-user-agent'),
+                '-i', $url,
+                '-f', 'mp3',
+                '-vn',
+                'pipe:1',
+            ]
+        );
     }
 
     /**
@@ -260,40 +278,22 @@ class VideoDownload
      */
     public function getAudioStream($url, $format, $password = null)
     {
-        if (!shell_exec('which '.$this->config->avconv)) {
-            throw(new \Exception('Can\'t find avconv or ffmpeg'));
-        }
-
         $video = $this->getJSON($url, $format, $password);
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
             throw(new \Exception('Conversion of M3U8 files is not supported.'));
         }
 
-        //Vimeo needs a correct user-agent
-        ini_set(
-            'user_agent',
-            $video->http_headers->{'User-Agent'}
-        );
-        $avconvProc = ProcessBuilder::create(
-            [
-                $this->config->avconv,
-                '-v', 'quiet',
-                '-i', '-',
-                '-f', 'mp3',
-                '-vn',
-                'pipe:1',
-            ]
-        );
-
         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
             $process = $this->getRtmpProcess($video);
-        } else {
-            $process = $this->getCurlProcess($video);
-        }
-        $chain = new Chain($process);
-        $chain->add('|', $avconvProc);
+            $chain = new Chain($process);
+            $chain->add('|', $this->getAvconvMp3Process('-'));
 
-        return popen($chain->getProcess()->getCommandLine(), 'r');
+            return popen($chain->getProcess()->getCommandLine(), 'r');
+        } else {
+            $avconvProc = $this->getAvconvMp3Process($video->url);
+
+            return popen($avconvProc->getProcess()->getCommandLine(), 'r');
+        }
     }
 
     /**
@@ -323,5 +323,43 @@ class VideoDownload
         );
 
         return popen($procBuilder->getProcess()->getCommandLine(), 'r');
+    }
+
+    /**
+     * Get an avconv stream to remux audio and video.
+     *
+     * @param array $urls URLs of the video ($urls[0]) and audio ($urls[1]) files
+     *
+     * @return resource popen stream
+     */
+    public function getRemuxStream(array $urls)
+    {
+        $procBuilder = ProcessBuilder::create(
+            [
+                $this->config->avconv,
+                '-v', 'quiet',
+                '-i', $urls[0],
+                '-i', $urls[1],
+                '-c', 'copy',
+                '-map', '0:v:0 ',
+                '-map', '1:a:0',
+                '-f', 'matroska',
+                'pipe:1',
+            ]
+        );
+
+        return popen($procBuilder->getProcess()->getCommandLine(), 'r');
+    }
+
+    /**
+     * Get video stream from an RTMP video.
+     *
+     * @param \stdClass $video Video object returned by getJSON
+     *
+     * @return resource popen stream
+     */
+    public function getRtmpStream(\stdClass $video)
+    {
+        return popen($this->getRtmpProcess($video)->getCommandLine(), 'r');
     }
 }

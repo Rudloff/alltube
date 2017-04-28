@@ -34,6 +34,11 @@
                         Best ({$video->ext})
                     {/strip}
                 </option>
+                {if $remux}
+                    <option value="bestvideo+bestaudio">
+                        Remux best video with best audio
+                    </option>
+                {/if}
                 <option value="worst{$protocol}">
                     Worst
                 </option>
