@@ -253,7 +253,7 @@ class VideoDownload
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
-        return ProcessBuilder::create(
+        $builder = ProcessBuilder::create(
             [
                 $this->config->avconv,
                 '-v', 'quiet',
@@ -265,6 +265,8 @@ class VideoDownload
                 'pipe:1',
             ]
         );
+
+        return $builder->getProcess();
     }
 
     /**
@@ -292,7 +294,7 @@ class VideoDownload
         } else {
             $avconvProc = $this->getAvconvMp3Process($video->url);
 
-            return popen($avconvProc->getProcess()->getCommandLine(), 'r');
+            return popen($avconvProc->getCommandLine(), 'r');
         }
     }
 
