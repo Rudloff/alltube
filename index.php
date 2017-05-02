@@ -3,6 +3,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\PlaylistArchiveStream;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;
@@ -11,6 +12,8 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
     header('Location: '.str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
     die;
 }
+
+stream_wrapper_register('playlist', PlaylistArchiveStream::class);
 
 $app = new App();
 $container = $app->getContainer();

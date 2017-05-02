@@ -453,4 +453,29 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsServerError('redirect', ['url'=>'http://example.com/foo']);
     }
+
+    /**
+     * Test the redirect() function with an video that returns an empty URL.
+     * This can be caused by trying to redirect to a playlist.
+     *
+     * @return void
+     */
+    public function testRedirectWithEmptyUrl()
+    {
+        $this->assertRequestIsServerError('redirect', ['url'=>'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']);
+    }
+
+    /**
+     * Test the redirect() function with a playlist stream.
+     *
+     * @return void
+     */
+    public function testRedirectWithPlaylist()
+    {
+        $this->assertRequestIsOk(
+            'redirect',
+            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC'],
+            new Config(['stream'=>true])
+        );
+    }
 }

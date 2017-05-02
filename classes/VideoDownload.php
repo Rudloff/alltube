@@ -364,4 +364,23 @@ class VideoDownload
     {
         return popen($this->getRtmpProcess($video)->getCommandLine(), 'r');
     }
+
+    /**
+     * Get a Tar stream containing every video in the playlist piped through the server.
+     *
+     * @param string $video  Video object returned by youtube-dl
+     * @param string $format Requested format
+     *
+     * @return Response HTTP response
+     */
+    public function getPlaylistArchiveStream($video, $format)
+    {
+        $playlistItems = [];
+        foreach ($video->entries as $entry) {
+            $playlistItems[] = urlencode($entry->url);
+        }
+        $stream = fopen('playlist://'.implode(';', $playlistItems).'/'.$format, 'r');
+
+        return $stream;
+    }
 }

@@ -6,6 +6,9 @@
     <a href="{$video->webpage_url}">
 {$video->title}</a></i>{/if} playlist:
 </p>
+{if $config->stream}
+    <a href="{path_for name="redirect"}?url={$video->webpage_url}" class="downloadBtn">Download everything</a>
+{/if}
 {foreach $video->entries as $video}
     <div class="playlist-entry">
         <h3><a target="_blank" href="{strip}

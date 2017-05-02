@@ -317,7 +317,16 @@ class FrontController
     private function getStream($url, $format, Response $response, Request $request, $password = null)
     {
         $video = $this->download->getJSON($url, $format, $password);
-        if ($video->protocol == 'rtmp') {
+        if (isset($video->entries)) {
+            $stream = $this->download->getPlaylistArchiveStream($video, $format);
+            $response = $response->withHeader('Content-Type', 'application/x-tar');
+            $response = $response->withHeader(
+                'Content-Disposition',
+                'attachment; filename="'.$video->title.'.tar"'
+            );
+
+            return $response->withBody(new Stream($stream));
+        } elseif ($video->protocol == 'rtmp') {
             $stream = $this->download->getRtmpStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
             if ($request->isGet()) {
@@ -426,6 +435,10 @@ class FrontController
                 $this->sessionSegment->getFlash($url)
             );
         } else {
+            if (empty($videoUrls[0])) {
+                throw new \Exception("Can't find URL of video");
+            }
+
             return $response->withRedirect($videoUrls[0]);
         }
     }
