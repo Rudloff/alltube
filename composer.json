@@ -13,7 +13,6 @@
     "ptachoire/process-builder-chain": "~1.2.0",
     "rudloff/smarty-plugin-noscheme": "~0.1.0",
     "guzzlehttp/guzzle": "~6.2.0",
-    "rudloff/rtmpdump-bin": "~2.3",
     "aura/session": "~2.1.0"
   },
   "require-dev": {
@@ -22,7 +21,7 @@
     "phpunit/phpunit": "~5.7.2",
     "ffmpeg/ffmpeg": "dev-release",
     "rg3/youtube-dl": "~2017.04.28",
-    "rudloff/rtmpdump-bin": "~2.3",
+    "rudloff/rtmpdump-bin": "~2.3.0",
     "heroku/heroku-buildpack-php": "*"
   },
   "extra": {

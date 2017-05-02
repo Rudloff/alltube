@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fda75dec4d72b9620ca68697278dc7e",
+    "content-hash": "18563e36d487153b121da01e2cf040db",
     "packages": [
         {
             "name": "aura/session",
@@ -680,34 +680,6 @@
             ],
             "description": "Add ability to chain symfony processes",
             "time": "2016-04-10T08:33:20+00:00"
-        },
-        {
-            "name": "rudloff/rtmpdump-bin",
-            "version": "2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Rudloff/rtmpdump-bin.git",
-                "reference": "133cdd80e3bab66593e88a5276158596383afd97"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Rudloff/rtmpdump-bin/zipball/133cdd80e3bab66593e88a5276158596383afd97",
-                "reference": "133cdd80e3bab66593e88a5276158596383afd97",
-                "shasum": ""
-            },
-            "require-dev": {
-                "rtmpdump/rtmpdump": "2.3"
-            },
-            "bin": [
-                "rtmpdump"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0"
-            ],
-            "description": "rtmpdump binary for Linux 64 bit",
-            "time": "2016-04-12T19:17:32+00:00"
         },
         {
             "name": "rudloff/smarty-plugin-noscheme",
@@ -1743,6 +1715,34 @@
                 "shasum": null
             },
             "type": "library"
+        },
+        {
+            "name": "rudloff/rtmpdump-bin",
+            "version": "2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Rudloff/rtmpdump-bin.git",
+                "reference": "133cdd80e3bab66593e88a5276158596383afd97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rudloff/rtmpdump-bin/zipball/133cdd80e3bab66593e88a5276158596383afd97",
+                "reference": "133cdd80e3bab66593e88a5276158596383afd97",
+                "shasum": ""
+            },
+            "require-dev": {
+                "rtmpdump/rtmpdump": "2.3"
+            },
+            "bin": [
+                "rtmpdump"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "description": "rtmpdump binary for Linux 64 bit",
+            "time": "2016-04-12T19:17:32+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
