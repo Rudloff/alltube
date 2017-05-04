@@ -218,7 +218,7 @@ class VideoDownload
      *
      * @return \Symfony\Component\Process\Process Process
      */
-    private function getRtmpProcess($video)
+    private function getRtmpProcess(\stdClass $video)
     {
         if (!shell_exec('which '.$this->config->rtmpdump)) {
             throw(new \Exception('Can\'t find rtmpdump'));
@@ -373,7 +373,7 @@ class VideoDownload
      *
      * @return Response HTTP response
      */
-    public function getPlaylistArchiveStream($video, $format)
+    public function getPlaylistArchiveStream(\stdClass $video, $format)
     {
         $playlistItems = [];
         foreach ($video->entries as $entry) {
