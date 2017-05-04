@@ -396,7 +396,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=> 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0'],
+            ['url'=> 'http://www.canalc2.tv/video/12163', 'format'=>'rtmp'],
             new Config(['stream'=>true])
         );
     }

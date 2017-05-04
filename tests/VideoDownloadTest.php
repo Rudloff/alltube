@@ -226,10 +226,10 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
-                'GRIP sucht den Sommerkönig-folge-203-0',
-                'f4v',
-                'edgefcs.net',
+                'http://www.canalc2.tv/video/12163', 'rtmp',
+                'Terrasses du Numérique-12163',
+                'flv',
+                'vod-flash.u-strasbg.fr',
             ],
         ];
     }
