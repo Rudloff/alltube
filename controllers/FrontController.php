@@ -101,8 +101,7 @@ class FrontController
             $response,
             'index.tpl',
             [
-                'convert'      => $this->config->convert,
-                'uglyUrls'     => $this->config->uglyUrls,
+                'config'      => $this->config,
                 'class'        => 'index',
                 'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
                 'domain'       => $uri->getScheme().'://'.$uri->getAuthority(),
@@ -247,8 +246,6 @@ class FrontController
                 'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
-                'uglyUrls'    => $this->config->uglyUrls,
-                'remux'       => $this->config->remux,
             ]
         );
 

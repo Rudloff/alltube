@@ -12,11 +12,11 @@
         <input class="URLinput" type="url" name="url" id="url"
         required autofocus placeholder="http://example.com/video" />
         </span>
-        {if $uglyUrls}
+        {if $config->uglyUrls}
             <input type="hidden" name="page" value="video" />
         {/if}
         <input class="downloadBtn" type="submit" value="Download" /><br/>
-        {if $convert}
+        {if $config->convert}
             <div class="mp3">
                 <p><input type="checkbox" id="audio" class="audio" name="audio">
                 <label for="audio"><span class="ui"></span>

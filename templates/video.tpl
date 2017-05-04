@@ -24,7 +24,7 @@
     <h3><label for="format">Available formats:</label></h3>
     <form action="{path_for name="redirect"}">
         <input type="hidden" name="url" value="{$video->webpage_url}" />
-        {if $uglyUrls}
+        {if $config->uglyUrls}
             <input type="hidden" name="page" value="redirect" />
         {/if}
         <select name="format" id="format" class="formats monospace">
@@ -34,7 +34,7 @@
                         Best ({$video->ext})
                     {/strip}
                 </option>
-                {if $remux}
+                {if $config->remux}
                     <option value="bestvideo+bestaudio">
                         Remux best video with best audio
                     </option>
