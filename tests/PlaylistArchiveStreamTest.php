@@ -13,6 +13,13 @@ use Alltube\PlaylistArchiveStream;
 class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * PlaylistArchiveStream instance.
+     *
+     * @var PlaylistArchiveStream
+     */
+    private $stream;
+
+    /**
      * Prepare tests.
      */
     protected function setUp()
