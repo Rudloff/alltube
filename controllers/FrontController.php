@@ -329,23 +329,20 @@ class FrontController
         } elseif ($video->protocol == 'rtmp') {
             $stream = $this->download->getRtmpStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
-            if ($request->isGet()) {
-                $response = $response->withBody(new Stream($stream));
-            }
+            $body = new Stream($stream);
         } elseif ($video->protocol == 'm3u8') {
             $stream = $this->download->getM3uStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
-            if ($request->isGet()) {
-                $response = $response->withBody(new Stream($stream));
-            }
+            $body = new Stream($stream);
         } else {
             $client = new \GuzzleHttp\Client();
             $stream = $client->request('GET', $video->url, ['stream' => true]);
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
-            if ($request->isGet()) {
-                $response = $response->withBody($stream->getBody());
-            }
+            $body = $stream->getBody();
+        }
+        if ($request->isGet()) {
+            $response = $response->withBody($body);
         }
         $response = $response->withHeader(
             'Content-Disposition',
