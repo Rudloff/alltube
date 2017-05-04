@@ -317,26 +317,32 @@ class FrontController
     private function getStream($url, $format, Response $response, Request $request, $password = null)
     {
         $video = $this->download->getJSON($url, $format, $password);
-        if ($video->protocol == 'rtmp') {
+        if (isset($video->entries)) {
+            $stream = $this->download->getPlaylistArchiveStream($video, $format);
+            $response = $response->withHeader('Content-Type', 'application/x-tar');
+            $response = $response->withHeader(
+                'Content-Disposition',
+                'attachment; filename="'.$video->title.'.tar"'
+            );
+
+            return $response->withBody(new Stream($stream));
+        } elseif ($video->protocol == 'rtmp') {
             $stream = $this->download->getRtmpStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
-            if ($request->isGet()) {
-                $response = $response->withBody(new Stream($stream));
-            }
+            $body = new Stream($stream);
         } elseif ($video->protocol == 'm3u8') {
             $stream = $this->download->getM3uStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
-            if ($request->isGet()) {
-                $response = $response->withBody(new Stream($stream));
-            }
+            $body = new Stream($stream);
         } else {
             $client = new \GuzzleHttp\Client();
             $stream = $client->request('GET', $video->url, ['stream' => true]);
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
-            if ($request->isGet()) {
-                $response = $response->withBody($stream->getBody());
-            }
+            $body = $stream->getBody();
+        }
+        if ($request->isGet()) {
+            $response = $response->withBody($body);
         }
         $response = $response->withHeader(
             'Content-Disposition',
@@ -350,7 +356,7 @@ class FrontController
     /**
      * Get a remuxed stream piped through the server.
      *
-     * @param array    $urls     URLs of the video and audio files
+     * @param string[] $urls     URLs of the video and audio files
      * @param string   $format   Requested format
      * @param Response $response PSR-7 response
      * @param Request  $request  PSR-7 request
@@ -426,6 +432,10 @@ class FrontController
                 $this->sessionSegment->getFlash($url)
             );
         } else {
+            if (empty($videoUrls[0])) {
+                throw new \Exception("Can't find URL of video");
+            }
+
             return $response->withRedirect($videoUrls[0]);
         }
     }

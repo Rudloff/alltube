@@ -480,4 +480,15 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $video = $download->getJSON($url, $format);
         $download->getM3uStream($video);
     }
+
+    /**
+     * Test getPlaylistArchiveStream function without avconv.
+     *
+     * @return void
+     */
+    public function testGetPlaylistArchiveStream()
+    {
+        $video = $this->download->getJSON('https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC', 'best');
+        $this->assertStream($this->download->getPlaylistArchiveStream($video, 'best'));
+    }
 }
