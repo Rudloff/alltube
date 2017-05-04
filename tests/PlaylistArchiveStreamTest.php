@@ -34,7 +34,7 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamOpen()
     {
-        $this->assertTrue($this->stream->stream_open('playlist://foo', 'r'));
+        $this->assertTrue($this->stream->stream_open('playlist://foo'));
     }
 
     /**
@@ -64,7 +64,7 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamTell()
     {
-        $this->stream->stream_open('playlist://foo', 'r');
+        $this->stream->stream_open('playlist://foo');
         $this->assertInternalType('int', $this->stream->stream_tell());
     }
 
@@ -75,7 +75,7 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamSeek()
     {
-        $this->stream->stream_open('playlist://foo', 'r');
+        $this->stream->stream_open('playlist://foo');
         $this->assertInternalType('bool', $this->stream->stream_seek(3));
     }
 
@@ -86,7 +86,7 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamRead()
     {
-        $this->stream->stream_open('playlist://BaW_jenozKc;BaW_jenozKc/worst', 'r');
+        $this->stream->stream_open('playlist://BaW_jenozKc;BaW_jenozKc/worst');
         while (!$this->stream->stream_eof()) {
             $this->assertLessThanOrEqual(8192, strlen($this->stream->stream_read(8192)));
         }
@@ -99,7 +99,7 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamEof()
     {
-        $this->stream->stream_open('playlist://foo', 'r');
-        $this->assertFalse($this->stream->stream_eof(3));
+        $this->stream->stream_open('playlist://foo');
+        $this->assertFalse($this->stream->stream_eof());
     }
 }
