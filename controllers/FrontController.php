@@ -101,7 +101,7 @@ class FrontController
             $response,
             'index.tpl',
             [
-                'config'      => $this->config,
+                'config'       => $this->config,
                 'class'        => 'index',
                 'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
                 'domain'       => $uri->getScheme().'://'.$uri->getAuthority(),
