@@ -368,7 +368,7 @@ class VideoDownload
     /**
      * Get a Tar stream containing every video in the playlist piped through the server.
      *
-     * @param string $video  Video object returned by youtube-dl
+     * @param object $video  Video object returned by youtube-dl
      * @param string $format Requested format
      *
      * @return Response HTTP response

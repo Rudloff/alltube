@@ -68,7 +68,7 @@ class PlaylistArchiveStream extends TarArchive
     /**
      * Add data to the archive.
      *
-     * @param mixed $data Data
+     * @param string $data Data
      *
      * @return void
      */
@@ -83,7 +83,6 @@ class PlaylistArchiveStream extends TarArchive
      * Called when fopen() is used on the stream.
      *
      * @param string $path Playlist path (should be playlist://url1;url2;.../format)
-     * @param string $mode Stream mode
      *
      * @return bool
      */
@@ -170,7 +169,7 @@ class PlaylistArchiveStream extends TarArchive
      *
      * @param int $count Number of bytes to read
      *
-     * @return mixed
+     * @return string
      */
     public function stream_read($count)
     {

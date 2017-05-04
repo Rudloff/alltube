@@ -359,7 +359,7 @@ class FrontController
     /**
      * Get a remuxed stream piped through the server.
      *
-     * @param array    $urls     URLs of the video and audio files
+     * @param string[] $urls     URLs of the video and audio files
      * @param string   $format   Requested format
      * @param Response $response PSR-7 response
      * @param Request  $request  PSR-7 request
