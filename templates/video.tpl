@@ -20,10 +20,10 @@
     <meta itemprop="uploadDate" content="{$video->upload_date}" />
 {/if}
 <br/>
+<form action="{path_for name="redirect"}">
+    <input type="hidden" name="url" value="{$video->webpage_url}" />
 {if isset($video->formats)}
     <h3><label for="format">Available formats:</label></h3>
-    <form action="{path_for name="redirect"}">
-        <input type="hidden" name="url" value="{$video->webpage_url}" />
         {if $config->uglyUrls}
             <input type="hidden" name="page" value="redirect" />
         {/if}
@@ -85,9 +85,7 @@
         <input class="downloadBtn" type="submit" value="Download" /><br/>
     </form>
 {else}
-    <input type="hidden" name="format" value="best{$protocol}" />
-    <a class="downloadBtn"
-        href="{$video->url|escape}">Download</a><br/>
+    <input class="downloadBtn" type="submit" value="Download" /><br/>
 {/if}
 </div>
 </div>
