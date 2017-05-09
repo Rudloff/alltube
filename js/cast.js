@@ -33,10 +33,10 @@ var castModule = (function () {
 
     function sessionListener(e) {
         session = e;
-        session.addMediaListener(onMediaDiscovered.bind(this, 'addMediaListener'));
-        session.addUpdateListener(updateListener.bind(this));
+        session.addMediaListener(onMediaDiscovered);
+        session.addUpdateListener(updateListener);
         if (session.media.length !== 0) {
-            onMediaDiscovered('onRequestSessionSuccess', session.media[0]);
+            onMediaDiscovered();
         }
     }
 
@@ -52,7 +52,7 @@ var castModule = (function () {
     function onRequestSessionSuccess(e) {
         session = e;
         var videoLink = document.getElementById('video_link'), videoURL = videoLink.dataset.video, mediaInfo = new chrome.cast.media.MediaInfo(videoURL, 'video/' + videoLink.dataset.ext), request = new chrome.cast.media.LoadRequest(mediaInfo);
-        session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError);
+        session.loadMedia(request, onMediaDiscovered, onMediaError);
     }
 
     function onLaunchError(e) {
@@ -80,7 +80,8 @@ var castModule = (function () {
     }
 
     function initializeCastApi() {
-        var sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID), apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener, chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED);
+        var sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID),
+            apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener, chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED);
         chrome.cast.initialize(apiConfig, onInitSuccess, onError);
     }
 
