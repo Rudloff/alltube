@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f968a7d8b884758ea4655dd80f0697d",
+    "content-hash": "5ccb4d0091c544eb55c17459b757f704",
     "packages": [
         {
             "name": "aura/session",
@@ -1747,10 +1747,10 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2017.04.28",
+            "version": "2017.05.09",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2017.04.28.zip",
+                "url": "https://github.com/rg3/youtube-dl/archive/2017.05.09.zip",
                 "reference": null,
                 "shasum": null
             },
