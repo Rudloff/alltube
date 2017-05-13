@@ -241,7 +241,7 @@ class VideoDownload
     }
 
     /**
-     * Check if a command runs successfully
+     * Check if a command runs successfully.
      *
      * @param array $command Command and arguments
      *
