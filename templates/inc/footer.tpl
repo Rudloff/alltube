@@ -16,6 +16,6 @@
      Based on <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
      </div>
 </footer>
-<script src="{base_url|noscheme}/dist/main.js"></script>
+<script src="{base_url}/dist/main.js"></script>
 </body>
 </html>

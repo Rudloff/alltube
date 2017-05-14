@@ -8,10 +8,10 @@
     <meta name="twitter:description" content="{$description|escape}" />
     <meta property="og:description" content="{$description|escape}" />
 {/if}
-<link rel="stylesheet" href="{base_url|noscheme}/dist/main.css" />
+<link rel="stylesheet" href="{base_url}/dist/main.css" />
 <title>AllTube Download{if isset($title)} - {$title|escape}{/if}</title>
 <link rel="canonical" href="{$canonical}" />
-<link rel="icon" href="{base_url|noscheme}/img/favicon.png" />
+<link rel="icon" href="{base_url}/img/favicon.png" />
 <meta property="og:title" content="AllTube Download{if isset($title)} - {$title|escape}{/if}" />
 <meta property="og:image" content="{base_url}/img/logo.png" />
 <meta name="twitter:card" content="summary" />
