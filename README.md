@@ -33,6 +33,10 @@ chmod 777 templates_c/
 
 If your web server is Apache, you need to set the `AllowOverride` setting to `All` or `FileInfo`.
 
+### On Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 #### Update
 
 When updating from Git, you need to run npm and Composer again:
