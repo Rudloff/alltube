@@ -48,7 +48,7 @@ composer install
 If you want to use a custom config, you need to create a config file:
 
 ```bash
-cp config.example.yml config.yml
+cp config/config.example.yml config/config.yml
 ```
 
 ## PHP requirements
@@ -168,7 +168,7 @@ You can also have a look at this [example project](https://github.com/Rudloff/al
 
 ## FAQ
 
-Please read the [FAQ](FAQ.md) before reporting any issue.
+Please read the [FAQ](resources/FAQ.md) before reporting any issue.
 
 ## License
 

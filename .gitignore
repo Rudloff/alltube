@@ -9,6 +9,6 @@ ffmpeg-*/
 alltube-*.zip
 coverage/
 bower_components/
-config.yml
+config/config.yml
 docs/
 clover.xml

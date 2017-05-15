@@ -27,7 +27,7 @@
   "extra": {
     "paas": {
       "nginx-includes": [
-        "nginx.conf"
+        "resources/nginx.conf"
       ]
     }
   },

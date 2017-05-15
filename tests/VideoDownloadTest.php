@@ -25,7 +25,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->download = new VideoDownload(Config::getInstance('config_test.yml'));
+        $this->download = new VideoDownload(Config::getInstance('config/config_test.yml'));
     }
 
     /**

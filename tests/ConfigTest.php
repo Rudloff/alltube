@@ -24,7 +24,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->config = Config::getInstance('config_test.yml');
+        $this->config = Config::getInstance('config/config_test.yml');
     }
 
     /**
@@ -83,7 +83,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         Config::destroyInstance();
         putenv('CONVERT=1');
         putenv('PYTHON=foo');
-        $config = Config::getInstance('config_test.yml');
+        $config = Config::getInstance('config/config_test.yml');
         $this->assertEquals($config->convert, true);
         $this->assertEquals($config->python, 'foo');
         putenv('CONVERT');

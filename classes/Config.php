@@ -126,13 +126,13 @@ class Config
      *
      * @return Config
      */
-    public static function getInstance($yamlfile = 'config.yml')
+    public static function getInstance($yamlfile = 'config/config.yml')
     {
         $yamlPath = __DIR__.'/../'.$yamlfile;
         if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
             if (is_file($yamlfile)) {
                 $options = Yaml::parse(file_get_contents($yamlPath));
-            } elseif ($yamlfile == 'config.yml' || empty($yamlfile)) {
+            } elseif ($yamlfile == 'config/config.yml' || empty($yamlfile)) {
                 /*
                 Allow for the default file to be missing in order to
                 not surprise users that did not create a config file

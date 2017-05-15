@@ -68,7 +68,7 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
-                    src: ['*.php', '!config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/phpunit/**', '!vendor/squizlabs/**']
+                    src: ['*.php', '!config/config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'resources/sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/phpunit/**', '!vendor/squizlabs/**']
                 }
             },
             phpdocumentor: {
@@ -80,7 +80,7 @@ module.exports = function (grunt) {
             },
             jsonlint: {
                 manifests: {
-                    src: ['*.json', '*.webapp'],
+                    src: ['*.json', 'resources/*.json'],
                     options: {
                         format: true
                     }

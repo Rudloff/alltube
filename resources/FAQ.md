@@ -9,7 +9,7 @@ You can ususally download the video by doing *File > Save to* or *ctrl + S*.
 
 ## How do I change config parameters?
 
-You need to create a YAML file called `config.yml` at the root of your project.
+You need to create a YAML file called `config.yml` in the `config/` folder.
 Here are the parameters that you can set:
 
 * `youtubedl`: path to your youtube-dl binary

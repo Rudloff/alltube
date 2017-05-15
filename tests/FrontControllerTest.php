@@ -55,7 +55,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
-        $this->controller = new FrontController($this->container, Config::getInstance('config_test.yml'));
+        $this->controller = new FrontController($this->container, Config::getInstance('config/config_test.yml'));
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
         $this->container['router']->map(['GET'], '/video', [$this->controller, 'video'])

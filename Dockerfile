@@ -7,7 +7,7 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-install zip
 RUN a2enmod rewrite
 RUN curl -sS https://getcomposer.org/installer | php
-COPY php.ini /usr/local/etc/php/
+COPY resources/php.ini /usr/local/etc/php/
 COPY . /var/www/html/
 RUN php composer.phar install --prefer-dist
 RUN npm install
