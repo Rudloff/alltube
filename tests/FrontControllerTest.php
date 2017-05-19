@@ -462,7 +462,10 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithEmptyUrl()
     {
-        $this->assertRequestIsServerError('redirect', ['url'=>'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']);
+        $this->assertRequestIsServerError(
+            'redirect',
+            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
+        );
     }
 
     /**

@@ -488,7 +488,10 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPlaylistArchiveStream()
     {
-        $video = $this->download->getJSON('https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC', 'best');
+        $video = $this->download->getJSON(
+            'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC',
+            'best'
+        );
         $this->assertStream($this->download->getPlaylistArchiveStream($video, 'best'));
     }
 }
