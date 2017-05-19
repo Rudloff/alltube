@@ -1,6 +1,8 @@
 <?php
 /**
  * PlaylistArchiveStream class.
+ *
+ * @codingStandardsIgnoreFile
  */
 
 namespace Alltube;
