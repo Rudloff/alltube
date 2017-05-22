@@ -1,4 +1,4 @@
-<ifmodule mod_expires.c>
+<ifmodule mod_mime.c>
     AddType application/x-web-app-manifest+json .webapp
     Addtype font/truetype .ttf
 </ifmodule>
@@ -15,13 +15,15 @@
 
 FileETag None
 
-RewriteEngine On
+<ifmodule mod_rewrite.c>
+    RewriteEngine On
 
-RewriteCond %{HTTP_HOST} ^alltube\.herokuapp\.com$ [NC]
-RewriteRule ^(.*)$ https://www.alltubedownload.net/$1 [R=301,L]
+    RewriteCond %{HTTP_HOST} ^alltube\.herokuapp\.com$ [NC]
+    RewriteRule ^(.*)$ https://www.alltubedownload.net/$1 [R=301,L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [QSA,L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</ifmodule>
 
 <ifmodule mod_filter.c>
     AddOutputFilterByType DEFLATE text/css text/html application/javascript font/truetype
