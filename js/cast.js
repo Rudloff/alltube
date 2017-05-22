@@ -104,4 +104,6 @@ var castModule = (function () {
     };
 }());
 
-window.addEventListener('load', castModule.init, false);
+if (typeof window === 'object') {
+    window.addEventListener('load', castModule.init, false);
+}
