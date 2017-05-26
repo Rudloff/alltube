@@ -1,6 +1,6 @@
 {include file='inc/head.tpl'}
 {include file='inc/header.tpl'}
-{locale path="Translations" domain="AllTube"}
+{locale path="Translations" domain="Alltube"}
 <div class="main">
     <div><img class="logo" src="{base_url}/img/logo.png"
     alt="AllTube Download" width="328" height="284"></div>

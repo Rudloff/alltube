@@ -1,4 +1,4 @@
-{locale path="Translations" domain="AllTube"}
+{locale path="Translations" domain="Alltube"}
 <!Doctype HTML>
 <html lang="en">
 <head>

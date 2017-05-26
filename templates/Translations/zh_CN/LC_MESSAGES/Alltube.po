@@ -108,7 +108,7 @@ msgstr "更多选项"
 
 #: ..\..\..\templates/video.tpl:6
 msgid "You are going to download"
-msgstr "你即将下载："
+msgstr "你即将下载"
 
 #: ..\..\..\templates/video.tpl:24
 msgid "Available formats:"
