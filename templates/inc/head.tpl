@@ -1,3 +1,9 @@
+{locale path="Translations" domain="AllTube"}
+<?php
+$language = "zh_CN";
+putenv("LANG=".$language);
+setlocale(LC_ALL, $language);
+?>
 <!Doctype HTML>
 <html lang="en">
 <head>
