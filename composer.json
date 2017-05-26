@@ -14,7 +14,7 @@
     "guzzlehttp/guzzle": "~6.2.0",
     "rudloff/rtmpdump-bin": "~2.3",
     "aura/session": "~2.1.0",
-    "smarty-gettext/smarty-gettext": "~1.2.0"
+    "smarty-gettext/smarty-gettext": "~1.5.1"
   },
   "require-dev": {
     "symfony/var-dumper": "~3.2.0",
