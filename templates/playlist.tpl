@@ -2,9 +2,9 @@
 <div class="wrapper">
 <div class="main">
 {include file="inc/logo.tpl"}
-<p>Videos extracted from the {if isset($video->title)}<i>
+<p>{t}Videos extracted from the{/t} {if isset($video->title)}<i>
     <a href="{$video->webpage_url}">
-{$video->title}</a></i>{/if} playlist:
+{$video->title}</a></i>{/if} {t}playlist:{/t}
 </p>
 {foreach $video->entries as $video}
     <div class="playlist-entry">
@@ -20,8 +20,8 @@
                 {$video->title}
             {/if}
         </a></h3>
-        <a target="_blank" class="downloadBtn" href="{path_for name="redirect"}?url={$video->url}">Download</a>
-        <a target="_blank" href="{path_for name="video"}?url={$video->url}">More options</a>
+        <a target="_blank" class="downloadBtn" href="{path_for name="redirect"}?url={$video->url}">{t}Download{/t}</a>
+        <a target="_blank" href="{path_for name="video"}?url={$video->url}">{t}More options{/t}</a>
     </div>
 {/foreach}
 
