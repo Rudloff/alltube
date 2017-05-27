@@ -1,0 +1,124 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+#: ..\..\..\templates/error.tpl:5
+msgid "An error occured"
+msgstr ""
+
+#: ..\..\..\templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr ""
+
+#: ..\..\..\templates/extractors.tpl:4
+msgid "Supported websites"
+msgstr ""
+
+#: ..\..\..\templates/inc/footer.tpl:4
+msgid "Code by"
+msgstr ""
+
+#: ..\..\..\templates/inc/footer.tpl:6
+msgid "Design by"
+msgstr ""
+
+#: ..\..\..\templates/inc/footer.tpl:12
+msgid "AllTube Download on Facebook"
+msgstr ""
+
+#: ..\..\..\templates/inc/footer.tpl:12
+msgid "Like us on Facebook"
+msgstr ""
+
+#: ..\..\..\templates/inc/footer.tpl:14
+msgid "Get the code"
+msgstr ""
+
+#: ..\..\..\templates/inc/footer.tpl:16
+msgid "Based on"
+msgstr ""
+
+#: ..\..\..\templates/inc/header.tpl:4
+msgid "Share on Twitter"
+msgstr ""
+
+#: ..\..\..\templates/inc/header.tpl:5
+msgid "Share on Facebook"
+msgstr ""
+
+#: ..\..\..\templates/index.tpl:9
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr ""
+
+#: ..\..\..\templates/index.tpl:19 ..\..\..\templates/password.tpl:10
+#: ..\..\..\templates/playlist.tpl:23 ..\..\..\templates/video.tpl:85
+#: ..\..\..\templates/video.tpl:90
+msgid "Download"
+msgstr ""
+
+#: ..\..\..\templates/index.tpl:24
+msgid "Audio only (MP3)"
+msgstr ""
+
+#: ..\..\..\templates/index.tpl:29
+msgid "See all supported websites"
+msgstr ""
+
+#: ..\..\..\templates/index.tpl:31
+msgid "Drag this to your bookmarks bar:"
+msgstr ""
+
+#: ..\..\..\templates/index.tpl:32
+msgid "Bookmarklet"
+msgstr ""
+
+#: ..\..\..\templates/password.tpl:5
+msgid "This video is protected"
+msgstr ""
+
+#: ..\..\..\templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr ""
+
+#: ..\..\..\templates/password.tpl:8
+msgid "Video password"
+msgstr ""
+
+#: ..\..\..\templates/playlist.tpl:5
+msgid "Videos extracted from the"
+msgstr ""
+
+#: ..\..\..\templates/playlist.tpl:7
+msgid "playlist:"
+msgstr ""
+
+#: ..\..\..\templates/playlist.tpl:24
+msgid "More options"
+msgstr ""
+
+#: ..\..\..\templates/video.tpl:6
+msgid "You are going to download"
+msgstr ""
+
+#: ..\..\..\templates/video.tpl:24
+msgid "Available formats:"
+msgstr ""
+
+#: ..\..\..\templates/video.tpl:31
+msgid "Generic formats"
+msgstr ""
+
+#: ..\..\..\templates/video.tpl:34
+msgid "Best"
+msgstr ""
+
+#: ..\..\..\templates/video.tpl:39
+msgid "Remux best video with best audio"
+msgstr ""
+
+#: ..\..\..\templates/video.tpl:43
+msgid "Worst"
+msgstr ""
+
+#: ..\..\..\templates/video.tpl:46
+msgid "Detailed formats"
+msgstr ""

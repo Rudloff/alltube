@@ -2,12 +2,12 @@
 <div class="wrapper">
     <div class="main">
         {include file="inc/logo.tpl"}
-        <h2>This video is protected</h2>
-        <p>You need a password in order to download this video.</p>
+        <h2>{t}This video is protected{/t}</h2>
+        <p>{t}You need a password in order to download this video.{/t}</p>
         <form action="" method="POST">
-            <input class="URLinput" type="password" name="password" title="Video password" />
+            <input class="URLinput" type="password" name="password" title="{t}Video password{/t}" />
             <br/><br/>
-            <input class="downloadBtn" type="submit" value="Download" />
+            <input class="downloadBtn" type="submit" value="{t}Download{/t}" />
         </form>
     </div>
 {include file='inc/footer.tpl'}

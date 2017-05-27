@@ -3,7 +3,7 @@
 <div itemscope itemtype="http://schema.org/VideoObject">
 <div class="main">
 {include file="inc/logo.tpl"}
-<p id="download_intro">You are going to download<i itemprop="name">
+<p id="download_intro">{t}You are going to download{/t}<i itemprop="name">
     <a itemprop="url" id="video_link"
         data-ext="{$video->ext}"
         data-video="{$video->url|escape}"
@@ -21,29 +21,29 @@
 {/if}
 <br/>
 {if isset($video->formats)}
-    <h3><label for="format">Available formats:</label></h3>
+    <h3><label for="format">{t}Available formats:{/t}</label></h3>
     <form action="{path_for name="redirect"}">
         <input type="hidden" name="url" value="{$video->webpage_url}" />
         {if $uglyUrls}
             <input type="hidden" name="page" value="redirect" />
         {/if}
         <select name="format" id="format" class="formats monospace">
-            <optgroup label="Generic formats">
+            <optgroup label="{t}Generic formats{/t}">
                 <option value="best{$protocol}">
                     {strip}
-                        Best ({$video->ext})
+                        {t}Best{/t} ({$video->ext})
                     {/strip}
                 </option>
                 {if $remux}
                     <option value="bestvideo+bestaudio">
-                        Remux best video with best audio
+                        {t}Remux best video with best audio{/t}
                     </option>
                 {/if}
                 <option value="worst{$protocol}">
-                    Worst
+                    {t}Worst{/t}
                 </option>
             </optgroup>
-            <optgroup label="Detailed formats" class="monospace">
+            <optgroup label="{t}Detailed formats{/t}" class="monospace">
                 {foreach $video->formats as $format}
                     {if $config->stream || $format->protocol|in_array:array('http', 'https')}
                         {strip}
@@ -82,12 +82,12 @@
                 {/foreach}
             </optgroup>
         </select><br/><br/>
-        <input class="downloadBtn" type="submit" value="Download" /><br/>
+        <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
     </form>
 {else}
     <input type="hidden" name="format" value="best{$protocol}" />
     <a class="downloadBtn"
-        href="{$video->url|escape}">Download</a><br/>
+        href="{$video->url|escape}">{t}Download{/t}</a><br/>
 {/if}
 </div>
 </div>

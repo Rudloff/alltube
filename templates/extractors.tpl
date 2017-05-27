@@ -1,7 +1,7 @@
 {include file='inc/head.tpl'}
 {include file='inc/header.tpl'}
 {include file='inc/logo.tpl'}
-<h2 class="titre">Supported websites</h2>
+<h2 class="titre">{t}Supported websites{/t}</h2>
 <div class="tripleliste">
         <ul>
             {foreach $extractors as $extractor}
