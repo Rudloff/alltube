@@ -16,11 +16,30 @@ use Slim\Http\Response;
 class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Original locale.
+     *
+     * @var string
+     */
+    private $locale;
+
+    /**
      * Prepare tests.
      */
     protected function setUp()
     {
+        $this->locale = getenv('LANG');
         $this->middleware = new LocaleMiddleware();
+    }
+
+    /**
+     * Restore environment after the tests.
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        putenv('LANG='.$this->locale);
+        setlocale(LC_ALL, $this->locale);
     }
 
     /**
