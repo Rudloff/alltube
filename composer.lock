@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9793382606938199471cea3e8c7cbb6c",
+    "content-hash": "44c4a3592a8eac7111a7284b22e55868",
     "packages": [
         {
             "name": "aura/session",
@@ -872,6 +872,47 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2017-05-01T14:55:58+00:00"
+        },
+        {
+            "name": "zonuexe/http-accept-language",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BaguettePHP/http-accept-language.git",
+                "reference": "f71422b1200737aa9d7c7fa83f07cbe4616198d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BaguettePHP/http-accept-language/zipball/f71422b1200737aa9d7c7fa83f07cbe4616198d5",
+                "reference": "f71422b1200737aa9d7c7fa83f07cbe4616198d5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*"
+            },
+            "require-dev": {
+                "phploc/phploc": "*",
+                "phpunit/phpunit": "4.1.*",
+                "theseer/phpdox": "0.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Teto\\HTTP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "USAMI Kenta",
+                    "email": "tadsan@zonu.me"
+                }
+            ],
+            "description": "HTTP Accept-Language Header parser",
+            "time": "2014-10-19T09:22:18+00:00"
         }
     ],
     "packages-dev": [

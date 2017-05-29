@@ -1,13 +1,9 @@
 <?php
 
-
-$language = 'fr_FR';
-putenv('LANG='.$language);
-setlocale(LC_ALL, [$language, $language.'.utf8']);
-
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\LocaleMiddleware;
 use Alltube\PlaylistArchiveStream;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
@@ -21,6 +17,7 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
 stream_wrapper_register('playlist', PlaylistArchiveStream::class);
 
 $app = new App();
+$app->add(new LocaleMiddleware());
 $container = $app->getContainer();
 $config = Config::getInstance();
 if ($config->uglyUrls) {
