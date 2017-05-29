@@ -15,7 +15,6 @@ use Slim\Http\Response;
  */
 class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Prepare tests.
      */
@@ -32,8 +31,8 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     public function testTestLocale()
     {
         $locale = [
-            'language'=>'fr',
-            'region'=>'FR',
+            'language'=> 'fr',
+            'region'  => 'FR',
         ];
         $this->assertEquals('fr_FR', $this->middleware->testLocale($locale));
     }
@@ -46,8 +45,8 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     public function testLocaleWithWrongLocale()
     {
         $locale = [
-            'language'=>'foo',
-            'region'=>'BAR'
+            'language'=> 'foo',
+            'region'  => 'BAR',
         ];
         $this->assertNull($this->middleware->testLocale($locale));
         $this->assertNull($this->middleware->testLocale([]));

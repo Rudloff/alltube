@@ -2,6 +2,7 @@
 /**
  * LocaleMiddleware class.
  */
+
 namespace Alltube;
 
 use Slim\Http\Request;
@@ -41,7 +42,7 @@ class LocaleMiddleware
     }
 
     /**
-     * Main middleware function
+     * Main middleware function.
      *
      * @param Request  $request  PSR request
      * @param Response $response PSR response
