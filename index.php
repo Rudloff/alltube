@@ -1,7 +1,7 @@
 <?php
 
 
-$language = 'zh_CN';
+$language = 'fr_FR';
 putenv('LANG='.$language);
 setlocale(LC_ALL, [$language, $language.'.utf8']);
 

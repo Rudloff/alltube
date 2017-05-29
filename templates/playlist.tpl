@@ -2,9 +2,9 @@
 <div class="wrapper">
 <div class="main">
 {include file="inc/logo.tpl"}
-<p>{t}Videos extracted from the{/t} {if isset($video->title)}<i>
+<p>{t}Videos extracted from{/t} {if isset($video->title)}<i>
     <a href="{$video->webpage_url}">
-{$video->title}</a></i>{/if} {t}playlist:{/t}
+{$video->title}</a></i>{/if}{t}:{/t}
 </p>
 {if $config->stream}
     <a href="{path_for name="redirect"}?url={$video->webpage_url}" class="downloadBtn">Download everything</a>

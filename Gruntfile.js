@@ -97,6 +97,7 @@ module.exports = function (grunt) {
                         poDel: false
                     },
                     files: {
+                        'i18n/fr_FR/LC_MESSAGES/Alltube.mo': 'i18n/fr_FR/LC_MESSAGES/Alltube.po',
                         'i18n/zh_CN/LC_MESSAGES/Alltube.mo': 'i18n/zh_CN/LC_MESSAGES/Alltube.po'
                     }
                 }
