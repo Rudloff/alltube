@@ -12,3 +12,4 @@ bower_components/
 config/config.yml
 docs/
 clover.xml
+i18n/*/LC_MESSAGES/*.mo

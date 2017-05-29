@@ -90,6 +90,16 @@ module.exports = function (grunt) {
                 package: {
                     src: 'package.json'
                 }
+            },
+            potomo: {
+                dist: {
+                    options: {
+                        poDel: false
+                    },
+                    files: {
+                        'i18n/zh_CN/LC_MESSAGES/Alltube.mo': 'i18n/zh_CN/LC_MESSAGES/Alltube.po'
+                    }
+                }
             }
         }
     );
@@ -105,8 +115,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-phpdocumentor');
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-fixpack');
+    grunt.loadNpmTasks('grunt-potomo');
 
-    grunt.registerTask('default', ['uglify', 'cssmin']);
+    grunt.registerTask('default', ['uglify', 'cssmin', 'potomo']);
     grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
