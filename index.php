@@ -1,5 +1,10 @@
 <?php
 
+
+$language = 'zh_CN';
+putenv('LANG='.$language);
+setlocale(LC_ALL, [$language, $language.'.utf8']);
+
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\FrontController;

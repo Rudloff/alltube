@@ -2,8 +2,8 @@
 <div class="wrapper">
     <div class="main error">
     {include file="inc/logo.tpl"}
-    <h2>An error occured</h2>
-    Please check the URL of your video.
+    <h2>{t}An error occured{/t}</h2>
+    {t}Please check the URL of your video.{/t}
     <p><i>
     {foreach $errors as $error}
         {$error|escape}
