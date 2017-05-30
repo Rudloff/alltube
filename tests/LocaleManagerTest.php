@@ -33,6 +33,18 @@ class LocaleManagerTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
+    public function testConstructorWithCookies()
+    {
+        $_SESSION['Alltube\LocaleManager']['locale'] = 'foo_BAR';
+        $localeManager = new LocaleManager([]);
+        $this->assertEquals('foo_BAR', (string) $localeManager->getLocale());
+    }
+
+    /**
+     * Test the getSupportedLocales function.
+     *
+     * @return void
+     */
     public function testGetSupportedLocales()
     {
         foreach ($this->localeManager->getSupportedLocales() as $locale) {
