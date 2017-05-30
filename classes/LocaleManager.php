@@ -43,7 +43,7 @@ class LocaleManager
         $this->sessionSegment = $session->getSegment('Alltube\LocaleManager');
         $cookieLocale = $this->sessionSegment->get('locale');
         if (isset($cookieLocale)) {
-            $this->setLocale(new Locale($this->sessionSegment->get('locale')));
+            $this->setLocale(new Locale($cookieLocale));
         }
     }
 
