@@ -18,13 +18,6 @@ use Slim\Http\Response;
 class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Original locale.
-     *
-     * @var string
-     */
-    private $origlocale;
-
-    /**
      * LocaleMiddleware instance.
      *
      * @var LocaleMiddleware
@@ -36,21 +29,9 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->origlocale = getenv('LANG');
         $container = new Container();
         $container['locale'] = new LocaleManager();
         $this->middleware = new LocaleMiddleware($container);
-    }
-
-    /**
-     * Restore environment after the tests.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        putenv('LANG='.$this->origlocale);
-        setlocale(LC_ALL, $this->origlocale);
     }
 
     /**
@@ -114,6 +95,11 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Test that the environment is correctly set up.
+     *
+     * @return void
+     */
     public function testEnv()
     {
         $this->markTestIncomplete('We need to find a way to reliably test LC_ALL and LANG values');

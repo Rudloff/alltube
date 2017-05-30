@@ -485,4 +485,20 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
             new Config(['stream'=>true])
         );
     }
+
+    /**
+     * Test the locale() function.
+     *
+     * @return void
+     */
+    public function testLocale()
+    {
+        $this->assertTrue(
+            $this->controller->locale(
+                $this->request,
+                $this->response,
+                ['locale'=>'fr_FR']
+            )->isRedirect()
+        );
+    }
 }
