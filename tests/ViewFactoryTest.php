@@ -27,7 +27,6 @@ class ViewFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Smarty::class, $view);
     }
 
-
     /**
      * Test the create() function with a X-Forwarded-Proto header.
      *

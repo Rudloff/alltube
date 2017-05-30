@@ -151,13 +151,13 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'best[protocol^=http]',
-                "It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU",
+                'It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU',
                 'mp4',
                 'googlevideo.com',
             ],
             [
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
-                "Heart_Attack_-_Demi_Lovato_".
+                'Heart_Attack_-_Demi_Lovato_'.
                 'Sam_Tsui_Against_The_Current-RJJ6FCAXvKg',
                 'mp4',
                 'googlevideo.com',
@@ -193,7 +193,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'bestvideo+bestaudio',
-                "It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU",
+                'It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU',
                 'mp4',
                 'googlevideo.com',
             ],

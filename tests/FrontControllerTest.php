@@ -497,7 +497,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
             $this->controller->locale(
                 $this->request,
                 $this->response,
-                ['locale'=>'fr_FR']
+                ['locale'=> 'fr_FR']
             )->isRedirect()
         );
     }
