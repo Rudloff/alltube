@@ -1,6 +1,6 @@
 {locale path="../i18n" domain="Alltube"}
 <!Doctype HTML>
-<html lang="{$locale->getBcp47()}">
+<html {if isset($locale)}lang="{$locale->getBcp47()}"{/if}>
 <head>
 <meta charset="UTF-8" />
 <meta name=viewport content="width=device-width, initial-scale=1">

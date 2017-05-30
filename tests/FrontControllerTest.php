@@ -7,6 +7,7 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\LocaleManager;
 use Alltube\ViewFactory;
 use Slim\Container;
 use Slim\Http\Environment;
@@ -55,6 +56,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
+        $this->container['locale'] = new LocaleManager();
         $this->controller = new FrontController($this->container, Config::getInstance('config/config_test.yml'));
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
@@ -64,6 +66,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
             ->setName('extractors');
         $this->container['router']->map(['GET'], '/redirect', [$this->controller, 'redirect'])
             ->setName('redirect');
+        $this->container['router']->map(['GET'], '/locale', [$this->controller, 'locale'])
+            ->setName('locale');
     }
 
     /**
