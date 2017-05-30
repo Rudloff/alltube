@@ -5,7 +5,9 @@
 
 namespace Alltube\Test;
 
+use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
+use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -28,7 +30,9 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->locale = getenv('LANG');
-        $this->middleware = new LocaleMiddleware();
+        $container = new Container();
+        $container['locale'] = new LocaleManager();
+        $this->middleware = new LocaleMiddleware($container);
     }
 
     /**
@@ -87,5 +91,23 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('fr_FR', getenv('LANG'));
         $this->assertEquals('fr_FR', setlocale(LC_ALL, null));
+    }
+
+    /**
+     * Test the __invoke() function withot the Accept-Language header.
+     *
+     * @return void
+     */
+    public function testInvokeWithoutHeader()
+    {
+        $request = Request::createFromEnvironment(Environment::mock());
+        $this->middleware->__invoke(
+            $request->withoutHeader('Accept-Language'),
+            new Response(),
+            function () {
+            }
+        );
+        $this->assertEquals('en_US', getenv('LANG'));
+        $this->assertEquals('en_US', setlocale(LC_ALL, null));
     }
 }

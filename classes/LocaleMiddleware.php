@@ -40,7 +40,7 @@ class LocaleMiddleware
                 && $parsedLocale[1]['language'] == $proposedLocale['language']
                 && $parsedLocale[1]['region'] == $proposedLocale['region']
             ) {
-                return $proposedLocale['language'].'_'.$proposedLocale['region'];
+                return new Locale($proposedLocale['language'].'_'.$proposedLocale['region']);
             }
         }
     }
@@ -61,10 +61,10 @@ class LocaleMiddleware
         if (!isset($curLocale)) {
             if (isset($headers[0])) {
                 $this->locale->setLocale(
-                    AcceptLanguage::detect([$this, 'testLocale'], 'en_US', $headers[0])
+                    AcceptLanguage::detect([$this, 'testLocale'], new Locale('en_US'), $headers[0])
                 );
             } else {
-                $this->locale->setLocale('en_US');
+                $this->locale->setLocale(new Locale('en_US'));
             }
         }
 
