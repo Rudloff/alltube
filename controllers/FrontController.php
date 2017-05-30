@@ -6,6 +6,7 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\Locale;
 use Alltube\PasswordException;
 use Alltube\VideoDownload;
 use Psr\Container\ContainerInterface;
@@ -126,7 +127,7 @@ class FrontController
      */
     public function locale(Request $request, Response $response, array $data)
     {
-        $this->locale->setLocale($data['locale']);
+        $this->locale->setLocale(new Locale($data['locale']));
 
         return $response->withRedirect($this->container->get('router')->pathFor('index'));
     }

@@ -20,7 +20,7 @@ class LocaleManager
     /**
      * Current locale.
      *
-     * @var string
+     * @var Locale
      */
     private $curLocale;
 
@@ -34,19 +34,22 @@ class LocaleManager
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment('Alltube\LocaleManager');
-        $this->setLocale($this->sessionSegment->get('locale'));
+        $cookieLocale = $this->sessionSegment->get('locale');
+        if (isset($cookieLocale)) {
+            $this->setLocale(new Locale($this->sessionSegment->get('locale')));
+        }
     }
 
     /**
      * Get a list of supported locales.
      *
-     * @return array
+     * @return Locale[]
      */
     public function getSupportedLocales()
     {
         $return = [];
         foreach ($this->supportedLocales as $supportedLocale) {
-            $return[$supportedLocale] = \Locale::getDisplayName($supportedLocale, $this->curLocale);
+            $return[] = new Locale($supportedLocale);
         }
 
         return $return;
@@ -55,7 +58,7 @@ class LocaleManager
     /**
      * Get the current locale.
      *
-     * @return string
+     * @return Locale
      */
     public function getLocale()
     {
@@ -65,9 +68,9 @@ class LocaleManager
     /**
      * Set the current locale.
      *
-     * @param string $locale Locale code.
+     * @param Locale $locale Locale
      */
-    public function setLocale($locale)
+    public function setLocale(Locale $locale)
     {
         putenv('LANG='.$locale);
         setlocale(LC_ALL, [$locale, $locale.'.utf8']);
