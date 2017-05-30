@@ -15,7 +15,6 @@ use Teto\HTTP\AcceptLanguage;
  */
 class LocaleMiddleware
 {
-
     /**
      * LocaleManager instance.
      *
