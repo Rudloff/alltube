@@ -63,6 +63,13 @@ class FrontController
     private $defaultFormat = 'best[protocol^=http]';
 
     /**
+     * LocaleManager instance.
+     *
+     * @var LocaleManager
+     */
+    private $localeManager;
+
+    /**
      * FrontController constructor.
      *
      * @param Container $container Slim dependency container
@@ -79,7 +86,7 @@ class FrontController
         $this->download = new VideoDownload();
         $this->container = $container;
         $this->view = $this->container->get('view');
-        $this->locale = $this->container->get('locale');
+        $this->localeManager = $this->container->get('locale');
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
@@ -108,8 +115,8 @@ class FrontController
                 'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
                 'domain'       => $uri->getScheme().'://'.$uri->getAuthority(),
                 'canonical'    => $this->getCanonicalUrl($request),
-                'locales'      => $this->locale->getSupportedLocales(),
-                'locale'       => $this->locale->getLocale(),
+                'locales'      => $this->localeManager->getSupportedLocales(),
+                'locale'       => $this->localeManager->getLocale(),
             ]
         );
 
@@ -127,7 +134,7 @@ class FrontController
      */
     public function locale(Request $request, Response $response, array $data)
     {
-        $this->locale->setLocale(new Locale($data['locale']));
+        $this->localeManager->setLocale(new Locale($data['locale']));
 
         return $response->withRedirect($this->container->get('router')->pathFor('index'));
     }
@@ -152,7 +159,7 @@ class FrontController
                 'description' => 'List of all supported websites from which Alltube Download '.
                     'can extract video or audio files',
                 'canonical'   => $this->getCanonicalUrl($request),
-                'locale'      => $this->locale->getLocale(),
+                'locale'      => $this->localeManager->getLocale(),
             ]
         );
 
@@ -177,7 +184,7 @@ class FrontController
                 'title'       => 'Password prompt',
                 'description' => 'You need a password in order to download this video with Alltube Download',
                 'canonical'   => $this->getCanonicalUrl($request),
-                'locale'      => $this->locale->getLocale(),
+                'locale'      => $this->localeManager->getLocale(),
             ]
         );
 
@@ -268,7 +275,7 @@ class FrontController
                 'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
-                'locale'      => $this->locale->getLocale(),
+                'locale'      => $this->localeManager->getLocale(),
             ]
         );
 
@@ -320,7 +327,7 @@ class FrontController
                 'class'     => 'video',
                 'title'     => 'Error',
                 'canonical' => $this->getCanonicalUrl($request),
-                'locale'    => $this->locale->getLocale(),
+                'locale'    => $this->localeManager->getLocale(),
             ]
         );
 

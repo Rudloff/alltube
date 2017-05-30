@@ -25,6 +25,13 @@ class LocaleManager
     private $curLocale;
 
     /**
+     * Session segment used to store session variables.
+     *
+     * @var \Aura\Session\Segment
+     */
+    private $sessionSegment;
+
+    /**
      * LocaleManager constructor.
      *
      * @param array $cookies Cookie array

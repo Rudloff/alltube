@@ -15,6 +15,14 @@ use Teto\HTTP\AcceptLanguage;
  */
 class LocaleMiddleware
 {
+
+    /**
+     * LocaleManager instance.
+     *
+     * @var LocaleManager
+     */
+    private $localeManager;
+
     /**
      * LocaleMiddleware constructor.
      *
@@ -22,7 +30,7 @@ class LocaleMiddleware
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->locale = $container->get('locale');
+        $this->localeManager = $container->get('locale');
     }
 
     /**
@@ -34,7 +42,7 @@ class LocaleMiddleware
      */
     public function testLocale(array $proposedLocale)
     {
-        foreach ($this->locale->getSupportedLocales() as $locale) {
+        foreach ($this->localeManager->getSupportedLocales() as $locale) {
             $parsedLocale = AcceptLanguage::parse($locale);
             if (isset($proposedLocale['language'])
                 && $parsedLocale[1]['language'] == $proposedLocale['language']
@@ -57,14 +65,14 @@ class LocaleMiddleware
     public function __invoke(Request $request, Response $response, callable $next)
     {
         $headers = $request->getHeader('Accept-Language');
-        $curLocale = $this->locale->getLocale();
+        $curLocale = $this->localeManager->getLocale();
         if (!isset($curLocale)) {
             if (isset($headers[0])) {
-                $this->locale->setLocale(
+                $this->localeManager->setLocale(
                     AcceptLanguage::detect([$this, 'testLocale'], new Locale('en_US'), $headers[0])
                 );
             } else {
-                $this->locale->setLocale(new Locale('en_US'));
+                $this->localeManager->setLocale(new Locale('en_US'));
             }
         }
 

@@ -22,14 +22,21 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
      *
      * @var string
      */
-    private $locale;
+    private $origlocale;
+
+    /**
+     * LocaleMiddleware instance.
+     *
+     * @var LocaleMiddleware
+     */
+    private $middleware;
 
     /**
      * Prepare tests.
      */
     protected function setUp()
     {
-        $this->locale = getenv('LANG');
+        $this->origlocale = getenv('LANG');
         $container = new Container();
         $container['locale'] = new LocaleManager();
         $this->middleware = new LocaleMiddleware($container);
@@ -42,8 +49,8 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        putenv('LANG='.$this->locale);
-        setlocale(LC_ALL, $this->locale);
+        putenv('LANG='.$this->origlocale);
+        setlocale(LC_ALL, $this->origlocale);
     }
 
     /**
