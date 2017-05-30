@@ -3,6 +3,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
 use Alltube\PlaylistArchiveStream;
 use Alltube\UglyRouter;
@@ -17,13 +18,14 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
 stream_wrapper_register('playlist', PlaylistArchiveStream::class);
 
 $app = new App();
-$app->add(new LocaleMiddleware());
 $container = $app->getContainer();
 $config = Config::getInstance();
 if ($config->uglyUrls) {
     $container['router'] = new UglyRouter();
 }
 $container['view'] = ViewFactory::create($container);
+$container['locale'] = new LocaleManager($_COOKIE);
+$app->add(new LocaleMiddleware($container));
 
 $controller = new FrontController($container, null, $_COOKIE);
 
@@ -45,4 +47,8 @@ $app->get(
     '/redirect',
     [$controller, 'redirect']
 )->setName('redirect');
+$app->get(
+    '/locale/{locale}',
+    [$controller, 'locale']
+)->setName('locale');
 $app->run();

@@ -23,7 +23,7 @@ header {
 {padding-right:21px;}
 
 
-header a
+header .social a
 {
 overflow:hidden;
 height:38px;
@@ -593,6 +593,11 @@ h1 {
 
 .monospace {
     font-family:monospace;
+}
+
+.locales {
+    float: left;
+    text-align: left;
 }
 
 @media (max-width: 640px) {

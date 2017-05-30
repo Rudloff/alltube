@@ -5,6 +5,7 @@
 
 namespace Alltube;
 
+use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Teto\HTTP\AcceptLanguage;
@@ -15,11 +16,14 @@ use Teto\HTTP\AcceptLanguage;
 class LocaleMiddleware
 {
     /**
-     * Supported locales.
+     * LocaleMiddleware constructor.
      *
-     * @var array
+     * @param ContainerInterface $container Slim dependency container
      */
-    private $locales = ['fr_FR', 'zh_CN'];
+    public function __construct(ContainerInterface $container)
+    {
+        $this->locale = $container->get('locale');
+    }
 
     /**
      * Test if a locale can be used for the current user.
@@ -30,7 +34,7 @@ class LocaleMiddleware
      */
     public function testLocale(array $proposedLocale)
     {
-        foreach ($this->locales as $locale) {
+        foreach ($this->locale->getSupportedLocales() as $locale => $name) {
             $parsedLocale = AcceptLanguage::parse($locale);
             if (isset($proposedLocale['language'])
                 && $parsedLocale[1]['language'] == $proposedLocale['language']
@@ -53,9 +57,12 @@ class LocaleMiddleware
     public function __invoke(Request $request, Response $response, callable $next)
     {
         $headers = $request->getHeader('Accept-Language');
-        $locale = AcceptLanguage::detect([$this, 'testLocale'], 'en_US', $headers[0]);
-        putenv('LANG='.$locale);
-        setlocale(LC_ALL, [$locale, $locale.'.utf8']);
+        $curLocale = $this->locale->getLocale();
+        if (!isset($curLocale)) {
+            $this->locale->setLocale(
+                AcceptLanguage::detect([$this, 'testLocale'], 'en_US', $headers[0])
+            );
+        }
 
         return $next($request, $response);
     }

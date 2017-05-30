@@ -4,5 +4,12 @@
             {t}Share on Twitter{/t}<div class="twittermask"></div></a>
         <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={base_url|urlencode}" target="_blank">{t}Share on Facebook{/t}<div class="facebookmask"></div></a>
     </div>
+    <ul class="locales">
+        {if isset($locales)}
+            {foreach $locales as $locale=>$name}
+                <li><a href="{path_for name='locale' data=['locale'=>$locale]}">{$name}</a></li>
+            {/foreach}
+        {/if}
+    </ul>
 </header>
 <div class="wrapper">
