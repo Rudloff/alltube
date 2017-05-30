@@ -51,13 +51,11 @@ class Locale
     /**
      * Get the full name of the locale.
      *
-     * @param Locale $displayLocale Locale to get the name in
-     *
      * @return string
      */
-    public function getFullName(Locale $displayLocale)
+    public function getFullName()
     {
-        return \Locale::getDisplayName($this->getIso15897(), $displayLocale->getIso15897());
+        return \Locale::getDisplayName($this->getIso15897(), $this->getIso15897());
     }
 
     /**
