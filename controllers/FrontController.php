@@ -110,13 +110,13 @@ class FrontController
             $response,
             'index.tpl',
             [
-                'config'       => $this->config,
-                'class'        => 'index',
-                'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
-                'domain'       => $uri->getScheme().'://'.$uri->getAuthority(),
-                'canonical'    => $this->getCanonicalUrl($request),
-                'locales'      => $this->localeManager->getSupportedLocales(),
-                'locale'       => $this->localeManager->getLocale(),
+                'config'           => $this->config,
+                'class'            => 'index',
+                'description'      => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+                'domain'           => $uri->getScheme().'://'.$uri->getAuthority(),
+                'canonical'        => $this->getCanonicalUrl($request),
+                'supportedLocales' => $this->localeManager->getSupportedLocales(),
+                'locale'           => $this->localeManager->getLocale(),
             ]
         );
 
