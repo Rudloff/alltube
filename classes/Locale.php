@@ -87,4 +87,9 @@ class Locale
     {
         return strtolower($this->region);
     }
+
+    public function getCountry()
+    {
+        return country($this->getIso3166());
+    }
 }

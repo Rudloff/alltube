@@ -10,7 +10,6 @@
     <meta property="og:description" content="{$description|escape}" />
 {/if}
 <link rel="stylesheet" href="{base_url}/dist/main.css" />
-<link rel="stylesheet" href="{base_url}/bower_components/flag-icon-css/css/flag-icon.min.css" />
 <title>AllTube Download{if isset($title)} - {$title|escape}{/if}</title>
 <link rel="canonical" href="{$canonical}" />
 <link rel="icon" href="{base_url}/img/favicon.png" />

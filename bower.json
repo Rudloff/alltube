@@ -1,7 +1,6 @@
 {
   "name": "alltube",
   "dependencies": {
-    "opensans-googlefont": "*",
-    "flag-icon-css": "~2.8.0"
+    "opensans-googlefont": "*"
   }
 }
