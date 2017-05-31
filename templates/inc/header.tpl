@@ -5,11 +5,16 @@
         <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={base_url|urlencode}" target="_blank">{t}Share on Facebook{/t}<div class="facebookmask"></div></a>
     </div>
     {if isset($supportedLocales)}
-        <ul class="locales">
+    <div class="locales">
+        <a href="#" class="localesBtn">{$locale->getCountry()->getEmoji()}</a>
+        <ul class="supportedLocales">
             {foreach $supportedLocales as $supportedLocale}
-                <li><a hreflang="{$supportedLocale->getBcp47()}" lang="{$supportedLocale->getBcp47()}" href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">{$supportedLocale->getCountry()->getEmoji()} {$supportedLocale->getFullName()}</a></li>
+                {if $supportedLocale != $locale}
+                    <li><a hreflang="{$supportedLocale->getBcp47()}" lang="{$supportedLocale->getBcp47()}" href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">{$supportedLocale->getCountry()->getEmoji()} {$supportedLocale->getFullName()}</a></li>
+                {/if}
             {/foreach}
         </ul>
     {/if}
+</div>
 </header>
 <div class="wrapper">

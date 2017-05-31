@@ -598,6 +598,50 @@ h1 {
 .locales {
     float: left;
     text-align: left;
+    padding-left: 1em;
+    padding-top: 1em;
+    font-size: 12px;
+}
+
+.locales a,
+.locales a:visited {
+    text-decoration: none;
+    color: #737881;
+}
+
+.supportedLocales {
+    display: none;
+    list-style-type: none;
+    padding-left: 0;
+    background-color: #f5f5f6;
+    margin: 0;
+}
+
+.supportedLocales li {
+    border-bottom: thin solid #ebebeb;
+}
+
+.supportedLocales li a {
+    padding: 1em;
+    padding-right: 2em;
+    display: block;
+}
+
+.supportedLocales li:hover {
+    background-color: #ECECEC;
+}
+
+.localesBtn {
+    padding: 1em;
+    display: inline-block;
+}
+
+.localesBtn:focus {
+    background-color: rgb(245, 245, 246);
+}
+
+.localesBtn:focus + .supportedLocales {
+    display: block;
 }
 
 @media (max-width: 640px) {
