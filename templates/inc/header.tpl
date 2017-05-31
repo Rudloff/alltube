@@ -7,7 +7,7 @@
     {if isset($supportedLocales)}
         <ul class="locales">
             {foreach $supportedLocales as $supportedLocale}
-                <li><a href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">{$supportedLocale->getCountry()->getEmoji()} {$supportedLocale->getFullName()}</a></li>
+                <li><a hreflang="{$supportedLocale->getBcp47()}" lang="{$supportedLocale->getBcp47()}" href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">{$supportedLocale->getCountry()->getEmoji()} {$supportedLocale->getFullName()}</a></li>
             {/foreach}
         </ul>
     {/if}
