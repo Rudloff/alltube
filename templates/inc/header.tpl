@@ -6,7 +6,13 @@
     </div>
     {if isset($supportedLocales)}
     <div class="locales">
-        <button class="localesBtn" title="{t}Switch language{/t}">{$locale->getCountry()->getEmoji()}</button>
+        <button class="localesBtn" title="{t}Switch language{/t}">
+            {if isset($locale)}
+                {$locale->getCountry()->getEmoji()}
+            {else}
+                Set language
+            {/if}
+        </button>
         <ul class="supportedLocales">
             {foreach $supportedLocales as $supportedLocale}
                 {if $supportedLocale != $locale}
