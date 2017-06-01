@@ -1,5 +1,5 @@
 </div>
-<footer>
+<footer class="small-font">
     <div class="footer_wrapper">
      {t}Code by{/t} <a rel="author" target="blank"
         href="http://rudloff.pro/">Pierre Rudloff</a>

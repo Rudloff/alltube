@@ -5,8 +5,8 @@
         <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={base_url|urlencode}" target="_blank">{t}Share on Facebook{/t}<div class="facebookmask"></div></a>
     </div>
     {if isset($supportedLocales)}
-    <div class="locales">
-        <button class="localesBtn" title="{t}Switch language{/t}">
+    <div class="locales small-font">
+        <button class="localesBtn small-font" title="{t}Switch language{/t}">
             {if isset($locale)}
                 {$locale->getCountry()->getEmoji()}
             {else}

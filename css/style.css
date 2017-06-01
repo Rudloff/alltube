@@ -109,7 +109,6 @@ footer {
     background-repeat:repeat-x;
     bottom:0;
     color:#adadad;
-    font-size:12px;
     padding-top:20px;
     position:fixed;
     text-align:center;
@@ -168,7 +167,6 @@ footer a:hover {
     color:#dedede;
     cursor:pointer;
     display:inline-block;
-    font-size:24px;
     font-weight:800;
     padding: 12px 14px;
     position:relative;
@@ -196,7 +194,6 @@ footer a:hover {
     border: 3px solid #a5a5a5;
     border-radius:10px;
     color:#3F3F3F;
-    font-size:24px;
     font-weight:800;
     margin-right:8px;
     min-width:426px;
@@ -222,7 +219,6 @@ footer a:hover {
     background-position:0 100%;
     background-repeat:no-repeat;
     color:#a5a5a5;
-    font-size:13px;
     padding-bottom:10px;
     padding-left:41px;
     padding-top:10px;
@@ -247,7 +243,6 @@ footer a:hover {
 .bookmarklet {
     border: 2px dotted;
     color:gray;
-    font-size:13px;
     padding:10px 30px;
     position:relative;
     text-decoration:none;
@@ -258,8 +253,6 @@ footer a:hover {
     background-color:#cecece;
     border-radius:6px;
     color:#696969;
-    font-size:14px;
-    font-weight:300;
     height:26px;
     margin-top:12px;
     position:relative;
@@ -485,7 +478,6 @@ footer a:hover {
 .tripleliste ul li {
     color:#383838;
     float:left;
-    font-size:16px;
     list-style-type:none;
     position:relative;
     text-align:left;
@@ -578,7 +570,6 @@ h1 {
 
 .locales {
     float: left;
-    font-size: 12px;
     padding-left: 1em;
     padding-top: 1em;
     text-align: left;
@@ -623,7 +614,6 @@ h1 {
     border: none;
     cursor: pointer;
     display: inline-block;
-    font-size: 12px;
     padding: 1em;
 }
 

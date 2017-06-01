@@ -9,15 +9,15 @@
     </label>
     <div class="champs">
         <span class="URLinput_wrapper">
-        <input class="URLinput" type="url" name="url" id="url"
+        <input class="URLinput large-font" type="url" name="url" id="url"
         required autofocus placeholder="http://example.com/video" />
         </span>
         {if $config->uglyUrls}
             <input type="hidden" name="page" value="video" />
         {/if}
-        <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
+        <input class="downloadBtn large-font" type="submit" value="{t}Download{/t}" /><br/>
         {if $config->convert}
-            <div class="mp3">
+            <div class="mp3 small-font">
                 <p><input type="checkbox" id="audio" class="audio" name="audio">
                 <label for="audio"><span class="ui"></span>
                     {t}Audio only (MP3){/t}</label></p>
@@ -25,10 +25,10 @@
         {/if}
     </div>
     </form>
-    <a class="combatiblelink" href="{path_for name="extractors"}">{t}See all supported websites{/t}</a>
+    <a class="combatiblelink small-font" href="{path_for name="extractors"}">{t}See all supported websites{/t}</a>
     <div id="bookmarklet" class="bookmarklet_wrapper">
         <p> {t}Drag this to your bookmarks bar:{/t} </p>
-        <a class="bookmarklet" href="javascript:window.location='{$domain}{path_for name='video'}?url='+encodeURIComponent(location.href);">{t}Bookmarklet{/t}</a>
+        <a class="bookmarklet small-font" href="javascript:window.location='{$domain}{path_for name='video'}?url='+encodeURIComponent(location.href);">{t}Bookmarklet{/t}</a>
     </div>
 
 </div>
