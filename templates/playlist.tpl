@@ -11,7 +11,7 @@
 {/if}
 {foreach $video->entries as $video}
     <div class="playlist-entry">
-        <h3><a target="_blank" href="{strip}
+        <h3 class="playlist-entry-title"><a target="_blank" href="{strip}
                 {if isset($video->ie_key) and $video->ie_key == Youtube and !filter_var($video->url, FILTER_VALIDATE_URL)}
                     https://www.youtube.com/watch?v=
                 {/if}

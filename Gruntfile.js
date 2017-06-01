@@ -103,6 +103,10 @@ module.exports = function (grunt) {
                 }
             },
             csslint: {
+                options: {
+                    'box-sizing': false,
+                    'bulletproof-font-face': false
+                },
                 css: {
                     src: 'css/*'
                 }

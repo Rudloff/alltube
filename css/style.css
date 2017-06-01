@@ -350,6 +350,7 @@ footer a:hover {
     background-repeat:no-repeat;
     content: "no";
     left: 0;
+    min-width:56px;
     padding-left:23px;
     padding-top:2px;
     -webkit-transition: all .2s;
@@ -357,7 +358,6 @@ footer a:hover {
     -ms-transition: all .2s;
     -o-transition: all .2s;
     transition: all .2s;
-    width:56px;
 }
 .audio:checked + label .ui:after {
     background-image:url('../img/mp3.png');
@@ -389,15 +389,15 @@ footer a:hover {
     width: 600px;
 }
 
-.playlist-entry h3 {
+.playlist-entry-title {
     margin-top: 0;
 }
 
-.playlist-entry h3 a {
+.playlist-entry-title a {
     text-decoration: none;
 }
 
-.playlist-entry h3 a:hover {
+.playlist-entry-title a:hover {
     text-decoration: underline;
 }
 
