@@ -19,6 +19,9 @@
     },
     {
       "url": "heroku/php"
+    },
+    {
+      "url": "https://github.com/piotras/heroku-buildpack-gettext.git"
     }
   ],
   "env": {
