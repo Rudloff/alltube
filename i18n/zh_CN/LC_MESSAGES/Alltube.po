@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Shiqiang Yu <tony19955569@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ..\..\..\templates/error.tpl:5
+msgid "An error occured"
+msgstr "出错了"
+
+#: ..\..\..\templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr "请检查您的视频的 URL。"
+
+#: ..\..\..\templates/extractors.tpl:4
+msgid "Supported websites"
+msgstr "支持的网站"
+
+#: ..\..\..\templates/inc/footer.tpl:4
+msgid "Code by"
+msgstr "代码来自"
+
+#: ..\..\..\templates/inc/footer.tpl:6
+msgid "Design by"
+msgstr "设计来自"
+
+#: ..\..\..\templates/inc/footer.tpl:12
+msgid "AllTube Download on Facebook"
+msgstr "去Alltube Download的Facebook页面"
+
+#: ..\..\..\templates/inc/footer.tpl:12
+msgid "Like us on Facebook"
+msgstr "在Facebook关注我们"
+
+#: ..\..\..\templates/inc/footer.tpl:14
+msgid "Get the code"
+msgstr "获取代码"
+
+#: ..\..\..\templates/inc/footer.tpl:16
+msgid "Based on"
+msgstr "基于"
+
+#: ..\..\..\templates/inc/header.tpl:4
+msgid "Share on Twitter"
+msgstr "分享到 Twitter"
+
+#: ..\..\..\templates/inc/header.tpl:5
+msgid "Share on Facebook"
+msgstr "分享到 Facebook"
+
+#: ..\..\..\templates/index.tpl:9
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr "在这里复制您的视频 （Youtube、 Dailymotion 等） 的 URL"
+
+#: ..\..\..\templates/index.tpl:19 ..\..\..\templates/password.tpl:10
+#: ..\..\..\templates/playlist.tpl:23 ..\..\..\templates/video.tpl:85
+#: ..\..\..\templates/video.tpl:90
+msgid "Download"
+msgstr "下载"
+
+#: ..\..\..\templates/index.tpl:24
+msgid "Audio only (MP3)"
+msgstr "仅限音频（mp3）"
+
+#: ..\..\..\templates/index.tpl:29
+msgid "See all supported websites"
+msgstr "请参阅支持的所有网站"
+
+#: ..\..\..\templates/index.tpl:31
+msgid "Drag this to your bookmarks bar:"
+msgstr "把这个拖到你的书签："
+
+#: ..\..\..\templates/index.tpl:32
+msgid "Bookmarklet"
+msgstr "书签工具"
+
+#: ..\..\..\templates/password.tpl:5
+msgid "This video is protected"
+msgstr "这个视频受保护"
+
+#: ..\..\..\templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "你需要密码才能下载这个视频。"
+
+#: ..\..\..\templates/password.tpl:8
+msgid "Video password"
+msgstr "视频密码"
+
+#: ..\..\..\templates/playlist.tpl:5
+msgid "Videos extracted from the"
+msgstr "视频从"
+
+#: ..\..\..\templates/playlist.tpl:7
+msgid "playlist:"
+msgstr "播放列表提取："
+
+#: ..\..\..\templates/playlist.tpl:24
+msgid "More options"
+msgstr "更多选项"
+
+#: ..\..\..\templates/video.tpl:6
+msgid "You are going to download"
+msgstr "你即将下载"
+
+#: ..\..\..\templates/video.tpl:24
+msgid "Available formats:"
+msgstr "可用的格式︰"
+
+#: ..\..\..\templates/video.tpl:31
+msgid "Generic formats"
+msgstr "通用格式"
+
+#: ..\..\..\templates/video.tpl:34
+msgid "Best"
+msgstr "最佳"
+
+#: ..\..\..\templates/video.tpl:39
+msgid "Remux best video with best audio"
+msgstr "重新封装最佳视频与最佳音频"
+
+#: ..\..\..\templates/video.tpl:43
+msgid "Worst"
+msgstr "最差"
+
+#: ..\..\..\templates/video.tpl:46
+msgid "Detailed formats"
+msgstr "详细格式"

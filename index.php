@@ -3,6 +3,8 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\LocaleManager;
+use Alltube\LocaleMiddleware;
 use Alltube\PlaylistArchiveStream;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
@@ -22,6 +24,8 @@ if ($config->uglyUrls) {
     $container['router'] = new UglyRouter();
 }
 $container['view'] = ViewFactory::create($container);
+$container['locale'] = new LocaleManager($_COOKIE);
+$app->add(new LocaleMiddleware($container));
 
 $controller = new FrontController($container, null, $_COOKIE);
 
@@ -43,4 +47,8 @@ $app->get(
     '/redirect',
     [$controller, 'redirect']
 )->setName('redirect');
+$app->get(
+    '/locale/{locale}',
+    [$controller, 'locale']
+)->setName('locale');
 $app->run();
