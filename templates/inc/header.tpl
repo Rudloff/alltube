@@ -1,5 +1,5 @@
 <header>
-    {if isset($supportedLocales)}
+    {if isset($supportedLocales) AND count($supportedLocales) > 1}
         <div class="locales small-font">
             <button class="localesBtn small-font" title="{t}Switch language{/t}">
                 {if isset($locale)}
