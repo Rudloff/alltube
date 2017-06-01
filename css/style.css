@@ -9,7 +9,7 @@ body {
 
 
 
-/************************HEADER******************************/
+/* Header */
 
 header {
     padding:0;
@@ -100,7 +100,7 @@ header a:hover {
 
 
 
-/*************************FOOTER****************************/
+/* Footer */
 
 
 footer {
@@ -143,7 +143,7 @@ footer a:hover {
 
 
 
-/*************************CONTENT ACCUEIL****************************/
+/* Home content */
 
 .logo {
     padding-bottom:55px;
@@ -416,7 +416,7 @@ footer a:hover {
 
 
 
-/*************************CONTENT COMPATIBLES****************************/
+/* Supported websites list */
 
 .logobis {
     height:107px;
