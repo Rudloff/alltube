@@ -10,3 +10,11 @@
     font-weight: 400;
     src: local('Open Sans'), local('OpenSans'), url(../bower_components/opensans-googlefont/OpenSans-Regular.ttf);
 }
+
+.small-font {
+    font-size: 13px;
+}
+
+.large-font {
+    font-size:24px;
+}

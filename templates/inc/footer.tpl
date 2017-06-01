@@ -1,19 +1,19 @@
 </div>
-<footer>
+<footer class="small-font">
     <div class="footer_wrapper">
-     Code by <a rel="author" target="blank"
+     {t}Code by{/t} <a rel="author" target="blank"
         href="http://rudloff.pro/">Pierre Rudloff</a>
-     &middot; Design by
+     &middot; {t}Design by{/t}
      <a rel="author" target="blank"
         href="http://olivierhaquette.fr">Olivier Haquette</a>
      &middot;
      <a target="_blank"
         href="https://www.facebook.com/pages/AllTube-Download/571380966249415"
-        title="AllTube Download on Facebook">Like us on Facebook</a>
+        title="{t}AllTube Download on Facebook{/t}">{t}Like us on Facebook{/t}</a>
      &middot;
-     <a href="https://github.com/Rudloff/alltube">Get the code</a>
+     <a href="https://github.com/Rudloff/alltube">{t}Get the code{/t}</a>
      &middot;
-     Based on <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
+     {t}Based on{/t} <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
      </div>
 </footer>
 <script src="{base_url}/dist/main.js"></script>

@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pierre Rudloff <contact@rudloff.pro>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/error.tpl:5
+msgid "An error occured"
+msgstr "Une erreur est survenue"
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr "Veuillez vérifier l'URL de votre vidéo"
+
+#: templates/playlist.tpl:5
+msgid "Videos extracted from"
+msgstr "Vidéos extraites depuis"
+
+#: templates/playlist.tpl:7
+msgid ":"
+msgstr " :"
+
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:85
+#: templates/video.tpl:88 templates/index.tpl:18
+msgid "Download"
+msgstr "Télécharger"
+
+#: templates/playlist.tpl:27
+msgid "More options"
+msgstr "Plus d'options"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "Cette vidéo est protégée"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "L'accès à cette vidéo nécessite un mot de passe."
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "Mot de passe de la vidéo"
+
+#: templates/extractors.tpl:4
+msgid "Supported websites"
+msgstr "Sites web supportés"
+
+#: templates/video.tpl:6
+msgid "You are going to download"
+msgstr "Vous allez télécharger"
+
+#: templates/video.tpl:26
+msgid "Available formats:"
+msgstr "Formats disponibles :"
+
+#: templates/video.tpl:31
+msgid "Generic formats"
+msgstr "Formats génériques"
+
+#: templates/video.tpl:34
+msgid "Best"
+msgstr "Meilleure qualité"
+
+#: templates/video.tpl:39
+msgid "Remux best video with best audio"
+msgstr "Combiner la meilleure vidéo avec le meilleur audio"
+
+#: templates/video.tpl:43
+msgid "Worst"
+msgstr "Pire qualité"
+
+#: templates/video.tpl:46
+msgid "Detailed formats"
+msgstr "Formats détaillés"
+
+#: templates/inc/footer.tpl:4
+msgid "Code by"
+msgstr "Développé par"
+
+#: templates/inc/footer.tpl:6
+msgid "Design by"
+msgstr "Designé par"
+
+#: templates/inc/footer.tpl:12
+msgid "AllTube Download on Facebook"
+msgstr "AllTube Download sur Facebook"
+
+#: templates/inc/footer.tpl:12
+msgid "Like us on Facebook"
+msgstr "Suivez-nous sur Facebook"
+
+#: templates/inc/footer.tpl:14
+msgid "Get the code"
+msgstr "Obtenir le code"
+
+#: templates/inc/footer.tpl:16
+msgid "Based on"
+msgstr "Basé sur"
+
+#: templates/inc/header.tpl:4
+msgid "Share on Twitter"
+msgstr "Partager sur Twitter"
+
+#: templates/inc/header.tpl:5
+msgid "Share on Facebook"
+msgstr "Partager sur Facebook"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr "Copiez ici l'URL de votre vidéo (Youtube, Dailymotion, etc.)"
+
+#: templates/index.tpl:23
+msgid "Audio only (MP3)"
+msgstr "Audio uniquement (MP3)"
+
+#: templates/index.tpl:28
+msgid "See all supported websites"
+msgstr "Voir tous les sites supportés"
+
+#: templates/index.tpl:30
+msgid "Drag this to your bookmarks bar:"
+msgstr "Glissez ce lien dans votre barre de favoris :"
+
+#: templates/index.tpl:31
+msgid "Bookmarklet"
+msgstr "Bookmarklet"

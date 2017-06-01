@@ -6,6 +6,7 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\Locale;
 use Alltube\PasswordException;
 use Alltube\VideoDownload;
 use Psr\Container\ContainerInterface;
@@ -62,6 +63,13 @@ class FrontController
     private $defaultFormat = 'best[protocol^=http]';
 
     /**
+     * LocaleManager instance.
+     *
+     * @var LocaleManager
+     */
+    private $localeManager;
+
+    /**
      * FrontController constructor.
      *
      * @param Container $container Slim dependency container
@@ -78,6 +86,7 @@ class FrontController
         $this->download = new VideoDownload();
         $this->container = $container;
         $this->view = $this->container->get('view');
+        $this->localeManager = $this->container->get('locale');
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment('Alltube\Controller\FrontController');
@@ -101,16 +110,33 @@ class FrontController
             $response,
             'index.tpl',
             [
-                'convert'      => $this->config->convert,
-                'uglyUrls'     => $this->config->uglyUrls,
-                'class'        => 'index',
-                'description'  => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
-                'domain'       => $uri->getScheme().'://'.$uri->getAuthority(),
-                'canonical'    => $this->getCanonicalUrl($request),
+                'config'           => $this->config,
+                'class'            => 'index',
+                'description'      => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+                'domain'           => $uri->getScheme().'://'.$uri->getAuthority(),
+                'canonical'        => $this->getCanonicalUrl($request),
+                'supportedLocales' => $this->localeManager->getSupportedLocales(),
+                'locale'           => $this->localeManager->getLocale(),
             ]
         );
 
         return $response;
+    }
+
+    /**
+     * Switch locale.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param array    $data     Query parameters
+     *
+     * @return Response
+     */
+    public function locale(Request $request, Response $response, array $data)
+    {
+        $this->localeManager->setLocale(new Locale($data['locale']));
+
+        return $response->withRedirect($this->container->get('router')->pathFor('index'));
     }
 
     /**
@@ -133,6 +159,7 @@ class FrontController
                 'description' => 'List of all supported websites from which Alltube Download '.
                     'can extract video or audio files',
                 'canonical'   => $this->getCanonicalUrl($request),
+                'locale'      => $this->localeManager->getLocale(),
             ]
         );
 
@@ -157,6 +184,7 @@ class FrontController
                 'title'       => 'Password prompt',
                 'description' => 'You need a password in order to download this video with Alltube Download',
                 'canonical'   => $this->getCanonicalUrl($request),
+                'locale'      => $this->localeManager->getLocale(),
             ]
         );
 
@@ -247,8 +275,7 @@ class FrontController
                 'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
-                'uglyUrls'    => $this->config->uglyUrls,
-                'remux'       => $this->config->remux,
+                'locale'      => $this->localeManager->getLocale(),
             ]
         );
 
@@ -300,6 +327,7 @@ class FrontController
                 'class'     => 'video',
                 'title'     => 'Error',
                 'canonical' => $this->getCanonicalUrl($request),
+                'locale'    => $this->localeManager->getLocale(),
             ]
         );
 
@@ -320,26 +348,32 @@ class FrontController
     private function getStream($url, $format, Response $response, Request $request, $password = null)
     {
         $video = $this->download->getJSON($url, $format, $password);
-        if ($video->protocol == 'rtmp') {
+        if (isset($video->entries)) {
+            $stream = $this->download->getPlaylistArchiveStream($video, $format);
+            $response = $response->withHeader('Content-Type', 'application/x-tar');
+            $response = $response->withHeader(
+                'Content-Disposition',
+                'attachment; filename="'.$video->title.'.tar"'
+            );
+
+            return $response->withBody(new Stream($stream));
+        } elseif ($video->protocol == 'rtmp') {
             $stream = $this->download->getRtmpStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
-            if ($request->isGet()) {
-                $response = $response->withBody(new Stream($stream));
-            }
+            $body = new Stream($stream);
         } elseif ($video->protocol == 'm3u8') {
             $stream = $this->download->getM3uStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
-            if ($request->isGet()) {
-                $response = $response->withBody(new Stream($stream));
-            }
+            $body = new Stream($stream);
         } else {
             $client = new \GuzzleHttp\Client();
             $stream = $client->request('GET', $video->url, ['stream' => true]);
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
-            if ($request->isGet()) {
-                $response = $response->withBody($stream->getBody());
-            }
+            $body = $stream->getBody();
+        }
+        if ($request->isGet()) {
+            $response = $response->withBody($body);
         }
         $response = $response->withHeader(
             'Content-Disposition',
@@ -353,7 +387,7 @@ class FrontController
     /**
      * Get a remuxed stream piped through the server.
      *
-     * @param array    $urls     URLs of the video and audio files
+     * @param string[] $urls     URLs of the video and audio files
      * @param string   $format   Requested format
      * @param Response $response PSR-7 response
      * @param Request  $request  PSR-7 request
@@ -429,6 +463,10 @@ class FrontController
                 $this->sessionSegment->getFlash($url)
             );
         } else {
+            if (empty($videoUrls[0])) {
+                throw new \Exception("Can't find URL of video");
+            }
+
             return $response->withRedirect($videoUrls[0]);
         }
     }

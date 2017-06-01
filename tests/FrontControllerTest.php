@@ -7,6 +7,7 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\LocaleManager;
 use Alltube\ViewFactory;
 use Slim\Container;
 use Slim\Http\Environment;
@@ -55,7 +56,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
-        $this->controller = new FrontController($this->container, Config::getInstance('config_test.yml'));
+        $this->container['locale'] = new LocaleManager();
+        $this->controller = new FrontController($this->container, Config::getInstance('config/config_test.yml'));
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
         $this->container['router']->map(['GET'], '/video', [$this->controller, 'video'])
@@ -64,6 +66,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
             ->setName('extractors');
         $this->container['router']->map(['GET'], '/redirect', [$this->controller, 'redirect'])
             ->setName('redirect');
+        $this->container['router']->map(['GET'], '/locale', [$this->controller, 'locale'])
+            ->setName('locale');
     }
 
     /**
@@ -396,7 +400,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=> 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0'],
+            ['url'=> 'http://www.canalc2.tv/video/12163', 'format'=>'rtmp'],
             new Config(['stream'=>true])
         );
     }
@@ -452,5 +456,49 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     public function testRedirectWithError()
     {
         $this->assertRequestIsServerError('redirect', ['url'=>'http://example.com/foo']);
+    }
+
+    /**
+     * Test the redirect() function with an video that returns an empty URL.
+     * This can be caused by trying to redirect to a playlist.
+     *
+     * @return void
+     */
+    public function testRedirectWithEmptyUrl()
+    {
+        $this->assertRequestIsServerError(
+            'redirect',
+            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
+        );
+    }
+
+    /**
+     * Test the redirect() function with a playlist stream.
+     *
+     * @return void
+     */
+    public function testRedirectWithPlaylist()
+    {
+        $this->assertRequestIsOk(
+            'redirect',
+            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC'],
+            new Config(['stream'=>true])
+        );
+    }
+
+    /**
+     * Test the locale() function.
+     *
+     * @return void
+     */
+    public function testLocale()
+    {
+        $this->assertTrue(
+            $this->controller->locale(
+                $this->request,
+                $this->response,
+                ['locale'=> 'fr_FR']
+            )->isRedirect()
+        );
     }
 }

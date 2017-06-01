@@ -68,7 +68,7 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
-                    src: ['*.php', '!config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/phpunit/**', '!vendor/squizlabs/**']
+                    src: ['*.php', '!config/config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'resources/sitemap.xml', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/phpunit/**', '!vendor/squizlabs/**']
                 }
             },
             phpdocumentor: {
@@ -80,7 +80,7 @@ module.exports = function (grunt) {
             },
             jsonlint: {
                 manifests: {
-                    src: ['*.json', '*.webapp'],
+                    src: ['*.json', 'resources/*.json'],
                     options: {
                         format: true
                     }
@@ -89,6 +89,26 @@ module.exports = function (grunt) {
             fixpack: {
                 package: {
                     src: 'package.json'
+                }
+            },
+            potomo: {
+                dist: {
+                    options: {
+                        poDel: false
+                    },
+                    files: {
+                        'i18n/fr_FR/LC_MESSAGES/Alltube.mo': 'i18n/fr_FR/LC_MESSAGES/Alltube.po',
+                        'i18n/zh_CN/LC_MESSAGES/Alltube.mo': 'i18n/zh_CN/LC_MESSAGES/Alltube.po'
+                    }
+                }
+            },
+            csslint: {
+                options: {
+                    'box-sizing': false,
+                    'bulletproof-font-face': false
+                },
+                css: {
+                    src: 'css/*'
                 }
             }
         }
@@ -105,9 +125,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-phpdocumentor');
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-fixpack');
+    grunt.loadNpmTasks('grunt-potomo');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
 
-    grunt.registerTask('default', ['uglify', 'cssmin']);
-    grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
+    grunt.registerTask('default', ['uglify', 'cssmin', 'potomo']);
+    grunt.registerTask('lint', ['jslint', 'csslint', 'fixpack', 'jsonlint', 'phpcs']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);

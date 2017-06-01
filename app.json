@@ -1,0 +1,38 @@
+{
+  "name": "AllTube Download",
+  "description": "HTML GUI for youtube-dl",
+  "repository": "https://github.com/Rudloff/alltube.git",
+  "logo": "https://alltubedownload.net/img/logo.png",
+  "keywords": [
+    "alltube",
+    "download",
+    "video",
+    "youtube",
+    "php"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/piotras/heroku-buildpack-gettext.git"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/php"
+    }
+  ],
+  "env": {
+    "CONVERT": {
+      "description": "Enable audio conversion",
+      "value": "true"
+    },
+    "PYTHON": {
+      "description": "Path to python binary",
+      "value": "/app/.heroku/python/bin/python"
+    }
+  },
+  "website": "https://alltubedownload.net/"
+}

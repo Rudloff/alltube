@@ -25,7 +25,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->download = new VideoDownload(Config::getInstance('config_test.yml'));
+        $this->download = new VideoDownload(Config::getInstance('config/config_test.yml'));
     }
 
     /**
@@ -151,32 +151,32 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'best[protocol^=http]',
-                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU",
+                'It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU',
                 'mp4',
                 'googlevideo.com',
             ],
             [
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 22,
-                "'Heart Attack' - Demi Lovato ".
-                '(Sam Tsui & Against The Current)-RJJ6FCAXvKg',
+                'Heart_Attack_-_Demi_Lovato_'.
+                'Sam_Tsui_Against_The_Current-RJJ6FCAXvKg',
                 'mp4',
                 'googlevideo.com',
             ],
             [
                 'https://vimeo.com/24195442', 'best[protocol^=http]',
-                'Carving the Mountains-24195442',
+                'Carving_the_Mountains-24195442',
                 'mp4',
                 'vimeocdn.com',
             ],
             [
                 'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
-                'Leonard Cohen, Kaleidoscope - BBC Radio 4-b039d07m',
+                'Leonard_Cohen_Kaleidoscope_-_BBC_Radio_4-b039d07m',
                 'flv',
                 'bbcodspdns.fcod.llnwd.net',
             ],
             [
                 'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
-                'GRIP sucht den Sommerkönig-folge-203-0',
+                'GRIP_sucht_den_Sommerkonig-folge-203-0',
                 'f4v',
                 'edgefcs.net',
             ],
@@ -193,7 +193,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'bestvideo+bestaudio',
-                "It's Not Me, It's You - Hearts Under Fire-M7IpKCZ47pU",
+                'It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU',
                 'mp4',
                 'googlevideo.com',
             ],
@@ -210,7 +210,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'https://twitter.com/verge/status/813055465324056576/video/1', 'best',
-                'The Verge - This tiny origami robot can self-fold and complete tasks-813055465324056576',
+                'The_Verge_-_This_tiny_origami_robot_can_self-fold_and_complete_tasks-813055465324056576',
                 'mp4',
                 'video.twimg.com',
             ],
@@ -226,10 +226,10 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
-                'GRIP sucht den Sommerkönig-folge-203-0',
-                'f4v',
-                'edgefcs.net',
+                'http://www.canalc2.tv/video/12163', 'rtmp',
+                'Terrasses_du_Numerique-12163',
+                'flv',
+                'vod-flash.u-strasbg.fr',
             ],
         ];
     }
@@ -479,5 +479,19 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
         $download = new VideoDownload(new Config(['avconv'=>'foobar']));
         $video = $download->getJSON($url, $format);
         $download->getM3uStream($video);
+    }
+
+    /**
+     * Test getPlaylistArchiveStream function without avconv.
+     *
+     * @return void
+     */
+    public function testGetPlaylistArchiveStream()
+    {
+        $video = $this->download->getJSON(
+            'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC',
+            'best'
+        );
+        $this->assertStream($this->download->getPlaylistArchiveStream($video, 'best'));
     }
 }

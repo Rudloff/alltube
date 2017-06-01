@@ -218,9 +218,9 @@ class VideoDownload
      *
      * @return \Symfony\Component\Process\Process Process
      */
-    private function getRtmpProcess($video)
+    private function getRtmpProcess(\stdClass $video)
     {
-        if (!shell_exec('which '.$this->config->rtmpdump)) {
+        if (!$this->checkCommand([$this->config->rtmpdump, '--help'])) {
             throw(new \Exception('Can\'t find rtmpdump'));
         }
         $builder = new ProcessBuilder(
@@ -241,6 +241,22 @@ class VideoDownload
     }
 
     /**
+     * Check if a command runs successfully.
+     *
+     * @param array $command Command and arguments
+     *
+     * @return bool False if the command returns an error, true otherwise
+     */
+    private function checkCommand(array $command)
+    {
+        $builder = ProcessBuilder::create($command);
+        $process = $builder->getProcess();
+        $process->run();
+
+        return $process->isSuccessful();
+    }
+
+    /**
      * Get a process that runs avconv in order to convert a video to MP3.
      *
      * @param string $url URL of the video file
@@ -249,11 +265,11 @@ class VideoDownload
      */
     private function getAvconvMp3Process($url)
     {
-        if (!shell_exec('which '.$this->config->avconv)) {
+        if (!$this->checkCommand([$this->config->avconv, '-version'])) {
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
-        return ProcessBuilder::create(
+        $builder = ProcessBuilder::create(
             [
                 $this->config->avconv,
                 '-v', 'quiet',
@@ -265,6 +281,8 @@ class VideoDownload
                 'pipe:1',
             ]
         );
+
+        return $builder->getProcess();
     }
 
     /**
@@ -292,7 +310,7 @@ class VideoDownload
         } else {
             $avconvProc = $this->getAvconvMp3Process($video->url);
 
-            return popen($avconvProc->getProcess()->getCommandLine(), 'r');
+            return popen($avconvProc->getCommandLine(), 'r');
         }
     }
 
@@ -305,7 +323,7 @@ class VideoDownload
      */
     public function getM3uStream(\stdClass $video)
     {
-        if (!shell_exec('which '.$this->config->avconv)) {
+        if (!$this->checkCommand([$this->config->avconv, '-version'])) {
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
@@ -361,5 +379,24 @@ class VideoDownload
     public function getRtmpStream(\stdClass $video)
     {
         return popen($this->getRtmpProcess($video)->getCommandLine(), 'r');
+    }
+
+    /**
+     * Get a Tar stream containing every video in the playlist piped through the server.
+     *
+     * @param object $video  Video object returned by youtube-dl
+     * @param string $format Requested format
+     *
+     * @return Response HTTP response
+     */
+    public function getPlaylistArchiveStream(\stdClass $video, $format)
+    {
+        $playlistItems = [];
+        foreach ($video->entries as $entry) {
+            $playlistItems[] = urlencode($entry->url);
+        }
+        $stream = fopen('playlist://'.implode(';', $playlistItems).'/'.$format, 'r');
+
+        return $stream;
     }
 }

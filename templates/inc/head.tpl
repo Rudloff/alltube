@@ -1,5 +1,6 @@
+{locale path="../i18n" domain="Alltube"}
 <!Doctype HTML>
-<html lang="en">
+<html {if isset($locale)}lang="{$locale->getBcp47()}"{/if}>
 <head>
 <meta charset="UTF-8" />
 <meta name=viewport content="width=device-width, initial-scale=1">
@@ -20,6 +21,6 @@
 <meta name="twitter:creator" content="@Tael67" />
 <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 <meta name="theme-color" content="#4F4F4F">
-<link rel="manifest" href="manifest.json" />
+<link rel="manifest" href="{base_url}/resources/manifest.json" />
 </head>
 <body class="{$class}">
