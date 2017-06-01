@@ -586,20 +586,26 @@ h1 {
 
 .locales a,
 .locales a:visited {
-    color: #737881;
+    color: #696969;
     text-decoration: none;
 }
 
 .supportedLocales {
-    background-color: #f5f5f6;
-    display: none;
+    background-color: #fff;
     list-style-type: none;
     margin: 0;
+    opacity: 0;
     padding-left: 0;
+    transition: visibility 0.5s;
+    visibility: hidden;
 }
 
 .supportedLocales li {
-    border-bottom: thin solid #ebebeb;
+    border-bottom: thin solid #E1E1E1;
+}
+
+.supportedLocales li:last-child {
+    border-bottom: none;
 }
 
 .supportedLocales li a {
@@ -609,20 +615,25 @@ h1 {
 }
 
 .supportedLocales li:hover {
-    background-color: #ECECEC;
+    background-color: #cecece;
 }
 
 .localesBtn {
+    border: none;
+    cursor: pointer;
     display: inline-block;
+    font-size: 12px;
     padding: 1em;
 }
 
 .localesBtn:focus {
-    background-color: rgb(245, 245, 246);
+    background-color: #fff;
+    pointer-events: none;
 }
 
 .localesBtn:focus + .supportedLocales {
-    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
 @media (max-width: 640px) {
