@@ -5,8 +5,6 @@
 {include file="inc/logo.tpl"}
 <p id="download_intro">{t}You are going to download{/t}<i itemprop="name">
     <a itemprop="url" id="video_link"
-        data-ext="{$video->ext}"
-        data-video="{$video->url|escape}"
         href="{$video->webpage_url}">
 {$video->title}</a></i>.
 </p>

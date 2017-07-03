@@ -544,18 +544,6 @@ h1 {
     max-width:700px;
 }
 
-.cast_btn {
-    cursor:pointer;
-}
-
-.cast_hidden {
-    display:none;
-}
-
-.cast_icon {
-    vertical-align:middle;
-}
-
 .format {
     text-align:left;
 }
