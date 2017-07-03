@@ -40,6 +40,7 @@ class LocaleManager
     {
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($cookies);
+        $session->setCookieParams(['httponly' => true]);
         $this->sessionSegment = $session->getSegment('Alltube\LocaleManager');
         $cookieLocale = $this->sessionSegment->get('locale');
         if (isset($cookieLocale)) {
