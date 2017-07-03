@@ -16,6 +16,5 @@
      {t}Based on{/t} <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
      </div>
 </footer>
-<script src="{base_url}/dist/main.js"></script>
 </body>
 </html>

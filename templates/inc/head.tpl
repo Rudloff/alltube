@@ -19,7 +19,6 @@
 <meta name="twitter:title" content="AllTube Download{if isset($title)} - {$title|escape}{/if}" />
 <meta name="twitter:image" content="{base_url}/img/logo.png" />
 <meta name="twitter:creator" content="@Tael67" />
-<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 <meta name="theme-color" content="#4F4F4F">
 <link rel="manifest" href="{base_url}/resources/manifest.json" />
 </head>

@@ -28,3 +28,10 @@ FileETag None
 <ifmodule mod_filter.c>
     AddOutputFilterByType DEFLATE text/css text/html application/javascript font/truetype
 </ifmodule>
+
+<ifmodule mod_headers.c>
+    Header set X-Frame-Options DENY
+    Header set X-Content-Type-Options nosniff
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Content-Security-Policy "default-src 'self'; object-src 'none'; script-src 'none'; img-src http:"
+</ifmodule>

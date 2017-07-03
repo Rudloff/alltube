@@ -11,7 +11,7 @@ module.exports = function (grunt) {
             uglify: {
                 combine: {
                     files: {
-                        'dist/main.js': ['js/cast.js']
+                        'dist/main.js': ['js/*.js']
                     }
                 }
             },
@@ -128,8 +128,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-potomo');
     grunt.loadNpmTasks('grunt-contrib-csslint');
 
-    grunt.registerTask('default', ['uglify', 'cssmin', 'potomo']);
-    grunt.registerTask('lint', ['jslint', 'csslint', 'fixpack', 'jsonlint', 'phpcs']);
+    grunt.registerTask('default', ['cssmin', 'potomo']);
+    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'phpcs']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
