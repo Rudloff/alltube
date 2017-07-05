@@ -105,7 +105,7 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
-        $uri = $request->getUri();
+        $uri = $request->getUri()->withUserInfo(null);
         $this->view->render(
             $response,
             'index.tpl',
