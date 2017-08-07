@@ -17,8 +17,8 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:85
-#: templates/video.tpl:88 templates/index.tpl:18
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:83
+#: templates/video.tpl:86 templates/index.tpl:18
 msgid "Download"
 msgstr ""
 
@@ -46,27 +46,27 @@ msgstr ""
 msgid "You are going to download"
 msgstr ""
 
-#: templates/video.tpl:26
+#: templates/video.tpl:24
 msgid "Available formats:"
 msgstr ""
 
-#: templates/video.tpl:31
+#: templates/video.tpl:29
 msgid "Generic formats"
 msgstr ""
 
-#: templates/video.tpl:34
+#: templates/video.tpl:32
 msgid "Best"
 msgstr ""
 
-#: templates/video.tpl:39
+#: templates/video.tpl:37
 msgid "Remux best video with best audio"
 msgstr ""
 
-#: templates/video.tpl:43
+#: templates/video.tpl:41
 msgid "Worst"
 msgstr ""
 
-#: templates/video.tpl:46
+#: templates/video.tpl:44
 msgid "Detailed formats"
 msgstr ""
 
@@ -95,10 +95,14 @@ msgid "Based on"
 msgstr ""
 
 #: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr ""
+
+#: templates/inc/header.tpl:21
 msgid "Share on Twitter"
 msgstr ""
 
-#: templates/inc/header.tpl:5
+#: templates/inc/header.tpl:23
 msgid "Share on Facebook"
 msgstr ""
 
