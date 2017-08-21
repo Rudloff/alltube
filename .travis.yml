@@ -1,6 +1,10 @@
 ---
 language: php
 php: 7
+addons:
+    apt:
+        packages:
+            - language-pack-fr
 install:
     - composer install
 before_install:
