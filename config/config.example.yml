@@ -1,3 +1,4 @@
+---
 youtubedl: vendor/rg3/youtube-dl/youtube_dl/__main__.py
 python: /usr/bin/python
 params:
