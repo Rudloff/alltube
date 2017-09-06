@@ -20,7 +20,7 @@ Here are the parameters that you can set:
 * `rtmpdump`: path to your rtmpdump binary
 * `remux`: enable remux mode (experimental)
 
-See [`config.example.yml`](config.example.yml) for default values.
+See [`config.example.yml`](https://github.com/Rudloff/alltube/blob/master/config/config.example.yml) for default values.
 
 ## How do I enable audio conversion?
 
@@ -70,7 +70,7 @@ You probably don't have the minified files (in the `dist` folder).
 You need to either:
 
 * Use a [release package](https://github.com/Rudloff/alltube/releases)
-* Run `npm install` (see detailed instructions in the [README](README.md#from-git))
+* Run `npm install` (see detailed instructions in the [README](https://github.com/Rudloff/alltube/blob/master/README.md#from-git))
 
 ## I get a 404 error on every page except the index
 
