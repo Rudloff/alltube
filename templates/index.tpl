@@ -9,8 +9,9 @@
     </label>
     <div class="champs">
         <span class="URLinput_wrapper">
-        <input class="URLinput large-font" type="url" name="url" id="url"
-        required autofocus placeholder="http://example.com/video" />
+            <!-- We used to have an autofocus attribute on this field but it triggerd a very specific CSS bug: https://github.com/Rudloff/alltube/issues/117 -->
+            <input class="URLinput large-font" type="url" name="url" id="url"
+            required placeholder="http://example.com/video" />
         </span>
         {if $config->uglyUrls}
             <input type="hidden" name="page" value="video" />
