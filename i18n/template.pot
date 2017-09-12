@@ -2,7 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 #: templates/error.tpl:5
-msgid "An error occured"
+msgid "An error occurred"
 msgstr ""
 
 #: templates/error.tpl:6
