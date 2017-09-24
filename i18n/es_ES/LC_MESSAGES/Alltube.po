@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: AllTube Download\n"
+"Language: es\n"
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr "Porfavor, revise la URL de su video."
+
+#: templates/playlist.tpl:5
+msgid "Videos extracted from"
+msgstr "Videos extraidos desde"
+
+#: templates/playlist.tpl:7
+msgid ":"
+msgstr ""
+
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:83
+#: templates/video.tpl:86 templates/index.tpl:18
+msgid "Download"
+msgstr "Descargar"
+
+#: templates/playlist.tpl:27
+msgid "More options"
+msgstr "Más opciones"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "Este vídeo esta protegido"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "Necesitas una contraseña para poder descargar este vídeo."
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "Contraseña del vídeo"
+
+#: templates/extractors.tpl:4
+msgid "Supported websites"
+msgstr "Sitios soportados"
+
+#. What's the contex of this?
+#: templates/video.tpl:6
+msgid "You are going to download"
+msgstr "Vas a descargar"
+
+#: templates/video.tpl:24
+msgid "Available formats:"
+msgstr "Formatos disponibles:"
+
+#: templates/video.tpl:29
+msgid "Generic formats"
+msgstr "Formatos genericos"
+
+#: templates/video.tpl:32
+msgid "Best"
+msgstr "Mejor"
+
+#: templates/video.tpl:37
+msgid "Remux best video with best audio"
+msgstr ""
+
+#: templates/video.tpl:41
+msgid "Worst"
+msgstr "Peor"
+
+#: templates/video.tpl:44
+msgid "Detailed formats"
+msgstr ""
+
+#: templates/inc/footer.tpl:4
+msgid "Code by"
+msgstr "Desarrollado por"
+
+#: templates/inc/footer.tpl:6
+msgid "Design by"
+msgstr "Diseñado por"
+
+#: templates/inc/footer.tpl:12
+msgid "AllTube Download on Facebook"
+msgstr "AllTube Download en Facebook"
+
+#: templates/inc/footer.tpl:12
+msgid "Like us on Facebook"
+msgstr "Danos me gusta en Facebook"
+
+#: templates/inc/footer.tpl:14
+msgid "Get the code"
+msgstr "Obtén el código"
+
+#: templates/inc/footer.tpl:16
+msgid "Based on"
+msgstr "Basado en"
+
+#: templates/inc/header.tpl:21
+msgid "Share on Twitter"
+msgstr "Compartir en Twitter"
+
+#: templates/inc/header.tpl:23
+msgid "Share on Facebook"
+msgstr "Compartir en Facebook"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr "Copia aqui la URL de tu video (Youtube, Dailymotion, etc.)"
+
+#: templates/index.tpl:23
+msgid "Audio only (MP3)"
+msgstr "Solo audio (MP3)"
+
+#: templates/index.tpl:28
+msgid "See all supported websites"
+msgstr "Ver todos los sitios soportados"
+
+#: templates/index.tpl:30
+msgid "Drag this to your bookmarks bar:"
+msgstr "Arrastra esto a tu barra de marcadores"
+
+#: templates/index.tpl:31
+msgid "Bookmarklet"
+msgstr ""
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "Cambiar idioma"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "Ha ocurrido un error"
+
