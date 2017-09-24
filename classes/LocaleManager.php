@@ -17,7 +17,7 @@ class LocaleManager
      *
      * @var array
      */
-    private $supportedLocales = ['en_US', 'fr_FR', 'zh_CN'];
+    private $supportedLocales = ['en_US', 'fr_FR', 'zh_CN', 'es_ES'];
 
     /**
      * Current locale.
