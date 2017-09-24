@@ -7,10 +7,6 @@ msgstr ""
 "Project-Id-Version: AllTube Download\n"
 "Language: fr\n"
 
-#: templates/error.tpl:5
-msgid "An error occurred"
-msgstr "Une erreur est survenue"
-
 #: templates/error.tpl:6
 msgid "Please check the URL of your video."
 msgstr "Veuillez vérifier l'URL de votre vidéo"
@@ -131,3 +127,8 @@ msgstr "Bookmarklet"
 #: templates/inc/header.tpl:4
 msgid "Switch language"
 msgstr "Changer de langue"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
+
