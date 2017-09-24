@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ..\..\..\templates/error.tpl:5
-msgid "An error occured"
+msgid "An error occurred"
 msgstr "出错了"
 
 #: ..\..\..\templates/error.tpl:6
