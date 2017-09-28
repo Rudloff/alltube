@@ -23,7 +23,7 @@
     "squizlabs/php_codesniffer": "~3.1.0",
     "phpunit/phpunit": "~5.7.2",
     "ffmpeg/ffmpeg": "dev-release",
-    "rg3/youtube-dl": "~2017.09.11",
+    "rg3/youtube-dl": "~2017.09.24",
     "rudloff/rtmpdump-bin": "~2.3.0",
     "heroku/heroku-buildpack-php": "*"
   },
@@ -39,10 +39,10 @@
       "type": "package",
       "package": {
         "name": "rg3/youtube-dl",
-        "version": "2017.09.11",
+        "version": "2017.09.24",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/rg3/youtube-dl/archive/2017.09.11.zip"
+          "url": "https://github.com/rg3/youtube-dl/archive/2017.09.24.zip"
         }
       }
     },
