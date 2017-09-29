@@ -83,6 +83,6 @@
   },
   "scripts": {
     "compile": "composer install --ignore-platform-reqs",
-    "update-locales": "vendor/bin/tsmarty2c.php templates > i18n/template.pot"
+    "update-locales": "tsmarty2c.php templates > i18n/template.pot"
   }
 }
