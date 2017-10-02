@@ -34,7 +34,7 @@ class ViewFactory
             $request = $request->withUri($request->getUri()->withScheme('https')->withPort(443));
         }
 
-        $smartyPlugins = new SmartyPlugins($container['router'], $request->getUri());
+        $smartyPlugins = new SmartyPlugins($container['router'], $request->getUri()->withUserInfo(null));
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
         $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
 

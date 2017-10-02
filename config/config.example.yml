@@ -1,12 +1,28 @@
+---
+# Path to your youtube-dl binary
 youtubedl: vendor/rg3/youtube-dl/youtube_dl/__main__.py
+
+# Path to your python binary
 python: /usr/bin/python
+
+# An array of parameters to pass to youtube-dl
 params:
     - --no-playlist
     - --no-warnings
     - --playlist-end
     - 1
+
+# True to enable audio conversion
 convert: false
+
+# Path to your avconv or ffmpeg binary
 avconv: vendor/bin/ffmpeg
+
+# Path to your rtmpdump binary
 rtmpdump: vendor/bin/rtmpdump
+
+# True to disable URL rewriting
 uglyUrls: false
+
+# True to stream videos through server
 stream: false

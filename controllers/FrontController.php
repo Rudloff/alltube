@@ -105,7 +105,7 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
-        $uri = $request->getUri();
+        $uri = $request->getUri()->withUserInfo(null);
         $this->view->render(
             $response,
             'index.tpl',
@@ -257,12 +257,11 @@ class FrontController
         } else {
             $template = 'video.tpl';
         }
+        $title = 'Video download';
+        $description = 'Download video from '.$video->extractor_key;
         if (isset($video->title)) {
             $title = $video->title;
             $description = 'Download "'.$video->title.'" from '.$video->extractor_key;
-        } else {
-            $title = 'Video download';
-            $description = 'Download video from '.$video->extractor_key;
         }
         $this->view->render(
             $response,
