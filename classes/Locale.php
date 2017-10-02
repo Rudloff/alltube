@@ -88,6 +88,11 @@ class Locale
         return strtolower($this->region);
     }
 
+    /**
+     * Get country information from locale.
+     *
+     * @return \Rinvex\Country\Country
+     */
     public function getCountry()
     {
         return country($this->getIso3166());

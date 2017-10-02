@@ -65,6 +65,15 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Mock function that does nothing.
+     *
+     * @return void
+     */
+    public function nothing()
+    {
+    }
+
+    /**
      * Test the __invoke() function.
      *
      * @return void
@@ -75,8 +84,7 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->middleware->__invoke(
             $request->withHeader('Accept-Language', 'fr-FR'),
             new Response(),
-            function () {
-            }
+            [$this, 'nothing']
         );
     }
 
@@ -91,8 +99,7 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->middleware->__invoke(
             $request->withoutHeader('Accept-Language'),
             new Response(),
-            function () {
-            }
+            [$this, 'nothing']
         );
     }
 
