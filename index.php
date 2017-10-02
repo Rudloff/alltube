@@ -55,4 +55,9 @@ $app->get(
     '/locale/{locale}',
     [$controller, 'locale']
 )->setName('locale');
-$app->run();
+
+try {
+    $app->run();
+} catch (\SmartyException $e) {
+    die('Smarty could not compile the template file: '.$e->getMessage());
+}
