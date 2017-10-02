@@ -24,6 +24,10 @@ if ($config->uglyUrls) {
     $container['router'] = new UglyRouter();
 }
 $container['view'] = ViewFactory::create($container);
+
+if (!class_exists('Locale')) {
+    die('You need to install the intl extension for PHP.');
+}
 $container['locale'] = new LocaleManager($_COOKIE);
 $app->add(new LocaleMiddleware($container));
 
