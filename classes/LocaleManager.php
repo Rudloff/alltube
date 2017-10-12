@@ -63,7 +63,9 @@ class LocaleManager
         $process->run();
         $installedLocales = explode(PHP_EOL, trim($process->getOutput()));
         foreach ($this->supportedLocales as $supportedLocale) {
-            if (in_array($supportedLocale, $installedLocales)) {
+            if (in_array($supportedLocale, $installedLocales)
+                || in_array($supportedLocale.'.utf8', $installedLocales)
+            ) {
                 $return[] = new Locale($supportedLocale);
             }
         }
