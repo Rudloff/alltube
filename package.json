@@ -5,12 +5,12 @@
   "author": "Pierre Rudloff",
   "bugs": "https://github.com/Rudloff/alltube/issues",
   "dependencies": {
-    "@bower_components/opensans-googlefont": "google-fonts-bower/opensans-bower#*",
     "grunt": "~1.0.1",
     "grunt-contrib-csslint": "~2.0.0",
     "grunt-contrib-cssmin": "~2.2.1",
     "grunt-contrib-uglify": "~3.1.0",
-    "grunt-potomo": "~3.5.0"
+    "grunt-potomo": "~3.5.0",
+    "open-sans-fontface": "~1.4.0"
   },
   "devDependencies": {
     "grunt-contrib-compress": "~1.4.1",
