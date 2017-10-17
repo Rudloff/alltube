@@ -70,7 +70,7 @@ You probably don't have the minified files (in the `dist` folder).
 You need to either:
 
 * Use a [release package](https://github.com/Rudloff/alltube/releases)
-* Run `npm install` (see detailed instructions in the [README](../README.md#from-git))
+* Run `yarn install` (see detailed instructions in the [README](../README.md#from-git))
 
 ## I get a 404 error on every page except the index
 

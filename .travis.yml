@@ -7,13 +7,11 @@ addons:
             - language-pack-fr
 install:
     - composer install
-before_install:
-    - npm install -g npm@3
 script: vendor/bin/phpunit
 after_success:
     - bash <(curl -s https://codecov.io/bash)
 before_deploy:
-    - npm install --ignore-scripts
+    - yarn install --ignore-scripts
     - ./node_modules/.bin/grunt doc
 deploy:
     provider: surge

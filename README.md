@@ -14,10 +14,10 @@ You just have to unzip it on your server and it should be ready to use.
 
 ### From Git
 
-In order to get AllTube working, you need to use [npm](https://www.npmjs.com/) and [Composer](https://getcomposer.org/):
+In order to get AllTube working, you need to use [Yarn](https://yarnpkg.com/) and [Composer](https://getcomposer.org/):
 
 ```bash
-npm install
+yarn install
 composer install
 ```
 
@@ -35,11 +35,11 @@ If your web server is Apache, you need to set the `AllowOverride` setting to `Al
 
 #### Update
 
-When updating from Git, you need to run npm and Composer again:
+When updating from Git, you need to run yarn and Composer again:
 
 ```bash
 git pull
-npm install
+yarn install
 composer install
 ```
 

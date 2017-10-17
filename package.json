@@ -5,7 +5,7 @@
   "author": "Pierre Rudloff",
   "bugs": "https://github.com/Rudloff/alltube/issues",
   "dependencies": {
-    "bower": "^1.8.2",
+    "@bower_components/opensans-googlefont": "google-fonts-bower/opensans-bower#*",
     "grunt": "~1.0.1",
     "grunt-contrib-csslint": "~2.0.0",
     "grunt-contrib-cssmin": "^2.2.1",
@@ -24,7 +24,7 @@
     "grunt-phpunit": "~0.3.6"
   },
   "engines": {
-    "npm": "~3"
+    "yarn": ">= 1.0.0"
   },
   "homepage": "https://www.alltubedownload.net/",
   "keywords": [
@@ -40,6 +40,6 @@
     "url": "https://github.com/Rudloff/alltube.git"
   },
   "scripts": {
-    "postinstall": "node node_modules/.bin/bower install && node node_modules/.bin/grunt"
+    "postinstall": "node node_modules/.bin/grunt"
   }
 }
