@@ -7,11 +7,12 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\VideoDownload;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the VideoDownload class.
  */
-class VideoDownloadTest extends \PHPUnit_Framework_TestCase
+class VideoDownloadTest extends TestCase
 {
     /**
      * VideoDownload instance.

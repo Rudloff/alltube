@@ -9,6 +9,7 @@ use Alltube\Config;
 use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
 use Alltube\ViewFactory;
+use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -17,7 +18,7 @@ use Slim\Http\Response;
 /**
  * Unit tests for the FrontController class.
  */
-class FrontControllerTest extends \PHPUnit_Framework_TestCase
+class FrontControllerTest extends TestCase
 {
     /**
      * Slim dependency container.

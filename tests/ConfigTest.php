@@ -6,11 +6,12 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Config class.
  */
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
     /**
      * Config class instance.

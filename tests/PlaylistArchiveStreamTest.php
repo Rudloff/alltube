@@ -6,11 +6,12 @@
 namespace Alltube\Test;
 
 use Alltube\PlaylistArchiveStream;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the ViewFactory class.
  */
-class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
+class PlaylistArchiveStreamTest extends TestCase
 {
     /**
      * PlaylistArchiveStream instance.

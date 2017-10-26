@@ -6,11 +6,12 @@
 namespace Alltube\Test;
 
 use Alltube\Locale;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Config class.
  */
-class LocaleTest extends \PHPUnit_Framework_TestCase
+class LocaleTest extends TestCase
 {
     /**
      * Locale class instance.
