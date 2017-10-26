@@ -60,7 +60,7 @@ class LocaleManagerTest extends TestCase
      */
     public function testGetLocale()
     {
-        $this->assertNull($this->localeManager->getLocale());
+        $this->assertEquals(new Locale('foo_BAR'), $this->localeManager->getLocale());
     }
 
     /**
