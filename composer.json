@@ -16,7 +16,7 @@
     "barracudanetworks/archivestream-php": "~1.0.5",
     "smarty-gettext/smarty-gettext": "~1.5.1",
     "zonuexe/http-accept-language": "~0.4.1",
-    "rinvex/country": "~2.0.0"
+    "rinvex/country": "~3.1.0"
   },
   "require-dev": {
     "symfony/var-dumper": "~3.3.9",

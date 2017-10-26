@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "be0203be4eb5ef4d1b03fed10aa1b9f1",
+    "content-hash": "62aeeecf774076fd0fe85b5b991b399e",
     "packages": [
         {
             "name": "aura/session",
@@ -600,28 +600,28 @@
         },
         {
             "name": "rinvex/country",
-            "version": "v2.0.0",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rinvex/country.git",
-                "reference": "9405da035644bc76671bfba0c282fef8fd3408e1"
+                "reference": "e32228ef43f26d3b02296be9454f842c52d492f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rinvex/country/zipball/9405da035644bc76671bfba0c282fef8fd3408e1",
-                "reference": "9405da035644bc76671bfba0c282fef8fd3408e1",
+                "url": "https://api.github.com/repos/rinvex/country/zipball/e32228ef43f26d3b02296be9454f842c52d492f3",
+                "reference": "e32228ef43f26d3b02296be9454f842c52d492f3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9"
+                "php": "^7.0.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.2.0"
+                "phpunit/phpunit": "^5.4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -670,7 +670,7 @@
                 "rinvex",
                 "svg"
             ],
-            "time": "2016-11-27T05:53:11+00:00"
+            "time": "2017-03-07T18:40:20+00:00"
         },
         {
             "name": "slim/slim",
