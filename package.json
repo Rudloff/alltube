@@ -24,7 +24,8 @@
     "grunt-phpunit": "~0.3.6"
   },
   "engines": {
-    "yarn": ">= 1.0.0"
+    "npm": "~3",
+    "yarn": "~1"
   },
   "homepage": "https://www.alltubedownload.net/",
   "keywords": [
