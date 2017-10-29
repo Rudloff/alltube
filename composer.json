@@ -22,6 +22,7 @@
     "symfony/var-dumper": "~3.3.9",
     "squizlabs/php_codesniffer": "~3.1.0",
     "phpunit/phpunit": "~6.4.3",
+    "doctrine/instantiator": "~1.0.0",
     "ffmpeg/ffmpeg": "dev-release",
     "rg3/youtube-dl": "~2017.10.20",
     "rudloff/rtmpdump-bin": "~2.3.0",
