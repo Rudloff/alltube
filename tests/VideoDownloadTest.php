@@ -364,7 +364,7 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStreamAvconvError($url, $format)
     {
-        $download = new VideoDownload(new Config(['avconv'=>'foobar']));
+        $download = new VideoDownload(new Config(['avconv' => 'foobar']));
         $download->getAudioStream($url, $format);
     }
 
@@ -380,7 +380,7 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStreamRtmpError($url, $format)
     {
-        $download = new VideoDownload(new Config(['rtmpdump'=>'foobar']));
+        $download = new VideoDownload(new Config(['rtmpdump' => 'foobar']));
         $download->getAudioStream($url, $format);
     }
 
@@ -477,7 +477,7 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetM3uStreamAvconvError($url, $format)
     {
-        $download = new VideoDownload(new Config(['avconv'=>'foobar']));
+        $download = new VideoDownload(new Config(['avconv' => 'foobar']));
         $video = $download->getJSON($url, $format);
         $download->getM3uStream($video);
     }

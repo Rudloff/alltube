@@ -55,7 +55,7 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     public function testStreamStat()
     {
-        $this->assertEquals(['mode'=>4096], $this->stream->stream_stat());
+        $this->assertEquals(['mode' => 4096], $this->stream->stream_stat());
     }
 
     /**

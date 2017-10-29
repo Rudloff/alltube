@@ -158,8 +158,8 @@ class FrontController
                 'title'       => 'Supported websites',
                 'description' => 'List of all supported websites from which Alltube Download '.
                     'can extract video or audio files',
-                'canonical'   => $this->getCanonicalUrl($request),
-                'locale'      => $this->localeManager->getLocale(),
+                'canonical' => $this->getCanonicalUrl($request),
+                'locale'    => $this->localeManager->getLocale(),
             ]
         );
 
