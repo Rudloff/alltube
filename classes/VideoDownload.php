@@ -86,6 +86,10 @@ class VideoDownload
             $this->procBuilder->add('--video-password');
             $this->procBuilder->add($password);
         }
+
+        //This is needed by the openload extractor because it runs PhantomJS
+        $this->procBuilder->setEnv('QT_QPA_PLATFORM', 'offscreen');
+
         $process = $this->procBuilder->getProcess();
         $process->run();
         if (!$process->isSuccessful()) {
