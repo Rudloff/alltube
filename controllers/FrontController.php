@@ -360,7 +360,7 @@ class FrontController
             $stream = $this->download->getRtmpStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
             $body = new Stream($stream);
-        } elseif ($video->protocol == 'm3u8') {
+        } elseif ($video->protocol == 'm3u8' || $video->protocol == 'm3u8_native') {
             $stream = $this->download->getM3uStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
             $body = new Stream($stream);
