@@ -26,7 +26,8 @@
     "ffmpeg/ffmpeg": "dev-release",
     "rg3/youtube-dl": "2017.10.29",
     "rudloff/rtmpdump-bin": "~2.3.0",
-    "heroku/heroku-buildpack-php": "*"
+    "heroku/heroku-buildpack-php": "*",
+    "composer/composer": "~1.5.0"
   },
   "extra": {
     "paas": {
