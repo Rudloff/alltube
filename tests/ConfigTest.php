@@ -46,11 +46,27 @@ class ConfigTest extends TestCase
     public function testGetInstance()
     {
         $this->assertEquals($this->config->convert, false);
-        $this->assertInternalType('array', $this->config->params);
-        $this->assertInternalType('string', $this->config->youtubedl);
-        $this->assertInternalType('string', $this->config->python);
-        $this->assertInternalType('string', $this->config->avconv);
-        $this->assertInternalType('string', $this->config->rtmpdump);
+        $this->assertConfig($this->config);
+    }
+
+    /**
+     * Assert that a Config object is correctly instantiated.
+     *
+     * @param  Config $config Config class instance.
+     *
+     * @return void
+     */
+    private function assertConfig(Config $config)
+    {
+        $this->assertInternalType('array', $config->params);
+        $this->assertInternalType('string', $config->youtubedl);
+        $this->assertInternalType('string', $config->python);
+        $this->assertInternalType('string', $config->avconv);
+        $this->assertInternalType('string', $config->rtmpdump);
+        $this->assertInternalType('bool', $config->convert);
+        $this->assertInternalType('bool', $config->uglyUrls);
+        $this->assertInternalType('bool', $config->stream);
+        $this->assertInternalType('bool', $config->remux);
     }
 
     /**
@@ -65,13 +81,14 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * Test the getInstance function with aen empty filename.
+     * Test the getInstance function with an empty filename.
      *
      * @return void
      */
     public function testGetInstanceWithEmptyFile()
     {
-        Config::getInstance('');
+        $config = Config::getInstance('');
+        $this->assertConfig($config);
     }
 
     /**
