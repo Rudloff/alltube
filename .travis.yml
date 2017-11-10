@@ -7,7 +7,7 @@ addons:
             - language-pack-fr
 install:
     - composer install
-script: vendor/bin/phpunit
+script: composer exec -v phpunit
 after_success:
     - bash <(curl -s https://codecov.io/bash)
 before_deploy:
