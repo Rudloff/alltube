@@ -75,4 +75,15 @@ class LocaleManagerTest extends TestCase
         $this->assertInstanceOf(Locale::class, $locale);
         $this->assertEquals('foo_BAR', (string) $locale);
     }
+
+    /**
+     * Test the unsetLocale function.
+     *
+     * @return void
+     */
+    public function testUnsetLocale()
+    {
+        $this->localeManager->unsetLocale();
+        $this->assertNull($this->localeManager->getLocale());
+    }
 }

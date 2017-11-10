@@ -95,4 +95,13 @@ class LocaleManager
         $this->curLocale = $locale;
         $this->sessionSegment->set('locale', $locale);
     }
+
+    /**
+     * Unset the current locale.
+     */
+    public function unsetLocale()
+    {
+        $this->curLocale = null;
+        $this->sessionSegment->clear('locale');
+    }
 }

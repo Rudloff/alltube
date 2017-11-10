@@ -5,6 +5,7 @@
 
 namespace Alltube\Test;
 
+use Alltube\Locale;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
 use PHPUnit\Framework\TestCase;
@@ -30,9 +31,19 @@ class LocaleMiddlewareTest extends TestCase
      */
     protected function setUp()
     {
-        $container = new Container();
-        $container['locale'] = new LocaleManager();
-        $this->middleware = new LocaleMiddleware($container);
+        $this->container = new Container();
+        $this->container['locale'] = new LocaleManager();
+        $this->middleware = new LocaleMiddleware($this->container);
+    }
+
+    /**
+     * Unset locale cookie after each test.
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        $this->container['locale']->unsetLocale();
     }
 
     /**
@@ -66,12 +77,29 @@ class LocaleMiddlewareTest extends TestCase
     }
 
     /**
-     * Mock function that does nothing.
+     * Check that the request contains an Accept-Language header.
+     *
+     * @param Request $request PSR-7 request
      *
      * @return void
      */
-    public function nothing()
+    public function assertHeader(Request $request)
     {
+        $header = $request->getHeader('Accept-Language');
+        $this->assertEquals('foo-BAR', $header[0]);
+    }
+
+    /**
+     * Check that the request contains no Accept-Language header.
+     *
+     * @param Request $request PSR-7 request
+     *
+     * @return void
+     */
+    public function assertNoHeader(Request $request)
+    {
+        $header = $request->getHeader('Accept-Language');
+        $this->assertEmpty($header);
     }
 
     /**
@@ -83,14 +111,14 @@ class LocaleMiddlewareTest extends TestCase
     {
         $request = Request::createFromEnvironment(Environment::mock());
         $this->middleware->__invoke(
-            $request->withHeader('Accept-Language', 'fr-FR'),
+            $request->withHeader('Accept-Language', 'foo-BAR'),
             new Response(),
-            [$this, 'nothing']
+            [$this, 'assertHeader']
         );
     }
 
     /**
-     * Test the __invoke() function withot the Accept-Language header.
+     * Test the __invoke() function without the Accept-Language header.
      *
      * @return void
      */
@@ -100,7 +128,7 @@ class LocaleMiddlewareTest extends TestCase
         $this->middleware->__invoke(
             $request->withoutHeader('Accept-Language'),
             new Response(),
-            [$this, 'nothing']
+            [$this, 'assertNoHeader']
         );
     }
 
