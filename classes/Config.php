@@ -83,6 +83,13 @@ class Config
     public $remux = false;
 
     /**
+     * MP3 bitrate when converting (in kbit/s)
+     *
+     * @var int
+     */
+    public $audioBitrate = 128;
+
+    /**
      * YAML config file path.
      *
      * @var string

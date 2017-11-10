@@ -67,6 +67,7 @@ class ConfigTest extends TestCase
         $this->assertInternalType('bool', $config->uglyUrls);
         $this->assertInternalType('bool', $config->stream);
         $this->assertInternalType('bool', $config->remux);
+        $this->assertInternalType('int', $config->audioBitrate);
     }
 
     /**

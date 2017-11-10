@@ -26,3 +26,6 @@ uglyUrls: false
 
 # True to stream videos through server
 stream: false
+
+# MP3 bitrate when converting (in kbit/s)
+audioBitrate: 128

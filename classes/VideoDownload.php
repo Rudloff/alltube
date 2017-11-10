@@ -281,6 +281,7 @@ class VideoDownload
                 '-user-agent', $this->getProp(null, null, 'dump-user-agent'),
                 '-i', $url,
                 '-f', 'mp3',
+                '-b:a', $this->config->audioBitrate.'k',
                 '-vn',
                 'pipe:1',
             ]
