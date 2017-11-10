@@ -83,7 +83,7 @@ class Config
     public $remux = false;
 
     /**
-     * MP3 bitrate when converting (in kbit/s)
+     * MP3 bitrate when converting (in kbit/s).
      *
      * @var int
      */
