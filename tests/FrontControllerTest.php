@@ -262,7 +262,10 @@ class FrontControllerTest extends TestCase
     {
         $this->assertRequestIsRedirect(
             'video',
-            ['url' => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover', 'audio' => true]
+            [
+                'url'   => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover',
+                'audio' => true,
+            ]
         );
     }
 

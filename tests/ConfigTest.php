@@ -52,7 +52,7 @@ class ConfigTest extends TestCase
     /**
      * Assert that a Config object is correctly instantiated.
      *
-     * @param  Config $config Config class instance.
+     * @param Config $config Config class instance.
      *
      * @return void
      */
