@@ -50,15 +50,15 @@ class LocaleMiddlewareTest extends TestCase
      * Test the testLocale() function.
      *
      * @return void
+     * @requires OS Linux
      */
     public function testTestLocale()
     {
-        $this->markTestSkipped('For some reason, this test fails on Travis even if the fr_FR locale is installed.');
         $locale = [
-            'language' => 'fr',
-            'region'   => 'FR',
+            'language' => 'en',
+            'region'   => 'US',
         ];
-        $this->assertEquals('fr_FR', $this->middleware->testLocale($locale));
+        $this->assertEquals('en_US', $this->middleware->testLocale($locale));
     }
 
     /**
@@ -130,15 +130,5 @@ class LocaleMiddlewareTest extends TestCase
             new Response(),
             [$this, 'assertNoHeader']
         );
-    }
-
-    /**
-     * Test that the environment is correctly set up.
-     *
-     * @return void
-     */
-    public function testEnv()
-    {
-        $this->markTestIncomplete('We need to find a way to reliably test LC_ALL and LANG values');
     }
 }

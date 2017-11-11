@@ -86,4 +86,15 @@ class LocaleManagerTest extends TestCase
         $this->localeManager->unsetLocale();
         $this->assertNull($this->localeManager->getLocale());
     }
+
+    /**
+     * Test that the environment is correctly set up.
+     *
+     * @return void
+     */
+    public function testEnv()
+    {
+        $this->localeManager->setLocale(new Locale('foo_BAR'));
+        $this->assertEquals('foo_BAR', getenv('LANG'));
+    }
 }

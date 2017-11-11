@@ -261,17 +261,6 @@ class FrontControllerTest extends TestCase
     }
 
     /**
-     * Test the video() function with a video that does not have a title.
-     *
-     * @return void
-     */
-    public function testVideoWithoutTitle()
-    {
-        $this->markTestSkipped('This URL triggers a curl SSL error on Travis');
-        $this->assertRequestIsOk('video', ['url' => 'http://html5demos.com/video']);
-    }
-
-    /**
      * Test the video() function with audio conversion.
      *
      * @return void
