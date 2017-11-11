@@ -6,11 +6,13 @@ Please answer these questions when reporting a new issue:
 
 **What is your operating system (Windows, Linux, OSX, etc.)?**
 
-**What is you web server (Apache, IIS, etc.)?**
+**What is your web server (Apache, IIS, etc.)?**
 
 **What version of Alltube are you using?**
 
 **How did you install Alltube (with Git or with a release package)?**
+
+**What version of PHP are you using?**
 
 **What version of Python are you using?**
 
