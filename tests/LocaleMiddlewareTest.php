@@ -131,14 +131,4 @@ class LocaleMiddlewareTest extends TestCase
             [$this, 'assertNoHeader']
         );
     }
-
-    /**
-     * Test that the environment is correctly set up.
-     *
-     * @return void
-     */
-    public function testEnv()
-    {
-        $this->markTestIncomplete('We need to find a way to reliably test LC_ALL and LANG values');
-    }
 }
