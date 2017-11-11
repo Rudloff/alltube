@@ -1,0 +1,21 @@
+# New issue
+
+## Your environment
+
+Please answer these questions when reporting a new issue:
+
+**What is your operating system (Windows, Linux, OSX, etc.)?**
+
+**What is you web server (Apache, IIS, etc.)?**
+
+**What version of Alltube are you using?**
+
+**How did you install Alltube (with Git or with a release package)?**
+
+**What version of Python are you using?**
+
+**What version of youtube-dl are you using?**
+
+**Do you get any PHP-related errors in your webserver's logs?**
+
+## Describe your issue
