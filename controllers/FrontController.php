@@ -83,7 +83,7 @@ class FrontController
         } else {
             $this->config = Config::getInstance();
         }
-        $this->download = new VideoDownload();
+        $this->download = new VideoDownload($this->config);
         $this->container = $container;
         $this->view = $this->container->get('view');
         $this->localeManager = $this->container->get('locale');

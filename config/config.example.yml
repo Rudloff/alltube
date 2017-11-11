@@ -7,10 +7,10 @@ python: /usr/bin/python
 
 # An array of parameters to pass to youtube-dl
 params:
-    - --no-playlist
     - --no-warnings
-    - --playlist-end
-    - 1
+    - --ignore-errors
+    - --flat-playlist
+    - --restrict-filenames
 
 # True to enable audio conversion
 convert: false

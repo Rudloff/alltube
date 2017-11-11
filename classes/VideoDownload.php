@@ -58,7 +58,7 @@ class VideoDownload
      * */
     public function listExtractors()
     {
-        return explode(PHP_EOL, trim($this->getProp(null, null, 'list-extractors')));
+        return explode("\n", trim($this->getProp(null, null, 'list-extractors')));
     }
 
     /**
@@ -135,7 +135,7 @@ class VideoDownload
      * */
     public function getURL($url, $format = null, $password = null)
     {
-        return explode(PHP_EOL, $this->getProp($url, $format, 'get-url', $password));
+        return explode("\n", $this->getProp($url, $format, 'get-url', $password));
     }
 
     /**

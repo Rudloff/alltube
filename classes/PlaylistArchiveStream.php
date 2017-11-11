@@ -61,10 +61,10 @@ class PlaylistArchiveStream extends TarArchive
     /**
      * PlaylistArchiveStream constructor.
      */
-    public function __construct()
+    public function __construct(Config $config = null)
     {
         $this->client = new \GuzzleHttp\Client();
-        $this->download = new VideoDownload();
+        $this->download = new VideoDownload($config);
     }
 
     /**

@@ -5,6 +5,7 @@
 
 namespace Alltube\Test;
 
+use Alltube\Config;
 use Alltube\PlaylistArchiveStream;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +26,12 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     protected function setUp()
     {
-        $this->stream = new PlaylistArchiveStream();
+        if (PHP_OS == 'WINNT') {
+            $configFile = 'config_test_windows.yml';
+        } else {
+            $configFile = 'config_test.yml';
+        }
+        $this->stream = new PlaylistArchiveStream(Config::getInstance('config/'.$configFile));
     }
 
     /**
