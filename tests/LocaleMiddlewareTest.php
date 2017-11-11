@@ -50,6 +50,7 @@ class LocaleMiddlewareTest extends TestCase
      * Test the testLocale() function.
      *
      * @return void
+     * @requires OS Linux
      */
     public function testTestLocale()
     {
