@@ -195,12 +195,12 @@ class VideoDownload
     private function addOptionsToRtmpProcess(ProcessBuilder $builder, $video)
     {
         foreach ([
-            'url'           => 'rtmp',
-            'webpage_url'   => 'pageUrl',
-            'player_url'    => 'swfVfy',
+            'url' => 'rtmp',
+            'webpage_url' => 'pageUrl',
+            'player_url' => 'swfVfy',
             'flash_version' => 'flashVer',
-            'play_path'     => 'playpath',
-            'app'           => 'app',
+            'play_path' => 'playpath',
+            'app' => 'app',
         ] as $property => $option) {
             if (isset($video->{$property})) {
                 $builder->add('--'.$option);

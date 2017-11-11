@@ -94,10 +94,10 @@ class PlaylistArchiveStream extends TarArchive
         $this->buffer = fopen('php://temp', 'r+');
         foreach (explode(';', parse_url($path, PHP_URL_HOST)) as $url) {
             $this->files[] = [
-                'url'        => urldecode($url),
-                'headersSent'=> false,
-                'complete'   => false,
-                'stream'     => null,
+                'url'         => urldecode($url),
+                'headersSent' => false,
+                'complete'    => false,
+                'stream'      => null,
             ];
         }
 
@@ -124,7 +124,7 @@ class PlaylistArchiveStream extends TarArchive
     {
         //We need this so Slim won't try to get the size of the stream
         return [
-            'mode'=> 0010000,
+            'mode' => 0010000,
         ];
     }
 

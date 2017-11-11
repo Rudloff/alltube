@@ -54,7 +54,7 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamStat()
     {
-        $this->assertEquals(['mode'=>4096], $this->stream->stream_stat());
+        $this->assertEquals(['mode' => 4096], $this->stream->stream_stat());
     }
 
     /**

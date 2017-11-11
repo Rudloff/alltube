@@ -43,8 +43,8 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('For some reason, this test fails on Travis even if the fr_FR locale is installed.');
         $locale = [
-            'language'=> 'fr',
-            'region'  => 'FR',
+            'language' => 'fr',
+            'region'   => 'FR',
         ];
         $this->assertEquals('fr_FR', $this->middleware->testLocale($locale));
     }
@@ -57,8 +57,8 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     public function testLocaleWithWrongLocale()
     {
         $locale = [
-            'language'=> 'foo',
-            'region'  => 'BAR',
+            'language' => 'foo',
+            'region'   => 'BAR',
         ];
         $this->assertNull($this->middleware->testLocale($locale));
         $this->assertNull($this->middleware->testLocale([]));

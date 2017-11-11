@@ -161,7 +161,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorWithStream()
     {
-        $controller = new FrontController($this->container, new Config(['stream'=>true]));
+        $controller = new FrontController($this->container, new Config(['stream' => true]));
         $this->assertInstanceOf(FrontController::class, $controller);
     }
 
@@ -184,7 +184,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->controller->index(
             Request::createFromEnvironment(
-                Environment::mock(['REQUEST_URI'=>'/foo', 'QUERY_STRING'=>'foo=bar'])
+                Environment::mock(['REQUEST_URI' => '/foo', 'QUERY_STRING' => 'foo=bar'])
             ),
             $this->response
         );
@@ -228,7 +228,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideo()
     {
-        $this->assertRequestIsOk('video', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
+        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
     }
 
     /**
@@ -239,7 +239,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     public function testVideoWithoutTitle()
     {
         $this->markTestSkipped('This URL triggers a curl SSL error on Travis');
-        $this->assertRequestIsOk('video', ['url'=>'http://html5demos.com/video']);
+        $this->assertRequestIsOk('video', ['url' => 'http://html5demos.com/video']);
     }
 
     /**
@@ -249,7 +249,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithAudio()
     {
-        $this->assertRequestIsOk('video', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true]);
+        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true]);
     }
 
     /**
@@ -261,7 +261,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsRedirect(
             'video',
-            ['url'=> 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover', 'audio'=>true]
+            ['url' => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover', 'audio' => true]
         );
     }
 
@@ -273,8 +273,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     public function testVideoWithPassword()
     {
         $result = $this->controller->video(
-            $this->request->withQueryParams(['url'=>'http://vimeo.com/68375962'])
-                ->withParsedBody(['password'=>'youtube-dl']),
+            $this->request->withQueryParams(['url' => 'http://vimeo.com/68375962'])
+                ->withParsedBody(['password' => 'youtube-dl']),
             $this->response
         );
         $this->assertTrue($result->isOk());
@@ -287,8 +287,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithMissingPassword()
     {
-        $this->assertRequestIsOk('video', ['url'=>'http://vimeo.com/68375962']);
-        $this->assertRequestIsOk('video', ['url'=>'http://vimeo.com/68375962', 'audio'=>true]);
+        $this->assertRequestIsOk('video', ['url' => 'http://vimeo.com/68375962']);
+        $this->assertRequestIsOk('video', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
     }
 
     /**
@@ -298,11 +298,11 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithStream()
     {
-        $config = new Config(['stream'=>true]);
-        $this->assertRequestIsOk('video', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU'], $config);
+        $config = new Config(['stream' => true]);
+        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU'], $config);
         $this->assertRequestIsOk(
             'video',
-            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio'=>true],
+            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true],
             $config
         );
     }
@@ -316,7 +316,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'video',
-            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
+            ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
     }
 
@@ -348,7 +348,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirect()
     {
-        $this->assertRequestIsRedirect('redirect', ['url'=>'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
+        $this->assertRequestIsRedirect('redirect', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
     }
 
     /**
@@ -360,7 +360,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsRedirect(
             'redirect',
-            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format'=>'worst']
+            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format' => 'worst']
         );
     }
 
@@ -373,8 +373,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=> 'https://www.youtube.com/watch?v=M7IpKCZ47pU'],
-            new Config(['stream'=>true])
+            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU'],
+            new Config(['stream' => true])
         );
     }
 
@@ -387,8 +387,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=> 'https://twitter.com/verge/status/813055465324056576/video/1'],
-            new Config(['stream'=>true])
+            ['url' => 'https://twitter.com/verge/status/813055465324056576/video/1'],
+            new Config(['stream' => true])
         );
     }
 
@@ -401,8 +401,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=> 'http://www.canalc2.tv/video/12163', 'format'=>'rtmp'],
-            new Config(['stream'=>true])
+            ['url' => 'http://www.canalc2.tv/video/12163', 'format' => 'rtmp'],
+            new Config(['stream' => true])
         );
     }
 
@@ -416,10 +416,10 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertRequestIsOk(
             'redirect',
             [
-                'url'   => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
-                'format'=> 'bestvideo+bestaudio',
+                'url'    => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                'format' => 'bestvideo+bestaudio',
             ],
-            new Config(['remux'=>true])
+            new Config(['remux' => true])
         );
     }
 
@@ -433,8 +433,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertRequestIsServerError(
             'redirect',
             [
-                'url'   => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
-                'format'=> 'bestvideo+bestaudio',
+                'url'    => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                'format' => 'bestvideo+bestaudio',
             ]
         );
     }
@@ -446,7 +446,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithMissingPassword()
     {
-        $this->assertRequestIsRedirect('redirect', ['url'=>'http://vimeo.com/68375962']);
+        $this->assertRequestIsRedirect('redirect', ['url' => 'http://vimeo.com/68375962']);
     }
 
     /**
@@ -456,7 +456,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithError()
     {
-        $this->assertRequestIsServerError('redirect', ['url'=>'http://example.com/foo']);
+        $this->assertRequestIsServerError('redirect', ['url' => 'http://example.com/foo']);
     }
 
     /**
@@ -469,7 +469,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsServerError(
             'redirect',
-            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
+            ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
     }
 
@@ -482,8 +482,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsOk(
             'redirect',
-            ['url'=> 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC'],
-            new Config(['stream'=>true])
+            ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC'],
+            new Config(['stream' => true])
         );
     }
 
@@ -498,7 +498,7 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
             $this->controller->locale(
                 $this->request,
                 $this->response,
-                ['locale'=> 'fr_FR']
+                ['locale' => 'fr_FR']
             )->isRedirect()
         );
     }
