@@ -392,7 +392,7 @@ class VideoDownload
      * @param object $video  Video object returned by youtube-dl
      * @param string $format Requested format
      *
-     * @return Response HTTP response
+     * @return resource
      */
     public function getPlaylistArchiveStream(\stdClass $video, $format)
     {
