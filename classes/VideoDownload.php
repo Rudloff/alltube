@@ -278,7 +278,7 @@ class VideoDownload
                 $this->config->avconv,
                 '-v', 'quiet',
                 //Vimeo needs a correct user-agent
-                '-user-agent', $this->getProp(null, null, 'dump-user-agent'),
+                '-user_agent', $this->getProp(null, null, 'dump-user-agent'),
                 '-i', $url,
                 '-f', 'mp3',
                 '-b:a', $this->config->audioBitrate.'k',
