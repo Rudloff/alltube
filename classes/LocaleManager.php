@@ -102,6 +102,6 @@ class LocaleManager
     public function unsetLocale()
     {
         $this->curLocale = null;
-        $this->sessionSegment->clear('locale');
+        $this->sessionSegment->clear();
     }
 }
