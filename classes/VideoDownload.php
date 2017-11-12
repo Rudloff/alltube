@@ -40,7 +40,7 @@ class VideoDownload
         $this->procBuilder = new ProcessBuilder();
         if (!is_file($this->config->youtubedl)) {
             throw new \Exception("Can't find youtube-dl at ".$this->config->youtubedl);
-        } elseif (!is_file($this->config->python)) {
+        } elseif (!$this->checkCommand([$this->config->python, '--version'])) {
             throw new \Exception("Can't find Python at ".$this->config->python);
         }
         $this->procBuilder->setPrefix(
