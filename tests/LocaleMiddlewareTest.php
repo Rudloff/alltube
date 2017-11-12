@@ -27,6 +27,13 @@ class LocaleMiddlewareTest extends TestCase
     private $middleware;
 
     /**
+     * Slim dependency container.
+     *
+     * @var Container
+     */
+    private $container;
+
+    /**
      * Prepare tests.
      */
     protected function setUp()
