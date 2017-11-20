@@ -20,4 +20,6 @@ Please answer these questions when reporting a new issue:
 
 **Do you get any PHP-related errors in your webserver's logs?**
 
+**What is the content of your `config/config.yml` file?**
+
 ## Describe your issue
