@@ -22,4 +22,6 @@ Please answer these questions when reporting a new issue:
 
 **What is the content of your `config/config.yml` file?**
 
+**Please provide the URL of a video that causes the issue.**
+
 ## Describe your issue
