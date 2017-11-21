@@ -39,7 +39,7 @@ When updating from Git, you need to run yarn and Composer again:
 
 ```bash
 git pull
-yarn install
+yarn install --prod
 composer install
 ```
 

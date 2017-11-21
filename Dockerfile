@@ -14,6 +14,6 @@ RUN curl -sS https://getcomposer.org/installer | php
 COPY resources/php.ini /usr/local/etc/php/
 COPY . /var/www/html/
 RUN php composer.phar install --prefer-dist
-RUN yarn install
+RUN yarn install --prod
 RUN ./node_modules/.bin/grunt
 ENV CONVERT=1
