@@ -35,7 +35,7 @@
     "youtube"
   ],
   "license": "GPL-3.0",
-  "main": "index.php",
+  "main": "Gruntfile.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Rudloff/alltube.git"
