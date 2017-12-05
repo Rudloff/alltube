@@ -78,7 +78,9 @@ class PlaylistArchiveStream extends TarArchive
     {
         $pos = ftell($this->buffer);
         fwrite($this->buffer, $data);
-        fseek($this->buffer, $pos);
+        if ($pos !== false) {
+            fseek($this->buffer, $pos);
+        }
     }
 
     /**
@@ -91,7 +93,10 @@ class PlaylistArchiveStream extends TarArchive
     public function stream_open($path)
     {
         $this->format = ltrim(parse_url($path, PHP_URL_PATH), '/');
-        $this->buffer = fopen('php://temp', 'r+');
+        $buffer = fopen('php://temp', 'r+');
+        if ($buffer !== false) {
+            $this->buffer = $buffer;
+        }
         foreach (explode(';', parse_url($path, PHP_URL_HOST)) as $url) {
             $this->files[] = [
                 'url'         => urldecode($url),
@@ -131,7 +136,7 @@ class PlaylistArchiveStream extends TarArchive
     /**
      * Called when ftell() is used on the stream.
      *
-     * @return int
+     * @return int|false
      */
     public function stream_tell()
     {
@@ -171,7 +176,7 @@ class PlaylistArchiveStream extends TarArchive
      *
      * @param int $count Number of bytes to read
      *
-     * @return string
+     * @return string|false
      */
     public function stream_read($count)
     {
