@@ -297,7 +297,7 @@ class VideoDownload
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
-     * @return resource popen stream
+     * @return resource|false popen stream
      */
     public function getAudioStream($url, $format, $password = null)
     {
@@ -324,7 +324,7 @@ class VideoDownload
      *
      * @param \stdClass $video Video object returned by getJSON
      *
-     * @return resource popen stream
+     * @return resource|false popen stream
      */
     public function getM3uStream(\stdClass $video)
     {
@@ -353,7 +353,7 @@ class VideoDownload
      *
      * @param array $urls URLs of the video ($urls[0]) and audio ($urls[1]) files
      *
-     * @return resource popen stream
+     * @return resource|false popen stream
      */
     public function getRemuxStream(array $urls)
     {
@@ -379,7 +379,7 @@ class VideoDownload
      *
      * @param \stdClass $video Video object returned by getJSON
      *
-     * @return resource popen stream
+     * @return resource|false popen stream
      */
     public function getRtmpStream(\stdClass $video)
     {
@@ -392,7 +392,7 @@ class VideoDownload
      * @param object $video  Video object returned by youtube-dl
      * @param string $format Requested format
      *
-     * @return resource
+     * @return resource|false
      */
     public function getPlaylistArchiveStream(\stdClass $video, $format)
     {
