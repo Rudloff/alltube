@@ -309,7 +309,7 @@ class VideoDownload
         if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
             $process = $this->getRtmpProcess($video);
             $chain = new Chain($process);
-            $chain->add('|', $this->getAvconvMp3Process('-'));
+            $chain->pipe($this->getAvconvMp3Process('-'));
 
             $stream = popen($chain->getProcess()->getCommandLine(), 'r');
         } else {
