@@ -95,7 +95,11 @@ class PlaylistArchiveStreamTest extends TestCase
     {
         $this->stream->stream_open('playlist://BaW_jenozKc;BaW_jenozKc/worst');
         while (!$this->stream->stream_eof()) {
-            $this->assertLessThanOrEqual(8192, strlen($this->stream->stream_read(8192)));
+            $result = $this->stream->stream_read(8192);
+            $this->assertInternalType('string', $result);
+            if (is_string($result)) {
+                $this->assertLessThanOrEqual(8192, strlen($result));
+            }
         }
     }
 

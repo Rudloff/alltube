@@ -297,7 +297,7 @@ class VideoDownload
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
-     * @return resource|false popen stream
+     * @return resource popen stream
      */
     public function getAudioStream($url, $format, $password = null)
     {
@@ -311,12 +311,18 @@ class VideoDownload
             $chain = new Chain($process);
             $chain->add('|', $this->getAvconvMp3Process('-'));
 
-            return popen($chain->getProcess()->getCommandLine(), 'r');
+            $stream = popen($chain->getProcess()->getCommandLine(), 'r');
         } else {
             $avconvProc = $this->getAvconvMp3Process($video->url);
 
-            return popen($avconvProc->getCommandLine(), 'r');
+            $stream = popen($avconvProc->getCommandLine(), 'r');
         }
+
+        if (!is_resource($stream)) {
+            throw new \Exception('Could not open popen stream.');
+        }
+
+        return $stream;
     }
 
     /**
@@ -324,7 +330,7 @@ class VideoDownload
      *
      * @param \stdClass $video Video object returned by getJSON
      *
-     * @return resource|false popen stream
+     * @return resource popen stream
      */
     public function getM3uStream(\stdClass $video)
     {
@@ -345,7 +351,12 @@ class VideoDownload
             ]
         );
 
-        return popen($procBuilder->getProcess()->getCommandLine(), 'r');
+        $stream = popen($procBuilder->getProcess()->getCommandLine(), 'r');
+        if (!is_resource($stream)) {
+            throw new \Exception('Could not open popen stream.');
+        }
+
+        return $stream;
     }
 
     /**
@@ -353,7 +364,7 @@ class VideoDownload
      *
      * @param array $urls URLs of the video ($urls[0]) and audio ($urls[1]) files
      *
-     * @return resource|false popen stream
+     * @return resource popen stream
      */
     public function getRemuxStream(array $urls)
     {
@@ -371,7 +382,12 @@ class VideoDownload
             ]
         );
 
-        return popen($procBuilder->getProcess()->getCommandLine(), 'r');
+        $stream = popen($procBuilder->getProcess()->getCommandLine(), 'r');
+        if (!is_resource($stream)) {
+            throw new \Exception('Could not open popen stream.');
+        }
+
+        return $stream;
     }
 
     /**
@@ -379,11 +395,16 @@ class VideoDownload
      *
      * @param \stdClass $video Video object returned by getJSON
      *
-     * @return resource|false popen stream
+     * @return resource popen stream
      */
     public function getRtmpStream(\stdClass $video)
     {
-        return popen($this->getRtmpProcess($video)->getCommandLine(), 'r');
+        $stream = popen($this->getRtmpProcess($video)->getCommandLine(), 'r');
+        if (!is_resource($stream)) {
+            throw new \Exception('Could not open popen stream.');
+        }
+
+        return $stream;
     }
 
     /**
@@ -392,7 +413,7 @@ class VideoDownload
      * @param object $video  Video object returned by youtube-dl
      * @param string $format Requested format
      *
-     * @return resource|false
+     * @return resource
      */
     public function getPlaylistArchiveStream(\stdClass $video, $format)
     {
@@ -401,6 +422,9 @@ class VideoDownload
             $playlistItems[] = urlencode($entry->url);
         }
         $stream = fopen('playlist://'.implode(';', $playlistItems).'/'.$format, 'r');
+        if (!is_resource($stream)) {
+            throw new \Exception('Could not fopen popen stream.');
+        }
 
         return $stream;
     }
