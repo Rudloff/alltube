@@ -15,7 +15,8 @@
     "barracudanetworks/archivestream-php": "~1.0.5",
     "smarty-gettext/smarty-gettext": "~1.5.1",
     "zonuexe/http-accept-language": "~0.4.1",
-    "rinvex/country": "~3.1.0"
+    "rinvex/country": "~3.1.0",
+    "php-mock/php-mock-mockery": "~1.2.0"
   },
   "require-dev": {
     "symfony/var-dumper": "~3.3.9",
@@ -25,8 +26,7 @@
     "ffmpeg/ffmpeg": "dev-release",
     "rg3/youtube-dl": "2017.11.06",
     "rudloff/rtmpdump-bin": "~2.3.0",
-    "heroku/heroku-buildpack-php": "*",
-    "php-mock/php-mock-mockery": "~1.1.0"
+    "heroku/heroku-buildpack-php": "*"
   },
   "extra": {
     "paas": {
