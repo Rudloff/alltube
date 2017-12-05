@@ -27,6 +27,7 @@ class LocaleManagerTest extends TestCase
     protected function setUp()
     {
         $this->localeManager = new LocaleManager();
+        $_SESSION['Alltube\LocaleManager']['locale'] = 'foo_BAR';
     }
 
     /**
@@ -36,7 +37,6 @@ class LocaleManagerTest extends TestCase
      */
     public function testConstructorWithCookies()
     {
-        $_SESSION['Alltube\LocaleManager']['locale'] = 'foo_BAR';
         $localeManager = new LocaleManager([]);
         $this->assertEquals('foo_BAR', (string) $localeManager->getLocale());
     }
