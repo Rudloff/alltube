@@ -100,8 +100,13 @@ class VideoDownloadTest extends TestCase
      * @dataProvider rtmpUrlProvider
      * @dataProvider remuxUrlProvider
      */
-    public function testGetURL($url, $format, $filename, $extension, $domain)
-    {
+    public function testGetURL(
+        $url,
+        $format,
+        /* @scrutinizer ignore-unused */ $filename,
+        /* @scrutinizer ignore-unused */ $extension,
+        $domain
+    ) {
         $videoURL = $this->download->getURL($url, $format);
         $this->assertContains($domain, $videoURL[0]);
     }
