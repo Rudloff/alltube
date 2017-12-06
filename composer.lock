@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ddc68bc8402785971a268a869f50d8c",
+    "content-hash": "1a9cd462b9581ad2fa7cc5815535a050",
     "packages": [
         {
             "name": "aura/session",
@@ -887,20 +887,23 @@
         },
         {
             "name": "ptachoire/process-builder-chain",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/krichprollsch/process-builder-chain.git",
-                "reference": "465055dbcc3b5ef792a768df935571551de4781a"
+                "reference": "67e94493dac63429683e43936cee9d36eca28105"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/krichprollsch/process-builder-chain/zipball/465055dbcc3b5ef792a768df935571551de4781a",
-                "reference": "465055dbcc3b5ef792a768df935571551de4781a",
+                "url": "https://api.github.com/repos/krichprollsch/process-builder-chain/zipball/67e94493dac63429683e43936cee9d36eca28105",
+                "reference": "67e94493dac63429683e43936cee9d36eca28105",
                 "shasum": ""
             },
             "require": {
-                "symfony/process": "~2.5 || ~3.0"
+                "symfony/process": "~2.5 || ~3.0 || ~4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
             },
             "type": "library",
             "autoload": {
@@ -919,7 +922,7 @@
                 }
             ],
             "description": "Add ability to chain symfony processes",
-            "time": "2016-04-10T08:33:20+00:00"
+            "time": "2017-12-06T12:24:36+00:00"
         },
         {
             "name": "rinvex/country",
@@ -1175,16 +1178,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.3.14",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "a56a3989fb762d7b19a0cf8e7693ee99a6ffb78d"
+                "reference": "db25e810fd5e124085e3777257d0cf4ae533d0ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/a56a3989fb762d7b19a0cf8e7693ee99a6ffb78d",
-                "reference": "a56a3989fb762d7b19a0cf8e7693ee99a6ffb78d",
+                "url": "https://api.github.com/repos/symfony/process/zipball/db25e810fd5e124085e3777257d0cf4ae533d0ea",
+                "reference": "db25e810fd5e124085e3777257d0cf4ae533d0ea",
                 "shasum": ""
             },
             "require": {
@@ -1193,7 +1196,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -1220,27 +1223,30 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-13T15:31:11+00:00"
+            "time": "2017-11-22T12:18:49+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.14",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "36353762fdca3a0ecdce4640764efc885df979f6"
+                "reference": "f6a99b95b338799645fe9f7880d7d4ca1bf79cc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/36353762fdca3a0ecdce4640764efc885df979f6",
-                "reference": "36353762fdca3a0ecdce4640764efc885df979f6",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/f6a99b95b338799645fe9f7880d7d4ca1bf79cc1",
+                "reference": "f6a99b95b338799645fe9f7880d7d4ca1bf79cc1",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5.9|>=7.0.8"
             },
+            "conflict": {
+                "symfony/console": "<3.4"
+            },
             "require-dev": {
-                "symfony/console": "~2.8|~3.0"
+                "symfony/console": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
@@ -1248,7 +1254,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -1275,7 +1281,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-04T14:51:35+00:00"
+            "time": "2017-12-04T18:15:22+00:00"
         },
         {
             "name": "zonuexe/http-accept-language",
@@ -2855,16 +2861,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.3.14",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "f193230a7fd5051910de4e8238139921f3a40af8"
+                "reference": "ec650a975a8e04e0c114d35eab732981243db3a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/f193230a7fd5051910de4e8238139921f3a40af8",
-                "reference": "f193230a7fd5051910de4e8238139921f3a40af8",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/ec650a975a8e04e0c114d35eab732981243db3a2",
+                "reference": "ec650a975a8e04e0c114d35eab732981243db3a2",
                 "shasum": ""
             },
             "require": {
@@ -2880,12 +2886,13 @@
             },
             "suggest": {
                 "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
+                "ext-intl": "To show region name in time zone dump",
                 "ext-symfony_debug": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -2919,7 +2926,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-11-30T09:28:49+00:00"
+            "time": "2017-11-30T14:59:23+00:00"
         },
         {
             "name": "theseer/tokenizer",

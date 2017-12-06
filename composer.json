@@ -7,9 +7,9 @@
   "require": {
     "slim/slim": "~3.9.2",
     "mathmarques/smarty-view": "~1.1.0",
-    "symfony/yaml": "~3.3.9",
-    "symfony/process": "~3.3.9",
-    "ptachoire/process-builder-chain": "~1.2.0",
+    "symfony/yaml": "~3.4.1",
+    "symfony/process": "~3.4.1",
+    "ptachoire/process-builder-chain": "~1.3.0",
     "guzzlehttp/guzzle": "~6.3.0",
     "aura/session": "~2.1.0",
     "barracudanetworks/archivestream-php": "~1.0.5",
@@ -19,7 +19,7 @@
     "php-mock/php-mock-mockery": "~1.2.0"
   },
   "require-dev": {
-    "symfony/var-dumper": "~3.3.9",
+    "symfony/var-dumper": "~3.4.1",
     "squizlabs/php_codesniffer": "~3.1.0",
     "phpunit/phpunit": "~6.5.2",
     "doctrine/instantiator": "~1.0.0",
