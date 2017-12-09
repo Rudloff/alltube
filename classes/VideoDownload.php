@@ -276,7 +276,7 @@ class VideoDownload
         $builder = ProcessBuilder::create(
             [
                 $this->config->avconv,
-                '-v', 'error',
+                '-v', $this->config->avconvVerbosity,
                 //Vimeo needs a correct user-agent
                 '-user_agent', $this->getProp(null, null, 'dump-user-agent'),
                 '-i', $url,

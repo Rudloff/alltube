@@ -90,6 +90,14 @@ class Config
     public $audioBitrate = 128;
 
     /**
+     * avconv/ffmpeg logging level.
+     * Must be one of these: quiet, panic, fatal, error, warning, info, verbose, debug
+     *
+     * @var string
+     */
+    public $avconvVerbosity = 'error';
+
+    /**
      * YAML config file path.
      *
      * @var string

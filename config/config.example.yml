@@ -18,6 +18,9 @@ convert: false
 # Path to your avconv or ffmpeg binary
 avconv: vendor/bin/ffmpeg
 
+# avconv/ffmpeg logging level.
+avconvVerbosity: error
+
 # Path to your rtmpdump binary
 rtmpdump: vendor/bin/rtmpdump
 
