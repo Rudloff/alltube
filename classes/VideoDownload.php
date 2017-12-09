@@ -273,19 +273,22 @@ class VideoDownload
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
-        $builder = ProcessBuilder::create(
-            [
-                $this->config->avconv,
-                '-v', $this->config->avconvVerbosity,
-                //Vimeo needs a correct user-agent
-                '-user_agent', $this->getProp(null, null, 'dump-user-agent'),
-                '-i', $url,
-                '-f', 'mp3',
-                '-b:a', $this->config->audioBitrate.'k',
-                '-vn',
-                'pipe:1',
-            ]
-        );
+        $arguments = [
+            $this->config->avconv,
+            '-v', $this->config->avconvVerbosity,
+            '-i', $url,
+            '-f', 'mp3',
+            '-b:a', $this->config->audioBitrate.'k',
+            '-vn',
+            'pipe:1',
+        ];
+        if ($url != '-') {
+            //Vimeo needs a correct user-agent
+            $arguments[] = '-user_agent';
+            $arguments[] = $this->getProp(null, null, 'dump-user-agent');
+        }
+
+        $builder = ProcessBuilder::create($arguments);
 
         return $builder->getProcess();
     }
