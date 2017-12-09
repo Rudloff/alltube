@@ -91,7 +91,7 @@ class Config
 
     /**
      * avconv/ffmpeg logging level.
-     * Must be one of these: quiet, panic, fatal, error, warning, info, verbose, debug
+     * Must be one of these: quiet, panic, fatal, error, warning, info, verbose, debug.
      *
      * @var string
      */
