@@ -226,7 +226,7 @@ class VideoDownloadTest extends TestCase
     {
         return [
             [
-                'https://twitter.com/verge/status/813055465324056576/video/1', 'best',
+                'https://twitter.com/verge/status/813055465324056576/video/1', 'hls-2176',
                 'The_Verge_-_This_tiny_origami_robot_can_self-fold_and_complete_tasks-813055465324056576',
                 'mp4',
                 'video.twimg.com',
