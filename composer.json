@@ -24,7 +24,7 @@
     "phpunit/phpunit": "~6.5.2",
     "doctrine/instantiator": "~1.0.0",
     "ffmpeg/ffmpeg": "dev-release",
-    "rg3/youtube-dl": "2017.11.06",
+    "rg3/youtube-dl": "2017.12.10",
     "rudloff/rtmpdump-bin": "~2.3.0",
     "heroku/heroku-buildpack-php": "*"
   },
@@ -40,10 +40,10 @@
       "type": "package",
       "package": {
         "name": "rg3/youtube-dl",
-        "version": "2017.11.06",
+        "version": "2017.12.10",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/rg3/youtube-dl/archive/2017.11.06.zip"
+          "url": "https://github.com/rg3/youtube-dl/archive/2017.12.10.zip"
         }
       }
     },
