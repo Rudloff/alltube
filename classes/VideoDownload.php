@@ -29,6 +29,9 @@ class VideoDownload
 
     /**
      * VideoDownload constructor.
+     *
+     * @throws \Exception If youtube-dl is missing
+     * @throws \Exception If Python is missing
      */
     public function __construct(Config $config = null)
     {
@@ -68,6 +71,10 @@ class VideoDownload
      * @param string $format   Format
      * @param string $prop     Property
      * @param string $password Video password
+     *
+     * @throws PasswordException If the video is protected by a password and no password was specified
+     * @throws \Exception        If the password is wrong
+     * @throws \Exception        If youtube-dl returns an error
      *
      * @return string
      */
@@ -220,6 +227,8 @@ class VideoDownload
      *
      * @param object $video Video object returned by youtube-dl
      *
+     * @throws \Exception If rtmpdump is missing
+     *
      * @return \Symfony\Component\Process\Process Process
      */
     private function getRtmpProcess(\stdClass $video)
@@ -265,6 +274,8 @@ class VideoDownload
      *
      * @param string $url URL of the video file
      *
+     * @throws \Exception If avconv/ffmpeg is missing
+     *
      * @return \Symfony\Component\Process\Process Process
      */
     private function getAvconvMp3Process($url)
@@ -300,6 +311,9 @@ class VideoDownload
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
+     * @throws \Exception If your try to convert and M3U8 video
+     * @throws \Exception If the popen stream was not created correctly
+     *
      * @return resource popen stream
      */
     public function getAudioStream($url, $format, $password = null)
@@ -332,6 +346,9 @@ class VideoDownload
      * Get video stream from an M3U playlist.
      *
      * @param \stdClass $video Video object returned by getJSON
+     *
+     * @throws \Exception If avconv/ffmpeg is missing
+     * @throws \Exception If the popen stream was not created correctly
      *
      * @return resource popen stream
      */
@@ -367,6 +384,8 @@ class VideoDownload
      *
      * @param array $urls URLs of the video ($urls[0]) and audio ($urls[1]) files
      *
+     * @throws \Exception If the popen stream was not created correctly
+     *
      * @return resource popen stream
      */
     public function getRemuxStream(array $urls)
@@ -398,6 +417,8 @@ class VideoDownload
      *
      * @param \stdClass $video Video object returned by getJSON
      *
+     * @throws \Exception If the popen stream was not created correctly
+     *
      * @return resource popen stream
      */
     public function getRtmpStream(\stdClass $video)
@@ -415,6 +436,8 @@ class VideoDownload
      *
      * @param object $video  Video object returned by youtube-dl
      * @param string $format Requested format
+     *
+     * @throws \Exception If the popen stream was not created correctly
      *
      * @return resource
      */
