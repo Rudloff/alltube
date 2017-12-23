@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "96a0790e383a8870104483939363bcc0",
+    "content-hash": "c67fcb771d11b4f276bd6d5f24660509",
     "packages": [
         {
             "name": "aura/session",
@@ -884,45 +884,6 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
-        },
-        {
-            "name": "ptachoire/process-builder-chain",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/krichprollsch/process-builder-chain.git",
-                "reference": "67e94493dac63429683e43936cee9d36eca28105"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/krichprollsch/process-builder-chain/zipball/67e94493dac63429683e43936cee9d36eca28105",
-                "reference": "67e94493dac63429683e43936cee9d36eca28105",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/process": "~2.5 || ~3.0 || ~4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Chain": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pierre Tachoire",
-                    "email": "pierre.tachoire@gmail.com"
-                }
-            ],
-            "description": "Add ability to chain symfony processes",
-            "time": "2017-12-06T12:24:36+00:00"
         },
         {
             "name": "rinvex/country",

@@ -5,7 +5,6 @@
 
 namespace Alltube;
 
-use Chain\Chain;
 use Symfony\Component\Process\Process;
 
 /**
