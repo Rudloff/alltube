@@ -98,6 +98,7 @@ class VideoDownload
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
         $process->setEnv(['QT_QPA_PLATFORM'=>'offscreen']);
+        $process->inheritEnvironmentVariables();
         $process->run();
         if (!$process->isSuccessful()) {
             $errorOutput = trim($process->getErrorOutput());
