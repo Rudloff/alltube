@@ -410,7 +410,10 @@ class FrontControllerTest extends TestCase
         $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
-            ['url' => 'https://twitter.com/verge/status/813055465324056576/video/1'],
+            [
+                'url'    => 'https://twitter.com/verge/status/813055465324056576/video/1',
+                'format' => 'hls-2176',
+            ],
             $this->config
         );
     }
