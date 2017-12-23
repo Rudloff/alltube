@@ -204,6 +204,8 @@ class VideoDownload
      */
     private function getRtmpArguments(\stdClass $video)
     {
+        $arguments = [];
+
         foreach ([
             'url'           => '-rtmp_tcurl',
             'webpage_url'   => '-rtmp_pageurl',
