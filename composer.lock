@@ -2164,16 +2164,16 @@
         },
         {
             "name": "rudloff/rtmpdump-bin",
-            "version": "2.3",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Rudloff/rtmpdump-bin.git",
-                "reference": "133cdd80e3bab66593e88a5276158596383afd97"
+                "reference": "1042538e0a97940c6605c67c26ff48932ba5e61f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Rudloff/rtmpdump-bin/zipball/133cdd80e3bab66593e88a5276158596383afd97",
-                "reference": "133cdd80e3bab66593e88a5276158596383afd97",
+                "url": "https://api.github.com/repos/Rudloff/rtmpdump-bin/zipball/1042538e0a97940c6605c67c26ff48932ba5e61f",
+                "reference": "1042538e0a97940c6605c67c26ff48932ba5e61f",
                 "shasum": ""
             },
             "require-dev": {
@@ -2188,7 +2188,7 @@
                 "GPL-2.0"
             ],
             "description": "rtmpdump binary for Linux 64 bit",
-            "time": "2016-04-12T19:17:32+00:00"
+            "time": "2017-12-23T12:11:49+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -2237,16 +2237,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "1174d9018191e93cb9d719edec01257fc05f8158"
+                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/1174d9018191e93cb9d719edec01257fc05f8158",
-                "reference": "1174d9018191e93cb9d719edec01257fc05f8158",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
+                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
                 "shasum": ""
             },
             "require": {
@@ -2297,7 +2297,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-11-03T07:16:52+00:00"
+            "time": "2017-12-22T14:50:35+00:00"
         },
         {
             "name": "sebastian/diff",
