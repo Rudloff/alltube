@@ -25,7 +25,6 @@
     "doctrine/instantiator": "~1.0.0",
     "ffmpeg/ffmpeg": "dev-release",
     "rg3/youtube-dl": "2017.12.10",
-    "rudloff/rtmpdump-bin": "~2.3.0",
     "heroku/heroku-buildpack-php": "*"
   },
   "extra": {

@@ -21,9 +21,6 @@ avconv: vendor/bin/ffmpeg
 # avconv/ffmpeg logging level.
 avconvVerbosity: error
 
-# Path to your rtmpdump binary
-rtmpdump: vendor/bin/rtmpdump
-
 # True to disable URL rewriting
 uglyUrls: false
 

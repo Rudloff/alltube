@@ -62,7 +62,6 @@ class ConfigTest extends TestCase
         $this->assertInternalType('string', $config->youtubedl);
         $this->assertInternalType('string', $config->python);
         $this->assertInternalType('string', $config->avconv);
-        $this->assertInternalType('string', $config->rtmpdump);
         $this->assertInternalType('bool', $config->convert);
         $this->assertInternalType('bool', $config->uglyUrls);
         $this->assertInternalType('bool', $config->stream);

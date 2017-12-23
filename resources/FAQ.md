@@ -18,7 +18,6 @@ Here are the parameters that you can set:
 * `params`: an array of parameters to pass to youtube-dl
 * `convert`: true to enable audio conversion
 * `avconv`: path to your avconv or ffmpeg binary
-* `rtmpdump`: path to your rtmpdump binary
 * `remux`: enable remux mode (experimental)
 
 See [`config.example.yml`](../config/config.example.yml) for default values.

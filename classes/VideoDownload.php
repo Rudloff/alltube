@@ -201,54 +201,32 @@ class VideoDownload
      *
      * @param object $video Video object returned by youtube-dl
      *
-     * @return array
+     * @return array Arguments
      */
-    private function getRtmpProcessArguments(\stdClass $video)
+    private function getRtmpArguments(\stdClass $video)
     {
-        $arguments = [
-            $this->config->rtmpdump,
-            '-q',
-        ];
         foreach ([
-            'url' => 'rtmp',
-            'webpage_url' => 'pageUrl',
-            'player_url' => 'swfVfy',
-            'flash_version' => 'flashVer',
-            'play_path' => 'playpath',
-            'app' => 'app',
+            'url'           => '-rtmp_tcurl',
+            'webpage_url'   => '-rtmp_pageurl',
+            'player_url'    => '-rtmp_swfverify',
+            'flash_version' => '-rtmp_flashver',
+            'play_path'     => '-rtmp_playpath',
+            'app'           => '-rtmp_app',
         ] as $property => $option) {
             if (isset($video->{$property})) {
-                $arguments[] = '--'.$option;
+                $arguments[] = $option;
                 $arguments[] = $video->{$property};
             }
         }
 
-        return $arguments;
-    }
-
-    /**
-     * Get a process that runs rtmp in order to download a video.
-     *
-     * @param object $video Video object returned by youtube-dl
-     *
-     * @throws \Exception If rtmpdump is missing
-     *
-     * @return \Symfony\Component\Process\Process Process
-     */
-    private function getRtmpProcess(\stdClass $video)
-    {
-        if (!$this->checkCommand([$this->config->rtmpdump, '--help'])) {
-            throw(new \Exception('Can\'t find rtmpdump'));
-        }
-        $arguments = $this->getRtmpProcessArguments($video);
         if (isset($video->rtmp_conn)) {
             foreach ($video->rtmp_conn as $conn) {
-                $arguments[] = '--conn';
+                $arguments[] = '-rtmp_conn';
                 $arguments[] = $conn;
             }
         }
 
-        return new Process($arguments);
+        return $arguments;
     }
 
     /**
@@ -269,28 +247,39 @@ class VideoDownload
     /**
      * Get a process that runs avconv in order to convert a video to MP3.
      *
-     * @param string $url URL of the video file
+     * @param object $url Video object returned by youtube-dl
      *
      * @throws \Exception If avconv/ffmpeg is missing
      *
      * @return \Symfony\Component\Process\Process Process
      */
-    private function getAvconvMp3Process($url)
+    private function getAvconvMp3Process(\stdClass $video)
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
-        $arguments = [
-            $this->config->avconv,
-            '-v', $this->config->avconvVerbosity,
-            '-i', $url,
-            '-f', 'mp3',
-            '-b:a', $this->config->audioBitrate.'k',
-            '-vn',
-            'pipe:1',
-        ];
-        if ($url != '-') {
+        if ($video->protocol == 'rtmp') {
+            $rtmpArguments = $this->getRtmpArguments($video);
+        } else {
+            $rtmpArguments = [];
+        }
+
+        $arguments = array_merge(
+            [
+                $this->config->avconv,
+                '-v', $this->config->avconvVerbosity,
+            ],
+            $rtmpArguments,
+            [
+                '-i', $video->url,
+                '-f', 'mp3',
+                '-b:a', $this->config->audioBitrate.'k',
+                '-vn',
+                'pipe:1',
+            ]
+        );
+        if ($video->url != '-') {
             //Vimeo needs a correct user-agent
             $arguments[] = '-user_agent';
             $arguments[] = $this->getProp(null, null, 'dump-user-agent');
@@ -318,17 +307,9 @@ class VideoDownload
             throw(new \Exception('Conversion of M3U8 files is not supported.'));
         }
 
-        if (parse_url($video->url, PHP_URL_SCHEME) == 'rtmp') {
-            $process = $this->getRtmpProcess($video);
-            $chain = new Chain($process);
-            $chain->pipe($this->getAvconvMp3Process('-'));
+        $avconvProc = $this->getAvconvMp3Process($video);
 
-            $stream = popen($chain->getProcess()->getCommandLine(), 'r');
-        } else {
-            $avconvProc = $this->getAvconvMp3Process($video->url);
-
-            $stream = popen($avconvProc->getCommandLine(), 'r');
-        }
+        $stream = popen($avconvProc->getCommandLine(), 'r');
 
         if (!is_resource($stream)) {
             throw new \Exception('Could not open popen stream.');
@@ -356,7 +337,7 @@ class VideoDownload
         $process = new Process(
             [
                 $this->config->avconv,
-                '-v', 'quiet',
+                '-v', $this->config->avconvVerbosity,
                 '-i', $video->url,
                 '-f', $video->ext,
                 '-c', 'copy',
@@ -388,7 +369,7 @@ class VideoDownload
         $process = new Process(
             [
                 $this->config->avconv,
-                '-v', 'quiet',
+                '-v', $this->config->avconvVerbosity,
                 '-i', $urls[0],
                 '-i', $urls[1],
                 '-c', 'copy',
@@ -418,7 +399,21 @@ class VideoDownload
      */
     public function getRtmpStream(\stdClass $video)
     {
-        $stream = popen($this->getRtmpProcess($video)->getCommandLine(), 'r');
+        $process = new Process(
+            array_merge(
+                [
+                    $this->config->avconv,
+                    '-v', $this->config->avconvVerbosity,
+                ],
+                $this->getRtmpArguments($video),
+                [
+                    '-i', $video->url,
+                    '-f', $video->ext,
+                    'pipe:1',
+                ]
+            )
+        );
+        $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
             throw new \Exception('Could not open popen stream.');
         }

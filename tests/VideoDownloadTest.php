@@ -386,23 +386,6 @@ class VideoDownloadTest extends TestCase
     }
 
     /**
-     * Test getAudioStream function without curl or rtmpdump.
-     *
-     * @param string $url    URL
-     * @param string $format Format
-     *
-     * @return void
-     * @expectedException Exception
-     * @dataProvider      rtmpUrlProvider
-     */
-    public function testGetAudioStreamRtmpError($url, $format)
-    {
-        $this->config->rtmpdump = 'foobar';
-        $download = new VideoDownload($this->config);
-        $download->getAudioStream($url, $format);
-    }
-
-    /**
      * Test getAudioStream function with a M3U8 file.
      *
      * @param string $url    URL
