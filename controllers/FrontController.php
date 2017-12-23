@@ -7,6 +7,7 @@ namespace Alltube\Controller;
 
 use Alltube\Config;
 use Alltube\Locale;
+use Alltube\LocaleManager;
 use Alltube\PasswordException;
 use Alltube\VideoDownload;
 use Psr\Container\ContainerInterface;
@@ -83,7 +84,7 @@ class FrontController
         } else {
             $this->config = Config::getInstance();
         }
-        $this->download = new VideoDownload();
+        $this->download = new VideoDownload($this->config);
         $this->container = $container;
         $this->view = $this->container->get('view');
         $this->localeManager = $this->container->get('locale');
@@ -360,7 +361,7 @@ class FrontController
             $stream = $this->download->getRtmpStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
             $body = new Stream($stream);
-        } elseif ($video->protocol == 'm3u8') {
+        } elseif ($video->protocol == 'm3u8' || $video->protocol == 'm3u8_native') {
             $stream = $this->download->getM3uStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);
             $body = new Stream($stream);

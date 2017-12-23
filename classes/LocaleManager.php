@@ -5,7 +5,7 @@
 
 namespace Alltube;
 
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 /**
  * Class used to manage locales.
@@ -42,7 +42,6 @@ class LocaleManager
     {
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($cookies);
-        $session->setCookieParams(['httponly' => true]);
         $this->sessionSegment = $session->getSegment('Alltube\LocaleManager');
         $cookieLocale = $this->sessionSegment->get('locale');
         if (isset($cookieLocale)) {
@@ -58,8 +57,7 @@ class LocaleManager
     public function getSupportedLocales()
     {
         $return = [];
-        $builder = new ProcessBuilder(['locale', '-a']);
-        $process = $builder->getProcess();
+        $process = new Process(['locale', '-a']);
         $process->run();
         $installedLocales = explode(PHP_EOL, trim($process->getOutput()));
         foreach ($this->supportedLocales as $supportedLocale) {
@@ -94,5 +92,14 @@ class LocaleManager
         setlocale(LC_ALL, [$locale, $locale.'.utf8']);
         $this->curLocale = $locale;
         $this->sessionSegment->set('locale', $locale);
+    }
+
+    /**
+     * Unset the current locale.
+     */
+    public function unsetLocale()
+    {
+        $this->curLocale = null;
+        $this->sessionSegment->clear();
     }
 }

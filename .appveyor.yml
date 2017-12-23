@@ -1,0 +1,20 @@
+---
+install:
+  - sc config wuauserv start= auto
+  - net start wuauserv
+  - cinst php composer ffmpeg
+  - refreshenv
+  - copy C:\tools\php72\php.ini-development C:\tools\php72\php.ini
+  - echo extension=C:\tools\php72\ext\php_gmp.dll >> C:\tools\php72\php.ini
+  - echo extension=C:\tools\php72\ext\php_gettext.dll >> C:\tools\php72\php.ini
+  - echo extension=C:\tools\php72\ext\php_intl.dll >> C:\tools\php72\php.ini
+  - echo extension=C:\tools\php72\ext\php_openssl.dll >> C:\tools\php72\php.ini
+  - echo extension=C:\tools\php72\ext\php_mbstring.dll >> C:\tools\php72\php.ini
+  - composer install --no-dev
+  - composer global require phpunit/phpunit
+  - C:\Python36\python.exe -m pip install youtube-dl
+
+test_script:
+  - phpunit
+
+build: "off"

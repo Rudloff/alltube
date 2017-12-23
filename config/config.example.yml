@@ -7,10 +7,10 @@ python: /usr/bin/python
 
 # An array of parameters to pass to youtube-dl
 params:
-    - --no-playlist
     - --no-warnings
-    - --playlist-end
-    - 1
+    - --ignore-errors
+    - --flat-playlist
+    - --restrict-filenames
 
 # True to enable audio conversion
 convert: false
@@ -18,11 +18,14 @@ convert: false
 # Path to your avconv or ffmpeg binary
 avconv: vendor/bin/ffmpeg
 
-# Path to your rtmpdump binary
-rtmpdump: vendor/bin/rtmpdump
+# avconv/ffmpeg logging level.
+avconvVerbosity: error
 
 # True to disable URL rewriting
 uglyUrls: false
 
 # True to stream videos through server
 stream: false
+
+# MP3 bitrate when converting (in kbit/s)
+audioBitrate: 128

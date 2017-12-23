@@ -54,7 +54,7 @@ module.exports = function (grunt) {
             },
             phpunit: {
                 options: {
-                    bin: 'php -dzend_extension=xdebug.so ./vendor/bin/phpunit',
+                    bin: 'vendor/bin/phpunit',
                     stopOnError: true,
                     stopOnFailure: true,
                     followOutput: true
@@ -111,7 +111,12 @@ module.exports = function (grunt) {
                 css: {
                     src: 'css/*'
                 }
-            }
+            },
+            markdownlint: {
+                doc: {
+                    src: ['README.md', 'CONTRIBUTING.md', 'resources/*.md']
+                }
+          }
         }
     );
 
@@ -128,9 +133,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-fixpack');
     grunt.loadNpmTasks('grunt-potomo');
     grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-markdownlint');
 
     grunt.registerTask('default', ['cssmin', 'potomo']);
-    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'phpcs']);
+    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);

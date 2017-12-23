@@ -6,6 +6,7 @@
 namespace Alltube\Test;
 
 use Alltube\ViewFactory;
+use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -14,7 +15,7 @@ use Slim\Views\Smarty;
 /**
  * Unit tests for the ViewFactory class.
  */
-class ViewFactoryTest extends \PHPUnit_Framework_TestCase
+class ViewFactoryTest extends TestCase
 {
     /**
      * Test the create() function.

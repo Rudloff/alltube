@@ -6,25 +6,26 @@
 namespace Alltube\Test;
 
 use Alltube\Locale;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Config class.
  */
-class LocaleTest extends \PHPUnit_Framework_TestCase
+class LocaleTest extends TestCase
 {
     /**
      * Locale class instance.
      *
      * @var Locale
      */
-    private $locale;
+    private $localeObject;
 
     /**
      * Prepare tests.
      */
     protected function setUp()
     {
-        $this->locale = new Locale('fr_FR');
+        $this->localeObject = new Locale('fr_FR');
     }
 
     /**
@@ -34,7 +35,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetToString()
     {
-        $this->assertEquals('fr_FR', $this->locale->__toString());
+        $this->assertEquals('fr_FR', $this->localeObject->__toString());
     }
 
     /**
@@ -44,7 +45,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFullName()
     {
-        $this->assertEquals('français (France)', $this->locale->getFullName());
+        $this->assertEquals('français (France)', $this->localeObject->getFullName());
     }
 
     /**
@@ -54,7 +55,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetIso15897()
     {
-        $this->assertEquals('fr_FR', $this->locale->getIso15897());
+        $this->assertEquals('fr_FR', $this->localeObject->getIso15897());
     }
 
     /**
@@ -64,7 +65,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBcp47()
     {
-        $this->assertEquals('fr-FR', $this->locale->getBcp47());
+        $this->assertEquals('fr-FR', $this->localeObject->getBcp47());
     }
 
     /**
@@ -74,6 +75,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetIso3166()
     {
-        $this->assertEquals('fr', $this->locale->getIso3166());
+        $this->assertEquals('fr', $this->localeObject->getIso3166());
     }
 }

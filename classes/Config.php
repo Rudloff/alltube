@@ -55,13 +55,6 @@ class Config
     public $avconv = 'vendor/bin/ffmpeg';
 
     /**
-     * rtmpdump binary path.
-     *
-     * @var string
-     */
-    public $rtmpdump = 'vendor/bin/rtmpdump';
-
-    /**
      * Disable URL rewriting.
      *
      * @var bool
@@ -83,6 +76,21 @@ class Config
     public $remux = false;
 
     /**
+     * MP3 bitrate when converting (in kbit/s).
+     *
+     * @var int
+     */
+    public $audioBitrate = 128;
+
+    /**
+     * avconv/ffmpeg logging level.
+     * Must be one of these: quiet, panic, fatal, error, warning, info, verbose, debug.
+     *
+     * @var string
+     */
+    public $avconvVerbosity = 'error';
+
+    /**
      * YAML config file path.
      *
      * @var string
@@ -96,7 +104,6 @@ class Config
      * * youtubedl: youtube-dl binary path
      * * python: Python binary path
      * * avconv: avconv or ffmpeg binary path
-     * * rtmpdump: rtmpdump binary path
      * * params: Array of youtube-dl parameters
      * * convert: Enable conversion?
      *

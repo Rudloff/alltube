@@ -1,18 +1,18 @@
 ---
 language: php
-php: 7
+php: 7.1
 addons:
     apt:
         packages:
             - language-pack-fr
 install:
     - composer install
-script: vendor/bin/phpunit
+script: composer exec -v phpunit
 after_success:
     - bash <(curl -s https://codecov.io/bash)
 before_deploy:
     - yarn install --ignore-scripts
-    - ./node_modules/.bin/grunt doc
+    - yarn grunt doc
 deploy:
     provider: surge
     project: ./docs/

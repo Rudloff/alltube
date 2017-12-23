@@ -7,11 +7,12 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\VideoDownload;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the VideoDownload class.
  */
-class VideoDownloadTest extends \PHPUnit_Framework_TestCase
+class VideoDownloadTest extends TestCase
 {
     /**
      * VideoDownload instance.
@@ -21,11 +22,24 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     private $download;
 
     /**
+     * Config class instance.
+     *
+     * @var Config
+     */
+    private $config;
+
+    /**
      * Initialize properties used by test.
      */
     protected function setUp()
     {
-        $this->download = new VideoDownload(Config::getInstance('config/config_test.yml'));
+        if (PHP_OS == 'WINNT') {
+            $configFile = 'config_test_windows.yml';
+        } else {
+            $configFile = 'config_test.yml';
+        }
+        $this->config = Config::getInstance('config/'.$configFile);
+        $this->download = new VideoDownload($this->config);
     }
 
     /**
@@ -44,9 +58,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorWithMissingYoutubedl()
     {
-        new VideoDownload(
-            new Config(['youtubedl' => 'foo'])
-        );
+        $this->config->youtubedl = 'foo';
+        new VideoDownload($this->config);
     }
 
     /**
@@ -57,9 +70,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorWithMissingPython()
     {
-        new VideoDownload(
-            new Config(['python' => 'foo'])
-        );
+        $this->config->python = 'foo';
+        new VideoDownload($this->config);
     }
 
     /**
@@ -88,8 +100,13 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * @dataProvider rtmpUrlProvider
      * @dataProvider remuxUrlProvider
      */
-    public function testGetURL($url, $format, $filename, $extension, $domain)
-    {
+    public function testGetURL(
+        $url,
+        $format,
+        /* @scrutinizer ignore-unused */ $filename,
+        /* @scrutinizer ignore-unused */ $extension,
+        $domain
+    ) {
         $videoURL = $this->download->getURL($url, $format);
         $this->assertContains($domain, $videoURL[0]);
     }
@@ -209,7 +226,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'https://twitter.com/verge/status/813055465324056576/video/1', 'best',
+                'https://twitter.com/verge/status/813055465324056576/video/1', 'hls-2176',
                 'The_Verge_-_This_tiny_origami_robot_can_self-fold_and_complete_tasks-813055465324056576',
                 'mp4',
                 'video.twimg.com',
@@ -363,23 +380,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAudioStreamAvconvError($url, $format)
     {
-        $download = new VideoDownload(new Config(['avconv' => 'foobar']));
-        $download->getAudioStream($url, $format);
-    }
-
-    /**
-     * Test getAudioStream function without curl or rtmpdump.
-     *
-     * @param string $url    URL
-     * @param string $format Format
-     *
-     * @return void
-     * @expectedException Exception
-     * @dataProvider      rtmpUrlProvider
-     */
-    public function testGetAudioStreamRtmpError($url, $format)
-    {
-        $download = new VideoDownload(new Config(['rtmpdump' => 'foobar']));
+        $this->config->avconv = 'foobar';
+        $download = new VideoDownload($this->config);
         $download->getAudioStream($url, $format);
     }
 
@@ -476,7 +478,8 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetM3uStreamAvconvError($url, $format)
     {
-        $download = new VideoDownload(new Config(['avconv' => 'foobar']));
+        $this->config->avconv = 'foobar';
+        $download = new VideoDownload($this->config);
         $video = $download->getJSON($url, $format);
         $download->getM3uStream($video);
     }
@@ -485,6 +488,7 @@ class VideoDownloadTest extends \PHPUnit_Framework_TestCase
      * Test getPlaylistArchiveStream function without avconv.
      *
      * @return void
+     * @requires OS Linux
      */
     public function testGetPlaylistArchiveStream()
     {

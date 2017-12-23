@@ -91,7 +91,7 @@ class Locale
     /**
      * Get country information from locale.
      *
-     * @return \Rinvex\Country\Country
+     * @return \Rinvex\Country\Country|array
      */
     public function getCountry()
     {

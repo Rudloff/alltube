@@ -10,4 +10,5 @@ Before opening a new issue, make sure that:
 
 ## Translation
 
-If you want to help translating Alltube in your language, you can join our [POEditor project](https://poeditor.com/join/project/GJmE0wN7Xw).
+If you want to help translating Alltube in your language,
+you can join our [POEditor project](https://poeditor.com/join/project/GJmE0wN7Xw).

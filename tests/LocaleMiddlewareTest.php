@@ -5,8 +5,10 @@
 
 namespace Alltube\Test;
 
+use Alltube\Locale;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
+use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -15,7 +17,7 @@ use Slim\Http\Response;
 /**
  * Unit tests for the FrontController class.
  */
-class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
+class LocaleMiddlewareTest extends TestCase
 {
     /**
      * LocaleMiddleware instance.
@@ -25,28 +27,45 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     private $middleware;
 
     /**
+     * Slim dependency container.
+     *
+     * @var Container
+     */
+    private $container;
+
+    /**
      * Prepare tests.
      */
     protected function setUp()
     {
-        $container = new Container();
-        $container['locale'] = new LocaleManager();
-        $this->middleware = new LocaleMiddleware($container);
+        $this->container = new Container();
+        $this->container['locale'] = new LocaleManager();
+        $this->middleware = new LocaleMiddleware($this->container);
+    }
+
+    /**
+     * Unset locale cookie after each test.
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        $this->container['locale']->unsetLocale();
     }
 
     /**
      * Test the testLocale() function.
      *
      * @return void
+     * @requires OS Linux
      */
     public function testTestLocale()
     {
-        $this->markTestSkipped('For some reason, this test fails on Travis even if the fr_FR locale is installed.');
         $locale = [
-            'language' => 'fr',
-            'region'   => 'FR',
+            'language' => 'en',
+            'region'   => 'US',
         ];
-        $this->assertEquals('fr_FR', $this->middleware->testLocale($locale));
+        $this->assertEquals('en_US', $this->middleware->testLocale($locale));
     }
 
     /**
@@ -65,12 +84,29 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Mock function that does nothing.
+     * Check that the request contains an Accept-Language header.
+     *
+     * @param Request $request PSR-7 request
      *
      * @return void
      */
-    public function nothing()
+    public function assertHeader(Request $request)
     {
+        $header = $request->getHeader('Accept-Language');
+        $this->assertEquals('foo-BAR', $header[0]);
+    }
+
+    /**
+     * Check that the request contains no Accept-Language header.
+     *
+     * @param Request $request PSR-7 request
+     *
+     * @return void
+     */
+    public function assertNoHeader(Request $request)
+    {
+        $header = $request->getHeader('Accept-Language');
+        $this->assertEmpty($header);
     }
 
     /**
@@ -82,14 +118,14 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $request = Request::createFromEnvironment(Environment::mock());
         $this->middleware->__invoke(
-            $request->withHeader('Accept-Language', 'fr-FR'),
+            $request->withHeader('Accept-Language', 'foo-BAR'),
             new Response(),
-            [$this, 'nothing']
+            [$this, 'assertHeader']
         );
     }
 
     /**
-     * Test the __invoke() function withot the Accept-Language header.
+     * Test the __invoke() function without the Accept-Language header.
      *
      * @return void
      */
@@ -99,17 +135,7 @@ class LocaleMiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->middleware->__invoke(
             $request->withoutHeader('Accept-Language'),
             new Response(),
-            [$this, 'nothing']
+            [$this, 'assertNoHeader']
         );
-    }
-
-    /**
-     * Test that the environment is correctly set up.
-     *
-     * @return void
-     */
-    public function testEnv()
-    {
-        $this->markTestIncomplete('We need to find a way to reliably test LC_ALL and LANG values');
     }
 }

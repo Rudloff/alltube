@@ -7,11 +7,12 @@ namespace Alltube\Test;
 
 use Alltube\Locale;
 use Alltube\LocaleManager;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Config class.
  */
-class LocaleManagerTest extends \PHPUnit_Framework_TestCase
+class LocaleManagerTest extends TestCase
 {
     /**
      * LocaleManager class instance.
@@ -26,6 +27,7 @@ class LocaleManagerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->localeManager = new LocaleManager();
+        $_SESSION['Alltube\LocaleManager']['locale'] = 'foo_BAR';
     }
 
     /**
@@ -35,7 +37,6 @@ class LocaleManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorWithCookies()
     {
-        $_SESSION['Alltube\LocaleManager']['locale'] = 'foo_BAR';
         $localeManager = new LocaleManager([]);
         $this->assertEquals('foo_BAR', (string) $localeManager->getLocale());
     }
@@ -59,7 +60,7 @@ class LocaleManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLocale()
     {
-        $this->assertNull($this->localeManager->getLocale());
+        $this->assertEquals(new Locale('foo_BAR'), $this->localeManager->getLocale());
     }
 
     /**
@@ -73,5 +74,27 @@ class LocaleManagerTest extends \PHPUnit_Framework_TestCase
         $locale = $this->localeManager->getLocale();
         $this->assertInstanceOf(Locale::class, $locale);
         $this->assertEquals('foo_BAR', (string) $locale);
+    }
+
+    /**
+     * Test the unsetLocale function.
+     *
+     * @return void
+     */
+    public function testUnsetLocale()
+    {
+        $this->localeManager->unsetLocale();
+        $this->assertNull($this->localeManager->getLocale());
+    }
+
+    /**
+     * Test that the environment is correctly set up.
+     *
+     * @return void
+     */
+    public function testEnv()
+    {
+        $this->localeManager->setLocale(new Locale('foo_BAR'));
+        $this->assertEquals('foo_BAR', getenv('LANG'));
     }
 }

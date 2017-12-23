@@ -5,12 +5,14 @@
 
 namespace Alltube\Test;
 
+use Alltube\Config;
 use Alltube\PlaylistArchiveStream;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the ViewFactory class.
  */
-class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
+class PlaylistArchiveStreamTest extends TestCase
 {
     /**
      * PlaylistArchiveStream instance.
@@ -24,7 +26,12 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->stream = new PlaylistArchiveStream();
+        if (PHP_OS == 'WINNT') {
+            $configFile = 'config_test_windows.yml';
+        } else {
+            $configFile = 'config_test.yml';
+        }
+        $this->stream = new PlaylistArchiveStream(Config::getInstance('config/'.$configFile));
     }
 
     /**
@@ -88,7 +95,11 @@ class PlaylistArchiveStreamTest extends \PHPUnit_Framework_TestCase
     {
         $this->stream->stream_open('playlist://BaW_jenozKc;BaW_jenozKc/worst');
         while (!$this->stream->stream_eof()) {
-            $this->assertLessThanOrEqual(8192, strlen($this->stream->stream_read(8192)));
+            $result = $this->stream->stream_read(8192);
+            $this->assertInternalType('string', $result);
+            if (is_string($result)) {
+                $this->assertLessThanOrEqual(8192, strlen($result));
+            }
         }
     }
 

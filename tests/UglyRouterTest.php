@@ -6,13 +6,14 @@
 namespace Alltube\Test;
 
 use Alltube\UglyRouter;
+use PHPUnit\Framework\TestCase;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 
 /**
  * Unit tests for the UglyRouter class.
  */
-class UglyRouterTest extends \PHPUnit_Framework_TestCase
+class UglyRouterTest extends TestCase
 {
     /**
      * UglyRouter instance.

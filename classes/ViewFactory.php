@@ -18,8 +18,8 @@ class ViewFactory
     /**
      * Create Smarty view object.
      *
-     * @param Container $container Slim dependency container
-     * @param Request   $request   PSR-7 request
+     * @param ContainerInterface $container Slim dependency container
+     * @param Request            $request   PSR-7 request
      *
      * @return Smarty
      */

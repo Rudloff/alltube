@@ -9,6 +9,7 @@ use Alltube\Config;
 use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
 use Alltube\ViewFactory;
+use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -17,7 +18,7 @@ use Slim\Http\Response;
 /**
  * Unit tests for the FrontController class.
  */
-class FrontControllerTest extends \PHPUnit_Framework_TestCase
+class FrontControllerTest extends TestCase
 {
     /**
      * Slim dependency container.
@@ -48,6 +49,13 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     private $controller;
 
     /**
+     * Config class instance.
+     *
+     * @var Config
+     */
+    private $config;
+
+    /**
      * Prepare tests.
      */
     protected function setUp()
@@ -57,7 +65,15 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
         $this->response = new Response();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
         $this->container['locale'] = new LocaleManager();
-        $this->controller = new FrontController($this->container, Config::getInstance('config/config_test.yml'));
+
+        if (PHP_OS == 'WINNT') {
+            $configFile = 'config_test_windows.yml';
+        } else {
+            $configFile = 'config_test.yml';
+        }
+        $this->config = Config::getInstance('config/'.$configFile);
+        $this->controller = new FrontController($this->container, $this->config);
+
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
         $this->container['router']->map(['GET'], '/video', [$this->controller, 'video'])
@@ -150,6 +166,18 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
+        $controller = new FrontController($this->container, $this->config);
+        $this->assertInstanceOf(FrontController::class, $controller);
+    }
+
+    /**
+     * Test the constructor with a default config.
+     *
+     * @return void
+     * @requires OS Linux
+     */
+    public function testConstructorWithDefaultConfig()
+    {
         $controller = new FrontController($this->container);
         $this->assertInstanceOf(FrontController::class, $controller);
     }
@@ -161,7 +189,8 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorWithStream()
     {
-        $controller = new FrontController($this->container, new Config(['stream' => true]));
+        $this->config->stream = true;
+        $controller = new FrontController($this->container, $this->config);
         $this->assertInstanceOf(FrontController::class, $controller);
     }
 
@@ -232,17 +261,6 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the video() function with a video that does not have a title.
-     *
-     * @return void
-     */
-    public function testVideoWithoutTitle()
-    {
-        $this->markTestSkipped('This URL triggers a curl SSL error on Travis');
-        $this->assertRequestIsOk('video', ['url' => 'http://html5demos.com/video']);
-    }
-
-    /**
      * Test the video() function with audio conversion.
      *
      * @return void
@@ -261,7 +279,10 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertRequestIsRedirect(
             'video',
-            ['url' => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover', 'audio' => true]
+            [
+                'url'   => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover',
+                'audio' => true,
+            ]
         );
     }
 
@@ -298,12 +319,12 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testVideoWithStream()
     {
-        $config = new Config(['stream' => true]);
-        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU'], $config);
+        $this->config->stream = true;
+        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU'], $this->config);
         $this->assertRequestIsOk(
             'video',
             ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true],
-            $config
+            $this->config
         );
     }
 
@@ -371,10 +392,11 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithStream()
     {
+        $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
             ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU'],
-            new Config(['stream' => true])
+            $this->config
         );
     }
 
@@ -385,10 +407,14 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithM3uStream()
     {
+        $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
-            ['url' => 'https://twitter.com/verge/status/813055465324056576/video/1'],
-            new Config(['stream' => true])
+            [
+                'url'    => 'https://twitter.com/verge/status/813055465324056576/video/1',
+                'format' => 'hls-2176',
+            ],
+            $this->config
         );
     }
 
@@ -399,10 +425,11 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithRtmpStream()
     {
+        $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
             ['url' => 'http://www.canalc2.tv/video/12163', 'format' => 'rtmp'],
-            new Config(['stream' => true])
+            $this->config
         );
     }
 
@@ -413,13 +440,14 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirectWithRemux()
     {
+        $this->config->remux = true;
         $this->assertRequestIsOk(
             'redirect',
             [
                 'url'    => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
                 'format' => 'bestvideo+bestaudio',
             ],
-            new Config(['remux' => true])
+            $this->config
         );
     }
 
@@ -477,13 +505,15 @@ class FrontControllerTest extends \PHPUnit_Framework_TestCase
      * Test the redirect() function with a playlist stream.
      *
      * @return void
+     * @requires OS Linux
      */
     public function testRedirectWithPlaylist()
     {
+        $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
             ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC'],
-            new Config(['stream' => true])
+            $this->config
         );
     }
 
