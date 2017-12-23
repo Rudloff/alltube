@@ -5,7 +5,7 @@
 
 namespace Alltube;
 
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 /**
  * Class used to manage locales.
@@ -57,8 +57,7 @@ class LocaleManager
     public function getSupportedLocales()
     {
         $return = [];
-        $builder = new ProcessBuilder(['locale', '-a']);
-        $process = $builder->getProcess();
+        $process = new Process(['locale', '-a']);
         $process->run();
         $installedLocales = explode(PHP_EOL, trim($process->getOutput()));
         foreach ($this->supportedLocales as $supportedLocale) {

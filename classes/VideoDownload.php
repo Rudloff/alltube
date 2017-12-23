@@ -6,7 +6,7 @@
 namespace Alltube;
 
 use Chain\Chain;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 /**
  * Extract info about videos.
@@ -21,13 +21,6 @@ class VideoDownload
     private $config;
 
     /**
-     * ProcessBuilder instance used to call Python.
-     *
-     * @var ProcessBuilder
-     */
-    private $procBuilder;
-
-    /**
      * VideoDownload constructor.
      *
      * @throws \Exception If youtube-dl is missing
@@ -40,16 +33,27 @@ class VideoDownload
         } else {
             $this->config = Config::getInstance();
         }
-        $this->procBuilder = new ProcessBuilder();
         if (!is_file($this->config->youtubedl)) {
             throw new \Exception("Can't find youtube-dl at ".$this->config->youtubedl);
         } elseif (!$this->checkCommand([$this->config->python, '--version'])) {
             throw new \Exception("Can't find Python at ".$this->config->python);
         }
-        $this->procBuilder->setPrefix(
+    }
+
+    /**
+     * Return a youtube-dl process with the specified arguments
+     *
+     * @param string[] $arguments Arguments
+     *
+     * @return Process
+     */
+    private function getProcess(array $arguments)
+    {
+        return new Process(
             array_merge(
                 [$this->config->python, $this->config->youtubedl],
-                $this->config->params
+                $this->config->params,
+                $arguments
             )
         );
     }
@@ -80,24 +84,21 @@ class VideoDownload
      */
     private function getProp($url, $format = null, $prop = 'dump-json', $password = null)
     {
-        $this->procBuilder->setArguments(
-            [
-                '--'.$prop,
-                $url,
-            ]
-        );
+        $arguments = [
+            '--'.$prop,
+            $url
+        ];
         if (isset($format)) {
-            $this->procBuilder->add('-f '.$format);
+            $arguments[] = '-f '.$format;
         }
         if (isset($password)) {
-            $this->procBuilder->add('--video-password');
-            $this->procBuilder->add($password);
+            $arguments[] = '--video-password';
+            $arguments[] = $password;
         }
 
+        $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
-        $this->procBuilder->setEnv('QT_QPA_PLATFORM', 'offscreen');
-
-        $process = $this->procBuilder->getProcess();
+        $process->setEnv(['QT_QPA_PLATFORM'=>'offscreen']);
         $process->run();
         if (!$process->isSuccessful()) {
             $errorOutput = trim($process->getErrorOutput());
@@ -196,15 +197,18 @@ class VideoDownload
     }
 
     /**
-     * Add options to a process builder running rtmp.
+     * Return arguments used to run rtmp for a specific video.
      *
-     * @param ProcessBuilder $builder Process builder
-     * @param object         $video   Video object returned by youtube-dl
+     * @param object $video Video object returned by youtube-dl
      *
-     * @return ProcessBuilder
+     * @return array
      */
-    private function addOptionsToRtmpProcess(ProcessBuilder $builder, $video)
+    private function getRtmpProcessArguments(\stdClass $video)
     {
+        $arguments = [
+            $this->config->rtmpdump,
+            '-q',
+        ];
         foreach ([
             'url' => 'rtmp',
             'webpage_url' => 'pageUrl',
@@ -214,12 +218,12 @@ class VideoDownload
             'app' => 'app',
         ] as $property => $option) {
             if (isset($video->{$property})) {
-                $builder->add('--'.$option);
-                $builder->add($video->{$property});
+                $arguments[] = '--'.$option;
+                $arguments[] =  $video->{$property};
             }
         }
 
-        return $builder;
+        return $arguments;
     }
 
     /**
@@ -236,21 +240,15 @@ class VideoDownload
         if (!$this->checkCommand([$this->config->rtmpdump, '--help'])) {
             throw(new \Exception('Can\'t find rtmpdump'));
         }
-        $builder = new ProcessBuilder(
-            [
-                $this->config->rtmpdump,
-                '-q',
-            ]
-        );
-        $builder = $this->addOptionsToRtmpProcess($builder, $video);
+        $arguments = $this->getRtmpProcessArguments($video);
         if (isset($video->rtmp_conn)) {
             foreach ($video->rtmp_conn as $conn) {
-                $builder->add('--conn');
-                $builder->add($conn);
+                $arguments[] = '--conn';
+                $arguments[] =  $conn;
             }
         }
 
-        return $builder->getProcess();
+        return new Process($arguments);
     }
 
     /**
@@ -262,8 +260,7 @@ class VideoDownload
      */
     private function checkCommand(array $command)
     {
-        $builder = ProcessBuilder::create($command);
-        $process = $builder->getProcess();
+        $process = new Process($command);
         $process->run();
 
         return $process->isSuccessful();
@@ -299,9 +296,7 @@ class VideoDownload
             $arguments[] = $this->getProp(null, null, 'dump-user-agent');
         }
 
-        $builder = ProcessBuilder::create($arguments);
-
-        return $builder->getProcess();
+        return new Process($arguments);
     }
 
     /**
@@ -358,7 +353,7 @@ class VideoDownload
             throw(new \Exception('Can\'t find avconv or ffmpeg'));
         }
 
-        $procBuilder = ProcessBuilder::create(
+        $process = new Process(
             [
                 $this->config->avconv,
                 '-v', 'quiet',
@@ -371,7 +366,7 @@ class VideoDownload
             ]
         );
 
-        $stream = popen($procBuilder->getProcess()->getCommandLine(), 'r');
+        $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
             throw new \Exception('Could not open popen stream.');
         }
@@ -390,7 +385,7 @@ class VideoDownload
      */
     public function getRemuxStream(array $urls)
     {
-        $procBuilder = ProcessBuilder::create(
+        $process = new Process(
             [
                 $this->config->avconv,
                 '-v', 'quiet',
@@ -404,7 +399,7 @@ class VideoDownload
             ]
         );
 
-        $stream = popen($procBuilder->getProcess()->getCommandLine(), 'r');
+        $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
             throw new \Exception('Could not open popen stream.');
         }
