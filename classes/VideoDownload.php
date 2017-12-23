@@ -41,7 +41,7 @@ class VideoDownload
     }
 
     /**
-     * Return a youtube-dl process with the specified arguments
+     * Return a youtube-dl process with the specified arguments.
      *
      * @param string[] $arguments Arguments
      *
@@ -86,7 +86,7 @@ class VideoDownload
     {
         $arguments = [
             '--'.$prop,
-            $url
+            $url,
         ];
         if (isset($format)) {
             $arguments[] = '-f '.$format;
@@ -219,7 +219,7 @@ class VideoDownload
         ] as $property => $option) {
             if (isset($video->{$property})) {
                 $arguments[] = '--'.$option;
-                $arguments[] =  $video->{$property};
+                $arguments[] = $video->{$property};
             }
         }
 
@@ -244,7 +244,7 @@ class VideoDownload
         if (isset($video->rtmp_conn)) {
             foreach ($video->rtmp_conn as $conn) {
                 $arguments[] = '--conn';
-                $arguments[] =  $conn;
+                $arguments[] = $conn;
             }
         }
 
