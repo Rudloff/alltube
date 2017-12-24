@@ -60,6 +60,8 @@ class PlaylistArchiveStream extends TarArchive
 
     /**
      * PlaylistArchiveStream constructor.
+     *
+     * @param Config $config Config instance.
      */
     public function __construct(Config $config = null)
     {

@@ -22,6 +22,8 @@ class VideoDownload
     /**
      * VideoDownload constructor.
      *
+     * @param Config $config Config instance.
+     *
      * @throws \Exception If youtube-dl is missing
      * @throws \Exception If Python is missing
      */
@@ -249,11 +251,11 @@ class VideoDownload
     /**
      * Get a process that runs avconv in order to convert a video to MP3.
      *
-     * @param object $url Video object returned by youtube-dl
+     * @param object $video Video object returned by youtube-dl
      *
      * @throws \Exception If avconv/ffmpeg is missing
      *
-     * @return \Symfony\Component\Process\Process Process
+     * @return Process Process
      */
     private function getAvconvMp3Process(\stdClass $video)
     {
