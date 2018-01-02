@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: Pierre Rudloff <contact@rudloff.pro>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_BR\n"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr ""
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr ""
+
+#: templates/playlist.tpl:5
+msgid "Videos extracted from"
+msgstr ""
+
+#: templates/playlist.tpl:7
+msgid ":"
+msgstr ""
+
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:83
+#: templates/video.tpl:86 templates/index.tpl:19
+msgid "Download"
+msgstr ""
+
+#: templates/playlist.tpl:27
+msgid "More options"
+msgstr ""
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr ""
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr ""
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr ""
+
+#: templates/extractors.tpl:4
+msgid "Supported websites"
+msgstr ""
+
+#: templates/video.tpl:6
+msgid "You are going to download"
+msgstr ""
+
+#: templates/video.tpl:24
+msgid "Available formats:"
+msgstr ""
+
+#: templates/video.tpl:29
+msgid "Generic formats"
+msgstr ""
+
+#: templates/video.tpl:32
+msgid "Best"
+msgstr ""
+
+#: templates/video.tpl:37
+msgid "Remux best video with best audio"
+msgstr ""
+
+#: templates/video.tpl:41
+msgid "Worst"
+msgstr ""
+
+#: templates/video.tpl:44
+msgid "Detailed formats"
+msgstr ""
+
+#: templates/inc/footer.tpl:4
+msgid "Code by"
+msgstr ""
+
+#: templates/inc/footer.tpl:6
+msgid "Design by"
+msgstr ""
+
+#: templates/inc/footer.tpl:12
+msgid "AllTube Download on Facebook"
+msgstr ""
+
+#: templates/inc/footer.tpl:12
+msgid "Like us on Facebook"
+msgstr ""
+
+#: templates/inc/footer.tpl:14
+msgid "Get the code"
+msgstr ""
+
+#: templates/inc/footer.tpl:16
+msgid "Based on"
+msgstr ""
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr ""
+
+#: templates/inc/header.tpl:21
+msgid "Share on Twitter"
+msgstr ""
+
+#: templates/inc/header.tpl:23
+msgid "Share on Facebook"
+msgstr ""
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr ""
+
+#: templates/index.tpl:24
+msgid "Audio only (MP3)"
+msgstr ""
+
+#: templates/index.tpl:29
+msgid "See all supported websites"
+msgstr ""
+
+#: templates/index.tpl:31
+msgid "Drag this to your bookmarks bar:"
+msgstr ""
+
+#: templates/index.tpl:32
+msgid "Bookmarklet"
+msgstr ""
