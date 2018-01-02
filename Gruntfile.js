@@ -8,13 +8,6 @@ module.exports = function (grunt) {
                     options: {}
                 }
             },
-            uglify: {
-                combine: {
-                    files: {
-                        'dist/main.js': ['js/*.js']
-                    }
-                }
-            },
             cssmin: {
                 combine: {
                     files: {
@@ -23,10 +16,6 @@ module.exports = function (grunt) {
                 }
             },
             watch: {
-                scripts: {
-                    files: ['js/*.js'],
-                    tasks: ['uglify']
-                },
                 styles: {
                     files: ['css/*.css'],
                     tasks: ['cssmin']
@@ -121,7 +110,6 @@ module.exports = function (grunt) {
     );
 
     grunt.loadNpmTasks('grunt-githash');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
