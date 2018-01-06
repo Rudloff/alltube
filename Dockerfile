@@ -15,5 +15,5 @@ COPY resources/php.ini /usr/local/etc/php/
 COPY . /var/www/html/
 RUN php composer.phar install --prefer-dist
 RUN yarn install --prod
-RUN ./node_modules/.bin/grunt
+RUN yarn grunt
 ENV CONVERT=1
