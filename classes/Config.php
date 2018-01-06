@@ -100,14 +100,7 @@ class Config
     /**
      * Config constructor.
      *
-     * Available options:
-     * * youtubedl: youtube-dl binary path
-     * * python: Python binary path
-     * * avconv: avconv or ffmpeg binary path
-     * * params: Array of youtube-dl parameters
-     * * convert: Enable conversion?
-     *
-     * @param array $options Options
+     * @param array $options Options (see `config/config.example.yml` for available options)
      */
     public function __construct(array $options)
     {
