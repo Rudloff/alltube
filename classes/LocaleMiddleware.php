@@ -68,10 +68,10 @@ class LocaleMiddleware
         if (!isset($curLocale)) {
             if (isset($headers[0])) {
                 $this->localeManager->setLocale(
-                    AcceptLanguage::detect([$this, 'testLocale'], new Locale('en_US'), $headers[0])
+                    AcceptLanguage::detect([$this, 'testLocale'], new Locale('pt_BR'), $headers[0])
                 );
             } else {
-                $this->localeManager->setLocale(new Locale('en_US'));
+                $this->localeManager->setLocale(new Locale('pt_BR'));
             }
         }
 
