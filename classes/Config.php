@@ -111,11 +111,23 @@ class Config
                 }
             }
         }
-        if (getenv('CONVERT')) {
-            $this->convert = (bool) getenv('CONVERT');
-        }
-        if (getenv('PYTHON')) {
-            $this->python = getenv('PYTHON');
+        $this->getEnv();
+    }
+
+    /**
+     * Override options from environement variables.
+     * Supported environment variables: CONVERT, PYTHON, AUDIO_BITRATE.
+     *
+     * @return void
+     */
+    private function getEnv()
+    {
+        foreach (['CONVERT', 'PYTHON', 'AUDIO_BITRATE'] as $var) {
+            $env = getenv($var);
+            if ($env) {
+                $prop = lcfirst(str_replace('_', '', ucwords(strtolower($var), '_')));
+                $this->$prop = $env;
+            }
         }
     }
 
