@@ -1,7 +1,7 @@
 {include file="inc/head.tpl"}
 <div class="wrapper">
 <div itemscope itemtype="http://schema.org/VideoObject">
-<div class="main">
+<main class="main">
 {include file="inc/logo.tpl"}
 <p id="download_intro">{t}You are going to download{/t}<i itemprop="name">
     <a itemprop="url" id="video_link"
@@ -85,6 +85,6 @@
 {else}
     <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
 {/if}
-</div>
+</main>
 </div>
 {include file="inc/footer.tpl"}

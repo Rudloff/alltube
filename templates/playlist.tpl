@@ -1,6 +1,6 @@
 {include file="inc/head.tpl"}
 <div class="wrapper">
-<div class="main">
+<main class="main">
 {include file="inc/logo.tpl"}
 <p>{t}Videos extracted from{/t} {if isset($video->title)}<i>
     <a href="{$video->webpage_url}">
@@ -28,5 +28,5 @@
     </div>
 {/foreach}
 
-</div>
+</main>
 {include file="inc/footer.tpl"}

@@ -1,6 +1,6 @@
 {include file='inc/head.tpl'}
 {include file='inc/header.tpl'}
-<div class="main">
+<main class="main">
     <div><img class="logo" src="{base_url}/img/logo.png"
     alt="AllTube Download" width="328" height="284"></div>
     <form action="{path_for name="video"}">
@@ -32,5 +32,5 @@
         <a class="bookmarklet small-font" href="javascript:window.location='{$domain}{path_for name='video'}?url='+encodeURIComponent(location.href);">{t}Bookmarklet{/t}</a>
     </div>
 
-</div>
+</main>
 {include file='inc/footer.tpl'}

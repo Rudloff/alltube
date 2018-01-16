@@ -1,6 +1,6 @@
 {include file='inc/head.tpl'}
 <div class="wrapper">
-    <div class="main">
+    <main class="main">
         {include file="inc/logo.tpl"}
         <h2>{t}This video is protected{/t}</h2>
         <p>{t}You need a password in order to download this video.{/t}</p>
@@ -9,5 +9,5 @@
             <br/><br/>
             <input class="downloadBtn" type="submit" value="{t}Download{/t}" />
         </form>
-    </div>
+    </main>
 {include file='inc/footer.tpl'}
