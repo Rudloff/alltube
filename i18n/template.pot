@@ -17,8 +17,8 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:83
-#: templates/video.tpl:86 templates/index.tpl:19
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:97
+#: templates/video.tpl:100 templates/index.tpl:19
 msgid "Download"
 msgstr ""
 
@@ -68,6 +68,14 @@ msgstr ""
 
 #: templates/video.tpl:44
 msgid "Detailed formats"
+msgstr ""
+
+#: templates/video.tpl:86
+msgid "Convert into a custom format:"
+msgstr ""
+
+#: templates/video.tpl:94
+msgid "kbit/s audio"
 msgstr ""
 
 #: templates/inc/footer.tpl:4

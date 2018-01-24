@@ -556,6 +556,10 @@ h1 {
     font-family:monospace;
 }
 
+.customBitrate {
+    width: 6ex;
+}
+
 .locales {
     float: left;
     padding-left: 1em;

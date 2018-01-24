@@ -15,6 +15,12 @@ params:
 # True to enable audio conversion
 convert: false
 
+# True to enable advanced conversion mode
+convertAdvanced: false
+
+# List of formats available in advanced conversion mode
+convertAdvancedFormats: [mp3, avi, flv, wav]
+
 # Path to your avconv or ffmpeg binary
 avconv: vendor/bin/ffmpeg
 

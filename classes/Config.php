@@ -48,6 +48,20 @@ class Config
     public $convert = false;
 
     /**
+     * Enable advanced conversion mode.
+     *
+     * @var bool
+     */
+    public $convertAdvanced = false;
+
+    /**
+     * List of formats available in advanced conversion mode.
+     *
+     * @var array
+     */
+    public $convertAdvancedFormats = ['mp3', 'avi', 'flv', 'wav'];
+
+    /**
      * avconv or ffmpeg binary path.
      *
      * @var string

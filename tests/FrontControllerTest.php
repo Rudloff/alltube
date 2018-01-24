@@ -518,6 +518,27 @@ class FrontControllerTest extends TestCase
     }
 
     /**
+     * Test the redirect() function with an advanced conversion.
+     *
+     * @return void
+     */
+    public function testRedirectWithAdvancedConversion()
+    {
+        $this->config->convertAdvanced = true;
+        $this->assertRequestIsOk(
+            'redirect',
+            [
+                'url'           => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
+                'format'        => 'best',
+                'customConvert' => 'on',
+                'customBitrate' => 32,
+                'customFormat'  => 'flv',
+            ],
+            $this->config
+        );
+    }
+
+    /**
      * Test the locale() function.
      *
      * @return void

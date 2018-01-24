@@ -485,7 +485,7 @@ class VideoDownloadTest extends TestCase
     }
 
     /**
-     * Test getPlaylistArchiveStream function without avconv.
+     * Test getPlaylistArchiveStream function.
      *
      * @return void
      * @requires OS Linux
@@ -497,5 +497,34 @@ class VideoDownloadTest extends TestCase
             'best'
         );
         $this->assertStream($this->download->getPlaylistArchiveStream($video, 'best'));
+    }
+
+    /**
+     * Test getConvertedStream function without avconv.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @dataProvider urlProvider
+     */
+    public function testGetConvertedStream($url, $format)
+    {
+        $this->assertStream($this->download->getConvertedStream($url, $format, 32, 'flv'));
+    }
+
+    /**
+     * Test getConvertedStream function with a M3U8 file.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @expectedException Exception
+     * @dataProvider m3uUrlProvider
+     */
+    public function testGetConvertedStreamM3uError($url, $format)
+    {
+        $this->download->getConvertedStream($url, $format, 32, 'flv');
     }
 }

@@ -79,7 +79,21 @@
                     {/if}
                 {/foreach}
             </optgroup>
+            <option value="{$format->format_id}">
         </select><br/><br/>
+        {if $config->convertAdvanced}
+            <input type="checkbox" name="customConvert" id="customConvert"/>
+            <label for="customConvert">{t}Convert into a custom format:{/t}</label>
+            <select title="Custom format" name="customFormat">
+                {foreach $config->convertAdvancedFormats as $format}
+                    <option>{$format}</option>
+                {/foreach}
+            </select>
+            with
+            <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"name="customBitrate" id="customBitrate" />
+            <label for="customBitrate">{t}kbit/s audio{/t}</label>
+            <br/><br/>
+        {/if}
         <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
     </form>
 {else}

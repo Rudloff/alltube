@@ -472,6 +472,45 @@ class FrontController
     }
 
     /**
+     * Return a converted video file.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param array    $params   GET query parameters
+     * @param string   $format   Requested source format
+     *
+     * @return Response HTTP response
+     */
+    private function getConvertedResponse(Request $request, Response $response, array $params, $format)
+    {
+        $password = $request->getParam('password');
+        $response = $response->withHeader(
+            'Content-Disposition',
+            'attachment; filename="'.
+            $this->download->getFileNameWithExtension(
+                $params['customFormat'],
+                $params['url'],
+                $format,
+                $password
+            ).'"'
+        );
+        $response = $response->withHeader('Content-Type', 'video/'.$params['customFormat']);
+
+        if ($request->isGet() || $request->isPost()) {
+            $process = $this->download->getConvertedStream(
+                $params['url'],
+                $format,
+                $params['customBitrate'],
+                $params['customFormat'],
+                $password
+            );
+            $response = $response->withBody(new Stream($process));
+        }
+
+        return $response;
+    }
+
+    /**
      * Redirect to video file.
      *
      * @param Request  $request  PSR-7 request
@@ -481,14 +520,18 @@ class FrontController
      */
     public function redirect(Request $request, Response $response)
     {
-        $url = $request->getQueryParam('url');
+        $params = $request->getQueryParams();
         $format = $this->getFormat($request);
-        if (isset($url)) {
+        if (isset($params['url'])) {
             try {
-                return $this->getRedirectResponse($url, $format, $response, $request);
+                if ($this->config->convertAdvanced && !is_null($request->getQueryParam('customConvert'))) {
+                    return $this->getConvertedResponse($request, $response, $params, $format);
+                }
+
+                return $this->getRedirectResponse($params['url'], $format, $response, $request);
             } catch (PasswordException $e) {
                 return $response->withRedirect(
-                    $this->container->get('router')->pathFor('video').'?url='.urlencode($url)
+                    $this->container->get('router')->pathFor('video').'?url='.urlencode($params['url'])
                 );
             } catch (\Exception $e) {
                 $response->getBody()->write($e->getMessage());

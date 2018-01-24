@@ -140,3 +140,17 @@ You then need to merge them together with a tool like ffmpeg.
 
 You can also enable the experimental remux mode
 that will merge the best video and the best audio format on the fly.
+
+## I want to convert videos to something other than MP3
+
+By default the `convert` option only allows converting to MP3,
+in order to keep things simple and ressources usage low.
+However, you can use the `convertAdvanced` option like this:
+
+```yaml
+convertAdvanced: true
+convertAdvancedFormats: [mp3, avi, flv, wav]
+```
+
+This will add new inputs on the download page
+that allow users to converted videos to other formats.

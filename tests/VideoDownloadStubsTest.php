@@ -124,4 +124,15 @@ class VideoDownloadStubsTest extends TestCase
         );
         $this->download->getPlaylistArchiveStream($video, 'best');
     }
+
+    /**
+     * Test getConvertedStream function with a buggy popen.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testGetConvertedStreamWithPopenError()
+    {
+        $this->download->getConvertedStream($this->url, 'best', 32, 'flv');
+    }
 }
