@@ -738,16 +738,16 @@
         },
         {
             "name": "pimple/pimple",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a"
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/4d45fb62d96418396ec58ba76e6f065bca16e10a",
-                "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
                 "shasum": ""
             },
             "require": {
@@ -784,7 +784,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2017-07-23T07:32:15+00:00"
+            "time": "2018-01-21T07:42:36+00:00"
         },
         {
             "name": "psr/container",
@@ -1139,16 +1139,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "bb3ef65d493a6d57297cad6c560ee04e2a8f5098"
+                "reference": "ff69f110c6b33fd33cd2089ba97d6112f44ef0ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/bb3ef65d493a6d57297cad6c560ee04e2a8f5098",
-                "reference": "bb3ef65d493a6d57297cad6c560ee04e2a8f5098",
+                "url": "https://api.github.com/repos/symfony/process/zipball/ff69f110c6b33fd33cd2089ba97d6112f44ef0ba",
+                "reference": "ff69f110c6b33fd33cd2089ba97d6112f44ef0ba",
                 "shasum": ""
             },
             "require": {
@@ -1184,20 +1184,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "afe0cd38486505c9703707707d91450cfc1bd536"
+                "reference": "25c192f25721a74084272671f658797d9e0e0146"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/afe0cd38486505c9703707707d91450cfc1bd536",
-                "reference": "afe0cd38486505c9703707707d91450cfc1bd536",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/25c192f25721a74084272671f658797d9e0e0146",
+                "reference": "25c192f25721a74084272671f658797d9e0e0146",
                 "shasum": ""
             },
             "require": {
@@ -1242,7 +1242,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-11T20:38:23+00:00"
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "zonuexe/http-accept-language",
@@ -1357,16 +1357,16 @@
         },
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v127",
+            "version": "v130",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "4428a20862137d682c9c15434c82a65c20541f97"
+                "reference": "1bbbc45da0f80dbb75606972c26236172b7d724c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/4428a20862137d682c9c15434c82a65c20541f97",
-                "reference": "4428a20862137d682c9c15434c82a65c20541f97",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/1bbbc45da0f80dbb75606972c26236172b7d724c",
+                "reference": "1bbbc45da0f80dbb75606972c26236172b7d724c",
                 "shasum": ""
             },
             "bin": [
@@ -1397,7 +1397,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2017-11-30T16:10:52+00:00"
+            "time": "2018-01-11T17:45:21+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2055,16 +2055,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "5.0.5",
+            "version": "5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "283b9f4f670e3a6fd6c4ff95c51a952eb5c75933"
+                "reference": "33fd41a76e746b8fa96d00b49a23dadfa8334cdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/283b9f4f670e3a6fd6c4ff95c51a952eb5c75933",
-                "reference": "283b9f4f670e3a6fd6c4ff95c51a952eb5c75933",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/33fd41a76e746b8fa96d00b49a23dadfa8334cdf",
+                "reference": "33fd41a76e746b8fa96d00b49a23dadfa8334cdf",
                 "shasum": ""
             },
             "require": {
@@ -2110,7 +2110,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-12-10T08:01:53+00:00"
+            "time": "2018-01-06T05:45:45+00:00"
         },
         {
             "name": "rg3/youtube-dl",
@@ -2170,16 +2170,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f"
+                "reference": "11c07feade1d65453e06df3b3b90171d6d982087"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
-                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/11c07feade1d65453e06df3b3b90171d6d982087",
+                "reference": "11c07feade1d65453e06df3b3b90171d6d982087",
                 "shasum": ""
             },
             "require": {
@@ -2230,7 +2230,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-12-22T14:50:35+00:00"
+            "time": "2018-01-12T06:34:42+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -2794,16 +2794,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "757074cf71b952ce9e75b557538948811c2bf006"
+                "reference": "545be7e78ccbec43e599f10ff7500d0b09eda9d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/757074cf71b952ce9e75b557538948811c2bf006",
-                "reference": "757074cf71b952ce9e75b557538948811c2bf006",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/545be7e78ccbec43e599f10ff7500d0b09eda9d0",
+                "reference": "545be7e78ccbec43e599f10ff7500d0b09eda9d0",
                 "shasum": ""
             },
             "require": {
@@ -2859,7 +2859,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-12-11T22:06:16+00:00"
+            "time": "2018-01-03T17:14:19+00:00"
         },
         {
             "name": "theseer/tokenizer",
