@@ -19,8 +19,8 @@ msgstr "Vidéos extraites depuis"
 msgid ":"
 msgstr " :"
 
-#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:83
-#: templates/video.tpl:86 templates/index.tpl:18
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:97
+#: templates/video.tpl:100 templates/index.tpl:19
 msgid "Download"
 msgstr "Télécharger"
 
@@ -108,19 +108,19 @@ msgstr "Partager sur Facebook"
 msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
 msgstr "Copiez ici l'URL de votre vidéo (Youtube, Dailymotion, etc.)"
 
-#: templates/index.tpl:23
+#: templates/index.tpl:24
 msgid "Audio only (MP3)"
 msgstr "Audio uniquement (MP3)"
 
-#: templates/index.tpl:28
+#: templates/index.tpl:29
 msgid "See all supported websites"
 msgstr "Voir tous les sites supportés"
 
-#: templates/index.tpl:30
+#: templates/index.tpl:31
 msgid "Drag this to your bookmarks bar:"
 msgstr "Glissez ce lien dans votre barre de favoris :"
 
-#: templates/index.tpl:31
+#: templates/index.tpl:32
 msgid "Bookmarklet"
 msgstr "Bookmarklet"
 
@@ -131,4 +131,16 @@ msgstr "Changer de langue"
 #: templates/error.tpl:5
 msgid "An error occurred"
 msgstr "Une erreur est survenue"
+
+#: templates/video.tpl:86
+msgid "Convert into a custom format:"
+msgstr "Convertir dans un format personnalisé :"
+
+#: templates/video.tpl:94
+msgid "kbit/s audio"
+msgstr "kbit/s"
+
+#: templates/video.tpl:92
+msgid "with"
+msgstr "avec de l'audio à"
 
