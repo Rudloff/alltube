@@ -89,7 +89,7 @@
                     <option>{$format}</option>
                 {/foreach}
             </select>
-            with
+            {t}with{/t}
             <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"name="customBitrate" id="customBitrate" />
             <label for="customBitrate">{t}kbit/s audio{/t}</label>
             <br/><br/>

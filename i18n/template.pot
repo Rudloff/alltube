@@ -74,6 +74,10 @@ msgstr ""
 msgid "Convert into a custom format:"
 msgstr ""
 
+#: templates/video.tpl:92
+msgid "with"
+msgstr ""
+
 #: templates/video.tpl:94
 msgid "kbit/s audio"
 msgstr ""
