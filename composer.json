@@ -1,7 +1,7 @@
 {
   "name": "rudloff/alltube",
   "description": "HTML GUI for youtube-dl",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-only",
   "homepage": "http://alltubedownload.net/",
   "type": "project",
   "require": {
