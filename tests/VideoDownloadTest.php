@@ -197,6 +197,12 @@ class VideoDownloadTest extends TestCase
                 'f4v',
                 'edgefcs.net',
             ],
+            [
+                'https://openload.co/embed/qTsjMEUtN4U', 'best[protocol^=http]',
+                'aup-the-lego-ninjago-movie-2017-1508463762.MP4.mp4-qTsjMEUtN4U',
+                'mp4',
+                'openload.co'
+            ]
         ];
     }
 
@@ -282,7 +288,7 @@ class VideoDownloadTest extends TestCase
         $this->assertObjectHasAttribute('ext', $info);
         $this->assertObjectHasAttribute('title', $info);
         $this->assertObjectHasAttribute('extractor_key', $info);
-        $this->assertObjectHasAttribute('formats', $info);
+        $this->assertObjectHasAttribute('format', $info);
     }
 
     /**

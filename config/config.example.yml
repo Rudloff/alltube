@@ -27,6 +27,9 @@ avconv: vendor/bin/ffmpeg
 # avconv/ffmpeg logging level.
 avconvVerbosity: error
 
+# Path to the directory that contains the phantomjs binary.
+phantomjsDir: vendor/bin/
+
 # True to disable URL rewriting
 uglyUrls: false
 
