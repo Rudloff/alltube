@@ -2,7 +2,7 @@
 install:
   - sc config wuauserv start= auto
   - net start wuauserv
-  - cinst php composer ffmpeg
+  - cinst php composer ffmpeg phantomjs
   - refreshenv
   - copy C:\tools\php72\php.ini-development C:\tools\php72\php.ini
   - echo extension=C:\tools\php72\ext\php_gmp.dll >> C:\tools\php72\php.ini

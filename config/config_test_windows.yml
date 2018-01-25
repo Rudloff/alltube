@@ -3,6 +3,7 @@ convert: false
 python: C:\Python36\python.exe
 avconv: C:\ProgramData\chocolatey\bin\ffmpeg.exe
 avconvVerbosity: fatal
+phantomjsDir: C:\ProgramData\chocolatey\bin\
 youtubedl: C:\Python36\Lib\site-packages\youtube_dl\__main__.py
 params:
     - --no-warnings
