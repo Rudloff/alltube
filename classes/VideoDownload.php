@@ -99,7 +99,7 @@ class VideoDownload
 
         $process = $this->getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
-        $process->setEnv(['QT_QPA_PLATFORM'=>'offscreen']);
+        $process->setEnv(['QT_QPA_PLATFORM'=>'phantom', 'PATH'=>$this->config->phantomjsDir]);
         $process->inheritEnvironmentVariables();
         $process->run();
         if (!$process->isSuccessful()) {
