@@ -201,8 +201,8 @@ class VideoDownloadTest extends TestCase
                 'https://openload.co/embed/qTsjMEUtN4U', 'best[protocol^=http]',
                 'aup-the-lego-ninjago-movie-2017-1508463762.MP4.mp4-qTsjMEUtN4U',
                 'mp4',
-                'openload.co'
-            ]
+                'openload.co',
+            ],
         ];
     }
 

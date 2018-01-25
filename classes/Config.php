@@ -70,6 +70,7 @@ class Config
 
     /**
      * Path to the directory that contains the phantomjs binary.
+     *
      * @var string
      */
     public $phantomjsDir = 'vendor/bin/';
