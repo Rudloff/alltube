@@ -47,6 +47,8 @@ class LocaleManager
         if (isset($cookieLocale)) {
             $this->setLocale(new Locale($cookieLocale));
         }
+        bindtextdomain('Alltube', __DIR__.'/../i18n/');
+        textdomain('Alltube');
     }
 
     /**

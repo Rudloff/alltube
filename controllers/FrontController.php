@@ -113,7 +113,7 @@ class FrontController
             [
                 'config'           => $this->config,
                 'class'            => 'index',
-                'description'      => 'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.',
+                'description'      => _('Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'),
                 'domain'           => $uri->getScheme().'://'.$uri->getAuthority(),
                 'canonical'        => $this->getCanonicalUrl($request),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
@@ -156,9 +156,9 @@ class FrontController
             [
                 'extractors'  => $this->download->listExtractors(),
                 'class'       => 'extractors',
-                'title'       => 'Supported websites',
-                'description' => 'List of all supported websites from which Alltube Download '.
-                    'can extract video or audio files',
+                'title'       => _('Supported websites'),
+                'description' => _('List of all supported websites from which Alltube Download '.
+                    'can extract video or audio files'),
                 'canonical' => $this->getCanonicalUrl($request),
                 'locale'    => $this->localeManager->getLocale(),
             ]
@@ -182,8 +182,8 @@ class FrontController
             'password.tpl',
             [
                 'class'       => 'password',
-                'title'       => 'Password prompt',
-                'description' => 'You need a password in order to download this video with Alltube Download',
+                'title'       => _('Password prompt'),
+                'description' => _('You need a password in order to download this video with Alltube Download'),
                 'canonical'   => $this->getCanonicalUrl($request),
                 'locale'      => $this->localeManager->getLocale(),
             ]
@@ -258,11 +258,11 @@ class FrontController
         } else {
             $template = 'video.tpl';
         }
-        $title = 'Video download';
-        $description = 'Download video from '.$video->extractor_key;
+        $title = _('Video download');
+        $description = _('Download video from ').$video->extractor_key;
         if (isset($video->title)) {
             $title = $video->title;
-            $description = 'Download "'.$video->title.'" from '.$video->extractor_key;
+            $description = _('Download').' "'.$video->title.'" '._('from').' '.$video->extractor_key;
         }
         $this->view->render(
             $response,
@@ -325,7 +325,7 @@ class FrontController
             [
                 'errors'    => $exception->getMessage(),
                 'class'     => 'video',
-                'title'     => 'Error',
+                'title'     => _('Error'),
                 'canonical' => $this->getCanonicalUrl($request),
                 'locale'    => $this->localeManager->getLocale(),
             ]
@@ -397,7 +397,7 @@ class FrontController
     private function getRemuxStream(array $urls, $format, Response $response, Request $request)
     {
         if (!$this->config->remux) {
-            throw new \Exception('You need to enable remux mode to merge two formats.');
+            throw new \Exception(_('You need to enable remux mode to merge two formats.'));
         }
         $stream = $this->download->getRemuxStream($urls);
         $response = $response->withHeader('Content-Type', 'video/x-matroska');
@@ -464,7 +464,7 @@ class FrontController
             );
         } else {
             if (empty($videoUrls[0])) {
-                throw new \Exception("Can't find URL of video");
+                throw new \Exception(_("Can't find URL of video."));
             }
 
             return $response->withRedirect($videoUrls[0]);
