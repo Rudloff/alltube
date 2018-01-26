@@ -21,6 +21,7 @@ msgstr " :"
 
 #: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:97
 #: templates/video.tpl:100 templates/index.tpl:19
+#: controllers/FrontController.php:265
 msgid "Download"
 msgstr "Télécharger"
 
@@ -40,7 +41,7 @@ msgstr "L'accès à cette vidéo nécessite un mot de passe."
 msgid "Video password"
 msgstr "Mot de passe de la vidéo"
 
-#: templates/extractors.tpl:4
+#: templates/extractors.tpl:4 controllers/FrontController.php:159
 msgid "Supported websites"
 msgstr "Sites web supportés"
 
@@ -143,4 +144,66 @@ msgstr "kbit/s"
 #: templates/video.tpl:92
 msgid "with"
 msgstr "avec de l'audio à"
+
+#: classes/VideoDownload.php:114
+msgid "Wrong password"
+msgstr "Mauvais mot de passe"
+
+#: classes/VideoDownload.php:270 classes/VideoDownload.php:353
+msgid "Can't find avconv or ffmpeg."
+msgstr "Impossible de trouver avconv ou ffmpeg."
+
+#: classes/VideoDownload.php:326 classes/VideoDownload.php:485
+msgid "Conversion of M3U8 files is not supported."
+msgstr "La conversion des fichiers M3U8 n'est pas possible."
+
+#: classes/VideoDownload.php:334 classes/VideoDownload.php:371
+#: classes/VideoDownload.php:404 classes/VideoDownload.php:437
+#: classes/VideoDownload.php:493
+msgid "Could not open popen stream."
+msgstr "Impossible d'ouvrir le flux popen."
+
+#: classes/VideoDownload.php:461
+msgid "Could not open fopen stream."
+msgstr "Impossible d'ouvrir le flux fopen."
+
+#: controllers/FrontController.php:116
+msgid "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
+msgstr "Téléchargez facilement des vidéos depuis Youtube, Dailymotion, Vimeo et d'autres sites web."
+
+#: controllers/FrontController.php:160
+msgid "List of all supported websites from which Alltube Download can extract video or audio files"
+msgstr "Liste de tous les sites web depuis lesquels Alltube Download peut extraire des fichiers vidéo ou audio"
+
+#: controllers/FrontController.php:185
+msgid "Password prompt"
+msgstr "Demande de mot de passe"
+
+#: controllers/FrontController.php:186
+msgid "You need a password in order to download this video with Alltube Download"
+msgstr "Vous avez besoin d'un mot de passe pour télécharger cette vidéo avec Alltube Download"
+
+#: controllers/FrontController.php:261
+msgid "Video download"
+msgstr "Téléchargement d'une vidéo"
+
+#: controllers/FrontController.php:262
+msgid "Download video from "
+msgstr "Téléchargement d'une vidéo depuis "
+
+#: controllers/FrontController.php:265
+msgid "from"
+msgstr "depuis"
+
+#: controllers/FrontController.php:328
+msgid "Error"
+msgstr "Erreur"
+
+#: controllers/FrontController.php:400
+msgid "You need to enable remux mode to merge two formats."
+msgstr "Vous devez activer le mode remux pour fusionner deux formats."
+
+#: controllers/FrontController.php:467
+msgid "Can't find URL of video."
+msgstr "Impossible de trouver l'URL de la vidéo."
 
