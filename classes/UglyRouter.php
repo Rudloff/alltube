@@ -5,7 +5,9 @@
 
 namespace Alltube;
 
+use InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
 use Slim\Router;
 
 /**
@@ -43,8 +45,8 @@ class UglyRouter extends Router
      * @param array  $data        Named argument replacement data
      * @param array  $queryParams Optional query string parameters
      *
-     * @throws \RuntimeException         If named route does not exist
-     * @throws \InvalidArgumentException If required data not provided
+     * @throws RuntimeException         If named route does not exist
+     * @throws InvalidArgumentException If required data not provided
      *
      * @return string
      */

@@ -126,7 +126,7 @@ class VideoDownloadTest extends TestCase
      * Test getURL function with a protected video and no password.
      *
      * @return void
-     * @expectedException \Alltube\PasswordException
+     * @expectedException Alltube\PasswordException
      */
     public function testGetURLWithMissingPassword()
     {

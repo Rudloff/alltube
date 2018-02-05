@@ -27,7 +27,7 @@ class LocaleManagerTest extends TestCase
     protected function setUp()
     {
         $this->localeManager = new LocaleManager();
-        $_SESSION['Alltube\LocaleManager']['locale'] = 'foo_BAR';
+        $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
     }
 
     /**
