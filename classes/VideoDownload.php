@@ -110,12 +110,13 @@ class VideoDownload
         $process->run();
         if (!$process->isSuccessful()) {
             $errorOutput = trim($process->getErrorOutput());
+            $exitCode = $process->getExitCode();
             if ($errorOutput == 'ERROR: This video is protected by a password, use the --video-password option') {
-                throw new PasswordException($errorOutput);
+                throw new PasswordException($errorOutput, $exitCode);
             } elseif (substr($errorOutput, 0, 21) == 'ERROR: Wrong password') {
-                throw new Exception(_('Wrong password'));
+                throw new Exception(_('Wrong password'), $exitCode);
             } else {
-                throw new Exception($errorOutput);
+                throw new Exception($errorOutput, $exitCode);
             }
         } else {
             return trim($process->getOutput());
