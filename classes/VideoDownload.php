@@ -269,7 +269,7 @@ class VideoDownload
     private function getAvconvProcess(stdClass $video, $audioBitrate, $filetype = 'mp3', $audioOnly = true)
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw(new Exception(_('Can\'t find avconv or ffmpeg.')));
+            throw new Exception(_('Can\'t find avconv or ffmpeg.'));
         }
 
         if ($video->protocol == 'rtmp') {
@@ -325,7 +325,7 @@ class VideoDownload
     {
         $video = $this->getJSON($url, $format, $password);
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
-            throw(new Exception(_('Conversion of M3U8 files is not supported.')));
+            throw new Exception(_('Conversion of M3U8 files is not supported.'));
         }
 
         $avconvProc = $this->getAvconvProcess($video, $this->config->audioBitrate);
@@ -352,7 +352,7 @@ class VideoDownload
     public function getM3uStream(stdClass $video)
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw(new Exception(_('Can\'t find avconv or ffmpeg.')));
+            throw new Exception(_('Can\'t find avconv or ffmpeg.'));
         }
 
         $process = new Process(
@@ -484,7 +484,7 @@ class VideoDownload
     {
         $video = $this->getJSON($url, $format, $password);
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
-            throw(new Exception(_('Conversion of M3U8 files is not supported.')));
+            throw new Exception(_('Conversion of M3U8 files is not supported.'));
         }
 
         $avconvProc = $this->getAvconvProcess($video, $audioBitrate, $filetype, false);
