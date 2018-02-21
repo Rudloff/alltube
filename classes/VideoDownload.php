@@ -270,7 +270,7 @@ class VideoDownload
     private function getAvconvProcess(stdClass $video, $audioBitrate, $filetype = 'mp3', $audioOnly = true)
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw new Exception(_('Can\'t find avconv or ffmpeg.'));
+            throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
         }
 
         if ($video->protocol == 'rtmp') {
@@ -353,7 +353,7 @@ class VideoDownload
     public function getM3uStream(stdClass $video)
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw new Exception(_('Can\'t find avconv or ffmpeg.'));
+            throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
         }
 
         $process = new Process(

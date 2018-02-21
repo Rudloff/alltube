@@ -19,7 +19,7 @@ msgstr ""
 
 #: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:97
 #: templates/video.tpl:100 templates/index.tpl:19
-#: controllers/FrontController.php:265
+#: controllers/FrontController.php:270
 msgid "Download"
 msgstr ""
 
@@ -39,7 +39,7 @@ msgstr ""
 msgid "Video password"
 msgstr ""
 
-#: templates/extractors.tpl:4 controllers/FrontController.php:159
+#: templates/extractors.tpl:4 controllers/FrontController.php:164
 msgid "Supported websites"
 msgstr ""
 
@@ -139,68 +139,68 @@ msgstr ""
 msgid "Bookmarklet"
 msgstr ""
 
-#: classes/VideoDownload.php:114
+#: classes/VideoDownload.php:117
 msgid "Wrong password"
 msgstr ""
 
-#: classes/VideoDownload.php:270 classes/VideoDownload.php:353
-msgid "Can't find avconv or ffmpeg."
+#: classes/VideoDownload.php:273 classes/VideoDownload.php:356
+msgid "Can't find avconv or ffmpeg at "
 msgstr ""
 
-#: classes/VideoDownload.php:326 classes/VideoDownload.php:485
+#: classes/VideoDownload.php:329 classes/VideoDownload.php:488
 msgid "Conversion of M3U8 files is not supported."
 msgstr ""
 
-#: classes/VideoDownload.php:334 classes/VideoDownload.php:371
-#: classes/VideoDownload.php:404 classes/VideoDownload.php:437
-#: classes/VideoDownload.php:493
+#: classes/VideoDownload.php:337 classes/VideoDownload.php:374
+#: classes/VideoDownload.php:407 classes/VideoDownload.php:440
+#: classes/VideoDownload.php:496
 msgid "Could not open popen stream."
 msgstr ""
 
-#: classes/VideoDownload.php:461
+#: classes/VideoDownload.php:464
 msgid "Could not open fopen stream."
 msgstr ""
 
-#: controllers/FrontController.php:116
+#: controllers/FrontController.php:121
 msgid ""
 "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
 msgstr ""
 
-#: controllers/FrontController.php:160
+#: controllers/FrontController.php:165
 msgid ""
 "List of all supported websites from which Alltube Download can extract video "
 "or audio files"
 msgstr ""
 
-#: controllers/FrontController.php:185
+#: controllers/FrontController.php:190
 msgid "Password prompt"
 msgstr ""
 
-#: controllers/FrontController.php:186
+#: controllers/FrontController.php:191
 msgid ""
 "You need a password in order to download this video with Alltube Download"
 msgstr ""
 
-#: controllers/FrontController.php:261
+#: controllers/FrontController.php:266
 msgid "Video download"
 msgstr ""
 
-#: controllers/FrontController.php:262
+#: controllers/FrontController.php:267
 msgid "Download video from "
 msgstr ""
 
-#: controllers/FrontController.php:265
+#: controllers/FrontController.php:270
 msgid "from"
 msgstr ""
 
-#: controllers/FrontController.php:328
+#: controllers/FrontController.php:333
 msgid "Error"
 msgstr ""
 
-#: controllers/FrontController.php:400
+#: controllers/FrontController.php:405
 msgid "You need to enable remux mode to merge two formats."
 msgstr ""
 
-#: controllers/FrontController.php:467
+#: controllers/FrontController.php:472
 msgid "Can't find URL of video."
 msgstr ""
