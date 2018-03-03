@@ -558,7 +558,7 @@ class FrontController
     private function getCanonicalUrl(Request $request)
     {
         $uri = $request->getUri();
-        $return = 'https://alltubedownload.net/';
+        $return = 'https://alltubedownload.net';
 
         $path = $uri->getPath();
         if ($path != '/') {
