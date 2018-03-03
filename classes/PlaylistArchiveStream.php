@@ -8,6 +8,7 @@
 namespace Alltube;
 
 use Barracuda\ArchiveStream\TarArchive;
+use GuzzleHttp\Client;
 
 /**
  * Class used to create a Tar archive from playlists and stream it to the browser.
@@ -33,7 +34,7 @@ class PlaylistArchiveStream extends TarArchive
     /**
      * Guzzle client.
      *
-     * @var \GuzzleHttp\Client
+     * @var Client
      */
     private $client;
 
@@ -65,7 +66,7 @@ class PlaylistArchiveStream extends TarArchive
      */
     public function __construct(Config $config = null)
     {
-        $this->client = new \GuzzleHttp\Client();
+        $this->client = new Client();
         $this->download = new VideoDownload($config);
     }
 

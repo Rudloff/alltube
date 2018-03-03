@@ -5,6 +5,7 @@
 
 namespace Alltube;
 
+use Exception;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -172,7 +173,7 @@ class Config
                  */
                 $options = [];
             } else {
-                throw new \Exception("Can't find config file at ".$yamlPath);
+                throw new Exception("Can't find config file at ".$yamlPath);
             }
             self::$instance = new self($options);
             self::$instance->file = $yamlfile;

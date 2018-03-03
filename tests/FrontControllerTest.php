@@ -9,6 +9,7 @@ use Alltube\Config;
 use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
 use Alltube\ViewFactory;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
@@ -348,7 +349,7 @@ class FrontControllerTest extends TestCase
      */
     public function testError()
     {
-        $result = $this->controller->error($this->request, $this->response, new \Exception('foo'));
+        $result = $this->controller->error($this->request, $this->response, new Exception('foo'));
         $this->assertTrue($result->isServerError());
     }
 
