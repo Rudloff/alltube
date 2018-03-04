@@ -31,8 +31,11 @@ you might want to specify the path to avconv/ffmpeg in your config file.)
 You should also ensure that the *templates_c* folder has the right permissions:
 
 ```bash
-chmod 777 templates_c/
+chmod 770 templates_c/
 ```
+
+(You need to adapt this to your permission model.
+You can find more information about this [in the Smarty documentation](https://www.smarty.net/docsv2/en/installing.smarty.basic.tpl#id2778738).)
 
 If your web server is Apache,
 you need to set the `AllowOverride` setting to `All` or `FileInfo`.
