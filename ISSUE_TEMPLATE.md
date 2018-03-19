@@ -8,9 +8,9 @@ Please answer these questions when reporting a new issue:
 
 **What is your web server (Apache, IIS, etc.)?**
 
-**What version of Alltube are you using?**
+**What version of AllTube are you using?**
 
-**How did you install Alltube (with Git or with a release package)?**
+**How did you install AllTube (with Git or with a release package)?**
 
 **What version of PHP are you using?**
 

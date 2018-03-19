@@ -1,8 +1,8 @@
-# Alltube Download
+# AllTube Download
 
 HTML GUI for youtube-dl ([alltubedownload.net](http://alltubedownload.net/))
 
-![Screenshot](img/screenshot.png "Alltube GUI screenshot")
+![Screenshot](img/screenshot.png "AllTube GUI screenshot")
 
 ## Setup
 
@@ -148,7 +148,7 @@ so that it points to your ffmpeg/avconv binary (`/usr/bin/avconv` on Debian/Ubun
 
 ## Use as library
 
-Alltube can also be used as a library to extract a video URL from a webpage.
+AllTube can also be used as a library to extract a video URL from a webpage.
 
 You can install it with:
 

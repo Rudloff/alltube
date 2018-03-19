@@ -30,7 +30,7 @@ You will also need to install `avconv` on your server:
 sudo apt-get install libav-tools
 ```
 
-## How do I deploy Alltube on Heroku?
+## How do I deploy AllTube on Heroku?
 
 Create a dyno with the following buildpacks:
 
@@ -50,12 +50,12 @@ Then push the code to Heroku and it should work out of the box.
 ## Why can't I download videos from some websites (e.g. Dailymotion)
 
 Some websites generate an unique video URL for each IP address.
-When using Alltube, the URL is generated for our server's IP address
+When using AllTube, the URL is generated for our server's IP address
 and your computer is not allowed to use it.
 
 There are two known workarounds:
 
-* You can run Alltube locally on your computer.
+* You can run AllTube locally on your computer.
 * You can enable streaming videos through the server (see below).
   Please note that this can use a lot of resources on the server
   (which is why we won't enable it on alltubedownload.net).
@@ -94,7 +94,7 @@ You need to enable streaming (see above).
 
 ## The downloaded videos have a strange name like `videoplayback.mp4`
 
-Alltube can rename videos automatically if you enable streaming (see above).
+AllTube can rename videos automatically if you enable streaming (see above).
 
 ## I want to download a video that isn't available in my country
 
@@ -134,7 +134,7 @@ chmod 0667 /tmp/heroku.fcgi.5000.sock
 ## How can I download 1080p videos from Youtube?
 
 Youtube distributes HD content in two separate video and audio files.
-So Alltube will offer you video-only and audio-only formats in the format list.
+So AllTube will offer you video-only and audio-only formats in the format list.
 
 You then need to merge them together with a tool like ffmpeg.
 
