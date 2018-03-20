@@ -249,10 +249,10 @@ class VideoDownloadTest extends TestCase
     {
         return [
             [
-                'http://www.canalc2.tv/video/12163', 'rtmp',
-                'Terrasses_du_Numerique-12163',
+                'http://www.rtvnh.nl/video/131946', 'rtmp-264',
+                'Ketting_van_strandgasten-131946',
                 'flv',
-                'vod-flash.u-strasbg.fr',
+                'lb-nh-vod.cdn.streamgate.nl',
             ],
         ];
     }

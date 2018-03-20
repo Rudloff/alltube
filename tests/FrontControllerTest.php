@@ -429,7 +429,7 @@ class FrontControllerTest extends TestCase
         $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
-            ['url' => 'http://www.canalc2.tv/video/12163', 'format' => 'rtmp'],
+            ['url' => 'http://www.rtvnh.nl/video/131946', 'format' => 'rtmp-264'],
             $this->config
         );
     }
