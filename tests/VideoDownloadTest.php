@@ -126,7 +126,7 @@ class VideoDownloadTest extends TestCase
      * Test getURL function with a protected video and no password.
      *
      * @return void
-     * @expectedException \Alltube\PasswordException
+     * @expectedException Alltube\PasswordException
      */
     public function testGetURLWithMissingPassword()
     {
@@ -198,8 +198,8 @@ class VideoDownloadTest extends TestCase
                 'edgefcs.net',
             ],
             [
-                'https://openload.co/embed/qTsjMEUtN4U', 'best[protocol^=http]',
-                'aup-the-lego-ninjago-movie-2017-1508463762.MP4.mp4-qTsjMEUtN4U',
+                'https://openload.co/f/kUEfGclsU9o', 'best[protocol^=http]',
+                'skyrim_no-audio_1080.mp4-kUEfGclsU9o',
                 'mp4',
                 'openload.co',
             ],
@@ -249,10 +249,10 @@ class VideoDownloadTest extends TestCase
     {
         return [
             [
-                'http://www.canalc2.tv/video/12163', 'rtmp',
-                'Terrasses_du_Numerique-12163',
+                'http://www.rtvnh.nl/video/131946', 'rtmp-264',
+                'Ketting_van_strandgasten-131946',
                 'flv',
-                'vod-flash.u-strasbg.fr',
+                'lb-nh-vod.cdn.streamgate.nl',
             ],
         ];
     }

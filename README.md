@@ -1,8 +1,8 @@
-# Alltube Download
+# AllTube Download
 
 HTML GUI for youtube-dl ([alltubedownload.net](http://alltubedownload.net/))
 
-![Screenshot](img/screenshot.png "Alltube GUI screenshot")
+![Screenshot](img/screenshot.png "AllTube GUI screenshot")
 
 ## Setup
 
@@ -31,8 +31,11 @@ you might want to specify the path to avconv/ffmpeg in your config file.)
 You should also ensure that the *templates_c* folder has the right permissions:
 
 ```bash
-chmod 777 templates_c/
+chmod 770 templates_c/
 ```
+
+(You need to adapt this to your permission model.
+You can find more information about this [in the Smarty documentation](https://www.smarty.net/docsv2/en/installing.smarty.basic.tpl#id2778738).)
 
 If your web server is Apache,
 you need to set the `AllowOverride` setting to `All` or `FileInfo`.
@@ -145,7 +148,7 @@ so that it points to your ffmpeg/avconv binary (`/usr/bin/avconv` on Debian/Ubun
 
 ## Use as library
 
-Alltube can also be used as a library to extract a video URL from a webpage.
+AllTube can also be used as a library to extract a video URL from a webpage.
 
 You can install it with:
 
@@ -175,6 +178,11 @@ $downloader->getURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 The library documentation is available on [alltube.surge.sh](https://alltube.surge.sh/classes/Alltube.VideoDownload.html).
 
 You can also have a look at this [example project](https://github.com/Rudloff/alltube-example-project).
+
+## JSON API
+
+We also provide a JSON API that you can use like this:
+[/json?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ](https://alltubedownload.net/json?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ)
 
 ## FAQ
 

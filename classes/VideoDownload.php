@@ -5,6 +5,8 @@
 
 namespace Alltube;
 
+use Exception;
+use stdClass;
 use Symfony\Component\Process\Process;
 
 /**
@@ -24,8 +26,8 @@ class VideoDownload
      *
      * @param Config $config Config instance.
      *
-     * @throws \Exception If youtube-dl is missing
-     * @throws \Exception If Python is missing
+     * @throws Exception If youtube-dl is missing
+     * @throws Exception If Python is missing
      */
     public function __construct(Config $config = null)
     {
@@ -39,9 +41,9 @@ class VideoDownload
         so they will always go to the logs.
          */
         if (!is_file($this->config->youtubedl)) {
-            throw new \Exception("Can't find youtube-dl at ".$this->config->youtubedl);
+            throw new Exception("Can't find youtube-dl at ".$this->config->youtubedl);
         } elseif (!$this->checkCommand([$this->config->python, '--version'])) {
-            throw new \Exception("Can't find Python at ".$this->config->python);
+            throw new Exception("Can't find Python at ".$this->config->python);
         }
     }
 
@@ -82,8 +84,8 @@ class VideoDownload
      * @param string $password Video password
      *
      * @throws PasswordException If the video is protected by a password and no password was specified
-     * @throws \Exception        If the password is wrong
-     * @throws \Exception        If youtube-dl returns an error
+     * @throws Exception         If the password is wrong
+     * @throws Exception         If youtube-dl returns an error
      *
      * @return string
      */
@@ -108,12 +110,13 @@ class VideoDownload
         $process->run();
         if (!$process->isSuccessful()) {
             $errorOutput = trim($process->getErrorOutput());
+            $exitCode = $process->getExitCode();
             if ($errorOutput == 'ERROR: This video is protected by a password, use the --video-password option') {
-                throw new PasswordException($errorOutput);
+                throw new PasswordException($errorOutput, $exitCode);
             } elseif (substr($errorOutput, 0, 21) == 'ERROR: Wrong password') {
-                throw new \Exception(_('Wrong password'));
+                throw new Exception(_('Wrong password'), $exitCode);
             } else {
-                throw new \Exception($errorOutput);
+                throw new Exception($errorOutput, $exitCode);
             }
         } else {
             return trim($process->getOutput());
@@ -209,7 +212,7 @@ class VideoDownload
      *
      * @return array Arguments
      */
-    private function getRtmpArguments(\stdClass $video)
+    private function getRtmpArguments(stdClass $video)
     {
         $arguments = [];
 
@@ -260,14 +263,14 @@ class VideoDownload
      * @param string $filetype     Filetype of the converted file
      * @param bool   $audioOnly    True to return an audio-only file
      *
-     * @throws \Exception If avconv/ffmpeg is missing
+     * @throws Exception If avconv/ffmpeg is missing
      *
      * @return Process Process
      */
-    private function getAvconvProcess(\stdClass $video, $audioBitrate, $filetype = 'mp3', $audioOnly = true)
+    private function getAvconvProcess(stdClass $video, $audioBitrate, $filetype = 'mp3', $audioOnly = true)
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw(new \Exception(_('Can\'t find avconv or ffmpeg.')));
+            throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
         }
 
         if ($video->protocol == 'rtmp') {
@@ -314,8 +317,8 @@ class VideoDownload
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
-     * @throws \Exception If your try to convert and M3U8 video
-     * @throws \Exception If the popen stream was not created correctly
+     * @throws Exception If your try to convert and M3U8 video
+     * @throws Exception If the popen stream was not created correctly
      *
      * @return resource popen stream
      */
@@ -323,7 +326,7 @@ class VideoDownload
     {
         $video = $this->getJSON($url, $format, $password);
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
-            throw(new \Exception(_('Conversion of M3U8 files is not supported.')));
+            throw new Exception(_('Conversion of M3U8 files is not supported.'));
         }
 
         $avconvProc = $this->getAvconvProcess($video, $this->config->audioBitrate);
@@ -331,7 +334,7 @@ class VideoDownload
         $stream = popen($avconvProc->getCommandLine(), 'r');
 
         if (!is_resource($stream)) {
-            throw new \Exception(_('Could not open popen stream.'));
+            throw new Exception(_('Could not open popen stream.'));
         }
 
         return $stream;
@@ -340,17 +343,17 @@ class VideoDownload
     /**
      * Get video stream from an M3U playlist.
      *
-     * @param \stdClass $video Video object returned by getJSON
+     * @param stdClass $video Video object returned by getJSON
      *
-     * @throws \Exception If avconv/ffmpeg is missing
-     * @throws \Exception If the popen stream was not created correctly
+     * @throws Exception If avconv/ffmpeg is missing
+     * @throws Exception If the popen stream was not created correctly
      *
      * @return resource popen stream
      */
-    public function getM3uStream(\stdClass $video)
+    public function getM3uStream(stdClass $video)
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw(new \Exception(_('Can\'t find avconv or ffmpeg.')));
+            throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
         }
 
         $process = new Process(
@@ -368,7 +371,7 @@ class VideoDownload
 
         $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
-            throw new \Exception(_('Could not open popen stream.'));
+            throw new Exception(_('Could not open popen stream.'));
         }
 
         return $stream;
@@ -379,7 +382,7 @@ class VideoDownload
      *
      * @param array $urls URLs of the video ($urls[0]) and audio ($urls[1]) files
      *
-     * @throws \Exception If the popen stream was not created correctly
+     * @throws Exception If the popen stream was not created correctly
      *
      * @return resource popen stream
      */
@@ -401,7 +404,7 @@ class VideoDownload
 
         $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
-            throw new \Exception(_('Could not open popen stream.'));
+            throw new Exception(_('Could not open popen stream.'));
         }
 
         return $stream;
@@ -410,13 +413,13 @@ class VideoDownload
     /**
      * Get video stream from an RTMP video.
      *
-     * @param \stdClass $video Video object returned by getJSON
+     * @param stdClass $video Video object returned by getJSON
      *
-     * @throws \Exception If the popen stream was not created correctly
+     * @throws Exception If the popen stream was not created correctly
      *
      * @return resource popen stream
      */
-    public function getRtmpStream(\stdClass $video)
+    public function getRtmpStream(stdClass $video)
     {
         $process = new Process(
             array_merge(
@@ -434,7 +437,7 @@ class VideoDownload
         );
         $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
-            throw new \Exception(_('Could not open popen stream.'));
+            throw new Exception(_('Could not open popen stream.'));
         }
 
         return $stream;
@@ -446,11 +449,11 @@ class VideoDownload
      * @param object $video  Video object returned by youtube-dl
      * @param string $format Requested format
      *
-     * @throws \Exception If the popen stream was not created correctly
+     * @throws Exception If the popen stream was not created correctly
      *
      * @return resource
      */
-    public function getPlaylistArchiveStream(\stdClass $video, $format)
+    public function getPlaylistArchiveStream(stdClass $video, $format)
     {
         $playlistItems = [];
         foreach ($video->entries as $entry) {
@@ -458,7 +461,7 @@ class VideoDownload
         }
         $stream = fopen('playlist://'.implode(';', $playlistItems).'/'.$format, 'r');
         if (!is_resource($stream)) {
-            throw new \Exception(_('Could not open fopen stream.'));
+            throw new Exception(_('Could not open fopen stream.'));
         }
 
         return $stream;
@@ -473,8 +476,8 @@ class VideoDownload
      * @param string $filetype     Filetype of the converted file
      * @param string $password     Video password
      *
-     * @throws \Exception If your try to convert and M3U8 video
-     * @throws \Exception If the popen stream was not created correctly
+     * @throws Exception If your try to convert and M3U8 video
+     * @throws Exception If the popen stream was not created correctly
      *
      * @return resource popen stream
      */
@@ -482,7 +485,7 @@ class VideoDownload
     {
         $video = $this->getJSON($url, $format, $password);
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
-            throw(new \Exception(_('Conversion of M3U8 files is not supported.')));
+            throw new Exception(_('Conversion of M3U8 files is not supported.'));
         }
 
         $avconvProc = $this->getAvconvProcess($video, $audioBitrate, $filetype, false);
@@ -490,7 +493,7 @@ class VideoDownload
         $stream = popen($avconvProc->getCommandLine(), 'r');
 
         if (!is_resource($stream)) {
-            throw new \Exception(_('Could not open popen stream.'));
+            throw new Exception(_('Could not open popen stream.'));
         }
 
         return $stream;

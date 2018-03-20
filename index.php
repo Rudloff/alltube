@@ -52,12 +52,16 @@ $app->get(
     [$controller, 'redirect']
 )->setName('redirect');
 $app->get(
+    '/json',
+    [$controller, 'json']
+)->setName('json');
+$app->get(
     '/locale/{locale}',
     [$controller, 'locale']
 )->setName('locale');
 
 try {
     $app->run();
-} catch (\SmartyException $e) {
+} catch (SmartyException $e) {
     die('Smarty could not compile the template file: '.$e->getMessage());
 }

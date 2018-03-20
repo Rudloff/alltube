@@ -5,6 +5,8 @@
 
 namespace Alltube;
 
+use Locale as PHPLocale;
+use Rinvex\Country\Country;
 use Teto\HTTP\AcceptLanguage;
 
 /**
@@ -55,7 +57,7 @@ class Locale
      */
     public function getFullName()
     {
-        return \Locale::getDisplayName($this->getIso15897(), $this->getIso15897());
+        return PHPLocale::getDisplayName($this->getIso15897(), $this->getIso15897());
     }
 
     /**
@@ -91,7 +93,7 @@ class Locale
     /**
      * Get country information from locale.
      *
-     * @return \Rinvex\Country\Country|array
+     * @return Country|array
      */
     public function getCountry()
     {

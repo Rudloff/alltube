@@ -5,6 +5,8 @@
 
 namespace Alltube;
 
+use Aura\Session\Segment;
+use Aura\Session\SessionFactory;
 use Symfony\Component\Process\Process;
 
 /**
@@ -29,7 +31,7 @@ class LocaleManager
     /**
      * Session segment used to store session variables.
      *
-     * @var \Aura\Session\Segment
+     * @var Segment
      */
     private $sessionSegment;
 
@@ -40,9 +42,9 @@ class LocaleManager
      */
     public function __construct(array $cookies = [])
     {
-        $session_factory = new \Aura\Session\SessionFactory();
+        $session_factory = new SessionFactory();
         $session = $session_factory->newInstance($cookies);
-        $this->sessionSegment = $session->getSegment('Alltube\LocaleManager');
+        $this->sessionSegment = $session->getSegment(self::class);
         $cookieLocale = $this->sessionSegment->get('locale');
         if (isset($cookieLocale)) {
             $this->setLocale(new Locale($cookieLocale));
