@@ -147,7 +147,7 @@ class FrontControllerTest extends TestCase
     }
 
     /**
-     * Assert that calling controller function with these parameters returns an HTTP redirect.
+     * Assert that calling controller function with these parameters returns an HTTP 500 error.
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
@@ -158,6 +158,20 @@ class FrontControllerTest extends TestCase
     private function assertRequestIsServerError($request, array $params = [], Config $config = null)
     {
         $this->assertTrue($this->getRequestResult($request, $params, $config)->isServerError());
+    }
+
+    /**
+     * Assert that calling controller function with these parameters returns an HTTP 400 error.
+     *
+     * @param string $request Controller function to call
+     * @param array  $params  Query parameters
+     * @param Config $config  Custom config
+     *
+     * @return void
+     */
+    private function assertRequestIsClientError($request, array $params = [], Config $config = null)
+    {
+        $this->assertTrue($this->getRequestResult($request, $params, $config)->isClientError());
     }
 
     /**
@@ -537,6 +551,36 @@ class FrontControllerTest extends TestCase
             ],
             $this->config
         );
+    }
+
+    /**
+     * Test the json() function without the URL parameter.
+     *
+     * @return void
+     */
+    public function testJsonWithoutUrl()
+    {
+        $this->assertRequestIsClientError('json');
+    }
+
+    /**
+     * Test the json() function.
+     *
+     * @return void
+     */
+    public function testJson()
+    {
+        $this->assertRequestIsOk('json', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
+    }
+
+    /**
+     * Test the json() function with an error.
+     *
+     * @return void
+     */
+    public function testJsonWithError()
+    {
+        $this->assertRequestIsServerError('json', ['url' => 'http://example.com/foo']);
     }
 
     /**

@@ -52,6 +52,10 @@ $app->get(
     [$controller, 'redirect']
 )->setName('redirect');
 $app->get(
+    '/json',
+    [$controller, 'json']
+)->setName('json');
+$app->get(
     '/locale/{locale}',
     [$controller, 'locale']
 )->setName('locale');

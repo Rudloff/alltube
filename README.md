@@ -179,6 +179,11 @@ The library documentation is available on [alltube.surge.sh](https://alltube.sur
 
 You can also have a look at this [example project](https://github.com/Rudloff/alltube-example-project).
 
+## JSON API
+
+We also provide a JSON API that you can use like this:
+[/json?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ](https://alltubedownload.net/json?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ)
+
 ## FAQ
 
 Please read the [FAQ](resources/FAQ.md) before reporting any issue.
