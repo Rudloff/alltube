@@ -91,19 +91,11 @@ msgstr ""
 msgid "Design by"
 msgstr ""
 
-#: templates/inc/footer.tpl:12
-msgid "AllTube Download on Facebook"
-msgstr ""
-
-#: templates/inc/footer.tpl:12
-msgid "Like us on Facebook"
-msgstr ""
-
-#: templates/inc/footer.tpl:14
+#: templates/inc/footer.tpl:10
 msgid "Get the code"
 msgstr ""
 
-#: templates/inc/footer.tpl:16
+#: templates/inc/footer.tpl:12
 msgid "Based on"
 msgstr ""
 
