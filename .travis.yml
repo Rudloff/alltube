@@ -5,10 +5,8 @@ addons:
     apt:
         packages:
             - language-pack-fr
-install:
-    - composer install
-after_success:
-    - bash <(curl -s https://codecov.io/bash)
+install: composer install
+after_success: bash <(curl -s https://codecov.io/bash)
 before_deploy:
     - yarn install --ignore-scripts
     - yarn grunt doc
