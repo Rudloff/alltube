@@ -70,8 +70,9 @@ You need to either:
 
 ## I get a 404 error on every page except the index
 
-This is probably because your server does not have mod_rewrite
-or AllowOverride is disabled.
+This is probably because your server does not have [mod_rewrite](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
+or [AllowOverride](https://httpd.apache.org/docs/current/mod/core.html#allowoverride)
+is disabled.
 You can work around this by adding this to your `config.yml` file:
 
 ```yaml
