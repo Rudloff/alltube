@@ -228,7 +228,11 @@ class FrontController
             $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
             if ($request->isGet() || $request->isPost()) {
-                $process = $this->download->getAudioStream($params['url'], 'bestaudio/best', $password);
+                try {
+                    $process = $this->download->getAudioStream($params['url'], 'bestaudio/best', $password);
+                } catch (Exception $e) {
+                    $process = $this->download->getAudioStream($params['url'], $this->defaultFormat, $password);
+                }
                 $response = $response->withBody(new Stream($process));
             }
 
