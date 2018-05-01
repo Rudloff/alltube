@@ -407,6 +407,17 @@ class VideoDownloadTest extends TestCase
     }
 
     /**
+     * Test getAudioStream function with a DASH URL.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testGetAudioStreamDashError()
+    {
+        $this->download->getAudioStream('https://vimeo.com/251997032', 'bestaudio/best');
+    }
+
+    /**
      * Assert that a stream is valid.
      *
      * @param resource $stream Stream

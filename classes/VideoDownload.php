@@ -327,6 +327,8 @@ class VideoDownload
         $video = $this->getJSON($url, $format, $password);
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
             throw new Exception(_('Conversion of M3U8 files is not supported.'));
+        } elseif ($video->protocol == 'http_dash_segments') {
+            throw new Exception(_('Conversion of DASH segments is not supported.'));
         }
 
         $avconvProc = $this->getAvconvProcess($video, $this->config->audioBitrate);
