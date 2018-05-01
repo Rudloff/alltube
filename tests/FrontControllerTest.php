@@ -286,6 +286,17 @@ class FrontControllerTest extends TestCase
     }
 
     /**
+     * Test the video() function with audio conversion from a Vimeo video.
+     *
+     * @return void
+     */
+    public function testVideoWithVimeoAudio()
+    {
+        // So we can test the fallback to default format
+        $this->assertRequestIsOk('video', ['url' => 'https://vimeo.com/251997032', 'audio' => true]);
+    }
+
+    /**
      * Test the video() function with audio enabled and an URL that doesn't need to be converted.
      *
      * @return void
