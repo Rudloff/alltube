@@ -155,7 +155,7 @@ class VideoDownload
         $urls = explode("\n", $this->getProp($url, $format, 'get-url', $password));
 
         if (empty($urls[0])) {
-            throw new Exception(_('youtube-dl returned an empty URL.'));
+            throw new EmptyUrlException(_('youtube-dl returned an empty URL.'));
         }
 
         return $urls;
