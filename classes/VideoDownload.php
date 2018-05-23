@@ -152,7 +152,13 @@ class VideoDownload
      * */
     public function getURL($url, $format = null, $password = null)
     {
-        return explode("\n", $this->getProp($url, $format, 'get-url', $password));
+        $urls = explode("\n", $this->getProp($url, $format, 'get-url', $password));
+
+        if (empty($urls[0])) {
+            throw new Exception(_('youtube-dl returned an empty URL.'));
+        }
+
+        return $urls;
     }
 
     /**
@@ -325,6 +331,11 @@ class VideoDownload
     public function getAudioStream($url, $format, $password = null)
     {
         $video = $this->getJSON($url, $format, $password);
+
+        if (isset($video->_type) && $video->_type == 'playlist') {
+            throw new Exception(_('Conversion of playlists is not supported.'));
+        }
+
         if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
             throw new Exception(_('Conversion of M3U8 files is not supported.'));
         } elseif ($video->protocol == 'http_dash_segments') {
