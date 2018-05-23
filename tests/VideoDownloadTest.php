@@ -418,6 +418,17 @@ class VideoDownloadTest extends TestCase
     }
 
     /**
+     * Test getAudioStream function with a playlist.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testGetAudioStreamPlaylistError()
+    {
+        $this->download->getAudioStream('https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC', 'best');
+    }
+
+    /**
      * Assert that a stream is valid.
      *
      * @param resource $stream Stream
