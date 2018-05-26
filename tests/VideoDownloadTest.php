@@ -425,7 +425,10 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStreamPlaylistError()
     {
-        $this->download->getAudioStream('https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC', 'best');
+        $this->download->getAudioStream(
+            'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC',
+            'best'
+        );
     }
 
     /**
