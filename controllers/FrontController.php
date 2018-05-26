@@ -466,7 +466,7 @@ class FrontController
         } catch (EmptyUrlException $e) {
             /*
             If this happens it is probably a playlist
-            so it will either be handle by getStream() or throw an exception anyway.
+            so it will either be handled by getStream() or throw an exception anyway.
              */
             $videoUrls = [];
         }
