@@ -6,6 +6,7 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\EmptyUrlException;
 use Alltube\Locale;
 use Alltube\LocaleManager;
 use Alltube\PasswordException;
@@ -456,11 +457,19 @@ class FrontController
      */
     private function getRedirectResponse($url, $format, Response $response, Request $request)
     {
-        $videoUrls = $this->download->getURL(
-            $url,
-            $format,
-            $this->sessionSegment->getFlash($url)
-        );
+        try {
+            $videoUrls = $this->download->getURL(
+                $url,
+                $format,
+                $this->sessionSegment->getFlash($url)
+            );
+        } catch (EmptyUrlException $e) {
+            /*
+            If this happens it is probably a playlist
+            so it will either be handle by getStream() or throw an exception anyway.
+             */
+            $videoUrls = [];
+        }
         if (count($videoUrls) > 1) {
             return $this->getRemuxStream($videoUrls, $format, $response, $request);
         } elseif ($this->config->stream) {

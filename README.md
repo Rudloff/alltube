@@ -1,5 +1,7 @@
 # AllTube Download
 
+[![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Rudloff/donate)
+
 HTML GUI for youtube-dl ([alltubedownload.net](http://alltubedownload.net/))
 
 ![Screenshot](img/screenshot.png "AllTube GUI screenshot")

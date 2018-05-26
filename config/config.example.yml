@@ -11,6 +11,7 @@ params:
     - --ignore-errors
     - --flat-playlist
     - --restrict-filenames
+    - --no-playlist
 
 # True to enable audio conversion
 convert: false

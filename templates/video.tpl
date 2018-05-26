@@ -79,7 +79,6 @@
                     {/if}
                 {/foreach}
             </optgroup>
-            <option value="{$format->format_id}">
         </select><br/><br/>
         {if $config->convertAdvanced}
             <input type="checkbox" name="customConvert" id="customConvert"/>
