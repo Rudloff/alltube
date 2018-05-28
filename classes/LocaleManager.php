@@ -93,7 +93,7 @@ class LocaleManager
     public function setLocale(Locale $locale)
     {
         putenv('LANG='.$locale);
-        setlocale(LC_ALL, [$locale, $locale.'.utf8']);
+        setlocale(LC_ALL, [$locale.'.utf8', $locale]);
         $this->curLocale = $locale;
         $this->sessionSegment->set('locale', $locale);
     }
