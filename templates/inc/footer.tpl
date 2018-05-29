@@ -11,7 +11,7 @@
      &middot;
      {t}Based on{/t} <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
      &middot;
-     <a rel="noopener" target="_blank" title="Donate using Liberapay" href="https://liberapay.com/Rudloff/donate">{t}Donate{/t}</a>
+     <a rel="noopener" target="_blank" title="{t}Donate using Liberapay{/t}" href="https://liberapay.com/Rudloff/donate">{t}Donate{/t}</a>
      </div>
 </footer>
 </body>

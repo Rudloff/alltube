@@ -110,6 +110,10 @@ msgid "Based on"
 msgstr "Basé sur"
 
 #: templates/inc/footer.tpl:14
+msgid "Donate using Liberapay"
+msgstr "Faire un don avec Liberapay"
+
+#: templates/inc/footer.tpl:14
 msgid "Donate"
 msgstr "Faire un don"
 
