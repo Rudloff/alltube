@@ -10,6 +10,8 @@
      <a rel="noopener" target="_blank" href="https://github.com/Rudloff/alltube">{t}Get the code{/t}</a>
      &middot;
      {t}Based on{/t} <a href="http://rg3.github.io/youtube-dl/">youtube-dl</a>
+     &middot;
+     <a rel="noopener" target="_blank" title="Donate using Liberapay" href="https://liberapay.com/Rudloff/donate">{t}Donate{/t}</a>
      </div>
 </footer>
 </body>
