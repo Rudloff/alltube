@@ -1,11 +1,19 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: AllTube Download\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pierre Rudloff <contact@rudloff.pro>\n"
+"Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: AllTube Download\n"
-"Language: fr\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
 
 #: templates/error.tpl:6
 msgid "Please check the URL of your video."
@@ -19,9 +27,9 @@ msgstr "Vidéos extraites depuis"
 msgid ":"
 msgstr " :"
 
-#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:97
-#: templates/video.tpl:100 templates/index.tpl:19
-#: controllers/FrontController.php:270
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:96
+#: templates/video.tpl:99 templates/index.tpl:19
+#: controllers/FrontController.php:275
 msgid "Download"
 msgstr "Télécharger"
 
@@ -41,7 +49,7 @@ msgstr "L'accès à cette vidéo nécessite un mot de passe."
 msgid "Video password"
 msgstr "Mot de passe de la vidéo"
 
-#: templates/extractors.tpl:4 controllers/FrontController.php:164
+#: templates/extractors.tpl:4 controllers/FrontController.php:165
 msgid "Supported websites"
 msgstr "Sites web supportés"
 
@@ -73,6 +81,18 @@ msgstr "Pire qualité"
 msgid "Detailed formats"
 msgstr "Formats détaillés"
 
+#: templates/video.tpl:85
+msgid "Convert into a custom format:"
+msgstr "Convertir dans un format personnalisé :"
+
+#: templates/video.tpl:91
+msgid "with"
+msgstr "avec de l'audio à"
+
+#: templates/video.tpl:93
+msgid "kbit/s audio"
+msgstr "kbit/s"
+
 #: templates/inc/footer.tpl:4
 msgid "Code by"
 msgstr "Développé par"
@@ -81,21 +101,21 @@ msgstr "Développé par"
 msgid "Design by"
 msgstr "Designé par"
 
-#: templates/inc/footer.tpl:12
-msgid "AllTube Download on Facebook"
-msgstr "AllTube Download sur Facebook"
-
-#: templates/inc/footer.tpl:12
-msgid "Like us on Facebook"
-msgstr "Suivez-nous sur Facebook"
-
-#: templates/inc/footer.tpl:14
+#: templates/inc/footer.tpl:10
 msgid "Get the code"
 msgstr "Obtenir le code"
 
-#: templates/inc/footer.tpl:16
+#: templates/inc/footer.tpl:12
 msgid "Based on"
 msgstr "Basé sur"
+
+#: templates/inc/footer.tpl:14
+msgid "Donate"
+msgstr "Faire un don"
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "Changer de langue"
 
 #: templates/inc/header.tpl:21
 msgid "Share on Twitter"
@@ -125,85 +145,92 @@ msgstr "Glissez ce lien dans votre barre de favoris :"
 msgid "Bookmarklet"
 msgstr "Bookmarklet"
 
-#: templates/inc/header.tpl:4
-msgid "Switch language"
-msgstr "Changer de langue"
-
-#: templates/error.tpl:5
-msgid "An error occurred"
-msgstr "Une erreur est survenue"
-
-#: templates/video.tpl:86
-msgid "Convert into a custom format:"
-msgstr "Convertir dans un format personnalisé :"
-
-#: templates/video.tpl:94
-msgid "kbit/s audio"
-msgstr "kbit/s"
-
-#: templates/video.tpl:92
-msgid "with"
-msgstr "avec de l'audio à"
-
 #: classes/VideoDownload.php:117
 msgid "Wrong password"
 msgstr "Mauvais mot de passe"
 
-#: classes/VideoDownload.php:329 classes/VideoDownload.php:488
-msgid "Conversion of M3U8 files is not supported."
-msgstr "La conversion des fichiers M3U8 n'est pas possible."
+#: classes/VideoDownload.php:158
+msgid "youtube-dl returned an empty URL."
+msgstr "youtube-dl a retourné une URL vide."
 
-#: classes/VideoDownload.php:337 classes/VideoDownload.php:374
-#: classes/VideoDownload.php:407 classes/VideoDownload.php:440
-#: classes/VideoDownload.php:496
-msgid "Could not open popen stream."
-msgstr "Impossible d'ouvrir le flux popen."
-
-#: classes/VideoDownload.php:464
-msgid "Could not open fopen stream."
-msgstr "Impossible d'ouvrir le flux fopen."
-
-#: controllers/FrontController.php:121
-msgid "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
-msgstr "Téléchargez facilement des vidéos depuis Youtube, Dailymotion, Vimeo et d'autres sites web."
-
-#: controllers/FrontController.php:165
-msgid "List of all supported websites from which Alltube Download can extract video or audio files"
-msgstr "Liste de tous les sites web depuis lesquels Alltube Download peut extraire des fichiers vidéo ou audio"
-
-#: controllers/FrontController.php:190
-msgid "Password prompt"
-msgstr "Demande de mot de passe"
-
-#: controllers/FrontController.php:191
-msgid "You need a password in order to download this video with Alltube Download"
-msgstr "Vous avez besoin d'un mot de passe pour télécharger cette vidéo avec Alltube Download"
-
-#: controllers/FrontController.php:266
-msgid "Video download"
-msgstr "Téléchargement d'une vidéo"
-
-#: controllers/FrontController.php:267
-msgid "Download video from "
-msgstr "Téléchargement d'une vidéo depuis "
-
-#: controllers/FrontController.php:270
-msgid "from"
-msgstr "depuis"
-
-#: controllers/FrontController.php:333
-msgid "Error"
-msgstr "Erreur"
-
-#: controllers/FrontController.php:405
-msgid "You need to enable remux mode to merge two formats."
-msgstr "Vous devez activer le mode remux pour fusionner deux formats."
-
-#: controllers/FrontController.php:472
-msgid "Can't find URL of video."
-msgstr "Impossible de trouver l'URL de la vidéo."
-
-#: classes/VideoDownload.php:273 classes/VideoDownload.php:356
+#: classes/VideoDownload.php:279 classes/VideoDownload.php:369
 msgid "Can't find avconv or ffmpeg at "
 msgstr "Impossible de trouver avconv ou ffmpeg à "
 
+#: classes/VideoDownload.php:336
+msgid "Conversion of playlists is not supported."
+msgstr "Impossible de convertir une playlist."
+
+#: classes/VideoDownload.php:340 classes/VideoDownload.php:501
+msgid "Conversion of M3U8 files is not supported."
+msgstr "La conversion des fichiers M3U8 n'est pas possible."
+
+#: classes/VideoDownload.php:342
+msgid "Conversion of DASH segments is not supported."
+msgstr "Impossible de convertir des segments DASH."
+
+#: classes/VideoDownload.php:350 classes/VideoDownload.php:387
+#: classes/VideoDownload.php:420 classes/VideoDownload.php:453
+#: classes/VideoDownload.php:509
+msgid "Could not open popen stream."
+msgstr "Impossible d'ouvrir le flux popen."
+
+#: classes/VideoDownload.php:477
+msgid "Could not open fopen stream."
+msgstr "Impossible d'ouvrir le flux fopen."
+
+#: controllers/FrontController.php:122
+msgid ""
+"Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
+msgstr ""
+"Téléchargez facilement des vidéos depuis Youtube, Dailymotion, Vimeo et "
+"d'autres sites web."
+
+#: controllers/FrontController.php:166
+msgid ""
+"List of all supported websites from which Alltube Download can extract video "
+"or audio files"
+msgstr ""
+"Liste de tous les sites web depuis lesquels Alltube Download peut extraire "
+"des fichiers vidéo ou audio"
+
+#: controllers/FrontController.php:191
+msgid "Password prompt"
+msgstr "Demande de mot de passe"
+
+#: controllers/FrontController.php:192
+msgid ""
+"You need a password in order to download this video with Alltube Download"
+msgstr ""
+"Vous avez besoin d'un mot de passe pour télécharger cette vidéo avec Alltube "
+"Download"
+
+#: controllers/FrontController.php:271
+msgid "Video download"
+msgstr "Téléchargement d'une vidéo"
+
+#: controllers/FrontController.php:272
+msgid "Download video from "
+msgstr "Téléchargement d'une vidéo depuis "
+
+#: controllers/FrontController.php:275
+msgid "from"
+msgstr "depuis"
+
+#: controllers/FrontController.php:338
+msgid "Error"
+msgstr "Erreur"
+
+#: controllers/FrontController.php:410
+msgid "You need to enable remux mode to merge two formats."
+msgstr "Vous devez activer le mode remux pour fusionner deux formats."
+
+#: controllers/FrontController.php:485
+msgid "Can't find URL of video."
+msgstr "Impossible de trouver l'URL de la vidéo."
+
+#~ msgid "AllTube Download on Facebook"
+#~ msgstr "AllTube Download sur Facebook"
+
+#~ msgid "Like us on Facebook"
+#~ msgstr "Suivez-nous sur Facebook"
