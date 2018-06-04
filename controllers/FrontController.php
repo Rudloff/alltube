@@ -97,7 +97,9 @@ class FrontController
         $session_factory = new SessionFactory();
         $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment(self::class);
-        if ($this->config->stream) {
+        if ($this->config->remux) {
+            $this->defaultFormat = 'bestvideo+bestaudio';
+        } elseif ($this->config->stream) {
             $this->defaultFormat = 'best';
         }
     }
@@ -466,7 +468,7 @@ class FrontController
         } catch (EmptyUrlException $e) {
             /*
             If this happens it is probably a playlist
-            so it will either be handle by getStream() or throw an exception anyway.
+            so it will either be handled by getStream() or throw an exception anyway.
              */
             $videoUrls = [];
         }

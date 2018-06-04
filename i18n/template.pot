@@ -17,9 +17,9 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:97
-#: templates/video.tpl:100 templates/index.tpl:19
-#: controllers/FrontController.php:270
+#: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:96
+#: templates/video.tpl:99 templates/index.tpl:19
+#: controllers/FrontController.php:275
 msgid "Download"
 msgstr ""
 
@@ -39,7 +39,7 @@ msgstr ""
 msgid "Video password"
 msgstr ""
 
-#: templates/extractors.tpl:4 controllers/FrontController.php:164
+#: templates/extractors.tpl:4 controllers/FrontController.php:165
 msgid "Supported websites"
 msgstr ""
 
@@ -71,15 +71,15 @@ msgstr ""
 msgid "Detailed formats"
 msgstr ""
 
-#: templates/video.tpl:86
+#: templates/video.tpl:85
 msgid "Convert into a custom format:"
 msgstr ""
 
-#: templates/video.tpl:92
+#: templates/video.tpl:91
 msgid "with"
 msgstr ""
 
-#: templates/video.tpl:94
+#: templates/video.tpl:93
 msgid "kbit/s audio"
 msgstr ""
 
@@ -97,6 +97,14 @@ msgstr ""
 
 #: templates/inc/footer.tpl:12
 msgid "Based on"
+msgstr ""
+
+#: templates/inc/footer.tpl:14
+msgid "Donate using Liberapay"
+msgstr ""
+
+#: templates/inc/footer.tpl:14
+msgid "Donate"
 msgstr ""
 
 #: templates/inc/header.tpl:4
@@ -135,64 +143,76 @@ msgstr ""
 msgid "Wrong password"
 msgstr ""
 
-#: classes/VideoDownload.php:273 classes/VideoDownload.php:356
+#: classes/VideoDownload.php:158
+msgid "youtube-dl returned an empty URL."
+msgstr ""
+
+#: classes/VideoDownload.php:279 classes/VideoDownload.php:369
 msgid "Can't find avconv or ffmpeg at "
 msgstr ""
 
-#: classes/VideoDownload.php:329 classes/VideoDownload.php:488
+#: classes/VideoDownload.php:336
+msgid "Conversion of playlists is not supported."
+msgstr ""
+
+#: classes/VideoDownload.php:340 classes/VideoDownload.php:501
 msgid "Conversion of M3U8 files is not supported."
 msgstr ""
 
-#: classes/VideoDownload.php:337 classes/VideoDownload.php:374
-#: classes/VideoDownload.php:407 classes/VideoDownload.php:440
-#: classes/VideoDownload.php:496
+#: classes/VideoDownload.php:342
+msgid "Conversion of DASH segments is not supported."
+msgstr ""
+
+#: classes/VideoDownload.php:350 classes/VideoDownload.php:387
+#: classes/VideoDownload.php:420 classes/VideoDownload.php:453
+#: classes/VideoDownload.php:509
 msgid "Could not open popen stream."
 msgstr ""
 
-#: classes/VideoDownload.php:464
+#: classes/VideoDownload.php:477
 msgid "Could not open fopen stream."
 msgstr ""
 
-#: controllers/FrontController.php:121
+#: controllers/FrontController.php:122
 msgid ""
 "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
 msgstr ""
 
-#: controllers/FrontController.php:165
+#: controllers/FrontController.php:166
 msgid ""
 "List of all supported websites from which Alltube Download can extract video "
 "or audio files"
 msgstr ""
 
-#: controllers/FrontController.php:190
+#: controllers/FrontController.php:191
 msgid "Password prompt"
 msgstr ""
 
-#: controllers/FrontController.php:191
+#: controllers/FrontController.php:192
 msgid ""
 "You need a password in order to download this video with Alltube Download"
 msgstr ""
 
-#: controllers/FrontController.php:266
+#: controllers/FrontController.php:271
 msgid "Video download"
 msgstr ""
 
-#: controllers/FrontController.php:267
+#: controllers/FrontController.php:272
 msgid "Download video from "
 msgstr ""
 
-#: controllers/FrontController.php:270
+#: controllers/FrontController.php:275
 msgid "from"
 msgstr ""
 
-#: controllers/FrontController.php:333
+#: controllers/FrontController.php:338
 msgid "Error"
 msgstr ""
 
-#: controllers/FrontController.php:405
+#: controllers/FrontController.php:410
 msgid "You need to enable remux mode to merge two formats."
 msgstr ""
 
-#: controllers/FrontController.php:472
+#: controllers/FrontController.php:485
 msgid "Can't find URL of video."
 msgstr ""
