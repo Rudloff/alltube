@@ -260,10 +260,9 @@ footer a:hover {
     width:622px;
 }
 
-.mp3 p {
+.mp3-inner {
     padding:3px;
 }
-
 
 .audio:not(:checked),
 .audio:checked {
@@ -273,7 +272,7 @@ footer a:hover {
 .audio:not(:checked) + label,
 .audio:checked + label {
     cursor: pointer;
-    line-height:22px;
+    line-height:20px;
     padding-left: 82px;
     position: relative;
 }
@@ -373,7 +372,15 @@ footer a:hover {
     width:73px;
 }
 
+.seekOptions {
+    display: none;
+    margin-top: 15px;
+    text-align: center;
+}
 
+.audio:checked ~ .seekOptions {
+    display: block;
+}
 
 
 /* Playlists */

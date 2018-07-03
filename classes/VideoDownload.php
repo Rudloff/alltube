@@ -268,27 +268,52 @@ class VideoDownload
      * @param int    $audioBitrate Audio bitrate of the converted file
      * @param string $filetype     Filetype of the converted file
      * @param bool   $audioOnly    True to return an audio-only file
+     * @param string $from         Start the conversion at this time
+     * @param string $to           End the conversion at this time
      *
      * @throws Exception If avconv/ffmpeg is missing
      *
      * @return Process Process
      */
-    private function getAvconvProcess(stdClass $video, $audioBitrate, $filetype = 'mp3', $audioOnly = true)
-    {
+    private function getAvconvProcess(
+        stdClass $video,
+        $audioBitrate,
+        $filetype = 'mp3',
+        $audioOnly = true,
+        $from = null,
+        $to = null
+    ) {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
             throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
         }
 
+        $durationRegex = '/(\d+:)?(\d+:)?(\d+)/';
+
         if ($video->protocol == 'rtmp') {
-            $rtmpArguments = $this->getRtmpArguments($video);
+            $beforeArguments = $this->getRtmpArguments($video);
         } else {
-            $rtmpArguments = [];
+            $beforeArguments = [];
         }
 
         if ($audioOnly) {
-            $videoArguments = ['-vn'];
+            $afterArguments = ['-vn'];
         } else {
-            $videoArguments = [];
+            $afterArguments = [];
+        }
+
+        if (isset($from) && !empty($from)) {
+            if (!preg_match($durationRegex, $from)) {
+                throw new Exception(_('Invalid start time: ').$from.'.');
+            }
+            $afterArguments[] = '-ss';
+            $afterArguments[] = $from;
+        }
+        if (isset($to) && !empty($to)) {
+            if (!preg_match($durationRegex, $to)) {
+                throw new Exception(_('Invalid end time: ').$to.'.');
+            }
+            $afterArguments[] = '-to';
+            $afterArguments[] = $to;
         }
 
         $arguments = array_merge(
@@ -296,13 +321,13 @@ class VideoDownload
                 $this->config->avconv,
                 '-v', $this->config->avconvVerbosity,
             ],
-            $rtmpArguments,
+            $beforeArguments,
             [
                 '-i', $video->url,
                 '-f', $filetype,
                 '-b:a', $audioBitrate.'k',
             ],
-            $videoArguments,
+            $afterArguments,
             [
                 'pipe:1',
             ]
@@ -322,13 +347,15 @@ class VideoDownload
      * @param string $url      URL of page
      * @param string $format   Format to use for the video
      * @param string $password Video password
+     * @param string $from     Start the conversion at this time
+     * @param string $to       End the conversion at this time
      *
      * @throws Exception If your try to convert and M3U8 video
      * @throws Exception If the popen stream was not created correctly
      *
      * @return resource popen stream
      */
-    public function getAudioStream($url, $format, $password = null)
+    public function getAudioStream($url, $format, $password = null, $from = null, $to = null)
     {
         $video = $this->getJSON($url, $format, $password);
 
@@ -336,13 +363,15 @@ class VideoDownload
             throw new Exception(_('Conversion of playlists is not supported.'));
         }
 
-        if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
-            throw new Exception(_('Conversion of M3U8 files is not supported.'));
-        } elseif ($video->protocol == 'http_dash_segments') {
-            throw new Exception(_('Conversion of DASH segments is not supported.'));
+        if (isset($video->protocol)) {
+            if (in_array($video->protocol, ['m3u8', 'm3u8_native'])) {
+                throw new Exception(_('Conversion of M3U8 files is not supported.'));
+            } elseif ($video->protocol == 'http_dash_segments') {
+                throw new Exception(_('Conversion of DASH segments is not supported.'));
+            }
         }
 
-        $avconvProc = $this->getAvconvProcess($video, $this->config->audioBitrate);
+        $avconvProc = $this->getAvconvProcess($video, $this->config->audioBitrate, 'mp3', true, $from, $to);
 
         $stream = popen($avconvProc->getCommandLine(), 'r');
 
