@@ -222,24 +222,26 @@ class VideoDownload
     {
         $arguments = [];
 
-        foreach ([
-            'url'           => '-rtmp_tcurl',
-            'webpage_url'   => '-rtmp_pageurl',
-            'player_url'    => '-rtmp_swfverify',
-            'flash_version' => '-rtmp_flashver',
-            'play_path'     => '-rtmp_playpath',
-            'app'           => '-rtmp_app',
-        ] as $property => $option) {
-            if (isset($video->{$property})) {
-                $arguments[] = $option;
-                $arguments[] = $video->{$property};
+        if ($video->protocol == 'rtmp') {
+            foreach ([
+                'url'           => '-rtmp_tcurl',
+                'webpage_url'   => '-rtmp_pageurl',
+                'player_url'    => '-rtmp_swfverify',
+                'flash_version' => '-rtmp_flashver',
+                'play_path'     => '-rtmp_playpath',
+                'app'           => '-rtmp_app',
+            ] as $property => $option) {
+                if (isset($video->{$property})) {
+                    $arguments[] = $option;
+                    $arguments[] = $video->{$property};
+                }
             }
-        }
 
-        if (isset($video->rtmp_conn)) {
-            foreach ($video->rtmp_conn as $conn) {
-                $arguments[] = '-rtmp_conn';
-                $arguments[] = $conn;
+            if (isset($video->rtmp_conn)) {
+                foreach ($video->rtmp_conn as $conn) {
+                    $arguments[] = '-rtmp_conn';
+                    $arguments[] = $conn;
+                }
             }
         }
 
@@ -289,26 +291,20 @@ class VideoDownload
 
         $durationRegex = '/(\d+:)?(\d+:)?(\d+)/';
 
-        if ($video->protocol == 'rtmp') {
-            $beforeArguments = $this->getRtmpArguments($video);
-        } else {
-            $beforeArguments = [];
-        }
+        $afterArguments = [];
 
         if ($audioOnly) {
-            $afterArguments = ['-vn'];
-        } else {
-            $afterArguments = [];
+            $afterArguments[] = '-vn';
         }
 
-        if (isset($from) && !empty($from)) {
+        if (!empty($from)) {
             if (!preg_match($durationRegex, $from)) {
                 throw new Exception(_('Invalid start time: ').$from.'.');
             }
             $afterArguments[] = '-ss';
             $afterArguments[] = $from;
         }
-        if (isset($to) && !empty($to)) {
+        if (!empty($to)) {
             if (!preg_match($durationRegex, $to)) {
                 throw new Exception(_('Invalid end time: ').$to.'.');
             }
@@ -321,7 +317,7 @@ class VideoDownload
                 $this->config->avconv,
                 '-v', $this->config->avconvVerbosity,
             ],
-            $beforeArguments,
+            $this->getRtmpArguments($video),
             [
                 '-i', $video->url,
                 '-f', $filetype,
