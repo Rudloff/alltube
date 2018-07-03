@@ -212,6 +212,13 @@ class FrontController
      */
     private function getConvertedAudioResponse(Request $request, Response $response, array $params, $password = null)
     {
+        if (!isset($params['from'])) {
+            $params['from'] = '';
+        }
+        if (!isset($params['to'])) {
+            $params['to'] = '';
+        }
+
         $response = $response->withHeader(
             'Content-Disposition',
             'attachment; filename="'.
