@@ -227,3 +227,11 @@ msgstr "Horodatage de début non-valide :␣"
 msgid "Invalid end time: "
 msgstr "Horodatage de fin non-valide :␣"
 
+#: templates/index.tpl:28
+msgid "From"
+msgstr "À partir de"
+
+#: templates/index.tpl:29
+msgid "to"
+msgstr "jusqu'à"
+
