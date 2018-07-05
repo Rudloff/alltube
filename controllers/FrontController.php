@@ -98,7 +98,7 @@ class FrontController
         $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment(self::class);
         if ($this->config->remux) {
-            $this->defaultFormat = 'bestvideo+bestaudio';
+            $this->defaultFormat = 'bestvideo+bestaudio,best';
         } elseif ($this->config->stream) {
             $this->defaultFormat = 'best';
         }
