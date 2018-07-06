@@ -144,7 +144,7 @@ class Config
      */
     private function getEnv()
     {
-        foreach (['CONVERT', 'PYTHON', 'AUDIO_BITRATE'] as $var) {
+        foreach (['CONVERT', 'PYTHON', 'AUDIO_BITRATE', 'STREAM'] as $var) {
             $env = getenv($var);
             if ($env) {
                 $prop = lcfirst(str_replace('_', '', ucwords(strtolower($var), '_')));

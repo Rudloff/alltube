@@ -32,6 +32,10 @@
     "PYTHON": {
       "description": "Path to python binary",
       "value": "/app/.heroku/python/bin/python"
+    },
+    "STREAM": {
+      "description": "Enable stream mode",
+      "value": "false"
     }
   },
   "website": "https://alltubedownload.net/"
