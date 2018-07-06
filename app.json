@@ -35,7 +35,8 @@
     },
     "STREAM": {
       "description": "Enable stream mode",
-      "value": "false"
+      "value": "false",
+      "required": false
     }
   },
   "website": "https://alltubedownload.net/"
