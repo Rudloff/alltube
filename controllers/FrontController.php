@@ -343,6 +343,11 @@ class FrontController
     public function video(Request $request, Response $response)
     {
         $params = $request->getQueryParams();
+
+        if (!isset($params['url']) && isset($params['v'])) {
+            $params['url'] = $params['v'];
+        }
+
         if (isset($params['url'])) {
             $password = $request->getParam('password');
             if (isset($password)) {

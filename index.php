@@ -47,6 +47,10 @@ $app->any(
     '/video',
     [$controller, 'video']
 )->setName('video');
+$app->any(
+    '/watch',
+    [$controller, 'video']
+);
 $app->get(
     '/redirect',
     [$controller, 'redirect']
