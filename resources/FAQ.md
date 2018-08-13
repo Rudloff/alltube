@@ -8,6 +8,20 @@ Most recent browsers automatically play a video
 if it is a format they know how to play.
 You can ususally download the video by doing *File > Save to* or *ctrl + S*.
 
+## Why is [alltubedownload.net](https://alltubedownload.net) so slow?
+
+[alltubedownload.net](https://alltubedownload.net) is hosted on a free [Heroku server](https://www.heroku.com/pricing)
+so it has low RAM and CPU.
+
+AllTube probably won't switch to a more expensive hosting
+because this project does not earn any financial ressources
+(although [donations are welcome](https://liberapay.com/Rudloff/))
+and you are encouraged to host it yourself.
+
+## alltubedownload.net often says "An error occurred in the application…"
+
+See above.
+
 ## How do I change config parameters?
 
 You need to create a YAML file called `config.yml` in the `config/` folder.
