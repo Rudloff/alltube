@@ -348,7 +348,7 @@ class FrontController
             $params['url'] = $params['v'];
         }
 
-        if (isset($params['url'])) {
+        if (isset($params['url']) && !empty($params['url'])) {
             $password = $request->getParam('password');
             if (isset($password)) {
                 $this->sessionSegment->setFlash($params['url'], $password);
