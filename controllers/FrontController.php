@@ -98,7 +98,7 @@ class FrontController
         $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment(self::class);
         if ($this->config->remux) {
-            $this->defaultFormat = 'bestvideo+bestaudio';
+            $this->defaultFormat = 'bestvideo+bestaudio,best';
         } elseif ($this->config->stream) {
             $this->defaultFormat = 'best';
         }
@@ -201,7 +201,57 @@ class FrontController
     }
 
     /**
-     * Return the converted MP3 file.
+     * Return a converted MP3 file.
+     *
+     * @param Request  $request  PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param array    $params   GET query parameters
+     * @param string   $password Video password
+     *
+     * @return Response HTTP response
+     */
+    private function getConvertedAudioResponse(Request $request, Response $response, array $params, $password = null)
+    {
+        if (!isset($params['from'])) {
+            $params['from'] = '';
+        }
+        if (!isset($params['to'])) {
+            $params['to'] = '';
+        }
+
+        $response = $response->withHeader(
+            'Content-Disposition',
+            'attachment; filename="'.
+            $this->download->getAudioFilename($params['url'], 'bestaudio/best', $password).'"'
+        );
+        $response = $response->withHeader('Content-Type', 'audio/mpeg');
+
+        if ($request->isGet() || $request->isPost()) {
+            try {
+                $process = $this->download->getAudioStream(
+                    $params['url'],
+                    'bestaudio/best',
+                    $password,
+                    $params['from'],
+                    $params['to']
+                );
+            } catch (Exception $e) {
+                $process = $this->download->getAudioStream(
+                    $params['url'],
+                    $this->defaultFormat,
+                    $password,
+                    $params['from'],
+                    $params['to']
+                );
+            }
+            $response = $response->withBody(new Stream($process));
+        }
+
+        return $response;
+    }
+
+    /**
+     * Return the MP3 file.
      *
      * @param Request  $request  PSR-7 request
      * @param Response $response PSR-7 response
@@ -213,6 +263,10 @@ class FrontController
     private function getAudioResponse(Request $request, Response $response, array $params, $password = null)
     {
         try {
+            if (isset($params['from']) || isset($params['to'])) {
+                throw new Exception('Force convert when we need to seek.');
+            }
+
             if ($this->config->stream) {
                 return $this->getStream($params['url'], 'mp3', $response, $request, $password);
             } else {
@@ -223,23 +277,7 @@ class FrontController
         } catch (PasswordException $e) {
             return $this->password($request, $response);
         } catch (Exception $e) {
-            $response = $response->withHeader(
-                'Content-Disposition',
-                'attachment; filename="'.
-                $this->download->getAudioFilename($params['url'], 'bestaudio/best', $password).'"'
-            );
-            $response = $response->withHeader('Content-Type', 'audio/mpeg');
-
-            if ($request->isGet() || $request->isPost()) {
-                try {
-                    $process = $this->download->getAudioStream($params['url'], 'bestaudio/best', $password);
-                } catch (Exception $e) {
-                    $process = $this->download->getAudioStream($params['url'], $this->defaultFormat, $password);
-                }
-                $response = $response->withBody(new Stream($process));
-            }
-
-            return $response;
+            return $this->getConvertedAudioResponse($request, $response, $params, $password);
         }
     }
 
@@ -305,7 +343,12 @@ class FrontController
     public function video(Request $request, Response $response)
     {
         $params = $request->getQueryParams();
-        if (isset($params['url'])) {
+
+        if (!isset($params['url']) && isset($params['v'])) {
+            $params['url'] = $params['v'];
+        }
+
+        if (isset($params['url']) && !empty($params['url'])) {
             $password = $request->getParam('password');
             if (isset($password)) {
                 $this->sessionSegment->setFlash($params['url'], $password);

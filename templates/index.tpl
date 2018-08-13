@@ -19,9 +19,16 @@
         <input class="downloadBtn large-font" type="submit" value="{t}Download{/t}" /><br/>
         {if $config->convert}
             <div class="mp3 small-font">
-                <p><input type="checkbox" id="audio" class="audio" name="audio">
-                <label for="audio"><span class="ui"></span>
-                    {t}Audio only (MP3){/t}</label></p>
+                <div class="mp3-inner">
+                    <input type="checkbox" id="audio" class="audio" name="audio">
+                    <label for="audio"><span class="ui"></span>
+                        {t}Audio only (MP3){/t}
+                    </label>
+                    <div class="seekOptions">
+                        {t}From{/t} <input type="text" placeholder="00:00:00" value="" name="from" />
+                        {t}to{/t} <input type="text" placeholder="00:22:30" value="" name="to" />
+                    </div>
+                </div>
             </div>
         {/if}
     </div>
