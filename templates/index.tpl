@@ -25,8 +25,8 @@
                         {t}Audio only (MP3){/t}
                     </label>
                     <div class="seekOptions">
-                        {t}From{/t} <input type="time" placeholder="00:00:00" step="2" value="" name="from" />
-                        {t}to{/t} <input type="time" placeholder="00:22:30" step="2" value="" name="to" />
+                        {t}From{/t} <input type="time" step="2" value="" name="from" />
+                        {t}to{/t} <input type="time" step="2" value="" name="to" />
                     </div>
                 </div>
             </div>
