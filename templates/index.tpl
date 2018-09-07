@@ -26,7 +26,7 @@
                     </label>
                     <div class="seekOptions">
                         {t}From{/t} <input type="text" pattern="(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}" placeholder="HH:MM:SS" value="" name="from"/>
-                        {t}to{/t} <input type="text" pattern="(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}" placeholder=HH:MM:SS" value="" name="to"/>
+                        {t}to{/t} <input type="text" pattern="(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}" placeholder="HH:MM:SS" value="" name="to"/>
                     </div>
                 </div>
             </div>
