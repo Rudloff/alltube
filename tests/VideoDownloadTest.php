@@ -187,7 +187,7 @@ class VideoDownloadTest extends TestCase
             ],
             [
                 'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
-                'Leonard_Cohen_Kaleidoscope_-_BBC_Radio_4-b039d07m',
+                'Kaleidoscope_Leonard_Cohen-b039d07m',
                 'flv',
                 'bbcodspdns.fcod.llnwd.net',
             ],

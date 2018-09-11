@@ -23,7 +23,7 @@
     "phpunit/phpunit": "~6.5.2",
     "doctrine/instantiator": "~1.0.0",
     "ffmpeg/ffmpeg": "4.0.2",
-    "rg3/youtube-dl": "2018.06.02",
+    "rg3/youtube-dl": "2018.09.10",
     "heroku/heroku-buildpack-php": "*",
     "anam/phantomjs-linux-x86-binary": "~2.1.1"
   },
@@ -39,10 +39,10 @@
       "type": "package",
       "package": {
         "name": "rg3/youtube-dl",
-        "version": "2018.06.02",
+        "version": "2018.09.10",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/rg3/youtube-dl/archive/2018.06.02.zip"
+          "url": "https://github.com/rg3/youtube-dl/archive/2018.09.10.zip"
         }
       }
     },
