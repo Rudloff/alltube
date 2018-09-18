@@ -426,8 +426,8 @@ class FrontController
                 'GET',
                 $video->url,
                 [
-                    'stream' => true,
-                    'headers' => ['Range' => $request->getHeader('Range')]
+                    'stream'  => true,
+                    'headers' => ['Range' => $request->getHeader('Range')],
                 ]
             );
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
