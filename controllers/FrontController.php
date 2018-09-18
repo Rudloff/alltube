@@ -422,9 +422,21 @@ class FrontController
             $body = new Stream($stream);
         } else {
             $client = new Client();
-            $stream = $client->request('GET', $video->url, ['stream' => true]);
+            $stream = $client->request(
+                'GET',
+                $video->url,
+                [
+                    'stream' => true,
+                    'headers' => ['Range' => $request->getHeader('Range')]
+                ]
+            );
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
+            $response = $response->withHeader('Accept-Ranges', $stream->getHeader('Accept-Ranges'));
+            $response = $response->withHeader('Content-Range', $stream->getHeader('Content-Range'));
+            if ($stream->getStatusCode() == 206) {
+                $response = $response->withStatus(206);
+            }
             $body = $stream->getBody();
         }
         if ($request->isGet()) {
