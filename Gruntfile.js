@@ -89,6 +89,7 @@ module.exports = function (grunt) {
                         'i18n/fr_FR/LC_MESSAGES/Alltube.mo': 'i18n/fr_FR/LC_MESSAGES/Alltube.po',
                         'i18n/zh_CN/LC_MESSAGES/Alltube.mo': 'i18n/zh_CN/LC_MESSAGES/Alltube.po',
                         'i18n/es_ES/LC_MESSAGES/Alltube.mo': 'i18n/es_ES/LC_MESSAGES/Alltube.po',
+                        'i18n/de_DE/LC_MESSAGES/Alltube.mo': 'i18n/de_DE/LC_MESSAGES/Alltube.po',
                         'i18n/pt_BR/LC_MESSAGES/Alltube.mo': 'i18n/pt_BR/LC_MESSAGES/Alltube.po'
                     }
                 }
