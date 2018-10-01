@@ -124,7 +124,7 @@ msgstr "Dieses Video ist geschützt"
 
 #: templates/password.tpl:6
 msgid "You need a password in order to download this video."
-msgstr "Du benötigst ein Password, um dieses Video herunterzuladen."
+msgstr "Du benötigst ein Passwort, um dieses Video herunterzuladen."
 
 #: templates/password.tpl:8
 msgid "Video password"
@@ -223,7 +223,7 @@ msgstr "Passwortabfrage"
 msgid ""
 "You need a password in order to download this video with Alltube Download"
 msgstr ""
-"Du benötigst ein Password, um dieses Video mit Alltube Download "
+"Du benötigst ein Passwort, um dieses Video mit Alltube Download "
 "herunterzuladen"
 
 #: controllers/FrontController.php:311
