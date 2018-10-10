@@ -1,14 +1,12 @@
 # Frequently asked questions
 
-<!-- markdownlint-disable MD026 -->
-
-## My browser plays the video. How do I download it?
+## My browser plays the video instead of downloading it
 
 Most recent browsers automatically play a video
 if it is a format they know how to play.
-You can ususally download the video by doing *File > Save to* or *ctrl + S*.
+You can usually download the video by doing *File > Save to* or *ctrl + S*.
 
-## Why is [alltubedownload.net](https://alltubedownload.net) so slow?
+## [alltubedownload.net](https://alltubedownload.net) is too slow
 
 [alltubedownload.net](https://alltubedownload.net) is hosted on a free [Heroku server](https://www.heroku.com/pricing)
 so it has low RAM and CPU.
@@ -22,14 +20,14 @@ and you are encouraged to host it yourself.
 
 See above.
 
-## How do I change config parameters?
+## Change config parameters
 
 You need to create a YAML file called `config.yml` in the `config/` folder.
 
 See [`config.example.yml`](../config/config.example.yml)
 for a list of parameters you can set and their default value.
 
-## How do I enable audio conversion?
+## Enable audio conversion
 
 In order to enable audio conversion, you need to add this to your `config.yml` file:
 
@@ -44,7 +42,7 @@ You will also need to install `avconv` on your server:
 sudo apt-get install libav-tools
 ```
 
-## How do I deploy AllTube on Heroku?
+## Deploy AllTube on Heroku
 
 Create a dyno with the following buildpacks:
 
@@ -61,7 +59,7 @@ PYTHON=/app/.heroku/python/bin/python
 
 Then push the code to Heroku and it should work out of the box.
 
-## Why can't I download videos from some websites (e.g. Dailymotion)
+## I can't download videos from some websites (e.g. Dailymotion)
 
 Some websites generate an unique video URL for each IP address.
 When using AllTube, the URL is generated for our server's IP address
@@ -93,7 +91,7 @@ You can work around this by adding this to your `config.yml` file:
 uglyUrls: true
 ```
 
-## How do I enable streaming videos through the server?
+## Enable streaming videos through the server
 
 You need to add this to your `config.yml` file:
 
@@ -103,7 +101,7 @@ stream: true
 
 Note that this can use a lot of ressources on your server.
 
-## I want to download M3U videos
+## Download M3U videos
 
 You need to enable streaming (see above).
 
@@ -111,18 +109,18 @@ You need to enable streaming (see above).
 
 AllTube can rename videos automatically if you enable streaming (see above).
 
-## I want to download a video that isn't available in my country
+## Download a video that isn't available in my country
 
 If the video is available in the server's country,
 you can download it if you enable streaming (see above).
 
-## How do I run the Docker image?
+## Run the Docker image
 
 ```bash
 docker run -p 8080:80 rudloff/alltube
 ```
 
-## How do I run Heroku locally?
+## Run Heroku locally
 
 You should be able to use `heroku local` like this:
 
@@ -146,7 +144,7 @@ after `heroku local` has finished launching `php-fpm`:
 chmod 0667 /tmp/heroku.fcgi.5000.sock
 ```
 
-## How can I download 1080p videos from Youtube?
+## Download 1080p videos from Youtube
 
 Youtube distributes HD content in two separate video and audio files.
 So AllTube will offer you video-only and audio-only formats in the format list.
@@ -156,7 +154,7 @@ You then need to merge them together with a tool like ffmpeg.
 You can also enable the experimental remux mode
 that will merge the best video and the best audio format on the fly.
 
-## I want to convert videos to something other than MP3
+## Convert videos to something other than MP3
 
 By default the `convert` option only allows converting to MP3,
 in order to keep things simple and ressources usage low.
