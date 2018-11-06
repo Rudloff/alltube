@@ -16,6 +16,9 @@ params:
 # True to enable audio conversion
 convert: false
 
+# Audio format ("best", "aac", "flac", "mp3", "m4a", "opus", "vorbis", or "wav")
+convertFormat: opus
+
 # True to enable advanced conversion mode
 convertAdvanced: false
 
