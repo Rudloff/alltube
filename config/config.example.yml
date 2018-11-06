@@ -17,7 +17,7 @@ params:
 convert: false
 
 # Audio format ("best", "aac", "flac", "mp3", "m4a", "opus", "vorbis", or "wav")
-convertFormat: opus
+audioFormat: mp3
 
 # True to enable advanced conversion mode
 convertAdvanced: false
