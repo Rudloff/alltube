@@ -1,7 +1,7 @@
 {
   "name": "alltube",
   "description": "HTML GUI for youtube-dl",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "author": "Pierre Rudloff",
   "bugs": "https://github.com/Rudloff/alltube/issues",
   "dependencies": {
