@@ -1451,7 +1451,7 @@
             "version": "4.0.2",
             "dist": {
                 "type": "xz",
-                "url": "https://johnvansickle.com/ffmpeg/releases/ffmpeg-4.0.2-64bit-static.tar.xz",
+                "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.0.3-64bit-static.tar.xz",
                 "reference": null,
                 "shasum": null
             },

@@ -52,7 +52,7 @@
         "name": "ffmpeg/ffmpeg",
         "version": "4.0.2",
         "dist": {
-          "url": "https://johnvansickle.com/ffmpeg/releases/ffmpeg-4.0.2-64bit-static.tar.xz",
+          "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.0.3-64bit-static.tar.xz",
           "type": "xz"
         },
         "bin": [
