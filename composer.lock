@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9290c3e6ef15fb65892664adfd8f24c2",
+    "content-hash": "2f25c657ba117b6ebbe7992c501bd890",
     "packages": [
         {
             "name": "aura/session",
@@ -1448,7 +1448,7 @@
         },
         {
             "name": "ffmpeg/ffmpeg",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "dist": {
                 "type": "xz",
                 "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.0.3-64bit-static.tar.xz",

@@ -22,7 +22,7 @@
     "squizlabs/php_codesniffer": "~3.2.2",
     "phpunit/phpunit": "~6.5.2",
     "doctrine/instantiator": "~1.0.0",
-    "ffmpeg/ffmpeg": "4.0.2",
+    "ffmpeg/ffmpeg": "4.0.3",
     "rg3/youtube-dl": "2018.11.07",
     "heroku/heroku-buildpack-php": "*",
     "anam/phantomjs-linux-x86-binary": "~2.1.1"
@@ -50,7 +50,7 @@
       "type": "package",
       "package": {
         "name": "ffmpeg/ffmpeg",
-        "version": "4.0.2",
+        "version": "4.0.3",
         "dist": {
           "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.0.3-64bit-static.tar.xz",
           "type": "xz"
