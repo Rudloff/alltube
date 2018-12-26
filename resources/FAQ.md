@@ -152,7 +152,11 @@ So AllTube will offer you video-only and audio-only formats in the format list.
 You then need to merge them together with a tool like ffmpeg.
 
 You can also enable the experimental remux mode
-that will merge the best video and the best audio format on the fly.
+that will merge the best video and the best audio format on the fly:
+
+```yaml
+remux: true
+```
 
 ## Convert videos to something other than MP3
 
