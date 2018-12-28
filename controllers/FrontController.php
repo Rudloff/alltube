@@ -473,15 +473,15 @@ class FrontController
         }
         $webpageUrl = $request->getQueryParam('url');
 
-        return $response->withHeader('Content-Disposition', 'attachment; filename="'.pathinfo(
-            $this->download->getFileNameWithExtension(
+        return $response->withHeader(
+            'Content-Disposition',
+            'attachment; filename="'.$this->download->getFileNameWithExtension(
                 'mkv',
                 $webpageUrl,
                 $format,
                 $this->sessionSegment->getFlash($webpageUrl)
-            ),
-            PATHINFO_FILENAME
-        ).'.mkv"');
+            )
+        );
     }
 
     /**
