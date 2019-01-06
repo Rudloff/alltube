@@ -113,7 +113,7 @@ class Config
     public $avconvVerbosity = 'error';
 
     /**
-     * App name
+     * App name.
      *
      * @var string
      */
