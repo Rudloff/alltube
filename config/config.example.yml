@@ -42,3 +42,6 @@ remux: false
 
 # MP3 bitrate when converting (in kbit/s)
 audioBitrate: 128
+
+# App name
+appName: AllTube Download

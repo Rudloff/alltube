@@ -162,6 +162,7 @@ class FrontController
             $response,
             'extractors.tpl',
             [
+                'config'      => $this->config,
                 'extractors'  => $this->download->listExtractors(),
                 'class'       => 'extractors',
                 'title'       => _('Supported websites'),

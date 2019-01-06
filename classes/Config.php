@@ -113,6 +113,13 @@ class Config
     public $avconvVerbosity = 'error';
 
     /**
+     * App name
+     *
+     * @var string
+     */
+    public $appName = 'AllTube Download';
+
+    /**
      * YAML config file path.
      *
      * @var string
