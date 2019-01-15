@@ -190,6 +190,7 @@ class FrontController
             $response,
             'password.tpl',
             [
+                'config'      => $this->config,
                 'class'       => 'password',
                 'title'       => _('Password prompt'),
                 'description' => _('You need a password in order to download this video with Alltube Download'),
@@ -379,6 +380,7 @@ class FrontController
             $response,
             'error.tpl',
             [
+                'config'    => $this->config,
                 'errors'    => $exception->getMessage(),
                 'class'     => 'video',
                 'title'     => _('Error'),
