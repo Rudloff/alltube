@@ -5,7 +5,7 @@
   "homepage": "http://alltubedownload.net/",
   "type": "project",
   "require": {
-    "slim/slim": "~3.9.2",
+    "slim/slim": "~3.11.0",
     "mathmarques/smarty-view": "~1.1.0",
     "symfony/yaml": "~3.4.1",
     "symfony/process": "~3.4.1",
