@@ -97,7 +97,6 @@ class VideoDownloadTest extends TestCase
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
-     * @dataProvider rtmpUrlProvider
      * @dataProvider remuxUrlProvider
      */
     public function testGetURL(
@@ -278,7 +277,6 @@ class VideoDownloadTest extends TestCase
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
-     * @dataProvider rtmpUrlProvider
      */
     public function testGetJSON($url, $format)
     {
@@ -316,7 +314,6 @@ class VideoDownloadTest extends TestCase
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
-     * @dataProvider rtmpUrlProvider
      * @dataProvider remuxUrlProvider
      */
     public function testGetFilename($url, $format, $filename, $extension)
@@ -349,7 +346,6 @@ class VideoDownloadTest extends TestCase
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
-     * @dataProvider rtmpUrlProvider
      * @dataProvider remuxUrlProvider
      */
     public function testGetAudioFilename($url, $format, $filename)
@@ -490,6 +486,8 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetRtmpStream($url, $format)
     {
+        $this->markTestIncomplete('We need to find another RTMP video.');
+
         $this->assertStream(
             $this->download->getRtmpStream(
                 $this->download->getJSON($url, $format)
