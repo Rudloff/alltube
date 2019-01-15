@@ -14,7 +14,7 @@
     "barracudanetworks/archivestream-php": "~1.0.5",
     "smarty-gettext/smarty-gettext": "~1.5.1",
     "zonuexe/http-accept-language": "~0.4.1",
-    "rinvex/country": "~3.1.0",
+    "rinvex/countries": "~3.1.0",
     "php-mock/php-mock-mockery": "~1.2.0"
   },
   "require-dev": {

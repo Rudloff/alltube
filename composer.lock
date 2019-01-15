@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fd1f5514e63feade05ea3e329679c55",
+    "content-hash": "8c0fe024874d8cf8aee45ea05931ccb8",
     "packages": [
         {
             "name": "aura/session",
@@ -931,16 +931,16 @@
             "time": "2016-02-11T07:05:27+00:00"
         },
         {
-            "name": "rinvex/country",
+            "name": "rinvex/countries",
             "version": "v3.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rinvex/renamed-country.git",
+                "url": "https://github.com/rinvex/countries.git",
                 "reference": "e32228ef43f26d3b02296be9454f842c52d492f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rinvex/renamed-country/zipball/e32228ef43f26d3b02296be9454f842c52d492f3",
+                "url": "https://api.github.com/repos/rinvex/countries/zipball/e32228ef43f26d3b02296be9454f842c52d492f3",
                 "reference": "e32228ef43f26d3b02296be9454f842c52d492f3",
                 "shasum": ""
             },
@@ -1002,7 +1002,6 @@
                 "rinvex",
                 "svg"
             ],
-            "abandoned": "rinvex/countries",
             "time": "2017-03-07T18:40:20+00:00"
         },
         {
