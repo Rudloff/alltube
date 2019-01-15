@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c0fe024874d8cf8aee45ea05931ccb8",
+    "content-hash": "3d6bfd06c7ca2432a182ebf6a1d0473f",
     "packages": [
         {
             "name": "aura/session",
@@ -1077,16 +1077,16 @@
         },
         {
             "name": "smarty-gettext/smarty-gettext",
-            "version": "1.5.1",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-gettext/smarty-gettext.git",
-                "reference": "00fe2fcbc41e24e0245cd9d73f96bc7b0337972d"
+                "reference": "2e20e71e82346a5d244f8bd7d3c4e2c0f2b18a5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/00fe2fcbc41e24e0245cd9d73f96bc7b0337972d",
-                "reference": "00fe2fcbc41e24e0245cd9d73f96bc7b0337972d",
+                "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/2e20e71e82346a5d244f8bd7d3c4e2c0f2b18a5e",
+                "reference": "2e20e71e82346a5d244f8bd7d3c4e2c0f2b18a5e",
                 "shasum": ""
             },
             "require": {
@@ -1096,6 +1096,7 @@
             },
             "require-dev": {
                 "azatoth/php-pgettext": "~1.0",
+                "phpunit/phpunit": ">=4.8.36",
                 "smarty/smarty": "3.1.*"
             },
             "suggest": {
@@ -1113,7 +1114,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1+"
+                "LGPL-2.1"
             ],
             "authors": [
                 {
@@ -1127,7 +1128,7 @@
             ],
             "description": "Gettext plugin enabling internationalization in Smarty Package files",
             "homepage": "https://github.com/smarty-gettext/smarty-gettext",
-            "time": "2017-05-12T12:14:46+00:00"
+            "time": "2018-10-13T15:42:29+00:00"
         },
         {
             "name": "smarty/smarty",

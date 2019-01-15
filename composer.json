@@ -12,7 +12,7 @@
     "guzzlehttp/guzzle": "~6.3.0",
     "aura/session": "~2.1.0",
     "barracudanetworks/archivestream-php": "~1.0.5",
-    "smarty-gettext/smarty-gettext": "~1.5.1",
+    "smarty-gettext/smarty-gettext": "~1.6.0",
     "zonuexe/http-accept-language": "~0.4.1",
     "rinvex/countries": "~3.1.0",
     "php-mock/php-mock-mockery": "~1.2.0"
