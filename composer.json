@@ -19,7 +19,7 @@
   },
   "require-dev": {
     "symfony/var-dumper": "~3.4.1",
-    "squizlabs/php_codesniffer": "~3.2.2",
+    "squizlabs/php_codesniffer": "~3.4.0",
     "phpunit/phpunit": "~6.5.2",
     "doctrine/instantiator": "~1.0.0",
     "ffmpeg/ffmpeg": "4.0.3",
