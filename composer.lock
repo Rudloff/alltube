@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee0f459b32da827b9437bdfc81671210",
+    "content-hash": "06c7619047b2e62246e52f538b982231",
     "packages": [
         {
             "name": "aura/session",
@@ -1076,16 +1076,16 @@
         },
         {
             "name": "smarty-gettext/smarty-gettext",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-gettext/smarty-gettext.git",
-                "reference": "2e20e71e82346a5d244f8bd7d3c4e2c0f2b18a5e"
+                "reference": "9a7d9284b5374caeae5eb226cf486efb4bc748b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/2e20e71e82346a5d244f8bd7d3c4e2c0f2b18a5e",
-                "reference": "2e20e71e82346a5d244f8bd7d3c4e2c0f2b18a5e",
+                "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/9a7d9284b5374caeae5eb226cf486efb4bc748b4",
+                "reference": "9a7d9284b5374caeae5eb226cf486efb4bc748b4",
                 "shasum": ""
             },
             "require": {
@@ -1127,7 +1127,7 @@
             ],
             "description": "Gettext plugin enabling internationalization in Smarty Package files",
             "homepage": "https://github.com/smarty-gettext/smarty-gettext",
-            "time": "2018-10-13T15:42:29+00:00"
+            "time": "2019-01-17T23:06:53+00:00"
         },
         {
             "name": "smarty/smarty",
@@ -2260,10 +2260,10 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2018.11.07",
+            "version": "2019.01.17",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2018.11.07.zip",
+                "url": "https://github.com/rg3/youtube-dl/archive/2019.01.17.zip",
                 "reference": null,
                 "shasum": null
             },
