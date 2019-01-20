@@ -57,7 +57,7 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
-                    src: ['*.php', 'config/*', '!config/config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'resources/sitemap.xml', 'resources/manifest.json', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', 'i18n/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/anam/phantomjs-linux-x86-binary/**', '!vendor/bin/phantomjs', '!vendor/phpunit/**', '!vendor/squizlabs/**', '!vendor/rinvex/country/resources/geodata/*.json', '!vendor/rinvex/country/resources/flags/*.svg', 'node_modules/open-sans-fontface/fonts/**']
+                    src: ['*.php', 'config/*', '!config/config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'resources/sitemap.xml', 'resources/manifest.json', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', 'i18n/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/anam/phantomjs-linux-x86-binary/**', '!vendor/bin/phantomjs', '!vendor/phpunit/**', '!vendor/squizlabs/**', '!vendor/rinvex/countries/resources/geodata/*.json', '!vendor/countries/country/resources/flags/*.svg', 'node_modules/open-sans-fontface/fonts/**']
                 }
             },
             phpdocumentor: {
