@@ -1,0 +1,237 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: AllTube Download\n"
+"Language: ar\n"
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr "رجاء راجع الرابط المكتوب"
+
+#: templates/playlist.tpl:5
+msgid "Videos extracted from"
+msgstr "الفيديوات مستخلصة من"
+
+#: templates/playlist.tpl:7
+msgid ":"
+msgstr ":"
+
+#: templates/playlist.tpl:26 templates/video.tpl:96 templates/video.tpl:99
+#: templates/password.tpl:10 templates/index.tpl:19
+#: controllers/FrontController.php:315
+msgid "Download"
+msgstr "حمل"
+
+#: templates/playlist.tpl:27
+msgid "More options"
+msgstr "خيارات أكثر"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "الفيديو محمي عن التحميل"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "تحتاج لكلمة سر كي تستطع تحميل هذا الفيديو"
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "كلمة سر الفيديو"
+
+#: templates/extractors.tpl:4 controllers/FrontController.php:167
+msgid "Supported websites"
+msgstr "المواقع المدعومة"
+
+#: templates/video.tpl:6
+msgid "You are going to download"
+msgstr "تريد تحميل"
+
+#: templates/video.tpl:24
+msgid "Available formats:"
+msgstr "الصيغ المدعومة"
+
+#: templates/video.tpl:29
+msgid "Generic formats"
+msgstr "الصيغ العامة"
+
+#: templates/video.tpl:32
+msgid "Best"
+msgstr "الأفضل"
+
+#: templates/video.tpl:37
+msgid "Remux best video with best audio"
+msgstr "اجمع الصوت الأفضل مع الفيديو الأفضل جودة"
+
+#: templates/video.tpl:41
+msgid "Worst"
+msgstr "الاسوأ"
+
+#: templates/video.tpl:44
+msgid "Detailed formats"
+msgstr "الصيغ بتعمق أكثر"
+
+#: templates/inc/footer.tpl:4
+msgid "Code by"
+msgstr "برمجه"
+
+#: templates/inc/footer.tpl:6
+msgid "Design by"
+msgstr "صممه"
+
+#: templates/inc/footer.tpl:10
+msgid "Get the code"
+msgstr "للحصول على أصل البرنامج"
+
+#: templates/inc/footer.tpl:12
+msgid "Based on"
+msgstr "مبني على"
+
+#: templates/inc/header.tpl:21
+msgid "Share on Twitter"
+msgstr "شاركها على تويتر"
+
+#: templates/inc/header.tpl:23
+msgid "Share on Facebook"
+msgstr "شاركها على فيسبوك"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr "انسخ هنا رابط الفيديو (يوتيوب، انستقرام، وغيرها)"
+
+#: templates/index.tpl:25
+msgid "Audio only (MP3)"
+msgstr "صوت فقط (MP3)"
+
+#: templates/index.tpl:36
+msgid "See all supported websites"
+msgstr "لمراجعة جميع المواقع المدعومة"
+
+#: templates/index.tpl:38
+msgid "Drag this to your bookmarks bar:"
+msgstr "اسحب هذا الموقع لقائمة المفضلة في متصفحك"
+
+#: templates/index.tpl:39
+msgid "Bookmarklet"
+msgstr "موشر الصفحة"
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "غير اللغة"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "حصل خطأ ما"
+
+#: templates/video.tpl:85
+msgid "Convert into a custom format:"
+msgstr "حول لصيغة خاصة"
+
+#: templates/video.tpl:93
+msgid "kbit/s audio"
+msgstr "كيلوبايتات صوت"
+
+#: templates/video.tpl:91
+msgid "with"
+msgstr "مع"
+
+#: classes/VideoDownload.php:117
+msgid "Wrong password"
+msgstr "كلمة السر خاطئة"
+
+#: classes/VideoDownload.php:364 classes/VideoDownload.php:526
+msgid "Conversion of M3U8 files is not supported."
+msgstr "تحويل ملفات M3U8 غير مدعوم حاليًا."
+
+#: classes/VideoDownload.php:375 classes/VideoDownload.php:412
+#: classes/VideoDownload.php:445 classes/VideoDownload.php:478
+#: classes/VideoDownload.php:534
+msgid "Could not open popen stream."
+msgstr "لم يمكن بدأ Popen"
+
+#: classes/VideoDownload.php:502
+msgid "Could not open fopen stream."
+msgstr "لم يمكن بدأ fopen"
+
+#: controllers/FrontController.php:124
+msgid "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
+msgstr "حمل مقاطع الفيديو بكل سهولة من يوتيوب، انستقرام، فيميو وغيره."
+
+#: controllers/FrontController.php:168
+msgid "List of all supported websites from which Alltube Download can extract video or audio files"
+msgstr "قائمة كل المواقع التي يدعم Alltube Download تحميل الفيديوات أو مقاطع الصوت منها"
+
+#: controllers/FrontController.php:193
+msgid "Password prompt"
+msgstr "ادخل كلمة السر"
+
+#: controllers/FrontController.php:194
+msgid "You need a password in order to download this video with Alltube Download"
+msgstr "تحتاج لكلمة السر لكي تستطع تحميل هذا الفيديو باستخدام Alltube Donwload"
+
+#: controllers/FrontController.php:311
+msgid "Video download"
+msgstr "تحميل الفيديو"
+
+#: controllers/FrontController.php:312
+msgid "Download video from "
+msgstr "تحميل الفيديو من"
+
+#: controllers/FrontController.php:315
+msgid "from"
+msgstr "من"
+
+#: controllers/FrontController.php:378
+msgid "Error"
+msgstr "مشكلة"
+
+#: controllers/FrontController.php:450
+msgid "You need to enable remux mode to merge two formats."
+msgstr "لابد من اختيار نمط الريمكس ليمكن دمج صيغتين مختلفتين."
+
+#: controllers/FrontController.php:525
+msgid "Can't find URL of video."
+msgstr "لم أستطع الوجود على رابط الفيديو."
+
+#: classes/VideoDownload.php:289 classes/VideoDownload.php:394
+msgid "Can't find avconv or ffmpeg at "
+msgstr "لم يمكن الوجود على avconv أو ffmpeg في"
+
+#: templates/inc/footer.tpl:14
+msgid "Donate"
+msgstr "تبرع"
+
+#: classes/VideoDownload.php:158
+msgid "youtube-dl returned an empty URL."
+msgstr "Youtube-DL عاد برابط فارغ"
+
+#: classes/VideoDownload.php:359
+msgid "Conversion of playlists is not supported."
+msgstr "تحويل القائمات غير مدعوم حاليًا."
+
+#: classes/VideoDownload.php:366
+msgid "Conversion of DASH segments is not supported."
+msgstr "تحويل مقاطع DASH غير مدعوم حاليًا."
+
+#: templates/inc/footer.tpl:14
+msgid "Donate using Liberapay"
+msgstr "تبرع عن طريق Liberapay"
+
+#: classes/VideoDownload.php:302
+msgid "Invalid start time: "
+msgstr "وقت بداية خاطئ:"
+
+#: classes/VideoDownload.php:309
+msgid "Invalid end time: "
+msgstr "وقت نهاية خاطئ:"
+
+#: templates/index.tpl:28
+msgid "From"
+msgstr "من"
+
+#: templates/index.tpl:29
+msgid "to"
+msgstr "إلى"
+

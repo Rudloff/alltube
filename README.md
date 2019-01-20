@@ -196,5 +196,3 @@ Please read the [FAQ](resources/FAQ.md) before reporting any issue.
 ## License
 
 This software is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
-
-Please __use a different name and logo__ if you run it on a public server.

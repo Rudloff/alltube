@@ -162,6 +162,7 @@ class FrontController
             $response,
             'extractors.tpl',
             [
+                'config'      => $this->config,
                 'extractors'  => $this->download->listExtractors(),
                 'class'       => 'extractors',
                 'title'       => _('Supported websites'),
@@ -189,6 +190,7 @@ class FrontController
             $response,
             'password.tpl',
             [
+                'config'      => $this->config,
                 'class'       => 'password',
                 'title'       => _('Password prompt'),
                 'description' => _('You need a password in order to download this video with Alltube Download'),
@@ -378,6 +380,7 @@ class FrontController
             $response,
             'error.tpl',
             [
+                'config'    => $this->config,
                 'errors'    => $exception->getMessage(),
                 'class'     => 'video',
                 'title'     => _('Error'),
@@ -473,15 +476,15 @@ class FrontController
         }
         $webpageUrl = $request->getQueryParam('url');
 
-        return $response->withHeader('Content-Disposition', 'attachment; filename="'.pathinfo(
-            $this->download->getFileNameWithExtension(
+        return $response->withHeader(
+            'Content-Disposition',
+            'attachment; filename="'.$this->download->getFileNameWithExtension(
                 'mkv',
                 $webpageUrl,
                 $format,
                 $this->sessionSegment->getFlash($webpageUrl)
-            ),
-            PATHINFO_FILENAME
-        ).'.mkv"');
+            )
+        );
     }
 
     /**

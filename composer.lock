@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f25c657ba117b6ebbe7992c501bd890",
+    "content-hash": "06c7619047b2e62246e52f538b982231",
     "packages": [
         {
             "name": "aura/session",
@@ -257,32 +257,33 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+                "reference": "9f83dded91781a01c63574e387eaa769be769115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9f83dded91781a01c63574e387eaa769be769115",
+                "reference": "9f83dded91781a01c63574e387eaa769be769115",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -312,13 +313,14 @@
             "keywords": [
                 "http",
                 "message",
+                "psr-7",
                 "request",
                 "response",
                 "stream",
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
+            "time": "2018-12-04T20:46:45+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -531,30 +533,29 @@
         },
         {
             "name": "php-mock/php-mock",
-            "version": "1.0.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mock/php-mock.git",
-                "reference": "bfa2d17d64dbf129073a7ba2051a96ce52749570"
+                "reference": "22d297231118e6fd5b9db087fbe1ef866c2b95d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mock/php-mock/zipball/bfa2d17d64dbf129073a7ba2051a96ce52749570",
-                "reference": "bfa2d17d64dbf129073a7ba2051a96ce52749570",
+                "url": "https://api.github.com/repos/php-mock/php-mock/zipball/22d297231118e6fd5b9db087fbe1ef866c2b95d2",
+                "reference": "22d297231118e6fd5b9db087fbe1ef866c2b95d2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
+                "php": ">=5.6",
                 "phpunit/php-text-template": "^1"
             },
             "replace": {
                 "malkusch/php-mock": "*"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4|^5"
+                "phpunit/phpunit": "^5.7"
             },
             "suggest": {
-                "php-mock/php-mock-mockery": "Allows using PHPMockery for Mockery integration",
                 "php-mock/php-mock-phpunit": "Allows integration into PHPUnit testcase with the trait PHPMock."
             },
             "type": "library",
@@ -562,7 +563,7 @@
                 "psr-4": {
                     "phpmock\\": [
                         "classes/",
-                        "tests/unit/"
+                        "tests/"
                     ]
                 }
             },
@@ -589,25 +590,25 @@
                 "test",
                 "test double"
             ],
-            "time": "2015-11-11T22:37:09+00:00"
+            "time": "2017-02-17T20:52:52+00:00"
         },
         {
             "name": "php-mock/php-mock-integration",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mock/php-mock-integration.git",
-                "reference": "e83fb65dd20cd3cf250d554cbd4682b96b684f4b"
+                "reference": "5a0d7d7755f823bc2a230cfa45058b40f9013bc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mock/php-mock-integration/zipball/e83fb65dd20cd3cf250d554cbd4682b96b684f4b",
-                "reference": "e83fb65dd20cd3cf250d554cbd4682b96b684f4b",
+                "url": "https://api.github.com/repos/php-mock/php-mock-integration/zipball/5a0d7d7755f823bc2a230cfa45058b40f9013bc4",
+                "reference": "5a0d7d7755f823bc2a230cfa45058b40f9013bc4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
-                "php-mock/php-mock": "^1",
+                "php": ">=5.6",
+                "php-mock/php-mock": "^2",
                 "phpunit/php-text-template": "^1"
             },
             "require-dev": {
@@ -642,26 +643,26 @@
                 "test",
                 "test double"
             ],
-            "time": "2015-10-26T21:21:42+00:00"
+            "time": "2017-02-17T21:31:34+00:00"
         },
         {
             "name": "php-mock/php-mock-mockery",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mock/php-mock-mockery.git",
-                "reference": "f3d67a36558c6d1fb912ed8ba786fffaf94e0755"
+                "reference": "d6d3df9d9232f1623f1ca3cfdaacd53415593825"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mock/php-mock-mockery/zipball/f3d67a36558c6d1fb912ed8ba786fffaf94e0755",
-                "reference": "f3d67a36558c6d1fb912ed8ba786fffaf94e0755",
+                "url": "https://api.github.com/repos/php-mock/php-mock-mockery/zipball/d6d3df9d9232f1623f1ca3cfdaacd53415593825",
+                "reference": "d6d3df9d9232f1623f1ca3cfdaacd53415593825",
                 "shasum": ""
             },
             "require": {
                 "mockery/mockery": "^1",
                 "php": ">=5.6",
-                "php-mock/php-mock-integration": "^1"
+                "php-mock/php-mock-integration": "^2"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4|^5"
@@ -696,7 +697,7 @@
                 "test",
                 "test double"
             ],
-            "time": "2017-10-13T09:34:01+00:00"
+            "time": "2018-03-27T07:00:25+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -889,16 +890,56 @@
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
-            "name": "rinvex/country",
+            "name": "ralouphie/getallheaders",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "time": "2016-02-11T07:05:27+00:00"
+        },
+        {
+            "name": "rinvex/countries",
             "version": "v3.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rinvex/renamed-country.git",
+                "url": "https://github.com/rinvex/countries.git",
                 "reference": "e32228ef43f26d3b02296be9454f842c52d492f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rinvex/renamed-country/zipball/e32228ef43f26d3b02296be9454f842c52d492f3",
+                "url": "https://api.github.com/repos/rinvex/countries/zipball/e32228ef43f26d3b02296be9454f842c52d492f3",
                 "reference": "e32228ef43f26d3b02296be9454f842c52d492f3",
                 "shasum": ""
             },
@@ -960,21 +1001,20 @@
                 "rinvex",
                 "svg"
             ],
-            "abandoned": "rinvex/countries",
             "time": "2017-03-07T18:40:20+00:00"
         },
         {
             "name": "slim/slim",
-            "version": "3.9.2",
+            "version": "3.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "4086d0106cf5a7135c69fce4161fe355a8feb118"
+                "reference": "d378e70431e78ee92ee32ddde61ecc72edf5dc0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/4086d0106cf5a7135c69fce4161fe355a8feb118",
-                "reference": "4086d0106cf5a7135c69fce4161fe355a8feb118",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/d378e70431e78ee92ee32ddde61ecc72edf5dc0a",
+                "reference": "d378e70431e78ee92ee32ddde61ecc72edf5dc0a",
                 "shasum": ""
             },
             "require": {
@@ -1032,20 +1072,20 @@
                 "micro",
                 "router"
             ],
-            "time": "2017-11-26T19:13:09+00:00"
+            "time": "2018-09-16T10:54:21+00:00"
         },
         {
             "name": "smarty-gettext/smarty-gettext",
-            "version": "1.5.1",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-gettext/smarty-gettext.git",
-                "reference": "00fe2fcbc41e24e0245cd9d73f96bc7b0337972d"
+                "reference": "9a7d9284b5374caeae5eb226cf486efb4bc748b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/00fe2fcbc41e24e0245cd9d73f96bc7b0337972d",
-                "reference": "00fe2fcbc41e24e0245cd9d73f96bc7b0337972d",
+                "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/9a7d9284b5374caeae5eb226cf486efb4bc748b4",
+                "reference": "9a7d9284b5374caeae5eb226cf486efb4bc748b4",
                 "shasum": ""
             },
             "require": {
@@ -1055,6 +1095,7 @@
             },
             "require-dev": {
                 "azatoth/php-pgettext": "~1.0",
+                "phpunit/phpunit": ">=4.8.36",
                 "smarty/smarty": "3.1.*"
             },
             "suggest": {
@@ -1072,7 +1113,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1+"
+                "LGPL-2.1"
             ],
             "authors": [
                 {
@@ -1086,7 +1127,7 @@
             ],
             "description": "Gettext plugin enabling internationalization in Smarty Package files",
             "homepage": "https://github.com/smarty-gettext/smarty-gettext",
-            "time": "2017-05-12T12:14:46+00:00"
+            "time": "2019-01-17T23:06:53+00:00"
         },
         {
             "name": "smarty/smarty",
@@ -1201,16 +1242,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.4.18",
+            "version": "v3.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "35c2914a9f50519bd207164c353ae4d59182c2cb"
+                "reference": "0d41dd7d95ed179aed6a13393b0f4f97bfa2d25c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/35c2914a9f50519bd207164c353ae4d59182c2cb",
-                "reference": "35c2914a9f50519bd207164c353ae4d59182c2cb",
+                "url": "https://api.github.com/repos/symfony/process/zipball/0d41dd7d95ed179aed6a13393b0f4f97bfa2d25c",
+                "reference": "0d41dd7d95ed179aed6a13393b0f4f97bfa2d25c",
                 "shasum": ""
             },
             "require": {
@@ -1246,20 +1287,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-14T17:33:21+00:00"
+            "time": "2019-01-02T21:24:08+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.18",
+            "version": "v3.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f"
+                "reference": "554a59a1ccbaac238a89b19c8e551a556fd0e2ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/640b6c27fed4066d64b64d5903a86043f4a4de7f",
-                "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/554a59a1ccbaac238a89b19c8e551a556fd0e2ea",
+                "reference": "554a59a1ccbaac238a89b19c8e551a556fd0e2ea",
                 "shasum": ""
             },
             "require": {
@@ -1305,7 +1346,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:33:53+00:00"
+            "time": "2019-01-01T13:45:19+00:00"
         },
         {
             "name": "zonuexe/http-accept-language",
@@ -1462,16 +1503,16 @@
         },
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v146",
+            "version": "v148",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "a380d44126a056cc5b7daaa0714714e3c888689f"
+                "reference": "d331bfb9251d8a091d3a0d29e25ffcdb801577e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/a380d44126a056cc5b7daaa0714714e3c888689f",
-                "reference": "a380d44126a056cc5b7daaa0714714e3c888689f",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/d331bfb9251d8a091d3a0d29e25ffcdb801577e1",
+                "reference": "d331bfb9251d8a091d3a0d29e25ffcdb801577e1",
                 "shasum": ""
             },
             "bin": [
@@ -1502,7 +1543,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2018-11-08T19:23:29+00:00"
+            "time": "2018-12-20T21:53:40+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2219,10 +2260,10 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2018.11.07",
+            "version": "2019.01.17",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2018.11.07.zip",
+                "url": "https://github.com/rg3/youtube-dl/archive/2019.01.17.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -2789,16 +2830,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.2.3",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "4842476c434e375f9d3182ff7b89059583aa8b27"
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/4842476c434e375f9d3182ff7b89059583aa8b27",
-                "reference": "4842476c434e375f9d3182ff7b89059583aa8b27",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/379deb987e26c7cd103a7b387aea178baec96e48",
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48",
                 "shasum": ""
             },
             "require": {
@@ -2836,7 +2877,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-02-20T21:35:23+00:00"
+            "time": "2018-12-19T23:57:18+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2899,16 +2940,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.4.18",
+            "version": "v3.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "ff8ac19e97e5c7c3979236b584719a1190f84181"
+                "reference": "a5f39641bb62e8b74e343467b145331273f615a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/ff8ac19e97e5c7c3979236b584719a1190f84181",
-                "reference": "ff8ac19e97e5c7c3979236b584719a1190f84181",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/a5f39641bb62e8b74e343467b145331273f615a2",
+                "reference": "a5f39641bb62e8b74e343467b145331273f615a2",
                 "shasum": ""
             },
             "require": {
@@ -2964,7 +3005,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2018-10-02T16:33:53+00:00"
+            "time": "2019-01-01T13:45:19+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -3008,20 +3049,21 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "0df1908962e7a3071564e857d86874dad1ef204a"
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/0df1908962e7a3071564e857d86874dad1ef204a",
-                "reference": "0df1908962e7a3071564e857d86874dad1ef204a",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "php": "^5.3.3 || ^7.0",
+                "symfony/polyfill-ctype": "^1.8"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.6",
@@ -3054,7 +3096,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2018-01-29T19:49:41+00:00"
+            "time": "2018-12-25T11:19:39+00:00"
         }
     ],
     "aliases": [],

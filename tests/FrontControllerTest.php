@@ -451,6 +451,8 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithRtmpStream()
     {
+        $this->markTestIncomplete('We need to find another RTMP video.');
+
         $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',

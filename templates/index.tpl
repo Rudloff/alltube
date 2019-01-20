@@ -2,7 +2,7 @@
 {include file='inc/header.tpl'}
 <main class="main">
     <div><img class="logo" src="{base_url}/img/logo.png"
-    alt="AllTube Download" width="328" height="284"></div>
+    alt="{$config->appName}" width="328" height="284"></div>
     <form action="{path_for name="video"}">
     <label class="labelurl" for="url">
         {t}Copy here the URL of your video (Youtube, Dailymotion, etc.){/t}
