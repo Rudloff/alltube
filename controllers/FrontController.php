@@ -67,7 +67,7 @@ class FrontController
      *
      * @var string
      */
-    private $defaultFormat = 'best[protocol^=http]';
+    private $defaultFormat = 'best[protocol=https]/best[protocol=http]';
 
     /**
      * LocaleManager instance.
@@ -265,14 +265,14 @@ class FrontController
     private function getAudioResponse(Request $request, Response $response, array $params, $password = null)
     {
         try {
-            if (isset($params['from']) || isset($params['to'])) {
+            if (isset($params['from']) && !empty($params['from']) || isset($params['to']) && !empty($params['to'])) {
                 throw new Exception('Force convert when we need to seek.');
             }
 
             if ($this->config->stream) {
                 return $this->getStream($params['url'], 'mp3', $response, $request, $password);
             } else {
-                $urls = $this->download->getURL($params['url'], 'mp3[protocol^=http]', $password);
+                $urls = $this->download->getURL($params['url'], 'mp3[protocol=https]/mp3[protocol=http]', $password);
 
                 return $response->withRedirect($urls[0]);
             }
@@ -300,11 +300,7 @@ class FrontController
         } catch (PasswordException $e) {
             return $this->password($request, $response);
         }
-        if ($this->config->stream) {
-            $protocol = '';
-        } else {
-            $protocol = '[protocol^=http]';
-        }
+
         if (isset($video->entries)) {
             $template = 'playlist.tpl';
         } else {
@@ -324,7 +320,6 @@ class FrontController
                 'class'       => 'video',
                 'title'       => $title,
                 'description' => $description,
-                'protocol'    => $protocol,
                 'config'      => $this->config,
                 'canonical'   => $this->getCanonicalUrl($request),
                 'locale'      => $this->localeManager->getLocale(),

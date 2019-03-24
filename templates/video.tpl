@@ -27,7 +27,7 @@
         {/if}
         <select name="format" id="format" class="formats monospace">
             <optgroup label="{t}Generic formats{/t}">
-                <option value="best{$protocol}">
+                <option value="{if $config->stream}best{else}best[protocol=https]/best[protocol=http]{/if}">
                     {strip}
                         {t}Best{/t} ({$video->ext})
                     {/strip}
@@ -37,7 +37,7 @@
                         {t}Remux best video with best audio{/t}
                     </option>
                 {/if}
-                <option value="worst{$protocol}">
+                <option value="{if $config->stream}worst{else}worst[protocol=https]/worst[protocol=http]{/if}">
                     {t}Worst{/t}
                 </option>
             </optgroup>
