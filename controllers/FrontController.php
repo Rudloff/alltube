@@ -97,9 +97,7 @@ class FrontController
         $session_factory = new SessionFactory();
         $session = $session_factory->newInstance($cookies);
         $this->sessionSegment = $session->getSegment(self::class);
-        if ($this->config->remux) {
-            $this->defaultFormat = 'bestvideo+bestaudio,best';
-        } elseif ($this->config->stream) {
+        if ($this->config->stream) {
             $this->defaultFormat = 'best';
         }
     }
@@ -316,13 +314,14 @@ class FrontController
             $response,
             $template,
             [
-                'video'       => $video,
-                'class'       => 'video',
-                'title'       => $title,
-                'description' => $description,
-                'config'      => $this->config,
-                'canonical'   => $this->getCanonicalUrl($request),
-                'locale'      => $this->localeManager->getLocale(),
+                'video'         => $video,
+                'class'         => 'video',
+                'title'         => $title,
+                'description'   => $description,
+                'config'        => $this->config,
+                'canonical'     => $this->getCanonicalUrl($request),
+                'locale'        => $this->localeManager->getLocale(),
+                'defaultFormat' => $this->defaultFormat,
             ]
         );
 
