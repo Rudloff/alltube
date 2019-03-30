@@ -130,7 +130,7 @@ class VideoDownload
      * @param string $format   Format to use for the video
      * @param string $password Video password
      *
-     * @return object Decoded JSON
+     * @return stdClass Decoded JSON
      * */
     public function getJSON($url, $format = null, $password = null)
     {
@@ -214,7 +214,7 @@ class VideoDownload
     /**
      * Return arguments used to run rtmp for a specific video.
      *
-     * @param object $video Video object returned by youtube-dl
+     * @param stdClass $video Video object returned by youtube-dl
      *
      * @return array Arguments
      */
@@ -266,12 +266,12 @@ class VideoDownload
     /**
      * Get a process that runs avconv in order to convert a video.
      *
-     * @param object $video        Video object returned by youtube-dl
-     * @param int    $audioBitrate Audio bitrate of the converted file
-     * @param string $filetype     Filetype of the converted file
-     * @param bool   $audioOnly    True to return an audio-only file
-     * @param string $from         Start the conversion at this time
-     * @param string $to           End the conversion at this time
+     * @param stdClass $video        Video object returned by youtube-dl
+     * @param int      $audioBitrate Audio bitrate of the converted file
+     * @param string   $filetype     Filetype of the converted file
+     * @param bool     $audioOnly    True to return an audio-only file
+     * @param string   $from         Start the conversion at this time
+     * @param string   $to           End the conversion at this time
      *
      * @throws Exception If avconv/ffmpeg is missing
      *
@@ -484,8 +484,8 @@ class VideoDownload
     /**
      * Get a Tar stream containing every video in the playlist piped through the server.
      *
-     * @param object $video  Video object returned by youtube-dl
-     * @param string $format Requested format
+     * @param stdClass $video  Video object returned by youtube-dl
+     * @param string   $format Requested format
      *
      * @throws Exception If the popen stream was not created correctly
      *

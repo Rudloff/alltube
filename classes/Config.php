@@ -16,7 +16,7 @@ class Config
     /**
      * Singleton instance.
      *
-     * @var Config
+     * @var Config|null
      */
     private static $instance;
 
@@ -133,11 +133,9 @@ class Config
      */
     public function __construct(array $options)
     {
-        if (isset($options) && is_array($options)) {
-            foreach ($options as $option => $value) {
-                if (isset($this->$option) && isset($value)) {
-                    $this->$option = $value;
-                }
+        foreach ($options as $option => $value) {
+            if (isset($this->$option) && isset($value)) {
+                $this->$option = $value;
             }
         }
         $this->getEnv();

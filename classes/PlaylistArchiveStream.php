@@ -186,7 +186,7 @@ class PlaylistArchiveStream extends TarArchive
     public function stream_read($count)
     {
         if (!$this->files[$this->curFile]['headersSent']) {
-            $urls = $this->download->getUrl($this->files[$this->curFile]['url'], $this->format);
+            $urls = $this->download->getURL($this->files[$this->curFile]['url'], $this->format);
             $response = $this->client->request('GET', $urls[0], ['stream' => true]);
 
             $contentLengthHeaders = $response->getHeader('Content-Length');

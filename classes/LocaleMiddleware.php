@@ -37,7 +37,7 @@ class LocaleMiddleware
      *
      * @param array $proposedLocale Locale array created by AcceptLanguage::parse()
      *
-     * @return string Locale name if chosen, nothing otherwise
+     * @return Locale Locale if chosen, nothing otherwise
      */
     public function testLocale(array $proposedLocale)
     {
@@ -65,7 +65,7 @@ class LocaleMiddleware
     {
         $headers = $request->getHeader('Accept-Language');
         $curLocale = $this->localeManager->getLocale();
-        if (!isset($curLocale)) {
+        if (is_null($curLocale)) {
             if (isset($headers[0])) {
                 $this->localeManager->setLocale(
                     AcceptLanguage::detect([$this, 'testLocale'], new Locale('en_US'), $headers[0])

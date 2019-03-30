@@ -24,7 +24,7 @@ class LocaleManager
     /**
      * Current locale.
      *
-     * @var Locale
+     * @var Locale|null
      */
     private $curLocale;
 
@@ -78,7 +78,7 @@ class LocaleManager
     /**
      * Get the current locale.
      *
-     * @return Locale
+     * @return Locale|null
      */
     public function getLocale()
     {
