@@ -263,7 +263,9 @@ class FrontController
     private function getAudioResponse(Request $request, Response $response, array $params, $password = null)
     {
         try {
-            if (isset($params['from']) && !empty($params['from']) || isset($params['to']) && !empty($params['to'])) {
+            if ((isset($params['from']) && !empty($params['from']))
+                || (isset($params['to']) && !empty($params['to']))
+            ) {
                 throw new Exception('Force convert when we need to seek.');
             }
 
