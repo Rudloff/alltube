@@ -79,9 +79,9 @@ class FrontController
     /**
      * FrontController constructor.
      *
-     * @param Container $container Slim dependency container
-     * @param Config    $config    Config instance
-     * @param array     $cookies   Cookie array
+     * @param ContainerInterface $container Slim dependency container
+     * @param Config             $config    Config instance
+     * @param array              $cookies   Cookie array
      */
     public function __construct(ContainerInterface $container, Config $config = null, array $cookies = [])
     {
@@ -112,7 +112,7 @@ class FrontController
      */
     public function index(Request $request, Response $response)
     {
-        $uri = $request->getUri()->withUserInfo(null);
+        $uri = $request->getUri()->withUserInfo('');
         $this->view->render(
             $response,
             'index.tpl',
