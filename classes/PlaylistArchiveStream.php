@@ -66,6 +66,8 @@ class PlaylistArchiveStream extends TarArchive
      */
     public function __construct(Config $config = null)
     {
+        parent::__construct();
+
         $this->client = new Client();
         $this->download = new VideoDownload($config);
     }
