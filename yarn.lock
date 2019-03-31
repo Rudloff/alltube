@@ -755,6 +755,11 @@ grunt-phpdocumentor@~0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/grunt-phpdocumentor/-/grunt-phpdocumentor-0.4.1.tgz#513a5cefd8804d45792ea35ddfbcb2471e307141"
 
+grunt-phpstan@~0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/grunt-phpstan/-/grunt-phpstan-0.1.0.tgz#b6009f9d54884d2427202e91ebc080abc5c3fc10"
+  integrity sha512-SL8h4cyWNoAf043Uao1ZZWVNgbJJN94Ogey1dDA8SGXeuFiGygYES4uDoqO59SYLmmnkB/zAiTznCA99QWL7Wg==
+
 grunt-phpunit@~0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/grunt-phpunit/-/grunt-phpunit-0.3.6.tgz#0e75bee6b5c2e65fda45075672a06ceb2cecd869"

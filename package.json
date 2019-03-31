@@ -21,6 +21,7 @@
     "grunt-markdownlint": "~2.1.0",
     "grunt-phpcs": "~0.4.0",
     "grunt-phpdocumentor": "~0.4.1",
+    "grunt-phpstan": "~0.1.0",
     "grunt-phpunit": "~0.3.6"
   },
   "homepage": "https://www.alltubedownload.net/",

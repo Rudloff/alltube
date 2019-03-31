@@ -33,6 +33,18 @@ module.exports = function (grunt) {
                     src: ['tests/*.php']
                 }
             },
+            phpstan: {
+                options: {
+                    level: 'max',
+                    bin: 'vendor/bin/phpstan'
+                },
+                php: {
+                    src: ['*.php', 'classes/*.php', 'controllers/*.php']
+                },
+                tests: {
+                    src: ['tests/*.php']
+                }
+            },
             jslint: {
                 js: {
                     src: ['js/*.js']
@@ -125,9 +137,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-potomo');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-markdownlint');
+    grunt.loadNpmTasks('grunt-phpstan');
 
     grunt.registerTask('default', ['cssmin', 'potomo']);
-    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs']);
+    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs', 'phpstan']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
