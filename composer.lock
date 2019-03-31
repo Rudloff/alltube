@@ -372,16 +372,16 @@
         },
         {
             "name": "mathmarques/smarty-view",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mathmarques/Smarty-View.git",
-                "reference": "c8f8501a0be4c290e1165fcb9e5064952ef6969d"
+                "reference": "2ab996e79efcc600cc324b6469c1cdbcd189c9fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mathmarques/Smarty-View/zipball/c8f8501a0be4c290e1165fcb9e5064952ef6969d",
-                "reference": "c8f8501a0be4c290e1165fcb9e5064952ef6969d",
+                "url": "https://api.github.com/repos/mathmarques/Smarty-View/zipball/2ab996e79efcc600cc324b6469c1cdbcd189c9fe",
+                "reference": "2ab996e79efcc600cc324b6469c1cdbcd189c9fe",
                 "shasum": ""
             },
             "require": {
@@ -418,7 +418,7 @@
                 "template",
                 "view"
             ],
-            "time": "2016-08-25T19:04:49+00:00"
+            "time": "2019-03-31T14:42:41+00:00"
         },
         {
             "name": "mockery/mockery",
