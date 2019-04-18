@@ -25,8 +25,8 @@
                         {t}Audio only (MP3){/t}
                     </label>
                     <div class="seekOptions">
-                        <label id="from">{t}From{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="from" id="from" />
-                        <label id="to">{t}to{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="to" id="to" />
+                        <label for="from">{t}From{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="from" id="from" />
+                        <label for="to">{t}to{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="to" id="to" />
                     </div>
                 </div>
             </div>
