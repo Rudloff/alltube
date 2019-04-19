@@ -83,14 +83,15 @@
         {if $config->convertAdvanced}
             <input type="checkbox" name="customConvert" id="customConvert"/>
             <label for="customConvert">{t}Convert into a custom format:{/t}</label>
-            <select title="Custom format" name="customFormat">
+            <select title="Custom format" name="customFormat" aria-label="{t}Format to convert to{/t}">
                 {foreach $config->convertAdvancedFormats as $format}
                     <option>{$format}</option>
                 {/foreach}
             </select>
             {t}with{/t}
-            <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"name="customBitrate" id="customBitrate" />
-            <label for="customBitrate">{t}kbit/s audio{/t}</label>
+            <label for="customBitrate" class="sr-only">{t}Bit rate{/t}</label>
+            <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"name="customBitrate" id="customBitrate" aria-describedby="customBitrateUnit" />
+            <span id="customBitrateUnit">{t}kbit/s audio{/t}</span>
             <br/><br/>
         {/if}
         <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
