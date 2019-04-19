@@ -208,4 +208,16 @@ class PlaylistArchiveStream extends TarArchive
 
         return fread($this->buffer, $count);
     }
+
+    /**
+     * Called when fclose() is used on the stream.
+     *
+     * @return void
+     */
+    public function stream_close()
+    {
+        if (is_resource($this->buffer)) {
+            fclose($this->buffer);
+        }
+    }
 }
