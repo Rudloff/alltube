@@ -82,8 +82,11 @@ class PlaylistArchiveStream extends TarArchive
     protected function send($data)
     {
         $pos = ftell($this->buffer);
+
+        // Add data to the buffer.
         fwrite($this->buffer, $data);
         if ($pos !== false) {
+            // Rewind so that stream_read() can later read this data.
             fseek($this->buffer, $pos);
         }
     }
