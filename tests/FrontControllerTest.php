@@ -442,6 +442,9 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithM3uStream()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Twitter returns a 429 error when the test is ran too many times.');
+        }
         $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
