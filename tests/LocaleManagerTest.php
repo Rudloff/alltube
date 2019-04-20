@@ -26,19 +26,18 @@ class LocaleManagerTest extends TestCase
      */
     protected function setUp()
     {
-        $this->localeManager = new LocaleManager();
         $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
+        $this->localeManager = new LocaleManager();
     }
 
     /**
-     * Test the getSupportedLocales function.
+     * Unset locale after each test.
      *
      * @return void
      */
-    public function testConstructorWithCookies()
+    protected function tearDown()
     {
-        $localeManager = new LocaleManager([]);
-        $this->assertEquals('foo_BAR', (string) $localeManager->getLocale());
+        $this->localeManager->unsetLocale();
     }
 
     /**

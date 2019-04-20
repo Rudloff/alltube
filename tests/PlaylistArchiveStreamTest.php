@@ -35,6 +35,16 @@ class PlaylistArchiveStreamTest extends TestCase
     }
 
     /**
+     * Clean variables used in tests.
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        $this->stream->stream_close();
+    }
+
+    /**
      * Test the stream_open() function.
      *
      * @return void

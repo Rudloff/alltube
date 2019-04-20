@@ -117,6 +117,9 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetURLWithPassword()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
         $videoURL = $this->download->getURL('http://vimeo.com/68375962', null, 'youtube-dl');
         $this->assertContains('vimeocdn.com', $videoURL[0]);
     }
@@ -129,6 +132,9 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetURLWithMissingPassword()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
         $this->download->getURL('http://vimeo.com/68375962');
     }
 
@@ -140,6 +146,9 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetURLWithWrongPassword()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
         $this->download->getURL('http://vimeo.com/68375962', null, 'foo');
     }
 
@@ -164,7 +173,7 @@ class VideoDownloadTest extends TestCase
      */
     public function urlProvider()
     {
-        return [
+        $videos = [
             [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'best[protocol^=http]',
                 'It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU',
@@ -177,12 +186,6 @@ class VideoDownloadTest extends TestCase
                 'Sam_Tsui_Against_The_Current-RJJ6FCAXvKg',
                 'mp4',
                 'googlevideo.com',
-            ],
-            [
-                'https://vimeo.com/24195442', 'best[protocol^=http]',
-                'Carving_the_Mountains-24195442',
-                'mp4',
-                'vimeocdn.com',
             ],
             [
                 'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
@@ -203,6 +206,18 @@ class VideoDownloadTest extends TestCase
                 'openload.co',
             ],
         ];
+
+        if (!getenv('CI')) {
+            // Travis is blacklisted by Vimeo.
+            $videos[] = [
+                'https://vimeo.com/24195442', 'best[protocol^=http]',
+                'Carving_the_Mountains-24195442',
+                'mp4',
+                'vimeocdn.com',
+            ];
+        }
+
+        return $videos;
     }
 
     /**
@@ -229,14 +244,19 @@ class VideoDownloadTest extends TestCase
      */
     public function m3uUrlProvider()
     {
-        return [
-            [
+        $videos = [];
+
+        if (!getenv('CI')) {
+            // Twitter returns a 429 error when the test is ran too many times.
+            $videos[] = [
                 'https://twitter.com/verge/status/813055465324056576/video/1', 'hls-2176',
                 'The_Verge_-_This_tiny_origami_robot_can_self-fold_and_complete_tasks-813055465324056576',
                 'mp4',
                 'video.twimg.com',
-            ],
-        ];
+            ];
+        }
+
+        return $videos;
     }
 
     /**

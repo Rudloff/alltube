@@ -722,14 +722,3 @@ h1 {
   white-space: nowrap;
   width: 1px;
 }
-
-.sr-only.focusable:active,
-.sr-only.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  white-space: normal;
-  width: auto;
-}

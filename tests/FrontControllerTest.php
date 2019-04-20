@@ -292,6 +292,9 @@ class FrontControllerTest extends TestCase
      */
     public function testVideoWithVimeoAudio()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
         // So we can test the fallback to default format
         $this->assertRequestIsOk('video', ['url' => 'https://vimeo.com/251997032', 'audio' => true]);
     }
@@ -319,6 +322,9 @@ class FrontControllerTest extends TestCase
      */
     public function testVideoWithPassword()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
         $result = $this->controller->video(
             $this->request->withQueryParams(['url' => 'http://vimeo.com/68375962'])
                 ->withParsedBody(['password' => 'youtube-dl']),
@@ -334,6 +340,9 @@ class FrontControllerTest extends TestCase
      */
     public function testVideoWithMissingPassword()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
         $this->assertRequestIsOk('video', ['url' => 'http://vimeo.com/68375962']);
         $this->assertRequestIsOk('video', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
     }
@@ -433,6 +442,9 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithM3uStream()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Twitter returns a 429 error when the test is ran too many times.');
+        }
         $this->config->stream = true;
         $this->assertRequestIsOk(
             'redirect',
@@ -502,6 +514,9 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithMissingPassword()
     {
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
         $this->assertRequestIsRedirect('redirect', ['url' => 'http://vimeo.com/68375962']);
     }
 
