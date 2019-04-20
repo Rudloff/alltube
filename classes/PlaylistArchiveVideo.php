@@ -18,7 +18,7 @@ class PlaylistArchiveVideo
     public $url;
 
     /**
-     * Has the video been streaded entirely ?
+     * Has the video been streamed entirely ?
      *
      * @var bool
      */
