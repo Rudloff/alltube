@@ -77,4 +77,14 @@ class LocaleTest extends TestCase
     {
         $this->assertEquals('fr', $this->localeObject->getIso3166());
     }
+
+    /**
+     * Test the getCountry function.
+     *
+     * @return void
+     */
+    public function testGetCountry()
+    {
+        $this->assertEquals(country('fr'), $this->localeObject->getCountry());
+    }
 }
