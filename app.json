@@ -12,6 +12,9 @@
   ],
   "buildpacks": [
     {
+      "url": "https://github.com/heroku/heroku-buildpack-locale"
+    },
+    {
       "url": "https://github.com/piotras/heroku-buildpack-gettext.git"
     },
     {
