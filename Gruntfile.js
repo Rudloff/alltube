@@ -36,7 +36,8 @@ module.exports = function (grunt) {
             phpstan: {
                 options: {
                     level: 'max',
-                    bin: 'vendor/bin/phpstan'
+                    bin: 'vendor/bin/phpstan',
+                    config: 'phpstan.neon'
                 },
                 php: {
                     src: ['*.php', 'classes/*.php', 'controllers/*.php']
