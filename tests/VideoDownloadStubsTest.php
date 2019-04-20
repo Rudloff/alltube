@@ -111,21 +111,6 @@ class VideoDownloadStubsTest extends TestCase
     }
 
     /**
-     * Test getPlaylistArchiveStream function with a buggy popen.
-     *
-     * @return void
-     * @expectedException Exception
-     */
-    public function testGetPlaylistArchiveStreamWithPopenError()
-    {
-        $video = $this->download->getJSON(
-            'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC',
-            'best'
-        );
-        $this->download->getPlaylistArchiveStream($video, 'best');
-    }
-
-    /**
      * Test getConvertedStream function with a buggy popen.
      *
      * @return void

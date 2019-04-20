@@ -8,6 +8,8 @@ namespace Alltube\Test;
 use Alltube\Config;
 use Alltube\PlaylistArchiveStream;
 use PHPUnit\Framework\TestCase;
+use stdClass;
+use RuntimeException;
 
 /**
  * Unit tests for the ViewFactory class.
@@ -31,7 +33,14 @@ class PlaylistArchiveStreamTest extends TestCase
         } else {
             $configFile = 'config_test.yml';
         }
-        $this->stream = new PlaylistArchiveStream(Config::getInstance('config/'.$configFile));
+
+        $entry = new stdClass();
+        $entry->url = 'BaW_jenozKc';
+
+        $video = new stdClass();
+        $video->entries = [$entry, $entry];
+
+        $this->stream = new PlaylistArchiveStream(Config::getInstance('config/'.$configFile), $video, 'worst');
     }
 
     /**
@@ -41,71 +50,51 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     protected function tearDown()
     {
-        $this->stream->stream_close();
+        $this->stream->close();
     }
 
     /**
-     * Test the stream_open() function.
+     * Test the write() function.
+     *
+     * @return void
+     * @expectedException RuntimeException
+     */
+    public function testWrite()
+    {
+        $this->stream->write('foo');
+    }
+
+
+    /**
+     * Test the tell() function.
      *
      * @return void
      */
-    public function testStreamOpen()
+    public function testTell()
     {
-        $this->assertTrue($this->stream->stream_open('playlist://foo'));
+        $this->assertInternalType('int', $this->stream->tell());
     }
 
     /**
-     * Test the stream_write() function.
+     * Test the seek() function.
      *
      * @return void
+     * @expectedException RuntimeException
      */
-    public function testStreamWrite()
+    public function testSeek()
     {
-        $this->assertEquals(0, $this->stream->stream_write());
+        $this->stream->seek(42);
     }
 
     /**
-     * Test the stream_stat() function.
+     * Test the read() function.
      *
      * @return void
      */
-    public function testStreamStat()
+    public function testRead()
     {
-        $this->assertEquals(['mode' => 4096], $this->stream->stream_stat());
-    }
-
-    /**
-     * Test the stream_tell() function.
-     *
-     * @return void
-     */
-    public function testStreamTell()
-    {
-        $this->stream->stream_open('playlist://foo');
-        $this->assertInternalType('int', $this->stream->stream_tell());
-    }
-
-    /**
-     * Test the stream_seek() function.
-     *
-     * @return void
-     */
-    public function testStreamSeek()
-    {
-        $this->stream->stream_open('playlist://foo');
-        $this->assertInternalType('bool', $this->stream->stream_seek(3));
-    }
-
-    /**
-     * Test the stream_read() function.
-     *
-     * @return void
-     */
-    public function testStreamRead()
-    {
-        $this->stream->stream_open('playlist://BaW_jenozKc;BaW_jenozKc/worst');
-        while (!$this->stream->stream_eof()) {
-            $result = $this->stream->stream_read(8192);
+        while (!$this->stream->eof()) {
+            $result = $this->stream->read(8192);
             $this->assertInternalType('string', $result);
             if (is_string($result)) {
                 $this->assertLessThanOrEqual(8192, strlen($result));
@@ -114,13 +103,104 @@ class PlaylistArchiveStreamTest extends TestCase
     }
 
     /**
-     * Test the stream_eof() function.
+     * Test the eof() function.
      *
      * @return void
      */
-    public function testStreamEof()
+    public function testEof()
     {
-        $this->stream->stream_open('playlist://foo');
-        $this->assertFalse($this->stream->stream_eof());
+        $this->assertFalse($this->stream->eof());
+    }
+
+    /**
+     * Test the getSize() function.
+     *
+     * @return void
+     */
+    public function testGetSize()
+    {
+        $this->assertNull($this->stream->getSize());
+    }
+
+    /**
+     * Test the isSeekable() function.
+     *
+     * @return void
+     */
+    public function testIsSeekable()
+    {
+        $this->assertFalse($this->stream->isSeekable());
+    }
+
+    /**
+     * Test the rewind() function.
+     *
+     * @return void
+     * @expectedException RuntimeException
+     */
+    public function testRewind()
+    {
+        $this->stream->rewind();
+    }
+
+    /**
+     * Test the isWritable() function.
+     *
+     * @return void
+     */
+    public function testIsWritable()
+    {
+        $this->assertFalse($this->stream->isWritable());
+    }
+
+    /**
+     * Test the isReadable() function.
+     *
+     * @return void
+     */
+    public function testIsReadable()
+    {
+        $this->assertTrue($this->stream->isReadable());
+    }
+
+    /**
+     * Test the getContents() function.
+     *
+     * @return void
+     */
+    public function testGetContents()
+    {
+        $this->assertInternalType('string', $this->stream->getContents());
+    }
+
+    /**
+     * Test the getMetadata() function.
+     *
+     * @return void
+     */
+    public function testGetMetadata()
+    {
+        $this->assertNull($this->stream->getMetadata());
+    }
+
+    /**
+     * Test the detach() function.
+     *
+     * @return void
+     */
+    public function testDetach()
+    {
+        $this->assertInternalType('resource', $this->stream->detach());
+    }
+
+    /**
+     * Test the __toString() function.
+     *
+     * @return void
+     */
+    public function testToString()
+    {
+        $this->assertInternalType('string', $this->stream->__toString());
+        $this->assertInternalType('string', (string) $this->stream);
     }
 }

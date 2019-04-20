@@ -534,21 +534,6 @@ class VideoDownloadTest extends TestCase
     }
 
     /**
-     * Test getPlaylistArchiveStream function.
-     *
-     * @return void
-     * @requires OS Linux
-     */
-    public function testGetPlaylistArchiveStream()
-    {
-        $video = $this->download->getJSON(
-            'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC',
-            'best'
-        );
-        $this->assertStream($this->download->getPlaylistArchiveStream($video, 'best'));
-    }
-
-    /**
      * Test getConvertedStream function without avconv.
      *
      * @param string $url    URL

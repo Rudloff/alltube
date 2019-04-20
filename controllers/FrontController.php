@@ -10,6 +10,7 @@ use Alltube\EmptyUrlException;
 use Alltube\Locale;
 use Alltube\LocaleManager;
 use Alltube\PasswordException;
+use Alltube\PlaylistArchiveStream;
 use Alltube\VideoDownload;
 use Aura\Session\Segment;
 use Aura\Session\SessionFactory;
@@ -403,14 +404,14 @@ class FrontController
     {
         $video = $this->download->getJSON($url, $format, $password);
         if (isset($video->entries)) {
-            $stream = $this->download->getPlaylistArchiveStream($video, $format);
+            $stream = new PlaylistArchiveStream($this->config, $video, $format);
             $response = $response->withHeader('Content-Type', 'application/x-tar');
             $response = $response->withHeader(
                 'Content-Disposition',
                 'attachment; filename="'.$video->title.'.tar"'
             );
 
-            return $response->withBody(new Stream($stream));
+            return $response->withBody($stream);
         } elseif ($video->protocol == 'rtmp') {
             $stream = $this->download->getRtmpStream($video);
             $response = $response->withHeader('Content-Type', 'video/'.$video->ext);

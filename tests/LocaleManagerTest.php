@@ -10,7 +10,7 @@ use Alltube\LocaleManager;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for the Config class.
+ * Unit tests for the LocaleManagerTest class.
  */
 class LocaleManagerTest extends TestCase
 {

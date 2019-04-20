@@ -1,28 +1,29 @@
 <?php
 /**
  * PlaylistArchiveStream class.
- *
- * @codingStandardsIgnoreFile
  */
 
 namespace Alltube;
 
 use Barracuda\ArchiveStream\TarArchive;
 use GuzzleHttp\Client;
+use Psr\Http\Message\StreamInterface;
+use RuntimeException;
+use stdClass;
 
 /**
  * Class used to create a Tar archive from playlists and stream it to the browser.
  *
- * @link http://php.net/manual/en/class.streamwrapper.php
+ * @link https://github.com/php-fig/http-message/blob/master/src/StreamInterface.php
  */
-class PlaylistArchiveStream extends TarArchive
+class PlaylistArchiveStream extends TarArchive implements StreamInterface
 {
     /**
      * Files to add in the archive.
      *
      * @var array[]
      */
-    private $files;
+    private $files = [];
 
     /**
      * Stream used to store data before it is sent to the browser.
@@ -63,11 +64,27 @@ class PlaylistArchiveStream extends TarArchive
      * PlaylistArchiveStream constructor.
      *
      * @param Config $config Config instance.
+     * @param stdClass $video  Video object returned by youtube-dl
+     * @param string   $format Requested format
      */
-    public function __construct(Config $config = null)
+    public function __construct(Config $config, stdClass $video, $format)
     {
         $this->client = new Client();
         $this->download = new VideoDownload($config);
+
+        $this->format = $format;
+        $buffer = fopen('php://temp', 'r+');
+        if ($buffer !== false) {
+            $this->buffer = $buffer;
+        }
+        foreach ($video->entries as $entry) {
+            $this->files[] = [
+                'url'         => $entry->url,
+                'headersSent' => false,
+                'complete'    => false,
+                'stream'      => null,
+            ];
+        }
     }
 
     /**
@@ -84,89 +101,152 @@ class PlaylistArchiveStream extends TarArchive
         // Add data to the buffer.
         fwrite($this->buffer, $data);
         if ($pos !== false) {
-            // Rewind so that stream_read() can later read this data.
+            // Rewind so that read() can later read this data.
             fseek($this->buffer, $pos);
         }
     }
 
     /**
-     * Called when fopen() is used on the stream.
+     * Write data to the stream.
      *
-     * @param string $path Playlist path (should be playlist://url1;url2;.../format)
+     * @param string $string The string that is to be written.
      *
-     * @return bool
+     * @return int
      */
-    public function stream_open($path)
+    public function write($string)
     {
-        $this->format = ltrim(parse_url($path, PHP_URL_PATH), '/');
-        $buffer = fopen('php://temp', 'r+');
-        if ($buffer !== false) {
-            $this->buffer = $buffer;
-        }
-        foreach (explode(';', parse_url($path, PHP_URL_HOST)) as $url) {
-            $this->files[] = [
-                'url'         => urldecode($url),
-                'headersSent' => false,
-                'complete'    => false,
-                'stream'      => null,
-            ];
-        }
+        throw new RuntimeException('This stream is not writeable.');
+    }
 
+    /**
+     * Get the size of the stream if known.
+     *
+     * @return null
+     */
+    public function getSize()
+    {
+        return null;
+    }
+
+    /**
+     * Returns whether or not the stream is seekable.
+     *
+     * @return boolean
+     */
+    public function isSeekable()
+    {
+        return false;
+    }
+
+    /**
+     * Seek to the beginning of the stream.
+     *
+     * @return void
+     */
+    public function rewind()
+    {
+        throw new RuntimeException('This stream is not seekable.');
+    }
+
+    /**
+     * Returns whether or not the stream is writable.
+     *
+     * @return boolean
+     */
+    public function isWritable()
+    {
+        return false;
+    }
+
+    /**
+     * Returns whether or not the stream is readable.
+     *
+     * @return boolean
+     */
+    public function isReadable()
+    {
         return true;
     }
 
     /**
-     * Called when fwrite() is used on the stream.
+     * Returns the remaining contents in a string.
      *
-     * @return int
+     * @return string
      */
-    public function stream_write()
+    public function getContents()
     {
-        //We don't support writing to a stream
-        return 0;
+        return stream_get_contents($this->buffer);
     }
 
     /**
-     * Called when fstat() is used on the stream.
+     * Get stream metadata as an associative array or retrieve a specific key.
      *
-     * @return array
+     * @param  string $key string $key Specific metadata to retrieve.
+     *
+     * @return null
      */
-    public function stream_stat()
+    public function getMetadata($key = null)
     {
-        //We need this so Slim won't try to get the size of the stream
-        return [
-            'mode' => 0010000,
-        ];
+        return null;
     }
 
     /**
-     * Called when ftell() is used on the stream.
+     * Separates any underlying resources from the stream.
+     *
+     * @return resource
+     */
+    public function detach()
+    {
+        $stream = $this->buffer;
+        $this->close();
+        return $stream;
+    }
+
+    /**
+     * Reads all data from the stream into a string, from the beginning to end.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $string = '';
+
+        foreach ($this->files as $file) {
+            $string .= $file['url'];
+        }
+
+        return $string;
+    }
+
+    /**
+     * Returns the current position of the file read/write pointer
      *
      * @return int|false
      */
-    public function stream_tell()
+    public function tell()
     {
         return ftell($this->buffer);
     }
 
     /**
-     * Called when fseek() is used on the stream.
+     * Seek to a position in the stream.
      *
      * @param int $offset Offset
+     * @param int $whence Specifies how the cursor position will be calculated
      *
-     * @return bool
+     * @return void
      */
-    public function stream_seek($offset)
+    public function seek($offset, $whence = SEEK_SET)
     {
-        return fseek($this->buffer, $offset) == 0;
+        throw new RuntimeException('This stream is not seekable.');
     }
 
     /**
-     * Called when feof() is used on the stream.
+     * Returns true if the stream is at the end of the stream.
      *
      * @return bool
      */
-    public function stream_eof()
+    public function eof()
     {
         foreach ($this->files as $file) {
             if (!$file['complete']) {
@@ -178,13 +258,13 @@ class PlaylistArchiveStream extends TarArchive
     }
 
     /**
-     * Called when fread() is used on the stream.
+     * Read data from the stream.
      *
      * @param int $count Number of bytes to read
      *
      * @return string|false
      */
-    public function stream_read($count)
+    public function read($count)
     {
         if (!$this->files[$this->curFile]['headersSent']) {
             $urls = $this->download->getURL($this->files[$this->curFile]['url'], $this->format);
@@ -211,14 +291,19 @@ class PlaylistArchiveStream extends TarArchive
     }
 
     /**
-     * Called when fclose() is used on the stream.
+     * Closes the stream and any underlying resources.
      *
      * @return void
      */
-    public function stream_close()
+    public function close()
     {
         if (is_resource($this->buffer)) {
             fclose($this->buffer);
+        }
+        foreach ($this->files as $file) {
+            if (is_resource($file['stream'])) {
+                fclose($file['stream']);
+            }
         }
     }
 }

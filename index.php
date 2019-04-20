@@ -15,8 +15,6 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
     die;
 }
 
-stream_wrapper_register('playlist', PlaylistArchiveStream::class);
-
 $app = new App();
 $container = $app->getContainer();
 $config = Config::getInstance();

@@ -9,7 +9,7 @@ use Alltube\Locale;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for the Config class.
+ * Unit tests for the LocaleTest class.
  */
 class LocaleTest extends TestCase
 {

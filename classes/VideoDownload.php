@@ -482,30 +482,6 @@ class VideoDownload
     }
 
     /**
-     * Get a Tar stream containing every video in the playlist piped through the server.
-     *
-     * @param stdClass $video  Video object returned by youtube-dl
-     * @param string   $format Requested format
-     *
-     * @throws Exception If the popen stream was not created correctly
-     *
-     * @return resource
-     */
-    public function getPlaylistArchiveStream(stdClass $video, $format)
-    {
-        $playlistItems = [];
-        foreach ($video->entries as $entry) {
-            $playlistItems[] = urlencode($entry->url);
-        }
-        $stream = fopen('playlist://'.implode(';', $playlistItems).'/'.$format, 'r');
-        if (!is_resource($stream)) {
-            throw new Exception(_('Could not open fopen stream.'));
-        }
-
-        return $stream;
-    }
-
-    /**
      * Get the stream of a converted video.
      *
      * @param string $url          URL of page
