@@ -63,7 +63,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     /**
      * PlaylistArchiveStream constructor.
      *
-     * @param Config $config Config instance.
+     * @param Config   $config Config instance.
      * @param stdClass $video  Video object returned by youtube-dl
      * @param string   $format Requested format
      */
@@ -120,13 +120,12 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function getSize()
     {
-        return null;
     }
 
     /**
      * Returns whether or not the stream is seekable.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSeekable()
     {
@@ -146,7 +145,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     /**
      * Returns whether or not the stream is writable.
      *
-     * @return boolean
+     * @return bool
      */
     public function isWritable()
     {
@@ -156,7 +155,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     /**
      * Returns whether or not the stream is readable.
      *
-     * @return boolean
+     * @return bool
      */
     public function isReadable()
     {
@@ -176,13 +175,12 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     /**
      * Get stream metadata as an associative array or retrieve a specific key.
      *
-     * @param  string $key string $key Specific metadata to retrieve.
+     * @param string $key string $key Specific metadata to retrieve.
      *
      * @return null
      */
     public function getMetadata($key = null)
     {
-        return null;
     }
 
     /**
@@ -194,6 +192,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     {
         $stream = $this->buffer;
         $this->close();
+
         return $stream;
     }
 
@@ -214,7 +213,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     }
 
     /**
-     * Returns the current position of the file read/write pointer
+     * Returns the current position of the file read/write pointer.
      *
      * @return int|false
      */

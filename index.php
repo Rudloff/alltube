@@ -5,7 +5,6 @@ use Alltube\Config;
 use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
-use Alltube\PlaylistArchiveStream;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;

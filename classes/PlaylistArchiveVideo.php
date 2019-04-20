@@ -5,12 +5,6 @@
 
 namespace Alltube;
 
-use Barracuda\ArchiveStream\TarArchive;
-use GuzzleHttp\Client;
-use Psr\Http\Message\StreamInterface;
-use RuntimeException;
-use stdClass;
-
 /**
  * Video streamed to a PlaylistArchiveStream.
  */

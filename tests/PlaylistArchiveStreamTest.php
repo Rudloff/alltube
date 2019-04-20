@@ -8,8 +8,8 @@ namespace Alltube\Test;
 use Alltube\Config;
 use Alltube\PlaylistArchiveStream;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 use RuntimeException;
+use stdClass;
 
 /**
  * Unit tests for the ViewFactory class.
@@ -63,7 +63,6 @@ class PlaylistArchiveStreamTest extends TestCase
     {
         $this->stream->write('foo');
     }
-
 
     /**
      * Test the tell() function.
