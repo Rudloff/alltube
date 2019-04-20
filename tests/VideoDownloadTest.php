@@ -244,14 +244,19 @@ class VideoDownloadTest extends TestCase
      */
     public function m3uUrlProvider()
     {
-        return [
-            [
+        $videos = [];
+
+        if (!getenv('CI')) {
+            // Twitter returns a 429 error when the test is ran too many times.
+            $videos[] = [
                 'https://twitter.com/verge/status/813055465324056576/video/1', 'hls-2176',
                 'The_Verge_-_This_tiny_origami_robot_can_self-fold_and_complete_tasks-813055465324056576',
                 'mp4',
                 'video.twimg.com',
-            ],
-        ];
+            ];
+        }
+
+        return $videos;
     }
 
     /**
