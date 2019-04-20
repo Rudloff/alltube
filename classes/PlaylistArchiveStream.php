@@ -19,11 +19,11 @@ use stdClass;
 class PlaylistArchiveStream extends TarArchive implements StreamInterface
 {
     /**
-     * Files to add in the archive.
+     * videos to add in the archive.
      *
-     * @var array[]
+     * @var PlaylistArchiveVideo[]
      */
-    private $files = [];
+    private $videos = [];
 
     /**
      * Stream used to store data before it is sent to the browser.
@@ -47,11 +47,11 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     private $download;
 
     /**
-     * Current file position in $files array.
+     * Current video being streamed to the archive.
      *
      * @var int
      */
-    private $curFile = 0;
+    private $curVideo;
 
     /**
      * Video format to download.
@@ -78,12 +78,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
             $this->buffer = $buffer;
         }
         foreach ($video->entries as $entry) {
-            $this->files[] = [
-                'url'         => $entry->url,
-                'headersSent' => false,
-                'complete'    => false,
-                'stream'      => null,
-            ];
+            $this->videos[] = new PlaylistArchiveVideo($entry->url);
         }
     }
 
@@ -211,8 +206,8 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     {
         $string = '';
 
-        foreach ($this->files as $file) {
-            $string .= $file['url'];
+        foreach ($this->videos as $file) {
+            $string .= $file->url;
         }
 
         return $string;
@@ -248,8 +243,8 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function eof()
     {
-        foreach ($this->files as $file) {
-            if (!$file['complete']) {
+        foreach ($this->videos as $file) {
+            if (!$file->complete) {
                 return false;
             }
         }
@@ -266,25 +261,30 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function read($count)
     {
-        if (!$this->files[$this->curFile]['headersSent']) {
-            $urls = $this->download->getURL($this->files[$this->curFile]['url'], $this->format);
-            $response = $this->client->request('GET', $urls[0], ['stream' => true]);
+        if (isset($this->curVideo)) {
+            if (isset($this->curVideo->stream)) {
+                if (!$this->curVideo->stream->eof()) {
+                    $this->stream_file_part($this->curVideo->stream->read($count));
+                } elseif (!$this->curVideo->complete) {
+                    $this->complete_file_stream();
+                    $this->curVideo->complete = true;
+                } else {
+                    $this->curVideo = next($this->videos);
+                }
+            } else {
+                $urls = $this->download->getURL($this->curVideo->url, $this->format);
+                $response = $this->client->request('GET', $urls[0], ['stream' => true]);
 
-            $contentLengthHeaders = $response->getHeader('Content-Length');
-            $this->init_file_stream_transfer(
-                $this->download->getFilename($this->files[$this->curFile]['url'], $this->format),
-                $contentLengthHeaders[0]
-            );
+                $contentLengthHeaders = $response->getHeader('Content-Length');
+                $this->init_file_stream_transfer(
+                    $this->download->getFilename($this->curVideo->url, $this->format),
+                    $contentLengthHeaders[0]
+                );
 
-            $this->files[$this->curFile]['headersSent'] = true;
-            $this->files[$this->curFile]['stream'] = $response->getBody();
-        } elseif (!$this->files[$this->curFile]['stream']->eof()) {
-            $this->stream_file_part($this->files[$this->curFile]['stream']->read($count));
-        } elseif (!$this->files[$this->curFile]['complete']) {
-            $this->complete_file_stream();
-            $this->files[$this->curFile]['complete'] = true;
-        } elseif (isset($this->files[$this->curFile])) {
-            $this->curFile += 1;
+                $this->curVideo->stream = $response->getBody();
+            }
+        } else {
+            $this->curVideo = current($this->videos);
         }
 
         return fread($this->buffer, $count);
@@ -300,9 +300,9 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
         if (is_resource($this->buffer)) {
             fclose($this->buffer);
         }
-        foreach ($this->files as $file) {
-            if (is_resource($file['stream'])) {
-                fclose($file['stream']);
+        foreach ($this->videos as $file) {
+            if (is_resource($file->stream)) {
+                fclose($file->stream);
             }
         }
     }
