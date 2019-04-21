@@ -370,11 +370,10 @@ class Video
                 'pipe:1',
             ]
         );
-        if ($this->url != '-') {
-            //Vimeo needs a correct user-agent
-            $arguments[] = '-user_agent';
-            $arguments[] = $this->getProp('dump-user-agent');
-        }
+
+        //Vimeo needs a correct user-agent
+        $arguments[] = '-user_agent';
+        $arguments[] = $this->getProp('dump-user-agent');
 
         return new Process($arguments);
     }
