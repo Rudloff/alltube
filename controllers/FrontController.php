@@ -331,7 +331,7 @@ class FrontController
 
             $this->video = new Video($url, $this->defaultFormat, $password);
 
-            if ($request->getQueryParam('audio')) {
+            if ($this->config->convert && $request->getQueryParam('audio')) {
                 return $this->getAudioResponse($request, $response);
             } else {
                 return $this->getVideoResponse($request, $response);
@@ -379,7 +379,7 @@ class FrontController
     private function getStream(Request $request, Response $response)
     {
         if (isset($this->video->entries)) {
-            if ($request->getQueryParam('audio')) {
+            if ($this->config->convert && $request->getQueryParam('audio')) {
                 $stream = new ConvertedPlaylistArchiveStream($this->video);
             } else {
                 $stream = new PlaylistArchiveStream($this->video);
