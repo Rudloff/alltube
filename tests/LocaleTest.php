@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Unit tests for the LocaleTest class.
  */
-class LocaleTest extends TestCase
+class LocaleTest extends BaseTest
 {
     /**
      * Locale class instance.

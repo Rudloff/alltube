@@ -6,7 +6,7 @@
 namespace Alltube;
 
 use Barracuda\ArchiveStream\TarArchive;
-use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Stream;
 use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 use stdClass;
@@ -21,7 +21,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     /**
      * videos to add in the archive.
      *
-     * @var PlaylistArchiveVideo[]
+     * @var Video[]
      */
     private $videos = [];
 
@@ -33,52 +33,31 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
     private $buffer;
 
     /**
-     * Guzzle client.
-     *
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * VideoDownload instance.
-     *
-     * @var VideoDownload
-     */
-    private $download;
-
-    /**
      * Current video being streamed to the archive.
      *
-     * @var int
+     * @var Stream
      */
-    private $curVideo;
+    private $curVideoStream;
 
     /**
-     * Video format to download.
-     *
-     * @var string
+     * True if the archive is complete.
+     * @var bool
      */
-    private $format;
+    private $isComplete = false;
 
     /**
      * PlaylistArchiveStream constructor.
      *
-     * @param Config   $config Config instance.
-     * @param stdClass $video  Video object returned by youtube-dl
-     * @param string   $format Requested format
+     * @param Video $video Video/playlist to download
      */
-    public function __construct(Config $config, stdClass $video, $format)
+    public function __construct(Video $video)
     {
-        $this->client = new Client();
-        $this->download = new VideoDownload($config);
-
-        $this->format = $format;
         $buffer = fopen('php://temp', 'r+');
         if ($buffer !== false) {
             $this->buffer = $buffer;
         }
         foreach ($video->entries as $entry) {
-            $this->videos[] = new PlaylistArchiveVideo($entry->url);
+            $this->videos[] = new Video($entry->url);
         }
     }
 
@@ -91,26 +70,27 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     protected function send($data)
     {
-        $pos = ftell($this->buffer);
+        $pos = $this->tell();
 
-        // Add data to the buffer.
-        fwrite($this->buffer, $data);
+        // Add data to the end of the buffer.
+        $this->seek(0, SEEK_END);
+        $this->write($data);
         if ($pos !== false) {
             // Rewind so that read() can later read this data.
-            fseek($this->buffer, $pos);
+            $this->seek($pos);
         }
     }
 
     /**
      * Write data to the stream.
      *
-     * @param string $string The string that is to be written.
+     * @param string $string The string that is to be written
      *
      * @return int
      */
     public function write($string)
     {
-        throw new RuntimeException('This stream is not writeable.');
+        fwrite($this->buffer, $string);
     }
 
     /**
@@ -129,7 +109,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function isSeekable()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -139,7 +119,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function rewind()
     {
-        throw new RuntimeException('This stream is not seekable.');
+        rewind($this->buffer);
     }
 
     /**
@@ -149,7 +129,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function isWritable()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -181,6 +161,15 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function getMetadata($key = null)
     {
+        $meta = stream_get_meta_data($this->buffer);
+
+        if (!isset($key)) {
+            return $meta;
+        }
+
+        if (isset($meta[$key])) {
+            return $meta[$key];
+        }
     }
 
     /**
@@ -203,13 +192,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function __toString()
     {
-        $string = '';
-
-        foreach ($this->videos as $file) {
-            $string .= $file->url;
-        }
-
-        return $string;
+        return $this->getContents();
     }
 
     /**
@@ -232,23 +215,37 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function seek($offset, $whence = SEEK_SET)
     {
-        throw new RuntimeException('This stream is not seekable.');
+        fseek($this->buffer, $offset, $whence);
     }
 
     /**
-     * Returns true if the stream is at the end of the stream.
+     * Returns true if the stream is at the end of the archive.
      *
      * @return bool
      */
     public function eof()
     {
-        foreach ($this->videos as $file) {
-            if (!$file->complete) {
-                return false;
-            }
-        }
+        return $this->isComplete && feof($this->buffer);
+    }
 
-        return true;
+    /**
+     * Start streaming a new video.
+     *
+     * @param Video $video Video to stream
+     *
+     * @return void
+     */
+    private function startVideoStream(Video $video)
+    {
+        $response = $video->getHttpResponse();
+
+        $this->curVideoStream = $response->getBody();
+        $contentLengthHeaders = $response->getHeader('Content-Length');
+
+        $this->init_file_stream_transfer(
+            $video->getFilename(),
+            $contentLengthHeaders[0]
+        );
     }
 
     /**
@@ -260,30 +257,30 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      */
     public function read($count)
     {
-        if (isset($this->curVideo)) {
-            if (isset($this->curVideo->stream)) {
-                if (!$this->curVideo->stream->eof()) {
-                    $this->stream_file_part($this->curVideo->stream->read($count));
-                } elseif (!$this->curVideo->complete) {
+        // If the archive is complete, we only read the remaining buffer.
+        if (!$this->isComplete) {
+            if (isset($this->curVideoStream)) {
+                if ($this->curVideoStream->eof()) {
+                    // Stop streaming the current video.
                     $this->complete_file_stream();
-                    $this->curVideo->complete = true;
+
+                    $video = next($this->videos);
+                    if ($video) {
+                        // Start streaming the next video.
+                        $this->startVideoStream($video);
+                    } else {
+                        // No video left.
+                        $this->finish();
+                        $this->isComplete = true;
+                    }
                 } else {
-                    $this->curVideo = next($this->videos);
+                    // Continue streaming the current video.
+                    $this->stream_file_part($this->curVideoStream->read($count));
                 }
             } else {
-                $urls = $this->download->getURL($this->curVideo->url, $this->format);
-                $response = $this->client->request('GET', $urls[0], ['stream' => true]);
-
-                $contentLengthHeaders = $response->getHeader('Content-Length');
-                $this->init_file_stream_transfer(
-                    $this->download->getFilename($this->curVideo->url, $this->format),
-                    $contentLengthHeaders[0]
-                );
-
-                $this->curVideo->stream = $response->getBody();
+                // Start streaming the first video.
+                $this->startVideoStream(current($this->videos));
             }
-        } else {
-            $this->curVideo = current($this->videos);
         }
 
         return fread($this->buffer, $count);
@@ -299,10 +296,8 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
         if (is_resource($this->buffer)) {
             fclose($this->buffer);
         }
-        foreach ($this->videos as $file) {
-            if (is_resource($file->stream)) {
-                fclose($file->stream);
-            }
+        if (isset($this->curVideoStream)) {
+            $this->curVideoStream->close();
         }
     }
 }

@@ -1,92 +1,32 @@
 <?php
 /**
- * VideoDownloadTest class.
+ * VideoTest class.
  */
 
 namespace Alltube\Test;
 
 use Alltube\Config;
-use Alltube\VideoDownload;
+use Alltube\Video;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for the VideoDownload class.
+ * Unit tests for the Video class.
  */
-class VideoDownloadTest extends TestCase
+class VideoTest extends BaseTest
 {
-    /**
-     * VideoDownload instance.
-     *
-     * @var VideoDownload
-     */
-    private $download;
 
     /**
-     * Config class instance.
-     *
-     * @var Config
-     */
-    private $config;
-
-    /**
-     * Initialize properties used by test.
-     */
-    protected function setUp()
-    {
-        if (PHP_OS == 'WINNT') {
-            $configFile = 'config_test_windows.yml';
-        } else {
-            $configFile = 'config_test.yml';
-        }
-        $this->config = Config::getInstance('config/'.$configFile);
-        $this->download = new VideoDownload($this->config);
-    }
-
-    /**
-     * Destroy properties after test.
-     */
-    protected function tearDown()
-    {
-        Config::destroyInstance();
-    }
-
-    /**
-     * Test VideoDownload constructor with wrong youtube-dl path.
-     *
-     * @return void
-     * @expectedException Exception
-     */
-    public function testConstructorWithMissingYoutubedl()
-    {
-        $this->config->youtubedl = 'foo';
-        new VideoDownload($this->config);
-    }
-
-    /**
-     * Test VideoDownload constructor with wrong Python path.
-     *
-     * @return void
-     * @expectedException Exception
-     */
-    public function testConstructorWithMissingPython()
-    {
-        $this->config->python = 'foo';
-        new VideoDownload($this->config);
-    }
-
-    /**
-     * Test listExtractors function.
+     * Test getExtractors function.
      *
      * @return void
      */
-    public function testListExtractors()
+    public function testGetExtractors()
     {
-        $extractors = $this->download->listExtractors();
-        $this->assertContains('youtube', $extractors);
+        $this->assertContains('youtube', Video::getExtractors());
     }
 
     /**
-     * Test getURL function.
+     * Test getUrl function.
      *
      * @param string $url       URL
      * @param string $format    Format
@@ -99,61 +39,70 @@ class VideoDownloadTest extends TestCase
      * @dataProvider m3uUrlProvider
      * @dataProvider remuxUrlProvider
      */
-    public function testGetURL(
+    public function testgetUrl(
         $url,
         $format,
         /* @scrutinizer ignore-unused */ $filename,
         /* @scrutinizer ignore-unused */ $extension,
         $domain
     ) {
-        $videoURL = $this->download->getURL($url, $format);
-        $this->assertContains($domain, $videoURL[0]);
+        $video = new Video($url, $format);
+        foreach ($video->getUrl() as $videoURL) {
+            $this->assertContains($domain, $videoURL);
+        }
     }
 
     /**
-     * Test getURL function with a protected video.
+     * Test getUrl function with a protected video.
      *
      * @return void
      */
-    public function testGetURLWithPassword()
+    public function testgetUrlWithPassword()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
         }
-        $videoURL = $this->download->getURL('http://vimeo.com/68375962', null, 'youtube-dl');
-        $this->assertContains('vimeocdn.com', $videoURL[0]);
+
+        $video = new Video('http://vimeo.com/68375962', 'best', 'youtube-dl');
+        foreach ($video->getUrl() as $videoURL) {
+            $this->assertContains('vimeocdn.com', $videoURL);
+        }
     }
 
     /**
-     * Test getURL function with a protected video and no password.
+     * Test getUrl function with a protected video and no password.
      *
      * @return void
      * @expectedException Alltube\PasswordException
      */
-    public function testGetURLWithMissingPassword()
+    public function testgetUrlWithMissingPassword()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
         }
-        $this->download->getURL('http://vimeo.com/68375962');
+
+        $video = new Video('http://vimeo.com/68375962');
+        $video->getUrl();
     }
 
     /**
-     * Test getURL function with a protected video and a wrong password.
+     * Test getUrl function with a protected video and a wrong password.
      *
      * @return void
      * @expectedException Exception
      */
-    public function testGetURLWithWrongPassword()
+    public function testgetUrlWithWrongPassword()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
         }
-        $this->download->getURL('http://vimeo.com/68375962', null, 'foo');
+
+        $video = new Video('http://vimeo.com/68375962', 'best', 'foo');
+        $video->getUrl();
     }
 
     /**
-     * Test getURL function errors.
+     * Test getUrl function errors.
      *
      * @param string $url URL
      *
@@ -161,9 +110,10 @@ class VideoDownloadTest extends TestCase
      * @expectedException Exception
      * @dataProvider      ErrorUrlProvider
      */
-    public function testGetURLError($url)
+    public function testgetUrlError($url)
     {
-        $this->download->getURL($url);
+        $video = new Video($url);
+        $video->getUrl();
     }
 
     /**
@@ -298,9 +248,10 @@ class VideoDownloadTest extends TestCase
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
      */
-    public function testGetJSON($url, $format)
+    public function testGetJson($url, $format)
     {
-        $info = $this->download->getJSON($url, $format);
+        $video = new Video($url, $format);
+        $info = $video->getJson();
         $this->assertObjectHasAttribute('webpage_url', $info);
         $this->assertObjectHasAttribute('url', $info);
         $this->assertObjectHasAttribute('ext', $info);
@@ -318,9 +269,10 @@ class VideoDownloadTest extends TestCase
      * @expectedException Exception
      * @dataProvider      ErrorURLProvider
      */
-    public function testGetJSONError($url)
+    public function testGetJsonError($url)
     {
-        $this->download->getJSON($url);
+        $video = new Video($url);
+        $video->getJson();
     }
 
     /**
@@ -338,8 +290,8 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetFilename($url, $format, $filename, $extension)
     {
-        $videoFilename = $this->download->getFilename($url, $format);
-        $this->assertEquals($videoFilename, $filename.'.'.$extension);
+        $video = new Video($url, $format);
+        $this->assertEquals($video->getFilename(), $filename.'.'.$extension);
     }
 
     /**
@@ -353,25 +305,8 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetFilenameError($url)
     {
-        $this->download->getFilename($url);
-    }
-
-    /**
-     * Test getAudioFilename function.
-     *
-     * @param string $url      URL
-     * @param string $format   Format
-     * @param string $filename Filename
-     *
-     * @return void
-     * @dataProvider urlProvider
-     * @dataProvider m3uUrlProvider
-     * @dataProvider remuxUrlProvider
-     */
-    public function testGetAudioFilename($url, $format, $filename)
-    {
-        $videoFilename = $this->download->getAudioFilename($url, $format);
-        $this->assertEquals($videoFilename, $filename.'.mp3');
+        $video = new Video($url);
+        $video->getFilename();
     }
 
     /**
@@ -385,9 +320,8 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStream($url, $format)
     {
-        $stream = $this->download->getAudioStream($url, $format);
-        $this->assertInternalType('resource', $stream);
-        $this->assertFalse(feof($stream));
+        $video = new Video($url, $format);
+        $this->assertStream($video->getAudioStream());
     }
 
     /**
@@ -402,9 +336,10 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStreamAvconvError($url, $format)
     {
-        $this->config->avconv = 'foobar';
-        $download = new VideoDownload($this->config);
-        $download->getAudioStream($url, $format);
+        Config::setOptions(['avconv' => 'foobar']);
+
+        $video = new Video($url, $format);
+        $video->getAudioStream();
     }
 
     /**
@@ -419,7 +354,8 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStreamM3uError($url, $format)
     {
-        $this->download->getAudioStream($url, $format);
+        $video = new Video($url, $format);
+        $video->getAudioStream();
     }
 
     /**
@@ -430,7 +366,12 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStreamDashError()
     {
-        $this->download->getAudioStream('https://vimeo.com/251997032', 'bestaudio/best');
+        if (getenv('CI')) {
+            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
+        }
+
+        $video = new Video('https://vimeo.com/251997032', 'bestaudio/best');
+        $video->getAudioStream();
     }
 
     /**
@@ -441,10 +382,11 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetAudioStreamPlaylistError()
     {
-        $this->download->getAudioStream(
+        $video = new Video(
             'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC',
             'best'
         );
+        $video->getAudioStream();
     }
 
     /**
@@ -471,11 +413,8 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetM3uStream($url, $format)
     {
-        $this->assertStream(
-            $this->download->getM3uStream(
-                $this->download->getJSON($url, $format)
-            )
-        );
+        $video = new Video($url, $format);
+        $this->assertStream($video->getM3uStream());
     }
 
     /**
@@ -489,10 +428,24 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetRemuxStream($url, $format)
     {
-        $urls = $this->download->getURL($url, $format);
-        if (count($urls) > 1) {
-            $this->assertStream($this->download->getRemuxStream($urls));
-        }
+        $video = new Video($url, $format);
+        $this->assertStream($video->getRemuxStream());
+    }
+
+    /**
+     * Test getRemuxStream function with a video with only one URL.
+     *
+     * @param string $url    URL
+     * @param string $format Format
+     *
+     * @return void
+     * @dataProvider urlProvider
+     * @expectedException Exception
+     */
+    public function testGetRemuxStreamWithWrongVideo($url, $format)
+    {
+        $video = new Video($url, $format);
+        $video->getRemuxStream();
     }
 
     /**
@@ -508,11 +461,9 @@ class VideoDownloadTest extends TestCase
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
 
-        $this->assertStream(
-            $this->download->getRtmpStream(
-                $this->download->getJSON($url, $format)
-            )
-        );
+        $video = new Video($url, $format);
+
+        $this->assertStream($video->getRtmpStream());
     }
 
     /**
@@ -527,10 +478,10 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetM3uStreamAvconvError($url, $format)
     {
-        $this->config->avconv = 'foobar';
-        $download = new VideoDownload($this->config);
-        $video = $download->getJSON($url, $format);
-        $download->getM3uStream($video);
+        Config::setOptions(['avconv' => 'foobar']);
+
+        $video = new Video($url, $format);
+        $video->getM3uStream();
     }
 
     /**
@@ -544,7 +495,8 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetConvertedStream($url, $format)
     {
-        $this->assertStream($this->download->getConvertedStream($url, $format, 32, 'flv'));
+        $video = new Video($url, $format);
+        $this->assertStream($video->getConvertedStream(32, 'flv'));
     }
 
     /**
@@ -559,6 +511,7 @@ class VideoDownloadTest extends TestCase
      */
     public function testGetConvertedStreamM3uError($url, $format)
     {
-        $this->download->getConvertedStream($url, $format, 32, 'flv');
+        $video = new Video($url, $format);
+        $video->getConvertedStream(32, 'flv');
     }
 }

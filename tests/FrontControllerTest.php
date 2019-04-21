@@ -19,7 +19,7 @@ use Slim\Http\Response;
 /**
  * Unit tests for the FrontController class.
  */
-class FrontControllerTest extends TestCase
+class FrontControllerTest extends BaseTest
 {
     /**
      * Slim dependency container.
@@ -61,19 +61,15 @@ class FrontControllerTest extends TestCase
      */
     protected function setUp()
     {
+        parent::setUp();
+
         $this->container = new Container();
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
         $this->container['locale'] = new LocaleManager();
 
-        if (PHP_OS == 'WINNT') {
-            $configFile = 'config_test_windows.yml';
-        } else {
-            $configFile = 'config_test.yml';
-        }
-        $this->config = Config::getInstance('config/'.$configFile);
-        $this->controller = new FrontController($this->container, $this->config);
+        $this->controller = new FrontController($this->container);
 
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
@@ -88,31 +84,16 @@ class FrontControllerTest extends TestCase
     }
 
     /**
-     * Destroy properties after test.
-     */
-    protected function tearDown()
-    {
-        Config::destroyInstance();
-    }
-
-    /**
      * Run controller function with custom query parameters and return the result.
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
-     * @param Config $config  Custom config
      *
      * @return Response HTTP response
      */
-    private function getRequestResult($request, array $params, Config $config = null)
+    private function getRequestResult($request, array $params)
     {
-        if (isset($config)) {
-            $controller = new FrontController($this->container, $config);
-        } else {
-            $controller = $this->controller;
-        }
-
-        return $controller->$request(
+        return $this->controller->$request(
             $this->request->withQueryParams($params),
             $this->response
         );
@@ -123,13 +104,12 @@ class FrontControllerTest extends TestCase
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
-     * @param Config $config  Custom config
      *
      * @return void
      */
-    private function assertRequestIsOk($request, array $params = [], Config $config = null)
+    private function assertRequestIsOk($request, array $params = [])
     {
-        $this->assertTrue($this->getRequestResult($request, $params, $config)->isOk());
+        $this->assertTrue($this->getRequestResult($request, $params)->isOk());
     }
 
     /**
@@ -137,13 +117,12 @@ class FrontControllerTest extends TestCase
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
-     * @param Config $config  Custom config
      *
      * @return void
      */
-    private function assertRequestIsRedirect($request, array $params = [], Config $config = null)
+    private function assertRequestIsRedirect($request, array $params = [])
     {
-        $this->assertTrue($this->getRequestResult($request, $params, $config)->isRedirect());
+        $this->assertTrue($this->getRequestResult($request, $params)->isRedirect());
     }
 
     /**
@@ -151,13 +130,12 @@ class FrontControllerTest extends TestCase
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
-     * @param Config $config  Custom config
      *
      * @return void
      */
-    private function assertRequestIsServerError($request, array $params = [], Config $config = null)
+    private function assertRequestIsServerError($request, array $params = [])
     {
-        $this->assertTrue($this->getRequestResult($request, $params, $config)->isServerError());
+        $this->assertTrue($this->getRequestResult($request, $params)->isServerError());
     }
 
     /**
@@ -165,13 +143,12 @@ class FrontControllerTest extends TestCase
      *
      * @param string $request Controller function to call
      * @param array  $params  Query parameters
-     * @param Config $config  Custom config
      *
      * @return void
      */
-    private function assertRequestIsClientError($request, array $params = [], Config $config = null)
+    private function assertRequestIsClientError($request, array $params = [])
     {
-        $this->assertTrue($this->getRequestResult($request, $params, $config)->isClientError());
+        $this->assertTrue($this->getRequestResult($request, $params)->isClientError());
     }
 
     /**
@@ -181,20 +158,7 @@ class FrontControllerTest extends TestCase
      */
     public function testConstructor()
     {
-        $controller = new FrontController($this->container, $this->config);
-        $this->assertInstanceOf(FrontController::class, $controller);
-    }
-
-    /**
-     * Test the constructor with a default config.
-     *
-     * @return void
-     * @requires OS Linux
-     */
-    public function testConstructorWithDefaultConfig()
-    {
-        $controller = new FrontController($this->container);
-        $this->assertInstanceOf(FrontController::class, $controller);
+        $this->assertInstanceOf(FrontController::class, new FrontController($this->container));
     }
 
     /**
@@ -204,9 +168,8 @@ class FrontControllerTest extends TestCase
      */
     public function testConstructorWithStream()
     {
-        $this->config->stream = true;
-        $controller = new FrontController($this->container, $this->config);
-        $this->assertInstanceOf(FrontController::class, $controller);
+        Config::setOptions(['stream' => true]);
+        $this->assertInstanceOf(FrontController::class, new FrontController($this->container));
     }
 
     /**
@@ -354,12 +317,12 @@ class FrontControllerTest extends TestCase
      */
     public function testVideoWithStream()
     {
-        $this->config->stream = true;
-        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU'], $this->config);
+        Config::setOptions(['stream' => true]);
+
+        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
         $this->assertRequestIsOk(
             'video',
-            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true],
-            $this->config
+            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true]
         );
     }
 
@@ -427,11 +390,11 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithStream()
     {
-        $this->config->stream = true;
+        Config::setOptions(['stream' => true]);
+
         $this->assertRequestIsOk(
             'redirect',
-            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU'],
-            $this->config
+            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']
         );
     }
 
@@ -445,14 +408,15 @@ class FrontControllerTest extends TestCase
         if (getenv('CI')) {
             $this->markTestSkipped('Twitter returns a 429 error when the test is ran too many times.');
         }
-        $this->config->stream = true;
+
+        Config::setOptions(['stream' => true]);
+
         $this->assertRequestIsOk(
             'redirect',
             [
                 'url'    => 'https://twitter.com/verge/status/813055465324056576/video/1',
                 'format' => 'hls-2176',
-            ],
-            $this->config
+            ]
         );
     }
 
@@ -465,11 +429,11 @@ class FrontControllerTest extends TestCase
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
 
-        $this->config->stream = true;
+        Config::setOptions(['stream' => true]);
+
         $this->assertRequestIsOk(
             'redirect',
-            ['url' => 'http://www.rtvnh.nl/video/131946', 'format' => 'rtmp-264'],
-            $this->config
+            ['url' => 'http://www.rtvnh.nl/video/131946', 'format' => 'rtmp-264']
         );
     }
 
@@ -480,14 +444,14 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithRemux()
     {
-        $this->config->remux = true;
+        Config::setOptions(['remux' => true]);
+
         $this->assertRequestIsOk(
             'redirect',
             [
                 'url'    => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
                 'format' => 'bestvideo+bestaudio',
-            ],
-            $this->config
+            ]
         );
     }
 
@@ -552,11 +516,11 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithPlaylist()
     {
-        $this->config->stream = true;
+        Config::setOptions(['stream' => true]);
+
         $this->assertRequestIsOk(
             'redirect',
-            ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC'],
-            $this->config
+            ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
     }
 
@@ -567,7 +531,8 @@ class FrontControllerTest extends TestCase
      */
     public function testRedirectWithAdvancedConversion()
     {
-        $this->config->convertAdvanced = true;
+        Config::setOptions(['convertAdvanced' => true]);
+
         $this->assertRequestIsOk(
             'redirect',
             [
@@ -576,8 +541,7 @@ class FrontControllerTest extends TestCase
                 'customConvert' => 'on',
                 'customBitrate' => 32,
                 'customFormat'  => 'flv',
-            ],
-            $this->config
+            ]
         );
     }
 

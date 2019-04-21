@@ -17,7 +17,7 @@ use Slim\Http\Response;
 /**
  * Unit tests for the FrontController class.
  */
-class LocaleMiddlewareTest extends TestCase
+class LocaleMiddlewareTest extends BaseTest
 {
     /**
      * LocaleMiddleware instance.

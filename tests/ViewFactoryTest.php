@@ -15,7 +15,7 @@ use Slim\Views\Smarty;
 /**
  * Unit tests for the ViewFactory class.
  */
-class ViewFactoryTest extends TestCase
+class ViewFactoryTest extends BaseTest
 {
     /**
      * Test the create() function.

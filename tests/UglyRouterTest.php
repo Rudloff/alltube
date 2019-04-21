@@ -13,7 +13,7 @@ use Slim\Http\Request;
 /**
  * Unit tests for the UglyRouter class.
  */
-class UglyRouterTest extends TestCase
+class UglyRouterTest extends BaseTest
 {
     /**
      * UglyRouter instance.

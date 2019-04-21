@@ -6,6 +6,7 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
+use Alltube\Video;
 use Alltube\PlaylistArchiveStream;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -14,7 +15,7 @@ use stdClass;
 /**
  * Unit tests for the ViewFactory class.
  */
-class PlaylistArchiveStreamTest extends TestCase
+class PlaylistArchiveStreamTest extends BaseTest
 {
     /**
      * PlaylistArchiveStream instance.
@@ -28,19 +29,11 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     protected function setUp()
     {
-        if (PHP_OS == 'WINNT') {
-            $configFile = 'config_test_windows.yml';
-        } else {
-            $configFile = 'config_test.yml';
-        }
+        parent::setUp();
 
-        $entry = new stdClass();
-        $entry->url = 'BaW_jenozKc';
+        $video = new Video('https://www.youtube.com/playlist?list=PL1j4Ff8cAqPu5iowaeUAY8lRgkfT4RybJ');
 
-        $video = new stdClass();
-        $video->entries = [$entry, $entry];
-
-        $this->stream = new PlaylistArchiveStream(Config::getInstance('config/'.$configFile), $video, 'worst');
+        $this->stream = new PlaylistArchiveStream($video);
     }
 
     /**
@@ -57,11 +50,10 @@ class PlaylistArchiveStreamTest extends TestCase
      * Test the write() function.
      *
      * @return void
-     * @expectedException RuntimeException
      */
     public function testWrite()
     {
-        $this->stream->write('foo');
+        $this->assertNull($this->stream->write('foo'));
     }
 
     /**
@@ -78,11 +70,12 @@ class PlaylistArchiveStreamTest extends TestCase
      * Test the seek() function.
      *
      * @return void
-     * @expectedException RuntimeException
      */
     public function testSeek()
     {
-        $this->stream->seek(42);
+        $this->stream->write('foobar');
+        $this->stream->seek(3);
+        $this->assertEquals(3, $this->stream->tell());
     }
 
     /**
@@ -92,13 +85,9 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     public function testRead()
     {
-        while (!$this->stream->eof()) {
-            $result = $this->stream->read(8192);
-            $this->assertInternalType('string', $result);
-            if (is_string($result)) {
-                $this->assertLessThanOrEqual(8192, strlen($result));
-            }
-        }
+        $result = $this->stream->read(8192);
+        $this->assertInternalType('string', $result);
+        $this->assertLessThanOrEqual(8192, strlen($result));
     }
 
     /**
@@ -128,18 +117,18 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     public function testIsSeekable()
     {
-        $this->assertFalse($this->stream->isSeekable());
+        $this->assertTrue($this->stream->isSeekable());
     }
 
     /**
      * Test the rewind() function.
      *
      * @return void
-     * @expectedException RuntimeException
      */
     public function testRewind()
     {
         $this->stream->rewind();
+        $this->assertEquals(0, $this->stream->tell());
     }
 
     /**
@@ -149,7 +138,7 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     public function testIsWritable()
     {
-        $this->assertFalse($this->stream->isWritable());
+        $this->assertTrue($this->stream->isWritable());
     }
 
     /**
@@ -179,7 +168,7 @@ class PlaylistArchiveStreamTest extends TestCase
      */
     public function testGetMetadata()
     {
-        $this->assertNull($this->stream->getMetadata());
+        $this->assertInternalType('array', $this->stream->getMetadata());
     }
 
     /**

@@ -1,59 +1,40 @@
 <?php
 /**
- * VideoDownloadStubsTest class.
+ * VideoStubsTest class.
  */
 
 namespace Alltube\Test;
 
 use Alltube\Config;
-use Alltube\VideoDownload;
+use Alltube\Video;
 use Mockery;
 use phpmock\mockery\PHPMockery;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for the VideoDownload class.
+ * Unit tests for the Video class.
  * They are in a separate file so they can safely replace PHP functions with stubs.
  */
-class VideoDownloadStubsTest extends TestCase
+class VideoStubsTest extends BaseTest
 {
-    /**
-     * VideoDownload instance.
-     *
-     * @var VideoDownload
-     */
-    private $download;
-
-    /**
-     * Config class instance.
-     *
-     * @var Config
-     */
-    private $config;
-
     /**
      * Video URL used in many tests.
      *
-     * @var string
+     * @var Video
      */
-    private $url;
+    private $video;
 
     /**
      * Initialize properties used by test.
      */
     protected function setUp()
     {
+        parent::setUp();
+
         PHPMockery::mock('Alltube', 'popen');
         PHPMockery::mock('Alltube', 'fopen');
 
-        if (PHP_OS == 'WINNT') {
-            $configFile = 'config_test_windows.yml';
-        } else {
-            $configFile = 'config_test.yml';
-        }
-        $this->config = Config::getInstance('config/'.$configFile);
-        $this->download = new VideoDownload($this->config);
-        $this->url = 'https://www.youtube.com/watch?v=XJC9_JkzugE';
+        $this->video = new Video('https://www.youtube.com/watch?v=XJC9_JkzugE');
     }
 
     /**
@@ -74,7 +55,7 @@ class VideoDownloadStubsTest extends TestCase
      */
     public function testGetAudioStreamWithPopenError()
     {
-        $this->download->getAudioStream($this->url, 'best');
+        $this->video->getAudioStream();
     }
 
     /**
@@ -85,7 +66,7 @@ class VideoDownloadStubsTest extends TestCase
      */
     public function testGetM3uStreamWithPopenError()
     {
-        $this->download->getM3uStream($this->download->getJSON($this->url, 'best'));
+        $this->video->getM3uStream();
     }
 
     /**
@@ -96,7 +77,7 @@ class VideoDownloadStubsTest extends TestCase
      */
     public function testGetRtmpStreamWithPopenError()
     {
-        $this->download->getRtmpStream($this->download->getJSON($this->url, 'best'));
+        $this->video->getRtmpStream();
     }
 
     /**
@@ -107,7 +88,8 @@ class VideoDownloadStubsTest extends TestCase
      */
     public function testGetRemuxStreamWithPopenError()
     {
-        $this->download->getRemuxStream([$this->url, $this->url]);
+        $video = $this->video->withFormat('bestvideo+bestaudio');
+        $video->getRemuxStream();
     }
 
     /**
@@ -118,6 +100,6 @@ class VideoDownloadStubsTest extends TestCase
      */
     public function testGetConvertedStreamWithPopenError()
     {
-        $this->download->getConvertedStream($this->url, 'best', 32, 'flv');
+        $this->video->getConvertedStream(32, 'flv');
     }
 }

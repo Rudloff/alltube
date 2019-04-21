@@ -14,6 +14,10 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
     die;
 }
 
+if (is_file(__DIR__.'/config/config.yml')) {
+    Config::setFile(__DIR__.'/config/config.yml');
+}
+
 $app = new App();
 $container = $app->getContainer();
 $config = Config::getInstance();
@@ -28,7 +32,7 @@ if (!class_exists('Locale')) {
 $container['locale'] = new LocaleManager($_COOKIE);
 $app->add(new LocaleMiddleware($container));
 
-$controller = new FrontController($container, null, $_COOKIE);
+$controller = new FrontController($container, $_COOKIE);
 
 $container['errorHandler'] = [$controller, 'error'];
 

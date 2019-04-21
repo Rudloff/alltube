@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Unit tests for the Config class.
  */
-class ConfigTest extends TestCase
+class ConfigTest extends BaseTest
 {
     /**
      * Config class instance.
@@ -25,17 +25,7 @@ class ConfigTest extends TestCase
      */
     protected function setUp()
     {
-        $this->config = Config::getInstance('config/config_test.yml');
-    }
-
-    /**
-     * Destroy variables created by setUp().
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        Config::destroyInstance();
+        $this->config = Config::getInstance();
     }
 
     /**
@@ -70,26 +60,78 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * Test the getInstance function with a missing config file.
+     * Test the setFile function.
+     *
+     * @return void
+     */
+    public function testSetFile()
+    {
+        if (PHP_OS == 'WINNT') {
+            $configFile = 'config_test_windows.yml';
+        } else {
+            $configFile = 'config_test.yml';
+        }
+
+        $this->assertNull(Config::setFile(__DIR__.'/../config/'.$configFile));
+    }
+
+    /**
+     * Test the setFile function with a missing config file.
      *
      * @return void
      * @expectedException Exception
      */
-    public function testGetInstanceWithMissingFile()
+    public function testSetFileWithMissingFile()
     {
-        Config::getInstance('foo');
+        Config::setFile('foo');
     }
 
     /**
-     * Test the getInstance function with an empty filename.
+     * Test the setOptions function.
      *
      * @return void
      */
-    public function testGetInstanceWithEmptyFile()
+    public function testSetOptions()
     {
-        $config = Config::getInstance('');
-        $this->assertConfig($config);
+        Config::setOptions(['appName' => 'foo']);
+        $config = Config::getInstance();
+        $this->assertEquals($config->appName, 'foo');
     }
+
+    /**
+     * Test the setOptions function.
+     *
+     * @return void
+     */
+    public function testSetOptionsWithoutUpdate()
+    {
+        Config::setOptions(['appName' => 'foo'], false);
+        $config = Config::getInstance();
+        $this->assertEquals($config->appName, 'foo');
+    }
+
+    /**
+     * Test the setOptions function.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testSetOptionsWithBadYoutubedl()
+    {
+        Config::setOptions(['youtubedl' => 'foo']);
+    }
+
+    /**
+     * Test the setOptions function.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testSetOptionsWithBadPython()
+    {
+        Config::setOptions(['python' => 'foo']);
+    }
+
 
     /**
      * Test the getInstance function with the CONVERT and PYTHON environment variables.
@@ -100,11 +142,8 @@ class ConfigTest extends TestCase
     {
         Config::destroyInstance();
         putenv('CONVERT=1');
-        putenv('PYTHON=foo');
-        $config = Config::getInstance('config/config_test.yml');
+        $config = Config::getInstance();
         $this->assertEquals($config->convert, true);
-        $this->assertEquals($config->python, 'foo');
         putenv('CONVERT');
-        putenv('PYTHON');
     }
 }

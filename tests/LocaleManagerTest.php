@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Unit tests for the LocaleManagerTest class.
  */
-class LocaleManagerTest extends TestCase
+class LocaleManagerTest extends BaseTest
 {
     /**
      * LocaleManager class instance.
