@@ -2,7 +2,6 @@
 /**
  * File used to bootstrap tests.
  */
-use Alltube\PlaylistArchiveStream;
 use phpmock\mockery\PHPMockery;
 
 /**
