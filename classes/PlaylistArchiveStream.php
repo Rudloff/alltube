@@ -6,7 +6,6 @@
 namespace Alltube;
 
 use Barracuda\ArchiveStream\ZipArchive;
-use GuzzleHttp\Psr7\Stream;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -33,9 +32,9 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Current video being streamed to the archive.
      *
-     * @var Stream
+     * @var StreamInterface
      */
-    private $curVideoStream;
+    protected $curVideoStream;
 
     /**
      * True if the archive is complete.
@@ -234,7 +233,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @return void
      */
-    private function startVideoStream(Video $video)
+    protected function startVideoStream(Video $video)
     {
         $response = $video->getHttpResponse();
 

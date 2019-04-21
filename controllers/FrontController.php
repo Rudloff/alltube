@@ -6,6 +6,7 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\ConvertedPlaylistArchiveStream;
 use Alltube\EmptyUrlException;
 use Alltube\Locale;
 use Alltube\LocaleManager;
@@ -378,7 +379,11 @@ class FrontController
     private function getStream(Request $request, Response $response)
     {
         if (isset($this->video->entries)) {
-            $stream = new PlaylistArchiveStream($this->video);
+            if ($request->getQueryParam('audio')) {
+                $stream = new ConvertedPlaylistArchiveStream($this->video);
+            } else {
+                $stream = new PlaylistArchiveStream($this->video);
+            }
             $response = $response->withHeader('Content-Type', 'application/zip');
             $response = $response->withHeader(
                 'Content-Disposition',
