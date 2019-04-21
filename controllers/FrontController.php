@@ -397,7 +397,7 @@ class FrontController
             $client = new Client();
             $stream = $client->request(
                 'GET',
-                $this->video->url,
+                $this->video->getUrl(),
                 [
                     'stream'  => true,
                     'headers' => ['Range' => $request->getHeader('Range')],

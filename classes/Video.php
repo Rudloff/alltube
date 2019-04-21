@@ -361,7 +361,7 @@ class Video
             ],
             $this->getRtmpArguments(),
             [
-                '-i', $this->url,
+                '-i', $this->getUrl(),
                 '-f', $filetype,
                 '-b:a', $audioBitrate.'k',
             ],
@@ -432,7 +432,7 @@ class Video
             [
                 $this->config->avconv,
                 '-v', $this->config->avconvVerbosity,
-                '-i', $this->url,
+                '-i', $this->getUrl(),
                 '-f', $this->ext,
                 '-c', 'copy',
                 '-bsf:a', 'aac_adtstoasc',
@@ -503,7 +503,7 @@ class Video
                 ],
                 $this->getRtmpArguments(),
                 [
-                    '-i', $this->url,
+                    '-i', $this->getUrl(),
                     '-f', $this->ext,
                     'pipe:1',
                 ]
