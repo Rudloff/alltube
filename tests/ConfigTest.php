@@ -24,6 +24,8 @@ class ConfigTest extends BaseTest
      */
     protected function setUp()
     {
+        parent::setUp();
+
         $this->config = Config::getInstance();
     }
 
