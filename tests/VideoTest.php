@@ -7,14 +7,12 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Video;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Video class.
  */
 class VideoTest extends BaseTest
 {
-
     /**
      * Test getExtractors function.
      *

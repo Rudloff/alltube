@@ -8,7 +8,6 @@ namespace Alltube\Test;
 use Alltube\Locale;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
-use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;

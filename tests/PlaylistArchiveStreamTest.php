@@ -5,12 +5,8 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
-use Alltube\Video;
 use Alltube\PlaylistArchiveStream;
-use PHPUnit\Framework\TestCase;
-use RuntimeException;
-use stdClass;
+use Alltube\Video;
 
 /**
  * Unit tests for the ViewFactory class.

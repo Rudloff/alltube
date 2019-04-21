@@ -6,7 +6,6 @@
 namespace Alltube\Test;
 
 use Alltube\UglyRouter;
-use PHPUnit\Framework\TestCase;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 

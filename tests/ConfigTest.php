@@ -6,7 +6,6 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Config class.
@@ -131,7 +130,6 @@ class ConfigTest extends BaseTest
     {
         Config::setOptions(['python' => 'foo']);
     }
-
 
     /**
      * Test the getInstance function with the CONVERT and PYTHON environment variables.

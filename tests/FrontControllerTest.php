@@ -10,7 +10,6 @@ use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
 use Alltube\ViewFactory;
 use Exception;
-use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;

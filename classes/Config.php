@@ -141,9 +141,10 @@ class Config
     /**
      * Throw an exception if some of the options are invalid.
      *
-     * @return void
      * @throws Exception If youtube-dl is missing
      * @throws Exception If Python is missing
+     *
+     * @return void
      */
     private function validateOptions()
     {
@@ -223,8 +224,8 @@ class Config
     /**
      * Manually set some options.
      *
-     * @param array   $options Options (see `config/config.example.yml` for available options)
-     * @param boolean $update  True to update an existing instance
+     * @param array $options Options (see `config/config.example.yml` for available options)
+     * @param bool  $update  True to update an existing instance
      */
     public static function setOptions(array $options, $update = true)
     {

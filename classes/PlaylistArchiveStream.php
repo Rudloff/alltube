@@ -8,8 +8,6 @@ namespace Alltube;
 use Barracuda\ArchiveStream\TarArchive;
 use GuzzleHttp\Psr7\Stream;
 use Psr\Http\Message\StreamInterface;
-use RuntimeException;
-use stdClass;
 
 /**
  * Class used to create a Tar archive from playlists and stream it to the browser.
@@ -41,6 +39,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
 
     /**
      * True if the archive is complete.
+     *
      * @var bool
      */
     private $isComplete = false;

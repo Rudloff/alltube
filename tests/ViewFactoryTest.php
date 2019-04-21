@@ -6,7 +6,6 @@
 namespace Alltube\Test;
 
 use Alltube\ViewFactory;
-use PHPUnit\Framework\TestCase;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;

@@ -26,19 +26,22 @@ class Video
     private $config;
 
     /**
-     * URL of the page containing the video
+     * URL of the page containing the video.
+     *
      * @var string
      */
     private $webpageUrl;
 
     /**
-     * Requested video format
+     * Requested video format.
+     *
      * @var string
      */
     private $requestedFormat;
 
     /**
-     * Password
+     * Password.
+     *
      * @var string
      */
     private $password;
@@ -68,6 +71,7 @@ class Video
     private function getProcess(array $arguments)
     {
         $config = Config::getInstance();
+
         return new Process(
             array_merge(
                 [$config->python, $config->youtubedl],
@@ -90,7 +94,7 @@ class Video
     /**
      * Get a property from youtube-dl.
      *
-     * @param string $prop     Property
+     * @param string $prop Property
      *
      * @throws PasswordException If the video is protected by a password and no password was specified
      * @throws Exception         If the password is wrong
@@ -172,7 +176,7 @@ class Video
      *
      * @param string $name Property
      *
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -281,11 +285,11 @@ class Video
     /**
      * Get a process that runs avconv in order to convert a video.
      *
-     * @param int      $audioBitrate Audio bitrate of the converted file
-     * @param string   $filetype     Filetype of the converted file
-     * @param bool     $audioOnly    True to return an audio-only file
-     * @param string   $from         Start the conversion at this time
-     * @param string   $to           End the conversion at this time
+     * @param int    $audioBitrate Audio bitrate of the converted file
+     * @param string $filetype     Filetype of the converted file
+     * @param bool   $audioOnly    True to return an audio-only file
+     * @param string $from         Start the conversion at this time
+     * @param string $to           End the conversion at this time
      *
      * @throws Exception If avconv/ffmpeg is missing
      *
@@ -353,8 +357,8 @@ class Video
     /**
      * Get audio stream of converted video.
      *
-     * @param string $from     Start the conversion at this time
-     * @param string $to       End the conversion at this time
+     * @param string $from Start the conversion at this time
+     * @param string $to   End the conversion at this time
      *
      * @throws Exception If your try to convert an M3U8 video
      * @throws Exception If the popen stream was not created correctly
@@ -526,7 +530,7 @@ class Video
      */
     public function withFormat($format)
     {
-        return new Video($this->webpageUrl, $format, $this->password);
+        return new self($this->webpageUrl, $format, $this->password);
     }
 
     /**

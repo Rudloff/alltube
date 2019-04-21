@@ -6,7 +6,6 @@
 namespace Alltube\Test;
 
 use Alltube\Locale;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the LocaleTest class.

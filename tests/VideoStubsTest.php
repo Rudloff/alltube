@@ -5,11 +5,9 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
 use Alltube\Video;
 use Mockery;
 use phpmock\mockery\PHPMockery;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Video class.
