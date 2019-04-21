@@ -354,6 +354,8 @@ class Video
             $afterArguments[] = $to;
         }
 
+        $urls = $this->getUrl();
+
         $arguments = array_merge(
             [
                 $this->config->avconv,
@@ -361,7 +363,7 @@ class Video
             ],
             $this->getRtmpArguments(),
             [
-                '-i', $this->getUrl(),
+                '-i', $urls[0],
                 '-f', $filetype,
                 '-b:a', $audioBitrate.'k',
             ],
@@ -428,11 +430,13 @@ class Video
             throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
         }
 
+        $urls = $this->getUrl();
+
         $process = new Process(
             [
                 $this->config->avconv,
                 '-v', $this->config->avconvVerbosity,
-                '-i', $this->getUrl(),
+                '-i', $urls[0],
                 '-f', $this->ext,
                 '-c', 'copy',
                 '-bsf:a', 'aac_adtstoasc',
@@ -495,6 +499,8 @@ class Video
      */
     public function getRtmpStream()
     {
+        $urls = $this->getUrl();
+
         $process = new Process(
             array_merge(
                 [
@@ -503,7 +509,7 @@ class Video
                 ],
                 $this->getRtmpArguments(),
                 [
-                    '-i', $this->getUrl(),
+                    '-i', $urls[0],
                     '-f', $this->ext,
                     'pipe:1',
                 ]
