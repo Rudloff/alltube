@@ -7,6 +7,9 @@ namespace Alltube;
 
 use Slim\Http\Stream;
 
+/**
+ * Class used to create a Zip archive from converted playlists entries.
+ */
 class ConvertedPlaylistArchiveStream extends PlaylistArchiveStream
 {
     /**
