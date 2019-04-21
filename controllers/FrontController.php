@@ -15,7 +15,6 @@ use Alltube\Video;
 use Aura\Session\Segment;
 use Aura\Session\SessionFactory;
 use Exception;
-use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
@@ -394,15 +393,8 @@ class FrontController
             $response = $response->withHeader('Content-Type', 'video/'.$this->video->ext);
             $body = new Stream($this->video->getM3uStream());
         } else {
-            $client = new Client();
-            $stream = $client->request(
-                'GET',
-                $this->video->getUrl(),
-                [
-                    'stream'  => true,
-                    'headers' => ['Range' => $request->getHeader('Range')],
-                ]
-            );
+            $stream = $this->video->getHttpResponse(['Range' => $request->getHeader('Range')]);
+
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
             $response = $response->withHeader('Accept-Ranges', $stream->getHeader('Accept-Ranges'));

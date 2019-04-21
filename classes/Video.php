@@ -562,11 +562,11 @@ class Video
      *
      * @return Response
      */
-    public function getHttpResponse()
+    public function getHttpResponse(array $headers = [])
     {
         $client = new Client();
         $urls = $this->getUrl();
 
-        return $client->request('GET', $urls[0], ['stream' => true]);
+        return $client->request('GET', $urls[0], ['stream' => true, 'headers' => $headers]);
     }
 }
