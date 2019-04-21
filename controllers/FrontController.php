@@ -380,10 +380,10 @@ class FrontController
     {
         if (isset($this->video->entries)) {
             $stream = new PlaylistArchiveStream($this->video);
-            $response = $response->withHeader('Content-Type', 'application/x-tar');
+            $response = $response->withHeader('Content-Type', 'application/zip');
             $response = $response->withHeader(
                 'Content-Disposition',
-                'attachment; filename="'.$this->video->title.'.tar"'
+                'attachment; filename="'.$this->video->title.'.zip"'
             );
 
             return $response->withBody($stream);

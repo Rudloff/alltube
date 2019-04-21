@@ -5,16 +5,16 @@
 
 namespace Alltube;
 
-use Barracuda\ArchiveStream\TarArchive;
+use Barracuda\ArchiveStream\ZipArchive;
 use GuzzleHttp\Psr7\Stream;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Class used to create a Tar archive from playlists and stream it to the browser.
+ * Class used to create a Zip archive from playlists and stream it to the browser.
  *
  * @link https://github.com/php-fig/http-message/blob/master/src/StreamInterface.php
  */
-class PlaylistArchiveStream extends TarArchive implements StreamInterface
+class PlaylistArchiveStream extends ZipArchive implements StreamInterface
 {
     /**
      * videos to add in the archive.
