@@ -49,13 +49,6 @@ class FrontControllerTest extends BaseTest
     private $controller;
 
     /**
-     * Config class instance.
-     *
-     * @var Config
-     */
-    private $config;
-
-    /**
      * Prepare tests.
      */
     protected function setUp()

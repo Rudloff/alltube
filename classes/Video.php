@@ -16,12 +16,14 @@ use Symfony\Component\Process\Process;
  *
  * Due to the way youtube-dl behaves, this class can also contain information about a playlist.
  *
- * @property-read string $title         Title
- * @property-read string $protocol      Network protocol (HTTP, RTMP, etc.)
- * @property-read string $url           File URL
- * @property-read string $ext           File extension
- * @property-read string $extractor_key youtube-dl extractor class used
- * @property-read array  $entries       List of videos (if the object contains information about a playlist)
+ * @property-read string      $title         Title
+ * @property-read string      $protocol      Network protocol (HTTP, RTMP, etc.)
+ * @property-read string      $url           File URL
+ * @property-read string      $ext           File extension
+ * @property-read string      $extractor_key youtube-dl extractor class used
+ * @property-read array       $entries       List of videos (if the object contains information about a playlist)
+ * @property-read array       $rtmp_conn
+ * @property-read string|null $_type         Object type (usually "playlist" or null)
  */
 class Video
 {

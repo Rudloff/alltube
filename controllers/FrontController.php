@@ -442,7 +442,6 @@ class FrontController
         if ($request->isGet()) {
             $response = $response->withBody(new Stream($stream));
         }
-        $webpageUrl = $request->getQueryParam('url');
 
         return $response->withHeader(
             'Content-Disposition',

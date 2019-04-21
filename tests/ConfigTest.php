@@ -36,8 +36,9 @@ class ConfigTest extends BaseTest
      */
     public function testGetInstance()
     {
-        $this->assertEquals($this->config->convert, false);
-        $this->assertConfig($this->config);
+        $config = Config::getInstance();
+        $this->assertEquals($config->convert, false);
+        $this->assertConfig($config);
     }
 
     /**
@@ -67,7 +68,8 @@ class ConfigTest extends BaseTest
      */
     public function testSetFile()
     {
-        $this->assertNull(Config::setFile($this->getConfigFile()));
+        Config::setFile($this->getConfigFile());
+        $this->assertConfig($this->config);
     }
 
     /**

@@ -156,7 +156,7 @@ class PlaylistArchiveStream extends TarArchive implements StreamInterface
      *
      * @param string $key string $key Specific metadata to retrieve.
      *
-     * @return null
+     * @return array|mixed|null
      */
     public function getMetadata($key = null)
     {
