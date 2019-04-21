@@ -237,6 +237,8 @@ class FrontControllerTest extends BaseTest
      */
     public function testVideoWithAudio()
     {
+        Config::setOptions(['convert' => true]);
+
         $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true]);
     }
 
@@ -250,6 +252,8 @@ class FrontControllerTest extends BaseTest
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
         }
+        Config::setOptions(['convert' => true]);
+
         // So we can test the fallback to default format
         $this->assertRequestIsOk('video', ['url' => 'https://vimeo.com/251997032', 'audio' => true]);
     }
@@ -261,6 +265,8 @@ class FrontControllerTest extends BaseTest
      */
     public function testVideoWithUnconvertedAudio()
     {
+        Config::setOptions(['convert' => true]);
+
         $this->assertRequestIsRedirect(
             'video',
             [
