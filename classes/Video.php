@@ -42,7 +42,7 @@ class Video
     /**
      * Password.
      *
-     * @var string
+     * @var string|null
      */
     private $password;
 
@@ -68,7 +68,7 @@ class Video
      *
      * @return Process
      */
-    private function getProcess(array $arguments)
+    private static function getProcess(array $arguments)
     {
         $config = Config::getInstance();
 
@@ -88,40 +88,23 @@ class Video
      * */
     public static function getExtractors()
     {
-        return explode("\n", trim(self::getProp('list-extractors')));
+        return explode("\n", trim(self::callYoutubedl(['--list-extractors'])));
     }
 
     /**
-     * Get a property from youtube-dl.
+     * Call youtube-dl.
      *
-     * @param string $prop Property
+     * @param array $arguments Arguments
      *
      * @throws PasswordException If the video is protected by a password and no password was specified
      * @throws Exception         If the password is wrong
      * @throws Exception         If youtube-dl returns an error
      *
-     * @return string
+     * @return string Result
      */
-    private function getProp($prop = 'dump-json')
+    private static function callYoutubedl(array $arguments)
     {
         $config = Config::getInstance();
-
-        $arguments = ['--'.$prop];
-
-        // This function can also be called statically.
-        if (isset($this)) {
-            if (isset($this->webpageUrl)) {
-                $arguments[] = $this->webpageUrl;
-            }
-            if (isset($this->requestedFormat)) {
-                $arguments[] = '-f';
-                $arguments[] = $this->requestedFormat;
-            }
-            if (isset($this->password)) {
-                $arguments[] = '--video-password';
-                $arguments[] = $this->password;
-            }
-        }
 
         $process = self::getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
@@ -141,6 +124,32 @@ class Video
         } else {
             return trim($process->getOutput());
         }
+    }
+
+    /**
+     * Get a property from youtube-dl.
+     *
+     * @param string $prop Property
+     *
+     * @return string
+     */
+    private function getProp($prop = 'dump-json')
+    {
+        $arguments = ['--'.$prop];
+
+        if (isset($this->webpageUrl)) {
+            $arguments[] = $this->webpageUrl;
+        }
+        if (isset($this->requestedFormat)) {
+            $arguments[] = '-f';
+            $arguments[] = $this->requestedFormat;
+        }
+        if (isset($this->password)) {
+            $arguments[] = '--video-password';
+            $arguments[] = $this->password;
+        }
+
+        return $this::callYoutubedl($arguments);
     }
 
     /**
