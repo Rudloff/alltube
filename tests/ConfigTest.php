@@ -67,13 +67,7 @@ class ConfigTest extends BaseTest
      */
     public function testSetFile()
     {
-        if (PHP_OS == 'WINNT') {
-            $configFile = 'config_test_windows.yml';
-        } else {
-            $configFile = 'config_test.yml';
-        }
-
-        $this->assertNull(Config::setFile(__DIR__.'/../config/'.$configFile));
+        $this->assertNull(Config::setFile($this->getConfigFile()));
     }
 
     /**
@@ -142,6 +136,7 @@ class ConfigTest extends BaseTest
     {
         Config::destroyInstance();
         putenv('CONVERT=1');
+        Config::setFile($this->getConfigFile());
         $config = Config::getInstance();
         $this->assertEquals($config->convert, true);
         putenv('CONVERT');

@@ -14,9 +14,11 @@ use PHPUnit\Framework\TestCase;
 abstract class BaseTest extends TestCase
 {
     /**
-     * Prepare tests.
+     * Get the config file used in tests.
+     *
+     * @return string Path to file
      */
-    protected function setUp()
+    protected function getConfigFile()
     {
         if (PHP_OS == 'WINNT') {
             $configFile = 'config_test_windows.yml';
@@ -24,7 +26,15 @@ abstract class BaseTest extends TestCase
             $configFile = 'config_test.yml';
         }
 
-        Config::setFile(__DIR__.'/../config/'.$configFile);
+        return __DIR__.'/../config/'.$configFile;
+    }
+
+    /**
+     * Prepare tests.
+     */
+    protected function setUp()
+    {
+        Config::setFile($this->getConfigFile());
     }
 
     /**
