@@ -24,16 +24,17 @@ class YoutubeStream extends AppendStream
         parent::__construct();
 
         $stream = $video->getHttpResponse();
-        $fileSize = $stream->getHeader('Content-Length');
+        $contentLenghtHeader = $stream->getHeader('Content-Length');
         $curSize = 0;
-        while ($curSize < $fileSize[0]) {
-            $newSize = $curSize + $video->downloader_options->http_chunk_size;
-            if ($newSize > $fileSize[0]) {
-                $newSize = $fileSize[0] - 1;
+
+        while ($rangeStart < $contentLenghtHeader[0]) {
+            $rangeEnd = $rangeStart + $video->downloader_options->http_chunk_size;
+            if ($rangeEnd > $contentLenghtHeader[0]) {
+                $rangeEnd = $contentLenghtHeader[0] - 1;
             }
-            $response = $video->getHttpResponse(['Range' => 'bytes='.$curSize.'-'.$newSize]);
+            $response = $video->getHttpResponse(['Range' => 'bytes='.$rangeStart.'-'.$rangeEnd]);
             $this->addStream(new YoutubeChunkStream($response));
-            $curSize = $newSize + 1;
+            $rangeStart = $rangeEnd + 1;
         }
     }
 }
