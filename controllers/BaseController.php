@@ -11,7 +11,6 @@ use Alltube\Video;
 use Aura\Session\Segment;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
-use Slim\Http\Response;
 
 /**
  * Abstract class used by every controller.

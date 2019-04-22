@@ -13,7 +13,6 @@ use Aura\Session\SessionFactory;
  */
 class SessionManager
 {
-
     /**
      * Current session.
      *
@@ -32,6 +31,7 @@ class SessionManager
             $session_factory = new SessionFactory();
             self::$session = $session_factory->newInstance($_COOKIE);
         }
+
         return self::$session;
     }
 }

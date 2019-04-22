@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
+use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\Controller\JsonController;
-use Alltube\Controller\DownloadController;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
 use Alltube\UglyRouter;
@@ -73,7 +73,6 @@ $app->get(
     '/locale/{locale}',
     [$frontController, 'locale']
 )->setName('locale');
-
 
 $app->get(
     '/json',

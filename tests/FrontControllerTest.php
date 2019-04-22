@@ -7,20 +7,15 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\FrontController;
-use Alltube\LocaleManager;
-use Alltube\ViewFactory;
 use Exception;
-use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
-use Slim\Http\Response;
 
 /**
  * Unit tests for the FrontController class.
  */
 class FrontControllerTest extends ControllerTest
 {
-
     /**
      * Controller instance used in tests.
      *

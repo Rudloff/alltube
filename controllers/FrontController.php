@@ -6,7 +6,6 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
-use Alltube\EmptyUrlException;
 use Alltube\Locale;
 use Alltube\LocaleManager;
 use Alltube\PasswordException;
@@ -16,7 +15,6 @@ use Psr\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Http\Stream;
 use Slim\Views\Smarty;
 
 /**
