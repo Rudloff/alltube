@@ -566,6 +566,8 @@ class Video
     /**
      * Get a HTTP response containing the video.
      *
+     * @param array $headers HTTP headers of the request
+     *
      * @return Response
      */
     public function getHttpResponse(array $headers = [])
