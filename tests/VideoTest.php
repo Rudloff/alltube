@@ -71,7 +71,7 @@ class VideoTest extends BaseTest
      * Test getUrl function with a protected video and no password.
      *
      * @return void
-     * @expectedException Alltube\PasswordException
+     * @expectedException Alltube\Exception\PasswordException
      */
     public function testgetUrlWithMissingPassword()
     {
