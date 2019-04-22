@@ -10,6 +10,7 @@ use Alltube\EmptyUrlException;
 use Alltube\PasswordException;
 use Alltube\PlaylistArchiveStream;
 use Alltube\Video;
+use Alltube\YoutubeStream;
 use Exception;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -172,7 +173,13 @@ class DownloadController extends BaseController
             if ($stream->getStatusCode() == 206) {
                 $response = $response->withStatus(206);
             }
-            $body = $stream->getBody();
+
+            if (isset($this->video->downloader_options->http_chunk_size)) {
+                // Workaround for Youtube throttling the download speed.
+                $body = new YoutubeStream($this->video);
+            } else {
+                $body = $stream->getBody();
+            }
         }
         if ($request->isGet()) {
             $response = $response->withBody($body);

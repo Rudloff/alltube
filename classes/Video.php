@@ -24,6 +24,7 @@ use Symfony\Component\Process\Process;
  * @property-read array       $entries       List of videos (if the object contains information about a playlist)
  * @property-read array       $rtmp_conn
  * @property-read string|null $_type         Object type (usually "playlist" or null)
+ * @property-read stdClass    $downloader_options
  */
 class Video
 {
@@ -61,6 +62,12 @@ class Video
      * @var stdClass
      */
     private $json;
+
+    /**
+     * URLs of the video files.
+     * @var array
+     */
+    private $urls;
 
     /**
      * VideoDownload constructor.
@@ -219,13 +226,16 @@ class Video
      * */
     public function getUrl()
     {
-        $urls = explode("\n", $this->getProp('get-url'));
+        // Cache the URLs.
+        if (!isset($this->urls)) {
+            $this->urls = explode("\n", $this->getProp('get-url'));
 
-        if (empty($urls[0])) {
-            throw new EmptyUrlException(_('youtube-dl returned an empty URL.'));
+            if (empty($urls[0])) {
+                throw new EmptyUrlException(_('youtube-dl returned an empty URL.'));
+            }
         }
 
-        return $urls;
+        return $this->urls;
     }
 
     /**
