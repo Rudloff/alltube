@@ -5,12 +5,12 @@
 
 namespace Alltube\Controller;
 
-use Alltube\ConvertedPlaylistArchiveStream;
-use Alltube\EmptyUrlException;
-use Alltube\PasswordException;
-use Alltube\PlaylistArchiveStream;
+use Alltube\Stream\ConvertedPlaylistArchiveStream;
+use Alltube\Exception\EmptyUrlException;
+use Alltube\Exception\PasswordException;
+use Alltube\Stream\PlaylistArchiveStream;
 use Alltube\Video;
-use Alltube\YoutubeStream;
+use Alltube\Stream\YoutubeStream;
 use Exception;
 use Slim\Http\Request;
 use Slim\Http\Response;

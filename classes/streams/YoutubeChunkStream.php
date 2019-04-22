@@ -3,7 +3,7 @@
  * YoutubeChunkStream class.
  */
 
-namespace Alltube;
+namespace Alltube\Stream;
 
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\StreamInterface;
@@ -17,6 +17,7 @@ class YoutubeChunkStream implements StreamInterface
 
     /**
      * HTTP response containing the video chunk.
+     *
      * @var Response
      */
     private $response;
@@ -173,7 +174,7 @@ class YoutubeChunkStream implements StreamInterface
     }
 
     /**
-     * Returns the remaining contents in a string
+     * Returns the remaining contents in a string.
      *
      * @return string
      */

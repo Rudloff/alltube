@@ -3,8 +3,9 @@
  * ConvertedPlaylistArchiveStream class.
  */
 
-namespace Alltube;
+namespace Alltube\Stream;
 
+use Alltube\Video;
 use Slim\Http\Stream;
 
 /**

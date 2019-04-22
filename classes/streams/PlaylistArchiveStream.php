@@ -3,8 +3,9 @@
  * PlaylistArchiveStream class.
  */
 
-namespace Alltube;
+namespace Alltube\Stream;
 
+use Alltube\Video;
 use Barracuda\ArchiveStream\ZipArchive;
 use Psr\Http\Message\StreamInterface;
 

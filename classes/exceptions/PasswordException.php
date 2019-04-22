@@ -3,7 +3,7 @@
  * PasswordException class.
  */
 
-namespace Alltube;
+namespace Alltube\Exception;
 
 use Exception;
 

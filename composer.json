@@ -79,6 +79,8 @@
   "autoload": {
     "psr-4": {
       "Alltube\\": "classes/",
+      "Alltube\\Stream\\": "classes/streams/",
+      "Alltube\\Exception\\": "classes/exceptions/",
       "Alltube\\Controller\\": "controllers/",
       "Alltube\\Test\\": "tests/"
     }

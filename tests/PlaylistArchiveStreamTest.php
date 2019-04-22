@@ -5,7 +5,7 @@
 
 namespace Alltube\Test;
 
-use Alltube\PlaylistArchiveStream;
+use Alltube\Stream\PlaylistArchiveStream;
 use Alltube\Video;
 
 /**

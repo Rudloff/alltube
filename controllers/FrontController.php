@@ -8,7 +8,7 @@ namespace Alltube\Controller;
 use Alltube\Config;
 use Alltube\Locale;
 use Alltube\LocaleManager;
-use Alltube\PasswordException;
+use Alltube\Exception\PasswordException;
 use Alltube\Video;
 use Exception;
 use Psr\Container\ContainerInterface;

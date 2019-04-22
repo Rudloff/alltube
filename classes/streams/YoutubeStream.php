@@ -3,9 +3,11 @@
  * YoutubeStream class.
  */
 
-namespace Alltube;
+namespace Alltube\Stream;
 
+use Alltube\Video;
 use GuzzleHttp\Psr7\AppendStream;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * Stream that downloads a video in chunks.

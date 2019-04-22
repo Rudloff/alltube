@@ -5,6 +5,8 @@
 
 namespace Alltube;
 
+use Alltube\Exception\EmptyUrlException;
+use Alltube\Exception\PasswordException;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
@@ -65,6 +67,7 @@ class Video
 
     /**
      * URLs of the video files.
+     *
      * @var array
      */
     private $urls;
