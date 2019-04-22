@@ -18,12 +18,12 @@
     <meta itemprop="uploadDate" content="{$video->upload_date}" />
 {/if}
 <br/>
-<form action="{path_for name="redirect"}">
+<form action="{path_for name="download"}">
     <input type="hidden" name="url" value="{$video->webpage_url}" />
 {if isset($video->formats)}
     <h3><label for="format">{t}Available formats:{/t}</label></h3>
         {if $config->uglyUrls}
-            <input type="hidden" name="page" value="redirect" />
+            <input type="hidden" name="page" value="download" />
         {/if}
         <select name="format" id="format" class="formats monospace">
             <optgroup label="{t}Generic formats{/t}">

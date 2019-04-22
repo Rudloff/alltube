@@ -7,7 +7,7 @@
 {$video->title}</a></i>{/if}{t}:{/t}
 </p>
 {if $config->stream}
-    <a href="{path_for name="redirect"}?url={$video->webpage_url}" class="downloadBtn">Download everything</a>
+    <a href="{path_for name="download"}?url={$video->webpage_url}" class="downloadBtn">Download everything</a>
 {/if}
 {foreach $video->entries as $entry}
     <div class="playlist-entry">
@@ -27,8 +27,8 @@
                 {$entry->title}
             {/if}
         </a></h3>
-        <a target="_blank" class="downloadBtn" href="{path_for name="redirect"}?url={$entry->url}">{t}Download{/t}</a>
-        <a target="_blank" href="{path_for name="video"}?url={$entry->url}">{t}More options{/t}</a>
+        <a target="_blank" class="downloadBtn" href="{path_for name="download"}?url={$entry->url}">{t}Download{/t}</a>
+        <a target="_blank" href="{path_for name="info"}?url={$entry->url}">{t}More options{/t}</a>
     </div>
 {/foreach}
 

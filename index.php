@@ -40,26 +40,36 @@ $app->get(
     '/',
     [$controller, 'index']
 )->setName('index');
+
 $app->get(
     '/extractors',
     [$controller, 'extractors']
 )->setName('extractors');
+
 $app->any(
-    '/video',
-    [$controller, 'video']
-)->setName('video');
+    '/info',
+    [$controller, 'info']
+)->setName('info');
+// Legacy route.
+$app->any('/video', [$controller, 'info']);
+
 $app->any(
     '/watch',
     [$controller, 'video']
 );
+
 $app->get(
-    '/redirect',
-    [$controller, 'redirect']
-)->setName('redirect');
+    '/download',
+    [$controller, 'download']
+)->setName('download');
+// Legacy route.
+$app->get('/redirect', [$controller, 'download']);
+
 $app->get(
     '/json',
     [$controller, 'json']
 )->setName('json');
+
 $app->get(
     '/locale/{locale}',
     [$controller, 'locale']

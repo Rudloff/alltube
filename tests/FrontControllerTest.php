@@ -65,12 +65,12 @@ class FrontControllerTest extends BaseTest
 
         $this->container['router']->map(['GET'], '/', [$this->controller, 'index'])
             ->setName('index');
-        $this->container['router']->map(['GET'], '/video', [$this->controller, 'video'])
-            ->setName('video');
+        $this->container['router']->map(['GET'], '/video', [$this->controller, 'info'])
+            ->setName('info');
         $this->container['router']->map(['GET'], '/extractors', [$this->controller, 'extractors'])
             ->setName('extractors');
-        $this->container['router']->map(['GET'], '/redirect', [$this->controller, 'redirect'])
-            ->setName('redirect');
+        $this->container['router']->map(['GET'], '/redirect', [$this->controller, 'download'])
+            ->setName('download');
         $this->container['router']->map(['GET'], '/locale', [$this->controller, 'locale'])
             ->setName('locale');
     }
@@ -211,43 +211,43 @@ class FrontControllerTest extends BaseTest
     }
 
     /**
-     * Test the video() function without the url parameter.
+     * Test the info() function without the url parameter.
      *
      * @return void
      */
-    public function testVideoWithoutUrl()
+    public function testInfoWithoutUrl()
     {
-        $this->assertRequestIsRedirect('video');
+        $this->assertRequestIsRedirect('info');
     }
 
     /**
-     * Test the video() function.
+     * Test the info() function.
      *
      * @return void
      */
-    public function testVideo()
+    public function testInfo()
     {
-        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
+        $this->assertRequestIsOk('info', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
     }
 
     /**
-     * Test the video() function with audio conversion.
+     * Test the info() function with audio conversion.
      *
      * @return void
      */
-    public function testVideoWithAudio()
+    public function testInfoWithAudio()
     {
         Config::setOptions(['convert' => true]);
 
-        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true]);
+        $this->assertRequestIsRedirect('info', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true]);
     }
 
     /**
-     * Test the video() function with audio conversion from a Vimeo video.
+     * Test the info() function with audio conversion from a Vimeo video.
      *
      * @return void
      */
-    public function testVideoWithVimeoAudio()
+    public function testInfoWithVimeoAudio()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
@@ -255,20 +255,20 @@ class FrontControllerTest extends BaseTest
         Config::setOptions(['convert' => true]);
 
         // So we can test the fallback to default format
-        $this->assertRequestIsOk('video', ['url' => 'https://vimeo.com/251997032', 'audio' => true]);
+        $this->assertRequestIsRedirect('info', ['url' => 'https://vimeo.com/251997032', 'audio' => true]);
     }
 
     /**
-     * Test the video() function with audio enabled and an URL that doesn't need to be converted.
+     * Test the info() function with audio enabled and an URL that doesn't need to be converted.
      *
      * @return void
      */
-    public function testVideoWithUnconvertedAudio()
+    public function testInfoWithUnconvertedAudio()
     {
         Config::setOptions(['convert' => true]);
 
         $this->assertRequestIsRedirect(
-            'video',
+            'info',
             [
                 'url'   => 'https://2080.bandcamp.com/track/cygnus-x-the-orange-theme-2080-faulty-chip-cover',
                 'audio' => true,
@@ -277,16 +277,16 @@ class FrontControllerTest extends BaseTest
     }
 
     /**
-     * Test the video() function with a password.
+     * Test the info() function with a password.
      *
      * @return void
      */
-    public function testVideoWithPassword()
+    public function testInfoWithPassword()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
         }
-        $result = $this->controller->video(
+        $result = $this->controller->info(
             $this->request->withQueryParams(['url' => 'http://vimeo.com/68375962'])
                 ->withParsedBody(['password' => 'youtube-dl']),
             $this->response
@@ -295,44 +295,44 @@ class FrontControllerTest extends BaseTest
     }
 
     /**
-     * Test the video() function with a missing password.
+     * Test the info() function with a missing password.
      *
      * @return void
      */
-    public function testVideoWithMissingPassword()
+    public function testInfoWithMissingPassword()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
         }
-        $this->assertRequestIsOk('video', ['url' => 'http://vimeo.com/68375962']);
-        $this->assertRequestIsOk('video', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
+        $this->assertRequestIsOk('info', ['url' => 'http://vimeo.com/68375962']);
+        $this->assertRequestIsOk('info', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
     }
 
     /**
-     * Test the video() function with streams enabled.
+     * Test the info() function with streams enabled.
      *
      * @return void
      */
-    public function testVideoWithStream()
+    public function testInfoWithStream()
     {
         Config::setOptions(['stream' => true]);
 
-        $this->assertRequestIsOk('video', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
+        $this->assertRequestIsOk('info', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
         $this->assertRequestIsOk(
-            'video',
+            'info',
             ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'audio' => true]
         );
     }
 
     /**
-     * Test the video() function with a playlist.
+     * Test the info() function with a playlist.
      *
      * @return void
      */
-    public function testVideoWithPlaylist()
+    public function testInfoWithPlaylist()
     {
         $this->assertRequestIsOk(
-            'video',
+            'info',
             ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
     }
@@ -349,59 +349,59 @@ class FrontControllerTest extends BaseTest
     }
 
     /**
-     * Test the redirect() function without the URL parameter.
+     * Test the download() function without the URL parameter.
      *
      * @return void
      */
-    public function testRedirectWithoutUrl()
+    public function testDownloadWithoutUrl()
     {
-        $this->assertRequestIsRedirect('redirect');
+        $this->assertRequestIsRedirect('download');
     }
 
     /**
-     * Test the redirect() function.
+     * Test the download() function.
      *
      * @return void
      */
-    public function testRedirect()
+    public function testDownload()
     {
-        $this->assertRequestIsRedirect('redirect', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
+        $this->assertRequestIsRedirect('download', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
     }
 
     /**
-     * Test the redirect() function with a specific format.
+     * Test the download() function with a specific format.
      *
      * @return void
      */
-    public function testRedirectWithFormat()
+    public function testDownloadWithFormat()
     {
         $this->assertRequestIsRedirect(
-            'redirect',
+            'download',
             ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'format' => 'worst']
         );
     }
 
     /**
-     * Test the redirect() function with streams enabled.
+     * Test the download() function with streams enabled.
      *
      * @return void
      */
-    public function testRedirectWithStream()
+    public function testDownloadWithStream()
     {
         Config::setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
-            'redirect',
+            'download',
             ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']
         );
     }
 
     /**
-     * Test the redirect() function with an M3U stream.
+     * Test the download() function with an M3U stream.
      *
      * @return void
      */
-    public function testRedirectWithM3uStream()
+    public function testDownloadWithM3uStream()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Twitter returns a 429 error when the test is ran too many times.');
@@ -410,7 +410,7 @@ class FrontControllerTest extends BaseTest
         Config::setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
-            'redirect',
+            'download',
             [
                 'url'    => 'https://twitter.com/verge/status/813055465324056576/video/1',
                 'format' => 'hls-2176',
@@ -419,33 +419,33 @@ class FrontControllerTest extends BaseTest
     }
 
     /**
-     * Test the redirect() function with an RTMP stream.
+     * Test the download() function with an RTMP stream.
      *
      * @return void
      */
-    public function testRedirectWithRtmpStream()
+    public function testDownloadWithRtmpStream()
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
 
         Config::setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
-            'redirect',
+            'download',
             ['url' => 'http://www.rtvnh.nl/video/131946', 'format' => 'rtmp-264']
         );
     }
 
     /**
-     * Test the redirect() function with a remuxed video.
+     * Test the download() function with a remuxed video.
      *
      * @return void
      */
-    public function testRedirectWithRemux()
+    public function testDownloadWithRemux()
     {
         Config::setOptions(['remux' => true]);
 
         $this->assertRequestIsOk(
-            'redirect',
+            'download',
             [
                 'url'    => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
                 'format' => 'bestvideo+bestaudio',
@@ -454,14 +454,14 @@ class FrontControllerTest extends BaseTest
     }
 
     /**
-     * Test the redirect() function with a remuxed video but remux disabled.
+     * Test the download() function with a remuxed video but remux disabled.
      *
      * @return void
      */
-    public function testRedirectWithRemuxDisabled()
+    public function testDownloadWithRemuxDisabled()
     {
         $this->assertRequestIsServerError(
-            'redirect',
+            'download',
             [
                 'url'    => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
                 'format' => 'bestvideo+bestaudio',
@@ -470,69 +470,69 @@ class FrontControllerTest extends BaseTest
     }
 
     /**
-     * Test the redirect() function with a missing password.
+     * Test the download() function with a missing password.
      *
      * @return void
      */
-    public function testRedirectWithMissingPassword()
+    public function testDownloadWithMissingPassword()
     {
         if (getenv('CI')) {
             $this->markTestSkipped('Travis is blacklisted by Vimeo.');
         }
-        $this->assertRequestIsRedirect('redirect', ['url' => 'http://vimeo.com/68375962']);
+        $this->assertRequestIsRedirect('download', ['url' => 'http://vimeo.com/68375962']);
     }
 
     /**
-     * Test the redirect() function with an error.
+     * Test the download() function with an error.
      *
      * @return void
      */
-    public function testRedirectWithError()
+    public function testDownloadWithError()
     {
-        $this->assertRequestIsServerError('redirect', ['url' => 'http://example.com/foo']);
+        $this->assertRequestIsServerError('download', ['url' => 'http://example.com/foo']);
     }
 
     /**
-     * Test the redirect() function with an video that returns an empty URL.
+     * Test the download() function with an video that returns an empty URL.
      * This can be caused by trying to redirect to a playlist.
      *
      * @return void
      */
-    public function testRedirectWithEmptyUrl()
+    public function testDownloadWithEmptyUrl()
     {
         $this->assertRequestIsServerError(
-            'redirect',
+            'download',
             ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
     }
 
     /**
-     * Test the redirect() function with a playlist stream.
+     * Test the download() function with a playlist stream.
      *
      * @return void
      * @requires OS Linux
      */
-    public function testRedirectWithPlaylist()
+    public function testDownloadWithPlaylist()
     {
         Config::setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
-            'redirect',
+            'download',
             ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
     }
 
     /**
-     * Test the redirect() function with an advanced conversion.
+     * Test the download() function with an advanced conversion.
      *
      * @return void
      */
-    public function testRedirectWithAdvancedConversion()
+    public function testDownloadWithAdvancedConversion()
     {
         Config::setOptions(['convertAdvanced' => true]);
 
         $this->assertRequestIsOk(
-            'redirect',
+            'download',
             [
                 'url'           => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
                 'format'        => 'best',

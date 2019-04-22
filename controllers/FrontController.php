@@ -274,7 +274,7 @@ class FrontController
      *
      * @return Response HTTP response
      */
-    private function getVideoResponse(Request $request, Response $response)
+    private function getInfoResponse(Request $request, Response $response)
     {
         try {
             $this->video->getJson();
@@ -285,7 +285,7 @@ class FrontController
         if (isset($this->video->entries)) {
             $template = 'playlist.tpl';
         } else {
-            $template = 'video.tpl';
+            $template = 'info.tpl';
         }
         $title = _('Video download');
         $description = _('Download video from ').$this->video->extractor_key;
@@ -298,7 +298,7 @@ class FrontController
             $template,
             [
                 'video'         => $this->video,
-                'class'         => 'video',
+                'class'         => 'info',
                 'title'         => $title,
                 'description'   => $description,
                 'config'        => $this->config,
@@ -319,7 +319,7 @@ class FrontController
      *
      * @return Response HTTP response
      */
-    public function video(Request $request, Response $response)
+    public function info(Request $request, Response $response)
     {
         $url = $request->getQueryParam('url') ?: $request->getQueryParam('v');
 
@@ -332,9 +332,13 @@ class FrontController
             $this->video = new Video($url, $this->defaultFormat, $password);
 
             if ($this->config->convert && $request->getQueryParam('audio')) {
-                return $this->getAudioResponse($request, $response);
+                // We skip the info page and get directly to the download.
+                return $response->withRedirect(
+                    $this->container->get('router')->pathFor('download').
+                    '?'.http_build_query($request->getQueryParams())
+                );
             } else {
-                return $this->getVideoResponse($request, $response);
+                return $this->getInfoResponse($request, $response);
             }
         } else {
             return $response->withRedirect($this->container->get('router')->pathFor('index'));
@@ -464,7 +468,7 @@ class FrontController
     }
 
     /**
-     * Get approriate HTTP response to redirect query
+     * Get approriate HTTP response to download query.
      * Depends on whether we want to stream, remux or simply redirect.
      *
      * @param Response $response PSR-7 response
@@ -472,7 +476,7 @@ class FrontController
      *
      * @return Response HTTP response
      */
-    private function getRedirectResponse(Request $request, Response $response)
+    private function getDownloadResponse(Request $request, Response $response)
     {
         try {
             $videoUrls = $this->video->getUrl();
@@ -532,7 +536,7 @@ class FrontController
      *
      * @return Response HTTP response
      */
-    public function redirect(Request $request, Response $response)
+    public function download(Request $request, Response $response)
     {
         $format = $this->getFormat($request);
         $url = $request->getQueryParam('url');
@@ -541,14 +545,19 @@ class FrontController
             $this->video = new Video($url, $format, $this->sessionSegment->getFlash($url));
 
             try {
-                if ($this->config->convertAdvanced && !is_null($request->getQueryParam('customConvert'))) {
+                if ($this->config->convert && $request->getQueryParam('audio')) {
+                    // Audio convert.
+                    return $this->getAudioResponse($request, $response);
+                } elseif ($this->config->convertAdvanced && !is_null($request->getQueryParam('customConvert'))) {
+                    // Advance convert.
                     return $this->getConvertedResponse($request, $response);
                 }
 
-                return $this->getRedirectResponse($request, $response);
+                // Regular download.
+                return $this->getDownloadResponse($request, $response);
             } catch (PasswordException $e) {
                 return $response->withRedirect(
-                    $this->container->get('router')->pathFor('video').'?url='.urlencode($url)
+                    $this->container->get('router')->pathFor('info').'?url='.urlencode($url)
                 );
             } catch (Exception $e) {
                 $response->getBody()->write($e->getMessage());
