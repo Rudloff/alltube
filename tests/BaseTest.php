@@ -9,7 +9,7 @@ use Alltube\Config;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for the ViewFactory class.
+ * Abstract class used by every test.
  */
 abstract class BaseTest extends TestCase
 {

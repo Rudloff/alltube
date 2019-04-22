@@ -3,6 +3,8 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\Controller\JsonController;
+use Alltube\Controller\DownloadController;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
 use Alltube\UglyRouter;
@@ -32,48 +34,51 @@ if (!class_exists('Locale')) {
 $container['locale'] = new LocaleManager($_COOKIE);
 $app->add(new LocaleMiddleware($container));
 
-$controller = new FrontController($container, $_COOKIE);
+$frontController = new FrontController($container, $_COOKIE);
+$jsonController = new JsonController($container, $_COOKIE);
+$downloadController = new DownloadController($container, $_COOKIE);
 
-$container['errorHandler'] = [$controller, 'error'];
+$container['errorHandler'] = [$jsonController, 'error'];
 
 $app->get(
     '/',
-    [$controller, 'index']
+    [$frontController, 'index']
 )->setName('index');
 
 $app->get(
     '/extractors',
-    [$controller, 'extractors']
+    [$frontController, 'extractors']
 )->setName('extractors');
 
 $app->any(
     '/info',
-    [$controller, 'info']
+    [$frontController, 'info']
 )->setName('info');
 // Legacy route.
-$app->any('/video', [$controller, 'info']);
+$app->any('/video', [$frontController, 'info']);
 
 $app->any(
     '/watch',
-    [$controller, 'video']
+    [$frontController, 'video']
 );
 
-$app->get(
+$app->any(
     '/download',
-    [$controller, 'download']
+    [$downloadController, 'download']
 )->setName('download');
 // Legacy route.
-$app->get('/redirect', [$controller, 'download']);
-
-$app->get(
-    '/json',
-    [$controller, 'json']
-)->setName('json');
+$app->get('/redirect', [$downloadController, 'download']);
 
 $app->get(
     '/locale/{locale}',
-    [$controller, 'locale']
+    [$frontController, 'locale']
 )->setName('locale');
+
+
+$app->get(
+    '/json',
+    [$jsonController, 'json']
+)->setName('json');
 
 try {
     $app->run();
