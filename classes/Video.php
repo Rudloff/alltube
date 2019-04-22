@@ -233,7 +233,7 @@ class Video
         if (!isset($this->urls)) {
             $this->urls = explode("\n", $this->getProp('get-url'));
 
-            if (empty($urls[0])) {
+            if (empty($this->urls[0])) {
                 throw new EmptyUrlException(_('youtube-dl returned an empty URL.'));
             }
         }
