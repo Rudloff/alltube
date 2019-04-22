@@ -17,13 +17,6 @@ use Slim\Http\Request;
 class FrontControllerTest extends ControllerTest
 {
     /**
-     * Controller instance used in tests.
-     *
-     * @var FrontController
-     */
-    protected $controller;
-
-    /**
      * Prepare tests.
      */
     protected function setUp()

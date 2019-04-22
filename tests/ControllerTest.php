@@ -5,7 +5,6 @@
 
 namespace Alltube\Test;
 
-use Alltube\Controller\BaseController;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
@@ -43,8 +42,6 @@ abstract class ControllerTest extends BaseTest
 
     /**
      * Controller instance used in tests.
-     *
-     * @var BaseController
      */
     protected $controller;
 

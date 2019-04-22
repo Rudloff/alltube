@@ -191,6 +191,8 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      */
     public function __toString()
     {
+        $this->rewind();
+
         return $this->getContents();
     }
 
