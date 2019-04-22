@@ -42,11 +42,10 @@ class FrontController extends BaseController
      * BaseController constructor.
      *
      * @param ContainerInterface $container Slim dependency container
-     * @param array              $cookies   Cookie array
      */
-    public function __construct(ContainerInterface $container, array $cookies = [])
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($container, $cookies);
+        parent::__construct($container);
 
         $this->localeManager = $this->container->get('locale');
         $this->view = $this->container->get('view');

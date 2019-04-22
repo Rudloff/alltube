@@ -31,12 +31,12 @@ $container['view'] = ViewFactory::create($container);
 if (!class_exists('Locale')) {
     die('You need to install the intl extension for PHP.');
 }
-$container['locale'] = new LocaleManager($_COOKIE);
+$container['locale'] = new LocaleManager();
 $app->add(new LocaleMiddleware($container));
 
-$frontController = new FrontController($container, $_COOKIE);
-$jsonController = new JsonController($container, $_COOKIE);
-$downloadController = new DownloadController($container, $_COOKIE);
+$frontController = new FrontController($container);
+$jsonController = new JsonController($container);
+$downloadController = new DownloadController($container);
 
 $container['errorHandler'] = [$jsonController, 'error'];
 

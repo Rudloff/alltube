@@ -6,9 +6,9 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\SessionManager;
 use Alltube\Video;
 use Aura\Session\Segment;
-use Aura\Session\SessionFactory;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -57,14 +57,12 @@ abstract class BaseController
      * BaseController constructor.
      *
      * @param ContainerInterface $container Slim dependency container
-     * @param array              $cookies   Cookie array
      */
-    public function __construct(ContainerInterface $container, array $cookies = [])
+    public function __construct(ContainerInterface $container)
     {
         $this->config = Config::getInstance();
         $this->container = $container;
-        $session_factory = new SessionFactory();
-        $session = $session_factory->newInstance($cookies);
+        $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
 
         if ($this->config->stream) {
