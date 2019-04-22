@@ -6,9 +6,9 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\Exception\PasswordException;
 use Alltube\Locale;
 use Alltube\LocaleManager;
-use Alltube\Exception\PasswordException;
 use Alltube\Video;
 use Exception;
 use Psr\Container\ContainerInterface;

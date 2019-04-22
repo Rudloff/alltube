@@ -14,7 +14,6 @@ use Psr\Http\Message\StreamInterface;
  */
 class YoutubeChunkStream implements StreamInterface
 {
-
     /**
      * HTTP response containing the video chunk.
      *
