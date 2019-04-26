@@ -24,4 +24,24 @@ class YoutubeStreamTest extends StreamTest
 
         $this->stream = new YoutubeStream($video);
     }
+
+    /**
+     * Test the getMetadata() function.
+     *
+     * @return void
+     */
+    public function testGetMetadataWithKey()
+    {
+        $this->assertNull($this->stream->getMetadata('foo'));
+    }
+
+    /**
+     * Test the detach() function.
+     *
+     * @return void
+     */
+    public function testDetach()
+    {
+        $this->assertNull($this->stream->detach());
+    }
 }
