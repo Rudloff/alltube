@@ -25,7 +25,7 @@ class YoutubeStream extends AppendStream
 
         $stream = $video->getHttpResponse();
         $contentLenghtHeader = $stream->getHeader('Content-Length');
-        $curSize = 0;
+        $rangeStart = 0;
 
         while ($rangeStart < $contentLenghtHeader[0]) {
             $rangeEnd = $rangeStart + $video->downloader_options->http_chunk_size;
