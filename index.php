@@ -38,7 +38,7 @@ $frontController = new FrontController($container);
 $jsonController = new JsonController($container);
 $downloadController = new DownloadController($container);
 
-$container['errorHandler'] = [$jsonController, 'error'];
+$container['errorHandler'] = [$frontController, 'error'];
 
 $app->get(
     '/',
