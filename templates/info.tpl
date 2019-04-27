@@ -80,6 +80,11 @@
                 {/foreach}
             </optgroup>
         </select><br/><br/>
+        {if $config->stream}
+            <input type="checkbox" name="stream" id="stream"/>
+            <label for="stream">{t}Stream the video through the server{/t}</label>
+            <br/><br/>
+        {/if}
         {if $config->convertAdvanced}
             <input type="checkbox" name="customConvert" id="customConvert"/>
             <label for="customConvert">{t}Convert into a custom format:{/t}</label>

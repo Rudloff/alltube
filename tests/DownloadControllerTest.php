@@ -67,7 +67,7 @@ class DownloadControllerTest extends ControllerTest
 
         $this->assertRequestIsOk(
             'download',
-            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']
+            ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'stream' => true]
         );
     }
 
@@ -89,6 +89,7 @@ class DownloadControllerTest extends ControllerTest
             [
                 'url'    => 'https://twitter.com/verge/status/813055465324056576/video/1',
                 'format' => 'hls-2176',
+                'stream' => true,
             ]
         );
     }

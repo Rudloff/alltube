@@ -240,7 +240,7 @@ class DownloadController extends BaseController
         }
         if (count($videoUrls) > 1) {
             return $this->getRemuxStream($request, $response);
-        } elseif ($this->config->stream) {
+        } elseif ($this->config->stream && (isset($this->video->entries) || $request->getQueryParam('stream'))) {
             return $this->getStream($request, $response);
         } else {
             if (empty($videoUrls[0])) {
