@@ -7,26 +7,3 @@ addons:
             - language-pack-fr
 install: composer install
 after_success: bash <(curl -s https://codecov.io/bash)
-before_deploy:
-    - yarn install --ignore-scripts
-    - yarn grunt doc
-deploy:
-    provider: surge
-    project: ./docs/
-    domain: alltube.surge.sh
-    skip_cleanup: true
-env:
-    global:
-        - SURGE_LOGIN=contact@rudloff.pro
-        - secure:
-              "Icw8UqAilq0+neZsdXn7pny5OrDin1tTN0H3HGPFDBawHWBEffettRsURljnBlm0Ic\
-              AE8HPvl0DlaGFMedM3ZlYjvp7OqMqe84p7dY22JMvirV4MsMz546FKEYI+g3txawAMD\
-              FPCorE+fgkDrL1eUoozGVJxc5c4w4nBVm84QvjxRvCvEKbfevd4giaie1Xuo927lKAw\
-              TaVFZryYNotPyJVB2pBBndxfl2EJczJ4DXQc3VczFXkTmuE/QLa2tQVJm5vnVPwOi1x\
-              mvgh6g1ChEOw0zAks1Mf5+UvxtVV7qTicVAWK0fVVBL9mHPpNzSNb4pPqHPWQjhAPdC\
-              W+WPn6+DhqS5BHeSfQit/OtLMpUWO1IceVDRwU3jkXmMgnKwz1t9yDh6VBZRvGPkXfU\
-              3cjQ9SFpmnnu/4JLgwA/zSU2Pzl7/+gsHQBazkXh8HYAbOjF2w1IBXOpZ8Yv7D5axRI\
-              DduS/TUQ6oNK3KYmRMBcg8ZzVzIdz+55NchaDtihcp5akaHhKxR7GMPrfi66b+wARSw\
-              3OsYmCGLNFF8zj/6zo3/zB02+oVMlXXySOAKKi0A2OvH9xV4W4Jl0TGua/27XOWr9c5\
-              btrZrykk3PXfKe5YgT46Q8CtK8yN97bDKbwbAp6gNEyMFFatdHKlEndZYsVDQ16htd0\
-              b/303SZfXYMvO0="
