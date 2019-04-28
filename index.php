@@ -2,10 +2,11 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 use Alltube\Config;
+use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
+use Alltube\Controller\JsonController;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
-use Alltube\PlaylistArchiveStream;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;
@@ -15,7 +16,9 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
     die;
 }
 
-stream_wrapper_register('playlist', PlaylistArchiveStream::class);
+if (is_file(__DIR__.'/config/config.yml')) {
+    Config::setFile(__DIR__.'/config/config.yml');
+}
 
 $app = new App();
 $container = $app->getContainer();
@@ -28,41 +31,53 @@ $container['view'] = ViewFactory::create($container);
 if (!class_exists('Locale')) {
     die('You need to install the intl extension for PHP.');
 }
-$container['locale'] = new LocaleManager($_COOKIE);
+$container['locale'] = new LocaleManager();
 $app->add(new LocaleMiddleware($container));
 
-$controller = new FrontController($container, null, $_COOKIE);
+$frontController = new FrontController($container);
+$jsonController = new JsonController($container);
+$downloadController = new DownloadController($container);
 
-$container['errorHandler'] = [$controller, 'error'];
+$container['errorHandler'] = [$frontController, 'error'];
 
 $app->get(
     '/',
-    [$controller, 'index']
+    [$frontController, 'index']
 )->setName('index');
+
 $app->get(
     '/extractors',
-    [$controller, 'extractors']
+    [$frontController, 'extractors']
 )->setName('extractors');
+
 $app->any(
-    '/video',
-    [$controller, 'video']
-)->setName('video');
+    '/info',
+    [$frontController, 'info']
+)->setName('info');
+// Legacy route.
+$app->any('/video', [$frontController, 'info']);
+
 $app->any(
     '/watch',
-    [$controller, 'video']
+    [$frontController, 'video']
 );
-$app->get(
-    '/redirect',
-    [$controller, 'redirect']
-)->setName('redirect');
-$app->get(
-    '/json',
-    [$controller, 'json']
-)->setName('json');
+
+$app->any(
+    '/download',
+    [$downloadController, 'download']
+)->setName('download');
+// Legacy route.
+$app->get('/redirect', [$downloadController, 'download']);
+
 $app->get(
     '/locale/{locale}',
-    [$controller, 'locale']
+    [$frontController, 'locale']
 )->setName('locale');
+
+$app->get(
+    '/json',
+    [$jsonController, 'json']
+)->setName('json');
 
 try {
     $app->run();

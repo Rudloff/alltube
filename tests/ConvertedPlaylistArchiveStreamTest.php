@@ -1,17 +1,17 @@
 <?php
 /**
- * PlaylistArchiveStreamTest class.
+ * ConvertedPlaylistArchiveStreamTest class.
  */
 
 namespace Alltube\Test;
 
-use Alltube\Stream\PlaylistArchiveStream;
+use Alltube\Stream\ConvertedPlaylistArchiveStream;
 use Alltube\Video;
 
 /**
- * Unit tests for the PlaylistArchiveStream class.
+ * Unit tests for the ConvertedPlaylistArchiveStream class.
  */
-class PlaylistArchiveStreamTest extends StreamTest
+class ConvertedPlaylistArchiveStreamTest extends StreamTest
 {
     /**
      * Prepare tests.
@@ -22,6 +22,6 @@ class PlaylistArchiveStreamTest extends StreamTest
 
         $video = new Video('https://www.youtube.com/playlist?list=PL1j4Ff8cAqPu5iowaeUAY8lRgkfT4RybJ');
 
-        $this->stream = new PlaylistArchiveStream($video);
+        $this->stream = new ConvertedPlaylistArchiveStream($video);
     }
 }

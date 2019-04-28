@@ -6,12 +6,11 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for the Config class.
  */
-class ConfigTest extends TestCase
+class ConfigTest extends BaseTest
 {
     /**
      * Config class instance.
@@ -25,17 +24,9 @@ class ConfigTest extends TestCase
      */
     protected function setUp()
     {
-        $this->config = Config::getInstance('config/config_test.yml');
-    }
+        parent::setUp();
 
-    /**
-     * Destroy variables created by setUp().
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        Config::destroyInstance();
+        $this->config = Config::getInstance();
     }
 
     /**
@@ -45,8 +36,9 @@ class ConfigTest extends TestCase
      */
     public function testGetInstance()
     {
-        $this->assertEquals($this->config->convert, false);
-        $this->assertConfig($this->config);
+        $config = Config::getInstance();
+        $this->assertEquals($config->convert, false);
+        $this->assertConfig($config);
     }
 
     /**
@@ -70,25 +62,77 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * Test the getInstance function with a missing config file.
+     * Test the setFile function.
+     *
+     * @return void
+     */
+    public function testSetFile()
+    {
+        Config::setFile($this->getConfigFile());
+        $this->assertConfig($this->config);
+    }
+
+    /**
+     * Test the setFile function with a missing config file.
      *
      * @return void
      * @expectedException Exception
      */
-    public function testGetInstanceWithMissingFile()
+    public function testSetFileWithMissingFile()
     {
-        Config::getInstance('foo');
+        Config::setFile('foo');
     }
 
     /**
-     * Test the getInstance function with an empty filename.
+     * Test the setOptions function.
      *
      * @return void
      */
-    public function testGetInstanceWithEmptyFile()
+    public function testSetOptions()
     {
-        $config = Config::getInstance('');
-        $this->assertConfig($config);
+        Config::setOptions(['appName' => 'foo']);
+        $config = Config::getInstance();
+        $this->assertEquals($config->appName, 'foo');
+    }
+
+    /**
+     * Test the setOptions function.
+     *
+     * @return void
+     */
+    public function testSetOptionsWithoutUpdate()
+    {
+        if (getenv('APPVEYOR')) {
+            $this->markTestSkipped(
+                "This will fail on AppVeyor because it won't be able to find youtube-dl at the defaut path."
+            );
+        }
+
+        Config::setOptions(['appName' => 'foo'], false);
+        $config = Config::getInstance();
+        $this->assertEquals($config->appName, 'foo');
+    }
+
+    /**
+     * Test the setOptions function.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testSetOptionsWithBadYoutubedl()
+    {
+        Config::setOptions(['youtubedl' => 'foo']);
+    }
+
+    /**
+     * Test the setOptions function.
+     *
+     * @return void
+     * @expectedException Exception
+     */
+    public function testSetOptionsWithBadPython()
+    {
+        Config::setOptions(['python' => 'foo']);
     }
 
     /**
@@ -100,11 +144,9 @@ class ConfigTest extends TestCase
     {
         Config::destroyInstance();
         putenv('CONVERT=1');
-        putenv('PYTHON=foo');
-        $config = Config::getInstance('config/config_test.yml');
+        Config::setFile($this->getConfigFile());
+        $config = Config::getInstance();
         $this->assertEquals($config->convert, true);
-        $this->assertEquals($config->python, 'foo');
         putenv('CONVERT');
-        putenv('PYTHON');
     }
 }

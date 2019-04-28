@@ -7,12 +7,11 @@ namespace Alltube\Test;
 
 use Alltube\Locale;
 use Alltube\LocaleManager;
-use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for the Config class.
+ * Unit tests for the LocaleManagerTest class.
  */
-class LocaleManagerTest extends TestCase
+class LocaleManagerTest extends BaseTest
 {
     /**
      * LocaleManager class instance.
@@ -26,19 +25,18 @@ class LocaleManagerTest extends TestCase
      */
     protected function setUp()
     {
-        $this->localeManager = new LocaleManager();
         $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
+        $this->localeManager = new LocaleManager();
     }
 
     /**
-     * Test the getSupportedLocales function.
+     * Unset locale after each test.
      *
      * @return void
      */
-    public function testConstructorWithCookies()
+    protected function tearDown()
     {
-        $localeManager = new LocaleManager([]);
-        $this->assertEquals('foo_BAR', (string) $localeManager->getLocale());
+        $this->localeManager->unsetLocale();
     }
 
     /**

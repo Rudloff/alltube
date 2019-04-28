@@ -162,19 +162,17 @@ You can then use it in your PHP code:
 
 ```php
 use Alltube\Config;
-use Alltube\VideoDownload;
+use Alltube\Video;
 
 require_once __DIR__.'/vendor/autoload.php';
 
-$downloader = new VideoDownload(
-    new Config(
-        [
-            'youtubedl' => '/usr/local/bin/youtube-dl',
-        ]
-    )
+Config::setOptions(
+    [
+        'youtubedl' => '/usr/local/bin/youtube-dl',
+    ]
 );
-
-$downloader->getURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+$video = new Video('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+$video->getUrl();
 ```
 
 The library documentation is available on [alltube.surge.sh](https://alltube.surge.sh/classes/Alltube.VideoDownload.html).

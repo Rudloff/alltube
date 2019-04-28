@@ -6,7 +6,6 @@
 namespace Alltube;
 
 use Aura\Session\Segment;
-use Aura\Session\SessionFactory;
 use Symfony\Component\Process\Process;
 
 /**
@@ -24,7 +23,7 @@ class LocaleManager
     /**
      * Current locale.
      *
-     * @var Locale
+     * @var Locale|null
      */
     private $curLocale;
 
@@ -37,13 +36,10 @@ class LocaleManager
 
     /**
      * LocaleManager constructor.
-     *
-     * @param array $cookies Cookie array
      */
-    public function __construct(array $cookies = [])
+    public function __construct()
     {
-        $session_factory = new SessionFactory();
-        $session = $session_factory->newInstance($cookies);
+        $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
         $cookieLocale = $this->sessionSegment->get('locale');
         if (isset($cookieLocale)) {
@@ -78,7 +74,7 @@ class LocaleManager
     /**
      * Get the current locale.
      *
-     * @return Locale
+     * @return Locale|null
      */
     public function getLocale()
     {

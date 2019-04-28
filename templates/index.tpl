@@ -3,7 +3,7 @@
 <main class="main">
     <div><img class="logo" src="{base_url}/img/logo.png"
     alt="{$config->appName}" width="328" height="284"></div>
-    <form action="{path_for name="video"}">
+    <form action="{path_for name="info"}">
     <label class="labelurl" for="url">
         {t}Copy here the URL of your video (Youtube, Dailymotion, etc.){/t}
     </label>
@@ -14,7 +14,7 @@
             required placeholder="http://example.com/video" />
         </span>
         {if $config->uglyUrls}
-            <input type="hidden" name="page" value="video" />
+            <input type="hidden" name="page" value="info" />
         {/if}
         <input class="downloadBtn large-font" type="submit" value="{t}Download{/t}" /><br/>
         {if $config->convert}
@@ -25,8 +25,8 @@
                         {t}Audio only (MP3){/t}
                     </label>
                     <div class="seekOptions">
-                        {t}From{/t} <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="from"/>
-                        {t}to{/t} <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="to"/>
+                        <label for="from">{t}From{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="from" id="from" />
+                        <label for="to">{t}to{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?" placeholder="HH:MM:SS" value="" name="to" id="to" />
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
     <a class="combatiblelink small-font" href="{path_for name="extractors"}">{t}See all supported websites{/t}</a>
     <div id="bookmarklet" class="bookmarklet_wrapper">
         <p> {t}Drag this to your bookmarks bar:{/t} </p>
-        <a class="bookmarklet small-font" href="javascript:window.location='{$domain}{path_for name='video'}?url='+encodeURIComponent(location.href);">{t}Bookmarklet{/t}</a>
+        <a class="bookmarklet small-font" href="javascript:window.location='{$domain}{path_for name='info'}?url='+encodeURIComponent(location.href);">{t}Bookmarklet{/t}</a>
     </div>
 
 </main>

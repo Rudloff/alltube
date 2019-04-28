@@ -6,12 +6,11 @@
 namespace Alltube\Test;
 
 use Alltube\Locale;
-use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for the Config class.
+ * Unit tests for the LocaleTest class.
  */
-class LocaleTest extends TestCase
+class LocaleTest extends BaseTest
 {
     /**
      * Locale class instance.
@@ -76,5 +75,15 @@ class LocaleTest extends TestCase
     public function testGetIso3166()
     {
         $this->assertEquals('fr', $this->localeObject->getIso3166());
+    }
+
+    /**
+     * Test the getCountry function.
+     *
+     * @return void
+     */
+    public function testGetCountry()
+    {
+        $this->assertEquals(country('fr'), $this->localeObject->getCountry());
     }
 }

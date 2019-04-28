@@ -33,6 +33,19 @@ module.exports = function (grunt) {
                     src: ['tests/*.php']
                 }
             },
+            phpstan: {
+                options: {
+                    level: 'max',
+                    bin: 'vendor/bin/phpstan',
+                    config: 'phpstan.neon'
+                },
+                php: {
+                    src: ['*.php', 'classes/*.php', 'controllers/*.php']
+                },
+                tests: {
+                    src: ['tests/*.php']
+                }
+            },
             jslint: {
                 js: {
                     src: ['js/*.js']
@@ -57,7 +70,7 @@ module.exports = function (grunt) {
                     options: {
                         archive: 'alltube-<%= githash.main.tag %>.zip'
                     },
-                    src: ['*.php', 'config/*', '!config/config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'resources/sitemap.xml', 'resources/manifest.json', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', 'i18n/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/anam/phantomjs-linux-x86-binary/**', '!vendor/bin/phantomjs', '!vendor/phpunit/**', '!vendor/squizlabs/**', '!vendor/rinvex/country/resources/geodata/*.json', '!vendor/rinvex/country/resources/flags/*.svg', 'node_modules/open-sans-fontface/fonts/**']
+                    src: ['*.php', 'config/*', '!config/config.yml', 'dist/**', '.htaccess', 'img/**', 'LICENSE', 'README.md', 'robots.txt', 'resources/sitemap.xml', 'resources/manifest.json', 'templates/**', 'templates_c/', 'vendor/**', 'classes/**', 'controllers/**', 'bower_components/**', 'i18n/**', '!vendor/ffmpeg/**', '!vendor/bin/ffmpeg', '!vendor/anam/phantomjs-linux-x86-binary/**', '!vendor/bin/phantomjs', '!vendor/phpunit/**', '!vendor/squizlabs/**', '!vendor/rinvex/countries/resources/geodata/*.json', '!vendor/countries/country/resources/flags/*.svg', 'node_modules/open-sans-fontface/fonts/**']
                 }
             },
             phpdocumentor: {
@@ -125,9 +138,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-potomo');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-markdownlint');
+    grunt.loadNpmTasks('grunt-phpstan');
 
     grunt.registerTask('default', ['cssmin', 'potomo']);
-    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs']);
+    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs', 'phpstan']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);

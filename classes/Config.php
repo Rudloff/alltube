@@ -16,7 +16,7 @@ class Config
     /**
      * Singleton instance.
      *
-     * @var Config
+     * @var Config|null
      */
     private static $instance;
 
@@ -129,18 +129,50 @@ class Config
     /**
      * Config constructor.
      *
-     * @param array $options Options (see `config/config.example.yml` for available options)
+     * @param array $options Options
      */
-    public function __construct(array $options)
+    private function __construct(array $options = [])
     {
-        if (isset($options) && is_array($options)) {
-            foreach ($options as $option => $value) {
-                if (isset($this->$option) && isset($value)) {
-                    $this->$option = $value;
-                }
+        $this->applyOptions($options);
+        $this->getEnv();
+        $this->validateOptions();
+    }
+
+    /**
+     * Throw an exception if some of the options are invalid.
+     *
+     * @throws Exception If youtube-dl is missing
+     * @throws Exception If Python is missing
+     *
+     * @return void
+     */
+    private function validateOptions()
+    {
+        /*
+        We don't translate these exceptions because they usually occur before Slim can catch them
+        so they will go to the logs.
+         */
+        if (!is_file($this->youtubedl)) {
+            throw new Exception("Can't find youtube-dl at ".$this->youtubedl);
+        } elseif (!Video::checkCommand([$this->python, '--version'])) {
+            throw new Exception("Can't find Python at ".$this->python);
+        }
+    }
+
+    /**
+     * Apply the provided options.
+     *
+     * @param array $options Options
+     *
+     * @return void
+     */
+    private function applyOptions(array $options)
+    {
+        foreach ($options as $option => $value) {
+            if (isset($this->$option) && isset($value)) {
+                $this->$option = $value;
             }
         }
-        $this->getEnv();
     }
 
     /**
@@ -161,32 +193,49 @@ class Config
     }
 
     /**
-     * Get Config singleton instance from YAML config file.
-     *
-     * @param string $yamlfile YAML config file name
+     * Get Config singleton instance.
      *
      * @return Config
      */
-    public static function getInstance($yamlfile = 'config/config.yml')
+    public static function getInstance()
     {
-        $yamlPath = __DIR__.'/../'.$yamlfile;
-        if (is_null(self::$instance) || self::$instance->file != $yamlfile) {
-            if (is_file($yamlfile)) {
-                $options = Yaml::parse(file_get_contents($yamlPath));
-            } elseif ($yamlfile == 'config/config.yml' || empty($yamlfile)) {
-                /*
-                Allow for the default file to be missing in order to
-                not surprise users that did not create a config file
-                 */
-                $options = [];
-            } else {
-                throw new Exception("Can't find config file at ".$yamlPath);
-            }
-            self::$instance = new self($options);
-            self::$instance->file = $yamlfile;
+        if (!isset(self::$instance)) {
+            self::$instance = new self();
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Set options from a YAML file.
+     *
+     * @param string $file Path to the YAML file
+     */
+    public static function setFile($file)
+    {
+        if (is_file($file)) {
+            $options = Yaml::parse(file_get_contents($file));
+            self::$instance = new self($options);
+        } else {
+            throw new Exception("Can't find config file at ".$file);
+        }
+    }
+
+    /**
+     * Manually set some options.
+     *
+     * @param array $options Options (see `config/config.example.yml` for available options)
+     * @param bool  $update  True to update an existing instance
+     */
+    public static function setOptions(array $options, $update = true)
+    {
+        if ($update) {
+            $config = self::getInstance();
+            $config->applyOptions($options);
+            $config->validateOptions();
+        } else {
+            self::$instance = new self($options);
+        }
     }
 
     /**
