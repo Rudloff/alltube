@@ -42,6 +42,20 @@ class ConfigTest extends BaseTest
     }
 
     /**
+     * Test the getInstance function.
+     *
+     * @return void
+     */
+    public function testGetInstanceFromScratch()
+    {
+        Config::destroyInstance();
+
+        $config = Config::getInstance();
+        $this->assertEquals($config->convert, false);
+        $this->assertConfig($config);
+    }
+
+    /**
      * Assert that a Config object is correctly instantiated.
      *
      * @param Config $config Config class instance.
