@@ -135,7 +135,6 @@ class Config
     {
         $this->applyOptions($options);
         $this->getEnv();
-        $this->validateOptions();
     }
 
     /**
@@ -216,6 +215,7 @@ class Config
         if (is_file($file)) {
             $options = Yaml::parse(file_get_contents($file));
             self::$instance = new self($options);
+            self::$instance->validateOptions();
         } else {
             throw new Exception("Can't find config file at ".$file);
         }
