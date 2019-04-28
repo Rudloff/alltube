@@ -60,11 +60,11 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * Closes the stream and any underlying resources.
      *
-     * @return mixed
+     * @return void
      */
     public function close()
     {
-        return $this->response->getBody()->close();
+        $this->response->getBody()->close();
     }
 
     /**
