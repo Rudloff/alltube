@@ -11,7 +11,7 @@
     "open-sans-fontface": "~1.4.0"
   },
   "devDependencies": {
-    "grunt-contrib-compress": "~1.4.1",
+    "grunt-contrib-compress": "~1.5.0",
     "grunt-contrib-csslint": "~2.0.0",
     "grunt-contrib-watch": "~1.0.0",
     "grunt-fixpack": "~0.1.0",
