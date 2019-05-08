@@ -71,7 +71,7 @@
             </optgroup>
         </select><br/><br/>
         {if $config->stream}
-            <input type="checkbox" name="stream" id="stream"/>
+            <input type="checkbox" checked name="stream" id="stream"/>
             <label for="stream">{t}Stream the video through the server{/t}</label>
             <br/><br/>
         {/if}
