@@ -146,9 +146,9 @@ class Config
         if (empty($this->genericFormats)) {
             // We don't put this in the class definition so it can be detected by xgettext.
             $this->genericFormats = [
-                'best' => _('Best'),
+                'best'                => _('Best'),
                 'bestvideo+bestaudio' => _('Remux best video with best audio'),
-                'worst' => _('Worst')
+                'worst'               => _('Worst'),
             ];
         }
 
