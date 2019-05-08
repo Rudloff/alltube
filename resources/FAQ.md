@@ -172,3 +172,15 @@ convertAdvancedFormats: [mp3, avi, flv, wav]
 
 This will add new inputs on the download page
 that allow users to converted videos to other formats.
+
+## Use other youtube-dl generic formats (e.g. `bestaudio`)
+
+You can add new formats by using the `genericFormats` option,
+for example:
+
+```yaml
+genericFormats:
+    bestaudio: Best audio
+```
+
+These will be available on every video page.

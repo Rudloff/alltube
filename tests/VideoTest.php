@@ -169,7 +169,7 @@ class VideoTest extends BaseTest
     }
 
     /**
-     * Provides M3U8 URLs for tests.
+     * Provides URLs for remux tests.
      *
      * @return array[]
      */
@@ -186,7 +186,7 @@ class VideoTest extends BaseTest
     }
 
     /**
-     * Provides URLs for remux tests.
+     * Provides M3U8 URLs for tests.
      *
      * @return array[]
      */

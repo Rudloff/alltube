@@ -27,19 +27,9 @@
         {/if}
         <select name="format" id="format" class="formats monospace">
             <optgroup label="{t}Generic formats{/t}">
-                <option value="{$defaultFormat}">
-                    {strip}
-                        {t}Best{/t} ({$video->ext})
-                    {/strip}
-                </option>
-                {if $config->remux}
-                    <option value="bestvideo+bestaudio">
-                        {t}Remux best video with best audio{/t}
-                    </option>
-                {/if}
-                <option value="{$defaultFormat|replace:best:worst}">
-                    {t}Worst{/t}
-                </option>
+                {foreach $config->genericFormats as $format => $name}
+                    <option value="{$format}">{t}{$name}{/t}</option>
+                {/foreach}
             </optgroup>
             <optgroup label="{t}Detailed formats{/t}" class="monospace">
                 {foreach $video->formats as $format}

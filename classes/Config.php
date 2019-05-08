@@ -127,6 +127,13 @@ class Config
     private $file;
 
     /**
+     * Generic formats supported by youtube-dl.
+     *
+     * @var array
+     */
+    public $genericFormats = [];
+
+    /**
      * Config constructor.
      *
      * @param array $options Options
@@ -135,6 +142,42 @@ class Config
     {
         $this->applyOptions($options);
         $this->getEnv();
+
+        if (empty($this->genericFormats)) {
+            // We don't put this in the class definition so it can be detected by xgettext.
+            $this->genericFormats = [
+                'best' => _('Best'),
+                'bestvideo+bestaudio' => _('Remux best video with best audio'),
+                'worst' => _('Worst')
+            ];
+        }
+
+        foreach ($this->genericFormats as $format => $name) {
+            if (strpos($format, '+') !== false) {
+                if (!$this->remux) {
+                    // Disable combined formats if remux mode is not enabled.
+                    unset($this->genericFormats[$format]);
+                }
+            } elseif (!$this->stream) {
+                // Force HTTP if stream is not enabled.
+                $this->replaceGenericFormat($format, $format.'[protocol=https]/'.$format.'[protocol=http]');
+            }
+        }
+    }
+
+    /**
+     * Replace a format key.
+     *
+     * @param string $oldFormat Old format
+     * @param string $newFormat New format
+     *
+     * @return void
+     */
+    private function replaceGenericFormat($oldFormat, $newFormat)
+    {
+        $keys = array_keys($this->genericFormats);
+        $keys[array_search($oldFormat, $keys)] = $newFormat;
+        $this->genericFormats = array_combine($keys, $this->genericFormats);
     }
 
     /**
