@@ -177,7 +177,9 @@ class Config
     {
         $keys = array_keys($this->genericFormats);
         $keys[array_search($oldFormat, $keys)] = $newFormat;
-        $this->genericFormats = array_combine($keys, $this->genericFormats);
+        if ($genericFormats = array_combine($keys, $this->genericFormats)) {
+            $this->genericFormats = $genericFormats;
+        }
     }
 
     /**
