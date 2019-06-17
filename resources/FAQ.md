@@ -64,6 +64,7 @@ Then push the code to Heroku and it should work out of the box.
 Some websites generate an unique video URL for each IP address.
 When using AllTube, the URL is generated for our server's IP address
 and your computer is not allowed to use it.
+(This is also known to happen with Vevo YouTube videos.)
 
 There are two known workarounds:
 
@@ -171,3 +172,15 @@ convertAdvancedFormats: [mp3, avi, flv, wav]
 
 This will add new inputs on the download page
 that allow users to converted videos to other formats.
+
+## Use other youtube-dl generic formats (e.g. `bestaudio`)
+
+You can add new formats by using the `genericFormats` option,
+for example:
+
+```yaml
+genericFormats:
+    bestaudio: Best audio
+```
+
+These will be available on every video page.

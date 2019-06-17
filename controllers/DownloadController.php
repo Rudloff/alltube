@@ -128,7 +128,7 @@ class DownloadController extends BaseController
             return $frontController->password($request, $response);
         } catch (Exception $e) {
             // If MP3 is not available, we convert it.
-            $this->video = $this->video->withFormat($this->defaultFormat);
+            $this->video = $this->video->withFormat('bestaudio');
 
             return $this->getConvertedAudioResponse($request, $response);
         }

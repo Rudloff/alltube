@@ -29,7 +29,7 @@ class YoutubeStream extends AppendStream
 
         while ($rangeStart < $contentLenghtHeader[0]) {
             $rangeEnd = $rangeStart + $video->downloader_options->http_chunk_size;
-            if ($rangeEnd > $contentLenghtHeader[0]) {
+            if ($rangeEnd >= $contentLenghtHeader[0]) {
                 $rangeEnd = $contentLenghtHeader[0] - 1;
             }
             $response = $video->getHttpResponse(['Range' => 'bytes='.$rangeStart.'-'.$rangeEnd]);

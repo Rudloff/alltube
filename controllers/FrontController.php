@@ -5,7 +5,6 @@
 
 namespace Alltube\Controller;
 
-use Alltube\Config;
 use Alltube\Exception\PasswordException;
 use Alltube\Locale;
 use Alltube\LocaleManager;
