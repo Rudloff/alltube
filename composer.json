@@ -92,5 +92,10 @@
       "xgettext --omit-header -j -o i18n/template.pot classes/* controllers/*"
     ],
     "youtube-dl": "vendor/rg3/youtube-dl/youtube_dl/__main__.py"
+  },
+  "config": {
+    "platform": {
+      "php": "7.0.33"
+    }
   }
 }
