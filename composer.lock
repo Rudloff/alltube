@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62241b9b42bfa3b460f97329182303b5",
+    "content-hash": "800ee563789a8ddbd1c3917ec223dd19",
     "packages": [
         {
             "name": "aura/session",
@@ -1492,9 +1492,7 @@
             "version": "4.0.3",
             "dist": {
                 "type": "xz",
-                "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.0.3-64bit-static.tar.xz",
-                "reference": null,
-                "shasum": null
+                "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.0.3-64bit-static.tar.xz"
             },
             "bin": [
                 "ffmpeg"
@@ -3044,12 +3042,10 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2019.06.08",
+            "version": "2019.06.21",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2019.06.08.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://github.com/rg3/youtube-dl/archive/2019.06.21.zip"
             },
             "type": "library"
         },
