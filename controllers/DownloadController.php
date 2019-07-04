@@ -164,7 +164,13 @@ class DownloadController extends BaseController
             $response = $response->withHeader('Content-Type', 'video/'.$this->video->ext);
             $body = new Stream($this->video->getM3uStream());
         } else {
-            $stream = $this->video->getHttpResponse(['Range' => $request->getHeader('Range')]);
+            $range = $request->getHeader('Range');
+            if (empty($range)) {
+                $headers = [];
+            } else {
+                $headers = ['Range' => $range];
+            }
+            $stream = $this->video->getHttpResponse($headers);
 
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
