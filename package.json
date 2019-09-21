@@ -16,6 +16,7 @@
     "grunt-contrib-watch": "~1.1.0",
     "grunt-fixpack": "~0.1.0",
     "grunt-githash": "~0.1.3",
+    "grunt-githooks": "^0.6.0",
     "grunt-jslint": "~1.1.15",
     "grunt-jsonlint": "~1.1.0",
     "grunt-markdownlint": "~2.1.0",
@@ -38,6 +39,7 @@
     "url": "https://github.com/Rudloff/alltube.git"
   },
   "scripts": {
-    "postinstall": "grunt"
+    "postinstall": "grunt",
+    "prepare": "grunt githooks"
   }
 }

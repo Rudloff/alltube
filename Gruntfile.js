@@ -47,9 +47,6 @@ module.exports = function (grunt) {
                 }
             },
             jslint: {
-                js: {
-                    src: ['js/*.js']
-                },
                 Gruntfile: {
                     src: ['Gruntfile.js']
                 }
@@ -121,7 +118,12 @@ module.exports = function (grunt) {
                 doc: {
                     src: ['README.md', 'CONTRIBUTING.md', 'resources/*.md']
                 }
-          }
+            },
+            githooks: {
+                all: {
+                    'pre-commit': 'lint'
+                }
+            }
         }
     );
 
@@ -139,9 +141,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-markdownlint');
     grunt.loadNpmTasks('grunt-phpstan');
+    grunt.loadNpmTasks('grunt-githooks');
 
     grunt.registerTask('default', ['cssmin', 'potomo']);
-    grunt.registerTask('lint', ['csslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs', 'phpstan']);
+    grunt.registerTask('lint', ['csslint', 'jslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs', 'phpstan']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
