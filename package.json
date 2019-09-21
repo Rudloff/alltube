@@ -7,6 +7,7 @@
   "dependencies": {
     "grunt": "~1.0.1",
     "grunt-contrib-cssmin": "~2.2.1",
+    "grunt-phpdocumentor": "^0.4.1",
     "grunt-potomo": "~3.5.0",
     "open-sans-fontface": "~1.4.0"
   },
@@ -21,7 +22,6 @@
     "grunt-jsonlint": "~1.1.0",
     "grunt-markdownlint": "~2.1.0",
     "grunt-phpcs": "~0.4.0",
-    "grunt-phpdocumentor": "~0.4.1",
     "grunt-phpstan": "~0.2.0",
     "grunt-phpunit": "~0.3.6"
   },

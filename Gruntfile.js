@@ -143,9 +143,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-phpstan');
     grunt.loadNpmTasks('grunt-githooks');
 
-    grunt.registerTask('default', ['cssmin', 'potomo']);
+    grunt.registerTask('default', ['cssmin', 'potomo', 'phpdocumentor']);
     grunt.registerTask('lint', ['csslint', 'jslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs', 'phpstan']);
     grunt.registerTask('test', ['phpunit']);
-    grunt.registerTask('doc', ['phpdocumentor']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
 };

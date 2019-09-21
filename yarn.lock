@@ -894,7 +894,7 @@ grunt-phpcs@~0.4.0:
   resolved "https://registry.yarnpkg.com/grunt-phpcs/-/grunt-phpcs-0.4.0.tgz#a08d625fc64465e453b2bd93f810b2a81e94bdaa"
   integrity sha1-oI1iX8ZEZeRTsr2T+BCyqB6Uvao=
 
-grunt-phpdocumentor@~0.4.1:
+grunt-phpdocumentor@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/grunt-phpdocumentor/-/grunt-phpdocumentor-0.4.1.tgz#513a5cefd8804d45792ea35ddfbcb2471e307141"
   integrity sha1-UTpc79iATUV5LqNd37yyRx4wcUE=
