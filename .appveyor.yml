@@ -11,6 +11,7 @@ install:
   - echo extension=C:\tools\php71\ext\php_intl.dll >> C:\tools\php71\php.ini
   - echo extension=C:\tools\php71\ext\php_openssl.dll >> C:\tools\php71\php.ini
   - echo extension=C:\tools\php71\ext\php_mbstring.dll >> C:\tools\php71\php.ini
+  - echo extension=C:\tools\php71\ext\php_xsl.dll >> C:\tools\php71\php.ini
   - composer install --no-dev
   - composer global require phpunit/phpunit:^6.0
   - C:\Python36\python.exe -m pip install youtube-dl
