@@ -5,5 +5,5 @@ addons:
     apt:
         packages:
             - language-pack-fr
-install: composer install
+install: composer install --no-progress
 after_success: bash <(curl -s https://codecov.io/bash)
