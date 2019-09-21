@@ -142,9 +142,21 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-markdownlint');
     grunt.loadNpmTasks('grunt-phpstan');
     grunt.loadNpmTasks('grunt-githooks');
+    grunt.loadNpmTasks('grunt-changed');
 
     grunt.registerTask('default', ['cssmin', 'potomo', 'phpdocumentor']);
-    grunt.registerTask('lint', ['csslint', 'jslint', 'fixpack', 'jsonlint', 'markdownlint', 'phpcs', 'phpstan']);
+    grunt.registerTask(
+        'lint',
+        [
+            'csslint',
+            'jslint',
+            'fixpack',
+            'jsonlint',
+            'markdownlint',
+            'changed:phpcs',
+            'changed:phpstan'
+        ]
+    );
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('release', ['default', 'githash', 'compress']);
 };
