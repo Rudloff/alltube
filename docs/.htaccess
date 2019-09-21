@@ -1,0 +1,3 @@
+<ifmodule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self'; object-src 'none'; script-src http: 'unsafe-inline'; img-src http:; style-src 'self' 'unsafe-inline' https:; font-src http:"
+</ifmodule>
