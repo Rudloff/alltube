@@ -27,6 +27,7 @@ use Symfony\Component\Process\Process;
  * @property-read array       $rtmp_conn
  * @property-read string|null $_type         Object type (usually "playlist" or null)
  * @property-read stdClass    $downloader_options
+ * @property-read stdClass    $http_headers
  */
 class Video
 {
