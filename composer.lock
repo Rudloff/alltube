@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0b21647fe89408b93d7778c1f034c64",
+    "content-hash": "c55d75b41a6cb8d56734f5266508049d",
     "packages": [
         {
             "name": "aura/session",
@@ -1505,16 +1505,16 @@
         },
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v158",
+            "version": "v162",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "26be51dee125027ac81bac756c3f27279623912d"
+                "reference": "343fa959d4c195beb7febe1996340624baf713b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/26be51dee125027ac81bac756c3f27279623912d",
-                "reference": "26be51dee125027ac81bac756c3f27279623912d",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/343fa959d4c195beb7febe1996340624baf713b9",
+                "reference": "343fa959d4c195beb7febe1996340624baf713b9",
                 "shasum": ""
             },
             "bin": [
@@ -1545,7 +1545,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2019-07-04T10:43:37+00:00"
+            "time": "2019-09-27T22:17:17+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
