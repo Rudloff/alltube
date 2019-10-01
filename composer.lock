@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa44824cd5988d0f0ed0cc3b68461702",
+    "content-hash": "33493e464172695368aaecf1f8e4e563",
     "packages": [
         {
             "name": "aura/session",
@@ -1493,10 +1493,10 @@
         },
         {
             "name": "ffmpeg/ffmpeg",
-            "version": "4.0.3",
+            "version": "4.1.4",
             "dist": {
                 "type": "xz",
-                "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.0.3-64bit-static.tar.xz"
+                "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.1.4-amd64-static.tar.xz"
             },
             "bin": [
                 "ffmpeg"
@@ -1505,16 +1505,16 @@
         },
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v158",
+            "version": "v162",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "26be51dee125027ac81bac756c3f27279623912d"
+                "reference": "343fa959d4c195beb7febe1996340624baf713b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/26be51dee125027ac81bac756c3f27279623912d",
-                "reference": "26be51dee125027ac81bac756c3f27279623912d",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/343fa959d4c195beb7febe1996340624baf713b9",
+                "reference": "343fa959d4c195beb7febe1996340624baf713b9",
                 "shasum": ""
             },
             "bin": [
@@ -1545,7 +1545,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2019-07-04T10:43:37+00:00"
+            "time": "2019-09-27T22:17:17+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
@@ -3046,10 +3046,10 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2019.09.12.1",
+            "version": "2019.09.28",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2019.09.12.1.zip"
+                "url": "https://github.com/rg3/youtube-dl/archive/2019.09.28.zip"
             },
             "type": "library"
         },
