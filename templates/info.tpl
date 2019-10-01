@@ -85,7 +85,8 @@
             </select>
             {t}with{/t}
             <label for="customBitrate" class="sr-only">{t}Bit rate{/t}</label>
-            <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"name="customBitrate" id="customBitrate" aria-describedby="customBitrateUnit" />
+            <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"
+                name="customBitrate" id="customBitrate" aria-describedby="customBitrateUnit" />
             <span id="customBitrateUnit">{t}kbit/s audio{/t}</span>
             <br/><br/>
         {/if}
