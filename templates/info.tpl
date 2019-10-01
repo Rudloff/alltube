@@ -20,8 +20,8 @@
 <br/>
 <form action="{path_for name="download"}">
     <input type="hidden" name="url" value="{$video->webpage_url}" />
-{if isset($video->formats)}
-    <h3><label for="format">{t}Available formats:{/t}</label></h3>
+    {if isset($video->formats) && count($video->formats) > 1}
+        <h3><label for="format">{t}Available formats:{/t}</label></h3>
         {if $config->uglyUrls}
             <input type="hidden" name="page" value="download" />
         {/if}
@@ -89,11 +89,9 @@
             <span id="customBitrateUnit">{t}kbit/s audio{/t}</span>
             <br/><br/>
         {/if}
-        <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
-    </form>
-{else}
+    {/if}
     <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
-{/if}
+</form>
 </main>
 </div>
 {include file="inc/footer.tpl"}
