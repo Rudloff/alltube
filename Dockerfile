@@ -4,7 +4,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update
-RUN apt-get install -y libicu-dev xz-utils git zlib1g-dev python nodejs libgmp-dev gettext yarn
+RUN apt-get install -y libicu-dev xz-utils git zlib1g-dev python nodejs libgmp-dev gettext yarn libxslt1-dev
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install zip
