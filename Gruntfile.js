@@ -27,7 +27,7 @@ module.exports = function (grunt) {
                     bin: 'vendor/bin/phpcs'
                 },
                 php: {
-                    src: ['*.php', 'classes/*.php', 'controllers/*.php']
+                    src: ['*.php', 'classes/*.php', 'classes/*/*.php', 'controllers/*.php']
                 },
                 tests: {
                     src: ['tests/*.php']

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * YoutubeStream class.
  */
@@ -32,7 +33,7 @@ class YoutubeStream extends AppendStream
             if ($rangeEnd >= $contentLenghtHeader[0]) {
                 $rangeEnd = $contentLenghtHeader[0] - 1;
             }
-            $response = $video->getHttpResponse(['Range' => 'bytes='.$rangeStart.'-'.$rangeEnd]);
+            $response = $video->getHttpResponse(['Range' => 'bytes=' . $rangeStart . '-' . $rangeEnd]);
             $this->addStream(new YoutubeChunkStream($response));
             $rangeStart = $rangeEnd + 1;
         }
