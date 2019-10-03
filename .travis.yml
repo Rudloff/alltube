@@ -5,4 +5,10 @@ addons:
     apt:
         packages:
             - language-pack-fr
-install: composer install --no-progress
+install:
+    - composer install --no-progress
+    - yarn install
+script:
+    - grunt lint
+    - composer exec -v
+        phpunit
