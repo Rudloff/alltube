@@ -10,5 +10,4 @@ install:
     - yarn install
 script:
     - grunt lint
-    - composer exec -v
-        phpunit
+    - grunt test
