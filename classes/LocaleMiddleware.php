@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LocaleMiddleware class.
  */
@@ -43,11 +44,12 @@ class LocaleMiddleware
     {
         foreach ($this->localeManager->getSupportedLocales() as $locale) {
             $parsedLocale = AcceptLanguage::parse($locale);
-            if (isset($proposedLocale['language'])
+            if (
+                isset($proposedLocale['language'])
                 && $parsedLocale[1]['language'] == $proposedLocale['language']
                 && $parsedLocale[1]['region'] == $proposedLocale['region']
             ) {
-                return new Locale($proposedLocale['language'].'_'.$proposedLocale['region']);
+                return new Locale($proposedLocale['language'] . '_' . $proposedLocale['region']);
             }
         }
     }

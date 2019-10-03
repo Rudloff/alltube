@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LocaleManager class.
  */
@@ -45,7 +46,7 @@ class LocaleManager
         if (isset($cookieLocale)) {
             $this->setLocale(new Locale($cookieLocale));
         }
-        bindtextdomain('Alltube', __DIR__.'/../i18n/');
+        bindtextdomain('Alltube', __DIR__ . '/../i18n/');
         textdomain('Alltube');
     }
 
@@ -61,8 +62,9 @@ class LocaleManager
         $process->run();
         $installedLocales = explode(PHP_EOL, trim($process->getOutput()));
         foreach ($this->supportedLocales as $supportedLocale) {
-            if (in_array($supportedLocale, $installedLocales)
-                || in_array($supportedLocale.'.utf8', $installedLocales)
+            if (
+                in_array($supportedLocale, $installedLocales)
+                || in_array($supportedLocale . '.utf8', $installedLocales)
             ) {
                 $return[] = new Locale($supportedLocale);
             }
@@ -88,8 +90,8 @@ class LocaleManager
      */
     public function setLocale(Locale $locale)
     {
-        putenv('LANG='.$locale);
-        setlocale(LC_ALL, [$locale.'.utf8', $locale]);
+        putenv('LANG=' . $locale);
+        setlocale(LC_ALL, [$locale . '.utf8', $locale]);
         $this->curLocale = $locale;
         $this->sessionSegment->set('locale', $locale);
     }

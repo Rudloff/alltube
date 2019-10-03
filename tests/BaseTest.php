@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PlaylistArchiveStreamTest class.
  */
@@ -26,7 +27,7 @@ abstract class BaseTest extends TestCase
             $configFile = 'config_test.yml';
         }
 
-        return __DIR__.'/../config/'.$configFile;
+        return __DIR__ . '/../config/' . $configFile;
     }
 
     /**

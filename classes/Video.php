@@ -1,4 +1,5 @@
 <?php
+
 /**
  * VideoDownload class.
  */
@@ -135,7 +136,7 @@ class Video
 
         $process = self::getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
-        $process->setEnv(['PATH'=>$config->phantomjsDir]);
+        $process->setEnv(['PATH' => $config->phantomjsDir]);
         $process->inheritEnvironmentVariables();
         $process->run();
         if (!$process->isSuccessful()) {
@@ -162,7 +163,7 @@ class Video
      */
     private function getProp($prop = 'dump-json')
     {
-        $arguments = ['--'.$prop];
+        $arguments = ['--' . $prop];
 
         if (isset($this->webpageUrl)) {
             $arguments[] = $this->webpageUrl;
@@ -265,7 +266,7 @@ class Video
             pathinfo(
                 $this->getFilename(),
                 PATHINFO_FILENAME
-            ).'.'.$extension,
+            ) . '.' . $extension,
             ENT_COMPAT,
             'ISO-8859-1'
         );
@@ -281,14 +282,16 @@ class Video
         $arguments = [];
 
         if ($this->protocol == 'rtmp') {
-            foreach ([
+            foreach (
+                [
                 'url'           => '-rtmp_tcurl',
                 'webpage_url'   => '-rtmp_pageurl',
                 'player_url'    => '-rtmp_swfverify',
                 'flash_version' => '-rtmp_flashver',
                 'play_path'     => '-rtmp_playpath',
                 'app'           => '-rtmp_app',
-            ] as $property => $option) {
+                ] as $property => $option
+            ) {
                 if (isset($this->{$property})) {
                     $arguments[] = $option;
                     $arguments[] = $this->{$property};
@@ -342,7 +345,7 @@ class Video
         $to = null
     ) {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
+            throw new Exception(_('Can\'t find avconv or ffmpeg at ') . $this->config->avconv . '.');
         }
 
         $durationRegex = '/(\d+:)?(\d+:)?(\d+)/';
@@ -355,14 +358,14 @@ class Video
 
         if (!empty($from)) {
             if (!preg_match($durationRegex, $from)) {
-                throw new Exception(_('Invalid start time: ').$from.'.');
+                throw new Exception(_('Invalid start time: ') . $from . '.');
             }
             $afterArguments[] = '-ss';
             $afterArguments[] = $from;
         }
         if (!empty($to)) {
             if (!preg_match($durationRegex, $to)) {
-                throw new Exception(_('Invalid end time: ').$to.'.');
+                throw new Exception(_('Invalid end time: ') . $to . '.');
             }
             $afterArguments[] = '-to';
             $afterArguments[] = $to;
@@ -379,7 +382,7 @@ class Video
             [
                 '-i', $urls[0],
                 '-f', $filetype,
-                '-b:a', $audioBitrate.'k',
+                '-b:a', $audioBitrate . 'k',
             ],
             $afterArguments,
             [
@@ -441,7 +444,7 @@ class Video
     public function getM3uStream()
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw new Exception(_('Can\'t find avconv or ffmpeg at ').$this->config->avconv.'.');
+            throw new Exception(_('Can\'t find avconv or ffmpeg at ') . $this->config->avconv . '.');
         }
 
         $urls = $this->getUrl();

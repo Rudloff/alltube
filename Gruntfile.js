@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             },
             phpcs: {
                 options: {
-                    standard: 'PSR2',
+                    standard: 'PSR12',
                     bin: 'vendor/bin/phpcs'
                 },
                 php: {

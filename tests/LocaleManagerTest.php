@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LocaleManagerTest class.
  */

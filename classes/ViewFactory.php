@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ViewFactory class.
  */
@@ -29,7 +30,7 @@ class ViewFactory
             $request = $container['request'];
         }
 
-        $view = new Smarty(__DIR__.'/../templates/');
+        $view = new Smarty(__DIR__ . '/../templates/');
         if (in_array('https', $request->getHeader('X-Forwarded-Proto'))) {
             $request = $request->withUri($request->getUri()->withScheme('https')->withPort(443));
         }

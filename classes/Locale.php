@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Locale class.
  */
@@ -67,7 +68,7 @@ class Locale
      */
     public function getIso15897()
     {
-        return $this->language.'_'.$this->region;
+        return $this->language . '_' . $this->region;
     }
 
     /**
@@ -77,7 +78,7 @@ class Locale
      */
     public function getBcp47()
     {
-        return $this->language.'-'.$this->region;
+        return $this->language . '-' . $this->region;
     }
 
     /**

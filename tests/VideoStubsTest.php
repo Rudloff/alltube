@@ -1,4 +1,5 @@
 <?php
+
 /**
  * VideoStubsTest class.
  */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * VideoTest class.
  */
@@ -130,7 +131,7 @@ class VideoTest extends BaseTest
             ],
             [
                 'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 18,
-                'Heart_Attack_-_Demi_Lovato_'.
+                'Heart_Attack_-_Demi_Lovato_' .
                 'Sam_Tsui_Against_The_Current-RJJ6FCAXvKg',
                 'mp4',
                 'googlevideo.com',
@@ -289,7 +290,7 @@ class VideoTest extends BaseTest
     public function testGetFilename($url, $format, $filename, $extension)
     {
         $video = new Video($url, $format);
-        $this->assertEquals($video->getFilename(), $filename.'.'.$extension);
+        $this->assertEquals($video->getFilename(), $filename . '.' . $extension);
     }
 
     /**

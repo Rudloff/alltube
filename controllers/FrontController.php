@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FrontController class.
  */
@@ -66,7 +67,7 @@ class FrontController extends BaseController
                 'config'           => $this->config,
                 'class'            => 'index',
                 'description'      => _('Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'),
-                'domain'           => $uri->getScheme().'://'.$uri->getAuthority(),
+                'domain'           => $uri->getScheme() . '://' . $uri->getAuthority(),
                 'canonical'        => $this->getCanonicalUrl($request),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
                 'locale'           => $this->localeManager->getLocale(),
@@ -110,7 +111,7 @@ class FrontController extends BaseController
                 'extractors'  => Video::getExtractors(),
                 'class'       => 'extractors',
                 'title'       => _('Supported websites'),
-                'description' => _('List of all supported websites from which Alltube Download '.
+                'description' => _('List of all supported websites from which Alltube Download ' .
                     'can extract video or audio files'),
                 'canonical' => $this->getCanonicalUrl($request),
                 'locale'    => $this->localeManager->getLocale(),
@@ -168,10 +169,11 @@ class FrontController extends BaseController
             $template = 'info.tpl';
         }
         $title = _('Video download');
-        $description = _('Download video from ').$this->video->extractor_key;
+        $description = _('Download video from ') . $this->video->extractor_key;
         if (isset($this->video->title)) {
             $title = $this->video->title;
-            $description = _('Download').' "'.$this->video->title.'" '._('from').' '.$this->video->extractor_key;
+            $description = _('Download') . ' "' . $this->video->title . '" ' .
+                _('from') . ' ' . $this->video->extractor_key;
         }
         $this->view->render(
             $response,
@@ -209,8 +211,8 @@ class FrontController extends BaseController
             if ($this->config->convert && $request->getQueryParam('audio')) {
                 // We skip the info page and get directly to the download.
                 return $response->withRedirect(
-                    $this->container->get('router')->pathFor('download').
-                    '?'.http_build_query($request->getQueryParams())
+                    $this->container->get('router')->pathFor('download') .
+                    '?' . http_build_query($request->getQueryParams())
                 );
             } else {
                 return $this->getInfoResponse($request, $response);
@@ -266,7 +268,7 @@ class FrontController extends BaseController
 
         $query = $uri->getQuery();
         if (!empty($query)) {
-            $return .= '?'.$query;
+            $return .= '?' . $query;
         }
 
         return $return;

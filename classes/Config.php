@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Config class.
  */
@@ -160,7 +161,7 @@ class Config
                 }
             } elseif (!$this->stream) {
                 // Force HTTP if stream is not enabled.
-                $this->replaceGenericFormat($format, $format.'[protocol=https]/'.$format.'[protocol=http]');
+                $this->replaceGenericFormat($format, $format . '[protocol=https]/' . $format . '[protocol=http]');
             }
         }
     }
@@ -197,9 +198,9 @@ class Config
         so they will go to the logs.
          */
         if (!is_file($this->youtubedl)) {
-            throw new Exception("Can't find youtube-dl at ".$this->youtubedl);
+            throw new Exception("Can't find youtube-dl at " . $this->youtubedl);
         } elseif (!Video::checkCommand([$this->python, '--version'])) {
-            throw new Exception("Can't find Python at ".$this->python);
+            throw new Exception("Can't find Python at " . $this->python);
         }
     }
 
@@ -262,7 +263,7 @@ class Config
             self::$instance = new self($options);
             self::$instance->validateOptions();
         } else {
-            throw new Exception("Can't find config file at ".$file);
+            throw new Exception("Can't find config file at " . $file);
         }
     }
 

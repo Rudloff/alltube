@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UglyRouter class.
  */
@@ -55,7 +56,7 @@ class UglyRouter extends Router
         $url = str_replace('/', '/?page=', $this->relativePathFor($name, $data, $queryParams));
 
         if ($this->basePath) {
-            $url = $this->basePath.$url;
+            $url = $this->basePath . $url;
         }
 
         return $url;

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 use Alltube\Config;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
@@ -12,12 +12,12 @@ use Alltube\ViewFactory;
 use Slim\App;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
-    header('Location: '.str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
+    header('Location: ' . str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
     die;
 }
 
-if (is_file(__DIR__.'/config/config.yml')) {
-    Config::setFile(__DIR__.'/config/config.yml');
+if (is_file(__DIR__ . '/config/config.yml')) {
+    Config::setFile(__DIR__ . '/config/config.yml');
 }
 
 $app = new App();
@@ -82,5 +82,5 @@ $app->get(
 try {
     $app->run();
 } catch (SmartyException $e) {
-    die('Smarty could not compile the template file: '.$e->getMessage());
+    die('Smarty could not compile the template file: ' . $e->getMessage());
 }
