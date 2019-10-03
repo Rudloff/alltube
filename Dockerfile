@@ -10,6 +10,7 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install gmp
 RUN docker-php-ext-install gettext
+RUN docker-php-ext-install xsl
 RUN a2enmod rewrite
 RUN curl -sS https://getcomposer.org/installer | php
 COPY resources/php.ini /usr/local/etc/php/
