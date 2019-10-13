@@ -39,6 +39,10 @@
     "type": "git",
     "url": "https://github.com/Rudloff/alltube.git"
   },
+  "resolutions": {
+    "grunt-fixpack/fixpack/rc": "^1.2.8",
+    "grunt-githooks/handlebars": "^4.3.0"
+  },
   "scripts": {
     "postinstall": "grunt",
     "prepare": "grunt githooks"
