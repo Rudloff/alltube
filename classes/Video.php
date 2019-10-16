@@ -592,6 +592,13 @@ class Video
         $client = new Client();
         $urls = $this->getUrl();
 
-        return $client->request('GET', $urls[0], ['stream' => true, 'headers' => $headers]);
+        return $client->request(
+            'GET',
+            $urls[0],
+            [
+                'stream' => true,
+                'headers' => array_merge((array) $this->http_headers, $headers)
+            ]
+        );
     }
 }
