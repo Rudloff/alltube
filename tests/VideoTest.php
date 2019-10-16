@@ -143,12 +143,6 @@ class VideoTest extends BaseTest
                 'bbcodspdns.fcod.llnwd.net',
             ],
             [
-                'http://www.rtl2.de/sendung/grip-das-motormagazin/folge/folge-203-0', 'bestaudio/best',
-                'GRIP_sucht_den_Sommerkonig-folge-203-0',
-                'f4v',
-                'edgefcs.net',
-            ],
-            [
                 'https://openload.co/f/kUEfGclsU9o', 'best[protocol^=http]',
                 'skyrim_no-audio_1080.mp4-kUEfGclsU9o',
                 'mp4',
