@@ -59,7 +59,7 @@ $app->any('/video', [$frontController, 'info']);
 
 $app->any(
     '/watch',
-    [$frontController, 'video']
+    [$frontController, 'info']
 );
 
 $app->any(
