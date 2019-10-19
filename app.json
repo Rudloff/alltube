@@ -18,13 +18,13 @@
       "url": "https://github.com/piotras/heroku-buildpack-gettext.git"
     },
     {
+      "url": "heroku/php"
+    },
+    {
       "url": "heroku/nodejs"
     },
     {
       "url": "heroku/python"
-    },
-    {
-      "url": "heroku/php"
     }
   ],
   "env": {
