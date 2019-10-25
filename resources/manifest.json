@@ -5,27 +5,27 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "img/favicon.png",
+      "src": "../img/favicon.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "img/logo_60.png",
+      "src": "../img/logo_60.png",
       "sizes": "60x60",
       "type": "image/png"
     },
     {
-      "src": "img/logo_90.png",
+      "src": "../img/logo_90.png",
       "sizes": "90x60",
       "type": "image/png"
     },
     {
-      "src": "img/logo_app.png",
+      "src": "../img/logo_app.png",
       "sizes": "243x243",
       "type": "image/png"
     },
     {
-      "src": "img/logo_250.png",
+      "src": "../img/logo_250.png",
       "sizes": "250x250",
       "type": "image/png"
     }
