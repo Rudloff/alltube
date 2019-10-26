@@ -11,6 +11,7 @@ use Alltube\Controller\DownloadController;
 
 /**
  * Unit tests for the FrontController class.
+ * @requires download
  */
 class DownloadControllerTest extends ControllerTest
 {
@@ -79,10 +80,6 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithM3uStream()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Twitter returns a 429 error when the test is ran too many times.');
-        }
-
         Config::setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
@@ -153,9 +150,6 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithMissingPassword()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
         $this->assertRequestIsRedirect('download', ['url' => 'http://vimeo.com/68375962']);
     }
 

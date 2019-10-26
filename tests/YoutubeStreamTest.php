@@ -11,6 +11,7 @@ use Alltube\Video;
 
 /**
  * Unit tests for the YoutubeStream class.
+ * @requires download
  */
 class YoutubeStreamTest extends StreamTest
 {

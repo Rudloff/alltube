@@ -45,4 +45,29 @@ abstract class BaseTest extends TestCase
     {
         Config::destroyInstance();
     }
+
+    /**
+     * Check tests requirements.
+     * @return void
+     */
+    protected function checkRequirements()
+    {
+        parent::checkRequirements();
+
+        $annotations = $this->getAnnotations();
+        $requires = [];
+
+        if (isset($annotations['class']['requires'])) {
+            $requires += $annotations['class']['requires'];
+        }
+        if (isset($annotations['method']['requires'])) {
+            $requires += $annotations['method']['requires'];
+        }
+
+        foreach ($requires as $require) {
+            if ($require == 'download' && getenv('CI')) {
+                $this->markTestSkipped('Do not run tests that download videos on CI.');
+            }
+        }
+    }
 }

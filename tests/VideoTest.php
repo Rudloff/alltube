@@ -11,6 +11,7 @@ use Alltube\Video;
 
 /**
  * Unit tests for the Video class.
+ * @requires download
  */
 class VideoTest extends BaseTest
 {
@@ -58,10 +59,6 @@ class VideoTest extends BaseTest
      */
     public function testgetUrlWithPassword()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
-
         $video = new Video('http://vimeo.com/68375962', 'best', 'youtube-dl');
         foreach ($video->getUrl() as $videoURL) {
             $this->assertContains('vimeocdn.com', $videoURL);
@@ -76,10 +73,6 @@ class VideoTest extends BaseTest
      */
     public function testgetUrlWithMissingPassword()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
-
         $video = new Video('http://vimeo.com/68375962');
         $video->getUrl();
     }
@@ -92,10 +85,6 @@ class VideoTest extends BaseTest
      */
     public function testgetUrlWithWrongPassword()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
-
         $video = new Video('http://vimeo.com/68375962', 'best', 'foo');
         $video->getUrl();
     }
@@ -148,17 +137,13 @@ class VideoTest extends BaseTest
                 'mp4',
                 'openload.co',
             ],
-        ];
-
-        if (!getenv('CI')) {
-            // Travis is blacklisted by Vimeo.
-            $videos[] = [
+            [
                 'https://vimeo.com/24195442', 'best[protocol^=http]',
                 'Carving_the_Mountains-24195442',
                 'mp4',
                 'vimeocdn.com',
-            ];
-        }
+            ]
+        ];
 
         return $videos;
     }
@@ -187,17 +172,14 @@ class VideoTest extends BaseTest
      */
     public function m3uUrlProvider()
     {
-        $videos = [];
-
-        if (!getenv('CI')) {
-            // Twitter returns a 429 error when the test is ran too many times.
-            $videos[] = [
+        $videos = [
+            [
                 'https://twitter.com/verge/status/813055465324056576/video/1', 'hls-2176',
                 'The_Verge_-_This_tiny_origami_robot_can_self-fold_and_complete_tasks-813055465324056576',
                 'mp4',
                 'video.twimg.com',
-            ];
-        }
+            ]
+        ];
 
         return $videos;
     }
@@ -359,10 +341,6 @@ class VideoTest extends BaseTest
      */
     public function testGetAudioStreamDashError()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
-
         $video = new Video('https://vimeo.com/251997032', 'bestaudio/best');
         $video->getAudioStream();
     }

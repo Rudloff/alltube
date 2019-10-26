@@ -108,6 +108,7 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function.
      *
      * @return void
+     * @requires download
      */
     public function testInfo()
     {
@@ -118,6 +119,7 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function with audio conversion.
      *
      * @return void
+     * @requires download
      */
     public function testInfoWithAudio()
     {
@@ -133,12 +135,10 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function with audio conversion from a Vimeo video.
      *
      * @return void
+     * @requires download
      */
     public function testInfoWithVimeoAudio()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
         Config::setOptions(['convert' => true]);
 
         // So we can test the fallback to default format
@@ -149,6 +149,7 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function with audio enabled and an URL that doesn't need to be converted.
      *
      * @return void
+     * @requires download
      */
     public function testInfoWithUnconvertedAudio()
     {
@@ -167,12 +168,10 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function with a password.
      *
      * @return void
+     * @requires download
      */
     public function testInfoWithPassword()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
         $result = $this->controller->info(
             $this->request->withQueryParams(['url' => 'http://vimeo.com/68375962'])
                 ->withParsedBody(['password' => 'youtube-dl']),
@@ -185,12 +184,10 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function with a missing password.
      *
      * @return void
+     * @requires download
      */
     public function testInfoWithMissingPassword()
     {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Travis is blacklisted by Vimeo.');
-        }
         $this->assertRequestIsOk('info', ['url' => 'http://vimeo.com/68375962']);
         $this->assertRequestIsOk('info', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
     }
@@ -199,6 +196,7 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function with streams enabled.
      *
      * @return void
+     * @requires download
      */
     public function testInfoWithStream()
     {
@@ -215,6 +213,7 @@ class FrontControllerTest extends ControllerTest
      * Test the info() function with a playlist.
      *
      * @return void
+     * @requires download
      */
     public function testInfoWithPlaylist()
     {

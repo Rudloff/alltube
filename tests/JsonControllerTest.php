@@ -27,6 +27,7 @@ class JsonControllerTest extends ControllerTest
      * Test the json() function.
      *
      * @return void
+     * @requires download
      */
     public function testJson()
     {
@@ -37,6 +38,7 @@ class JsonControllerTest extends ControllerTest
      * Test the json() function with an error.
      *
      * @return void
+     * @requires download
      */
     public function testJsonWithError()
     {
