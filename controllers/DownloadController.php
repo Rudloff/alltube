@@ -222,7 +222,7 @@ class DownloadController extends BaseController
 
         return $response->withHeader(
             'Content-Disposition',
-            'attachment; filename="' . $this->video->getFileNameWithExtension('mkv')
+            'attachment; filename="' . $this->video->getFileNameWithExtension('mkv') . '"'
         );
     }
 
