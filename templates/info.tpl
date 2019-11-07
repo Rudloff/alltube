@@ -20,11 +20,11 @@
 <br/>
 <form action="{path_for name="download"}">
     <input type="hidden" name="url" value="{$video->webpage_url}" />
+    {if $config->uglyUrls}
+        <input type="hidden" name="page" value="download" />
+    {/if}
     {if isset($video->formats) && count($video->formats) > 1}
         <h3><label for="format">{t}Available formats:{/t}</label></h3>
-        {if $config->uglyUrls}
-            <input type="hidden" name="page" value="download" />
-        {/if}
         <select name="format" id="format" class="formats monospace">
             <optgroup label="{t}Generic formats{/t}">
                 {foreach $config->genericFormats as $format => $name}
@@ -70,26 +70,26 @@
                 {/foreach}
             </optgroup>
         </select><br/><br/>
-        {if $config->stream}
-            <input type="checkbox" checked name="stream" id="stream"/>
-            <label for="stream">{t}Stream the video through the server{/t}</label>
-            <br/><br/>
-        {/if}
-        {if $config->convertAdvanced}
-            <input type="checkbox" name="customConvert" id="customConvert"/>
-            <label for="customConvert">{t}Convert into a custom format:{/t}</label>
-            <select title="Custom format" name="customFormat" aria-label="{t}Format to convert to{/t}">
-                {foreach $config->convertAdvancedFormats as $format}
-                    <option>{$format}</option>
-                {/foreach}
-            </select>
-            {t}with{/t}
-            <label for="customBitrate" class="sr-only">{t}Bit rate{/t}</label>
-            <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"
-                name="customBitrate" id="customBitrate" aria-describedby="customBitrateUnit" />
-            <span id="customBitrateUnit">{t}kbit/s audio{/t}</span>
-            <br/><br/>
-        {/if}
+    {/if}
+    {if $config->stream}
+        <input type="checkbox" checked name="stream" id="stream"/>
+        <label for="stream">{t}Stream the video through the server{/t}</label>
+        <br/><br/>
+    {/if}
+    {if $config->convertAdvanced}
+        <input type="checkbox" name="customConvert" id="customConvert"/>
+        <label for="customConvert">{t}Convert into a custom format:{/t}</label>
+        <select title="Custom format" name="customFormat" aria-label="{t}Format to convert to{/t}">
+            {foreach $config->convertAdvancedFormats as $format}
+                <option>{$format}</option>
+            {/foreach}
+        </select>
+        {t}with{/t}
+        <label for="customBitrate" class="sr-only">{t}Bit rate{/t}</label>
+        <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"
+            name="customBitrate" id="customBitrate" aria-describedby="customBitrateUnit" />
+        <span id="customBitrateUnit">{t}kbit/s audio{/t}</span>
+        <br/><br/>
     {/if}
     <input class="downloadBtn" type="submit" value="{t}Download{/t}" /><br/>
 </form>
