@@ -90,7 +90,7 @@
     "compile": "composer install --ignore-platform-reqs",
     "update-locales": [
       "tsmarty2c.php templates > i18n/template.pot",
-      "xgettext --omit-header -j -o i18n/template.pot classes/* controllers/*"
+      "xgettext --omit-header -j -o i18n/template.pot classes/*.php classes/*/*.php controllers/*"
     ],
     "youtube-dl": "vendor/rg3/youtube-dl/youtube_dl/__main__.py"
   },
