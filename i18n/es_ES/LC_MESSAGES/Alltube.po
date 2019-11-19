@@ -9,15 +9,15 @@ msgstr ""
 
 #: templates/error.tpl:6
 msgid "Please check the URL of your video."
-msgstr "Porfavor, revise la URL de su video."
+msgstr "Por favor, revise la URL de su vídeo."
 
 #: templates/playlist.tpl:5
 msgid "Videos extracted from"
-msgstr "Videos extraidos desde"
+msgstr "Vídeos extraídos desde"
 
 #: templates/playlist.tpl:7
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: templates/playlist.tpl:26 templates/password.tpl:10 templates/video.tpl:83
 #: templates/video.tpl:86 templates/index.tpl:18
@@ -55,23 +55,23 @@ msgstr "Formatos disponibles:"
 
 #: templates/video.tpl:29
 msgid "Generic formats"
-msgstr "Formatos genericos"
+msgstr "Formatos genéricos"
 
 #: templates/video.tpl:32
 msgid "Best"
-msgstr "Mejor"
+msgstr "El mejor"
 
 #: templates/video.tpl:37
 msgid "Remux best video with best audio"
-msgstr ""
+msgstr "Usar la mejor calidad de vídeo y audio"
 
 #: templates/video.tpl:41
 msgid "Worst"
-msgstr "Peor"
+msgstr "El peor"
 
 #: templates/video.tpl:44
 msgid "Detailed formats"
-msgstr ""
+msgstr "Formatos detallados"
 
 #: templates/inc/footer.tpl:4
 msgid "Code by"
@@ -107,11 +107,11 @@ msgstr "Compartir en Facebook"
 
 #: templates/index.tpl:8
 msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
-msgstr "Copia aqui la URL de tu video (Youtube, Dailymotion, etc.)"
+msgstr "Copia aquí la URL de tu vídeo (Youtube, Dailymotion, etc.)"
 
 #: templates/index.tpl:23
 msgid "Audio only (MP3)"
-msgstr "Solo audio (MP3)"
+msgstr "Sólo audio (MP3)"
 
 #: templates/index.tpl:28
 msgid "See all supported websites"
@@ -123,7 +123,7 @@ msgstr "Arrastra esto a tu barra de marcadores"
 
 #: templates/index.tpl:31
 msgid "Bookmarklet"
-msgstr ""
+msgstr "Marcador"
 
 #: templates/inc/header.tpl:4
 msgid "Switch language"
