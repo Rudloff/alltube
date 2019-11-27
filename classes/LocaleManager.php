@@ -8,6 +8,8 @@ namespace Alltube;
 
 use Aura\Session\Segment;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\Loader\MoFileLoader;
 
 /**
  * Class used to manage locales.
@@ -19,7 +21,7 @@ class LocaleManager
      *
      * @var array
      */
-    private $supportedLocales = ['en_US', 'fr_FR', 'zh_CN', 'es_ES', 'pt_BR', 'de_DE', 'ar_001'];
+    private $supportedLocales = ['en_US', 'fr_FR', 'zh_CN', 'es_ES', 'pt_BR', 'de_DE', 'ar'];
 
     /**
      * Current locale.
@@ -36,18 +38,48 @@ class LocaleManager
     private $sessionSegment;
 
     /**
+     * Default locale.
+     *
+     * @var string
+     */
+    private const DEFAULT_LOCALE = 'en';
+
+    /**
+     * Symfony Translator instance.
+     *
+     * @var Translator
+     */
+    private $translator;
+
+    /**
+     * Singleton instance.
+     *
+     * @var LocaleManager|null
+     */
+    private static $instance;
+
+    /**
      * LocaleManager constructor.
      */
-    public function __construct()
+    private function __construct()
     {
         $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
         $cookieLocale = $this->sessionSegment->get('locale');
+
+        $this->translator = new Translator(self::DEFAULT_LOCALE);
         if (isset($cookieLocale)) {
             $this->setLocale(new Locale($cookieLocale));
         }
-        bindtextdomain('Alltube', __DIR__ . '/../i18n/');
-        textdomain('Alltube');
+
+        $this->translator->addLoader('gettext', new MoFileLoader());
+        foreach ($this->getSupportedLocales() as $locale) {
+            $this->translator->addResource(
+                'gettext',
+                __DIR__ . '/../i18n/' . $locale->getIso15897() . '/LC_MESSAGES/Alltube.mo',
+                $locale->getIso15897()
+            );
+        }
     }
 
     /**
@@ -58,16 +90,9 @@ class LocaleManager
     public function getSupportedLocales()
     {
         $return = [];
-        $process = new Process(['locale', '-a']);
-        $process->run();
-        $installedLocales = explode(PHP_EOL, trim($process->getOutput()));
+
         foreach ($this->supportedLocales as $supportedLocale) {
-            if (
-                in_array($supportedLocale, $installedLocales)
-                || in_array($supportedLocale . '.utf8', $installedLocales)
-            ) {
-                $return[] = new Locale($supportedLocale);
-            }
+            $return[] = new Locale($supportedLocale);
         }
 
         return $return;
@@ -90,8 +115,7 @@ class LocaleManager
      */
     public function setLocale(Locale $locale)
     {
-        putenv('LANG=' . $locale);
-        setlocale(LC_ALL, [$locale . '.utf8', $locale]);
+        $this->translator->setLocale($locale->getIso15897());
         $this->curLocale = $locale;
         $this->sessionSegment->set('locale', $locale);
     }
@@ -101,7 +125,47 @@ class LocaleManager
      */
     public function unsetLocale()
     {
+        $this->translator->setLocale(self::DEFAULT_LOCALE);
         $this->curLocale = null;
         $this->sessionSegment->clear();
+    }
+
+    /**
+     * Smarty "t" block.
+     *
+     * @param  array  $params Block parameters
+     * @param  string $text  Block content
+     *
+     * @return string Translated string
+     */
+    public function smartyTranslate(array $params, $text)
+    {
+        return $this->t($text);
+    }
+
+    /**
+     * Translate a string.
+     *
+     * @param string $string String to translate
+     *
+     * @return string Translated string
+     */
+    public function t($string)
+    {
+        return $this->translator->trans($string);
+    }
+
+    /**
+     * Get LocaleManager singleton instance.
+     *
+     * @return LocaleManager
+     */
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
     }
 }

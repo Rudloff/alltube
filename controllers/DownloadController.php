@@ -212,7 +212,7 @@ class DownloadController extends BaseController
     private function getRemuxStream(Request $request, Response $response)
     {
         if (!$this->config->remux) {
-            throw new Exception(_('You need to enable remux mode to merge two formats.'));
+            throw new Exception($this->localeManager->t('You need to enable remux mode to merge two formats.'));
         }
         $stream = $this->video->getRemuxStream();
         $response = $response->withHeader('Content-Type', 'video/x-matroska');
@@ -252,7 +252,7 @@ class DownloadController extends BaseController
             return $this->getStream($request, $response);
         } else {
             if (empty($videoUrls[0])) {
-                throw new Exception(_("Can't find URL of video."));
+                throw new Exception($this->localeManager->t("Can't find URL of video."));
             }
 
             return $response->withRedirect($videoUrls[0]);

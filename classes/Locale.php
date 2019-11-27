@@ -38,7 +38,9 @@ class Locale
     {
         $parse = AcceptLanguage::parse($locale);
         $this->language = $parse[1]['language'];
-        $this->region = $parse[1]['region'];
+        if (!empty($parse[1]['region'])) {
+            $this->region = $parse[1]['region'];
+        }
     }
 
     /**
@@ -68,7 +70,11 @@ class Locale
      */
     public function getIso15897()
     {
-        return $this->language . '_' . $this->region;
+        if (isset($this->region)) {
+            return $this->language . '_' . $this->region;
+        } else {
+            return $this->language;
+        }
     }
 
     /**
@@ -78,7 +84,11 @@ class Locale
      */
     public function getBcp47()
     {
-        return $this->language . '-' . $this->region;
+        if (isset($this->region)) {
+            return $this->language . '-' . $this->region;
+        } else {
+            return $this->language;
+        }
     }
 
     /**
@@ -98,6 +108,8 @@ class Locale
      */
     public function getCountry()
     {
-        return country($this->getIso3166());
+        if (isset($this->region)) {
+            return country($this->getIso3166());
+        }
     }
 }

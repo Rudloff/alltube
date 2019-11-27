@@ -2,7 +2,7 @@
     {if isset($supportedLocales) AND count($supportedLocales) > 1}
         <div class="locales small-font">
             <button class="localesBtn small-font" title="{t}Switch language{/t}">
-                {if isset($locale)}
+                {if isset($locale) AND $locale->getCountry()}
                     {$locale->getCountry()->getEmoji()}
                 {else}
                     Set language
@@ -11,7 +11,16 @@
             <ul class="supportedLocales">
                 {foreach $supportedLocales as $supportedLocale}
                     {if $supportedLocale != $locale}
-                        <li><a hreflang="{$supportedLocale->getBcp47()}" lang="{$supportedLocale->getBcp47()}" href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">{$supportedLocale->getCountry()->getEmoji()} {$supportedLocale->getFullName()|ucfirst}</a></li>
+                        <li>
+                            <a hreflang="{$supportedLocale->getBcp47()}"
+                                lang="{$supportedLocale->getBcp47()}"
+                                href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">
+                                {if $supportedLocale->getCountry()}
+                                    {$supportedLocale->getCountry()->getEmoji()}
+                                {/if}
+                                {$supportedLocale->getFullName()|ucfirst}
+                            </a>
+                        </li>
                     {/if}
                 {/foreach}
             </ul>

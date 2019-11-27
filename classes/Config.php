@@ -135,6 +135,11 @@ class Config
      */
     public $genericFormats = [];
 
+    /**
+     * Enable debug mode.
+     *
+     * @var bool
+     */
     public $debug = false;
 
     /**

@@ -1,4 +1,3 @@
-{locale path="../i18n" domain="Alltube"}
 <!doctype html>
 <html {if isset($locale)}lang="{$locale->getBcp47()}"{/if}>
 <head>

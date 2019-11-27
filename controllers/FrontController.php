@@ -8,7 +8,6 @@ namespace Alltube\Controller;
 
 use Alltube\Exception\PasswordException;
 use Alltube\Locale;
-use Alltube\LocaleManager;
 use Alltube\Video;
 use Exception;
 use Psr\Container\ContainerInterface;
@@ -31,13 +30,6 @@ class FrontController extends BaseController
     private $view;
 
     /**
-     * LocaleManager instance.
-     *
-     * @var LocaleManager
-     */
-    private $localeManager;
-
-    /**
      * BaseController constructor.
      *
      * @param ContainerInterface $container Slim dependency container
@@ -46,7 +38,6 @@ class FrontController extends BaseController
     {
         parent::__construct($container);
 
-        $this->localeManager = $this->container->get('locale');
         $this->view = $this->container->get('view');
     }
 
@@ -67,7 +58,9 @@ class FrontController extends BaseController
             [
                 'config'           => $this->config,
                 'class'            => 'index',
-                'description'      => _('Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'),
+                'description'      => $this->localeManager->t(
+                    'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
+                ),
                 'domain'           => $uri->getScheme() . '://' . $uri->getAuthority(),
                 'canonical'        => $this->getCanonicalUrl($request),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
@@ -111,8 +104,8 @@ class FrontController extends BaseController
                 'config'      => $this->config,
                 'extractors'  => Video::getExtractors(),
                 'class'       => 'extractors',
-                'title'       => _('Supported websites'),
-                'description' => _('List of all supported websites from which Alltube Download ' .
+                'title'       => $this->localeManager->t('Supported websites'),
+                'description' => $this->localeManager->t('List of all supported websites from which Alltube Download ' .
                     'can extract video or audio files'),
                 'canonical' => $this->getCanonicalUrl($request),
                 'locale'    => $this->localeManager->getLocale(),
@@ -138,8 +131,10 @@ class FrontController extends BaseController
             [
                 'config'      => $this->config,
                 'class'       => 'password',
-                'title'       => _('Password prompt'),
-                'description' => _('You need a password in order to download this video with Alltube Download'),
+                'title'       => $this->localeManager->t('Password prompt'),
+                'description' => $this->localeManager->t(
+                    'You need a password in order to download this video with Alltube Download'
+                ),
                 'canonical'   => $this->getCanonicalUrl($request),
                 'locale'      => $this->localeManager->getLocale(),
             ]
@@ -169,12 +164,12 @@ class FrontController extends BaseController
         } else {
             $template = 'info.tpl';
         }
-        $title = _('Video download');
-        $description = _('Download video from ') . $this->video->extractor_key;
+        $title = $this->localeManager->t('Video download');
+        $description = $this->localeManager->t('Download video from ') . $this->video->extractor_key;
         if (isset($this->video->title)) {
             $title = $this->video->title;
-            $description = _('Download') . ' "' . $this->video->title . '" ' .
-                _('from') . ' ' . $this->video->extractor_key;
+            $description = $this->localeManager->t('Download') . ' "' . $this->video->title . '" ' .
+                $this->localeManager->t('from') . ' ' . $this->video->extractor_key;
         }
         $this->view->render(
             $response,
@@ -245,7 +240,7 @@ class FrontController extends BaseController
                     'config'    => $this->config,
                     'errors'    => $exception->getMessage(),
                     'class'     => 'video',
-                    'title'     => _('Error'),
+                    'title'     => $this->localeManager->t('Error'),
                     'canonical' => $this->getCanonicalUrl($request),
                     'locale'    => $this->localeManager->getLocale(),
                 ]

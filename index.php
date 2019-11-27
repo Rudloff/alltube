@@ -32,13 +32,13 @@ if ($config->debug) {
     Debug::enable();
 }
 
-$container['view'] = ViewFactory::create($container);
-
 if (!class_exists('Locale')) {
     die('You need to install the intl extension for PHP.');
 }
-$container['locale'] = new LocaleManager();
+$container['locale'] = LocaleManager::getInstance();
 $app->add(new LocaleMiddleware($container));
+
+$container['view'] = ViewFactory::create($container);
 
 $frontController = new FrontController($container);
 $jsonController = new JsonController($container);
