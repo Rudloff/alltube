@@ -168,4 +168,14 @@ class LocaleManager
 
         return self::$instance;
     }
+
+    /**
+     * Destroy singleton instance.
+     *
+     * @return void
+     */
+    public static function destroyInstance()
+    {
+        self::$instance = null;
+    }
 }
