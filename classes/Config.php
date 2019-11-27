@@ -135,6 +135,8 @@ class Config
      */
     public $genericFormats = [];
 
+    public $debug = false;
+
     /**
      * Config constructor.
      *

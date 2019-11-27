@@ -10,6 +10,7 @@ use Alltube\LocaleMiddleware;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;
+use Symfony\Component\Debug\Debug;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
     header('Location: ' . str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
@@ -26,6 +27,11 @@ $config = Config::getInstance();
 if ($config->uglyUrls) {
     $container['router'] = new UglyRouter();
 }
+
+if ($config->debug) {
+    Debug::enable();
+}
+
 $container['view'] = ViewFactory::create($container);
 
 if (!class_exists('Locale')) {

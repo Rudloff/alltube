@@ -16,6 +16,7 @@ use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Smarty;
+use Symfony\Component\Debug\ExceptionHandler;
 
 /**
  * Main controller.
@@ -233,18 +234,23 @@ class FrontController extends BaseController
      */
     public function error(Request $request, Response $response, Exception $exception)
     {
-        $this->view->render(
-            $response,
-            'error.tpl',
-            [
-                'config'    => $this->config,
-                'errors'    => $exception->getMessage(),
-                'class'     => 'video',
-                'title'     => _('Error'),
-                'canonical' => $this->getCanonicalUrl($request),
-                'locale'    => $this->localeManager->getLocale(),
-            ]
-        );
+        if ($this->config->debug) {
+            $handler = new ExceptionHandler();
+            $handler->handle($exception);
+        } else {
+            $this->view->render(
+                $response,
+                'error.tpl',
+                [
+                    'config'    => $this->config,
+                    'errors'    => $exception->getMessage(),
+                    'class'     => 'video',
+                    'title'     => _('Error'),
+                    'canonical' => $this->getCanonicalUrl($request),
+                    'locale'    => $this->localeManager->getLocale(),
+                ]
+            );
+        }
 
         return $response->withStatus(500);
     }
