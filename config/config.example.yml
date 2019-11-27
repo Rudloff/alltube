@@ -51,3 +51,6 @@ genericFormats:
     best: Best
     bestvideo+bestaudio: Remux best video with best audio
     worst: Worst
+
+# Enable debug mode.
+debug: false

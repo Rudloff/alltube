@@ -9,6 +9,7 @@ namespace Alltube\Controller;
 use Alltube\Exception\PasswordException;
 use Alltube\Locale;
 use Alltube\Video;
+use Throwable;
 use Exception;
 use Psr\Container\ContainerInterface;
 use Slim\Container;
@@ -16,6 +17,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Smarty;
 use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 /**
  * Main controller.
@@ -239,6 +241,37 @@ class FrontController extends BaseController
                 [
                     'config'    => $this->config,
                     'errors'    => $exception->getMessage(),
+                    'class'     => 'video',
+                    'title'     => $this->localeManager->t('Error'),
+                    'canonical' => $this->getCanonicalUrl($request),
+                    'locale'    => $this->localeManager->getLocale(),
+                ]
+            );
+        }
+
+        return $response->withStatus(500);
+    }
+
+    /**
+     * Display an error page for fatal errors.
+     *
+     * @param Request   $request   PSR-7 request
+     * @param Response  $response  PSR-7 response
+     * @param Throwable $error Error to display
+     *
+     * @return Response HTTP response
+     */
+    public function fatalError(Request $request, Response $response, Throwable $error)
+    {
+        if ($this->config->debug) {
+            $handler = new ExceptionHandler();
+            $handler->handle(new FatalThrowableError($error));
+        } else {
+            $this->view->render(
+                $response,
+                'error.tpl',
+                [
+                    'config'    => $this->config,
                     'class'     => 'video',
                     'title'     => $this->localeManager->t('Error'),
                     'canonical' => $this->getCanonicalUrl($request),

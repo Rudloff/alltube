@@ -45,6 +45,7 @@ $jsonController = new JsonController($container);
 $downloadController = new DownloadController($container);
 
 $container['errorHandler'] = [$frontController, 'error'];
+$container['phpErrorHandler'] = [$frontController, 'fatalError'];
 
 $app->get(
     '/',
