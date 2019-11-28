@@ -21,32 +21,44 @@ if (is_file(__DIR__ . '/config/config.yml')) {
     Config::setFile(__DIR__ . '/config/config.yml');
 }
 
+// Create app.
 $app = new App();
 $container = $app->getContainer();
+
+// Load config.
 $config = Config::getInstance();
 if ($config->uglyUrls) {
     $container['router'] = new UglyRouter();
 }
-
 if ($config->debug) {
+    /*
+     We want to enable this as soon as possible,
+     in order to catch errors that are thrown
+     before the Slim error handler is ready.
+     */
     Debug::enable();
 }
 
+// Locales.
 if (!class_exists('Locale')) {
     die('You need to install the intl extension for PHP.');
 }
 $container['locale'] = LocaleManager::getInstance();
 $app->add(new LocaleMiddleware($container));
 
+// Smarty.
 $container['view'] = ViewFactory::create($container);
 
+// Controllers.
 $frontController = new FrontController($container);
 $jsonController = new JsonController($container);
 $downloadController = new DownloadController($container);
 
+// Error handling.
 $container['errorHandler'] = [$frontController, 'error'];
 $container['phpErrorHandler'] = [$frontController, 'fatalError'];
 
+// Routes.
 $app->get(
     '/',
     [$frontController, 'index']
