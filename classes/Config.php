@@ -151,13 +151,14 @@ class Config
     {
         $this->applyOptions($options);
         $this->getEnv();
+        $localeManager = LocaleManager::getInstance();
 
         if (empty($this->genericFormats)) {
             // We don't put this in the class definition so it can be detected by xgettext.
             $this->genericFormats = [
-                'best'                => _('Best'),
-                'bestvideo+bestaudio' => _('Remux best video with best audio'),
-                'worst'               => _('Worst'),
+                'best'                => $localeManager->t('Best'),
+                'bestvideo+bestaudio' => $localeManager->t('Remux best video with best audio'),
+                'worst'               => $localeManager->t('Worst'),
             ];
         }
 
