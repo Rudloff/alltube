@@ -166,7 +166,7 @@ class DownloadController extends BaseController
             $response = $response->withHeader('Content-Type', 'video/' . $this->video->ext);
             $body = new Stream($this->video->getM3uStream());
         } else {
-            $headers = (array) $this->video->http_headers;
+            $headers = [];
             $range = $request->getHeader('Range');
 
             if (!empty($range)) {
@@ -212,7 +212,7 @@ class DownloadController extends BaseController
     private function getRemuxStream(Request $request, Response $response)
     {
         if (!$this->config->remux) {
-            throw new Exception(_('You need to enable remux mode to merge two formats.'));
+            throw new Exception($this->localeManager->t('You need to enable remux mode to merge two formats.'));
         }
         $stream = $this->video->getRemuxStream();
         $response = $response->withHeader('Content-Type', 'video/x-matroska');
@@ -222,7 +222,7 @@ class DownloadController extends BaseController
 
         return $response->withHeader(
             'Content-Disposition',
-            'attachment; filename="' . $this->video->getFileNameWithExtension('mkv')
+            'attachment; filename="' . $this->video->getFileNameWithExtension('mkv') . '"'
         );
     }
 
@@ -252,7 +252,7 @@ class DownloadController extends BaseController
             return $this->getStream($request, $response);
         } else {
             if (empty($videoUrls[0])) {
-                throw new Exception(_("Can't find URL of video."));
+                throw new Exception($this->localeManager->t("Can't find URL of video."));
             }
 
             return $response->withRedirect($videoUrls[0]);

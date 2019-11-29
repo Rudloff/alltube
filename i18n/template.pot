@@ -1,110 +1,49 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
-#: templates/inc/footer.tpl:4
-msgid "Code by"
+#: templates/playlist.tpl:13
+msgid "Videos extracted from @title:"
 msgstr ""
 
-#: templates/inc/footer.tpl:6
-msgid "Design by"
+#: templates/playlist.tpl:38 templates/password.tpl:11 templates/index.tpl:19
+#: templates/info.tpl:98
+msgid "Download"
 msgstr ""
 
-#: templates/inc/footer.tpl:10
-msgid "Get the code"
-msgstr ""
-
-#: templates/inc/footer.tpl:12
-msgid "Based on"
-msgstr ""
-
-#: templates/inc/footer.tpl:14
-msgid "Donate using Liberapay"
-msgstr ""
-
-#: templates/inc/footer.tpl:14
-msgid "Donate"
+#: templates/playlist.tpl:39
+msgid "More options"
 msgstr ""
 
 #: templates/inc/header.tpl:4
 msgid "Switch language"
 msgstr ""
 
-#: templates/inc/header.tpl:21
-msgid "Share on Twitter"
+#: templates/inc/header.tpl:8
+msgid "Set language"
 msgstr ""
 
-#: templates/inc/header.tpl:23
-msgid "Share on Facebook"
+#: templates/inc/footer.tpl:8
+msgid "Code by @dev"
 msgstr ""
 
-#: templates/playlist.tpl:5
-msgid "Videos extracted from"
+#: templates/inc/footer.tpl:16
+msgid "Design by @designer"
 msgstr ""
 
-#: templates/playlist.tpl:7
-msgid ":"
+#: templates/inc/footer.tpl:21
+msgid "Get the code"
 msgstr ""
 
-#: templates/playlist.tpl:26 templates/video.tpl:96 templates/video.tpl:99
-#: templates/password.tpl:10 templates/index.tpl:19
-#: controllers/FrontController.php:315
-msgid "Download"
+#: templates/inc/footer.tpl:29
+msgid "Based on @youtubedl"
 msgstr ""
 
-#: templates/playlist.tpl:27
-msgid "More options"
+#: templates/inc/footer.tpl:33
+msgid "Donate using Liberapay"
 msgstr ""
 
-#: templates/extractors.tpl:4 controllers/FrontController.php:167
-msgid "Supported websites"
-msgstr ""
-
-#: templates/video.tpl:6
-msgid "You are going to download"
-msgstr ""
-
-#: templates/video.tpl:24
-msgid "Available formats:"
-msgstr ""
-
-#: templates/video.tpl:29
-msgid "Generic formats"
-msgstr ""
-
-#: templates/video.tpl:32
-msgid "Best"
-msgstr ""
-
-#: templates/video.tpl:37
-msgid "Remux best video with best audio"
-msgstr ""
-
-#: templates/video.tpl:41
-msgid "Worst"
-msgstr ""
-
-#: templates/video.tpl:44
-msgid "Detailed formats"
-msgstr ""
-
-#: templates/video.tpl:85
-msgid "Convert into a custom format:"
-msgstr ""
-
-#: templates/video.tpl:91
-msgid "with"
-msgstr ""
-
-#: templates/video.tpl:93
-msgid "kbit/s audio"
-msgstr ""
-
-#: templates/error.tpl:5
-msgid "An error occurred"
-msgstr ""
-
-#: templates/error.tpl:6
-msgid "Please check the URL of your video."
+#: templates/inc/footer.tpl:35
+msgid "Donate"
 msgstr ""
 
 #: templates/password.tpl:5
@@ -147,88 +86,159 @@ msgstr ""
 msgid "Bookmarklet"
 msgstr ""
 
-#: classes/VideoDownload.php:117
+#: templates/info.tpl:13
+msgid "You are going to download @title."
+msgstr ""
+
+#: templates/info.tpl:31
+msgid "Available formats:"
+msgstr ""
+
+#: templates/info.tpl:33
+msgid "Generic formats"
+msgstr ""
+
+#: templates/info.tpl:38
+msgid "Detailed formats"
+msgstr ""
+
+#: templates/info.tpl:80
+msgid "Stream the video through the server"
+msgstr ""
+
+#: templates/info.tpl:85
+msgid "Convert into a custom format:"
+msgstr ""
+
+#: templates/info.tpl:86
+msgid "Custom format"
+msgstr ""
+
+#: templates/info.tpl:86
+msgid "Format to convert to"
+msgstr ""
+
+#: templates/info.tpl:91
+msgid "with"
+msgstr ""
+
+#: templates/info.tpl:92
+msgid "Bit rate"
+msgstr ""
+
+#: templates/info.tpl:93
+msgid "Custom bitrate"
+msgstr ""
+
+#: templates/info.tpl:95
+msgid "kbit/s audio"
+msgstr ""
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr ""
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr ""
+
+#: templates/extractors.tpl:4 controllers/FrontController.php:109
+msgid "Supported websites"
+msgstr ""
+
+#: classes/Config.php:158
+msgid "Best"
+msgstr ""
+
+#: classes/Config.php:159
+msgid "Remux best video with best audio"
+msgstr ""
+
+#: classes/Config.php:160
+msgid "Worst"
+msgstr ""
+
+#: classes/Video.php:159
 msgid "Wrong password"
 msgstr ""
 
-#: classes/VideoDownload.php:158
+#: classes/Video.php:250
 msgid "youtube-dl returned an empty URL."
 msgstr ""
 
-#: classes/VideoDownload.php:289 classes/VideoDownload.php:394
-msgid "Can't find avconv or ffmpeg at "
+#: classes/Video.php:361 classes/Video.php:465
+msgid "Can't find avconv or ffmpeg at @path."
 msgstr ""
 
-#: classes/VideoDownload.php:302
-msgid "Invalid start time: "
+#: classes/Video.php:377
+msgid "Invalid start time: @from."
 msgstr ""
 
-#: classes/VideoDownload.php:309
-msgid "Invalid end time: "
+#: classes/Video.php:384
+msgid "Invalid end time: @to."
 msgstr ""
 
-#: classes/VideoDownload.php:359
+#: classes/Video.php:430
 msgid "Conversion of playlists is not supported."
 msgstr ""
 
-#: classes/VideoDownload.php:364 classes/VideoDownload.php:526
+#: classes/Video.php:435 classes/Video.php:578
 msgid "Conversion of M3U8 files is not supported."
 msgstr ""
 
-#: classes/VideoDownload.php:366
+#: classes/Video.php:437
 msgid "Conversion of DASH segments is not supported."
 msgstr ""
 
-#: classes/VideoDownload.php:375 classes/VideoDownload.php:412
-#: classes/VideoDownload.php:445 classes/VideoDownload.php:478
-#: classes/VideoDownload.php:534
+#: classes/Video.php:446 classes/Video.php:488 classes/Video.php:525
+#: classes/Video.php:558 classes/Video.php:586
 msgid "Could not open popen stream."
 msgstr ""
 
-#: classes/VideoDownload.php:502
-msgid "Could not open fopen stream."
+#: classes/Video.php:506
+msgid "This video does not have two URLs."
 msgstr ""
 
-#: controllers/FrontController.php:124
+#: controllers/DownloadController.php:215
+msgid "You need to enable remux mode to merge two formats."
+msgstr ""
+
+#: controllers/DownloadController.php:255
+msgid "Can't find URL of video."
+msgstr ""
+
+#: controllers/FrontController.php:64
 msgid ""
 "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
 msgstr ""
 
-#: controllers/FrontController.php:168
+#: controllers/FrontController.php:110
 msgid ""
 "List of all supported websites from which Alltube Download can extract video "
 "or audio files"
 msgstr ""
 
-#: controllers/FrontController.php:193
+#: controllers/FrontController.php:136
 msgid "Password prompt"
 msgstr ""
 
-#: controllers/FrontController.php:194
+#: controllers/FrontController.php:138
 msgid ""
 "You need a password in order to download this video with Alltube Download"
 msgstr ""
 
-#: controllers/FrontController.php:311
+#: controllers/FrontController.php:169
 msgid "Video download"
 msgstr ""
 
-#: controllers/FrontController.php:312
-msgid "Download video from "
+#: controllers/FrontController.php:171
+msgid "Download video from @extractor"
 msgstr ""
 
-#: controllers/FrontController.php:315
-msgid "from"
+#: controllers/FrontController.php:177
+msgid "Download @title from @extractor"
 msgstr ""
 
-#: controllers/FrontController.php:378
+#: controllers/FrontController.php:253 controllers/FrontController.php:284
 msgid "Error"
-msgstr ""
-
-#: controllers/FrontController.php:450
-msgid "You need to enable remux mode to merge two formats."
-msgstr ""
-
-#: controllers/FrontController.php:525
-msgid "Can't find URL of video."
 msgstr ""

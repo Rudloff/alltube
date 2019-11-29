@@ -75,6 +75,13 @@ class Video
     private $urls;
 
     /**
+     * LocaleManager instance.
+     *
+     * @var LocaleManager
+     */
+    protected $localeManager;
+
+    /**
      * VideoDownload constructor.
      *
      * @param string $webpageUrl      URL of the page containing the video
@@ -87,6 +94,8 @@ class Video
         $this->requestedFormat = $requestedFormat;
         $this->password = $password;
         $this->config = Config::getInstance();
+
+        $this->localeManager = LocaleManager::getInstance();
     }
 
     /**
@@ -116,7 +125,9 @@ class Video
      * */
     public static function getExtractors()
     {
-        return explode("\n", trim(self::callYoutubedl(['--list-extractors'])));
+        $video = new self('');
+
+        return explode("\n", trim($video->callYoutubedl(['--list-extractors'])));
     }
 
     /**
@@ -130,7 +141,7 @@ class Video
      *
      * @return string Result
      */
-    private static function callYoutubedl(array $arguments)
+    private function callYoutubedl(array $arguments)
     {
         $config = Config::getInstance();
 
@@ -145,7 +156,7 @@ class Video
             if ($errorOutput == 'ERROR: This video is protected by a password, use the --video-password option') {
                 throw new PasswordException($errorOutput, $exitCode);
             } elseif (substr($errorOutput, 0, 21) == 'ERROR: Wrong password') {
-                throw new Exception(_('Wrong password'), $exitCode);
+                throw new Exception($this->localeManager->t('Wrong password'), $exitCode);
             } else {
                 throw new Exception($errorOutput, $exitCode);
             }
@@ -177,7 +188,7 @@ class Video
             $arguments[] = $this->password;
         }
 
-        return $this::callYoutubedl($arguments);
+        return $this->callYoutubedl($arguments);
     }
 
     /**
@@ -236,7 +247,7 @@ class Video
             $this->urls = explode("\n", $this->getProp('get-url'));
 
             if (empty($this->urls[0])) {
-                throw new EmptyUrlException(_('youtube-dl returned an empty URL.'));
+                throw new EmptyUrlException($this->localeManager->t('youtube-dl returned an empty URL.'));
             }
         }
 
@@ -345,7 +356,12 @@ class Video
         $to = null
     ) {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw new Exception(_('Can\'t find avconv or ffmpeg at ') . $this->config->avconv . '.');
+            throw new Exception(
+                $this->localeManager->t(
+                    "Can't find avconv or ffmpeg at @path.",
+                    ['@path' => $this->config->avconv]
+                )
+            );
         }
 
         $durationRegex = '/(\d+:)?(\d+:)?(\d+)/';
@@ -358,14 +374,14 @@ class Video
 
         if (!empty($from)) {
             if (!preg_match($durationRegex, $from)) {
-                throw new Exception(_('Invalid start time: ') . $from . '.');
+                throw new Exception($this->localeManager->t('Invalid start time: @from.', ['@from' => $from]));
             }
             $afterArguments[] = '-ss';
             $afterArguments[] = $from;
         }
         if (!empty($to)) {
             if (!preg_match($durationRegex, $to)) {
-                throw new Exception(_('Invalid end time: ') . $to . '.');
+                throw new Exception($this->localeManager->t('Invalid end time: @to.', ['@to' => $to]));
             }
             $afterArguments[] = '-to';
             $afterArguments[] = $to;
@@ -411,14 +427,14 @@ class Video
     public function getAudioStream($from = null, $to = null)
     {
         if (isset($this->_type) && $this->_type == 'playlist') {
-            throw new Exception(_('Conversion of playlists is not supported.'));
+            throw new Exception($this->localeManager->t('Conversion of playlists is not supported.'));
         }
 
         if (isset($this->protocol)) {
             if (in_array($this->protocol, ['m3u8', 'm3u8_native'])) {
-                throw new Exception(_('Conversion of M3U8 files is not supported.'));
+                throw new Exception($this->localeManager->t('Conversion of M3U8 files is not supported.'));
             } elseif ($this->protocol == 'http_dash_segments') {
-                throw new Exception(_('Conversion of DASH segments is not supported.'));
+                throw new Exception($this->localeManager->t('Conversion of DASH segments is not supported.'));
             }
         }
 
@@ -427,7 +443,7 @@ class Video
         $stream = popen($avconvProc->getCommandLine(), 'r');
 
         if (!is_resource($stream)) {
-            throw new Exception(_('Could not open popen stream.'));
+            throw new Exception($this->localeManager->t('Could not open popen stream.'));
         }
 
         return $stream;
@@ -444,7 +460,12 @@ class Video
     public function getM3uStream()
     {
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
-            throw new Exception(_('Can\'t find avconv or ffmpeg at ') . $this->config->avconv . '.');
+            throw new Exception(
+                $this->localeManager->t(
+                    "Can't find avconv or ffmpeg at @path.",
+                    ['@path' => $this->config->avconv]
+                )
+            );
         }
 
         $urls = $this->getUrl();
@@ -464,7 +485,7 @@ class Video
 
         $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
-            throw new Exception(_('Could not open popen stream.'));
+            throw new Exception($this->localeManager->t('Could not open popen stream.'));
         }
 
         return $stream;
@@ -482,7 +503,7 @@ class Video
         $urls = $this->getUrl();
 
         if (!isset($urls[0]) || !isset($urls[1])) {
-            throw new Exception(_('This video does not have two URLs.'));
+            throw new Exception($this->localeManager->t('This video does not have two URLs.'));
         }
 
         $process = new Process(
@@ -501,7 +522,7 @@ class Video
 
         $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
-            throw new Exception(_('Could not open popen stream.'));
+            throw new Exception($this->localeManager->t('Could not open popen stream.'));
         }
 
         return $stream;
@@ -534,7 +555,7 @@ class Video
         );
         $stream = popen($process->getCommandLine(), 'r');
         if (!is_resource($stream)) {
-            throw new Exception(_('Could not open popen stream.'));
+            throw new Exception($this->localeManager->t('Could not open popen stream.'));
         }
 
         return $stream;
@@ -554,7 +575,7 @@ class Video
     public function getConvertedStream($audioBitrate, $filetype)
     {
         if (in_array($this->protocol, ['m3u8', 'm3u8_native'])) {
-            throw new Exception(_('Conversion of M3U8 files is not supported.'));
+            throw new Exception($this->localeManager->t('Conversion of M3U8 files is not supported.'));
         }
 
         $avconvProc = $this->getAvconvProcess($audioBitrate, $filetype, false);
@@ -562,7 +583,7 @@ class Video
         $stream = popen($avconvProc->getCommandLine(), 'r');
 
         if (!is_resource($stream)) {
-            throw new Exception(_('Could not open popen stream.'));
+            throw new Exception($this->localeManager->t('Could not open popen stream.'));
         }
 
         return $stream;
@@ -592,6 +613,13 @@ class Video
         $client = new Client();
         $urls = $this->getUrl();
 
-        return $client->request('GET', $urls[0], ['stream' => true, 'headers' => $headers]);
+        return $client->request(
+            'GET',
+            $urls[0],
+            [
+                'stream' => true,
+                'headers' => array_merge((array) $this->http_headers, $headers)
+            ]
+        );
     }
 }

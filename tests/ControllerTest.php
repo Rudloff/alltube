@@ -56,8 +56,8 @@ abstract class ControllerTest extends BaseTest
         $this->container = new Container();
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
+        $this->container['locale'] = LocaleManager::getInstance();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
-        $this->container['locale'] = new LocaleManager();
 
         $frontController = new FrontController($this->container);
         $downloadController = new DownloadController($this->container);

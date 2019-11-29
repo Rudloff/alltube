@@ -11,6 +11,7 @@ use Alltube\Video;
 
 /**
  * Unit tests for the YoutubeChunkStream class.
+ * @requires download
  */
 class YoutubeChunkStreamTest extends StreamTest
 {

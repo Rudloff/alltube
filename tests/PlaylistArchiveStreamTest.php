@@ -11,6 +11,7 @@ use Alltube\Video;
 
 /**
  * Unit tests for the PlaylistArchiveStream class.
+ * @requires download
  */
 class PlaylistArchiveStreamTest extends StreamTest
 {

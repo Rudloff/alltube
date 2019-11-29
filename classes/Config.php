@@ -8,6 +8,7 @@ namespace Alltube;
 
 use Exception;
 use Symfony\Component\Yaml\Yaml;
+use Jawira\CaseConverter\Convert;
 
 /**
  * Manage config parameters.
@@ -135,6 +136,13 @@ class Config
     public $genericFormats = [];
 
     /**
+     * Enable debug mode.
+     *
+     * @var bool
+     */
+    public $debug = false;
+
+    /**
      * Config constructor.
      *
      * @param array $options Options
@@ -222,17 +230,18 @@ class Config
 
     /**
      * Override options from environement variables.
-     * Supported environment variables: CONVERT, PYTHON, AUDIO_BITRATE.
+     * Environment variables should use screaming snake case: CONVERT, PYTHON, AUDIO_BITRATE, etc.
+     * If the value is an array, you should use the YAML format: "CONVERT_ADVANCED_FORMATS='[foo, bar]'"
      *
      * @return void
      */
     private function getEnv()
     {
-        foreach (['CONVERT', 'PYTHON', 'AUDIO_BITRATE', 'STREAM'] as $var) {
-            $env = getenv($var);
+        foreach (get_object_vars($this) as $prop => $value) {
+            $convert = new Convert($prop);
+            $env = getenv($convert->toSnake(true));
             if ($env) {
-                $prop = lcfirst(str_replace('_', '', ucwords(strtolower($var), '_')));
-                $this->$prop = $env;
+                $this->$prop = Yaml::parse($env);
             }
         }
     }

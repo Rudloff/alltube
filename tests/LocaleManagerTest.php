@@ -27,7 +27,7 @@ class LocaleManagerTest extends BaseTest
     protected function setUp()
     {
         $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
-        $this->localeManager = new LocaleManager();
+        $this->localeManager = LocaleManager::getInstance();
     }
 
     /**
@@ -38,6 +38,7 @@ class LocaleManagerTest extends BaseTest
     protected function tearDown()
     {
         $this->localeManager->unsetLocale();
+        LocaleManager::destroyInstance();
     }
 
     /**
@@ -93,6 +94,7 @@ class LocaleManagerTest extends BaseTest
      */
     public function testEnv()
     {
+        putenv('LANG=foo_BAR');
         $this->localeManager->setLocale(new Locale('foo_BAR'));
         $this->assertEquals('foo_BAR', getenv('LANG'));
     }

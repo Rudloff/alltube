@@ -8,14 +8,16 @@ namespace Alltube\Controller;
 
 use Alltube\Exception\PasswordException;
 use Alltube\Locale;
-use Alltube\LocaleManager;
 use Alltube\Video;
+use Throwable;
 use Exception;
 use Psr\Container\ContainerInterface;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Smarty;
+use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 /**
  * Main controller.
@@ -30,13 +32,6 @@ class FrontController extends BaseController
     private $view;
 
     /**
-     * LocaleManager instance.
-     *
-     * @var LocaleManager
-     */
-    private $localeManager;
-
-    /**
      * BaseController constructor.
      *
      * @param ContainerInterface $container Slim dependency container
@@ -45,7 +40,6 @@ class FrontController extends BaseController
     {
         parent::__construct($container);
 
-        $this->localeManager = $this->container->get('locale');
         $this->view = $this->container->get('view');
     }
 
@@ -66,7 +60,9 @@ class FrontController extends BaseController
             [
                 'config'           => $this->config,
                 'class'            => 'index',
-                'description'      => _('Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'),
+                'description'      => $this->localeManager->t(
+                    'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
+                ),
                 'domain'           => $uri->getScheme() . '://' . $uri->getAuthority(),
                 'canonical'        => $this->getCanonicalUrl($request),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
@@ -110,8 +106,8 @@ class FrontController extends BaseController
                 'config'      => $this->config,
                 'extractors'  => Video::getExtractors(),
                 'class'       => 'extractors',
-                'title'       => _('Supported websites'),
-                'description' => _('List of all supported websites from which Alltube Download ' .
+                'title'       => $this->localeManager->t('Supported websites'),
+                'description' => $this->localeManager->t('List of all supported websites from which Alltube Download ' .
                     'can extract video or audio files'),
                 'canonical' => $this->getCanonicalUrl($request),
                 'locale'    => $this->localeManager->getLocale(),
@@ -137,8 +133,10 @@ class FrontController extends BaseController
             [
                 'config'      => $this->config,
                 'class'       => 'password',
-                'title'       => _('Password prompt'),
-                'description' => _('You need a password in order to download this video with Alltube Download'),
+                'title'       => $this->localeManager->t('Password prompt'),
+                'description' => $this->localeManager->t(
+                    'You need a password in order to download this video with Alltube Download'
+                ),
                 'canonical'   => $this->getCanonicalUrl($request),
                 'locale'      => $this->localeManager->getLocale(),
             ]
@@ -168,12 +166,20 @@ class FrontController extends BaseController
         } else {
             $template = 'info.tpl';
         }
-        $title = _('Video download');
-        $description = _('Download video from ') . $this->video->extractor_key;
+        $title = $this->localeManager->t('Video download');
+        $description = $this->localeManager->t(
+            'Download video from @extractor',
+            ['@extractor' => $this->video->extractor_key]
+        );
         if (isset($this->video->title)) {
             $title = $this->video->title;
-            $description = _('Download') . ' "' . $this->video->title . '" ' .
-                _('from') . ' ' . $this->video->extractor_key;
+            $description = $this->localeManager->t(
+                'Download @title from @extractor',
+                [
+                    '@title' => $this->video->title,
+                    '@extractor' => $this->video->extractor_key
+                ]
+            );
         }
         $this->view->render(
             $response,
@@ -233,18 +239,54 @@ class FrontController extends BaseController
      */
     public function error(Request $request, Response $response, Exception $exception)
     {
-        $this->view->render(
-            $response,
-            'error.tpl',
-            [
-                'config'    => $this->config,
-                'errors'    => $exception->getMessage(),
-                'class'     => 'video',
-                'title'     => _('Error'),
-                'canonical' => $this->getCanonicalUrl($request),
-                'locale'    => $this->localeManager->getLocale(),
-            ]
-        );
+        if ($this->config->debug) {
+            $handler = new ExceptionHandler();
+            $handler->handle($exception);
+        } else {
+            $this->view->render(
+                $response,
+                'error.tpl',
+                [
+                    'config'    => $this->config,
+                    'errors'    => $exception->getMessage(),
+                    'class'     => 'video',
+                    'title'     => $this->localeManager->t('Error'),
+                    'canonical' => $this->getCanonicalUrl($request),
+                    'locale'    => $this->localeManager->getLocale(),
+                ]
+            );
+        }
+
+        return $response->withStatus(500);
+    }
+
+    /**
+     * Display an error page for fatal errors.
+     *
+     * @param Request   $request   PSR-7 request
+     * @param Response  $response  PSR-7 response
+     * @param Throwable $error Error to display
+     *
+     * @return Response HTTP response
+     */
+    public function fatalError(Request $request, Response $response, Throwable $error)
+    {
+        if ($this->config->debug) {
+            $handler = new ExceptionHandler();
+            $handler->handle(new FatalThrowableError($error));
+        } else {
+            $this->view->render(
+                $response,
+                'error.tpl',
+                [
+                    'config'    => $this->config,
+                    'class'     => 'video',
+                    'title'     => $this->localeManager->t('Error'),
+                    'canonical' => $this->getCanonicalUrl($request),
+                    'locale'    => $this->localeManager->getLocale(),
+                ]
+            );
+        }
 
         return $response->withStatus(500);
     }

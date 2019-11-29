@@ -2,10 +2,17 @@
 <div class="wrapper">
 <main class="main">
 {include file="inc/logo.tpl"}
-<p>{t}Videos extracted from{/t} {if isset($video->title)}<i>
-    <a href="{$video->webpage_url}">
-{$video->title}</a></i>{/if}{t}:{/t}
-</p>
+
+{if isset($video->title)}
+    {$title="<i>
+        <a href='{$video->webpage_url}'>
+            {$video->title}</a>
+    </i>"}
+    <p>
+        {t params=['@title'=>$title]}Videos extracted from @title:{/t}
+    </p>
+{/if}
+
 {if $config->stream}
     <a href="{path_for name="download"}?url={$video->webpage_url}" class="downloadBtn">Download everything</a>
 {/if}
