@@ -6,9 +6,7 @@
 {$title="<i itemprop='name'>
     <a itemprop='url' id='video_link'
         href='{$video->webpage_url}'>
-        {$video->title}
-    </a>
-</i>"}
+        {$video->title}</a></i>"}
 <p id="download_intro">
     {t params=['@title' => $title]}You are going to download @title.{/t}
 </p>

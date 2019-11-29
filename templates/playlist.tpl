@@ -6,8 +6,7 @@
 {if isset($video->title)}
     {$title="<i>
         <a href='{$video->webpage_url}'>
-            {$video->title}
-        </a>
+            {$video->title}</a>
     </i>"}
     <p>
         {t params=['@title'=>$title]}Videos extracted from @title:{/t}
