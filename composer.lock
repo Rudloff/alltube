@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c773a24c670cb4c431217ea94f03b942",
+    "content-hash": "e8ee860a3852c246eaba6712685b5dbc",
     "packages": [
         {
             "name": "aura/session",
@@ -1221,7 +1221,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -4404,6 +4404,6 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.0.33"
+        "php": "7.3.11"
     }
 }
