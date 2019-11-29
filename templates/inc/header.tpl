@@ -5,7 +5,7 @@
                 {if isset($locale) AND $locale->getCountry()}
                     {$locale->getCountry()->getEmoji()}
                 {else}
-                    Set language
+                    {t}Set language{/t}
                 {/if}
             </button>
             <ul class="supportedLocales">

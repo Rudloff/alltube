@@ -140,7 +140,11 @@ class LocaleManager
      */
     public function smartyTranslate(array $params, $text)
     {
-        return $this->t($text);
+        if (isset($params['params'])) {
+            return $this->t($text, $params['params']);
+        } else {
+            return $this->t($text);
+        }
     }
 
     /**
@@ -150,9 +154,9 @@ class LocaleManager
      *
      * @return string Translated string
      */
-    public function t($string)
+    public function t($string, array $params = [])
     {
-        return $this->translator->trans($string);
+        return $this->translator->trans($string, $params);
     }
 
     /**

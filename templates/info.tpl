@@ -3,10 +3,14 @@
 <div itemscope itemtype="http://schema.org/VideoObject">
 <main class="main">
 {include file="inc/logo.tpl"}
-<p id="download_intro">{t}You are going to download{/t}<i itemprop="name">
-    <a itemprop="url" id="video_link"
-        href="{$video->webpage_url}">
-{$video->title}</a></i>.
+{$title="<i itemprop='name'>
+    <a itemprop='url' id='video_link'
+        href='{$video->webpage_url}'>
+        {$video->title}
+    </a>
+</i>"}
+<p id="download_intro">
+    {t params=['@title' => $title]}You are going to download @title.{/t}
 </p>
 {if isset($video->thumbnail)}
     <img itemprop="thumbnailUrl" class="thumb" src="{$video->thumbnail}" alt="" />
@@ -79,14 +83,14 @@
     {if $config->convertAdvanced}
         <input type="checkbox" name="customConvert" id="customConvert"/>
         <label for="customConvert">{t}Convert into a custom format:{/t}</label>
-        <select title="Custom format" name="customFormat" aria-label="{t}Format to convert to{/t}">
+        <select title="{t}Custom format{/t}" name="customFormat" aria-label="{t}Format to convert to{/t}">
             {foreach $config->convertAdvancedFormats as $format}
                 <option>{$format}</option>
             {/foreach}
         </select>
         {t}with{/t}
         <label for="customBitrate" class="sr-only">{t}Bit rate{/t}</label>
-        <input type="number" value="{$config->audioBitrate}" title="Custom bitrate" class="customBitrate"
+        <input type="number" value="{$config->audioBitrate}" title="{t}Custom bitrate{/t}" class="customBitrate"
             name="customBitrate" id="customBitrate" aria-describedby="customBitrateUnit" />
         <span id="customBitrateUnit">{t}kbit/s audio{/t}</span>
         <br/><br/>

@@ -358,8 +358,9 @@ class Video
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
             throw new Exception(
                 $this->localeManager->t(
-                    'Can\'t find avconv or ffmpeg at '
-                ) . $this->config->avconv . '.'
+                    "Can't find avconv or ffmpeg at @path.",
+                    ['@path' => $this->config->avconv]
+                )
             );
         }
 
@@ -373,14 +374,14 @@ class Video
 
         if (!empty($from)) {
             if (!preg_match($durationRegex, $from)) {
-                throw new Exception($this->localeManager->t('Invalid start time: ') . $from . '.');
+                throw new Exception($this->localeManager->t('Invalid start time: @from.', ['@from' => $from]));
             }
             $afterArguments[] = '-ss';
             $afterArguments[] = $from;
         }
         if (!empty($to)) {
             if (!preg_match($durationRegex, $to)) {
-                throw new Exception($this->localeManager->t('Invalid end time: ') . $to . '.');
+                throw new Exception($this->localeManager->t('Invalid end time: @to.', ['@to' => $to]));
             }
             $afterArguments[] = '-to';
             $afterArguments[] = $to;
@@ -461,8 +462,9 @@ class Video
         if (!$this->checkCommand([$this->config->avconv, '-version'])) {
             throw new Exception(
                 $this->localeManager->t(
-                    'Can\'t find avconv or ffmpeg at '
-                ) . $this->config->avconv . '.'
+                    "Can't find avconv or ffmpeg at @path.",
+                    ['@path' => $this->config->avconv]
+                )
             );
         }
 

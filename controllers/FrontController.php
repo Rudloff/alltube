@@ -167,11 +167,19 @@ class FrontController extends BaseController
             $template = 'info.tpl';
         }
         $title = $this->localeManager->t('Video download');
-        $description = $this->localeManager->t('Download video from ') . $this->video->extractor_key;
+        $description = $this->localeManager->t(
+            'Download video from @extractor',
+            ['@extractor' => $this->video->extractor_key]
+        );
         if (isset($this->video->title)) {
             $title = $this->video->title;
-            $description = $this->localeManager->t('Download') . ' "' . $this->video->title . '" ' .
-                $this->localeManager->t('from') . ' ' . $this->video->extractor_key;
+            $description = $this->localeManager->t(
+                'Download @title from @extractor',
+                [
+                    '@title' => $this->video->title,
+                    '@extractor' => $this->video->extractor_key
+                ]
+            );
         }
         $this->view->render(
             $response,
