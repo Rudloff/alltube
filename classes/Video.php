@@ -148,7 +148,6 @@ class Video
         $process = self::getProcess($arguments);
         //This is needed by the openload extractor because it runs PhantomJS
         $process->setEnv(['PATH' => $config->phantomjsDir]);
-        $process->inheritEnvironmentVariables();
         $process->run();
         if (!$process->isSuccessful()) {
             $errorOutput = trim($process->getErrorOutput());
