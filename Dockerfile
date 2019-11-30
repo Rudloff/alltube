@@ -1,4 +1,4 @@
-FROM php:7.0-apache
+FROM php:7.3-apache
 RUN apt-get update && apt-get install -my gnupg
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
