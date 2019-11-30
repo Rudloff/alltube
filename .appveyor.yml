@@ -2,16 +2,16 @@
 install:
   - sc config wuauserv start= auto
   - net start wuauserv
-  - cinst php --version 7.1.28
+  - cinst php --version 7.3.11
   - cinst composer ffmpeg phantomjs
   - refreshenv
-  - copy C:\tools\php71\php.ini-development C:\tools\php71\php.ini
-  - echo extension=C:\tools\php71\ext\php_gmp.dll >> C:\tools\php71\php.ini
-  - echo extension=C:\tools\php71\ext\php_gettext.dll >> C:\tools\php71\php.ini
-  - echo extension=C:\tools\php71\ext\php_intl.dll >> C:\tools\php71\php.ini
-  - echo extension=C:\tools\php71\ext\php_openssl.dll >> C:\tools\php71\php.ini
-  - echo extension=C:\tools\php71\ext\php_mbstring.dll >> C:\tools\php71\php.ini
-  - echo extension=C:\tools\php71\ext\php_xsl.dll >> C:\tools\php71\php.ini
+  - copy C:\tools\php73\php.ini-development C:\tools\php73\php.ini
+  - echo extension=C:\tools\php73\ext\php_gmp.dll >> C:\tools\php73\php.ini
+  - echo extension=C:\tools\php73\ext\php_gettext.dll >> C:\tools\php73\php.ini
+  - echo extension=C:\tools\php73\ext\php_intl.dll >> C:\tools\php73\php.ini
+  - echo extension=C:\tools\php73\ext\php_openssl.dll >> C:\tools\php73\php.ini
+  - echo extension=C:\tools\php73\ext\php_mbstring.dll >> C:\tools\php73\php.ini
+  - echo extension=C:\tools\php73\ext\php_xsl.dll >> C:\tools\php73\php.ini
   - composer install --no-dev --no-progress
   - composer global require phpunit/phpunit:^6.0 --no-progress
   - C:\Python36\python.exe -m pip install youtube-dl
