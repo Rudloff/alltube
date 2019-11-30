@@ -118,12 +118,6 @@ class ConfigTest extends BaseTest
      */
     public function testSetOptionsWithoutUpdate()
     {
-        if (getenv('APPVEYOR')) {
-            $this->markTestSkipped(
-                "This will fail on AppVeyor because it won't be able to find youtube-dl at the defaut path."
-            );
-        }
-
         Config::setOptions(['appName' => 'foo'], false);
         $config = Config::getInstance();
         $this->assertEquals($config->appName, 'foo');
