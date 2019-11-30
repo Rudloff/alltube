@@ -49,7 +49,7 @@ abstract class ControllerTest extends BaseTest
     /**
      * Prepare tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -20,7 +20,7 @@ class FrontControllerTest extends ControllerTest
     /**
      * Prepare tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -9,6 +9,7 @@ namespace Alltube\Test;
 use Alltube\Video;
 use Mockery;
 use phpmock\mockery\PHPMockery;
+use Exception;
 
 /**
  * Unit tests for the Video class.
@@ -26,7 +27,7 @@ class VideoStubsTest extends BaseTest
     /**
      * Initialize properties used by test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -41,7 +42,7 @@ class VideoStubsTest extends BaseTest
      *
      * @return void
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Mockery::close();
     }
@@ -50,10 +51,10 @@ class VideoStubsTest extends BaseTest
      * Test getAudioStream function with a buggy popen.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testGetAudioStreamWithPopenError()
     {
+        $this->expectException(Exception::class);
         $this->video->getAudioStream();
     }
 
@@ -61,10 +62,10 @@ class VideoStubsTest extends BaseTest
      * Test getM3uStream function with a buggy popen.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testGetM3uStreamWithPopenError()
     {
+        $this->expectException(Exception::class);
         $this->video->getM3uStream();
     }
 
@@ -72,10 +73,10 @@ class VideoStubsTest extends BaseTest
      * Test getRtmpStream function with a buggy popen.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testGetRtmpStreamWithPopenError()
     {
+        $this->expectException(Exception::class);
         $this->video->getRtmpStream();
     }
 
@@ -83,10 +84,10 @@ class VideoStubsTest extends BaseTest
      * Test getRemuxStream function with a buggy popen.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testGetRemuxStreamWithPopenError()
     {
+        $this->expectException(Exception::class);
         $video = $this->video->withFormat('bestvideo+bestaudio');
         $video->getRemuxStream();
     }
@@ -95,10 +96,10 @@ class VideoStubsTest extends BaseTest
      * Test getConvertedStream function with a buggy popen.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testGetConvertedStreamWithPopenError()
     {
+        $this->expectException(Exception::class);
         $this->video->getConvertedStream(32, 'flv');
     }
 }

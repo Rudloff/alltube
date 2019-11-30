@@ -7,6 +7,7 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
+use Exception;
 
 /**
  * Unit tests for the Config class.
@@ -23,7 +24,7 @@ class ConfigTest extends BaseTest
     /**
      * Prepare tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -65,15 +66,15 @@ class ConfigTest extends BaseTest
      */
     private function assertConfig(Config $config)
     {
-        $this->assertInternalType('array', $config->params);
-        $this->assertInternalType('string', $config->youtubedl);
-        $this->assertInternalType('string', $config->python);
-        $this->assertInternalType('string', $config->avconv);
-        $this->assertInternalType('bool', $config->convert);
-        $this->assertInternalType('bool', $config->uglyUrls);
-        $this->assertInternalType('bool', $config->stream);
-        $this->assertInternalType('bool', $config->remux);
-        $this->assertInternalType('int', $config->audioBitrate);
+        $this->assertIsArray($config->params);
+        $this->assertIsString($config->youtubedl);
+        $this->assertIsString($config->python);
+        $this->assertIsString($config->avconv);
+        $this->assertIsBool($config->convert);
+        $this->assertIsBool($config->uglyUrls);
+        $this->assertIsBool($config->stream);
+        $this->assertIsBool($config->remux);
+        $this->assertIsInt($config->audioBitrate);
     }
 
     /**
@@ -91,10 +92,10 @@ class ConfigTest extends BaseTest
      * Test the setFile function with a missing config file.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testSetFileWithMissingFile()
     {
+        $this->expectException(Exception::class);
         Config::setFile('foo');
     }
 
@@ -132,10 +133,10 @@ class ConfigTest extends BaseTest
      * Test the setOptions function.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testSetOptionsWithBadYoutubedl()
     {
+        $this->expectException(Exception::class);
         Config::setOptions(['youtubedl' => 'foo']);
     }
 
@@ -143,10 +144,10 @@ class ConfigTest extends BaseTest
      * Test the setOptions function.
      *
      * @return void
-     * @expectedException Exception
      */
     public function testSetOptionsWithBadPython()
     {
+        $this->expectException(Exception::class);
         Config::setOptions(['python' => 'foo']);
     }
 

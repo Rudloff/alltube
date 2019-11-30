@@ -33,15 +33,16 @@ abstract class BaseTest extends TestCase
     /**
      * Prepare tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         Config::setFile($this->getConfigFile());
+        $this->checkRequirements();
     }
 
     /**
      * Destroy properties after test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Config::destroyInstance();
     }
@@ -52,8 +53,6 @@ abstract class BaseTest extends TestCase
      */
     protected function checkRequirements()
     {
-        parent::checkRequirements();
-
         $annotations = $this->getAnnotations();
         $requires = [];
 

@@ -18,7 +18,7 @@ class ConvertedPlaylistArchiveStreamTest extends StreamTest
     /**
      * Prepare tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
