@@ -173,8 +173,6 @@ $video = new Video('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 $video->getUrl();
 ```
 
-The library documentation is available on [alltubedownload.net/docs/](https://alltubedownload.net/docs/classes/Alltube.Video.html).
-
 You can also have a look at this [example project](https://github.com/Rudloff/alltube-example-project).
 
 ## JSON API
