@@ -1,4 +1,4 @@
 parameters:
 	ignoreErrors:
 		# The Archive constructor messes up the output buffering.
-		- '#Alltube\\PlaylistArchiveStream::__construct\(\) does not call parent constructor from Barracuda\\ArchiveStream\\ZipArchive\.#'
+		- '#Alltube\\Stream\\PlaylistArchiveStream::__construct\(\) does not call parent constructor from Barracuda\\ArchiveStream\\ZipArchive\.#'

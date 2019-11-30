@@ -9,7 +9,7 @@ namespace Alltube;
 use Aura\Session\Segment;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\Loader\MoFileLoader;
+use Symfony\Component\Translation\Loader\PoFileLoader;
 
 /**
  * Class used to manage locales.
@@ -72,11 +72,11 @@ class LocaleManager
             $this->setLocale(new Locale($cookieLocale));
         }
 
-        $this->translator->addLoader('gettext', new MoFileLoader());
+        $this->translator->addLoader('gettext', new PoFileLoader());
         foreach ($this->getSupportedLocales() as $locale) {
             $this->translator->addResource(
                 'gettext',
-                __DIR__ . '/../i18n/' . $locale->getIso15897() . '/LC_MESSAGES/Alltube.mo',
+                __DIR__ . '/../i18n/' . $locale->getIso15897() . '/LC_MESSAGES/Alltube.po',
                 $locale->getIso15897()
             );
         }

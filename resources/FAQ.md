@@ -73,14 +73,6 @@ There are two known workarounds:
   Please note that this can use a lot of resources on the server
   (which is why we won't enable it on alltubedownload.net).
 
-## CSS and JavaScript files are missing
-
-You probably don't have the minified files (in the `dist` folder).
-You need to either:
-
-* Use a [release package](https://github.com/Rudloff/alltube/releases)
-* Run `yarn install` (see detailed instructions in the [README](../README.md#from-git))
-
 ## I get a 404 error on every page except the index
 
 This is probably because your server does not have [mod_rewrite](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)

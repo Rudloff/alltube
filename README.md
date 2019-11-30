@@ -17,10 +17,9 @@ You just have to unzip it on your server and it should be ready to use.
 ### From Git
 
 In order to get AllTube working,
-you need to use [Yarn](https://yarnpkg.com/) and [Composer](https://getcomposer.org/):
+you need to use [Composer](https://getcomposer.org/):
 
 ```bash
-yarn install
 composer install
 ```
 
@@ -44,11 +43,10 @@ you need to set the `AllowOverride` setting to `All` or `FileInfo`.
 
 #### Update
 
-When updating from Git, you need to run yarn and Composer again:
+When updating from Git, you need to run Composer again:
 
 ```bash
 git pull
-yarn install --prod
 composer install
 ```
 
@@ -66,7 +64,7 @@ cp config/config.example.yml config/config.yml
 
 ## PHP requirements
 
-You will need PHP 5.5 (or higher) and the following PHP modules:
+You will need PHP 7.1 (or higher) and the following PHP modules:
 
 * fileinfo
 * intl

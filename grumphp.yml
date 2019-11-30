@@ -1,0 +1,16 @@
+---
+parameters:
+    ascii: ~
+    tasks:
+        jsonlint: ~
+        xmllint: ~
+        yamllint: ~
+        phpcs:
+            standard: PSR12
+            ignore_patterns:
+                - RoboFile.php
+        phpstan:
+            level: max
+            configuration: phpstan.neon
+            ignore_patterns:
+                - RoboFile.php

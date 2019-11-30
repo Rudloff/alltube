@@ -2,13 +2,13 @@
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 300;
-    src: local('Open Sans Light'), local('OpenSans-Light'), url(../node_modules/open-sans-fontface/fonts/Light/OpenSans-Regular.ttf);
+    src: local('Open Sans Light'), local('OpenSans-Light'), url(../vendor/npm-asset/open-sans-fontface/fonts/Light/OpenSans-Regular.ttf);
 }
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    src: local('Open Sans'), local('OpenSans'), url(../node_modules/open-sans-fontface/fonts/Regular/OpenSans-Regular.ttf);
+    src: local('Open Sans'), local('OpenSans'), url(../vendor/npm-asset/open-sans-fontface/fonts/Regular/OpenSans-Regular.ttf);
 }
 
 .small-font {

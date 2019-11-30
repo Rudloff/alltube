@@ -5,9 +5,7 @@ addons:
     apt:
         packages:
             - language-pack-fr
-install:
-    - composer install --no-progress
-    - yarn install
+install: composer install --no-progress
 script:
-    - grunt lint
-    - grunt test
+    - composer lint
+    - composer test
