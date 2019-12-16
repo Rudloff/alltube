@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d5ee035d64c39c270806f30282e60c8",
+    "content-hash": "3d68a20e61fc48bd5ac1bba4b510b733",
     "packages": [
         {
             "name": "aura/session",
@@ -4130,10 +4130,10 @@
         },
         {
             "name": "rg3/youtube-dl",
-            "version": "2019.09.28",
+            "version": "2019.11.28",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2019.09.28.zip"
+                "url": "https://github.com/rg3/youtube-dl/archive/2019.11.28.zip"
             },
             "type": "library"
         },
