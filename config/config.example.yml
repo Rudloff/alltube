@@ -35,6 +35,7 @@ phantomjsDir: vendor/bin/
 uglyUrls: false
 
 # True to stream videos through server
+# Set to "ask" if you want to allow it but not enable by default.
 stream: false
 
 # True to enable remux mode (merge best audio and best video)
