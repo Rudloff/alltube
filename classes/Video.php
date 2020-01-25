@@ -512,7 +512,7 @@ class Video
                 '-i', $urls[0],
                 '-i', $urls[1],
                 '-c', 'copy',
-                '-map', '0:v:0 ',
+                '-map', '0:v:0',
                 '-map', '1:a:0',
                 '-f', 'matroska',
                 'pipe:1',
