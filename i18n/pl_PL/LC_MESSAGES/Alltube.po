@@ -1,0 +1,258 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
+"Language: pl\n"
+
+#: templates/playlist.tpl:13
+msgid "Videos extracted from @title:"
+msgstr "Widea wyekstrahowane z @title:"
+
+#: templates/playlist.tpl:38 templates/password.tpl:11 templates/index.tpl:19
+#: templates/info.tpl:98
+msgid "Download"
+msgstr "Ściągnij"
+
+#: templates/playlist.tpl:39
+msgid "More options"
+msgstr "Więcej opcji"
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "Zmień język"
+
+#: templates/inc/header.tpl:8
+msgid "Set language"
+msgstr "Wybierz język"
+
+#: templates/inc/footer.tpl:8
+msgid "Code by @dev"
+msgstr "Kod od @dev"
+
+#: templates/inc/footer.tpl:16
+msgid "Design by @designer"
+msgstr "Design od @designer"
+
+#: templates/inc/footer.tpl:21
+msgid "Get the code"
+msgstr "Zdobądź kod"
+
+#: templates/inc/footer.tpl:29
+msgid "Based on @youtubedl"
+msgstr "Bazuje na @youtubedl"
+
+#: templates/inc/footer.tpl:33
+msgid "Donate using Liberapay"
+msgstr "Wspomóż używając Liberapay"
+
+#: templates/inc/footer.tpl:35
+msgid "Donate"
+msgstr "Wspomóż"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "To wideo jest zabezpieczone"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "Potrzebujesz hasła, aby ściągnąć to wideo."
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "Hasło do wideo"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr "Zamieść link do wideo (Yotube, Dailymotion, itp.)"
+
+#: templates/index.tpl:25
+msgid "Audio only (MP3)"
+msgstr "Tylko audio (MP3)"
+
+#: templates/index.tpl:28
+msgid "From"
+msgstr "Od"
+
+#: templates/index.tpl:29
+msgid "to"
+msgstr "do"
+
+#: templates/index.tpl:36
+msgid "See all supported websites"
+msgstr "Zobacz wszystkie obsługiwane witryny"
+
+#: templates/index.tpl:38
+msgid "Drag this to your bookmarks bar:"
+msgstr "Upuść to do swoich zakładek:"
+
+#: templates/index.tpl:39
+msgid "Bookmarklet"
+msgstr "Skryptozakładka"
+
+#: templates/info.tpl:13
+msgid "You are going to download @title."
+msgstr "Zamierzasz ściągnąć @title."
+
+#: templates/info.tpl:31
+msgid "Available formats:"
+msgstr "Dostępne formaty:"
+
+#: templates/info.tpl:33
+msgid "Generic formats"
+msgstr "Generyczne formaty"
+
+#: templates/info.tpl:38
+msgid "Detailed formats"
+msgstr "Szczegółowe formaty"
+
+#: templates/info.tpl:80
+msgid "Stream the video through the server"
+msgstr "Strumieniuj wideo przez serwer"
+
+#: templates/info.tpl:85
+msgid "Convert into a custom format:"
+msgstr "Skonwertuj do niestandardowego formatu:"
+
+#: templates/info.tpl:86
+msgid "Custom format"
+msgstr "Niestandardowy format"
+
+#: templates/info.tpl:86
+msgid "Format to convert to"
+msgstr "Docelowy format konwersji"
+
+#: templates/info.tpl:91
+msgid "with"
+msgstr "z"
+
+#: templates/info.tpl:92
+msgid "Bit rate"
+msgstr "Przepustowość"
+
+#: templates/info.tpl:93
+msgid "Custom bitrate"
+msgstr "Niestandardowa przepustowość"
+
+#: templates/info.tpl:95
+msgid "kbit/s audio"
+msgstr "kb/s audio"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "Wystąpił błąd"
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr "Sprawdź adres do podanego wideo."
+
+#: templates/extractors.tpl:4 controllers/FrontController.php:109
+msgid "Supported websites"
+msgstr "Obsługiwane strony"
+
+#: classes/Config.php:158
+msgid "Best"
+msgstr "Najlepsza"
+
+#: classes/Config.php:159
+msgid "Remux best video with best audio"
+msgstr "Połącz najlepsze wideo z najlepszym audio"
+
+#: classes/Config.php:160
+msgid "Worst"
+msgstr "Najgorsza"
+
+#: classes/Video.php:159
+msgid "Wrong password"
+msgstr "Złe hasło"
+
+#: classes/Video.php:250
+msgid "youtube-dl returned an empty URL."
+msgstr "youtube-dl zwróciło pusty adres URL."
+
+#: classes/Video.php:361 classes/Video.php:465
+msgid "Can't find avconv or ffmpeg at @path."
+msgstr "Nie można odnaleźć avconv/ffmpeg w @path."
+
+#: classes/Video.php:377
+msgid "Invalid start time: @from."
+msgstr "Nieprawidłowy czas startu: @from."
+
+#: classes/Video.php:384
+msgid "Invalid end time: @to."
+msgstr "Nieprawidłowy czas końca: @to."
+
+#: classes/Video.php:430
+msgid "Conversion of playlists is not supported."
+msgstr "Konwersja listy odtwarzania nie jest obsługiwana."
+
+#: classes/Video.php:435 classes/Video.php:578
+msgid "Conversion of M3U8 files is not supported."
+msgstr "Konwersja plików M3U8 nie jest obsługiwana."
+
+#: classes/Video.php:437
+msgid "Conversion of DASH segments is not supported."
+msgstr "Konwersja fragmentów DASH nie jest obsługiwana."
+
+#: classes/Video.php:446 classes/Video.php:488 classes/Video.php:525
+#: classes/Video.php:558 classes/Video.php:586
+msgid "Could not open popen stream."
+msgstr "Nie udało się otworzyć strumienia popen."
+
+#: classes/Video.php:506
+msgid "This video does not have two URLs."
+msgstr "Podane wideo nie posiada dwóch adresów URL."
+
+#: controllers/DownloadController.php:215
+msgid "You need to enable remux mode to merge two formats."
+msgstr "Musisz włączyć tryb łączenia aby złączyć dwa formaty."
+
+#: controllers/DownloadController.php:255
+msgid "Can't find URL of video."
+msgstr "Nie można odnaleźć adresu URL od wideo."
+
+#: controllers/FrontController.php:64
+msgid ""
+"Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
+msgstr "Łatwo ściągaj z Youtube, Dailymotion, Vimeo oraz innych stron."
+
+#: controllers/FrontController.php:110
+msgid ""
+"List of all supported websites from which Alltube Download can extract video "
+"or audio files"
+msgstr ""
+"Lista wszystkich obsługiwanych stron, z których Alltube Download potrafi "
+"ekstrahować pliki wideo lub audio."
+
+#: controllers/FrontController.php:136
+msgid "Password prompt"
+msgstr "Podaj hasło"
+
+#: controllers/FrontController.php:138
+msgid ""
+"You need a password in order to download this video with Alltube Download"
+msgstr "Musisz podać hasło, aby ściągnąć to wideo z Alltube Download"
+
+#: controllers/FrontController.php:169
+msgid "Video download"
+msgstr "Ściąganie wideo"
+
+#: controllers/FrontController.php:171
+msgid "Download video from @extractor"
+msgstr "Ściągnij wideo z @extractor"
+
+#: controllers/FrontController.php:177
+msgid "Download @title from @extractor"
+msgstr "Ściągnij @title z @extractor"
+
+#: controllers/FrontController.php:253 controllers/FrontController.php:284
+msgid "Error"
+msgstr "Błąd"
