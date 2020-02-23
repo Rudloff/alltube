@@ -8,7 +8,7 @@
     "aura/session": "~2.1.0",
     "barracudanetworks/archivestream-php": "~1.0.5",
     "guzzlehttp/guzzle": "~6.3.0",
-    "jawira/case-converter": "^1.2",
+    "jawira/case-converter": "^3.4",
     "mathmarques/smarty-view": "~1.1.0",
     "npm-asset/open-sans-fontface": "^1.4",
     "rinvex/countries": "~3.1.0",
