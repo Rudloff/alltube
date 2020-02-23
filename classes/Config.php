@@ -240,7 +240,7 @@ class Config
     {
         foreach (get_object_vars($this) as $prop => $value) {
             $convert = new Convert($prop);
-            $env = getenv($convert->toSnake());
+            $env = getenv($convert->toMacro());
             if ($env) {
                 $this->$prop = Yaml::parse($env);
             }
