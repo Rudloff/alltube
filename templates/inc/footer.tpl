@@ -23,7 +23,7 @@
 
         &middot;
 
-        {$youtubedl="<a href='http://rg3.github.io/youtube-dl/'>
+        {$youtubedl="<a href='http://ytdl-org.github.io/youtube-dl/'>
             youtube-dl
         </a>"}
         {t params=['@youtubedl'=>$youtubedl]}Based on @youtubedl{/t}
