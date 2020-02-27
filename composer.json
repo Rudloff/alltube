@@ -27,12 +27,12 @@
     "phpro/grumphp": "^0.17.0",
     "phpstan/phpstan": "~0.9.2",
     "phpunit/phpunit": "^8.4",
-    "rg3/youtube-dl": "^2020.01",
     "roave/security-advisories": "dev-master",
     "smarty-gettext/smarty-gettext": "^1.6",
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/debug": "^4.0",
-    "symfony/var-dumper": "^4.0"
+    "symfony/var-dumper": "^4.0",
+    "ytdl-org/youtube-dl": "^2020.02"
   },
   "extra": {
     "paas": {
@@ -49,11 +49,11 @@
     {
       "type": "package",
       "package": {
-        "name": "rg3/youtube-dl",
-        "version": "2020.01.24",
+        "name": "ytdl-org/youtube-dl",
+        "version": "2020.02.16",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/rg3/youtube-dl/archive/2020.01.24.zip"
+          "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.02.16.zip"
         }
       }
     },
@@ -104,7 +104,7 @@
       "tsmarty2c.php templates > i18n/template.pot",
       "xgettext --omit-header -kt -j -o i18n/template.pot classes/*.php classes/*/*.php controllers/*"
     ],
-    "youtube-dl": "vendor/rg3/youtube-dl/youtube_dl/__main__.py"
+    "youtube-dl": "vendor/ytdl-org/youtube-dl/youtube_dl/__main__.py"
   },
   "config": {
     "sort-packages": true,

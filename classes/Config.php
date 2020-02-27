@@ -27,7 +27,7 @@ class Config
      *
      * @var string
      */
-    public $youtubedl = 'vendor/rg3/youtube-dl/youtube_dl/__main__.py';
+    public $youtubedl = 'vendor/ytdl-org/youtube-dl/youtube_dl/__main__.py';
 
     /**
      * python binary path.

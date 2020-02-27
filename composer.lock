@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d5031247a278c06162e69efb70e4b92",
+    "content-hash": "bcc40aec18060593e21a8157b07c4f55",
     "packages": [
         {
             "name": "aura/session",
@@ -486,7 +486,7 @@
             "version": "1.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FontFaceKit/open-sans.git",
+                "url": "git@github.com:FontFaceKit/open-sans.git",
                 "reference": "2285c0300e6a4c8b102b98fb030fb38c26aa081c"
             },
             "dist": {
@@ -4143,15 +4143,6 @@
             "time": "2018-11-20T15:27:04+00:00"
         },
         {
-            "name": "rg3/youtube-dl",
-            "version": "2020.01.24",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2020.01.24.zip"
-            },
-            "type": "library"
-        },
-        {
             "name": "roave/security-advisories",
             "version": "dev-master",
             "source": {
@@ -6023,6 +6014,15 @@
                 "validate"
             ],
             "time": "2019-11-24T13:36:37+00:00"
+        },
+        {
+            "name": "ytdl-org/youtube-dl",
+            "version": "2020.02.16",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.02.16.zip"
+            },
+            "type": "library"
         }
     ],
     "aliases": [],
