@@ -27,7 +27,7 @@ class Config
      *
      * @var string
      */
-    public $youtubedl = 'vendor/rg3/youtube-dl/youtube_dl/__main__.py';
+    public $youtubedl = 'vendor/ytdl-org/youtube-dl/youtube_dl/__main__.py';
 
     /**
      * python binary path.
@@ -240,7 +240,7 @@ class Config
     {
         foreach (get_object_vars($this) as $prop => $value) {
             $convert = new Convert($prop);
-            $env = getenv($convert->toSnake(true));
+            $env = getenv($convert->toMacro());
             if ($env) {
                 $this->$prop = Yaml::parse($env);
             }

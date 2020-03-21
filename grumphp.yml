@@ -5,6 +5,7 @@ parameters:
         jsonlint: ~
         xmllint: ~
         yamllint: ~
+        composer: ~
         phpcs:
             standard: PSR12
             ignore_patterns:

@@ -86,6 +86,8 @@ class Video
      *
      * @param string $webpageUrl      URL of the page containing the video
      * @param string $requestedFormat Requested video format
+     *                                (can be any format string accepted by youtube-dl,
+     *                                including selectors like "[height<=720]")
      * @param string $password        Password
      */
     public function __construct($webpageUrl, $requestedFormat = 'best', $password = null)

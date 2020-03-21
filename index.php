@@ -56,7 +56,7 @@ $downloadController = new DownloadController($container);
 
 // Error handling.
 $container['errorHandler'] = [$frontController, 'error'];
-$container['phpErrorHandler'] = [$frontController, 'fatalError'];
+$container['phpErrorHandler'] = [$frontController, 'error'];
 
 // Routes.
 $app->get(

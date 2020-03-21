@@ -1,6 +1,6 @@
 ---
 # Path to your youtube-dl binary
-youtubedl: vendor/rg3/youtube-dl/youtube_dl/__main__.py
+youtubedl: vendor/ytdl-org/youtube-dl/youtube_dl/__main__.py
 
 # Path to your python binary
 python: /usr/bin/python
@@ -35,6 +35,7 @@ phantomjsDir: vendor/bin/
 uglyUrls: false
 
 # True to stream videos through server
+# Set to "ask" if you want to allow it but not enable by default.
 stream: false
 
 # True to enable remux mode (merge best audio and best video)

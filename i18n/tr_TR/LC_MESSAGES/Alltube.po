@@ -1,0 +1,247 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Alltube\n"
+"Language: tr\n"
+
+#: templates/playlist.tpl:13
+msgid "Videos extracted from @title:"
+msgstr "@title`dan çıkarılan videolar."
+
+#: templates/playlist.tpl:38 templates/password.tpl:11 templates/index.tpl:19
+#: templates/info.tpl:98
+msgid "Download"
+msgstr "İndir"
+
+#: templates/playlist.tpl:39
+msgid "More options"
+msgstr "Daha fazla seçenek"
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "Dil Değiştir"
+
+#: templates/inc/header.tpl:8
+msgid "Set language"
+msgstr "Dil Ayarla"
+
+#: templates/inc/footer.tpl:8
+msgid "Code by @dev"
+msgstr "Kodlama "
+
+#: templates/inc/footer.tpl:16
+msgid "Design by @designer"
+msgstr "Tasarım "
+
+#: templates/inc/footer.tpl:21
+msgid "Get the code"
+msgstr "Kodu edin"
+
+#: templates/inc/footer.tpl:29
+msgid "Based on @youtubedl"
+msgstr "Altyapı "
+
+#: templates/inc/footer.tpl:33
+msgid "Donate using Liberapay"
+msgstr "Liberapay kullanarak bağış yapın"
+
+#: templates/inc/footer.tpl:35
+msgid "Donate"
+msgstr "Bağış"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "Bu video parola korumalı"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "Bu videoyu indirmek için bir parolaya ihtiyacınız var."
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "Video parolası"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr "Videonuzun URL'sini buraya kopyalayın (Youtube, Dailymotion, vb.)"
+
+#: templates/index.tpl:25
+msgid "Audio only (MP3)"
+msgstr "Sadece ses (MP3)"
+
+#: templates/index.tpl:28
+msgid "From"
+msgstr "Başlangıç"
+
+#: templates/index.tpl:29
+msgid "to"
+msgstr "Bitiş"
+
+#: templates/index.tpl:36
+msgid "See all supported websites"
+msgstr "Desteklenen tüm web sitelerini görün"
+
+#: templates/index.tpl:38
+msgid "Drag this to your bookmarks bar:"
+msgstr "Bunu yer işaretleri çubuğunuza sürükleyin:"
+
+#: templates/index.tpl:39
+msgid "Bookmarklet"
+msgstr "Bookmarklet"
+
+#: templates/info.tpl:13
+msgid "You are going to download @title."
+msgstr "@title İndirilecek."
+
+#: templates/info.tpl:31
+msgid "Available formats:"
+msgstr "Kullanılabilir dosya biçimleri:"
+
+#: templates/info.tpl:33
+msgid "Generic formats"
+msgstr "Genel biçimler"
+
+#: templates/info.tpl:38
+msgid "Detailed formats"
+msgstr "Ayrıntılı biçimler"
+
+#: templates/info.tpl:80
+msgid "Stream the video through the server"
+msgstr "Videoyu sunucu üzerinden aktarın"
+
+#: templates/info.tpl:85
+msgid "Convert into a custom format:"
+msgstr "Özel bir biçime dönüştürün:"
+
+#: templates/info.tpl:86
+msgid "Custom format"
+msgstr "Özel biçim"
+
+#: templates/info.tpl:86
+msgid "Format to convert to"
+msgstr "Dönüştürülecek biçim"
+
+#: templates/info.tpl:91
+msgid "with"
+msgstr "ile"
+
+#: templates/info.tpl:92
+msgid "Bit rate"
+msgstr "Bit hızı"
+
+#: templates/info.tpl:93
+msgid "Custom bitrate"
+msgstr "Özel bit hızı"
+
+#: templates/info.tpl:95
+msgid "kbit/s audio"
+msgstr "kbit/s ses"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "Bir hata oluştu"
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr "Lütfen videonuzun URL'sini kontrol edin."
+
+#: templates/extractors.tpl:4 controllers/FrontController.php:109
+msgid "Supported websites"
+msgstr "Desteklenen web siteleri"
+
+#: classes/Config.php:158
+msgid "Best"
+msgstr "En İyi"
+
+#: classes/Config.php:159
+msgid "Remux best video with best audio"
+msgstr "En kaliteli görüntüyü en kalitesli sesle birleştirin"
+
+#: classes/Config.php:160
+msgid "Worst"
+msgstr "En Kötü"
+
+#: classes/Video.php:159
+msgid "Wrong password"
+msgstr "Hatalı parola"
+
+#: classes/Video.php:250
+msgid "youtube-dl returned an empty URL."
+msgstr "youtube-dl boş bir URL döndürdü."
+
+#: classes/Video.php:361 classes/Video.php:465
+msgid "Can't find avconv or ffmpeg at @path."
+msgstr "@path yolunda avconv veya ffmpeg bulunamıyor."
+
+#: classes/Video.php:377
+msgid "Invalid start time: @from."
+msgstr "Hatalı başlangıç zamanı: @from."
+
+#: classes/Video.php:384
+msgid "Invalid end time: @to."
+msgstr "Hatalı bitiş zamanı: @to."
+
+#: classes/Video.php:430
+msgid "Conversion of playlists is not supported."
+msgstr "Oynatma listelerinin dönüştürülmesi desteklenmiyor."
+
+#: classes/Video.php:435 classes/Video.php:578
+msgid "Conversion of M3U8 files is not supported."
+msgstr "M3U8 dosyaların dönüştürülmesi desteklenmiyor."
+
+#: classes/Video.php:437
+msgid "Conversion of DASH segments is not supported."
+msgstr "DASH segmentleri desteklenmiyor."
+
+#: classes/Video.php:446 classes/Video.php:488 classes/Video.php:525
+#: classes/Video.php:558 classes/Video.php:586
+msgid "Could not open popen stream."
+msgstr "Popen akışı açılamadı."
+
+#: classes/Video.php:506
+msgid "This video does not have two URLs."
+msgstr "Bu videonun iki URL'si yok."
+
+#: controllers/DownloadController.php:215
+msgid "You need to enable remux mode to merge two formats."
+msgstr "İki biçimi birleştirmek için remux modunu etkinleştirmeniz gerekir."
+
+#: controllers/DownloadController.php:255
+msgid "Can't find URL of video."
+msgstr "Video URL'si bulunamadı."
+
+#: controllers/FrontController.php:64
+msgid "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
+msgstr "Youtube, Dailymotion, Vimeo ve diğer web sitelerinden videoları kolayca indirin."
+
+#: controllers/FrontController.php:110
+msgid "List of all supported websites from which Alltube Download can extract video or audio files"
+msgstr "Alltube Download'un video veya ses dosyalarını indirebileceğiniz, desteklenen tüm web sitelerinin listesi"
+
+#: controllers/FrontController.php:136
+msgid "Password prompt"
+msgstr "Parola istemi"
+
+#: controllers/FrontController.php:138
+msgid "You need a password in order to download this video with Alltube Download"
+msgstr "Bu videoyu Alltube Download ile indirmek için bir parolaya ihtiyacınız var"
+
+#: controllers/FrontController.php:169
+msgid "Video download"
+msgstr "Video indirme"
+
+#: controllers/FrontController.php:171
+msgid "Download video from @extractor"
+msgstr "@extractor kaynağından video indiriliyor"
+
+#: controllers/FrontController.php:177
+msgid "Download @title from @extractor"
+msgstr "@extractor kaynağından @title indiriliyor."
+
+#: controllers/FrontController.php:253 controllers/FrontController.php:284
+msgid "Error"
+msgstr "Hata"
+

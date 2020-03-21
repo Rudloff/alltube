@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d5ee035d64c39c270806f30282e60c8",
+    "content-hash": "bcc40aec18060593e21a8157b07c4f55",
     "packages": [
         {
             "name": "aura/session",
@@ -329,24 +329,25 @@
         },
         {
             "name": "jawira/case-converter",
-            "version": "v1.2.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jawira/case-converter.git",
-                "reference": "79716629a298e44507a8eed9b997968f39367abc"
+                "reference": "756089a523ce268fb173a9f4af4ca95629b3a7f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jawira/case-converter/zipball/79716629a298e44507a8eed9b997968f39367abc",
-                "reference": "79716629a298e44507a8eed9b997968f39367abc",
+                "url": "https://api.github.com/repos/jawira/case-converter/zipball/756089a523ce268fb173a9f4af4ca95629b3a7f0",
+                "reference": "756089a523ce268fb173a9f4af4ca95629b3a7f0",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": ">=5.4"
+                "php": "^7.1"
             },
             "suggest": {
-                "pds/skeleton": "PHP Package Development Standards"
+                "pds/skeleton": "PHP Package Development Standards",
+                "phing/phing": "PHP Build Tool"
             },
             "type": "library",
             "autoload": {
@@ -360,16 +361,29 @@
             ],
             "authors": [
                 {
-                    "name": "Jawira Portugal"
+                    "name": "Jawira Portugal",
+                    "email": "dev@tugal.be",
+                    "homepage": "http://jawira.com/"
                 }
             ],
-            "description": "Convert string between **Camel Case** ?, **Snake Case** ?and **Kebab Case** ?.",
+            "description": "Convert strings between 13 naming conventions: Snake case, Camel case, Pascal case, Kebab case, Ada case, Train case, Cobol case, Macro case, Upper case, Lower case, Sentence case, Title case and Dot notation.",
+            "homepage": "https://jawira.github.io/case-converter/",
             "keywords": [
+                "Ada case",
+                "Cobol case",
+                "Macro case",
+                "Train case",
                 "camel case",
+                "dot notation",
                 "kebab case",
-                "snake case"
+                "lower case",
+                "pascal case",
+                "sentence case",
+                "snake case",
+                "title case",
+                "upper case"
             ],
-            "time": "2019-03-18T05:59:08+00:00"
+            "time": "2019-12-15T14:31:43+00:00"
         },
         {
             "name": "mathmarques/smarty-view",
@@ -472,7 +486,7 @@
             "version": "1.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FontFaceKit/open-sans.git",
+                "url": "git@github.com:FontFaceKit/open-sans.git",
                 "reference": "2285c0300e6a4c8b102b98fb030fb38c26aa081c"
             },
             "dist": {
@@ -4129,15 +4143,6 @@
             "time": "2018-11-20T15:27:04+00:00"
         },
         {
-            "name": "rg3/youtube-dl",
-            "version": "2019.09.28",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/rg3/youtube-dl/archive/2019.09.28.zip"
-            },
-            "type": "library"
-        },
-        {
             "name": "roave/security-advisories",
             "version": "dev-master",
             "source": {
@@ -6009,6 +6014,15 @@
                 "validate"
             ],
             "time": "2019-11-24T13:36:37+00:00"
+        },
+        {
+            "name": "ytdl-org/youtube-dl",
+            "version": "2020.02.16",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.02.16.zip"
+            },
+            "type": "library"
         }
     ],
     "aliases": [],
