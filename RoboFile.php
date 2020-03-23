@@ -51,6 +51,7 @@ class RoboFile extends Tasks
             ->add('templates_c/')
             ->add('classes')
             ->add('controllers')
+            ->add('css')
             ->add('i18n');
 
         foreach ($finder as $file) {
