@@ -274,14 +274,7 @@ class Video
      */
     public function getFileNameWithExtension($extension)
     {
-        return html_entity_decode(
-            pathinfo(
-                $this->getFilename(),
-                PATHINFO_FILENAME
-            ) . '.' . $extension,
-            ENT_COMPAT,
-            'ISO-8859-1'
-        );
+        return str_replace('.' . $this->ext, '.' . $extension, $this->getFilename());
     }
 
     /**
