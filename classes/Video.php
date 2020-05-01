@@ -613,12 +613,22 @@ class Video
     {
         $client = new Client();
         $urls = $this->getUrl();
+        $stream_context_options = [];
+
+        if (strpos($this->webpageUrl, 'xhamster.com') !== false) {
+            $stream_context_options = [
+                'http' => [
+                    'header' => 'Referer: https://xhamster.com'
+                ]
+            ];
+        }
 
         return $client->request(
             'GET',
             $urls[0],
             [
                 'stream' => true,
+                'stream_context' => $stream_context_options,
                 'headers' => array_merge((array) $this->http_headers, $headers)
             ]
         );
