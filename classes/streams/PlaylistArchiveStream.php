@@ -266,6 +266,8 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      * @param int $count Number of bytes to read
      *
      * @return string|false
+     * @throws EmptyUrlException
+     * @throws PasswordException
      */
     public function read($count)
     {
