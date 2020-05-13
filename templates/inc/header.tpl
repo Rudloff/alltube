@@ -13,8 +13,8 @@
                     {if $supportedLocale != $locale}
                         <li>
                             <a hreflang="{$supportedLocale->getBcp47()}"
-                                lang="{$supportedLocale->getBcp47()}"
-                                href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">
+                               lang="{$supportedLocale->getBcp47()}"
+                               href="{path_for name='locale' data=['locale'=>$supportedLocale->getIso15897()]}">
                                 {if $supportedLocale->getCountry()}
                                     {$supportedLocale->getCountry()->getEmoji()}
                                 {/if}

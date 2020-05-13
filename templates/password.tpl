@@ -6,9 +6,9 @@
         <p>{t}You need a password in order to download this video.{/t}</p>
         <form action="" method="POST">
             <label class="sr-only" for="password">{t}Video password{/t}</label>
-            <input class="URLinput" type="password" name="password" id="password" />
+            <input class="URLinput" type="password" name="password" id="password"/>
             <br/><br/>
-            <input class="downloadBtn" type="submit" value="{t}Download{/t}" />
+            <input class="downloadBtn" type="submit" value="{t}Download{/t}"/>
         </form>
     </main>
-{include file='inc/footer.tpl'}
+    {include file='inc/footer.tpl'}
