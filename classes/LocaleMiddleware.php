@@ -38,7 +38,7 @@ class LocaleMiddleware
      *
      * @param array $proposedLocale Locale array created by AcceptLanguage::parse()
      *
-     * @return Locale Locale if chosen, nothing otherwise
+     * @return Locale|null Locale if chosen, nothing otherwise
      */
     public function testLocale(array $proposedLocale)
     {
@@ -52,6 +52,8 @@ class LocaleMiddleware
                 return new Locale($proposedLocale['language'] . '_' . $proposedLocale['region']);
             }
         }
+
+        return null;
     }
 
     /**

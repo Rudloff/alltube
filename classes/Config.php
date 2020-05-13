@@ -7,6 +7,7 @@
 namespace Alltube;
 
 use Exception;
+use Jawira\CaseConverter\CaseConverterException;
 use Symfony\Component\Yaml\Yaml;
 use Jawira\CaseConverter\Convert;
 
@@ -122,13 +123,6 @@ class Config
     public $appName = 'AllTube Download';
 
     /**
-     * YAML config file path.
-     *
-     * @var string
-     */
-    private $file;
-
-    /**
      * Generic formats supported by youtube-dl.
      *
      * @var array
@@ -156,9 +150,9 @@ class Config
         if (empty($this->genericFormats)) {
             // We don't put this in the class definition so it can be detected by xgettext.
             $this->genericFormats = [
-                'best'                => $localeManager->t('Best'),
+                'best' => $localeManager->t('Best'),
                 'bestvideo+bestaudio' => $localeManager->t('Remux best video with best audio'),
-                'worst'               => $localeManager->t('Worst'),
+                'worst' => $localeManager->t('Worst'),
             ];
         }
 
@@ -195,10 +189,10 @@ class Config
     /**
      * Throw an exception if some of the options are invalid.
      *
-     * @throws Exception If youtube-dl is missing
+     * @return void
      * @throws Exception If Python is missing
      *
-     * @return void
+     * @throws Exception If youtube-dl is missing
      */
     private function validateOptions()
     {
@@ -235,6 +229,7 @@ class Config
      * If the value is an array, you should use the YAML format: "CONVERT_ADVANCED_FORMATS='[foo, bar]'"
      *
      * @return void
+     * @throws CaseConverterException
      */
     private function getEnv()
     {
@@ -265,6 +260,7 @@ class Config
      * Set options from a YAML file.
      *
      * @param string $file Path to the YAML file
+     * @throws Exception
      */
     public static function setFile($file)
     {
@@ -281,7 +277,8 @@ class Config
      * Manually set some options.
      *
      * @param array $options Options (see `config/config.example.yml` for available options)
-     * @param bool  $update  True to update an existing instance
+     * @param bool $update True to update an existing instance
+     * @throws Exception
      */
     public static function setOptions(array $options, $update = true)
     {

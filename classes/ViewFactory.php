@@ -10,6 +10,7 @@ use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Views\Smarty;
 use Slim\Views\SmartyPlugins;
+use SmartyException;
 
 /**
  * Create Smarty view object.
@@ -20,9 +21,10 @@ class ViewFactory
      * Create Smarty view object.
      *
      * @param ContainerInterface $container Slim dependency container
-     * @param Request            $request   PSR-7 request
+     * @param Request $request PSR-7 request
      *
      * @return Smarty
+     * @throws SmartyException
      */
     public static function create(ContainerInterface $container, Request $request = null)
     {

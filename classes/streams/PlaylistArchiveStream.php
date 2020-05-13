@@ -86,7 +86,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @param string $string The string that is to be written
      *
-     * @return int
+     * @return void
      */
     public function write($string)
     {
@@ -96,7 +96,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Get the size of the stream if known.
      *
-     * @return null
+     * @return void
      */
     public function getSize()
     {
@@ -170,6 +170,8 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
         if (isset($meta[$key])) {
             return $meta[$key];
         }
+
+        return null;
     }
 
     /**

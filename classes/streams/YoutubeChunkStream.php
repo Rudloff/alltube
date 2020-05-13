@@ -124,21 +124,21 @@ class YoutubeChunkStream implements StreamInterface
      * @param int $offset Stream offset
      * @param int $whence Specifies how the cursor position will be calculated
      *
-     * @return mixed
+     * @return void
      */
     public function seek($offset, $whence = SEEK_SET)
     {
-        return $this->response->getBody()->seek($offset, $whence);
+        $this->response->getBody()->seek($offset, $whence);
     }
 
     /**
      * Seek to the beginning of the stream.
      *
-     * @return mixed
+     * @return void
      */
     public function rewind()
     {
-        return $this->response->getBody()->rewind();
+        $this->response->getBody()->rewind();
     }
 
     /**

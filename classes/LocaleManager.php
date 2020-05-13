@@ -7,7 +7,6 @@
 namespace Alltube;
 
 use Aura\Session\Segment;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\PoFileLoader;
 

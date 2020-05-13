@@ -7,6 +7,7 @@
 namespace Alltube\Stream;
 
 use Alltube\Video;
+use Exception;
 use Slim\Http\Stream;
 
 /**
@@ -20,6 +21,7 @@ class ConvertedPlaylistArchiveStream extends PlaylistArchiveStream
      * @param Video $video Video to stream
      *
      * @return void
+     * @throws Exception
      */
     protected function startVideoStream(Video $video)
     {

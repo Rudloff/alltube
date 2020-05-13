@@ -10,6 +10,7 @@ use Alltube\Exception\EmptyUrlException;
 use Alltube\Exception\PasswordException;
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use stdClass;
 use Symfony\Component\Process\Process;
@@ -124,7 +125,9 @@ class Video
      * List all extractors.
      *
      * @return string[] Extractors
-     * */
+     *
+     * @throws PasswordException
+     */
     public static function getExtractors()
     {
         $video = new self('');
@@ -172,6 +175,7 @@ class Video
      * @param string $prop Property
      *
      * @return string
+     * @throws PasswordException
      */
     private function getProp($prop = 'dump-json')
     {
@@ -196,7 +200,9 @@ class Video
      * Get all information about a video.
      *
      * @return stdClass Decoded JSON
-     * */
+     *
+     * @throws PasswordException
+     */
     public function getJson()
     {
         if (!isset($this->json)) {
@@ -212,12 +218,15 @@ class Video
      * @param string $name Property
      *
      * @return mixed
+     * @throws PasswordException
      */
     public function __get($name)
     {
         if (isset($this->$name)) {
             return $this->getJson()->$name;
         }
+
+        return null;
     }
 
     /**
@@ -226,6 +235,7 @@ class Video
      * @param string $name Property
      *
      * @return bool
+     * @throws PasswordException
      */
     public function __isset($name)
     {
@@ -240,7 +250,9 @@ class Video
      * (eg. bestvideo+bestaudio).
      *
      * @return string[] URLs of video
-     * */
+     * @throws EmptyUrlException
+     * @throws PasswordException
+     */
     public function getUrl()
     {
         // Cache the URLs.
@@ -259,7 +271,9 @@ class Video
      * Get filename of video file from URL of page.
      *
      * @return string Filename of extracted video
-     * */
+     *
+     * @throws PasswordException
+     */
     public function getFilename()
     {
         return trim($this->getProp('get-filename'));
@@ -271,6 +285,7 @@ class Video
      * @param string $extension New file extension
      *
      * @return string Filename of extracted video with specified extension
+     * @throws PasswordException
      */
     public function getFileNameWithExtension($extension)
     {
@@ -601,6 +616,9 @@ class Video
      * @param array $headers HTTP headers of the request
      *
      * @return Response
+     * @throws EmptyUrlException
+     * @throws PasswordException
+     * @throws GuzzleException
      */
     public function getHttpResponse(array $headers = [])
     {

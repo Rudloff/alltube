@@ -12,7 +12,6 @@ use Alltube\Video;
 use Throwable;
 use Exception;
 use Psr\Container\ContainerInterface;
-use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Smarty;
@@ -92,10 +91,11 @@ class FrontController extends BaseController
     /**
      * Display a list of extractors.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws PasswordException
      */
     public function extractors(Request $request, Response $response)
     {
