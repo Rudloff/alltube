@@ -9,14 +9,15 @@ namespace Alltube\Controller;
 use Alltube\Exception\PasswordException;
 use Alltube\Locale;
 use Alltube\Video;
+use Symfony\Component\ErrorHandler\ErrorHandler;
+use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Throwable;
 use Exception;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Smarty;
-use Symfony\Component\Debug\ExceptionHandler;
-use Symfony\Component\Debug\Exception\FlattenException;
 
 /**
  * Main controller.
@@ -240,9 +241,9 @@ class FrontController extends BaseController
     public function error(Request $request, Response $response, Throwable $error)
     {
         if ($this->config->debug) {
-            $exception = FlattenException::createFromThrowable($error);
-            $handler = new ExceptionHandler();
-            $response->getBody()->write($handler->getHtml($exception));
+            $renderer = new HtmlErrorRenderer(true);
+            $exception = $renderer->render($error);
+            $response->getBody()->write($exception->getAsString());
 
             return $response->withStatus($exception->getStatusCode());
         } else {

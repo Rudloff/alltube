@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+
 use Alltube\Config;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
@@ -11,7 +12,7 @@ use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;
 use Slim\Container;
-use Symfony\Component\Debug\Debug;
+use Symfony\Component\ErrorHandler\Debug;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
     header('Location: ' . str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
