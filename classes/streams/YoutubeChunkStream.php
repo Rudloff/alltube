@@ -6,7 +6,7 @@
 
 namespace Alltube\Stream;
 
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -18,16 +18,16 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * HTTP response containing the video chunk.
      *
-     * @var Response
+     * @var ResponseInterface
      */
     private $response;
 
     /**
      * YoutubeChunkStream constructor.
      *
-     * @param Response $response HTTP response containing the video chunk
+     * @param ResponseInterface $response HTTP response containing the video chunk
      */
-    public function __construct(Response $response)
+    public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
     }

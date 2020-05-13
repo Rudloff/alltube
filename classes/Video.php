@@ -10,8 +10,7 @@ use Alltube\Exception\EmptyUrlException;
 use Alltube\Exception\PasswordException;
 use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use stdClass;
 use Symfony\Component\Process\Process;
 
@@ -615,10 +614,9 @@ class Video
      *
      * @param array $headers HTTP headers of the request
      *
-     * @return Response
+     * @return ResponseInterface
      * @throws EmptyUrlException
      * @throws PasswordException
-     * @throws GuzzleException
      */
     public function getHttpResponse(array $headers = [])
     {

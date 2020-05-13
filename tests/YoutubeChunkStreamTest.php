@@ -9,7 +9,6 @@ namespace Alltube\Test;
 use Alltube\Stream\YoutubeChunkStream;
 use Alltube\Video;
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Unit tests for the YoutubeChunkStream class.
@@ -20,7 +19,6 @@ class YoutubeChunkStreamTest extends StreamTest
     /**
      * Prepare tests.
      * @throws Exception
-     * @throws GuzzleException
      */
     protected function setUp(): void
     {

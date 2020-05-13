@@ -13,7 +13,6 @@ use Alltube\Stream\PlaylistArchiveStream;
 use Alltube\Stream\YoutubeStream;
 use Alltube\Video;
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\Stream;
@@ -149,7 +148,7 @@ class DownloadController extends BaseController
      * @return Response HTTP response
      * @throws EmptyUrlException
      * @throws PasswordException
-     * @throws GuzzleException
+     * @throws Exception
      */
     private function getStream(Request $request, Response $response)
     {
@@ -244,7 +243,6 @@ class DownloadController extends BaseController
      * @param Response $response PSR-7 response
      * @return Response HTTP response
      * @throws EmptyUrlException
-     * @throws GuzzleException
      * @throws PasswordException
      * @throws Exception
      */

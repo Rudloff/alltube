@@ -5,9 +5,11 @@
   "homepage": "http://alltubedownload.net/",
   "type": "project",
   "require": {
+    "ext-intl": "*",
+    "ext-json": "*",
     "aura/session": "~2.1.0",
     "barracudanetworks/archivestream-php": "~1.0.5",
-    "guzzlehttp/guzzle": "~6.3.0",
+    "guzzlehttp/guzzle": "^6.5",
     "jawira/case-converter": "^3.4",
     "mathmarques/smarty-view": "~1.1.0",
     "npm-asset/open-sans-fontface": "^1.4",
@@ -16,9 +18,7 @@
     "symfony/process": "^4.0",
     "symfony/translation": "^4.0",
     "symfony/yaml": "^4.0",
-    "zonuexe/http-accept-language": "~0.4.1",
-    "ext-intl": "*",
-    "ext-json": "*"
+    "zonuexe/http-accept-language": "~0.4.1"
   },
   "require-dev": {
     "anam/phantomjs-linux-x86-binary": "~2.1.1",
