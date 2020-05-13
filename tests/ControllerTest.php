@@ -10,6 +10,7 @@ use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
 use Alltube\ViewFactory;
+use Exception;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -48,6 +49,7 @@ abstract class ControllerTest extends BaseTest
 
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {

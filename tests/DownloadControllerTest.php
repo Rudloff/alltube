@@ -8,6 +8,7 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\DownloadController;
+use Exception;
 
 /**
  * Unit tests for the FrontController class.
@@ -17,6 +18,7 @@ class DownloadControllerTest extends ControllerTest
 {
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {
@@ -62,6 +64,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with streams enabled.
      *
      * @return void
+     * @throws Exception
      */
     public function testDownloadWithStream()
     {
@@ -77,6 +80,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an M3U stream.
      *
      * @return void
+     * @throws Exception
      */
     public function testDownloadWithM3uStream()
     {
@@ -96,6 +100,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an RTMP stream.
      *
      * @return void
+     * @throws Exception
      */
     public function testDownloadWithRtmpStream()
     {
@@ -113,6 +118,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with a remuxed video.
      *
      * @return void
+     * @throws Exception
      */
     public function testDownloadWithRemux()
     {
@@ -182,6 +188,7 @@ class DownloadControllerTest extends ControllerTest
      *
      * @return void
      * @requires OS Linux
+     * @throws Exception
      */
     public function testDownloadWithPlaylist()
     {
@@ -197,6 +204,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an advanced conversion.
      *
      * @return void
+     * @throws Exception
      */
     public function testDownloadWithAdvancedConversion()
     {

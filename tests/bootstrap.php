@@ -9,7 +9,7 @@ use phpmock\mockery\PHPMockery;
 // Composer autoload.
 require_once __DIR__ . '/../vendor/autoload.php';
 
-ini_set('session.use_cookies', 0);
+ini_set('session.use_cookies', '0');
 session_cache_limiter('');
 session_start();
 

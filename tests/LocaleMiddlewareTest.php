@@ -6,7 +6,6 @@
 
 namespace Alltube\Test;
 
-use Alltube\Locale;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
 use Slim\Container;

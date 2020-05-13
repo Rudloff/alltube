@@ -7,6 +7,7 @@
 namespace Alltube\Test;
 
 use Alltube\Controller\JsonController;
+use Exception;
 
 /**
  * Unit tests for the FrontController class.
@@ -15,6 +16,7 @@ class JsonControllerTest extends ControllerTest
 {
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {

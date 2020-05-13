@@ -8,6 +8,7 @@ namespace Alltube\Test;
 
 use Alltube\Stream\ConvertedPlaylistArchiveStream;
 use Alltube\Video;
+use Exception;
 
 /**
  * Unit tests for the ConvertedPlaylistArchiveStream class.
@@ -17,6 +18,7 @@ class ConvertedPlaylistArchiveStreamTest extends StreamTest
 {
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {
