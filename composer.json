@@ -32,7 +32,7 @@
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/debug": "^4.0",
     "symfony/var-dumper": "^4.0",
-    "ytdl-org/youtube-dl": "^2020.02"
+    "ytdl-org/youtube-dl": "^2020.03.24"
   },
   "extra": {
     "paas": {
@@ -50,10 +50,10 @@
       "type": "package",
       "package": {
         "name": "ytdl-org/youtube-dl",
-        "version": "2020.02.16",
+        "version": "2020.03.24",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.02.16.zip"
+          "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.03.24.zip"
         }
       }
     },
