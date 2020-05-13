@@ -45,7 +45,7 @@ class FrontController extends BaseController
     /**
      * Display index page.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
@@ -57,15 +57,15 @@ class FrontController extends BaseController
             $response,
             'index.tpl',
             [
-                'config'           => $this->config,
-                'class'            => 'index',
-                'description'      => $this->localeManager->t(
+                'config' => $this->config,
+                'class' => 'index',
+                'description' => $this->localeManager->t(
                     'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
                 ),
-                'domain'           => $uri->getScheme() . '://' . $uri->getAuthority(),
-                'canonical'        => $this->getCanonicalUrl($request),
+                'domain' => $uri->getScheme() . '://' . $uri->getAuthority(),
+                'canonical' => $this->getCanonicalUrl($request),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
-                'locale'           => $this->localeManager->getLocale(),
+                'locale' => $this->localeManager->getLocale(),
             ]
         );
 
@@ -75,9 +75,9 @@ class FrontController extends BaseController
     /**
      * Switch locale.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
-     * @param array    $data     Query parameters
+     * @param string[] $data Query parameters
      *
      * @return Response
      */
@@ -103,14 +103,14 @@ class FrontController extends BaseController
             $response,
             'extractors.tpl',
             [
-                'config'      => $this->config,
-                'extractors'  => Video::getExtractors(),
-                'class'       => 'extractors',
-                'title'       => $this->localeManager->t('Supported websites'),
+                'config' => $this->config,
+                'extractors' => Video::getExtractors(),
+                'class' => 'extractors',
+                'title' => $this->localeManager->t('Supported websites'),
                 'description' => $this->localeManager->t('List of all supported websites from which Alltube Download ' .
                     'can extract video or audio files'),
                 'canonical' => $this->getCanonicalUrl($request),
-                'locale'    => $this->localeManager->getLocale(),
+                'locale' => $this->localeManager->getLocale(),
             ]
         );
 
@@ -120,7 +120,7 @@ class FrontController extends BaseController
     /**
      * Display a password prompt.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
@@ -131,14 +131,14 @@ class FrontController extends BaseController
             $response,
             'password.tpl',
             [
-                'config'      => $this->config,
-                'class'       => 'password',
-                'title'       => $this->localeManager->t('Password prompt'),
+                'config' => $this->config,
+                'class' => 'password',
+                'title' => $this->localeManager->t('Password prompt'),
                 'description' => $this->localeManager->t(
                     'You need a password in order to download this video with Alltube Download'
                 ),
-                'canonical'   => $this->getCanonicalUrl($request),
-                'locale'      => $this->localeManager->getLocale(),
+                'canonical' => $this->getCanonicalUrl($request),
+                'locale' => $this->localeManager->getLocale(),
             ]
         );
 
@@ -148,7 +148,7 @@ class FrontController extends BaseController
     /**
      * Return the video description page.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
@@ -185,13 +185,13 @@ class FrontController extends BaseController
             $response,
             $template,
             [
-                'video'         => $this->video,
-                'class'         => 'info',
-                'title'         => $title,
-                'description'   => $description,
-                'config'        => $this->config,
-                'canonical'     => $this->getCanonicalUrl($request),
-                'locale'        => $this->localeManager->getLocale(),
+                'video' => $this->video,
+                'class' => 'info',
+                'title' => $title,
+                'description' => $description,
+                'config' => $this->config,
+                'canonical' => $this->getCanonicalUrl($request),
+                'locale' => $this->localeManager->getLocale(),
                 'defaultFormat' => $this->defaultFormat,
             ]
         );
@@ -202,7 +202,7 @@ class FrontController extends BaseController
     /**
      * Dislay information about the video.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
@@ -231,9 +231,9 @@ class FrontController extends BaseController
     /**
      * Display an error page.
      *
-     * @param Request   $request   PSR-7 request
-     * @param Response  $response  PSR-7 response
-     * @param Throwable $error     Error to display
+     * @param Request $request PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param Throwable $error Error to display
      *
      * @return Response HTTP response
      */
@@ -256,12 +256,12 @@ class FrontController extends BaseController
                 $response,
                 'error.tpl',
                 [
-                    'config'    => $this->config,
-                    'error'     => $message,
-                    'class'     => 'video',
-                    'title'     => $this->localeManager->t('Error'),
+                    'config' => $this->config,
+                    'error' => $message,
+                    'class' => 'video',
+                    'title' => $this->localeManager->t('Error'),
                     'canonical' => $this->getCanonicalUrl($request),
-                    'locale'    => $this->localeManager->getLocale(),
+                    'locale' => $this->localeManager->getLocale(),
                 ]
             );
 

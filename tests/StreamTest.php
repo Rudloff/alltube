@@ -6,6 +6,7 @@
 
 namespace Alltube\Test;
 
+use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 
 /**
@@ -15,6 +16,7 @@ abstract class StreamTest extends BaseTest
 {
     /**
      * Stream instance.
+     * @var StreamInterface
      */
     protected $stream;
 

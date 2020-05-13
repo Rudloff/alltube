@@ -10,6 +10,7 @@ use Alltube\LocaleMiddleware;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;
+use Slim\Container;
 use Symfony\Component\Debug\Debug;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
@@ -23,6 +24,8 @@ if (is_file(__DIR__ . '/config/config.yml')) {
 
 // Create app.
 $app = new App();
+
+/** @var Container $container */
 $container = $app->getContainer();
 
 // Load config.

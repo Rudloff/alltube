@@ -41,7 +41,7 @@ class YoutubeChunkStream implements StreamInterface
      */
     public function read($length)
     {
-        $size = $this->response->getHeader('Content-Length')[0];
+        $size = intval($this->response->getHeader('Content-Length')[0]);
         if ($size - $this->tell() < $length) {
             // Don't try to read further than the end of the stream.
             $length = $size - $this->tell();
@@ -55,7 +55,7 @@ class YoutubeChunkStream implements StreamInterface
      */
     public function __toString()
     {
-        return (string) $this->response->getBody();
+        return (string)$this->response->getBody();
     }
 
     /**

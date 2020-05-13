@@ -6,6 +6,7 @@
 
 namespace Alltube\Test;
 
+use Alltube\Controller\BaseController;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\LocaleManager;
@@ -44,6 +45,7 @@ abstract class ControllerTest extends BaseTest
 
     /**
      * Controller instance used in tests.
+     * @var BaseController
      */
     protected $controller;
 
@@ -80,7 +82,7 @@ abstract class ControllerTest extends BaseTest
      * Run controller function with custom query parameters and return the result.
      *
      * @param string $request Controller function to call
-     * @param array  $params  Query parameters
+     * @param mixed[] $params Query parameters
      *
      * @return Response HTTP response
      */
@@ -96,7 +98,7 @@ abstract class ControllerTest extends BaseTest
      * Assert that calling controller function with these parameters returns a 200 HTTP response.
      *
      * @param string $request Controller function to call
-     * @param array  $params  Query parameters
+     * @param mixed[] $params Query parameters
      *
      * @return void
      */
@@ -109,7 +111,7 @@ abstract class ControllerTest extends BaseTest
      * Assert that calling controller function with these parameters returns an HTTP redirect.
      *
      * @param string $request Controller function to call
-     * @param array  $params  Query parameters
+     * @param mixed[] $params Query parameters
      *
      * @return void
      */
@@ -122,7 +124,7 @@ abstract class ControllerTest extends BaseTest
      * Assert that calling controller function with these parameters returns an HTTP 500 error.
      *
      * @param string $request Controller function to call
-     * @param array  $params  Query parameters
+     * @param mixed[] $params Query parameters
      *
      * @return void
      */
@@ -135,7 +137,7 @@ abstract class ControllerTest extends BaseTest
      * Assert that calling controller function with these parameters returns an HTTP 400 error.
      *
      * @param string $request Controller function to call
-     * @param array  $params  Query parameters
+     * @param mixed[] $params Query parameters
      *
      * @return void
      */

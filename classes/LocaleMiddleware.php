@@ -36,7 +36,7 @@ class LocaleMiddleware
     /**
      * Test if a locale can be used for the current user.
      *
-     * @param array $proposedLocale Locale array created by AcceptLanguage::parse()
+     * @param mixed[] $proposedLocale Locale array created by AcceptLanguage::parse()
      *
      * @return Locale|null Locale if chosen, nothing otherwise
      */
@@ -59,9 +59,9 @@ class LocaleMiddleware
     /**
      * Main middleware function.
      *
-     * @param Request  $request  PSR request
+     * @param Request $request PSR request
      * @param Response $response PSR response
-     * @param callable $next     Next middleware
+     * @param callable $next Next middleware
      *
      * @return Response
      */

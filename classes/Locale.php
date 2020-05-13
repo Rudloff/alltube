@@ -104,7 +104,7 @@ class Locale
     /**
      * Get country information from locale.
      *
-     * @return Country|array|null
+     * @return Country|Country[]|null
      */
     public function getCountry()
     {

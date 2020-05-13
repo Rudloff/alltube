@@ -29,7 +29,7 @@ class ViewFactory
     public static function create(ContainerInterface $container, Request $request = null)
     {
         if (!isset($request)) {
-            $request = $container['request'];
+            $request = $container->get('request');
         }
 
         $view = new Smarty(__DIR__ . '/../templates/');
@@ -37,9 +37,10 @@ class ViewFactory
             $request = $request->withUri($request->getUri()->withScheme('https')->withPort(443));
         }
 
-        $localeManager = $container['locale'];
+        /** @var LocaleManager $localeManager */
+        $localeManager = $container->get('locale');
 
-        $smartyPlugins = new SmartyPlugins($container['router'], $request->getUri()->withUserInfo(null));
+        $smartyPlugins = new SmartyPlugins($container->get('router'), $request->getUri()->withUserInfo(null));
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
         $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
         $view->registerPlugin('block', 't', [$localeManager, 'smartyTranslate']);
