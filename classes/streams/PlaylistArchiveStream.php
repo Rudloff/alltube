@@ -50,7 +50,10 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * PlaylistArchiveStream constructor.
      *
+     * We don't call the parent constructor because it messes up the output buffering.
+     *
      * @param Video $video Video/playlist to download
+     * @noinspection PhpMissingParentConstructorInspection
      */
     public function __construct(Video $video)
     {

@@ -12,6 +12,5 @@ parameters:
         - RoboFile.php
     phpstan:
       level: max
-      configuration: phpstan.neon
       ignore_patterns:
         - RoboFile.php
