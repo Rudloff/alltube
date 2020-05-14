@@ -149,7 +149,7 @@ class VideoTest extends BaseTest
                 'https://vimeo.com/24195442', 'http-720p',
                 'Carving_the_Mountains-24195442',
                 'mp4',
-                'gcs-vimeo.akamaized.net',
+                'akamaized.net',
             ]
         ];
     }
