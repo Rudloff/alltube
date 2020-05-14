@@ -29,6 +29,7 @@ class RoboFile extends Tasks
             ->exclude(
                 [
                     'ffmpeg/',
+                    'phpstan/',
                     'bin/',
                     'anam/phantomjs-linux-x86-binary/',
                     'phpunit/',
