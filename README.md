@@ -82,7 +82,7 @@ You will need the following modules:
 
 ### Nginx
 
-Here is an exemple Nginx configuration:
+Here is an example Nginx configuration:
 
 ```nginx
 server {
