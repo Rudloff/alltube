@@ -615,10 +615,10 @@ class Video
         $urls = $this->getUrl();
         $stream_context_options = [];
 
-        if (strpos($this->webpageUrl, 'xhamster.com') !== false) {
+        if (array_key_exists('Referer', $this->http_headers)) {
             $stream_context_options = [
                 'http' => [
-                    'header' => 'Referer: https://xhamster.com'
+                    'header' => 'Referer: '.$this->http_headers->Referer
                 ]
             ];
         }
