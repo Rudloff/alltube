@@ -66,10 +66,12 @@ class DownloadController extends BaseController
     /**
      * Return a converted MP3 file.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws PasswordException
+     * @throws Exception
      */
     private function getConvertedAudioResponse(Request $request, Response $response)
     {
@@ -100,10 +102,11 @@ class DownloadController extends BaseController
     /**
      * Return the MP3 file.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws PasswordException
      */
     private function getAudioResponse(Request $request, Response $response)
     {
@@ -130,7 +133,7 @@ class DownloadController extends BaseController
             return $frontController->password($request, $response);
         } catch (Exception $e) {
             // If MP3 is not available, we convert it.
-            $this->video = $this->video->withFormat('bestaudio');
+            $this->video = $this->video->withFormat('bestaudio/best');
 
             return $this->getConvertedAudioResponse($request, $response);
         }
@@ -139,10 +142,13 @@ class DownloadController extends BaseController
     /**
      * Get a video/audio stream piped through the server.
      *
-     * @param Response $response PSR-7 response
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      *
+     * @param Response $response PSR-7 response
      * @return Response HTTP response
+     * @throws EmptyUrlException
+     * @throws PasswordException
+     * @throws Exception
      */
     private function getStream(Request $request, Response $response)
     {
@@ -205,9 +211,11 @@ class DownloadController extends BaseController
      * Get a remuxed stream piped through the server.
      *
      * @param Response $response PSR-7 response
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      *
      * @return Response HTTP response
+     * @throws PasswordException
+     * @throws Exception
      */
     private function getRemuxStream(Request $request, Response $response)
     {
@@ -230,10 +238,13 @@ class DownloadController extends BaseController
      * Get approriate HTTP response to download query.
      * Depends on whether we want to stream, remux or simply redirect.
      *
-     * @param Response $response PSR-7 response
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      *
+     * @param Response $response PSR-7 response
      * @return Response HTTP response
+     * @throws EmptyUrlException
+     * @throws PasswordException
+     * @throws Exception
      */
     private function getDownloadResponse(Request $request, Response $response)
     {
@@ -262,10 +273,12 @@ class DownloadController extends BaseController
     /**
      * Return a converted video file.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws PasswordException
+     * @throws Exception
      */
     private function getConvertedResponse(Request $request, Response $response)
     {

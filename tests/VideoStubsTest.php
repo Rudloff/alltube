@@ -26,6 +26,7 @@ class VideoStubsTest extends BaseTest
 
     /**
      * Initialize properties used by test.
+     * @throws Exception
      */
     protected function setUp(): void
     {

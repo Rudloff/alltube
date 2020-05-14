@@ -8,6 +8,7 @@ namespace Alltube\Test;
 
 use Alltube\Stream\PlaylistArchiveStream;
 use Alltube\Video;
+use Exception;
 
 /**
  * Unit tests for the PlaylistArchiveStream class.
@@ -17,6 +18,7 @@ class PlaylistArchiveStreamTest extends StreamTest
 {
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {

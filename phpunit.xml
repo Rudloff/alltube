@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <phpunit bootstrap="tests/bootstrap.php">
-  <filter>
-    <whitelist>
-      <directory>classes/</directory>
-      <directory>controllers/</directory>
-    </whitelist>
-  </filter>
-  <testsuites>
-    <testsuite name="Tests">
-      <directory>tests/</directory>
-    </testsuite>
-  </testsuites>
-  <logging>
-    <log type="coverage-html" target="coverage/"/>
-    <log type="coverage-clover" target="clover.xml"/>
-  </logging>
+    <filter>
+        <whitelist>
+            <directory>classes/</directory>
+            <directory>controllers/</directory>
+        </whitelist>
+    </filter>
+    <testsuites>
+        <testsuite name="Tests">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <log type="coverage-html" target="coverage/"/>
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
 </phpunit>

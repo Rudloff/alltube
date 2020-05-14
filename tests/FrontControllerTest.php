@@ -18,7 +18,14 @@ use Slim\Http\Request;
 class FrontControllerTest extends ControllerTest
 {
     /**
+     * Controller instance used in tests.
+     * @var FrontController
+     */
+    protected $controller;
+
+    /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {
@@ -41,6 +48,7 @@ class FrontControllerTest extends ControllerTest
      * Test the constructor with streams enabled.
      *
      * @return void
+     * @throws Exception
      */
     public function testConstructorWithStream()
     {
@@ -120,6 +128,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
+     * @throws Exception
      */
     public function testInfoWithAudio()
     {
@@ -136,6 +145,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
+     * @throws Exception
      */
     public function testInfoWithVimeoAudio()
     {
@@ -150,6 +160,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
+     * @throws Exception
      */
     public function testInfoWithUnconvertedAudio()
     {
@@ -197,6 +208,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
+     * @throws Exception
      */
     public function testInfoWithStream()
     {

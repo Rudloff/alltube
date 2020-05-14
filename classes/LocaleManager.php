@@ -7,7 +7,6 @@
 namespace Alltube;
 
 use Aura\Session\Segment;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\PoFileLoader;
 
@@ -19,7 +18,7 @@ class LocaleManager
     /**
      * Supported locales.
      *
-     * @var array
+     * @var string[]
      */
     private $supportedLocales = ['en_US', 'fr_FR', 'zh_CN', 'es_ES', 'pt_BR', 'de_DE', 'ar', 'pl_PL', 'tr_TR'];
 
@@ -112,6 +111,7 @@ class LocaleManager
      * Set the current locale.
      *
      * @param Locale $locale Locale
+     * @return void
      */
     public function setLocale(Locale $locale)
     {
@@ -122,6 +122,7 @@ class LocaleManager
 
     /**
      * Unset the current locale.
+     * @return void
      */
     public function unsetLocale()
     {
@@ -133,8 +134,8 @@ class LocaleManager
     /**
      * Smarty "t" block.
      *
-     * @param  array  $params Block parameters
-     * @param  string $text  Block content
+     * @param mixed[] $params Block parameters
+     * @param string $text Block content
      *
      * @return string Translated string
      */
@@ -152,6 +153,7 @@ class LocaleManager
      *
      * @param string $string String to translate
      *
+     * @param mixed[] $params
      * @return string Translated string
      */
     public function t($string, array $params = [])

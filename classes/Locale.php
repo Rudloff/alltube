@@ -104,12 +104,14 @@ class Locale
     /**
      * Get country information from locale.
      *
-     * @return Country|array
+     * @return Country|Country[]|null
      */
     public function getCountry()
     {
         if (isset($this->region)) {
             return country($this->getIso3166());
         }
+
+        return null;
     }
 }

@@ -23,6 +23,7 @@ class ConfigTest extends BaseTest
 
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {
@@ -39,7 +40,7 @@ class ConfigTest extends BaseTest
     public function testGetInstance()
     {
         $config = Config::getInstance();
-        $this->assertEquals($config->convert, false);
+        $this->assertEquals(false, $config->convert);
         $this->assertConfig($config);
     }
 
@@ -53,7 +54,7 @@ class ConfigTest extends BaseTest
         Config::destroyInstance();
 
         $config = Config::getInstance();
-        $this->assertEquals($config->convert, false);
+        $this->assertEquals(false, $config->convert);
         $this->assertConfig($config);
     }
 
@@ -81,6 +82,7 @@ class ConfigTest extends BaseTest
      * Test the setFile function.
      *
      * @return void
+     * @throws Exception
      */
     public function testSetFile()
     {
@@ -103,24 +105,26 @@ class ConfigTest extends BaseTest
      * Test the setOptions function.
      *
      * @return void
+     * @throws Exception
      */
     public function testSetOptions()
     {
         Config::setOptions(['appName' => 'foo']);
         $config = Config::getInstance();
-        $this->assertEquals($config->appName, 'foo');
+        $this->assertEquals('foo', $config->appName);
     }
 
     /**
      * Test the setOptions function.
      *
      * @return void
+     * @throws Exception
      */
     public function testSetOptionsWithoutUpdate()
     {
         Config::setOptions(['appName' => 'foo'], false);
         $config = Config::getInstance();
-        $this->assertEquals($config->appName, 'foo');
+        $this->assertEquals('foo', $config->appName);
     }
 
     /**
@@ -149,6 +153,7 @@ class ConfigTest extends BaseTest
      * Test the getInstance function with the CONVERT and PYTHON environment variables.
      *
      * @return void
+     * @throws Exception
      */
     public function testGetInstanceWithEnv()
     {
@@ -156,7 +161,7 @@ class ConfigTest extends BaseTest
         putenv('CONVERT=1');
         Config::setFile($this->getConfigFile());
         $config = Config::getInstance();
-        $this->assertEquals($config->convert, true);
+        $this->assertEquals(true, $config->convert);
         putenv('CONVERT');
     }
 }

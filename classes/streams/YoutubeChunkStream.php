@@ -6,7 +6,7 @@
 
 namespace Alltube\Stream;
 
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -18,16 +18,16 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * HTTP response containing the video chunk.
      *
-     * @var Response
+     * @var ResponseInterface
      */
     private $response;
 
     /**
      * YoutubeChunkStream constructor.
      *
-     * @param Response $response HTTP response containing the video chunk
+     * @param ResponseInterface $response HTTP response containing the video chunk
      */
-    public function __construct(Response $response)
+    public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
     }
@@ -41,7 +41,7 @@ class YoutubeChunkStream implements StreamInterface
      */
     public function read($length)
     {
-        $size = $this->response->getHeader('Content-Length')[0];
+        $size = intval($this->response->getHeader('Content-Length')[0]);
         if ($size - $this->tell() < $length) {
             // Don't try to read further than the end of the stream.
             $length = $size - $this->tell();
@@ -55,7 +55,7 @@ class YoutubeChunkStream implements StreamInterface
      */
     public function __toString()
     {
-        return (string) $this->response->getBody();
+        return (string)$this->response->getBody();
     }
 
     /**
@@ -124,21 +124,21 @@ class YoutubeChunkStream implements StreamInterface
      * @param int $offset Stream offset
      * @param int $whence Specifies how the cursor position will be calculated
      *
-     * @return mixed
+     * @return void
      */
     public function seek($offset, $whence = SEEK_SET)
     {
-        return $this->response->getBody()->seek($offset, $whence);
+        $this->response->getBody()->seek($offset, $whence);
     }
 
     /**
      * Seek to the beginning of the stream.
      *
-     * @return mixed
+     * @return void
      */
     public function rewind()
     {
-        return $this->response->getBody()->rewind();
+        $this->response->getBody()->rewind();
     }
 
     /**
