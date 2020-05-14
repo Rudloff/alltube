@@ -615,7 +615,7 @@ class Video
         $urls = $this->getUrl();
         $stream_context_options = [];
 
-        if (array_key_exists('Referer', $this->http_headers)) {
+        if (array_key_exists('Referer', (array)$this->http_headers)) {
             $stream_context_options = [
                 'http' => [
                     'header' => 'Referer: ' . $this->http_headers->Referer
@@ -629,7 +629,7 @@ class Video
             [
                 'stream' => true,
                 'stream_context' => $stream_context_options,
-                'headers' => array_merge((array) $this->http_headers, $headers)
+                'headers' => array_merge((array)$this->http_headers, $headers)
             ]
         );
     }
