@@ -6,6 +6,8 @@
 
 namespace Alltube\Stream;
 
+use Alltube\Exception\EmptyUrlException;
+use Alltube\Exception\PasswordException;
 use Alltube\Video;
 use Barracuda\ArchiveStream\ZipArchive;
 use Psr\Http\Message\StreamInterface;
@@ -48,7 +50,10 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * PlaylistArchiveStream constructor.
      *
+     * We don't call the parent constructor because it messes up the output buffering.
+     *
      * @param Video $video Video/playlist to download
+     * @noinspection PhpMissingParentConstructorInspection
      */
     public function __construct(Video $video)
     {
@@ -86,20 +91,21 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @param string $string The string that is to be written
      *
-     * @return int
+     * @return int|false
      */
     public function write($string)
     {
-        fwrite($this->buffer, $string);
+        return fwrite($this->buffer, $string);
     }
 
     /**
      * Get the size of the stream if known.
      *
-     * @return null
+     * @return int|null
      */
     public function getSize()
     {
+        return null;
     }
 
     /**
@@ -145,7 +151,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Returns the remaining contents in a string.
      *
-     * @return string
+     * @return string|false
      */
     public function getContents()
     {
@@ -170,6 +176,8 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
         if (isset($meta[$key])) {
             return $meta[$key];
         }
+
+        return null;
     }
 
     /**
@@ -194,7 +202,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     {
         $this->rewind();
 
-        return $this->getContents();
+        return strval($this->getContents());
     }
 
     /**
@@ -236,6 +244,8 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      * @param Video $video Video to stream
      *
      * @return void
+     * @throws PasswordException
+     * @throws EmptyUrlException
      */
     protected function startVideoStream(Video $video)
     {
@@ -246,7 +256,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
 
         $this->init_file_stream_transfer(
             $video->getFilename(),
-            $contentLengthHeaders[0]
+            intval($contentLengthHeaders[0])
         );
     }
 
@@ -256,6 +266,8 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      * @param int $count Number of bytes to read
      *
      * @return string|false
+     * @throws EmptyUrlException
+     * @throws PasswordException
      */
     public function read($count)
     {

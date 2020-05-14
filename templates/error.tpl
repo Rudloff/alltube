@@ -6,4 +6,4 @@
         {t}Please check the URL of your video.{/t}
         <p><i>{$error|escape}</i></p>
     </main>
-{include file='inc/footer.tpl'}
+    {include file='inc/footer.tpl'}

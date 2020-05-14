@@ -36,9 +36,9 @@ class LocaleMiddleware
     /**
      * Test if a locale can be used for the current user.
      *
-     * @param array $proposedLocale Locale array created by AcceptLanguage::parse()
+     * @param mixed[] $proposedLocale Locale array created by AcceptLanguage::parse()
      *
-     * @return Locale Locale if chosen, nothing otherwise
+     * @return Locale|null Locale if chosen, nothing otherwise
      */
     public function testLocale(array $proposedLocale)
     {
@@ -52,14 +52,16 @@ class LocaleMiddleware
                 return new Locale($proposedLocale['language'] . '_' . $proposedLocale['region']);
             }
         }
+
+        return null;
     }
 
     /**
      * Main middleware function.
      *
-     * @param Request  $request  PSR request
+     * @param Request $request PSR request
      * @param Response $response PSR response
-     * @param callable $next     Next middleware
+     * @param callable $next Next middleware
      *
      * @return Response
      */

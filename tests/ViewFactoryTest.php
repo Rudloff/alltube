@@ -12,6 +12,7 @@ use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Views\Smarty;
+use SmartyException;
 
 /**
  * Unit tests for the ViewFactory class.
@@ -22,6 +23,7 @@ class ViewFactoryTest extends BaseTest
      * Test the create() function.
      *
      * @return void
+     * @throws SmartyException
      */
     public function testCreate()
     {
@@ -35,6 +37,7 @@ class ViewFactoryTest extends BaseTest
      * Test the create() function with a X-Forwarded-Proto header.
      *
      * @return void
+     * @throws SmartyException
      */
     public function testCreateWithXForwardedProto()
     {

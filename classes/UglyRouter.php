@@ -21,7 +21,7 @@ class UglyRouter extends Router
      *
      * @param ServerRequestInterface $request The current HTTP request object
      *
-     * @return array
+     * @return mixed[]
      *
      * @link   https://github.com/nikic/FastRoute/blob/master/src/Dispatcher.php
      */
@@ -42,14 +42,14 @@ class UglyRouter extends Router
     /**
      * Build the path for a named route including the base path.
      *
-     * @param string $name        Route name
-     * @param array  $data        Named argument replacement data
-     * @param array  $queryParams Optional query string parameters
-     *
-     * @throws RuntimeException         If named route does not exist
-     * @throws InvalidArgumentException If required data not provided
+     * @param string $name Route name
+     * @param string[] $data Named argument replacement data
+     * @param string[] $queryParams Optional query string parameters
      *
      * @return string
+     * @throws InvalidArgumentException If required data not provided
+     *
+     * @throws RuntimeException         If named route does not exist
      */
     public function pathFor($name, array $data = [], array $queryParams = [])
     {

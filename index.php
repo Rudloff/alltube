@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+
 use Alltube\Config;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
@@ -10,7 +11,8 @@ use Alltube\LocaleMiddleware;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;
-use Symfony\Component\Debug\Debug;
+use Slim\Container;
+use Symfony\Component\ErrorHandler\Debug;
 
 if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
     header('Location: ' . str_ireplace('/index.php', '/', $_SERVER['REQUEST_URI']));
@@ -18,11 +20,17 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/index.ph
 }
 
 if (is_file(__DIR__ . '/config/config.yml')) {
-    Config::setFile(__DIR__ . '/config/config.yml');
+    try {
+        Config::setFile(__DIR__ . '/config/config.yml');
+    } catch (Exception $e) {
+        die('Could not load config file: ' . $e->getMessage());
+    }
 }
 
 // Create app.
 $app = new App();
+
+/** @var Container $container */
 $container = $app->getContainer();
 
 // Load config.
@@ -47,7 +55,11 @@ $container['locale'] = LocaleManager::getInstance();
 $app->add(new LocaleMiddleware($container));
 
 // Smarty.
-$container['view'] = ViewFactory::create($container);
+try {
+    $container['view'] = ViewFactory::create($container);
+} catch (SmartyException $e) {
+    die('Could not load Smarty: ' . $e->getMessage());
+}
 
 // Controllers.
 $frontController = new FrontController($container);
@@ -102,4 +114,7 @@ try {
     $app->run();
 } catch (SmartyException $e) {
     die('Smarty could not compile the template file: ' . $e->getMessage());
+} catch (Throwable $e) {
+    // Last resort if the error has not been caught by the error handler for some reason.
+    die('Error when starting the app: ' . $e->getMessage());
 }

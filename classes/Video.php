@@ -10,7 +10,7 @@ use Alltube\Exception\EmptyUrlException;
 use Alltube\Exception\PasswordException;
 use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use stdClass;
 use Symfony\Component\Process\Process;
 
@@ -19,16 +19,16 @@ use Symfony\Component\Process\Process;
  *
  * Due to the way youtube-dl behaves, this class can also contain information about a playlist.
  *
- * @property-read string      $title         Title
- * @property-read string      $protocol      Network protocol (HTTP, RTMP, etc.)
- * @property-read string      $url           File URL
- * @property-read string      $ext           File extension
- * @property-read string      $extractor_key youtube-dl extractor class used
- * @property-read array       $entries       List of videos (if the object contains information about a playlist)
- * @property-read array       $rtmp_conn
+ * @property-read string $title         Title
+ * @property-read string $protocol      Network protocol (HTTP, RTMP, etc.)
+ * @property-read string $url           File URL
+ * @property-read string $ext           File extension
+ * @property-read string $extractor_key youtube-dl extractor class used
+ * @property-read array $entries       List of videos (if the object contains information about a playlist)
+ * @property-read array $rtmp_conn
  * @property-read string|null $_type         Object type (usually "playlist" or null)
- * @property-read stdClass    $downloader_options
- * @property-read stdClass    $http_headers
+ * @property-read stdClass $downloader_options
+ * @property-read stdClass $http_headers
  */
 class Video
 {
@@ -70,7 +70,7 @@ class Video
     /**
      * URLs of the video files.
      *
-     * @var array
+     * @var string[]
      */
     private $urls;
 
@@ -84,11 +84,11 @@ class Video
     /**
      * VideoDownload constructor.
      *
-     * @param string $webpageUrl      URL of the page containing the video
+     * @param string $webpageUrl URL of the page containing the video
      * @param string $requestedFormat Requested video format
      *                                (can be any format string accepted by youtube-dl,
      *                                including selectors like "[height<=720]")
-     * @param string $password        Password
+     * @param string $password Password
      */
     public function __construct($webpageUrl, $requestedFormat = 'best', $password = null)
     {
@@ -105,7 +105,7 @@ class Video
      *
      * @param string[] $arguments Arguments
      *
-     * @return Process
+     * @return Process<string>
      */
     private static function getProcess(array $arguments)
     {
@@ -124,7 +124,9 @@ class Video
      * List all extractors.
      *
      * @return string[] Extractors
-     * */
+     *
+     * @throws PasswordException
+     */
     public static function getExtractors()
     {
         $video = new self('');
@@ -135,13 +137,13 @@ class Video
     /**
      * Call youtube-dl.
      *
-     * @param array $arguments Arguments
+     * @param string[] $arguments Arguments
      *
-     * @throws PasswordException If the video is protected by a password and no password was specified
+     * @return string Result
      * @throws Exception         If the password is wrong
      * @throws Exception         If youtube-dl returns an error
      *
-     * @return string Result
+     * @throws PasswordException If the video is protected by a password and no password was specified
      */
     private function callYoutubedl(array $arguments)
     {
@@ -153,7 +155,7 @@ class Video
         $process->run();
         if (!$process->isSuccessful()) {
             $errorOutput = trim($process->getErrorOutput());
-            $exitCode = $process->getExitCode();
+            $exitCode = intval($process->getExitCode());
             if ($errorOutput == 'ERROR: This video is protected by a password, use the --video-password option') {
                 throw new PasswordException($errorOutput, $exitCode);
             } elseif (substr($errorOutput, 0, 21) == 'ERROR: Wrong password') {
@@ -172,6 +174,7 @@ class Video
      * @param string $prop Property
      *
      * @return string
+     * @throws PasswordException
      */
     private function getProp($prop = 'dump-json')
     {
@@ -196,7 +199,9 @@ class Video
      * Get all information about a video.
      *
      * @return stdClass Decoded JSON
-     * */
+     *
+     * @throws PasswordException
+     */
     public function getJson()
     {
         if (!isset($this->json)) {
@@ -212,12 +217,15 @@ class Video
      * @param string $name Property
      *
      * @return mixed
+     * @throws PasswordException
      */
     public function __get($name)
     {
         if (isset($this->$name)) {
             return $this->getJson()->$name;
         }
+
+        return null;
     }
 
     /**
@@ -226,6 +234,7 @@ class Video
      * @param string $name Property
      *
      * @return bool
+     * @throws PasswordException
      */
     public function __isset($name)
     {
@@ -240,7 +249,9 @@ class Video
      * (eg. bestvideo+bestaudio).
      *
      * @return string[] URLs of video
-     * */
+     * @throws EmptyUrlException
+     * @throws PasswordException
+     */
     public function getUrl()
     {
         // Cache the URLs.
@@ -259,7 +270,9 @@ class Video
      * Get filename of video file from URL of page.
      *
      * @return string Filename of extracted video
-     * */
+     *
+     * @throws PasswordException
+     */
     public function getFilename()
     {
         return trim($this->getProp('get-filename'));
@@ -271,23 +284,17 @@ class Video
      * @param string $extension New file extension
      *
      * @return string Filename of extracted video with specified extension
+     * @throws PasswordException
      */
     public function getFileNameWithExtension($extension)
     {
-        return html_entity_decode(
-            pathinfo(
-                $this->getFilename(),
-                PATHINFO_FILENAME
-            ) . '.' . $extension,
-            ENT_COMPAT,
-            'ISO-8859-1'
-        );
+        return str_replace('.' . $this->ext, '.' . $extension, $this->getFilename());
     }
 
     /**
      * Return arguments used to run rtmp for a specific video.
      *
-     * @return array Arguments
+     * @return string[] Arguments
      */
     private function getRtmpArguments()
     {
@@ -296,12 +303,12 @@ class Video
         if ($this->protocol == 'rtmp') {
             foreach (
                 [
-                'url'           => '-rtmp_tcurl',
-                'webpage_url'   => '-rtmp_pageurl',
-                'player_url'    => '-rtmp_swfverify',
-                'flash_version' => '-rtmp_flashver',
-                'play_path'     => '-rtmp_playpath',
-                'app'           => '-rtmp_app',
+                    'url' => '-rtmp_tcurl',
+                    'webpage_url' => '-rtmp_pageurl',
+                    'player_url' => '-rtmp_swfverify',
+                    'flash_version' => '-rtmp_flashver',
+                    'play_path' => '-rtmp_playpath',
+                    'app' => '-rtmp_app',
                 ] as $property => $option
             ) {
                 if (isset($this->{$property})) {
@@ -324,7 +331,7 @@ class Video
     /**
      * Check if a command runs successfully.
      *
-     * @param array $command Command and arguments
+     * @param string[] $command Command and arguments
      *
      * @return bool False if the command returns an error, true otherwise
      */
@@ -339,15 +346,15 @@ class Video
     /**
      * Get a process that runs avconv in order to convert a video.
      *
-     * @param int    $audioBitrate Audio bitrate of the converted file
-     * @param string $filetype     Filetype of the converted file
-     * @param bool   $audioOnly    True to return an audio-only file
-     * @param string $from         Start the conversion at this time
-     * @param string $to           End the conversion at this time
+     * @param int $audioBitrate Audio bitrate of the converted file
+     * @param string $filetype Filetype of the converted file
+     * @param bool $audioOnly True to return an audio-only file
+     * @param string $from Start the conversion at this time
+     * @param string $to End the conversion at this time
      *
+     * @return Process<string> Process
      * @throws Exception If avconv/ffmpeg is missing
      *
-     * @return Process Process
      */
     private function getAvconvProcess(
         $audioBitrate,
@@ -418,12 +425,12 @@ class Video
      * Get audio stream of converted video.
      *
      * @param string $from Start the conversion at this time
-     * @param string $to   End the conversion at this time
-     *
-     * @throws Exception If your try to convert an M3U8 video
-     * @throws Exception If the popen stream was not created correctly
+     * @param string $to End the conversion at this time
      *
      * @return resource popen stream
+     * @throws Exception If the popen stream was not created correctly
+     *
+     * @throws Exception If your try to convert an M3U8 video
      */
     public function getAudioStream($from = null, $to = null)
     {
@@ -453,10 +460,10 @@ class Video
     /**
      * Get video stream from an M3U playlist.
      *
-     * @throws Exception If avconv/ffmpeg is missing
+     * @return resource popen stream
      * @throws Exception If the popen stream was not created correctly
      *
-     * @return resource popen stream
+     * @throws Exception If avconv/ffmpeg is missing
      */
     public function getM3uStream()
     {
@@ -495,9 +502,9 @@ class Video
     /**
      * Get an avconv stream to remux audio and video.
      *
+     * @return resource popen stream
      * @throws Exception If the popen stream was not created correctly
      *
-     * @return resource popen stream
      */
     public function getRemuxStream()
     {
@@ -532,9 +539,9 @@ class Video
     /**
      * Get video stream from an RTMP video.
      *
+     * @return resource popen stream
      * @throws Exception If the popen stream was not created correctly
      *
-     * @return resource popen stream
      */
     public function getRtmpStream()
     {
@@ -565,13 +572,13 @@ class Video
     /**
      * Get the stream of a converted video.
      *
-     * @param int    $audioBitrate Audio bitrate of the converted file
-     * @param string $filetype     Filetype of the converted file
-     *
-     * @throws Exception If your try to convert and M3U8 video
-     * @throws Exception If the popen stream was not created correctly
+     * @param int $audioBitrate Audio bitrate of the converted file
+     * @param string $filetype Filetype of the converted file
      *
      * @return resource popen stream
+     * @throws Exception If the popen stream was not created correctly
+     *
+     * @throws Exception If your try to convert and M3U8 video
      */
     public function getConvertedStream($audioBitrate, $filetype)
     {
@@ -605,21 +612,35 @@ class Video
     /**
      * Get a HTTP response containing the video.
      *
-     * @param array $headers HTTP headers of the request
+     * @param mixed[] $headers HTTP headers of the request
      *
-     * @return Response
+     * @return ResponseInterface
+     * @throws EmptyUrlException
+     * @throws PasswordException
+     * @link https://github.com/guzzle/guzzle/issues/2640
      */
     public function getHttpResponse(array $headers = [])
     {
-        $client = new Client();
+        // IDN conversion breaks with Google hosts like https://r3---sn-25glene6.googlevideo.com/.
+        $client = new Client(['idn_conversion' => false]);
         $urls = $this->getUrl();
+        $stream_context_options = [];
+
+        if (array_key_exists('Referer', (array)$this->http_headers)) {
+            $stream_context_options = [
+                'http' => [
+                    'header' => 'Referer: ' . $this->http_headers->Referer
+                ]
+            ];
+        }
 
         return $client->request(
             'GET',
             $urls[0],
             [
                 'stream' => true,
-                'headers' => array_merge((array) $this->http_headers, $headers)
+                'stream_context' => $stream_context_options,
+                'headers' => array_merge((array)$this->http_headers, $headers)
             ]
         );
     }

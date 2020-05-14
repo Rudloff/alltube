@@ -8,6 +8,7 @@ namespace Alltube\Test;
 
 use Alltube\Stream\YoutubeStream;
 use Alltube\Video;
+use Exception;
 
 /**
  * Unit tests for the YoutubeStream class.
@@ -17,6 +18,7 @@ class YoutubeStreamTest extends StreamTest
 {
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {

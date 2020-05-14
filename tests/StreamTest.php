@@ -6,6 +6,7 @@
 
 namespace Alltube\Test;
 
+use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 
 /**
@@ -15,6 +16,7 @@ abstract class StreamTest extends BaseTest
 {
     /**
      * Stream instance.
+     * @var StreamInterface
      */
     protected $stream;
 
@@ -36,7 +38,7 @@ abstract class StreamTest extends BaseTest
     public function testWrite()
     {
         if ($this->stream->isWritable()) {
-            $this->assertNull($this->stream->write('foo'));
+            $this->assertIsInt($this->stream->write('foo'));
         } else {
             $this->expectException(RuntimeException::class);
             $this->stream->write('foo');
@@ -103,7 +105,7 @@ abstract class StreamTest extends BaseTest
      */
     public function testEof()
     {
-        $this->assertFalse($this->stream->eof());
+        $this->assertIsBool($this->stream->eof());
     }
 
     /**

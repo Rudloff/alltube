@@ -2,10 +2,10 @@
 language: php
 php: 7.3
 addons:
-    apt:
-        packages:
-            - language-pack-fr
+  apt:
+    packages:
+      - language-pack-fr
 install: composer install --no-progress
 script:
-    - composer lint
-    - composer test
+  - composer lint
+  - composer test

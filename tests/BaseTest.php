@@ -7,6 +7,7 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -32,6 +33,7 @@ abstract class BaseTest extends TestCase
 
     /**
      * Prepare tests.
+     * @throws Exception
      */
     protected function setUp(): void
     {

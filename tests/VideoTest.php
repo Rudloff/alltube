@@ -7,6 +7,8 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
+use Alltube\Exception\EmptyUrlException;
+use Alltube\Exception\PasswordException;
 use Alltube\Video;
 use Exception;
 
@@ -20,6 +22,7 @@ class VideoTest extends BaseTest
      * Test getExtractors function.
      *
      * @return void
+     * @throws PasswordException
      */
     public function testGetExtractors()
     {
@@ -29,13 +32,15 @@ class VideoTest extends BaseTest
     /**
      * Test getUrl function.
      *
-     * @param string $url       URL
-     * @param string $format    Format
-     * @param string $filename  Filename
+     * @param string $url URL
+     * @param string $format Format
+     * @param string $filename Filename
      * @param string $extension File extension
-     * @param string $domain    Domain
+     * @param string $domain Domain
      *
      * @return void
+     * @throws PasswordException
+     * @throws EmptyUrlException
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
      * @dataProvider remuxUrlProvider
@@ -57,6 +62,8 @@ class VideoTest extends BaseTest
      * Test getUrl function with a protected video.
      *
      * @return void
+     * @throws EmptyUrlException
+     * @throws PasswordException
      */
     public function testgetUrlWithPassword()
     {
@@ -70,6 +77,8 @@ class VideoTest extends BaseTest
      * Test getUrl function with a protected video and no password.
      *
      * @return void
+     * @throws EmptyUrlException
+     * @throws PasswordException
      */
     public function testgetUrlWithMissingPassword()
     {
@@ -82,6 +91,8 @@ class VideoTest extends BaseTest
      * Test getUrl function with a protected video and a wrong password.
      *
      * @return void
+     * @throws EmptyUrlException
+     * @throws PasswordException
      */
     public function testgetUrlWithWrongPassword()
     {
@@ -96,6 +107,8 @@ class VideoTest extends BaseTest
      * @param string $url URL
      *
      * @return void
+     * @throws EmptyUrlException
+     * @throws PasswordException
      * @dataProvider      ErrorUrlProvider
      */
     public function testgetUrlError($url)
@@ -112,7 +125,7 @@ class VideoTest extends BaseTest
      */
     public function urlProvider()
     {
-        $videos = [
+        return [
             [
                 'https://www.youtube.com/watch?v=M7IpKCZ47pU', 'best[protocol^=http]',
                 'It_s_Not_Me_It_s_You_-_Hearts_Under_Fire-M7IpKCZ47pU',
@@ -136,11 +149,9 @@ class VideoTest extends BaseTest
                 'https://vimeo.com/24195442', 'http-720p',
                 'Carving_the_Mountains-24195442',
                 'mp4',
-                'gcs-vimeo.akamaized.net',
+                'akamaized.net',
             ]
         ];
-
-        return $videos;
     }
 
     /**
@@ -167,7 +178,7 @@ class VideoTest extends BaseTest
      */
     public function m3uUrlProvider()
     {
-        $videos = [
+        return [
             [
                 'https://twitter.com/verge/status/813055465324056576/video/1', 'hls-2176',
                 'The_Verge_-_This_tiny_origami_robot_can_self-fold_and_complete_tasks-813055465324056576',
@@ -175,8 +186,6 @@ class VideoTest extends BaseTest
                 'video.twimg.com',
             ]
         ];
-
-        return $videos;
     }
 
     /**
@@ -211,12 +220,13 @@ class VideoTest extends BaseTest
     /**
      * Test getJSON function.
      *
-     * @param string $url    URL
+     * @param string $url URL
      * @param string $format Format
      *
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
+     * @throws PasswordException
      */
     public function testGetJson($url, $format)
     {
@@ -237,6 +247,7 @@ class VideoTest extends BaseTest
      *
      * @return void
      * @dataProvider      ErrorURLProvider
+     * @throws PasswordException
      */
     public function testGetJsonError($url)
     {
@@ -248,15 +259,16 @@ class VideoTest extends BaseTest
     /**
      * Test getFilename function.
      *
-     * @param string $url       URL
-     * @param string $format    Format
-     * @param string $filename  Filename
+     * @param string $url URL
+     * @param string $format Format
+     * @param string $filename Filename
      * @param string $extension File extension
      *
      * @return void
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
      * @dataProvider remuxUrlProvider
+     * @throws PasswordException
      */
     public function testGetFilename($url, $format, $filename, $extension)
     {
@@ -271,6 +283,7 @@ class VideoTest extends BaseTest
      *
      * @return void
      * @dataProvider      ErrorUrlProvider
+     * @throws PasswordException
      */
     public function testGetFilenameError($url)
     {
@@ -282,11 +295,12 @@ class VideoTest extends BaseTest
     /**
      * Test getAudioStream function.
      *
-     * @param string $url    URL
+     * @param string $url URL
      * @param string $format Format
      *
      * @return void
      * @dataProvider urlProvider
+     * @throws Exception
      */
     public function testGetAudioStream($url, $format)
     {
@@ -371,11 +385,12 @@ class VideoTest extends BaseTest
     /**
      * Test getM3uStream function.
      *
-     * @param string $url    URL
+     * @param string $url URL
      * @param string $format Format
      *
      * @return void
      * @dataProvider m3uUrlProvider
+     * @throws Exception
      */
     public function testGetM3uStream($url, $format)
     {
@@ -386,11 +401,12 @@ class VideoTest extends BaseTest
     /**
      * Test getRemuxStream function.
      *
-     * @param string $url    URL
+     * @param string $url URL
      * @param string $format Format
      *
      * @return void
      * @dataProvider remuxUrlProvider
+     * @throws Exception
      */
     public function testGetRemuxStream($url, $format)
     {
@@ -417,11 +433,12 @@ class VideoTest extends BaseTest
     /**
      * Test getRtmpStream function.
      *
-     * @param string $url    URL
+     * @param string $url URL
      * @param string $format Format
      *
      * @return void
      * @dataProvider rtmpUrlProvider
+     * @throws Exception
      */
     public function testGetRtmpStream($url, $format)
     {
@@ -453,11 +470,12 @@ class VideoTest extends BaseTest
     /**
      * Test getConvertedStream function without avconv.
      *
-     * @param string $url    URL
+     * @param string $url URL
      * @param string $format Format
      *
      * @return void
      * @dataProvider urlProvider
+     * @throws Exception
      */
     public function testGetConvertedStream($url, $format)
     {

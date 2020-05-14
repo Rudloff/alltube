@@ -7,6 +7,7 @@
 namespace Alltube;
 
 use Exception;
+use Jawira\CaseConverter\CaseConverterException;
 use Symfony\Component\Yaml\Yaml;
 use Jawira\CaseConverter\Convert;
 
@@ -39,7 +40,7 @@ class Config
     /**
      * youtube-dl parameters.
      *
-     * @var array
+     * @var string[]
      */
     public $params = ['--no-warnings', '--ignore-errors', '--flat-playlist', '--restrict-filenames', '--no-playlist'];
 
@@ -60,7 +61,7 @@ class Config
     /**
      * List of formats available in advanced conversion mode.
      *
-     * @var array
+     * @var string[]
      */
     public $convertAdvancedFormats = ['mp3', 'avi', 'flv', 'wav'];
 
@@ -122,16 +123,9 @@ class Config
     public $appName = 'AllTube Download';
 
     /**
-     * YAML config file path.
-     *
-     * @var string
-     */
-    private $file;
-
-    /**
      * Generic formats supported by youtube-dl.
      *
-     * @var array
+     * @var string[]
      */
     public $genericFormats = [];
 
@@ -145,7 +139,8 @@ class Config
     /**
      * Config constructor.
      *
-     * @param array $options Options
+     * @param mixed[] $options Options
+     * @throws CaseConverterException
      */
     private function __construct(array $options = [])
     {
@@ -156,9 +151,9 @@ class Config
         if (empty($this->genericFormats)) {
             // We don't put this in the class definition so it can be detected by xgettext.
             $this->genericFormats = [
-                'best'                => $localeManager->t('Best'),
+                'best' => $localeManager->t('Best'),
                 'bestvideo+bestaudio' => $localeManager->t('Remux best video with best audio'),
-                'worst'               => $localeManager->t('Worst'),
+                'worst' => $localeManager->t('Worst'),
             ];
         }
 
@@ -195,10 +190,10 @@ class Config
     /**
      * Throw an exception if some of the options are invalid.
      *
-     * @throws Exception If youtube-dl is missing
+     * @return void
      * @throws Exception If Python is missing
      *
-     * @return void
+     * @throws Exception If youtube-dl is missing
      */
     private function validateOptions()
     {
@@ -216,7 +211,7 @@ class Config
     /**
      * Apply the provided options.
      *
-     * @param array $options Options
+     * @param mixed[] $options Options
      *
      * @return void
      */
@@ -235,6 +230,7 @@ class Config
      * If the value is an array, you should use the YAML format: "CONVERT_ADVANCED_FORMATS='[foo, bar]'"
      *
      * @return void
+     * @throws CaseConverterException
      */
     private function getEnv()
     {
@@ -265,11 +261,13 @@ class Config
      * Set options from a YAML file.
      *
      * @param string $file Path to the YAML file
+     * @return void
+     * @throws Exception
      */
     public static function setFile($file)
     {
         if (is_file($file)) {
-            $options = Yaml::parse(file_get_contents($file));
+            $options = Yaml::parse(strval(file_get_contents($file)));
             self::$instance = new self($options);
             self::$instance->validateOptions();
         } else {
@@ -280,8 +278,10 @@ class Config
     /**
      * Manually set some options.
      *
-     * @param array $options Options (see `config/config.example.yml` for available options)
-     * @param bool  $update  True to update an existing instance
+     * @param mixed[] $options Options (see `config/config.example.yml` for available options)
+     * @param bool $update True to update an existing instance
+     * @return void
+     * @throws Exception
      */
     public static function setOptions(array $options, $update = true)
     {
