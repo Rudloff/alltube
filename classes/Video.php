@@ -618,7 +618,7 @@ class Video
         if (array_key_exists('Referer', $this->http_headers)) {
             $stream_context_options = [
                 'http' => [
-                    'header' => 'Referer: '.$this->http_headers->Referer
+                    'header' => 'Referer: ' . $this->http_headers->Referer
                 ]
             ];
         }
