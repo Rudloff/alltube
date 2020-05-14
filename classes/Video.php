@@ -617,10 +617,12 @@ class Video
      * @return ResponseInterface
      * @throws EmptyUrlException
      * @throws PasswordException
+     * @link https://github.com/guzzle/guzzle/issues/2640
      */
     public function getHttpResponse(array $headers = [])
     {
-        $client = new Client();
+        // IDN conversion breaks with Google hosts like https://r3---sn-25glene6.googlevideo.com/.
+        $client = new Client(['idn_conversion' => false]);
         $urls = $this->getUrl();
         $stream_context_options = [];
 
