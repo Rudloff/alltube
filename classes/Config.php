@@ -225,7 +225,7 @@ class Config
     }
 
     /**
-     * Override options from environement variables.
+     * Override options from environment variables.
      * Environment variables should use screaming snake case: CONVERT, PYTHON, AUDIO_BITRATE, etc.
      * If the value is an array, you should use the YAML format: "CONVERT_ADVANCED_FORMATS='[foo, bar]'"
      *
