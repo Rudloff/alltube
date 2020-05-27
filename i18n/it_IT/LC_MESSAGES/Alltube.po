@@ -1,0 +1,248 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+#: templates/playlist.tpl:13
+msgid "Videos extracted from @title:"
+msgstr "Video estratti da @title:"
+
+#: templates/playlist.tpl:38 templates/password.tpl:11 templates/index.tpl:19
+#: templates/info.tpl:98
+msgid "Download"
+msgstr "Download"
+
+#: templates/playlist.tpl:39
+msgid "More options"
+msgstr "Più opzioni"
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "Cambia lingua"
+
+#: templates/inc/header.tpl:8
+msgid "Set language"
+msgstr "Imposta lingua"
+
+#: templates/inc/footer.tpl:8
+msgid "Code by @dev"
+msgstr "Codice di @dev"
+
+#: templates/inc/footer.tpl:16
+msgid "Design by @designer"
+msgstr "Design di @designer"
+
+#: templates/inc/footer.tpl:21
+msgid "Get the code"
+msgstr "Ottieni il codice"
+
+#: templates/inc/footer.tpl:29
+msgid "Based on @youtubedl"
+msgstr "Basato su @youtubedl"
+
+#: templates/inc/footer.tpl:33
+msgid "Donate using Liberapay"
+msgstr "Fai una donazione con Liberapay"
+
+#: templates/inc/footer.tpl:35
+msgid "Donate"
+msgstr "Dona"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "Questo video è protetto"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "Ti serve una password per scaricare questo video."
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "Password del video"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr "Copia qui l'URL del video (Youtube, Dailymotion, ecc.)"
+
+#: templates/index.tpl:25
+msgid "Audio only (MP3)"
+msgstr "Solo audio (MP3)"
+
+#: templates/index.tpl:28
+msgid "From"
+msgstr "Da"
+
+#: templates/index.tpl:29
+msgid "to"
+msgstr "a"
+
+#: templates/index.tpl:36
+msgid "See all supported websites"
+msgstr "Guarda tutti i siti supportati"
+
+#: templates/index.tpl:38
+msgid "Drag this to your bookmarks bar:"
+msgstr "Trascina questo nella tua barra dei segnalibri:"
+
+#: templates/index.tpl:39
+msgid "Bookmarklet"
+msgstr "Bookmarklet"
+
+#: templates/info.tpl:13
+msgid "You are going to download @title."
+msgstr "Stai per scaricare @title."
+
+#: templates/info.tpl:31
+msgid "Available formats:"
+msgstr "Formati disponibili:"
+
+#: templates/info.tpl:33
+msgid "Generic formats"
+msgstr "Formati generici"
+
+#: templates/info.tpl:38
+msgid "Detailed formats"
+msgstr "Formati dettagliati"
+
+#: templates/info.tpl:80
+msgid "Stream the video through the server"
+msgstr "Riproduci il video attraverso il server"
+
+#: templates/info.tpl:85
+msgid "Convert into a custom format:"
+msgstr "Converti in un formato personalizzato:"
+
+#: templates/info.tpl:86
+msgid "Custom format"
+msgstr "Formato personalizzato"
+
+#: templates/info.tpl:86
+msgid "Format to convert to"
+msgstr "Formato verso cui convertire"
+
+#: templates/info.tpl:91
+msgid "with"
+msgstr "con"
+
+#: templates/info.tpl:92
+msgid "Bit rate"
+msgstr "Bit rate"
+
+#: templates/info.tpl:93
+msgid "Custom bitrate"
+msgstr "bitrate personalizzato"
+
+#: templates/info.tpl:95
+msgid "kbit/s audio"
+msgstr "kbit/s audio"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "Si è verificato un errore"
+
+#: templates/error.tpl:6
+msgid "Please check the URL of your video."
+msgstr "Per favore controlla l'URL del video."
+
+#: templates/extractors.tpl:4 controllers/FrontController.php:109
+msgid "Supported websites"
+msgstr "Siti supportati"
+
+#: classes/Config.php:158
+msgid "Best"
+msgstr "Migliore"
+
+#: classes/Config.php:159
+msgid "Remux best video with best audio"
+msgstr "Fai il remux del video migliore con l'audio migliore"
+
+#: classes/Config.php:160
+msgid "Worst"
+msgstr "Peggiore"
+
+#: classes/Video.php:159
+msgid "Wrong password"
+msgstr "Password errata"
+
+#: classes/Video.php:250
+msgid "youtube-dl returned an empty URL."
+msgstr "youtube-dl ha restituito un URL vuoto."
+
+#: classes/Video.php:361 classes/Video.php:465
+msgid "Can't find avconv or ffmpeg at @path."
+msgstr "Impossibile trovare avconv o ffmpeg in @path."
+
+#: classes/Video.php:377
+msgid "Invalid start time: @from."
+msgstr "Punto di inizio non valido: @from."
+
+#: classes/Video.php:384
+msgid "Invalid end time: @to."
+msgstr "Punto di fine non valido: @to."
+
+#: classes/Video.php:430
+msgid "Conversion of playlists is not supported."
+msgstr "La conversione delle playlist non è supportata."
+
+#: classes/Video.php:435 classes/Video.php:578
+msgid "Conversion of M3U8 files is not supported."
+msgstr "La conversione di file M3U8 non è supportata."
+
+#: classes/Video.php:437
+msgid "Conversion of DASH segments is not supported."
+msgstr "La conversione di segmenti DASH non è supportata."
+
+#: classes/Video.php:446 classes/Video.php:488 classes/Video.php:525
+#: classes/Video.php:558 classes/Video.php:586
+msgid "Could not open popen stream."
+msgstr "Non è stato possibile aprire il popen stream."
+
+#: classes/Video.php:506
+msgid "This video does not have two URLs."
+msgstr "Questo video non ha due URL."
+
+#: controllers/DownloadController.php:215
+msgid "You need to enable remux mode to merge two formats."
+msgstr "Devi abilitare la modalità remux per unire due formati."
+
+#: controllers/DownloadController.php:255
+msgid "Can't find URL of video."
+msgstr "Impossibile trovare l'URL del video."
+
+#: controllers/FrontController.php:64
+msgid ""
+"Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
+msgstr ""
+"Scarica facilmente video da Youtube, Dailymotion, Vimeo e altri siti."
+
+#: controllers/FrontController.php:110
+msgid ""
+"List of all supported websites from which Alltube Download can extract video "
+"or audio files"
+msgstr ""
+"Lista di tutti i siti supportati da cui Alltube Download può estrarre file "
+"video o audio"
+
+#: controllers/FrontController.php:136
+msgid "Password prompt"
+msgstr "Richiesta password"
+
+#: controllers/FrontController.php:138
+msgid ""
+"You need a password in order to download this video with Alltube Download"
+msgstr ""
+"Ti serve una password per scaricare questo video con Alltube Download"
+
+#: controllers/FrontController.php:169
+msgid "Video download"
+msgstr "Download video"
+
+#: controllers/FrontController.php:171
+msgid "Download video from @extractor"
+msgstr "Scarica video da @extractor"
+
+#: controllers/FrontController.php:177
+msgid "Download @title from @extractor"
+msgstr "Scarica @title da @extractor"
+
+#: controllers/FrontController.php:253 controllers/FrontController.php:284
+msgid "Error"
+msgstr "Errore"
