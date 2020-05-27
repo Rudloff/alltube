@@ -16,6 +16,10 @@ use Symfony\Component\Translation\Loader\PoFileLoader;
  */
 class LocaleManager
 {
+
+    /**
+     * Path to locales.
+     */
     private const PATH = __DIR__ . '/../i18n/';
 
     /**
@@ -84,7 +88,9 @@ class LocaleManager
      */
     public function getSupportedLocales()
     {
-        $return = [];
+        $return = [
+            new Locale('en_US')
+        ];
 
         $finder = new Finder();
         $finder->depth(0)
