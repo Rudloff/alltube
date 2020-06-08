@@ -116,5 +116,5 @@ try {
     die('Smarty could not compile the template file: ' . $e->getMessage());
 } catch (Throwable $e) {
     // Last resort if the error has not been caught by the error handler for some reason.
-    die('Error when starting the app: ' . $e->getMessage());
+    die('Error when starting the app: ' . htmlentities($e->getMessage()));
 }
