@@ -17,10 +17,9 @@ class RoboFile extends Tasks
     {
         $result = $this->taskExec('git')
             ->args('describe')
-            ->printOutput(false)
             ->run();
         $result->provideOutputdata();
-        $tag = $result->getOutputData();
+        $tag = trim($result->getOutputData());
 
         // We don't want the whole vendor directory.
         $finder = new Finder();
