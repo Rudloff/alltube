@@ -8,9 +8,12 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\FrontController;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Exception\AlltubeLibraryException;
 use Exception;
 use Slim\Http\Environment;
 use Slim\Http\Request;
+use SmartyException;
 
 /**
  * Unit tests for the FrontController class.
@@ -25,7 +28,7 @@ class FrontControllerTest extends ControllerTest
 
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException|SmartyException
      */
     protected function setUp(): void
     {
@@ -48,7 +51,7 @@ class FrontControllerTest extends ControllerTest
      * Test the constructor with streams enabled.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testConstructorWithStream()
     {
@@ -99,7 +102,7 @@ class FrontControllerTest extends ControllerTest
      */
     public function testPassword()
     {
-        $this->assertRequestIsOk('password');
+        $this->assertRequestIsClientError('password');
     }
 
     /**
@@ -128,7 +131,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testInfoWithAudio()
     {
@@ -145,7 +148,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testInfoWithVimeoAudio()
     {
@@ -160,7 +163,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testInfoWithUnconvertedAudio()
     {
@@ -180,6 +183,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
+     * @throws AlltubeLibraryException
      */
     public function testInfoWithPassword()
     {
@@ -199,8 +203,8 @@ class FrontControllerTest extends ControllerTest
      */
     public function testInfoWithMissingPassword()
     {
-        $this->assertRequestIsOk('info', ['url' => 'http://vimeo.com/68375962']);
-        $this->assertRequestIsOk('info', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
+        $this->assertRequestIsClientError('info', ['url' => 'http://vimeo.com/68375962']);
+        $this->assertRequestIsClientError('info', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
     }
 
     /**
@@ -208,7 +212,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testInfoWithStream()
     {

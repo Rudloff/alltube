@@ -6,9 +6,10 @@
 
 namespace Alltube\Test;
 
+use Alltube\Config;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Stream\YoutubeStream;
-use Alltube\Video;
-use Exception;
 
 /**
  * Unit tests for the YoutubeStream class.
@@ -18,15 +19,17 @@ class YoutubeStreamTest extends StreamTest
 {
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException|AlltubeLibraryException
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $video = new Video('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '135');
+        $config = Config::getInstance();
+        $downloader = $config->getDownloader();
+        $video = $downloader->getVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '135');
 
-        $this->stream = new YoutubeStream($video);
+        $this->stream = new YoutubeStream($downloader, $video);
     }
 
     /**

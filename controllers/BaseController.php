@@ -7,12 +7,14 @@
 namespace Alltube\Controller;
 
 use Alltube\Config;
+use Alltube\Library\Downloader;
+use Alltube\Library\Video;
 use Alltube\LocaleManager;
 use Alltube\SessionManager;
-use Alltube\Video;
 use Aura\Session\Segment;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
+use Slim\Http\Response;
 
 /**
  * Abstract class used by every controller.
@@ -62,6 +64,13 @@ abstract class BaseController
     protected $localeManager;
 
     /**
+     * Downloader instance.
+     *
+     * @var Downloader
+     */
+    protected $downloader;
+
+    /**
      * BaseController constructor.
      *
      * @param ContainerInterface $container Slim dependency container
@@ -73,6 +82,7 @@ abstract class BaseController
         $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
         $this->localeManager = $this->container->get('locale');
+        $this->downloader = $this->config->getDownloader();
 
         if (!$this->config->stream) {
             // Force HTTP if stream is not enabled.
@@ -116,5 +126,21 @@ abstract class BaseController
         }
 
         return $password;
+    }
+
+    /**
+     * Display an user-friendly error.
+     *
+     * @param Request $request PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param string $message Error message
+     *
+     * @return Response HTTP response
+     */
+    protected function displayError(Request $request, Response $response, $message)
+    {
+        $controller = new FrontController($this->container);
+
+        return $controller->displayError($request, $response, $message);
     }
 }

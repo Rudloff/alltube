@@ -6,12 +6,13 @@
 
 namespace Alltube\Controller;
 
-use Alltube\Exception\PasswordException;
+use Alltube\Library\Exception\PasswordException;
+use Alltube\Library\Exception\AlltubeLibraryException;
+use Alltube\Library\Exception\WrongPasswordException;
 use Alltube\Locale;
-use Alltube\Video;
+use Exception;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
-use Exception;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -94,7 +95,7 @@ class FrontController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
-     * @throws PasswordException
+     * @throws AlltubeLibraryException
      */
     public function extractors(Request $request, Response $response)
     {
@@ -103,7 +104,7 @@ class FrontController extends BaseController
             'extractors.tpl',
             [
                 'config' => $this->config,
-                'extractors' => Video::getExtractors(),
+                'extractors' => $this->downloader->getExtractors(),
                 'class' => 'extractors',
                 'title' => $this->localeManager->t('Supported websites'),
                 'description' => $this->localeManager->t('List of all supported websites from which Alltube Download ' .
@@ -141,7 +142,7 @@ class FrontController extends BaseController
             ]
         );
 
-        return $response;
+        return $response->withStatus(403);
     }
 
     /**
@@ -151,6 +152,7 @@ class FrontController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws AlltubeLibraryException
      */
     private function getInfoResponse(Request $request, Response $response)
     {
@@ -158,6 +160,8 @@ class FrontController extends BaseController
             $this->video->getJson();
         } catch (PasswordException $e) {
             return $this->password($request, $response);
+        } catch (WrongPasswordException $e) {
+            return $this->displayError($request, $response, $this->localeManager->t('Wrong password'));
         }
 
         if (isset($this->video->entries)) {
@@ -205,13 +209,14 @@ class FrontController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws AlltubeLibraryException
      */
     public function info(Request $request, Response $response)
     {
         $url = $request->getQueryParam('url') ?: $request->getQueryParam('v');
 
         if (isset($url) && !empty($url)) {
-            $this->video = new Video($url, $this->getFormat($request), $this->getPassword($request));
+            $this->video = $this->downloader->getVideo($url, $this->getFormat($request), $this->getPassword($request));
 
             if ($this->config->convert && $request->getQueryParam('audio')) {
                 // We skip the info page and get directly to the download.
@@ -228,6 +233,33 @@ class FrontController extends BaseController
     }
 
     /**
+     * Display an user-friendly error.
+     *
+     * @param Request $request PSR-7 request
+     * @param Response $response PSR-7 response
+     * @param string $message Error message
+     *
+     * @return Response HTTP response
+     */
+    protected function displayError(Request $request, Response $response, $message)
+    {
+        $this->view->render(
+            $response,
+            'error.tpl',
+            [
+                'config' => $this->config,
+                'error' => $message,
+                'class' => 'video',
+                'title' => $this->localeManager->t('Error'),
+                'canonical' => $this->getCanonicalUrl($request),
+                'locale' => $this->localeManager->getLocale(),
+            ]
+        );
+
+        return $response->withStatus(500);
+    }
+
+    /**
      * Display an error page.
      *
      * @param Request $request PSR-7 request
@@ -241,7 +273,11 @@ class FrontController extends BaseController
         if ($this->config->debug) {
             $renderer = new HtmlErrorRenderer(true);
             $exception = $renderer->render($error);
+
             $response->getBody()->write($exception->getAsString());
+            foreach ($exception->getHeaders() as $header => $value) {
+                $response = $response->withHeader($header, $value);
+            }
 
             return $response->withStatus($exception->getStatusCode());
         } else {
@@ -251,20 +287,7 @@ class FrontController extends BaseController
                 $message = '';
             }
 
-            $this->view->render(
-                $response,
-                'error.tpl',
-                [
-                    'config' => $this->config,
-                    'error' => $message,
-                    'class' => 'video',
-                    'title' => $this->localeManager->t('Error'),
-                    'canonical' => $this->getCanonicalUrl($request),
-                    'locale' => $this->localeManager->getLocale(),
-                ]
-            );
-
-            return $response->withStatus(500);
+            return $this->displayError($request, $response, $message);
         }
     }
 

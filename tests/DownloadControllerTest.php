@@ -8,7 +8,11 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Controller\DownloadController;
-use Exception;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Exception\EmptyUrlException;
+use Alltube\Library\Exception\RemuxException;
+use Alltube\Library\Exception\YoutubedlException;
+use SmartyException;
 
 /**
  * Unit tests for the FrontController class.
@@ -18,7 +22,7 @@ class DownloadControllerTest extends ControllerTest
 {
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException|SmartyException
      */
     protected function setUp(): void
     {
@@ -64,7 +68,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with streams enabled.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testDownloadWithStream()
     {
@@ -80,7 +84,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an M3U stream.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testDownloadWithM3uStream()
     {
@@ -100,7 +104,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an RTMP stream.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testDownloadWithRtmpStream()
     {
@@ -118,7 +122,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with a remuxed video.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testDownloadWithRemux()
     {
@@ -140,7 +144,8 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithRemuxDisabled()
     {
-        $this->assertRequestIsServerError(
+        $this->expectException(RemuxException::class);
+        $this->getRequestResult(
             'download',
             [
                 'url'    => 'https://www.youtube.com/watch?v=M7IpKCZ47pU',
@@ -166,7 +171,8 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithError()
     {
-        $this->assertRequestIsServerError('download', ['url' => 'http://example.com/foo']);
+        $this->expectException(YoutubedlException::class);
+        $this->getRequestResult('download', ['url' => 'http://example.com/foo']);
     }
 
     /**
@@ -177,7 +183,8 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithEmptyUrl()
     {
-        $this->assertRequestIsServerError(
+        $this->expectException(EmptyUrlException::class);
+        $this->getRequestResult(
             'download',
             ['url' => 'https://www.youtube.com/playlist?list=PLgdySZU6KUXL_8Jq5aUkyNV7wCa-4wZsC']
         );
@@ -188,7 +195,7 @@ class DownloadControllerTest extends ControllerTest
      *
      * @return void
      * @requires OS Linux
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testDownloadWithPlaylist()
     {
@@ -204,7 +211,7 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an advanced conversion.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testDownloadWithAdvancedConversion()
     {

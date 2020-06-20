@@ -9,13 +9,14 @@ namespace Alltube\Test;
 use Alltube\Controller\BaseController;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
+use Alltube\Exception\ConfigException;
 use Alltube\LocaleManager;
 use Alltube\ViewFactory;
-use Exception;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use SmartyException;
 
 /**
  * Abstract class used by the controller tests.
@@ -51,7 +52,7 @@ abstract class ControllerTest extends BaseTest
 
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException|SmartyException
      */
     protected function setUp(): void
     {

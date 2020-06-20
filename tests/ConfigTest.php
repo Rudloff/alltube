@@ -7,7 +7,7 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
-use Exception;
+use Alltube\Exception\ConfigException;
 
 /**
  * Unit tests for the Config class.
@@ -23,7 +23,7 @@ class ConfigTest extends BaseTest
 
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException
      */
     protected function setUp(): void
     {
@@ -82,7 +82,7 @@ class ConfigTest extends BaseTest
      * Test the setFile function.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testSetFile()
     {
@@ -97,7 +97,7 @@ class ConfigTest extends BaseTest
      */
     public function testSetFileWithMissingFile()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(ConfigException::class);
         Config::setFile('foo');
     }
 
@@ -105,7 +105,7 @@ class ConfigTest extends BaseTest
      * Test the setOptions function.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testSetOptions()
     {
@@ -118,7 +118,7 @@ class ConfigTest extends BaseTest
      * Test the setOptions function.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testSetOptionsWithoutUpdate()
     {
@@ -134,7 +134,7 @@ class ConfigTest extends BaseTest
      */
     public function testSetOptionsWithBadYoutubedl()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(ConfigException::class);
         Config::setOptions(['youtubedl' => 'foo']);
     }
 
@@ -145,7 +145,7 @@ class ConfigTest extends BaseTest
      */
     public function testSetOptionsWithBadPython()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(ConfigException::class);
         Config::setOptions(['python' => 'foo']);
     }
 
@@ -153,7 +153,7 @@ class ConfigTest extends BaseTest
      * Test the getInstance function with the CONVERT and PYTHON environment variables.
      *
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public function testGetInstanceWithEnv()
     {
