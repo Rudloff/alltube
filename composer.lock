@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e02a081a0f220bf779ab5ba047c1ca68",
+    "content-hash": "a61a7bc33d1de355e511fe3aa1b6a193",
     "packages": [
+        {
+            "name": "anam/phantomjs-linux-x86-binary",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anam-hossain/phantomjs-linux-x86-binary.git",
+                "reference": "cb90cd0e7bd4ad34f52e6834783b1c5adae15014"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anam-hossain/phantomjs-linux-x86-binary/zipball/cb90cd0e7bd4ad34f52e6834783b1c5adae15014",
+                "reference": "cb90cd0e7bd4ad34f52e6834783b1c5adae15014",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/phantomjs"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Anam\\PhantomLinux\\": "/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Anam hossain",
+                    "email": "enam33@gmail.com"
+                }
+            ],
+            "description": "PhantomJS static linked binary for 64 bit linux systems. Most of Linux distributions are supported including Ubuntu, Debian, Fedora and CentOS.",
+            "homepage": "http://phantomjs.org/download.html",
+            "keywords": [
+                "binary",
+                "phantomjs",
+                "phantomjs binary"
+            ],
+            "time": "2016-04-05T05:24:48+00:00"
+        },
         {
             "name": "aura/session",
             "version": "2.1.0",
@@ -107,6 +149,18 @@
                 "zip"
             ],
             "time": "2018-08-10T13:58:33+00:00"
+        },
+        {
+            "name": "ffmpeg/ffmpeg",
+            "version": "4.1.4",
+            "dist": {
+                "type": "xz",
+                "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.1.4-amd64-static.tar.xz"
+            },
+            "bin": [
+                "ffmpeg"
+            ],
+            "type": "library"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1387,6 +1441,15 @@
             "time": "2019-11-12T14:51:11+00:00"
         },
         {
+            "name": "ytdl-org/youtube-dl",
+            "version": "2020.05.08",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.05.08.zip"
+            },
+            "type": "library"
+        },
+        {
             "name": "zonuexe/http-accept-language",
             "version": "0.4.1",
             "source": {
@@ -1429,48 +1492,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "anam/phantomjs-linux-x86-binary",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/anam-hossain/phantomjs-linux-x86-binary.git",
-                "reference": "cb90cd0e7bd4ad34f52e6834783b1c5adae15014"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/anam-hossain/phantomjs-linux-x86-binary/zipball/cb90cd0e7bd4ad34f52e6834783b1c5adae15014",
-                "reference": "cb90cd0e7bd4ad34f52e6834783b1c5adae15014",
-                "shasum": ""
-            },
-            "bin": [
-                "bin/phantomjs"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Anam\\PhantomLinux\\": "/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Anam hossain",
-                    "email": "enam33@gmail.com"
-                }
-            ],
-            "description": "PhantomJS static linked binary for 64 bit linux systems. Most of Linux distributions are supported including Ubuntu, Debian, Fedora and CentOS.",
-            "homepage": "http://phantomjs.org/download.html",
-            "keywords": [
-                "binary",
-                "phantomjs",
-                "phantomjs binary"
-            ],
-            "time": "2016-04-05T05:24:48+00:00"
-        },
         {
             "name": "consolidation/annotated-command",
             "version": "4.1.1",
@@ -2092,18 +2113,6 @@
                 "instantiate"
             ],
             "time": "2019-10-21T16:45:58+00:00"
-        },
-        {
-            "name": "ffmpeg/ffmpeg",
-            "version": "4.1.4",
-            "dist": {
-                "type": "xz",
-                "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.1.4-amd64-static.tar.xz"
-            },
-            "bin": [
-                "ffmpeg"
-            ],
-            "type": "library"
         },
         {
             "name": "gitonomy/gitlib",
@@ -4243,12 +4252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "e38de1df609b39d97144514d28b0804ad4daaddb"
+                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/e38de1df609b39d97144514d28b0804ad4daaddb",
-                "reference": "e38de1df609b39d97144514d28b0804ad4daaddb",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6d2e5ab854782830911ddd33b7d4649b9f18c10f",
+                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f",
                 "shasum": ""
             },
             "conflict": {
@@ -4257,13 +4266,14 @@
                 "alterphp/easyadmin-extension-bundle": ">=1.2,<1.2.11|>=1.3,<1.3.1",
                 "amphp/artax": "<1.0.6|>=2,<2.0.6",
                 "amphp/http": "<1.0.1",
+                "amphp/http-client": ">=4,<4.4",
                 "api-platform/core": ">=2.2,<2.2.10|>=2.3,<2.3.6",
                 "asymmetricrypt/asymmetricrypt": ">=0,<9.9.99",
                 "aws/aws-sdk-php": ">=3,<3.2.1",
                 "bagisto/bagisto": "<0.1.5",
                 "barrelstrength/sprout-base-email": "<1.2.7",
                 "barrelstrength/sprout-forms": "<3.9",
-                "bolt/bolt": "<3.6.10",
+                "bolt/bolt": "<3.7.1",
                 "brightlocal/phpwhois": "<=4.2.5",
                 "buddypress/buddypress": "<5.1.2",
                 "bugsnag/bugsnag-laravel": ">=2,<2.0.2",
@@ -4291,8 +4301,8 @@
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1",
                 "dolibarr/dolibarr": "<11.0.4",
                 "dompdf/dompdf": ">=0.6,<0.6.2",
-                "drupal/core": ">=7,<7.70|>=8,<8.7.14|>=8.8,<8.8.6",
-                "drupal/drupal": ">=7,<7.70|>=8,<8.7.14|>=8.8,<8.8.6",
+                "drupal/core": ">=7,<7.72|>=8,<8.8.8|>=8.9,<8.9.1|>=9,<9.0.1",
+                "drupal/drupal": ">=7,<7.72|>=8,<8.8.8|>=8.9,<8.9.1|>=9,<9.0.1",
                 "endroid/qr-code-bundle": "<3.4.2",
                 "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
@@ -4302,8 +4312,9 @@
                 "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
                 "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6",
                 "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2",
+                "ezsystems/ezplatform-kernel": ">=1,<1.0.2.1",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
-                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.1|>=6,<6.7.9.1|>=6.8,<6.13.6.2|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.6.2",
+                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.2|>=6,<6.7.9.1|>=6.8,<6.13.6.3|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.7.1",
                 "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.14.1|>=2011,<2017.12.7.2|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3|>=2019.3,<2019.3.4.2",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
@@ -4341,6 +4352,7 @@
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
                 "nzo/url-encryptor-bundle": ">=4,<4.3.2|>=5,<5.0.1",
+                "october/october": ">=1.0.319,<1.0.466",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
@@ -4352,7 +4364,8 @@
                 "paypal/merchant-sdk-php": "<3.12",
                 "pear/archive_tar": "<1.4.4",
                 "phpfastcache/phpfastcache": ">=5,<5.0.13",
-                "phpmailer/phpmailer": ">=5,<5.2.27|>=6,<6.0.6",
+                "phpmailer/phpmailer": "<6.1.6",
+                "phpmussel/phpmussel": ">=1,<1.6",
                 "phpmyadmin/phpmyadmin": "<4.9.2",
                 "phpoffice/phpexcel": "<1.8.2",
                 "phpoffice/phpspreadsheet": "<1.8",
@@ -4367,6 +4380,7 @@
                 "propel/propel": ">=2-alpha.1,<=2-alpha.7",
                 "propel/propel1": ">=1,<=1.7.1",
                 "pusher/pusher-php-server": "<2.2.1",
+                "rainlab/debugbar-plugin": "<3.1",
                 "robrichards/xmlseclibs": "<3.0.4",
                 "sabre/dav": ">=1.6,<1.6.99|>=1.7,<1.7.11|>=1.8,<1.8.9",
                 "scheb/two-factor-bundle": ">=0,<3.26|>=4,<4.11",
@@ -4505,7 +4519,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2020-05-22T06:49:22+00:00"
+            "time": "2020-06-19T13:23:43+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -6055,15 +6069,6 @@
                 "validate"
             ],
             "time": "2019-11-24T13:36:37+00:00"
-        },
-        {
-            "name": "ytdl-org/youtube-dl",
-            "version": "2020.05.08",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.05.08.zip"
-            },
-            "type": "library"
         }
     ],
     "aliases": [],
