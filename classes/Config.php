@@ -8,6 +8,7 @@ namespace Alltube;
 
 use Exception;
 use Jawira\CaseConverter\CaseConverterException;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\Yaml\Yaml;
 use Jawira\CaseConverter\Convert;
 
@@ -210,6 +211,11 @@ class Config
             throw new Exception("Can't find youtube-dl at " . $this->youtubedl);
         } elseif (!Video::checkCommand([$this->python, '--version'])) {
             throw new Exception("Can't find Python at " . $this->python);
+        }
+
+        if (!class_exists(Debug::class)) {
+            // Dev dependencies are probably not installed.
+            $this->debug = false;
         }
     }
 
