@@ -90,7 +90,7 @@ class Video
      *                                including selectors like "[height<=720]")
      * @param string $password Password
      */
-    public function __construct($webpageUrl, $requestedFormat = 'best', $password = null)
+    public function __construct($webpageUrl, $requestedFormat = 'best/bestvideo', $password = null)
     {
         $this->webpageUrl = $webpageUrl;
         $this->requestedFormat = $requestedFormat;
