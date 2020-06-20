@@ -49,9 +49,9 @@ appName: AllTube Download
 
 # Generic formats supported by youtube-dl
 genericFormats:
-    best: Best
+    best/bestvideo: Best
     bestvideo+bestaudio: Remux best video with best audio
-    worst: Worst
+    worst/worstvideo: Worst
 
 # Enable debug mode.
 debug: false

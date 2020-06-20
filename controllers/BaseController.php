@@ -31,7 +31,7 @@ abstract class BaseController
      *
      * @var string
      */
-    protected $defaultFormat = 'best[protocol=https]/best[protocol=http]';
+    protected $defaultFormat = 'best/bestvideo';
 
     /**
      * Slim dependency container.
@@ -74,8 +74,9 @@ abstract class BaseController
         $this->sessionSegment = $session->getSegment(self::class);
         $this->localeManager = $this->container->get('locale');
 
-        if ($this->config->stream) {
-            $this->defaultFormat = 'best';
+        if (!$this->config->stream) {
+            // Force HTTP if stream is not enabled.
+            $this->defaultFormat = Config::addHttpToFormat($this->defaultFormat);
         }
     }
 

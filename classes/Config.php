@@ -151,9 +151,9 @@ class Config
         if (empty($this->genericFormats)) {
             // We don't put this in the class definition so it can be detected by xgettext.
             $this->genericFormats = [
-                'best' => $localeManager->t('Best'),
+                'best/bestvideo' => $localeManager->t('Best'),
                 'bestvideo+bestaudio' => $localeManager->t('Remux best video with best audio'),
-                'worst' => $localeManager->t('Worst'),
+                'worst/worstvideo' => $localeManager->t('Worst'),
             ];
         }
 
@@ -165,26 +165,31 @@ class Config
                 }
             } elseif (!$this->stream) {
                 // Force HTTP if stream is not enabled.
-                $this->replaceGenericFormat($format, $format . '[protocol=https]/' . $format . '[protocol=http]');
+                $keys = array_keys($this->genericFormats);
+                $keys[array_search($format, $keys)] = $this->addHttpToFormat($format);
+                if ($genericFormats = array_combine($keys, $this->genericFormats)) {
+                    $this->genericFormats = $genericFormats;
+                }
             }
         }
     }
 
     /**
-     * Replace a format key.
+     * Add HTTP condition to a format.
      *
-     * @param string $oldFormat Old format
-     * @param string $newFormat New format
+     * @param string $format Format
      *
-     * @return void
+     * @return string
      */
-    private function replaceGenericFormat($oldFormat, $newFormat)
+    public static function addHttpToFormat($format)
     {
-        $keys = array_keys($this->genericFormats);
-        $keys[array_search($oldFormat, $keys)] = $newFormat;
-        if ($genericFormats = array_combine($keys, $this->genericFormats)) {
-            $this->genericFormats = $genericFormats;
+        $newFormat = [];
+        foreach (explode('/', $format) as $subformat) {
+            $newFormat[] = $subformat . '[protocol=https]';
+            $newFormat[] = $subformat . '[protocol=http]';
         }
+
+        return implode('/', $newFormat);
     }
 
     /**
