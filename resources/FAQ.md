@@ -113,30 +113,6 @@ you can download it if you enable streaming (see above).
 docker run -p 8080:80 rudloff/alltube
 ```
 
-## Run Heroku locally
-
-You should be able to use `heroku local` like this:
-
-```bash
-sudo APACHE_LOCK_DIR=. APACHE_PID_FILE=./pid APACHE_RUN_USER=www-data \
-    APACHE_RUN_GROUP=www-data APACHE_LOG_DIR=. \
-    heroku local
-```
-
-You might need to create some symlinks before that:
-
-```bash
-ln -s /usr/sbin/apache2 /usr/sbin/httpd
-ln -s /usr/sbin/php-fpm7.0 /usr/sbin/php-fpm
-```
-
-And you probably need to run this in another terminal
-after `heroku local` has finished launching `php-fpm`:
-
-```bash
-chmod 0667 /tmp/heroku.fcgi.5000.sock
-```
-
 ## Download 1080p videos from Youtube
 
 Youtube distributes HD content in two separate video and audio files.
