@@ -3557,20 +3557,20 @@
         },
         {
             "name": "phpro/grumphp",
-            "version": "v0.18.0",
+            "version": "v0.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpro/grumphp.git",
-                "reference": "b3d80bbcbac8068f21ea5f5da18a4af01d2d471d"
+                "reference": "d07e59ebfdd48cf41d12b2af3670abcd1a2b01ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpro/grumphp/zipball/b3d80bbcbac8068f21ea5f5da18a4af01d2d471d",
-                "reference": "b3d80bbcbac8068f21ea5f5da18a4af01d2d471d",
+                "url": "https://api.github.com/repos/phpro/grumphp/zipball/d07e59ebfdd48cf41d12b2af3670abcd1a2b01ef",
+                "reference": "d07e59ebfdd48cf41d12b2af3670abcd1a2b01ef",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "~1.0",
+                "composer-plugin-api": "~1.0 || ~2.0",
                 "doctrine/collections": "~1.2",
                 "ext-json": "*",
                 "gitonomy/gitlib": "^1.0.3",
@@ -3588,10 +3588,9 @@
                 "symfony/yaml": "~3.4 || ~4.0 || ~5.0"
             },
             "require-dev": {
-                "brianium/paratest": "~3.1",
-                "composer/composer": "~1.9",
+                "brianium/paratest": "~3.1 || dev-master",
+                "composer/composer": "~1.9 || ^2.0@dev",
                 "ergebnis/composer-normalize": "~2.1",
-                "friendsofphp/php-cs-fixer": "~2.16",
                 "jakub-onderka/php-parallel-lint": "~1.0",
                 "nikic/php-parser": "~3.1",
                 "phpspec/phpspec": "~6.1",
@@ -3658,7 +3657,7 @@
                 }
             ],
             "description": "A composer plugin that enables source code quality checks.",
-            "time": "2020-02-25T17:51:17+00:00"
+            "time": "2020-05-27T04:48:38+00:00"
         },
         {
             "name": "phpspec/prophecy",
