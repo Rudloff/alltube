@@ -34,13 +34,6 @@
     "symfony/error-handler": "^5.0",
     "symfony/var-dumper": "^5.0"
   },
-  "extra": {
-    "paas": {
-      "nginx-includes": [
-        "resources/nginx.conf"
-      ]
-    }
-  },
   "repositories": [
     {
       "type": "composer",
