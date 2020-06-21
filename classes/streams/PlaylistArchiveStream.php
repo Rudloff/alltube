@@ -6,9 +6,9 @@
 
 namespace Alltube\Stream;
 
-use Alltube\Exception\EmptyUrlException;
-use Alltube\Exception\PasswordException;
-use Alltube\Video;
+use Alltube\Library\Downloader;
+use Alltube\Library\Exception\AlltubeLibraryException;
+use Alltube\Library\Video;
 use Barracuda\ArchiveStream\ZipArchive;
 use Psr\Http\Message\StreamInterface;
 
@@ -48,21 +48,31 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     private $isComplete = false;
 
     /**
+     * Downloader object.
+     *
+     * @var Downloader
+     */
+    protected $downloader;
+
+    /**
      * PlaylistArchiveStream constructor.
      *
      * We don't call the parent constructor because it messes up the output buffering.
      *
+     * @param Downloader $downloader Downloader object
      * @param Video $video Video/playlist to download
      * @noinspection PhpMissingParentConstructorInspection
      */
-    public function __construct(Video $video)
+    public function __construct(Downloader $downloader, Video $video)
     {
+        $this->downloader = $downloader;
+
         $buffer = fopen('php://temp', 'r+');
         if ($buffer !== false) {
             $this->buffer = $buffer;
         }
         foreach ($video->entries as $entry) {
-            $this->videos[] = new Video($entry->url);
+            $this->videos[] = $downloader->getVideo($entry->url);
         }
     }
 
@@ -244,12 +254,11 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      * @param Video $video Video to stream
      *
      * @return void
-     * @throws PasswordException
-     * @throws EmptyUrlException
+     * @throws AlltubeLibraryException
      */
     protected function startVideoStream(Video $video)
     {
-        $response = $video->getHttpResponse();
+        $response = $this->downloader->getHttpResponse($video);
 
         $this->curVideoStream = $response->getBody();
         $contentLengthHeaders = $response->getHeader('Content-Length');
@@ -266,8 +275,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      * @param int $count Number of bytes to read
      *
      * @return string|false
-     * @throws EmptyUrlException
-     * @throws PasswordException
+     * @throws AlltubeLibraryException
      */
     public function read($count)
     {

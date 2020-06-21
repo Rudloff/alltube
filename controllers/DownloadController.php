@@ -6,13 +6,19 @@
 
 namespace Alltube\Controller;
 
-use Alltube\Exception\EmptyUrlException;
-use Alltube\Exception\PasswordException;
+use Alltube\Config;
+use Alltube\Library\Exception\EmptyUrlException;
+use Alltube\Library\Exception\InvalidProtocolConversionException;
+use Alltube\Library\Exception\PasswordException;
+use Alltube\Library\Exception\AlltubeLibraryException;
+use Alltube\Library\Exception\PlaylistConversionException;
+use Alltube\Library\Exception\PopenStreamException;
+use Alltube\Library\Exception\RemuxException;
+use Alltube\Library\Exception\WrongPasswordException;
+use Alltube\Library\Exception\YoutubedlException;
 use Alltube\Stream\ConvertedPlaylistArchiveStream;
 use Alltube\Stream\PlaylistArchiveStream;
 use Alltube\Stream\YoutubeStream;
-use Alltube\Video;
-use Exception;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\Stream;
@@ -25,17 +31,18 @@ class DownloadController extends BaseController
     /**
      * Redirect to video file.
      *
-     * @param Request  $request  PSR-7 request
+     * @param Request $request PSR-7 request
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws AlltubeLibraryException
      */
     public function download(Request $request, Response $response)
     {
         $url = $request->getQueryParam('url');
 
         if (isset($url)) {
-            $this->video = new Video($url, $this->getFormat($request), $this->getPassword($request));
+            $this->video = $this->downloader->getVideo($url, $this->getFormat($request), $this->getPassword($request));
 
             try {
                 if ($this->config->convert && $request->getQueryParam('audio')) {
@@ -49,14 +56,33 @@ class DownloadController extends BaseController
                 // Regular download.
                 return $this->getDownloadResponse($request, $response);
             } catch (PasswordException $e) {
-                return $response->withRedirect(
-                    $this->container->get('router')->pathFor('info') .
-                        '?' . http_build_query($request->getQueryParams())
-                );
-            } catch (Exception $e) {
-                $response->getBody()->write($e->getMessage());
+                $frontController = new FrontController($this->container);
 
-                return $response->withHeader('Content-Type', 'text/plain')->withStatus(500);
+                return $frontController->password($request, $response);
+            } catch (WrongPasswordException $e) {
+                return $this->displayError($request, $response, $this->localeManager->t('Wrong password'));
+            } catch (PlaylistConversionException $e) {
+                return $this->displayError(
+                    $request,
+                    $response,
+                    $this->localeManager->t('Conversion of playlists is not supported.')
+                );
+            } catch (InvalidProtocolConversionException $e) {
+                if (in_array($this->video->protocol, ['m3u8', 'm3u8_native'])) {
+                    return $this->displayError(
+                        $request,
+                        $response,
+                        $this->localeManager->t('Conversion of M3U8 files is not supported.')
+                    );
+                } elseif ($this->video->protocol == 'http_dash_segments') {
+                    return $this->displayError(
+                        $request,
+                        $response,
+                        $this->localeManager->t('Conversion of DASH segments is not supported.')
+                    );
+                } else {
+                    throw $e;
+                }
             }
         } else {
             return $response->withRedirect($this->container->get('router')->pathFor('index'));
@@ -70,8 +96,7 @@ class DownloadController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
-     * @throws PasswordException
-     * @throws Exception
+     * @throws AlltubeLibraryException
      */
     private function getConvertedAudioResponse(Request $request, Response $response)
     {
@@ -86,13 +111,7 @@ class DownloadController extends BaseController
         $response = $response->withHeader('Content-Type', 'audio/mpeg');
 
         if ($request->isGet() || $request->isPost()) {
-            try {
-                $process = $this->video->getAudioStream($from, $to);
-            } catch (Exception $e) {
-                // Fallback to default format.
-                $this->video = $this->video->withFormat($this->defaultFormat);
-                $process = $this->video->getAudioStream($from, $to);
-            }
+            $process = $this->downloader->getAudioStream($this->video, $this->config->audioBitrate, $from, $to);
             $response = $response->withBody(new Stream($process));
         }
 
@@ -106,36 +125,38 @@ class DownloadController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws AlltubeLibraryException
+     * @throws EmptyUrlException
      * @throws PasswordException
+     * @throws WrongPasswordException
      */
     private function getAudioResponse(Request $request, Response $response)
     {
-        try {
-            // First, we try to get a MP3 file directly.
-            if (!empty($request->getQueryParam('from')) || !empty($request->getQueryParam('to'))) {
-                throw new Exception('Force convert when we need to seek.');
-            }
-
-            if ($this->config->stream) {
-                $this->video = $this->video->withFormat('mp3');
-
-                return $this->getStream($request, $response);
-            } else {
-                $this->video = $this->video->withFormat('mp3[protocol=https]/mp3[protocol=http]');
-
-                $urls = $this->video->getUrl();
-
-                return $response->withRedirect($urls[0]);
-            }
-        } catch (PasswordException $e) {
-            $frontController = new FrontController($this->container);
-
-            return $frontController->password($request, $response);
-        } catch (Exception $e) {
-            // If MP3 is not available, we convert it.
-            $this->video = $this->video->withFormat('bestaudio/best');
+        if (!empty($request->getQueryParam('from')) || !empty($request->getQueryParam('to'))) {
+            // Force convert when we need to seek.
+            $this->video = $this->video->withFormat('bestaudio/' . $this->defaultFormat);
 
             return $this->getConvertedAudioResponse($request, $response);
+        } else {
+            try {
+                // First, we try to get a MP3 file directly.
+                if ($this->config->stream) {
+                    $this->video = $this->video->withFormat('mp3');
+
+                    return $this->getStream($request, $response);
+                } else {
+                    $this->video = $this->video->withFormat(Config::addHttpToFormat('mp3'));
+
+                    $urls = $this->video->getUrl();
+
+                    return $response->withRedirect($urls[0]);
+                }
+            } catch (YoutubedlException $e) {
+                // If MP3 is not available, we convert it.
+                $this->video = $this->video->withFormat('bestaudio/' . $this->defaultFormat);
+
+                return $this->getConvertedAudioResponse($request, $response);
+            }
         }
     }
 
@@ -146,17 +167,15 @@ class DownloadController extends BaseController
      *
      * @param Response $response PSR-7 response
      * @return Response HTTP response
-     * @throws EmptyUrlException
-     * @throws PasswordException
-     * @throws Exception
+     * @throws AlltubeLibraryException
      */
     private function getStream(Request $request, Response $response)
     {
         if (isset($this->video->entries)) {
             if ($this->config->convert && $request->getQueryParam('audio')) {
-                $stream = new ConvertedPlaylistArchiveStream($this->video);
+                $stream = new ConvertedPlaylistArchiveStream($this->downloader, $this->video);
             } else {
-                $stream = new PlaylistArchiveStream($this->video);
+                $stream = new PlaylistArchiveStream($this->downloader, $this->video);
             }
             $response = $response->withHeader('Content-Type', 'application/zip');
             $response = $response->withHeader(
@@ -167,10 +186,10 @@ class DownloadController extends BaseController
             return $response->withBody($stream);
         } elseif ($this->video->protocol == 'rtmp') {
             $response = $response->withHeader('Content-Type', 'video/' . $this->video->ext);
-            $body = new Stream($this->video->getRtmpStream());
+            $body = new Stream($this->downloader->getRtmpStream($this->video));
         } elseif ($this->video->protocol == 'm3u8' || $this->video->protocol == 'm3u8_native') {
             $response = $response->withHeader('Content-Type', 'video/' . $this->video->ext);
-            $body = new Stream($this->video->getM3uStream());
+            $body = new Stream($this->downloader->getM3uStream($this->video));
         } else {
             $headers = [];
             $range = $request->getHeader('Range');
@@ -178,7 +197,7 @@ class DownloadController extends BaseController
             if (!empty($range)) {
                 $headers['Range'] = $range;
             }
-            $stream = $this->video->getHttpResponse($headers);
+            $stream = $this->downloader->getHttpResponse($this->video, $headers);
 
             $response = $response->withHeader('Content-Type', $stream->getHeader('Content-Type'));
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
@@ -190,7 +209,7 @@ class DownloadController extends BaseController
 
             if (isset($this->video->downloader_options->http_chunk_size)) {
                 // Workaround for Youtube throttling the download speed.
-                $body = new YoutubeStream($this->video);
+                $body = new YoutubeStream($this->downloader, $this->video);
             } else {
                 $body = $stream->getBody();
             }
@@ -201,7 +220,7 @@ class DownloadController extends BaseController
         $response = $response->withHeader(
             'Content-Disposition',
             'attachment; filename="' .
-                $this->video->getFilename() . '"'
+            $this->video->getFilename() . '"'
         );
 
         return $response;
@@ -210,19 +229,18 @@ class DownloadController extends BaseController
     /**
      * Get a remuxed stream piped through the server.
      *
-     * @param Response $response PSR-7 response
      * @param Request $request PSR-7 request
      *
+     * @param Response $response PSR-7 response
      * @return Response HTTP response
-     * @throws PasswordException
-     * @throws Exception
+     * @throws AlltubeLibraryException
      */
     private function getRemuxStream(Request $request, Response $response)
     {
         if (!$this->config->remux) {
-            throw new Exception($this->localeManager->t('You need to enable remux mode to merge two formats.'));
+            throw new RemuxException('You need to enable remux mode to merge two formats.');
         }
-        $stream = $this->video->getRemuxStream();
+        $stream = $this->downloader->getRemuxStream($this->video);
         $response = $response->withHeader('Content-Type', 'video/x-matroska');
         if ($request->isGet()) {
             $response = $response->withBody(new Stream($stream));
@@ -242,9 +260,7 @@ class DownloadController extends BaseController
      *
      * @param Response $response PSR-7 response
      * @return Response HTTP response
-     * @throws EmptyUrlException
-     * @throws PasswordException
-     * @throws Exception
+     * @throws AlltubeLibraryException
      */
     private function getDownloadResponse(Request $request, Response $response)
     {
@@ -263,7 +279,7 @@ class DownloadController extends BaseController
             return $this->getStream($request, $response);
         } else {
             if (empty($videoUrls[0])) {
-                throw new Exception($this->localeManager->t("Can't find URL of video."));
+                throw new EmptyUrlException("Can't find URL of video.");
             }
 
             return $response->withRedirect($videoUrls[0]);
@@ -277,8 +293,13 @@ class DownloadController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws AlltubeLibraryException
+     * @throws InvalidProtocolConversionException
      * @throws PasswordException
-     * @throws Exception
+     * @throws PlaylistConversionException
+     * @throws WrongPasswordException
+     * @throws YoutubedlException
+     * @throws PopenStreamException
      */
     private function getConvertedResponse(Request $request, Response $response)
     {
@@ -290,7 +311,8 @@ class DownloadController extends BaseController
         $response = $response->withHeader('Content-Type', 'video/' . $request->getQueryParam('customFormat'));
 
         if ($request->isGet() || $request->isPost()) {
-            $process = $this->video->getConvertedStream(
+            $process = $this->downloader->getConvertedStream(
+                $this->video,
                 $request->getQueryParam('customBitrate'),
                 $request->getQueryParam('customFormat')
             );

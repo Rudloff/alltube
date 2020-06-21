@@ -48,7 +48,6 @@ class UglyRouter extends Router
      *
      * @return string
      * @throws InvalidArgumentException If required data not provided
-     *
      * @throws RuntimeException         If named route does not exist
      */
     public function pathFor($name, array $data = [], array $queryParams = [])

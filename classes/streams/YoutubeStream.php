@@ -6,9 +6,9 @@
 
 namespace Alltube\Stream;
 
-use Alltube\Exception\EmptyUrlException;
-use Alltube\Exception\PasswordException;
-use Alltube\Video;
+use Alltube\Library\Downloader;
+use Alltube\Library\Exception\AlltubeLibraryException;
+use Alltube\Library\Video;
 use GuzzleHttp\Psr7\AppendStream;
 
 /**
@@ -20,15 +20,15 @@ class YoutubeStream extends AppendStream
     /**
      * YoutubeStream constructor.
      *
+     * @param Downloader $downloader Downloader object
      * @param Video $video Video to stream
-     * @throws EmptyUrlException
-     * @throws PasswordException
+     * @throws AlltubeLibraryException
      */
-    public function __construct(Video $video)
+    public function __construct(Downloader $downloader, Video $video)
     {
         parent::__construct();
 
-        $stream = $video->getHttpResponse();
+        $stream = $downloader->getHttpResponse($video);
         $contentLenghtHeader = $stream->getHeader('Content-Length');
         $rangeStart = 0;
 
@@ -37,7 +37,7 @@ class YoutubeStream extends AppendStream
             if ($rangeEnd >= $contentLenghtHeader[0]) {
                 $rangeEnd = intval($contentLenghtHeader[0]) - 1;
             }
-            $response = $video->getHttpResponse(['Range' => 'bytes=' . $rangeStart . '-' . $rangeEnd]);
+            $response = $downloader->getHttpResponse($video, ['Range' => 'bytes=' . $rangeStart . '-' . $rangeEnd]);
             $this->addStream(new YoutubeChunkStream($response));
             $rangeStart = $rangeEnd + 1;
         }

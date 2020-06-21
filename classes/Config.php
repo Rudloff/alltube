@@ -6,7 +6,8 @@
 
 namespace Alltube;
 
-use Exception;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Downloader;
 use Jawira\CaseConverter\CaseConverterException;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\Yaml\Yaml;
@@ -141,7 +142,7 @@ class Config
      * Config constructor.
      *
      * @param mixed[] $options Options
-     * @throws CaseConverterException
+     * @throws ConfigException
      */
     private function __construct(array $options = [])
     {
@@ -197,20 +198,15 @@ class Config
      * Throw an exception if some of the options are invalid.
      *
      * @return void
-     * @throws Exception If Python is missing
-     *
-     * @throws Exception If youtube-dl is missing
+     * @throws ConfigException If Python is missing
+     * @throws ConfigException If youtube-dl is missing
      */
     private function validateOptions()
     {
-        /*
-        We don't translate these exceptions because they usually occur before Slim can catch them
-        so they will go to the logs.
-         */
         if (!is_file($this->youtubedl)) {
-            throw new Exception("Can't find youtube-dl at " . $this->youtubedl);
-        } elseif (!Video::checkCommand([$this->python, '--version'])) {
-            throw new Exception("Can't find Python at " . $this->python);
+            throw new ConfigException("Can't find youtube-dl at " . $this->youtubedl);
+        } elseif (!Downloader::checkCommand([$this->python, '--version'])) {
+            throw new ConfigException("Can't find Python at " . $this->python);
         }
 
         if (!class_exists(Debug::class)) {
@@ -241,13 +237,18 @@ class Config
      * If the value is an array, you should use the YAML format: "CONVERT_ADVANCED_FORMATS='[foo, bar]'"
      *
      * @return void
-     * @throws CaseConverterException
+     * @throws ConfigException
      */
     private function getEnv()
     {
         foreach (get_object_vars($this) as $prop => $value) {
-            $convert = new Convert($prop);
-            $env = getenv($convert->toMacro());
+            try {
+                $convert = new Convert($prop);
+                $env = getenv($convert->toMacro());
+            } catch (CaseConverterException $e) {
+                // This should not happen.
+                throw new ConfigException('Could not parse option name: ' . $prop, $e->getCode(), $e);
+            }
             if ($env) {
                 $this->$prop = Yaml::parse($env);
             }
@@ -273,7 +274,7 @@ class Config
      *
      * @param string $file Path to the YAML file
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public static function setFile($file)
     {
@@ -282,7 +283,7 @@ class Config
             self::$instance = new self($options);
             self::$instance->validateOptions();
         } else {
-            throw new Exception("Can't find config file at " . $file);
+            throw new ConfigException("Can't find config file at " . $file);
         }
     }
 
@@ -292,7 +293,7 @@ class Config
      * @param mixed[] $options Options (see `config/config.example.yml` for available options)
      * @param bool $update True to update an existing instance
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public static function setOptions(array $options, $update = true)
     {
@@ -313,5 +314,22 @@ class Config
     public static function destroyInstance()
     {
         self::$instance = null;
+    }
+
+    /**
+     * Return a downloader object with the current config.
+     *
+     * @return Downloader
+     */
+    public function getDownloader()
+    {
+        return new Downloader(
+            $this->youtubedl,
+            $this->params,
+            $this->python,
+            $this->avconv,
+            $this->phantomjsDir,
+            $this->avconvVerbosity
+        );
     }
 }
