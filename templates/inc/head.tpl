@@ -2,7 +2,7 @@
 <html {if isset($locale)}lang="{$locale->getBcp47()}"{/if}>
 <head>
     <meta charset="UTF-8"/>
-    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name=viewport content="width=device-width, initial-scale=1"/>
     {if isset($description)}
         <meta name="description" content="{$description|escape}"/>
         <meta name="twitter:description" content="{$description|escape}"/>
@@ -19,7 +19,8 @@
     <meta name="twitter:title" content="{$config->appName}{if isset($title)} - {$title|escape}{/if}"/>
     <meta name="twitter:image" content="{base_url}/img/logo.png"/>
     <meta name="twitter:creator" content="@Tael67"/>
-    <meta name="theme-color" content="#4F4F4F">
+    <meta name="theme-color" content="#4F4F4F"/>
     <link rel="manifest" href="{base_url}/resources/manifest.json"/>
+    <meta name="generator" content="AllTube Download ({$config->getAppVersion()})"/>
 </head>
 <body class="{$class}">

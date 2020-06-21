@@ -9,6 +9,8 @@ namespace Alltube;
 use Alltube\Exception\ConfigException;
 use Alltube\Library\Downloader;
 use Jawira\CaseConverter\CaseConverterException;
+use Jean85\PrettyVersions;
+use PackageVersions\Versions;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\Yaml\Yaml;
 use Jawira\CaseConverter\Convert;
@@ -331,5 +333,15 @@ class Config
             $this->phantomjsDir,
             $this->avconvVerbosity
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppVersion()
+    {
+        $version = PrettyVersions::getVersion(Versions::ROOT_PACKAGE_NAME);
+
+        return $version->getPrettyVersion();
     }
 }
