@@ -92,7 +92,7 @@
   "scripts": {
     "lint": "grumphp run --ansi",
     "test": "phpunit",
-    "release": "robo release",
+    "release": "robo release --ansi",
     "update-locales": [
       "tsmarty2c.php templates > i18n/template.pot",
       "xgettext --omit-header -kt -j -o i18n/template.pot classes/*.php classes/*/*.php controllers/*"

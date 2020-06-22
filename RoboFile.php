@@ -1,7 +1,6 @@
 <?php
 
 use Robo\Tasks;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Manage robo tasks.
@@ -15,51 +14,33 @@ class RoboFile extends Tasks
      */
     public function release()
     {
+        $this->stopOnFail();
+
         $result = $this->taskExec('git')
-            ->args('describe')
+            ->arg('describe')
             ->run();
         $result->provideOutputdata();
-        $tag = trim($result->getOutputData());
 
-        // We don't want the whole vendor directory.
-        $finder = new Finder();
-        $finder->files()
-            ->in(__DIR__ . '/vendor/')
-            ->exclude(
-                [
-                    'ffmpeg/',
-                    'phpstan/',
-                    'bin/',
-                    'anam/phantomjs-linux-x86-binary/',
-                    'phpunit/',
-                    'squizlabs/',
-                    'rinvex/countries/resources/geodata/',
-                    'rinvex/countries/resources/flags/'
-                ]
-            );
+        $tmpDir = $this->_tmpDir();
 
-        $zipTask = $this->taskPack('alltube-' . $tag . '.zip')
-            ->add('index.php')
-            ->add('config/config.example.yml')
-            ->add('.htaccess')
-            ->add('img')
-            ->add('LICENSE')
-            ->add('README.md')
-            ->add('robots.txt')
-            ->add('resources')
-            ->add('templates')
-            ->add('templates_c/')
-            ->add('classes')
-            ->add('controllers')
-            ->add('css')
-            ->add('i18n');
+        $filename = 'alltube-' . trim($result->getOutputData()) . '.zip';
 
-        foreach ($finder as $file) {
-            if ($path = $file->getRelativePathname()) {
-                $zipTask->add('vendor/' . $path);
-            }
-        }
+        $this->taskFilesystemStack()
+            ->remove($filename)
+            ->run();
 
-        $zipTask->run();
+        $this->taskGitStack()
+            ->cloneRepo(__DIR__, $tmpDir)
+            ->run();
+
+        $this->taskComposerInstall()
+            ->dir($tmpDir)
+            ->optimizeAutoloader()
+            ->noDev()
+            ->run();
+
+        $this->taskPack($filename)
+            ->addDir('alltube', $tmpDir)
+            ->run();
     }
 }
