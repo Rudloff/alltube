@@ -74,14 +74,14 @@ class Config
      *
      * @var string
      */
-    public $avconv = 'vendor/bin/ffmpeg';
+    public $avconv = '/usr/bin/ffmpeg';
 
     /**
      * Path to the directory that contains the phantomjs binary.
      *
      * @var string
      */
-    public $phantomjsDir = 'vendor/bin/';
+    public $phantomjsDir = '/usr/bin/';
 
     /**
      * Disable URL rewriting.

@@ -23,13 +23,13 @@ convertAdvanced: false
 convertAdvancedFormats: [mp3, avi, flv, wav]
 
 # Path to your avconv or ffmpeg binary
-avconv: vendor/bin/ffmpeg
+avconv: /usr/bin/ffmpeg
 
 # avconv/ffmpeg logging level.
 avconvVerbosity: error
 
 # Path to the directory that contains the phantomjs binary.
-phantomjsDir: vendor/bin/
+phantomjsDir: /usr/bin/
 
 # True to disable URL rewriting
 uglyUrls: false

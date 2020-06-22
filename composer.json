@@ -7,10 +7,8 @@
   "require": {
     "ext-intl": "*",
     "ext-json": "*",
-    "anam/phantomjs-linux-x86-binary": "^2.1",
     "aura/session": "^2.1",
     "barracudanetworks/archivestream-php": "^1.0",
-    "ffmpeg/ffmpeg": "^4.1",
     "jawira/case-converter": "^3.4",
     "jean85/pretty-package-versions": "^1.3",
     "mathmarques/smarty-view": "^1.1",
@@ -49,20 +47,6 @@
           "type": "zip",
           "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.06.16.1.zip"
         }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "ffmpeg/ffmpeg",
-        "version": "4.1.4",
-        "dist": {
-          "url": "https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-4.1.4-amd64-static.tar.xz",
-          "type": "xz"
-        },
-        "bin": [
-          "ffmpeg"
-        ]
       }
     }
   ],
