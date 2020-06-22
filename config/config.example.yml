@@ -22,11 +22,11 @@ convertAdvanced: false
 # List of formats available in advanced conversion mode
 convertAdvancedFormats: [mp3, avi, flv, wav]
 
-# Path to your avconv or ffmpeg binary
-avconv: /usr/bin/ffmpeg
+# Path to your ffmpeg binary
+ffmpeg: /usr/bin/ffmpeg
 
-# avconv/ffmpeg logging level.
-avconvVerbosity: error
+# ffmpeg logging level.
+ffmpegVerbosity: error
 
 # Path to the directory that contains the phantomjs binary.
 phantomjsDir: /usr/bin/

@@ -27,7 +27,7 @@ This will download all the required dependencies.
 
 (Note that it will download the ffmpeg binary for 64-bits Linux.
 If you are on another platform,
-you might want to specify the path to avconv/ffmpeg in your config file.)
+you might want to specify the path to ffmpeg in your config file.)
 
 You should also ensure that the *templates_c* folder has the right permissions:
 
@@ -133,18 +133,18 @@ server {
 
 ## Other dependencies
 
-You need [avconv](https://libav.org/avconv.html)
+You need [ffmpeg](https://ffmpeg.org/)
 in order to enable conversions.
 If you don't want to enable conversions, you can disable it in `config.yml`.
 
 On Debian-based systems:
 
 ```bash
-sudo apt-get install libav-tools
+sudo apt-get install ffmpeg
 ```
 
-You also probably need to edit the `avconv` variable in `config.yml`
-so that it points to your ffmpeg/avconv binary (`/usr/bin/avconv` on Debian/Ubuntu).
+You also probably need to edit the `ffmpeg` variable in `config.yml`
+so that it points to your ffmpeg binary (`/usr/bin/ffmpeg` on Debian/Ubuntu).
 
 ## Use as library
 

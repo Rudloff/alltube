@@ -339,7 +339,7 @@ class VideoTest extends BaseTest
     }
 
     /**
-     * Test getAudioStream function without avconv.
+     * Test getAudioStream function without ffmpeg.
      *
      * @param string $url URL
      * @param string $format Format
@@ -348,10 +348,10 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException|ConfigException
      * @dataProvider urlProvider
      */
-    public function testGetAudioStreamAvconvError($url, $format)
+    public function testGetAudioStreamFfmpegError($url, $format)
     {
         $this->expectException(AvconvException::class);
-        Config::setOptions(['avconv' => 'foobar']);
+        Config::setOptions(['ffmpeg' => 'foobar']);
         $config = Config::getInstance();
         $downloader = $config->getDownloader();
 
@@ -488,7 +488,7 @@ class VideoTest extends BaseTest
     }
 
     /**
-     * Test getM3uStream function without avconv.
+     * Test getM3uStream function without ffmpeg.
      *
      * @param string $url URL
      * @param string $format Format
@@ -497,10 +497,10 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException|ConfigException
      * @dataProvider m3uUrlProvider
      */
-    public function testGetM3uStreamAvconvError($url, $format)
+    public function testGetM3uStreamFfmpegError($url, $format)
     {
         $this->expectException(AvconvException::class);
-        Config::setOptions(['avconv' => 'foobar']);
+        Config::setOptions(['ffmpeg' => 'foobar']);
         $config = Config::getInstance();
         $downloader = $config->getDownloader();
 
@@ -509,7 +509,7 @@ class VideoTest extends BaseTest
     }
 
     /**
-     * Test getConvertedStream function without avconv.
+     * Test getConvertedStream function without ffmpeg.
      *
      * @param string $url URL
      * @param string $format Format

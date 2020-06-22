@@ -33,13 +33,13 @@ In order to enable audio conversion, you need to add this to your `config.yml` f
 
 ```yaml
 convert: true
-avconv: path/to/avconv
+ffmpeg: path/to/ffmpeg
 ```
 
-You will also need to install `avconv` on your server:
+You will also need to install `ffmpeg` on your server:
 
 ```bash
-sudo apt-get install libav-tools
+sudo apt-get install ffmpeg
 ```
 
 ## Deploy AllTube on Heroku

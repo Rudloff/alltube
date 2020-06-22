@@ -70,7 +70,7 @@ class ConfigTest extends BaseTest
         $this->assertIsArray($config->params);
         $this->assertIsString($config->youtubedl);
         $this->assertIsString($config->python);
-        $this->assertIsString($config->avconv);
+        $this->assertIsString($config->ffmpeg);
         $this->assertIsBool($config->convert);
         $this->assertIsBool($config->uglyUrls);
         $this->assertIsBool($config->stream);

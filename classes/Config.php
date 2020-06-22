@@ -70,11 +70,11 @@ class Config
     public $convertAdvancedFormats = ['mp3', 'avi', 'flv', 'wav'];
 
     /**
-     * avconv or ffmpeg binary path.
+     * ffmpeg binary path.
      *
      * @var string
      */
-    public $avconv = '/usr/bin/ffmpeg';
+    public $ffmpeg = '/usr/bin/ffmpeg';
 
     /**
      * Path to the directory that contains the phantomjs binary.
@@ -112,12 +112,12 @@ class Config
     public $audioBitrate = 128;
 
     /**
-     * avconv/ffmpeg logging level.
+     * ffmpeg logging level.
      * Must be one of these: quiet, panic, fatal, error, warning, info, verbose, debug.
      *
      * @var string
      */
-    public $avconvVerbosity = 'error';
+    public $ffmpegVerbosity = 'error';
 
     /**
      * App name.
@@ -329,9 +329,9 @@ class Config
             $this->youtubedl,
             $this->params,
             $this->python,
-            $this->avconv,
+            $this->ffmpeg,
             $this->phantomjsDir,
-            $this->avconvVerbosity
+            $this->ffmpegVerbosity
         );
     }
 
