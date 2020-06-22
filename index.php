@@ -85,8 +85,6 @@ $app->any(
     '/info',
     [$frontController, 'info']
 )->setName('info');
-// Legacy route.
-$app->any('/video', [$frontController, 'info']);
 
 $app->any(
     '/watch',
@@ -97,8 +95,6 @@ $app->any(
     '/download',
     [$downloadController, 'download']
 )->setName('download');
-// Legacy route.
-$app->get('/redirect', [$downloadController, 'download']);
 
 $app->get(
     '/locale/{locale}',
