@@ -47,7 +47,6 @@ sudo apt-get install ffmpeg
 Create a dyno with the following buildpacks:
 
 * `heroku/php`
-* `heroku/nodejs`
 * `heroku/python`
 
 You might also need to add the following config variables:

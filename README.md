@@ -25,10 +25,6 @@ composer install
 
 This will download all the required dependencies.
 
-(Note that it will download the ffmpeg binary for 64-bits Linux.
-If you are on another platform,
-you might want to specify the path to ffmpeg in your config file.)
-
 You should also ensure that the *templates_c* folder has the right permissions:
 
 ```bash
@@ -66,19 +62,22 @@ cp config/config.example.yml config/config.yml
 
 You will need PHP 7.1 (or higher) and the following PHP modules:
 
-* fileinfo
 * intl
 * mbstring
-* curl
+* gmp
 
 ## Web server configuration
 
 ### Apache
 
-You will need the following modules:
+The following modules are recommended:
 
 * mod_mime
 * mod_rewrite
+* mod_expires
+* mod_filter
+* mod_deflate
+* mod_headers
 
 ### Nginx
 
@@ -135,7 +134,7 @@ server {
 
 You need [ffmpeg](https://ffmpeg.org/)
 in order to enable conversions.
-If you don't want to enable conversions, you can disable it in `config.yml`.
+(Conversions are disabled by default.)
 
 On Debian-based systems:
 
@@ -143,10 +142,9 @@ On Debian-based systems:
 sudo apt-get install ffmpeg
 ```
 
-You also probably need to edit the `ffmpeg` variable in `config.yml`
-so that it points to your ffmpeg binary (`/usr/bin/ffmpeg` on Debian/Ubuntu).
+If your ffmpeg binary is not installed at `/usr/bin/ffmpeg`, you also need to edit the `ffmpeg` variable in `config.yml`.
 
-## Use as library
+## Use as a library
 
 The `Video` class is now available as [a separate package](https://packagist.org/packages/rudloff/alltube-library)
 so that you can reuse it in your projects.
