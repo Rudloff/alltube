@@ -60,7 +60,7 @@ cp config/config.example.yml config/config.yml
 
 ## PHP requirements
 
-You will need PHP 7.1 (or higher) and the following PHP modules:
+You will need PHP 7.2 (or higher) and the following PHP modules:
 
 * intl
 * mbstring
