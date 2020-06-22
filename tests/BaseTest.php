@@ -22,13 +22,7 @@ abstract class BaseTest extends TestCase
      */
     protected function getConfigFile()
     {
-        if (PHP_OS == 'WINNT') {
-            $configFile = 'config_test_windows.yml';
-        } else {
-            $configFile = 'config_test.yml';
-        }
-
-        return __DIR__ . '/../config/' . $configFile;
+        return __DIR__ . '/../config/config_test.yml';
     }
 
     /**
