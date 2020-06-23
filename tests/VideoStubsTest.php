@@ -6,36 +6,51 @@
 
 namespace Alltube\Test;
 
-use Alltube\Video;
+use Alltube\Config;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Downloader;
+use Alltube\Library\Exception\AlltubeLibraryException;
+use Alltube\Library\Exception\PopenStreamException;
+use Alltube\Library\Video;
 use Mockery;
 use phpmock\mockery\PHPMockery;
-use Exception;
 
 /**
  * Unit tests for the Video class.
  * They are in a separate file so they can safely replace PHP functions with stubs.
+ *
+ * @requires download
  */
 class VideoStubsTest extends BaseTest
 {
     /**
-     * Video URL used in many tests.
+     * Video used in many tests.
      *
      * @var Video
      */
     private $video;
 
     /**
+     * Downloader instance used in tests.
+     *
+     * @var Downloader
+     */
+    private $downloader;
+
+    /**
      * Initialize properties used by test.
-     * @throws Exception
+     * @throws ConfigException
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        PHPMockery::mock('Alltube', 'popen');
-        PHPMockery::mock('Alltube', 'fopen');
+        PHPMockery::mock('Alltube\Library', 'popen');
+        PHPMockery::mock('Alltube\Library', 'fopen');
 
-        $this->video = new Video('https://www.youtube.com/watch?v=XJC9_JkzugE');
+        $config = Config::getInstance();
+        $this->downloader = $config->getDownloader();
+        $this->video = $this->downloader->getVideo('https://www.youtube.com/watch?v=XJC9_JkzugE');
     }
 
     /**
@@ -52,55 +67,60 @@ class VideoStubsTest extends BaseTest
      * Test getAudioStream function with a buggy popen.
      *
      * @return void
+     * @throws AlltubeLibraryException
      */
     public function testGetAudioStreamWithPopenError()
     {
-        $this->expectException(Exception::class);
-        $this->video->getAudioStream();
+        $this->expectException(PopenStreamException::class);
+        $this->downloader->getAudioStream($this->video);
     }
 
     /**
      * Test getM3uStream function with a buggy popen.
      *
      * @return void
+     * @throws AlltubeLibraryException
      */
     public function testGetM3uStreamWithPopenError()
     {
-        $this->expectException(Exception::class);
-        $this->video->getM3uStream();
+        $this->expectException(PopenStreamException::class);
+        $this->downloader->getM3uStream($this->video);
     }
 
     /**
      * Test getRtmpStream function with a buggy popen.
      *
      * @return void
+     * @throws AlltubeLibraryException
      */
     public function testGetRtmpStreamWithPopenError()
     {
-        $this->expectException(Exception::class);
-        $this->video->getRtmpStream();
+        $this->expectException(PopenStreamException::class);
+        $this->downloader->getRtmpStream($this->video);
     }
 
     /**
      * Test getRemuxStream function with a buggy popen.
      *
      * @return void
+     * @throws AlltubeLibraryException
      */
     public function testGetRemuxStreamWithPopenError()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(PopenStreamException::class);
         $video = $this->video->withFormat('bestvideo+bestaudio');
-        $video->getRemuxStream();
+        $this->downloader->getRemuxStream($video);
     }
 
     /**
      * Test getConvertedStream function with a buggy popen.
      *
      * @return void
+     * @throws AlltubeLibraryException
      */
     public function testGetConvertedStreamWithPopenError()
     {
-        $this->expectException(Exception::class);
-        $this->video->getConvertedStream(32, 'flv');
+        $this->expectException(PopenStreamException::class);
+        $this->downloader->getConvertedStream($this->video, 32, 'flv');
     }
 }

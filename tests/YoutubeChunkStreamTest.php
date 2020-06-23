@@ -6,9 +6,10 @@
 
 namespace Alltube\Test;
 
+use Alltube\Config;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Stream\YoutubeChunkStream;
-use Alltube\Video;
-use Exception;
 
 /**
  * Unit tests for the YoutubeChunkStream class.
@@ -18,14 +19,17 @@ class YoutubeChunkStreamTest extends StreamTest
 {
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException
+     * @throws AlltubeLibraryException
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $video = new Video('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+        $config = Config::getInstance();
+        $downloader = $config->getDownloader();
+        $video = $downloader->getVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 
-        $this->stream = new YoutubeChunkStream($video->getHttpResponse());
+        $this->stream = new YoutubeChunkStream($downloader->getHttpResponse($video));
     }
 }

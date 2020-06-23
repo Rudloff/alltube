@@ -19,10 +19,6 @@
     }
   ],
   "env": {
-    "CONVERT": {
-      "description": "Enable audio conversion",
-      "value": "true"
-    },
     "PYTHON": {
       "description": "Path to python binary",
       "value": "/app/.heroku/python/bin/python"

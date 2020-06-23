@@ -85,8 +85,6 @@ $app->any(
     '/info',
     [$frontController, 'info']
 )->setName('info');
-// Legacy route.
-$app->any('/video', [$frontController, 'info']);
 
 $app->any(
     '/watch',
@@ -97,8 +95,6 @@ $app->any(
     '/download',
     [$downloadController, 'download']
 )->setName('download');
-// Legacy route.
-$app->get('/redirect', [$downloadController, 'download']);
 
 $app->get(
     '/locale/{locale}',
@@ -116,5 +112,5 @@ try {
     die('Smarty could not compile the template file: ' . $e->getMessage());
 } catch (Throwable $e) {
     // Last resort if the error has not been caught by the error handler for some reason.
-    die('Error when starting the app: ' . $e->getMessage());
+    die('Error when starting the app: ' . htmlentities($e->getMessage()));
 }

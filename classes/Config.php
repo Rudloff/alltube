@@ -6,8 +6,12 @@
 
 namespace Alltube;
 
-use Exception;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Downloader;
 use Jawira\CaseConverter\CaseConverterException;
+use Jean85\PrettyVersions;
+use PackageVersions\Versions;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\Yaml\Yaml;
 use Jawira\CaseConverter\Convert;
 
@@ -66,18 +70,18 @@ class Config
     public $convertAdvancedFormats = ['mp3', 'avi', 'flv', 'wav'];
 
     /**
-     * avconv or ffmpeg binary path.
+     * ffmpeg binary path.
      *
      * @var string
      */
-    public $avconv = 'vendor/bin/ffmpeg';
+    public $ffmpeg = '/usr/bin/ffmpeg';
 
     /**
      * Path to the directory that contains the phantomjs binary.
      *
      * @var string
      */
-    public $phantomjsDir = 'vendor/bin/';
+    public $phantomjsDir = '/usr/bin/';
 
     /**
      * Disable URL rewriting.
@@ -108,12 +112,12 @@ class Config
     public $audioBitrate = 128;
 
     /**
-     * avconv/ffmpeg logging level.
+     * ffmpeg logging level.
      * Must be one of these: quiet, panic, fatal, error, warning, info, verbose, debug.
      *
      * @var string
      */
-    public $avconvVerbosity = 'error';
+    public $ffmpegVerbosity = 'error';
 
     /**
      * App name.
@@ -140,7 +144,7 @@ class Config
      * Config constructor.
      *
      * @param mixed[] $options Options
-     * @throws CaseConverterException
+     * @throws ConfigException
      */
     private function __construct(array $options = [])
     {
@@ -151,9 +155,9 @@ class Config
         if (empty($this->genericFormats)) {
             // We don't put this in the class definition so it can be detected by xgettext.
             $this->genericFormats = [
-                'best' => $localeManager->t('Best'),
+                'best/bestvideo' => $localeManager->t('Best'),
                 'bestvideo+bestaudio' => $localeManager->t('Remux best video with best audio'),
-                'worst' => $localeManager->t('Worst'),
+                'worst/worstvideo' => $localeManager->t('Worst'),
             ];
         }
 
@@ -165,46 +169,51 @@ class Config
                 }
             } elseif (!$this->stream) {
                 // Force HTTP if stream is not enabled.
-                $this->replaceGenericFormat($format, $format . '[protocol=https]/' . $format . '[protocol=http]');
+                $keys = array_keys($this->genericFormats);
+                $keys[array_search($format, $keys)] = $this->addHttpToFormat($format);
+                if ($genericFormats = array_combine($keys, $this->genericFormats)) {
+                    $this->genericFormats = $genericFormats;
+                }
             }
         }
     }
 
     /**
-     * Replace a format key.
+     * Add HTTP condition to a format.
      *
-     * @param string $oldFormat Old format
-     * @param string $newFormat New format
+     * @param string $format Format
      *
-     * @return void
+     * @return string
      */
-    private function replaceGenericFormat($oldFormat, $newFormat)
+    public static function addHttpToFormat($format)
     {
-        $keys = array_keys($this->genericFormats);
-        $keys[array_search($oldFormat, $keys)] = $newFormat;
-        if ($genericFormats = array_combine($keys, $this->genericFormats)) {
-            $this->genericFormats = $genericFormats;
+        $newFormat = [];
+        foreach (explode('/', $format) as $subformat) {
+            $newFormat[] = $subformat . '[protocol=https]';
+            $newFormat[] = $subformat . '[protocol=http]';
         }
+
+        return implode('/', $newFormat);
     }
 
     /**
      * Throw an exception if some of the options are invalid.
      *
      * @return void
-     * @throws Exception If Python is missing
-     *
-     * @throws Exception If youtube-dl is missing
+     * @throws ConfigException If Python is missing
+     * @throws ConfigException If youtube-dl is missing
      */
     private function validateOptions()
     {
-        /*
-        We don't translate these exceptions because they usually occur before Slim can catch them
-        so they will go to the logs.
-         */
         if (!is_file($this->youtubedl)) {
-            throw new Exception("Can't find youtube-dl at " . $this->youtubedl);
-        } elseif (!Video::checkCommand([$this->python, '--version'])) {
-            throw new Exception("Can't find Python at " . $this->python);
+            throw new ConfigException("Can't find youtube-dl at " . $this->youtubedl);
+        } elseif (!Downloader::checkCommand([$this->python, '--version'])) {
+            throw new ConfigException("Can't find Python at " . $this->python);
+        }
+
+        if (!class_exists(Debug::class)) {
+            // Dev dependencies are probably not installed.
+            $this->debug = false;
         }
     }
 
@@ -225,18 +234,23 @@ class Config
     }
 
     /**
-     * Override options from environement variables.
+     * Override options from environment variables.
      * Environment variables should use screaming snake case: CONVERT, PYTHON, AUDIO_BITRATE, etc.
      * If the value is an array, you should use the YAML format: "CONVERT_ADVANCED_FORMATS='[foo, bar]'"
      *
      * @return void
-     * @throws CaseConverterException
+     * @throws ConfigException
      */
     private function getEnv()
     {
         foreach (get_object_vars($this) as $prop => $value) {
-            $convert = new Convert($prop);
-            $env = getenv($convert->toMacro());
+            try {
+                $convert = new Convert($prop);
+                $env = getenv($convert->toMacro());
+            } catch (CaseConverterException $e) {
+                // This should not happen.
+                throw new ConfigException('Could not parse option name: ' . $prop, $e->getCode(), $e);
+            }
             if ($env) {
                 $this->$prop = Yaml::parse($env);
             }
@@ -262,7 +276,7 @@ class Config
      *
      * @param string $file Path to the YAML file
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public static function setFile($file)
     {
@@ -271,7 +285,7 @@ class Config
             self::$instance = new self($options);
             self::$instance->validateOptions();
         } else {
-            throw new Exception("Can't find config file at " . $file);
+            throw new ConfigException("Can't find config file at " . $file);
         }
     }
 
@@ -281,7 +295,7 @@ class Config
      * @param mixed[] $options Options (see `config/config.example.yml` for available options)
      * @param bool $update True to update an existing instance
      * @return void
-     * @throws Exception
+     * @throws ConfigException
      */
     public static function setOptions(array $options, $update = true)
     {
@@ -302,5 +316,32 @@ class Config
     public static function destroyInstance()
     {
         self::$instance = null;
+    }
+
+    /**
+     * Return a downloader object with the current config.
+     *
+     * @return Downloader
+     */
+    public function getDownloader()
+    {
+        return new Downloader(
+            $this->youtubedl,
+            $this->params,
+            $this->python,
+            $this->ffmpeg,
+            $this->phantomjsDir,
+            $this->ffmpegVerbosity
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppVersion()
+    {
+        $version = PrettyVersions::getVersion(Versions::ROOT_PACKAGE_NAME);
+
+        return $version->getPrettyVersion();
     }
 }

@@ -7,7 +7,9 @@
 namespace Alltube\Test;
 
 use Alltube\Controller\JsonController;
-use Exception;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Exception\YoutubedlException;
+use SmartyException;
 
 /**
  * Unit tests for the FrontController class.
@@ -16,7 +18,7 @@ class JsonControllerTest extends ControllerTest
 {
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException|SmartyException
      */
     protected function setUp(): void
     {
@@ -44,7 +46,8 @@ class JsonControllerTest extends ControllerTest
      */
     public function testJsonWithError()
     {
-        $this->assertRequestIsServerError('json', ['url' => 'http://example.com/foo']);
+        $this->expectException(YoutubedlException::class);
+        $this->getRequestResult('json', ['url' => 'http://example.com/foo']);
     }
 
     /**

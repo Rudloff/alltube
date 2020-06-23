@@ -7,6 +7,7 @@
 namespace Alltube;
 
 use Aura\Session\Segment;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\PoFileLoader;
 
@@ -15,12 +16,11 @@ use Symfony\Component\Translation\Loader\PoFileLoader;
  */
 class LocaleManager
 {
+
     /**
-     * Supported locales.
-     *
-     * @var string[]
+     * Path to locales.
      */
-    private $supportedLocales = ['en_US', 'fr_FR', 'zh_CN', 'es_ES', 'pt_BR', 'de_DE', 'ar', 'pl_PL', 'tr_TR'];
+    private const PATH = __DIR__ . '/../i18n/';
 
     /**
      * Current locale.
@@ -75,7 +75,7 @@ class LocaleManager
         foreach ($this->getSupportedLocales() as $locale) {
             $this->translator->addResource(
                 'gettext',
-                __DIR__ . '/../i18n/' . $locale->getIso15897() . '/LC_MESSAGES/Alltube.po',
+                self::PATH . $locale->getIso15897() . '/LC_MESSAGES/Alltube.po',
                 $locale->getIso15897()
             );
         }
@@ -88,10 +88,17 @@ class LocaleManager
      */
     public function getSupportedLocales()
     {
-        $return = [];
+        $return = [
+            new Locale('en_US')
+        ];
 
-        foreach ($this->supportedLocales as $supportedLocale) {
-            $return[] = new Locale($supportedLocale);
+        $finder = new Finder();
+        $finder->depth(0)
+            ->directories()
+            ->in(self::PATH);
+
+        foreach ($finder as $file) {
+            $return[] = new Locale($file->getFilename());
         }
 
         return $return;

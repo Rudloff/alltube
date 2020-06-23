@@ -7,7 +7,7 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
-use Exception;
+use Alltube\Exception\ConfigException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,18 +22,12 @@ abstract class BaseTest extends TestCase
      */
     protected function getConfigFile()
     {
-        if (PHP_OS == 'WINNT') {
-            $configFile = 'config_test_windows.yml';
-        } else {
-            $configFile = 'config_test.yml';
-        }
-
-        return __DIR__ . '/../config/' . $configFile;
+        return __DIR__ . '/../config/config_test.yml';
     }
 
     /**
      * Prepare tests.
-     * @throws Exception
+     * @throws ConfigException
      */
     protected function setUp(): void
     {

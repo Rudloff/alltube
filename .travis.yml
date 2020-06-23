@@ -7,5 +7,6 @@ addons:
       - language-pack-fr
 install: composer install --no-progress
 script:
+  - composer check-platform-reqs
   - composer lint
   - composer test

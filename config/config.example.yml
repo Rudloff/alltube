@@ -22,14 +22,14 @@ convertAdvanced: false
 # List of formats available in advanced conversion mode
 convertAdvancedFormats: [mp3, avi, flv, wav]
 
-# Path to your avconv or ffmpeg binary
-avconv: vendor/bin/ffmpeg
+# Path to your ffmpeg binary
+ffmpeg: /usr/bin/ffmpeg
 
-# avconv/ffmpeg logging level.
-avconvVerbosity: error
+# ffmpeg logging level.
+ffmpegVerbosity: error
 
 # Path to the directory that contains the phantomjs binary.
-phantomjsDir: vendor/bin/
+phantomjsDir: /usr/bin/
 
 # True to disable URL rewriting
 uglyUrls: false
@@ -49,9 +49,9 @@ appName: AllTube Download
 
 # Generic formats supported by youtube-dl
 genericFormats:
-    best: Best
+    best/bestvideo: Best
     bestvideo+bestaudio: Remux best video with best audio
-    worst: Worst
+    worst/worstvideo: Worst
 
 # Enable debug mode.
 debug: false

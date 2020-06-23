@@ -25,10 +25,6 @@ composer install
 
 This will download all the required dependencies.
 
-(Note that it will download the ffmpeg binary for 64-bits Linux.
-If you are on another platform,
-you might want to specify the path to avconv/ffmpeg in your config file.)
-
 You should also ensure that the *templates_c* folder has the right permissions:
 
 ```bash
@@ -66,19 +62,22 @@ cp config/config.example.yml config/config.yml
 
 You will need PHP 7.2 (or higher) and the following PHP modules:
 
-* fileinfo
 * intl
 * mbstring
-* curl
+* gmp
 
 ## Web server configuration
 
 ### Apache
 
-You will need the following modules:
+The following modules are recommended:
 
 * mod_mime
 * mod_rewrite
+* mod_expires
+* mod_filter
+* mod_deflate
+* mod_headers
 
 ### Nginx
 
@@ -133,47 +132,22 @@ server {
 
 ## Other dependencies
 
-You need [avconv](https://libav.org/avconv.html)
+You need [ffmpeg](https://ffmpeg.org/)
 in order to enable conversions.
-If you don't want to enable conversions, you can disable it in `config.yml`.
+(Conversions are disabled by default.)
 
 On Debian-based systems:
 
 ```bash
-sudo apt-get install libav-tools
+sudo apt-get install ffmpeg
 ```
 
-You also probably need to edit the `avconv` variable in `config.yml`
-so that it points to your ffmpeg/avconv binary (`/usr/bin/avconv` on Debian/Ubuntu).
+If your ffmpeg binary is not installed at `/usr/bin/ffmpeg`, you also need to edit the `ffmpeg` variable in `config.yml`.
 
-## Use as library
+## Use as a library
 
-AllTube can also be used as a library to extract a video URL from a webpage.
-
-You can install it with:
-
-```bash
-composer require rudloff/alltube
-```
-
-You can then use it in your PHP code:
-
-```php
-use Alltube\Config;
-use Alltube\Video;
-
-require_once __DIR__.'/vendor/autoload.php';
-
-Config::setOptions(
-    [
-        'youtubedl' => '/usr/local/bin/youtube-dl',
-    ]
-);
-$video = new Video('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-$video->getUrl();
-```
-
-You can also have a look at this [example project](https://github.com/Rudloff/alltube-example-project).
+The `Video` class is now available as [a separate package](https://packagist.org/packages/rudloff/alltube-library)
+so that you can reuse it in your projects.
 
 ## JSON API
 
