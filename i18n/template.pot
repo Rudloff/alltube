@@ -1,6 +1,27 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
+#: templates/playlist.tpl:12
+msgid "Videos extracted from @title:"
+msgstr ""
+
+#: templates/playlist.tpl:38 templates/password.tpl:11 templates/index.tpl:19
+#: templates/info.tpl:101
+msgid "Download"
+msgstr ""
+
+#: templates/playlist.tpl:39
+msgid "More options"
+msgstr ""
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr ""
+
+#: templates/inc/header.tpl:8
+msgid "Set language"
+msgstr ""
+
 #: templates/inc/footer.tpl:8
 msgid "Code by @dev"
 msgstr ""
@@ -25,12 +46,44 @@ msgstr ""
 msgid "Donate"
 msgstr ""
 
-#: templates/inc/header.tpl:4
-msgid "Switch language"
+#: templates/password.tpl:5
+msgid "This video is protected"
 msgstr ""
 
-#: templates/inc/header.tpl:8
-msgid "Set language"
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr ""
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr ""
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgstr ""
+
+#: templates/index.tpl:25
+msgid "Audio only (MP3)"
+msgstr ""
+
+#: templates/index.tpl:28
+msgid "From"
+msgstr ""
+
+#: templates/index.tpl:31
+msgid "to"
+msgstr ""
+
+#: templates/index.tpl:39
+msgid "See all supported websites"
+msgstr ""
+
+#: templates/index.tpl:41
+msgid "Drag this to your bookmarks bar:"
+msgstr ""
+
+#: templates/index.tpl:43
+msgid "Bookmarklet"
 msgstr ""
 
 #: templates/info.tpl:11
@@ -81,23 +134,6 @@ msgstr ""
 msgid "kbit/s audio"
 msgstr ""
 
-#: templates/info.tpl:101 templates/playlist.tpl:38 templates/password.tpl:11
-#: templates/index.tpl:19
-msgid "Download"
-msgstr ""
-
-#: templates/playlist.tpl:12
-msgid "Videos extracted from @title:"
-msgstr ""
-
-#: templates/playlist.tpl:39
-msgid "More options"
-msgstr ""
-
-#: templates/extractors.tpl:4 controllers/FrontController.php:109
-msgid "Supported websites"
-msgstr ""
-
 #: templates/error.tpl:5
 msgid "An error occurred"
 msgstr ""
@@ -106,106 +142,71 @@ msgstr ""
 msgid "Please check the URL of your video."
 msgstr ""
 
-#: templates/password.tpl:5
-msgid "This video is protected"
-msgstr ""
-
-#: templates/password.tpl:6
-msgid "You need a password in order to download this video."
-msgstr ""
-
-#: templates/password.tpl:8
-msgid "Video password"
-msgstr ""
-
-#: templates/index.tpl:8
-msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
-msgstr ""
-
-#: templates/index.tpl:25
-msgid "Audio only (MP3)"
-msgstr ""
-
-#: templates/index.tpl:28
-msgid "From"
-msgstr ""
-
-#: templates/index.tpl:31
-msgid "to"
-msgstr ""
-
-#: templates/index.tpl:39
-msgid "See all supported websites"
-msgstr ""
-
-#: templates/index.tpl:41
-msgid "Drag this to your bookmarks bar:"
-msgstr ""
-
-#: templates/index.tpl:43
-msgid "Bookmarklet"
-msgstr ""
-
-#: classes/Config.php:156
-msgid "Best"
-msgstr ""
-
-#: classes/Config.php:157
-msgid "Remux best video with best audio"
+#: templates/extractors.tpl:4 classes/Controller/FrontController.php:109
+msgid "Supported websites"
 msgstr ""
 
 #: classes/Config.php:158
+msgid "Best"
+msgstr ""
+
+#: classes/Config.php:159
+msgid "Remux best video with best audio"
+msgstr ""
+
+#: classes/Config.php:160
 msgid "Worst"
 msgstr ""
 
-#: controllers/DownloadController.php:63 controllers/FrontController.php:164
+#: classes/Controller/DownloadController.php:63
+#: classes/Controller/FrontController.php:164
 msgid "Wrong password"
 msgstr ""
 
-#: controllers/DownloadController.php:68
+#: classes/Controller/DownloadController.php:68
 msgid "Conversion of playlists is not supported."
 msgstr ""
 
-#: controllers/DownloadController.php:75
+#: classes/Controller/DownloadController.php:75
 msgid "Conversion of M3U8 files is not supported."
 msgstr ""
 
-#: controllers/DownloadController.php:81
+#: classes/Controller/DownloadController.php:81
 msgid "Conversion of DASH segments is not supported."
 msgstr ""
 
-#: controllers/FrontController.php:63
+#: classes/Controller/FrontController.php:63
 msgid ""
 "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
 msgstr ""
 
-#: controllers/FrontController.php:110
+#: classes/Controller/FrontController.php:110
 msgid ""
 "List of all supported websites from which Alltube Download can extract video "
 "or audio files"
 msgstr ""
 
-#: controllers/FrontController.php:136
+#: classes/Controller/FrontController.php:136
 msgid "Password prompt"
 msgstr ""
 
-#: controllers/FrontController.php:138
+#: classes/Controller/FrontController.php:138
 msgid ""
 "You need a password in order to download this video with Alltube Download"
 msgstr ""
 
-#: controllers/FrontController.php:172
+#: classes/Controller/FrontController.php:172
 msgid "Video download"
 msgstr ""
 
-#: controllers/FrontController.php:174
+#: classes/Controller/FrontController.php:174
 msgid "Download video from @extractor"
 msgstr ""
 
-#: controllers/FrontController.php:180
+#: classes/Controller/FrontController.php:180
 msgid "Download @title from @extractor"
 msgstr ""
 
-#: controllers/FrontController.php:253
+#: classes/Controller/FrontController.php:253
 msgid "Error"
 msgstr ""

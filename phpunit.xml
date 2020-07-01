@@ -3,7 +3,6 @@
     <filter>
         <whitelist>
             <directory>classes/</directory>
-            <directory>controllers/</directory>
         </whitelist>
     </filter>
     <testsuites>

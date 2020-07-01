@@ -67,9 +67,6 @@
   "autoload": {
     "psr-4": {
       "Alltube\\": "classes/",
-      "Alltube\\Stream\\": "classes/streams/",
-      "Alltube\\Exception\\": "classes/exceptions/",
-      "Alltube\\Controller\\": "controllers/",
       "Alltube\\Test\\": "tests/"
     }
   },
@@ -79,7 +76,7 @@
     "release": "robo release --ansi",
     "update-locales": [
       "tsmarty2c.php templates > i18n/template.pot",
-      "xgettext --omit-header -kt -j -o i18n/template.pot classes/*.php classes/*/*.php controllers/*"
+      "xgettext --omit-header -kt -j -o i18n/template.pot classes/*.php classes/*/*.php"
     ],
     "youtube-dl": "vendor/ytdl-org/youtube-dl/youtube_dl/__main__.py"
   },
