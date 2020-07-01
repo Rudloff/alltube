@@ -54,7 +54,7 @@ composer install
 
 Cloudron is a complete solution for running apps on your server and keeping them up-to-date and secure.
 
-[![Install](https://cloudron.io/img/button.svg)](https://cloudron.io/button.html?app=net.alltubedownload.cloudronapp)
+[![Install](https://cloudron.io/img/button.svg)](https://cloudron.io/store/net.alltubedownload.cloudronapp.html)
 
 The source code for the package can be found [here](https://git.cloudron.io/cloudron/alltube-app).
 
