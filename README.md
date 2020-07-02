@@ -50,6 +50,14 @@ composer install
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+### On Cloudron
+
+Cloudron is a complete solution for running apps on your server and keeping them up-to-date and secure.
+
+[![Install](https://cloudron.io/img/button.svg)](https://cloudron.io/store/net.alltubedownload.cloudronapp.html)
+
+The source code for the package can be found [here](https://git.cloudron.io/cloudron/alltube-app).
+
 ## Config
 
 If you want to use a custom config, you need to create a config file:
