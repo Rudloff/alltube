@@ -8,9 +8,5 @@ parameters:
     composer: ~
     phpcs:
       standard: PSR12
-      ignore_patterns:
-        - RoboFile.php
     phpstan:
       level: max
-      ignore_patterns:
-        - RoboFile.php
