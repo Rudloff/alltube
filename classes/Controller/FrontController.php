@@ -11,6 +11,7 @@ use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Library\Exception\WrongPasswordException;
 use Alltube\Locale;
 use Exception;
+use Slim\Http\StatusCode;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
 use Psr\Container\ContainerInterface;
@@ -142,7 +143,7 @@ class FrontController extends BaseController
             ]
         );
 
-        return $response->withStatus(403);
+        return $response->withStatus(StatusCode::HTTP_FORBIDDEN);
     }
 
     /**
@@ -256,7 +257,7 @@ class FrontController extends BaseController
             ]
         );
 
-        return $response->withStatus(500);
+        return $response->withStatus(StatusCode::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**

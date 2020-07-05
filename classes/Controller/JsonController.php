@@ -9,6 +9,7 @@ namespace Alltube\Controller;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Http\StatusCode;
 
 /**
  * Controller that returns JSON.
@@ -38,7 +39,7 @@ class JsonController extends BaseController
             return $response->withJson($this->video->getJson());
         } else {
             return $response->withJson(['error' => 'You need to provide the url parameter'])
-                ->withStatus(400);
+                ->withStatus(StatusCode::HTTP_BAD_REQUEST);
         }
     }
 }
