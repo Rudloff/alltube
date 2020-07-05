@@ -7,6 +7,7 @@ parameters:
     yamllint: ~
     composer: ~
     securitychecker: ~
+    composer_normalize: ~
     phpcs:
       standard: PSR12
     phpstan:
