@@ -6,6 +6,7 @@ parameters:
     xmllint: ~
     yamllint: ~
     composer: ~
+    securitychecker: ~
     phpcs:
       standard: PSR12
     phpstan:
