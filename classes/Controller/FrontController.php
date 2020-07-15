@@ -261,6 +261,28 @@ class FrontController extends BaseController
     }
 
     /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function notFound(Request $request, Response $response)
+    {
+        return $this->displayError($request, $response, $this->localeManager->t('Page not found'))
+            ->withStatus(StatusCode::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function notAllowed(Request $request, Response $response)
+    {
+        return $this->displayError($request, $response, $this->localeManager->t('Method not allowed'))
+            ->withStatus(StatusCode::HTTP_METHOD_NOT_ALLOWED);
+    }
+
+    /**
      * Display an error page.
      *
      * @param Request $request PSR-7 request

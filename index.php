@@ -46,6 +46,8 @@ try {
     // Error handling.
     $container['errorHandler'] = [$frontController, 'error'];
     $container['phpErrorHandler'] = [$frontController, 'error'];
+    $container['notFoundHandler'] = [$frontController, 'notFound'];
+    $container['notAllowedHandler'] = [$frontController, 'notAllowed'];
 
     // Routes.
     $app->get(
