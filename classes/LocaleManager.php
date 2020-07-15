@@ -172,6 +172,7 @@ class LocaleManager
      * Get LocaleManager singleton instance.
      *
      * @return LocaleManager
+     * @todo Stop using a singleton.
      */
     public static function getInstance()
     {

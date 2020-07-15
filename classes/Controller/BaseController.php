@@ -83,7 +83,7 @@ abstract class BaseController
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->config = Config::getInstance();
+        $this->config = $container->get('config');
         $this->container = $container;
         $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);

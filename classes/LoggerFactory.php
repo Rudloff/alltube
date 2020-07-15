@@ -4,6 +4,7 @@ namespace Alltube;
 
 use Consolidation\Log\Logger;
 use Consolidation\Log\LogOutputStyler;
+use Slim\Container;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 /**
@@ -14,11 +15,12 @@ class LoggerFactory
 {
 
     /**
+     * @param Container $container
      * @return Logger
      */
-    public static function create()
+    public static function create(Container $container)
     {
-        $config = Config::getInstance();
+        $config = $container->get('config');
         if ($config->debug) {
             $verbosity = ConsoleOutput::VERBOSITY_DEBUG;
         } else {

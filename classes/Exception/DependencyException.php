@@ -5,10 +5,10 @@ namespace Alltube\Exception;
 use Exception;
 
 /**
- * Class ConfigException
+ * Class DependencyException
  * @package Alltube\Exception
  */
-class ConfigException extends Exception
+class DependencyException extends Exception
 {
 
 }

@@ -261,6 +261,7 @@ class Config
      * Get Config singleton instance.
      *
      * @return Config
+     * @todo Stop using a singleton.
      */
     public static function getInstance()
     {
