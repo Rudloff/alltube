@@ -11,6 +11,7 @@ use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\Exception\ConfigException;
 use Alltube\LocaleManager;
+use Alltube\LoggerFactory;
 use Alltube\ViewFactory;
 use Slim\Container;
 use Slim\Http\Environment;
@@ -63,6 +64,7 @@ abstract class ControllerTest extends BaseTest
         $this->response = new Response();
         $this->container['locale'] = LocaleManager::getInstance();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
+        $this->container['logger'] = LoggerFactory::create();
 
         $frontController = new FrontController($this->container);
         $downloadController = new DownloadController($this->container);

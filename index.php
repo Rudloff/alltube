@@ -8,6 +8,7 @@ use Alltube\Controller\FrontController;
 use Alltube\Controller\JsonController;
 use Alltube\LocaleManager;
 use Alltube\LocaleMiddleware;
+use Alltube\LoggerFactory;
 use Alltube\UglyRouter;
 use Alltube\ViewFactory;
 use Slim\App;
@@ -60,6 +61,9 @@ try {
 } catch (SmartyException $e) {
     die('Could not load Smarty: ' . $e->getMessage());
 }
+
+// Logger.
+$container['logger'] = LoggerFactory::create();
 
 // Controllers.
 $frontController = new FrontController($container);
