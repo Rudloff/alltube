@@ -8,6 +8,7 @@ namespace Alltube\Test;
 
 use Alltube\Controller\JsonController;
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Library\Exception\YoutubedlException;
 use SmartyException;
 
@@ -18,7 +19,7 @@ class JsonControllerTest extends ControllerTest
 {
     /**
      * Prepare tests.
-     * @throws ConfigException|SmartyException
+     * @throws ConfigException|SmartyException|DependencyException
      */
     protected function setUp(): void
     {

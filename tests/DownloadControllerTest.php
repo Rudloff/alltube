@@ -9,6 +9,7 @@ namespace Alltube\Test;
 use Alltube\Config;
 use Alltube\Controller\DownloadController;
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Library\Exception\EmptyUrlException;
 use Alltube\Library\Exception\RemuxException;
 use Alltube\Library\Exception\YoutubedlException;
@@ -22,7 +23,7 @@ class DownloadControllerTest extends ControllerTest
 {
     /**
      * Prepare tests.
-     * @throws ConfigException|SmartyException
+     * @throws ConfigException|SmartyException|DependencyException
      */
     protected function setUp(): void
     {
