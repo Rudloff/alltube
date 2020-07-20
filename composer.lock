@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0a5c7e93a6d08ce781d72a85dff85ab",
+    "content-hash": "33751d511fe2a384c6fa74542d7defb1",
     "packages": [
         {
             "name": "aura/session",
@@ -617,24 +617,6 @@
                 "routing"
             ],
             "time": "2018-02-13T20:26:39+00:00"
-        },
-        {
-            "name": "npm-asset/open-sans-fontface",
-            "version": "1.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FontFaceKit/open-sans.git",
-                "reference": "2285c0300e6a4c8b102b98fb030fb38c26aa081c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FontFaceKit/open-sans/zipball/2285c0300e6a4c8b102b98fb030fb38c26aa081c",
-                "reference": "2285c0300e6a4c8b102b98fb030fb38c26aa081c"
-            },
-            "type": "npm-asset",
-            "license": [
-                "Apache License version 2.0"
-            ]
         },
         {
             "name": "pimple/pimple",
@@ -1832,6 +1814,29 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2019-11-12T14:51:11+00:00"
+        },
+        {
+            "name": "webfontkit/open-sans",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webfontkit/open-sans.git",
+                "reference": "00ab31e690edfd0d88f9ffbcd998cf298b9687e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webfontkit/open-sans/zipball/00ab31e690edfd0d88f9ffbcd998cf298b9687e9",
+                "reference": "00ab31e690edfd0d88f9ffbcd998cf298b9687e9",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Open Sans is a humanist sans serif typeface designed by Steve Matteson, Type Director of Ascender Corp. This version contains the complete 897 character set, which includes the standard ISO Latin 1, Latin CE, Greek and Cyrillic character sets. Open Sans was designed with an upright stress, open forms and a neutral, yet friendly appearance. It was optimized for print, web, and mobile interfaces, and has excellent legibility characteristics in its letterforms.",
+            "homepage": "http://www.google.com/fonts/specimen/Open+Sans",
+            "time": "2014-08-20T20:43:34+00:00"
         },
         {
             "name": "ytdl-org/youtube-dl",

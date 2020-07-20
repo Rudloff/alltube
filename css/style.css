@@ -6,6 +6,14 @@ body {
   text-align: center;
 }
 
+.small-font {
+  font-size: 13px;
+}
+
+.large-font {
+  font-size:24px;
+}
+
 /* Header */
 
 header {
