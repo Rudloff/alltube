@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33751d511fe2a384c6fa74542d7defb1",
+    "content-hash": "0e2a7ead8c864965d75c0ed7f3868c51",
     "packages": [
         {
             "name": "aura/session",
@@ -2835,6 +2835,45 @@
             "time": "2016-01-20T08:20:44+00:00"
         },
         {
+            "name": "insite/composer-dangling-locked-deps",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prudloff-insite/composer-dangling-locked-deps.git",
+                "reference": "3e5b6bef90eeb0ed0203533b4daa78bffa7a74ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prudloff-insite/composer-dangling-locked-deps/zipball/3e5b6bef90eeb0ed0203533b4daa78bffa7a74ad",
+                "reference": "3e5b6bef90eeb0ed0203533b4daa78bffa7a74ad",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1|^2.0",
+                "ocramius/package-versions": "^1.4"
+            },
+            "require-dev": {
+                "composer/composer": "^1.10",
+                "phpro/grumphp": "^0.16.2"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "ComposerDanglingLockedDeps\\DanglingLockedDepsPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "ComposerDanglingLockedDeps\\": "src/",
+                    "ComposerDanglingLockedDeps\\GrumPHP\\": "src/grumphp/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Detect dangling Composer locked dependencies",
+            "time": "2020-09-01T08:16:17+00:00"
+        },
+        {
             "name": "justinrainbow/json-schema",
             "version": "5.2.10",
             "source": {
@@ -4089,6 +4128,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

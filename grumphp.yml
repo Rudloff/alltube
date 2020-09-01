@@ -1,4 +1,11 @@
 ---
+services:
+  ComposerDanglingLockedDeps\GrumPHP\ComposerDanglingLockedDeps:
+    arguments:
+      - '@process_builder'
+      - '@formatter.raw_process'
+    tags:
+      - {name: grumphp.task, task: composer_dangling_locked_deps}
 parameters:
   ascii: ~
   tasks:
@@ -8,6 +15,7 @@ parameters:
     composer: ~
     securitychecker: ~
     composer_normalize: ~
+    composer_dangling_locked_deps: ~
     phpcs:
       standard: PSR12
     phpstan:
