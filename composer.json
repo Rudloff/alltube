@@ -82,7 +82,10 @@
   "scripts": {
     "lint": "grumphp run --ansi",
     "release": "robo release --ansi",
-    "test": "phpunit",
+    "test": [
+      "Composer\\Config::disableProcessTimeout",
+      "phpunit"
+    ],
     "update-locales": [
       "tsmarty2c.php templates > i18n/template.pot",
       "xgettext --omit-header -kt -j -o i18n/template.pot classes/*.php classes/*/*.php"
