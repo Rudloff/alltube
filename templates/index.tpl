@@ -20,7 +20,7 @@
             {if $config->convert}
                 <div class="mp3 small-font">
                     <div class="mp3-inner">
-                        <input type="checkbox" id="audio" class="audio" name="audio"{($config->defaultAudio) ? ' checked' : ''}>
+                        <input type="checkbox" id="audio" class="audio" name="audio" {($config->defaultAudio) ? 'checked' : ''}>
                         <label for="audio"><span class="ui"></span>
                             {t}Audio only (MP3){/t}
                         </label>
