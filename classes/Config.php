@@ -141,7 +141,6 @@ class Config
     public $debug = false;
 
     /**
-    /**
      * Default to audio.
      *
      * @var bool
