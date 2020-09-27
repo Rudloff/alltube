@@ -30,7 +30,10 @@ try {
 
     // Locales.
     $container['locale'] = LocaleManagerFactory::create();
+
     $app->add(new LocaleMiddleware($container));
+
+$container['config'] = $config;
 
     // Smarty.
     $container['view'] = ViewFactory::create($container);
@@ -51,37 +54,37 @@ try {
 
     // Routes.
     $app->get(
-        '/',
+    $config->basePath . '/',
         [$frontController, 'index']
     )->setName('index');
 
     $app->get(
-        '/extractors',
+    $config->basePath . '/extractors',
         [$frontController, 'extractors']
     )->setName('extractors');
 
     $app->any(
-        '/info',
+    $config->basePath . '/info',
         [$frontController, 'info']
     )->setName('info');
 
     $app->any(
-        '/watch',
+    $config->basePath . '/watch',
         [$frontController, 'info']
     );
 
     $app->any(
-        '/download',
+    $config->basePath . '/download',
         [$downloadController, 'download']
     )->setName('download');
 
     $app->get(
-        '/locale/{locale}',
+    $config->basePath . '/locale/{locale}',
         [$frontController, 'locale']
     )->setName('locale');
 
     $app->get(
-        '/json',
+    $config->basePath . '/json',
         [$jsonController, 'json']
     )->setName('json');
 

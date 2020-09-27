@@ -33,8 +33,14 @@ class ViewFactory
         }
 
         $view = new Smarty(__DIR__ . '/../templates/');
+
+        /** @var Config $config */
+        $config = $container->get('config');
+        $scheme = 'http';
         if (in_array('https', $request->getHeader('X-Forwarded-Proto'))) {
-            $request = $request->withUri($request->getUri()->withScheme('https')->withPort(443));
+            $scheme = 'https';
+            $forwardPort = $config->forwardPort;
+            $request = $request->withUri($request->getUri()->withScheme($scheme)->withPort($forwardPort));
         }
 
         /** @var LocaleManager $localeManager */
@@ -43,6 +49,7 @@ class ViewFactory
         $smartyPlugins = new SmartyPlugins($container->get('router'), $request->getUri()->withUserInfo(null));
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
         $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
+        $view->registerPlugin('function', 'base_path', [$config, 'getBasePath']);
         $view->registerPlugin('block', 't', [$localeManager, 'smartyTranslate']);
 
         return $view;
