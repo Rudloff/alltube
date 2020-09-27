@@ -58,3 +58,6 @@ debug: false
 
 # True to enable audio conversion mode by default
 defaultAudio: false
+
+# False to disable convert seek functionality
+convertSeek: true
