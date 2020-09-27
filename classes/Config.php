@@ -185,7 +185,7 @@ class Config
      *
      * @return string
      */
-    public static function addHttpToFormat($format)
+    public static function addHttpToFormat(string $format)
     {
         $newFormat = [];
         foreach (explode('/', $format) as $subformat) {
@@ -279,7 +279,7 @@ class Config
      * @return void
      * @throws ConfigException
      */
-    public static function setFile($file)
+    public static function setFile(string $file)
     {
         if (is_file($file)) {
             $options = Yaml::parse(strval(file_get_contents($file)));

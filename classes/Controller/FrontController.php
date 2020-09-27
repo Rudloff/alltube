@@ -242,7 +242,7 @@ class FrontController extends BaseController
      *
      * @return Response HTTP response
      */
-    protected function displayError(Request $request, Response $response, $message)
+    protected function displayError(Request $request, Response $response, string $message)
     {
         $this->view->render(
             $response,

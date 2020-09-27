@@ -79,7 +79,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Add data to the archive.
      *
-     * @param string $data Data
+     * @param mixed $data Data
      *
      * @return void
      */
@@ -99,7 +99,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Write data to the stream.
      *
-     * @param string $string The string that is to be written
+     * @param mixed $string The string that is to be written
      *
      * @return int|false
      */
@@ -171,7 +171,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Get stream metadata as an associative array or retrieve a specific key.
      *
-     * @param string $key string $key Specific metadata to retrieve.
+     * @param string|null $key string $key Specific metadata to retrieve.
      *
      * @return array|mixed|null
      */
@@ -228,7 +228,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Seek to a position in the stream.
      *
-     * @param int $offset Offset
+     * @param mixed $offset Offset
      * @param int $whence Specifies how the cursor position will be calculated
      *
      * @return void
@@ -272,7 +272,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Read data from the stream.
      *
-     * @param int $count Number of bytes to read
+     * @param mixed $count Number of bytes to read
      *
      * @return string|false
      * @throws AlltubeLibraryException

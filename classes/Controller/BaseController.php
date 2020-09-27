@@ -144,7 +144,7 @@ abstract class BaseController
      *
      * @return Response HTTP response
      */
-    protected function displayError(Request $request, Response $response, $message)
+    protected function displayError(Request $request, Response $response, string $message)
     {
         $controller = new FrontController($this->container);
 

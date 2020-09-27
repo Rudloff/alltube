@@ -21,7 +21,7 @@ class ViewFactory
      * Create Smarty view object.
      *
      * @param ContainerInterface $container Slim dependency container
-     * @param Request $request PSR-7 request
+     * @param Request|null $request PSR-7 request
      *
      * @return Smarty
      * @throws SmartyException

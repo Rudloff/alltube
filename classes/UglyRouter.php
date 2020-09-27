@@ -42,7 +42,7 @@ class UglyRouter extends Router
     /**
      * Build the path for a named route including the base path.
      *
-     * @param string $name Route name
+     * @param mixed $name Route name
      * @param string[] $data Named argument replacement data
      * @param string[] $queryParams Optional query string parameters
      *
