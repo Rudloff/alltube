@@ -141,6 +141,14 @@ class Config
     public $debug = false;
 
     /**
+    /**
+     * Default to audio.
+     *
+     * @var bool
+     */
+    public $defaultAudio = false;
+
+    /**
      * Config constructor.
      *
      * @param mixed[] $options Options
