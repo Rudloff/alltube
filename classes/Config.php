@@ -141,6 +141,13 @@ class Config
     public $debug = false;
 
     /**
+     * Disable audio conversion from/to seeker.
+     *
+     * @var bool
+     */
+    public $convertSeek = true;
+
+    /**
      * Config constructor.
      *
      * @param mixed[] $options Options

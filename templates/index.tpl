@@ -24,6 +24,7 @@
                         <label for="audio"><span class="ui"></span>
                             {t}Audio only (MP3){/t}
                         </label>
+                       {if $config->convertSeek}
                         <div class="seekOptions">
                             <label for="from">{t}From{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?"
                                                                          placeholder="HH:MM:SS" value="" name="from"
@@ -31,6 +32,7 @@
                             <label for="to">{t}to{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?"
                                                                      placeholder="HH:MM:SS" value="" name="to" id="to"/>
                         </div>
+                        {/if}
                     </div>
                 </div>
             {/if}

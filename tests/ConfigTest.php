@@ -75,6 +75,7 @@ class ConfigTest extends BaseTest
         $this->assertIsBool($config->uglyUrls);
         $this->assertIsBool($config->stream);
         $this->assertIsBool($config->remux);
+        $this->assertIsBool($config->convertSeek);
         $this->assertIsInt($config->audioBitrate);
     }
 
