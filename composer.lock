@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e2a7ead8c864965d75c0ed7f3868c51",
+    "content-hash": "b4620291428c1396460522b3b5c0eebe",
     "packages": [
         {
             "name": "aura/session",
@@ -2836,16 +2836,16 @@
         },
         {
             "name": "insite/composer-dangling-locked-deps",
-            "version": "0.1.2",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prudloff-insite/composer-dangling-locked-deps.git",
-                "reference": "3e5b6bef90eeb0ed0203533b4daa78bffa7a74ad"
+                "reference": "373820e7680f2e98e1fe8259f04474cea5745806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prudloff-insite/composer-dangling-locked-deps/zipball/3e5b6bef90eeb0ed0203533b4daa78bffa7a74ad",
-                "reference": "3e5b6bef90eeb0ed0203533b4daa78bffa7a74ad",
+                "url": "https://api.github.com/repos/prudloff-insite/composer-dangling-locked-deps/zipball/373820e7680f2e98e1fe8259f04474cea5745806",
+                "reference": "373820e7680f2e98e1fe8259f04474cea5745806",
                 "shasum": ""
             },
             "require": {
@@ -2854,7 +2854,7 @@
             },
             "require-dev": {
                 "composer/composer": "^1.10",
-                "phpro/grumphp": "^0.16.2"
+                "phpro/grumphp": "^0.21.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -2871,7 +2871,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Detect dangling Composer locked dependencies",
-            "time": "2020-09-01T08:16:17+00:00"
+            "time": "2020-10-05T10:24:52+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
