@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4620291428c1396460522b3b5c0eebe",
+    "content-hash": "7e756e8b0f372bd5a914c54310933ecb",
     "packages": [
         {
             "name": "aura/session",
@@ -1840,10 +1840,10 @@
         },
         {
             "name": "ytdl-org/youtube-dl",
-            "version": "2020.06.16.1",
+            "version": "2020.09.20",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.06.16.1.zip"
+                "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.09.20.zip"
             },
             "type": "library"
         },
