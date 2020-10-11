@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: cd /var/www/html/resources && bash heroku-docker-start.sh
+  web: bash /var/www/html/resources/heroku-docker-start.sh
