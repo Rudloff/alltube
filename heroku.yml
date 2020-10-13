@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: bash /var/www/html/resources/heroku-docker-start.sh
