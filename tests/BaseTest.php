@@ -53,10 +53,10 @@ abstract class BaseTest extends TestCase
         $requires = [];
 
         if (isset($annotations['class']['requires'])) {
-            $requires += $annotations['class']['requires'];
+            $requires = array_merge($requires, $annotations['class']['requires']);
         }
         if (isset($annotations['method']['requires'])) {
-            $requires += $annotations['method']['requires'];
+            $requires = array_merge($requires, $annotations['method']['requires']);
         }
 
         foreach ($requires as $require) {
