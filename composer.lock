@@ -938,12 +938,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Rudloff/alltube-library.git",
-                "reference": "0413427bbed7b02a2971b1716bf36c66924a205f"
+                "reference": "69d09b780e01ec0f3e6e3d123be14fa3b981b64e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Rudloff/alltube-library/zipball/0413427bbed7b02a2971b1716bf36c66924a205f",
-                "reference": "0413427bbed7b02a2971b1716bf36c66924a205f",
+                "url": "https://api.github.com/repos/Rudloff/alltube-library/zipball/69d09b780e01ec0f3e6e3d123be14fa3b981b64e",
+                "reference": "69d09b780e01ec0f3e6e3d123be14fa3b981b64e",
                 "shasum": ""
             },
             "require": {
@@ -971,7 +971,7 @@
             ],
             "description": "PHP wrapper for youtube-dl",
             "homepage": "http://alltubedownload.net/",
-            "time": "2020-07-15T20:34:36+00:00"
+            "time": "2020-10-17T20:47:16+00:00"
         },
         {
             "name": "slim/slim",
