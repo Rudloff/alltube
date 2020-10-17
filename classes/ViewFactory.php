@@ -34,14 +34,23 @@ class ViewFactory
 
         $view = new Smarty(__DIR__ . '/../templates/');
 
-        /** @var Config $config */
-        $config = $container->get('config');
-        $scheme = 'http';
+        $uri = $request->getUri();
         if (in_array('https', $request->getHeader('X-Forwarded-Proto'))) {
-            $scheme = 'https';
-            $forwardPort = $config->forwardPort;
-            $request = $request->withUri($request->getUri()->withScheme($scheme)->withPort($forwardPort));
+            $uri = $uri->withScheme('https')->withPort(443);
         }
+
+        $port = ViewFactory::extractHeader($request, 'X-Forwarded-Port');
+        if (!is_null($port)) {
+            $uri = $uri->withPort(intVal($port));
+        }
+
+        $path = ViewFactory::extractHeader($request, 'X-Forwarded-Path');
+        if (!is_null($path)) {
+            $uri = $uri->withBasePath($path);
+        }
+
+        $request = $request->withUri($uri);
+
 
         /** @var LocaleManager $localeManager */
         $localeManager = $container->get('locale');
@@ -49,9 +58,30 @@ class ViewFactory
         $smartyPlugins = new SmartyPlugins($container->get('router'), $request->getUri()->withUserInfo(null));
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
         $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
-        $view->registerPlugin('function', 'base_path', [$config, 'getBasePath']);
         $view->registerPlugin('block', 't', [$localeManager, 'smartyTranslate']);
 
         return $view;
     }
+
+    static function extractHeader(Request $request = null, string $headerName) {
+        if (is_null($request)) {
+            return null;
+        }
+
+        $header = $request->getHeader($headerName);
+        if (!isset($header)) {
+            return null;
+        }
+
+        $count = sizeof($header);
+        if ($count != 1) {
+            return null;
+        }
+        return $header[0];
+    }
+
+    public static function getBasePath(Request $request = null) {
+        return ViewFactory::extractHeader($request, 'X-Forwarded-Path');
+    }
+
 }

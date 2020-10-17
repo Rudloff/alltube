@@ -133,22 +133,6 @@ class Config
      */
     public $debug = false;
 
-
-    /**
-     * Forward port.
-     *
-     * @var int
-     */
-    public $forwardPort = 443;
-
-    /**
-     * Base Path.
-     * *Must* start with a '/' and *not* end with one.
-     *
-     * @var string
-     */
-    public $basePath = '';
-
     /**
      * Default to audio.
      *
@@ -337,13 +321,4 @@ class Config
         return $version->getPrettyVersion();
     }
 
-    /**
-    * Return the configured base_path usable in smarty.
-    *
-    * @return string
-    */
-    public function getBasePath($params, $smarty)
-    {
-        return $this->basePath;
-    }
 }

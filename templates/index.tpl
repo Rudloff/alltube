@@ -1,7 +1,7 @@
 {include file='inc/head.tpl'}
 {include file='inc/header.tpl'}
 <main class="main">
-    <div><img class="logo" src="{base_url}{base_path}/img/logo.png"
+    <div><img class="logo" src="{base_url}/img/logo.png"
               alt="{$config->appName}" width="328" height="284"></div>
     <form action="{path_for name="info"}">
         <label class="labelurl" for="url">

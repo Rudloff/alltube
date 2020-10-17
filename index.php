@@ -53,38 +53,39 @@ $container['config'] = $config;
     $container['notAllowedHandler'] = [$frontController, 'notAllowed'];
 
     // Routes.
+    $basePath = ViewFactory::getBasepath($container->get('request'));
     $app->get(
-    $config->basePath . '/',
+        $basePath . '/',
         [$frontController, 'index']
     )->setName('index');
 
     $app->get(
-    $config->basePath . '/extractors',
+        $base_path . '/extractors',
         [$frontController, 'extractors']
     )->setName('extractors');
 
     $app->any(
-    $config->basePath . '/info',
+        $base_path . '/info',
         [$frontController, 'info']
     )->setName('info');
 
     $app->any(
-    $config->basePath . '/watch',
+        $base_path . '/watch',
         [$frontController, 'info']
     );
 
     $app->any(
-    $config->basePath . '/download',
+        $base_path . '/download',
         [$downloadController, 'download']
     )->setName('download');
 
     $app->get(
-    $config->basePath . '/locale/{locale}',
+        $base_path . '/locale/{locale}',
         [$frontController, 'locale']
     )->setName('locale');
 
     $app->get(
-    $config->basePath . '/json',
+        $base_path . '/json',
         [$jsonController, 'json']
     )->setName('json');
 
