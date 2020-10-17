@@ -48,7 +48,8 @@ class VideoTest extends BaseTest
     {
         parent::setUp();
 
-        $config = Config::getInstance();
+        // So ffmpeg does not spam the output with broken pipe errors.
+        $config = new Config(['ffmpegVerbosity' => 'fatal']);
         $this->downloader = $config->getDownloader();
         $this->format = 'best';
     }
@@ -352,8 +353,7 @@ class VideoTest extends BaseTest
     public function testGetAudioStreamFfmpegError(string $url, string $format)
     {
         $this->expectException(AvconvException::class);
-        Config::setOptions(['ffmpeg' => 'foobar']);
-        $config = Config::getInstance();
+        $config = new Config(['ffmpeg' => 'foobar']);
         $downloader = $config->getDownloader();
 
         $video = new Video($this->downloader, $url, $format, $this->format);
@@ -502,8 +502,7 @@ class VideoTest extends BaseTest
     public function testGetM3uStreamFfmpegError(string $url, string $format)
     {
         $this->expectException(AvconvException::class);
-        Config::setOptions(['ffmpeg' => 'foobar']);
-        $config = Config::getInstance();
+        $config = new Config(['ffmpeg' => 'foobar']);
         $downloader = $config->getDownloader();
 
         $video = new Video($downloader, $url, $format);

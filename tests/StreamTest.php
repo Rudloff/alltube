@@ -6,6 +6,9 @@
 
 namespace Alltube\Test;
 
+use Alltube\Config;
+use Alltube\Exception\ConfigException;
+use Alltube\Library\Downloader;
 use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 
@@ -19,6 +22,25 @@ abstract class StreamTest extends BaseTest
      * @var StreamInterface
      */
     protected $stream;
+
+    /**
+     * Downloader class instance.
+     * @var Downloader
+     */
+    protected $downloader;
+
+    /**
+     * Prepare tests.
+     * @throws ConfigException
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // So ffmpeg does not spam the output with broken pipe errors.
+        $config = new Config(['ffmpegVerbosity' => 'fatal']);
+        $this->downloader = $config->getDownloader();
+    }
 
     /**
      * Clean variables used in tests.

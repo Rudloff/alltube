@@ -19,10 +19,10 @@ class ConfigFactory
     {
         $configPath = __DIR__ . '/../config/config.yml';
         if (is_file($configPath)) {
-            Config::setFile($configPath);
+            $config = Config::fromFile($configPath);
+        } else {
+            $config = new Config();
         }
-
-        $config = Config::getInstance();
         if ($config->uglyUrls) {
             $container['router'] = new UglyRouter();
         }

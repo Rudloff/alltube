@@ -6,7 +6,6 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
 use Alltube\Controller\FrontController;
 use Alltube\Exception\ConfigException;
 use Alltube\Exception\DependencyException;
@@ -52,11 +51,11 @@ class FrontControllerTest extends ControllerTest
      * Test the constructor with streams enabled.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testConstructorWithStream()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
         $this->assertInstanceOf(FrontController::class, new FrontController($this->container));
     }
 
@@ -132,11 +131,11 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws ConfigException
      */
     public function testInfoWithAudio()
     {
-        Config::setOptions(['convert' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['convert' => true]);
 
         $this->assertRequestIsRedirect(
             'info',
@@ -149,11 +148,11 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws ConfigException
      */
     public function testInfoWithVimeoAudio()
     {
-        Config::setOptions(['convert' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['convert' => true]);
 
         // So we can test the fallback to default format
         $this->assertRequestIsRedirect('info', ['url' => 'https://vimeo.com/251997032', 'audio' => true]);
@@ -164,11 +163,11 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws ConfigException
      */
     public function testInfoWithUnconvertedAudio()
     {
-        Config::setOptions(['convert' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['convert' => true]);
 
         $this->assertRequestIsRedirect(
             'info',
@@ -213,11 +212,11 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws ConfigException
      */
     public function testInfoWithStream()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk('info', ['url' => 'https://www.youtube.com/watch?v=M7IpKCZ47pU']);
         $this->assertRequestIsOk(

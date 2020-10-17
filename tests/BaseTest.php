@@ -27,20 +27,10 @@ abstract class BaseTest extends TestCase
 
     /**
      * Prepare tests.
-     * @throws ConfigException
      */
     protected function setUp(): void
     {
-        Config::setFile($this->getConfigFile());
         $this->checkRequirements();
-    }
-
-    /**
-     * Destroy properties after test.
-     */
-    protected function tearDown(): void
-    {
-        Config::destroyInstance();
     }
 
     /**

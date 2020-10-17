@@ -6,7 +6,6 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
 use Alltube\Controller\DownloadController;
 use Alltube\Exception\ConfigException;
 use Alltube\Exception\DependencyException;
@@ -69,11 +68,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with streams enabled.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithStream()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -85,11 +84,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an M3U stream.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithM3uStream()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -105,13 +104,13 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an RTMP stream.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithRtmpStream()
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
 
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -123,11 +122,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with a remuxed video.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithRemux()
     {
-        Config::setOptions(['remux' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['remux' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -196,11 +195,11 @@ class DownloadControllerTest extends ControllerTest
      *
      * @return void
      * @requires OS Linux
-     * @throws ConfigException
      */
     public function testDownloadWithPlaylist()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -212,11 +211,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an advanced conversion.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithAdvancedConversion()
     {
-        Config::setOptions(['convertAdvanced' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['convertAdvanced' => true]);
 
         $this->assertRequestIsOk(
             'download',

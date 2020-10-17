@@ -20,12 +20,6 @@ use Jawira\CaseConverter\Convert;
  */
 class Config
 {
-    /**
-     * Singleton instance.
-     *
-     * @var Config|null
-     */
-    private static $instance;
 
     /**
      * youtube-dl binary path.
@@ -160,10 +154,11 @@ class Config
      * @param mixed[] $options Options
      * @throws ConfigException
      */
-    private function __construct(array $options = [])
+    public function __construct(array $options = [])
     {
         $this->applyOptions($options);
         $this->getEnv();
+        $this->validateOptions();
         $localeManager = LocaleManager::getInstance();
 
         if (empty($this->genericFormats)) {
@@ -272,33 +267,16 @@ class Config
     }
 
     /**
-     * Get Config singleton instance.
-     *
-     * @return Config
-     * @todo Stop using a singleton.
-     */
-    public static function getInstance()
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-    /**
      * Set options from a YAML file.
      *
      * @param string $file Path to the YAML file
-     * @return void
+     * @return Config
      * @throws ConfigException
      */
-    public static function setFile(string $file)
+    public static function fromFile(string $file)
     {
         if (is_file($file)) {
-            $options = Yaml::parse(strval(file_get_contents($file)));
-            self::$instance = new self($options);
-            self::$instance->validateOptions();
+            return new self(Yaml::parse(strval(file_get_contents($file))));
         } else {
             throw new ConfigException("Can't find config file at " . $file);
         }
@@ -308,29 +286,13 @@ class Config
      * Manually set some options.
      *
      * @param mixed[] $options Options (see `config/config.example.yml` for available options)
-     * @param bool $update True to update an existing instance
      * @return void
      * @throws ConfigException
      */
-    public static function setOptions(array $options, $update = true)
+    public function setOptions(array $options)
     {
-        if ($update) {
-            $config = self::getInstance();
-            $config->applyOptions($options);
-            $config->validateOptions();
-        } else {
-            self::$instance = new self($options);
-        }
-    }
-
-    /**
-     * Destroy singleton instance.
-     *
-     * @return void
-     */
-    public static function destroyInstance()
-    {
-        self::$instance = null;
+        $this->applyOptions($options);
+        $this->validateOptions();
     }
 
     /**
