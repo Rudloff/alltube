@@ -51,16 +51,9 @@ class LocaleManager
     private $translator;
 
     /**
-     * Singleton instance.
-     *
-     * @var LocaleManager|null
-     */
-    private static $instance;
-
-    /**
      * LocaleManager constructor.
      */
-    private function __construct()
+    public function __construct()
     {
         $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
@@ -170,30 +163,5 @@ class LocaleManager
         }
 
         return '';
-    }
-
-    /**
-     * Get LocaleManager singleton instance.
-     *
-     * @return LocaleManager
-     * @todo Stop using a singleton.
-     */
-    public static function getInstance()
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Destroy singleton instance.
-     *
-     * @return void
-     */
-    public static function destroyInstance()
-    {
-        self::$instance = null;
     }
 }

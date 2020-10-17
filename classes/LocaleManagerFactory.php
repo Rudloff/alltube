@@ -21,6 +21,6 @@ class LocaleManagerFactory
             throw new DependencyException('You need to install the intl extension for PHP.');
         }
 
-        return LocaleManager::getInstance();
+        return new LocaleManager();
     }
 }

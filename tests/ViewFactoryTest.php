@@ -28,7 +28,7 @@ class ViewFactoryTest extends BaseTest
     public function testCreate()
     {
         $container = new Container();
-        $container['locale'] = LocaleManager::getInstance();
+        $container['locale'] = new LocaleManager();
         $view = ViewFactory::create($container);
         $this->assertInstanceOf(Smarty::class, $view);
     }
@@ -42,7 +42,7 @@ class ViewFactoryTest extends BaseTest
     public function testCreateWithXForwardedProto()
     {
         $container = new Container();
-        $container['locale'] = LocaleManager::getInstance();
+        $container['locale'] = new LocaleManager();
         $request = Request::createFromEnvironment(Environment::mock());
         $view = ViewFactory::create($container, $request->withHeader('X-Forwarded-Proto', 'https'));
         $this->assertInstanceOf(Smarty::class, $view);

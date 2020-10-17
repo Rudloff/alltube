@@ -38,7 +38,7 @@ class LocaleMiddlewareTest extends BaseTest
     protected function setUp(): void
     {
         $this->container = new Container();
-        $this->container['locale'] = LocaleManager::getInstance();
+        $this->container['locale'] = new LocaleManager();
         $this->middleware = new LocaleMiddleware($this->container);
     }
 
@@ -50,7 +50,6 @@ class LocaleMiddlewareTest extends BaseTest
     protected function tearDown(): void
     {
         $this->container['locale']->unsetLocale();
-        LocaleManager::destroyInstance();
     }
 
     /**
