@@ -101,8 +101,12 @@ class DownloadController extends BaseController
      */
     private function getConvertedAudioResponse(Request $request, Response $response)
     {
-        $from = $request->getQueryParam('from');
-        $to = $request->getQueryParam('to');
+        $from = null;
+        $to = null;
+        if ($this->config->convertSeek) {
+            $from = $request->getQueryParam('from');
+            $to = $request->getQueryParam('to');
+        }
 
         $response = $response->withHeader(
             'Content-Disposition',
