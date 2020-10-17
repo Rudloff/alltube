@@ -81,11 +81,11 @@ class VideoTest extends BaseTest
      * @dataProvider remuxUrlProvider
      */
     public function testgetUrl(
-        $url,
-        $format,
-        /* @scrutinizer ignore-unused */ $filename,
-        /* @scrutinizer ignore-unused */ $extension,
-        $domain
+        string $url,
+        string $format,
+        string $filename,
+        string $extension,
+        string $domain
     ) {
         $video = new Video($this->downloader, $url, $format);
         foreach ($video->getUrl() as $videoURL) {

@@ -6,8 +6,6 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
-use Alltube\Exception\ConfigException;
 use PHPUnit\Framework\TestCase;
 
 /**
