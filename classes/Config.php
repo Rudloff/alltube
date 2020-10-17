@@ -320,5 +320,4 @@ class Config
 
         return $version->getPrettyVersion();
     }
-
 }

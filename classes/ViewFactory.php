@@ -63,25 +63,38 @@ class ViewFactory
         return $view;
     }
 
-    static function extractHeader(Request $request = null, string $headerName) {
+    /**
+     * Extract the header name from the given request.
+     * Multiple headers with the same name are not supported; the first one would be returned in this case.
+     *
+     * @param Request|null $request PSR-7 request
+     * @param string $headerName name of the header
+     *
+     * @return string|null
+     */
+    public static function extractHeader(Request $request = null, string $headerName)
+    {
         if (is_null($request)) {
             return null;
         }
 
         $header = $request->getHeader($headerName);
-        if (!isset($header)) {
-            return null;
-        }
-
         $count = sizeof($header);
-        if ($count != 1) {
+        if ($count < 1) {
             return null;
         }
         return $header[0];
     }
 
-    public static function getBasePath(Request $request = null) {
+    /**
+     * Get the basepath as specified via 'X-Forwarded-Path' from the request if present.
+     *
+     * @param Request|null $request PSR-7 request
+     *
+     * @return string|null
+     */
+    public static function getBasePath(Request $request = null)
+    {
         return ViewFactory::extractHeader($request, 'X-Forwarded-Path');
     }
-
 }

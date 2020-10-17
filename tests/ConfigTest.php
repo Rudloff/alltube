@@ -40,7 +40,6 @@ class ConfigTest extends BaseTest
         $this->assertIsString($config->youtubedl);
         $this->assertIsString($config->python);
         $this->assertIsString($config->ffmpeg);
-        $this->assertIsString($config->basePath);
         $this->assertIsBool($config->convert);
         $this->assertIsBool($config->uglyUrls);
         $this->assertIsBool($config->stream);
@@ -48,7 +47,6 @@ class ConfigTest extends BaseTest
         $this->assertIsBool($config->defaultAudio);
         $this->assertIsBool($config->convertSeek);
         $this->assertIsInt($config->audioBitrate);
-        $this->assertIsInt($config->forwardPort);
     }
 
     /**
@@ -123,17 +121,5 @@ class ConfigTest extends BaseTest
         $config = Config::fromFile($this->getConfigFile());
         $this->assertEquals(true, $config->convert);
         putenv('CONVERT');
-    }
-
-    /**
-     * Test the getBasePath function.
-     *
-     * @return void
-     */
-    public function testGetBasePath()
-    {
-        Config::setOptions(['basePath' => '/foo']);
-        $config = Config::getInstance();
-        $this->assertEquals('/foo', $config->getBasePath(null, null));
     }
 }

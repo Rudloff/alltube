@@ -33,8 +33,6 @@ try {
 
     $app->add(new LocaleMiddleware($container));
 
-$container['config'] = $config;
-
     // Smarty.
     $container['view'] = ViewFactory::create($container);
 
@@ -60,32 +58,32 @@ $container['config'] = $config;
     )->setName('index');
 
     $app->get(
-        $base_path . '/extractors',
+        $basePath . '/extractors',
         [$frontController, 'extractors']
     )->setName('extractors');
 
     $app->any(
-        $base_path . '/info',
+        $basePath . '/info',
         [$frontController, 'info']
     )->setName('info');
 
     $app->any(
-        $base_path . '/watch',
+        $basePath . '/watch',
         [$frontController, 'info']
     );
 
     $app->any(
-        $base_path . '/download',
+        $basePath . '/download',
         [$downloadController, 'download']
     )->setName('download');
 
     $app->get(
-        $base_path . '/locale/{locale}',
+        $basePath . '/locale/{locale}',
         [$frontController, 'locale']
     )->setName('locale');
 
     $app->get(
-        $base_path . '/json',
+        $basePath . '/json',
         [$jsonController, 'json']
     )->setName('json');
 
