@@ -26,7 +26,7 @@ try {
     $container = $app->getContainer();
 
     // Config.
-    $container['config'] = ConfigFactory::create();
+    $container['config'] = ConfigFactory::create($container);
 
     // Locales.
     $container['locale'] = LocaleManagerFactory::create();

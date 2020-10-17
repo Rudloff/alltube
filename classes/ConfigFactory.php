@@ -2,6 +2,7 @@
 
 namespace Alltube;
 
+use Slim\Container;
 use Symfony\Component\ErrorHandler\Debug;
 
 /**
@@ -15,7 +16,7 @@ class ConfigFactory
      * @return Config
      * @throws Exception\ConfigException
      */
-    public static function create()
+    public static function create(Container $container)
     {
         $configPath = __DIR__ . '/../config/config.yml';
         if (is_file($configPath)) {
