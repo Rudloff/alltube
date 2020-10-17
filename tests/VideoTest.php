@@ -164,7 +164,7 @@ class VideoTest extends BaseTest
                 'googlevideo.com',
             ],
             [
-                'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 18,
+                'https://www.youtube.com/watch?v=RJJ6FCAXvKg', '18',
                 'Heart_Attack_-_Demi_Lovato_' .
                 'Sam_Tsui_Against_The_Current-RJJ6FCAXvKg',
                 'mp4',
