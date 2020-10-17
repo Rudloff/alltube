@@ -161,7 +161,7 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithMissingPassword()
     {
-        $this->assertRequestIsRedirect('download', ['url' => 'http://vimeo.com/68375962']);
+        $this->assertRequestIsClientError('download', ['url' => 'http://vimeo.com/68375962']);
     }
 
     /**
