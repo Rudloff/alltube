@@ -293,6 +293,8 @@ class FrontController extends BaseController
      */
     public function error(Request $request, Response $response, Throwable $error)
     {
+        $this->logger->error($error);
+
         if ($this->config->debug) {
             $renderer = new HtmlErrorRenderer(true);
             $exception = $renderer->render($error);

@@ -89,7 +89,8 @@ abstract class BaseController
         $this->sessionSegment = $session->getSegment(self::class);
         $this->localeManager = $this->container->get('locale');
         $this->downloader = $this->config->getDownloader();
-        $this->downloader->setLogger($this->container->get('logger'));
+        $this->logger = $this->container->get('logger');
+        $this->downloader->setLogger($this->logger);
 
         if (!$this->config->stream) {
             // Force HTTP if stream is not enabled.
