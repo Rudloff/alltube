@@ -39,13 +39,13 @@ class ViewFactory
             $uri = $uri->withScheme('https')->withPort(443);
         }
 
-        $port = ViewFactory::extractHeader($request, 'X-Forwarded-Port');
-        if (!is_null($port)) {
+        $port = current($request->getHeader('X-Forwarded-Port'));
+        if ($port) {
             $uri = $uri->withPort(intVal($port));
         }
 
-        $path = ViewFactory::extractHeader($request, 'X-Forwarded-Path');
-        if (!is_null($path)) {
+        $path = current($request->getHeader('X-Forwarded-Path'));
+        if ($path) {
             $uri = $uri->withBasePath($path);
         }
 
@@ -61,40 +61,5 @@ class ViewFactory
         $view->registerPlugin('block', 't', [$localeManager, 'smartyTranslate']);
 
         return $view;
-    }
-
-    /**
-     * Extract the header name from the given request.
-     * Multiple headers with the same name are not supported; the first one would be returned in this case.
-     *
-     * @param Request|null $request PSR-7 request
-     * @param string $headerName name of the header
-     *
-     * @return string|null
-     */
-    public static function extractHeader(Request $request = null, string $headerName)
-    {
-        if (is_null($request)) {
-            return null;
-        }
-
-        $header = $request->getHeader($headerName);
-        $count = sizeof($header);
-        if ($count < 1) {
-            return null;
-        }
-        return $header[0];
-    }
-
-    /**
-     * Get the basepath as specified via 'X-Forwarded-Path' from the request if present.
-     *
-     * @param Request|null $request PSR-7 request
-     *
-     * @return string|null
-     */
-    public static function getBasePath(Request $request = null)
-    {
-        return ViewFactory::extractHeader($request, 'X-Forwarded-Path');
     }
 }

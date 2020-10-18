@@ -51,7 +51,7 @@ try {
     $container['notAllowedHandler'] = [$frontController, 'notAllowed'];
 
     // Routes.
-    $basePath = ViewFactory::getBasepath($container->get('request'));
+    $basePath = current($container->get('request')->getHeader('X-Forwarded-Path'));
     $app->get(
         $basePath . '/',
         [$frontController, 'index']
