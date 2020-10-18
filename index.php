@@ -9,6 +9,7 @@ use Alltube\Controller\JsonController;
 use Alltube\LocaleManagerFactory;
 use Alltube\LocaleMiddleware;
 use Alltube\LoggerFactory;
+use Alltube\RouterPathMiddleware;
 use Alltube\ViewFactory;
 use Slim\App;
 use Slim\Container;
@@ -32,6 +33,7 @@ try {
     $container['locale'] = LocaleManagerFactory::create();
 
     $app->add(new LocaleMiddleware($container));
+    $app->add(new RouterPathMiddleware($container));
 
     // Smarty.
     $container['view'] = ViewFactory::create($container);
@@ -51,39 +53,38 @@ try {
     $container['notAllowedHandler'] = [$frontController, 'notAllowed'];
 
     // Routes.
-    $basePath = current($container->get('request')->getHeader('X-Forwarded-Path'));
     $app->get(
-        $basePath . '/',
+        '/',
         [$frontController, 'index']
     )->setName('index');
 
     $app->get(
-        $basePath . '/extractors',
+        '/extractors',
         [$frontController, 'extractors']
     )->setName('extractors');
 
     $app->any(
-        $basePath . '/info',
+        '/info',
         [$frontController, 'info']
     )->setName('info');
 
     $app->any(
-        $basePath . '/watch',
+        '/watch',
         [$frontController, 'info']
     );
 
     $app->any(
-        $basePath . '/download',
+        '/download',
         [$downloadController, 'download']
     )->setName('download');
 
     $app->get(
-        $basePath . '/locale/{locale}',
+        '/locale/{locale}',
         [$frontController, 'locale']
     )->setName('locale');
 
     $app->get(
-        $basePath . '/json',
+        '/json',
         [$jsonController, 'json']
     )->setName('json');
 
