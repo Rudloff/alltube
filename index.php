@@ -6,6 +6,7 @@ use Alltube\ConfigFactory;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\Controller\JsonController;
+use Alltube\ErrorHandler;
 use Alltube\LocaleManagerFactory;
 use Alltube\LocaleMiddleware;
 use Alltube\LoggerFactory;
@@ -87,6 +88,5 @@ try {
 
     $app->run();
 } catch (Throwable $e) {
-    // Last resort if the error has not been caught by the error handler for some reason.
-    die('Error when starting the app: ' . htmlentities($e->getMessage()));
+    ErrorHandler::handle($e);
 }
