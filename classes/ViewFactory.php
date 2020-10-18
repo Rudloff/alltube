@@ -39,6 +39,12 @@ class ViewFactory
             $uri = $uri->withScheme('https')->withPort(443);
         }
 
+        // set values from X-Forwarded-* headers
+        $host = current($request->getHeader('X-Forwarded-Host'));
+        if ($host) {
+            $uri = $uri->withHost($host);
+        }
+
         $port = current($request->getHeader('X-Forwarded-Port'));
         if ($port) {
             $uri = $uri->withPort(intVal($port));
