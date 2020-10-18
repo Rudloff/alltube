@@ -55,13 +55,10 @@ class ViewFactory
             $uri = $uri->withBasePath($path);
         }
 
-        $request = $request->withUri($uri);
-
-
         /** @var LocaleManager $localeManager */
         $localeManager = $container->get('locale');
 
-        $smartyPlugins = new SmartyPlugins($container->get('router'), $request->getUri()->withUserInfo(null));
+        $smartyPlugins = new SmartyPlugins($container->get('router'), $uri->withUserInfo(null));
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
         $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
         $view->registerPlugin('block', 't', [$localeManager, 'smartyTranslate']);
