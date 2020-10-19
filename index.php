@@ -33,14 +33,15 @@ try {
     // Locales.
     $container['locale'] = LocaleManagerFactory::create();
 
-    $app->add(new LocaleMiddleware($container));
-    $app->add(new RouterPathMiddleware($container));
-
     // Smarty.
     $container['view'] = ViewFactory::create($container);
 
     // Logger.
     $container['logger'] = LoggerFactory::create($container);
+
+    // Middlewares.
+    $app->add(new LocaleMiddleware($container));
+    $app->add(new RouterPathMiddleware($container));
 
     // Controllers.
     $frontController = new FrontController($container);
