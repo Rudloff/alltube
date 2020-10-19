@@ -1,6 +1,9 @@
 body {
   background-color: #ebebeb;
   background-image: url("../img/fond.jpg");
+}
+
+.page {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   text-align: center;

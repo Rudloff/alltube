@@ -23,4 +23,5 @@
     <link rel="manifest" href="{base_url}/resources/manifest.json"/>
     <meta name="generator" content="AllTube Download ({$config->getAppVersion()})"/>
 </head>
-<body class="{$class}">
+<body>
+<div class="page {$class}">
