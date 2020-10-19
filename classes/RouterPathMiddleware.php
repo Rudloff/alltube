@@ -5,7 +5,7 @@ namespace Alltube;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Interfaces\RouterInterface;
+use Slim\Router;
 
 /**
  * Class RouterPathMiddleware
@@ -14,7 +14,7 @@ use Slim\Interfaces\RouterInterface;
 class RouterPathMiddleware
 {
     /**
-     * @var RouterInterface
+     * @var Router
      */
     private $router;
 
