@@ -1,8 +1,10 @@
 ---
-parameters:
+grumphp:
   extensions:
     - ComposerDanglingLockedDeps\GrumPHP\Loader
-  ascii: ~
+  ascii:
+    succeeded: ~
+    failed: ~
   tasks:
     jsonlint: ~
     xmllint: ~
