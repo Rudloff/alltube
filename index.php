@@ -10,6 +10,7 @@ use Alltube\ErrorHandler;
 use Alltube\LocaleManagerFactory;
 use Alltube\LocaleMiddleware;
 use Alltube\LoggerFactory;
+use Alltube\RouterPathMiddleware;
 use Alltube\ViewFactory;
 use Slim\App;
 use Slim\Container;
@@ -31,7 +32,9 @@ try {
 
     // Locales.
     $container['locale'] = LocaleManagerFactory::create();
+
     $app->add(new LocaleMiddleware($container));
+    $app->add(new RouterPathMiddleware($container));
 
     // Smarty.
     $container['view'] = ViewFactory::create($container);
