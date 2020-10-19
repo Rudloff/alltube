@@ -473,24 +473,24 @@
         },
         {
             "name": "jean85/pretty-package-versions",
-            "version": "1.3.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jean85/pretty-package-versions.git",
-                "reference": "e3517fb11b67e798239354fe8213927d012ad8f9"
+                "reference": "a917488320c20057da87f67d0d40543dd9427f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/e3517fb11b67e798239354fe8213927d012ad8f9",
-                "reference": "e3517fb11b67e798239354fe8213927d012ad8f9",
+                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/a917488320c20057da87f67d0d40543dd9427f7a",
+                "reference": "a917488320c20057da87f67d0d40543dd9427f7a",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.8.0",
-                "php": "^7.0"
+                "php": "^7.0|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.0"
+                "phpunit/phpunit": "^6.0|^8.5|^9.2"
             },
             "type": "library",
             "extra": {
@@ -520,7 +520,7 @@
                 "release",
                 "versions"
             ],
-            "time": "2020-04-24T14:19:45+00:00"
+            "time": "2020-09-14T08:43:34+00:00"
         },
         {
             "name": "mathmarques/smarty-view",

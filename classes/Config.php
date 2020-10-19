@@ -316,7 +316,7 @@ class Config
      */
     public function getAppVersion()
     {
-        $version = PrettyVersions::getVersion('rudloff/alltube');
+        $version = PrettyVersions::getRootPackageVersion();
 
         return $version->getPrettyVersion();
     }
