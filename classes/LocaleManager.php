@@ -51,16 +51,9 @@ class LocaleManager
     private $translator;
 
     /**
-     * Singleton instance.
-     *
-     * @var LocaleManager|null
-     */
-    private static $instance;
-
-    /**
      * LocaleManager constructor.
      */
-    private function __construct()
+    public function __construct()
     {
         $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
@@ -142,11 +135,11 @@ class LocaleManager
      * Smarty "t" block.
      *
      * @param mixed[] $params Block parameters
-     * @param string $text Block content
+     * @param string|null $text Block content
      *
      * @return string Translated string
      */
-    public function smartyTranslate(array $params, $text)
+    public function smartyTranslate(array $params, string $text = null)
     {
         if (isset($params['params'])) {
             return $this->t($text, $params['params']);
@@ -158,37 +151,17 @@ class LocaleManager
     /**
      * Translate a string.
      *
-     * @param string $string String to translate
+     * @param string|null $string $string String to translate
      *
      * @param mixed[] $params
      * @return string Translated string
      */
-    public function t($string, array $params = [])
+    public function t(string $string = null, array $params = [])
     {
-        return $this->translator->trans($string, $params);
-    }
-
-    /**
-     * Get LocaleManager singleton instance.
-     *
-     * @return LocaleManager
-     */
-    public static function getInstance()
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new self();
+        if (isset($string)) {
+            return $this->translator->trans($string, $params);
         }
 
-        return self::$instance;
-    }
-
-    /**
-     * Destroy singleton instance.
-     *
-     * @return void
-     */
-    public static function destroyInstance()
-    {
-        self::$instance = null;
+        return '';
     }
 }

@@ -27,7 +27,7 @@ class LocaleManagerTest extends BaseTest
     protected function setUp(): void
     {
         $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
-        $this->localeManager = LocaleManager::getInstance();
+        $this->localeManager = new LocaleManager();
     }
 
     /**
@@ -38,7 +38,6 @@ class LocaleManagerTest extends BaseTest
     protected function tearDown(): void
     {
         $this->localeManager->unsetLocale();
-        LocaleManager::destroyInstance();
     }
 
     /**

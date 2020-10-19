@@ -6,9 +6,9 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
 use Alltube\Controller\DownloadController;
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Library\Exception\EmptyUrlException;
 use Alltube\Library\Exception\RemuxException;
 use Alltube\Library\Exception\YoutubedlException;
@@ -22,7 +22,7 @@ class DownloadControllerTest extends ControllerTest
 {
     /**
      * Prepare tests.
-     * @throws ConfigException|SmartyException
+     * @throws ConfigException|SmartyException|DependencyException
      */
     protected function setUp(): void
     {
@@ -68,11 +68,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with streams enabled.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithStream()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -84,11 +84,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an M3U stream.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithM3uStream()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -104,13 +104,13 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an RTMP stream.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithRtmpStream()
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
 
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -122,11 +122,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with a remuxed video.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithRemux()
     {
-        Config::setOptions(['remux' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['remux' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -161,7 +161,7 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithMissingPassword()
     {
-        $this->assertRequestIsRedirect('download', ['url' => 'http://vimeo.com/68375962']);
+        $this->assertRequestIsClientError('download', ['url' => 'http://vimeo.com/68375962']);
     }
 
     /**
@@ -195,11 +195,11 @@ class DownloadControllerTest extends ControllerTest
      *
      * @return void
      * @requires OS Linux
-     * @throws ConfigException
      */
     public function testDownloadWithPlaylist()
     {
-        Config::setOptions(['stream' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['stream' => true]);
 
         $this->assertRequestIsOk(
             'download',
@@ -211,11 +211,11 @@ class DownloadControllerTest extends ControllerTest
      * Test the download() function with an advanced conversion.
      *
      * @return void
-     * @throws ConfigException
      */
     public function testDownloadWithAdvancedConversion()
     {
-        Config::setOptions(['convertAdvanced' => true]);
+        $config = $this->container->get('config');
+        $config->setOptions(['convertAdvanced' => true]);
 
         $this->assertRequestIsOk(
             'download',

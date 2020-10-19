@@ -21,6 +21,7 @@ use Alltube\Stream\PlaylistArchiveStream;
 use Alltube\Stream\YoutubeStream;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Http\StatusCode;
 use Slim\Http\Stream;
 
 /**
@@ -100,8 +101,12 @@ class DownloadController extends BaseController
      */
     private function getConvertedAudioResponse(Request $request, Response $response)
     {
-        $from = $request->getQueryParam('from');
-        $to = $request->getQueryParam('to');
+        $from = null;
+        $to = null;
+        if ($this->config->convertSeek) {
+            $from = $request->getQueryParam('from');
+            $to = $request->getQueryParam('to');
+        }
 
         $response = $response->withHeader(
             'Content-Disposition',
@@ -203,8 +208,8 @@ class DownloadController extends BaseController
             $response = $response->withHeader('Content-Length', $stream->getHeader('Content-Length'));
             $response = $response->withHeader('Accept-Ranges', $stream->getHeader('Accept-Ranges'));
             $response = $response->withHeader('Content-Range', $stream->getHeader('Content-Range'));
-            if ($stream->getStatusCode() == 206) {
-                $response = $response->withStatus(206);
+            if ($stream->getStatusCode() == StatusCode::HTTP_PARTIAL_CONTENT) {
+                $response = $response->withStatus(StatusCode::HTTP_PARTIAL_CONTENT);
             }
 
             if (isset($this->video->downloader_options->http_chunk_size)) {

@@ -35,7 +35,7 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * Read data from the stream.
      *
-     * @param int $length Read up to $length bytes from the object and return
+     * @param mixed $length Read up to $length bytes from the object and return
      *
      * @return string
      */
@@ -121,7 +121,7 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * Seek to a position in the stream.
      *
-     * @param int $offset Stream offset
+     * @param mixed $offset Stream offset
      * @param int $whence Specifies how the cursor position will be calculated
      *
      * @return void
@@ -154,7 +154,7 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * Write data to the stream.
      *
-     * @param string $string The string that is to be written
+     * @param mixed $string The string that is to be written
      *
      * @return mixed
      */
@@ -186,7 +186,7 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * Get stream metadata as an associative array or retrieve a specific key.
      *
-     * @param string $key Specific metadata to retrieve.
+     * @param string|null $key Specific metadata to retrieve.
      *
      * @return array|mixed|null
      */

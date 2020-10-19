@@ -14,23 +14,6 @@ use Alltube\Exception\ConfigException;
  */
 class ConfigTest extends BaseTest
 {
-    /**
-     * Config class instance.
-     *
-     * @var Config
-     */
-    private $config;
-
-    /**
-     * Prepare tests.
-     * @throws ConfigException
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->config = Config::getInstance();
-    }
 
     /**
      * Test the getInstance function.
@@ -39,21 +22,7 @@ class ConfigTest extends BaseTest
      */
     public function testGetInstance()
     {
-        $config = Config::getInstance();
-        $this->assertEquals(false, $config->convert);
-        $this->assertConfig($config);
-    }
-
-    /**
-     * Test the getInstance function.
-     *
-     * @return void
-     */
-    public function testGetInstanceFromScratch()
-    {
-        Config::destroyInstance();
-
-        $config = Config::getInstance();
+        $config = new Config();
         $this->assertEquals(false, $config->convert);
         $this->assertConfig($config);
     }
@@ -75,6 +44,8 @@ class ConfigTest extends BaseTest
         $this->assertIsBool($config->uglyUrls);
         $this->assertIsBool($config->stream);
         $this->assertIsBool($config->remux);
+        $this->assertIsBool($config->defaultAudio);
+        $this->assertIsBool($config->convertSeek);
         $this->assertIsInt($config->audioBitrate);
     }
 
@@ -86,8 +57,8 @@ class ConfigTest extends BaseTest
      */
     public function testSetFile()
     {
-        Config::setFile($this->getConfigFile());
-        $this->assertConfig($this->config);
+        $config = Config::fromFile($this->getConfigFile());
+        $this->assertConfig($config);
     }
 
     /**
@@ -98,7 +69,7 @@ class ConfigTest extends BaseTest
     public function testSetFileWithMissingFile()
     {
         $this->expectException(ConfigException::class);
-        Config::setFile('foo');
+        Config::fromFile('foo');
     }
 
     /**
@@ -109,21 +80,8 @@ class ConfigTest extends BaseTest
      */
     public function testSetOptions()
     {
-        Config::setOptions(['appName' => 'foo']);
-        $config = Config::getInstance();
-        $this->assertEquals('foo', $config->appName);
-    }
-
-    /**
-     * Test the setOptions function.
-     *
-     * @return void
-     * @throws ConfigException
-     */
-    public function testSetOptionsWithoutUpdate()
-    {
-        Config::setOptions(['appName' => 'foo'], false);
-        $config = Config::getInstance();
+        $config = new Config();
+        $config->setOptions(['appName' => 'foo']);
         $this->assertEquals('foo', $config->appName);
     }
 
@@ -135,7 +93,8 @@ class ConfigTest extends BaseTest
     public function testSetOptionsWithBadYoutubedl()
     {
         $this->expectException(ConfigException::class);
-        Config::setOptions(['youtubedl' => 'foo']);
+        $config = new Config();
+        $config->setOptions(['youtubedl' => 'foo']);
     }
 
     /**
@@ -146,7 +105,8 @@ class ConfigTest extends BaseTest
     public function testSetOptionsWithBadPython()
     {
         $this->expectException(ConfigException::class);
-        Config::setOptions(['python' => 'foo']);
+        $config = new Config();
+        $config->setOptions(['python' => 'foo']);
     }
 
     /**
@@ -157,10 +117,8 @@ class ConfigTest extends BaseTest
      */
     public function testGetInstanceWithEnv()
     {
-        Config::destroyInstance();
         putenv('CONVERT=1');
-        Config::setFile($this->getConfigFile());
-        $config = Config::getInstance();
+        $config = Config::fromFile($this->getConfigFile());
         $this->assertEquals(true, $config->convert);
         putenv('CONVERT');
     }

@@ -6,11 +6,13 @@
 
 namespace Alltube\Controller;
 
+use Alltube\CspMiddleware;
 use Alltube\Library\Exception\PasswordException;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Library\Exception\WrongPasswordException;
 use Alltube\Locale;
 use Exception;
+use Slim\Http\StatusCode;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
 use Psr\Container\ContainerInterface;
@@ -142,7 +144,7 @@ class FrontController extends BaseController
             ]
         );
 
-        return $response->withStatus(403);
+        return $response->withStatus(StatusCode::HTTP_FORBIDDEN);
     }
 
     /**
@@ -241,7 +243,7 @@ class FrontController extends BaseController
      *
      * @return Response HTTP response
      */
-    protected function displayError(Request $request, Response $response, $message)
+    protected function displayError(Request $request, Response $response, string $message)
     {
         $this->view->render(
             $response,
@@ -256,7 +258,29 @@ class FrontController extends BaseController
             ]
         );
 
-        return $response->withStatus(500);
+        return $response->withStatus(StatusCode::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function notFound(Request $request, Response $response)
+    {
+        return $this->displayError($request, $response, $this->localeManager->t('Page not found'))
+            ->withStatus(StatusCode::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function notAllowed(Request $request, Response $response)
+    {
+        return $this->displayError($request, $response, $this->localeManager->t('Method not allowed'))
+            ->withStatus(StatusCode::HTTP_METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -270,6 +294,14 @@ class FrontController extends BaseController
      */
     public function error(Request $request, Response $response, Throwable $error)
     {
+        $this->logger->error($error);
+
+        // We apply the CSP manually because middlewares are not called on error pages.
+        $cspMiddleware = new CspMiddleware($this->container);
+
+        /** @var Response $response */
+        $response = $cspMiddleware->applyHeader($response);
+
         if ($this->config->debug) {
             $renderer = new HtmlErrorRenderer(true);
             $exception = $renderer->render($error);

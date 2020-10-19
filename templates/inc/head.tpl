@@ -8,7 +8,7 @@
         <meta name="twitter:description" content="{$description|escape}"/>
         <meta property="og:description" content="{$description|escape}"/>
     {/if}
-    <link rel="stylesheet" href="{base_url}/css/fonts.css"/>
+    <link rel="stylesheet" href="{base_url}/vendor/webfontkit/open-sans/open-sans.css"/>
     <link rel="stylesheet" href="{base_url}/css/style.css"/>
     <title>{$config->appName}{if isset($title)} - {$title|escape}{/if}</title>
     <link rel="canonical" href="{$canonical}"/>
@@ -23,4 +23,5 @@
     <link rel="manifest" href="{base_url}/resources/manifest.json"/>
     <meta name="generator" content="AllTube Download ({$config->getAppVersion()})"/>
 </head>
-<body class="{$class}">
+<body>
+<div class="page {$class}">

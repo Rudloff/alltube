@@ -7,7 +7,6 @@
 namespace Alltube\Test;
 
 use Alltube\Config;
-use Alltube\Exception\ConfigException;
 use Alltube\Library\Downloader;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Library\Exception\PopenStreamException;
@@ -39,7 +38,6 @@ class VideoStubsTest extends BaseTest
 
     /**
      * Initialize properties used by test.
-     * @throws ConfigException
      */
     protected function setUp(): void
     {
@@ -48,7 +46,7 @@ class VideoStubsTest extends BaseTest
         PHPMockery::mock('Alltube\Library', 'popen');
         PHPMockery::mock('Alltube\Library', 'fopen');
 
-        $config = Config::getInstance();
+        $config = new Config();
         $this->downloader = $config->getDownloader();
         $this->video = $this->downloader->getVideo('https://www.youtube.com/watch?v=XJC9_JkzugE');
     }

@@ -48,7 +48,8 @@ class VideoTest extends BaseTest
     {
         parent::setUp();
 
-        $config = Config::getInstance();
+        // So ffmpeg does not spam the output with broken pipe errors.
+        $config = new Config(['ffmpegVerbosity' => 'fatal']);
         $this->downloader = $config->getDownloader();
         $this->format = 'best';
     }
@@ -80,11 +81,11 @@ class VideoTest extends BaseTest
      * @dataProvider remuxUrlProvider
      */
     public function testgetUrl(
-        $url,
-        $format,
-        /* @scrutinizer ignore-unused */ $filename,
-        /* @scrutinizer ignore-unused */ $extension,
-        $domain
+        string $url,
+        string $format,
+        string $filename,
+        string $extension,
+        string $domain
     ) {
         $video = new Video($this->downloader, $url, $format);
         foreach ($video->getUrl() as $videoURL) {
@@ -141,7 +142,7 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException
      * @dataProvider ErrorUrlProvider
      */
-    public function testgetUrlError($url)
+    public function testgetUrlError(string $url)
     {
         $this->expectException(YoutubedlException::class);
         $video = new Video($this->downloader, $url, $this->format);
@@ -163,7 +164,7 @@ class VideoTest extends BaseTest
                 'googlevideo.com',
             ],
             [
-                'https://www.youtube.com/watch?v=RJJ6FCAXvKg', 18,
+                'https://www.youtube.com/watch?v=RJJ6FCAXvKg', '18',
                 'Heart_Attack_-_Demi_Lovato_' .
                 'Sam_Tsui_Against_The_Current-RJJ6FCAXvKg',
                 'mp4',
@@ -258,7 +259,7 @@ class VideoTest extends BaseTest
      * @dataProvider urlProvider
      * @dataProvider m3uUrlProvider
      */
-    public function testGetJson($url, $format)
+    public function testGetJson(string $url, string $format)
     {
         $video = new Video($this->downloader, $url, $format);
         $info = $video->getJson();
@@ -279,7 +280,7 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException
      * @dataProvider ErrorURLProvider
      */
-    public function testGetJsonError($url)
+    public function testGetJsonError(string $url)
     {
         $this->expectException(YoutubedlException::class);
         $video = new Video($this->downloader, $url, $this->format);
@@ -300,7 +301,7 @@ class VideoTest extends BaseTest
      * @dataProvider m3uUrlProvider
      * @dataProvider remuxUrlProvider
      */
-    public function testGetFilename($url, $format, $filename, $extension)
+    public function testGetFilename(string $url, string $format, string $filename, string $extension)
     {
         $video = new Video($this->downloader, $url, $format);
         $this->assertEquals($video->getFilename(), $filename . '.' . $extension);
@@ -315,7 +316,7 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException
      * @dataProvider ErrorUrlProvider
      */
-    public function testGetFilenameError($url)
+    public function testGetFilenameError(string $url)
     {
         $this->expectException(YoutubedlException::class);
         $video = new Video($this->downloader, $url, $this->format);
@@ -329,10 +330,10 @@ class VideoTest extends BaseTest
      * @param string $format Format
      *
      * @return void
-     * @dataProvider urlProvider
      * @throws AlltubeLibraryException
+     * @dataProvider urlProvider
      */
-    public function testGetAudioStream($url, $format)
+    public function testGetAudioStream(string $url, string $format)
     {
         $video = new Video($this->downloader, $url, $format);
         $this->assertStream($this->downloader->getAudioStream($video));
@@ -345,14 +346,14 @@ class VideoTest extends BaseTest
      * @param string $format Format
      *
      * @return void
-     * @throws AlltubeLibraryException|ConfigException
+     * @throws AlltubeLibraryException
+     * @throws ConfigException
      * @dataProvider urlProvider
      */
-    public function testGetAudioStreamFfmpegError($url, $format)
+    public function testGetAudioStreamFfmpegError(string $url, string $format)
     {
         $this->expectException(AvconvException::class);
-        Config::setOptions(['ffmpeg' => 'foobar']);
-        $config = Config::getInstance();
+        $config = new Config(['ffmpeg' => 'foobar']);
         $downloader = $config->getDownloader();
 
         $video = new Video($this->downloader, $url, $format, $this->format);
@@ -369,7 +370,7 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException
      * @dataProvider m3uUrlProvider
      */
-    public function testGetAudioStreamM3uError($url, $format)
+    public function testGetAudioStreamM3uError(string $url, string $format)
     {
         $this->expectException(InvalidProtocolConversionException::class);
         $video = new Video($this->downloader, $url, $format);
@@ -426,10 +427,10 @@ class VideoTest extends BaseTest
      * @param string $format Format
      *
      * @return void
-     * @dataProvider m3uUrlProvider
      * @throws AlltubeLibraryException
+     * @dataProvider m3uUrlProvider
      */
-    public function testGetM3uStream($url, $format)
+    public function testGetM3uStream(string $url, string $format)
     {
         $video = new Video($this->downloader, $url, $format);
         $this->assertStream($this->downloader->getM3uStream($video));
@@ -442,10 +443,10 @@ class VideoTest extends BaseTest
      * @param string $format Format
      *
      * @return void
-     * @dataProvider remuxUrlProvider
      * @throws AlltubeLibraryException
+     * @dataProvider remuxUrlProvider
      */
-    public function testGetRemuxStream($url, $format)
+    public function testGetRemuxStream(string $url, string $format)
     {
         $video = new Video($this->downloader, $url, $format);
         $this->assertStream($this->downloader->getRemuxStream($video));
@@ -461,7 +462,7 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException
      * @dataProvider urlProvider
      */
-    public function testGetRemuxStreamWithWrongVideo($url, $format)
+    public function testGetRemuxStreamWithWrongVideo(string $url, string $format)
     {
         $this->expectException(RemuxException::class);
         $video = new Video($this->downloader, $url, $format);
@@ -478,7 +479,7 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException
      * @dataProvider rtmpUrlProvider
      */
-    public function testGetRtmpStream($url, $format)
+    public function testGetRtmpStream(string $url, string $format)
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
 
@@ -494,14 +495,14 @@ class VideoTest extends BaseTest
      * @param string $format Format
      *
      * @return void
-     * @throws AlltubeLibraryException|ConfigException
+     * @throws AlltubeLibraryException
+     * @throws ConfigException
      * @dataProvider m3uUrlProvider
      */
-    public function testGetM3uStreamFfmpegError($url, $format)
+    public function testGetM3uStreamFfmpegError(string $url, string $format)
     {
         $this->expectException(AvconvException::class);
-        Config::setOptions(['ffmpeg' => 'foobar']);
-        $config = Config::getInstance();
+        $config = new Config(['ffmpeg' => 'foobar']);
         $downloader = $config->getDownloader();
 
         $video = new Video($downloader, $url, $format);
@@ -515,10 +516,10 @@ class VideoTest extends BaseTest
      * @param string $format Format
      *
      * @return void
-     * @dataProvider urlProvider
      * @throws AlltubeLibraryException
+     * @dataProvider urlProvider
      */
-    public function testGetConvertedStream($url, $format)
+    public function testGetConvertedStream(string $url, string $format)
     {
         $video = new Video($this->downloader, $url, $format);
         $this->assertStream($this->downloader->getConvertedStream($video, 32, 'flv'));
@@ -534,7 +535,7 @@ class VideoTest extends BaseTest
      * @throws AlltubeLibraryException
      * @dataProvider m3uUrlProvider
      */
-    public function testGetConvertedStreamM3uError($url, $format)
+    public function testGetConvertedStreamM3uError(string $url, string $format)
     {
         $this->expectException(InvalidProtocolConversionException::class);
         $video = new Video($this->downloader, $url, $format);

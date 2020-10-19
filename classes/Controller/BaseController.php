@@ -12,6 +12,7 @@ use Alltube\Library\Video;
 use Alltube\LocaleManager;
 use Alltube\SessionManager;
 use Aura\Session\Segment;
+use Consolidation\Log\Logger;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -71,18 +72,25 @@ abstract class BaseController
     protected $downloader;
 
     /**
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
      * BaseController constructor.
      *
      * @param ContainerInterface $container Slim dependency container
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->config = Config::getInstance();
+        $this->config = $container->get('config');
         $this->container = $container;
         $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
         $this->localeManager = $this->container->get('locale');
         $this->downloader = $this->config->getDownloader();
+        $this->logger = $this->container->get('logger');
+        $this->downloader->setLogger($this->logger);
 
         if (!$this->config->stream) {
             // Force HTTP if stream is not enabled.
@@ -137,7 +145,7 @@ abstract class BaseController
      *
      * @return Response HTTP response
      */
-    protected function displayError(Request $request, Response $response, $message)
+    protected function displayError(Request $request, Response $response, string $message)
     {
         $controller = new FrontController($this->container);
 

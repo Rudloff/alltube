@@ -1,9 +1,20 @@
 body {
   background-color: #ebebeb;
   background-image: url("../img/fond.jpg");
+}
+
+.page {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   text-align: center;
+}
+
+.small-font {
+  font-size: 13px;
+}
+
+.large-font {
+  font-size:24px;
 }
 
 /* Header */

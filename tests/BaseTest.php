@@ -6,8 +6,6 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
-use Alltube\Exception\ConfigException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,20 +25,10 @@ abstract class BaseTest extends TestCase
 
     /**
      * Prepare tests.
-     * @throws ConfigException
      */
     protected function setUp(): void
     {
-        Config::setFile($this->getConfigFile());
         $this->checkRequirements();
-    }
-
-    /**
-     * Destroy properties after test.
-     */
-    protected function tearDown(): void
-    {
-        Config::destroyInstance();
     }
 
     /**
@@ -53,10 +41,10 @@ abstract class BaseTest extends TestCase
         $requires = [];
 
         if (isset($annotations['class']['requires'])) {
-            $requires += $annotations['class']['requires'];
+            $requires = array_merge($requires, $annotations['class']['requires']);
         }
         if (isset($annotations['method']['requires'])) {
-            $requires += $annotations['method']['requires'];
+            $requires = array_merge($requires, $annotations['method']['requires']);
         }
 
         foreach ($requires as $require) {

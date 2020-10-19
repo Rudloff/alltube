@@ -6,12 +6,14 @@
 
 namespace Alltube\Test;
 
+use Alltube\Config;
 use Alltube\Controller\BaseController;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\Exception\ConfigException;
 use Alltube\LocaleManager;
 use Alltube\ViewFactory;
+use Psr\Log\NullLogger;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -61,8 +63,10 @@ abstract class ControllerTest extends BaseTest
         $this->container = new Container();
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
-        $this->container['locale'] = LocaleManager::getInstance();
+        $this->container['config'] = Config::fromFile($this->getConfigFile());
+        $this->container['locale'] = new LocaleManager();
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
+        $this->container['logger'] = new NullLogger();
 
         $frontController = new FrontController($this->container);
         $downloadController = new DownloadController($this->container);
@@ -87,7 +91,7 @@ abstract class ControllerTest extends BaseTest
      *
      * @return Response HTTP response
      */
-    protected function getRequestResult($request, array $params)
+    protected function getRequestResult(string $request, array $params)
     {
         return $this->controller->$request(
             $this->request->withQueryParams($params),
@@ -103,7 +107,7 @@ abstract class ControllerTest extends BaseTest
      *
      * @return void
      */
-    protected function assertRequestIsOk($request, array $params = [])
+    protected function assertRequestIsOk(string $request, array $params = [])
     {
         $this->assertTrue($this->getRequestResult($request, $params)->isOk());
     }
@@ -116,7 +120,7 @@ abstract class ControllerTest extends BaseTest
      *
      * @return void
      */
-    protected function assertRequestIsRedirect($request, array $params = [])
+    protected function assertRequestIsRedirect(string $request, array $params = [])
     {
         $this->assertTrue($this->getRequestResult($request, $params)->isRedirect());
     }
@@ -129,7 +133,7 @@ abstract class ControllerTest extends BaseTest
      *
      * @return void
      */
-    protected function assertRequestIsServerError($request, array $params = [])
+    protected function assertRequestIsServerError(string $request, array $params = [])
     {
         $this->assertTrue($this->getRequestResult($request, $params)->isServerError());
     }
@@ -142,7 +146,7 @@ abstract class ControllerTest extends BaseTest
      *
      * @return void
      */
-    protected function assertRequestIsClientError($request, array $params = [])
+    protected function assertRequestIsClientError(string $request, array $params = [])
     {
         $this->assertTrue($this->getRequestResult($request, $params)->isClientError());
     }

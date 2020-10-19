@@ -1,16 +1,19 @@
 ---
-parameters:
-  ascii: ~
+grumphp:
+  extensions:
+    - ComposerDanglingLockedDeps\GrumPHP\Loader
+  ascii:
+    succeeded: ~
+    failed: ~
   tasks:
     jsonlint: ~
     xmllint: ~
     yamllint: ~
     composer: ~
+    securitychecker: ~
+    composer_normalize: ~
+    composer_dangling_locked_deps: ~
     phpcs:
       standard: PSR12
-      ignore_patterns:
-        - RoboFile.php
     phpstan:
       level: max
-      ignore_patterns:
-        - RoboFile.php

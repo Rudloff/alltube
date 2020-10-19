@@ -76,6 +76,12 @@ You will need PHP 7.2 (or higher) and the following PHP modules:
 
 ## Web server configuration
 
+If you want to serve the application under a basepath and/or with a different internal than external port (scenario: nginx->docker setup) Alltube supports the following X-Forwarded headers:
+
+* X-Forwarded-Host (ex. `another.domain.com`)
+* X-Forwarded-Path (ex: `/alltube`)
+* X-Forwarded-Port (ex: `5555`)
+
 ### Apache
 
 The following modules are recommended:

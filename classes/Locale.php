@@ -34,7 +34,7 @@ class Locale
      *
      * @param string $locale ISO 15897 code
      */
-    public function __construct($locale)
+    public function __construct(string $locale)
     {
         $parse = AcceptLanguage::parse($locale);
         $this->language = $parse[1]['language'];

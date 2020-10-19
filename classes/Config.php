@@ -10,7 +10,6 @@ use Alltube\Exception\ConfigException;
 use Alltube\Library\Downloader;
 use Jawira\CaseConverter\CaseConverterException;
 use Jean85\PrettyVersions;
-use PackageVersions\Versions;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\Yaml\Yaml;
 use Jawira\CaseConverter\Convert;
@@ -20,12 +19,6 @@ use Jawira\CaseConverter\Convert;
  */
 class Config
 {
-    /**
-     * Singleton instance.
-     *
-     * @var Config|null
-     */
-    private static $instance;
 
     /**
      * youtube-dl binary path.
@@ -141,16 +134,31 @@ class Config
     public $debug = false;
 
     /**
+     * Default to audio.
+     *
+     * @var bool
+     */
+    public $defaultAudio = false;
+
+    /**
+     * Disable audio conversion from/to seeker.
+     *
+     * @var bool
+     */
+    public $convertSeek = true;
+
+    /**
      * Config constructor.
      *
      * @param mixed[] $options Options
      * @throws ConfigException
      */
-    private function __construct(array $options = [])
+    public function __construct(array $options = [])
     {
         $this->applyOptions($options);
         $this->getEnv();
-        $localeManager = LocaleManager::getInstance();
+        $this->validateOptions();
+        $localeManager = new LocaleManager();
 
         if (empty($this->genericFormats)) {
             // We don't put this in the class definition so it can be detected by xgettext.
@@ -185,7 +193,7 @@ class Config
      *
      * @return string
      */
-    public static function addHttpToFormat($format)
+    public static function addHttpToFormat(string $format)
     {
         $newFormat = [];
         foreach (explode('/', $format) as $subformat) {
@@ -258,32 +266,16 @@ class Config
     }
 
     /**
-     * Get Config singleton instance.
-     *
-     * @return Config
-     */
-    public static function getInstance()
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-    /**
      * Set options from a YAML file.
      *
      * @param string $file Path to the YAML file
-     * @return void
+     * @return Config
      * @throws ConfigException
      */
-    public static function setFile($file)
+    public static function fromFile(string $file)
     {
         if (is_file($file)) {
-            $options = Yaml::parse(strval(file_get_contents($file)));
-            self::$instance = new self($options);
-            self::$instance->validateOptions();
+            return new self(Yaml::parse(strval(file_get_contents($file))));
         } else {
             throw new ConfigException("Can't find config file at " . $file);
         }
@@ -293,29 +285,13 @@ class Config
      * Manually set some options.
      *
      * @param mixed[] $options Options (see `config/config.example.yml` for available options)
-     * @param bool $update True to update an existing instance
      * @return void
      * @throws ConfigException
      */
-    public static function setOptions(array $options, $update = true)
+    public function setOptions(array $options)
     {
-        if ($update) {
-            $config = self::getInstance();
-            $config->applyOptions($options);
-            $config->validateOptions();
-        } else {
-            self::$instance = new self($options);
-        }
-    }
-
-    /**
-     * Destroy singleton instance.
-     *
-     * @return void
-     */
-    public static function destroyInstance()
-    {
-        self::$instance = null;
+        $this->applyOptions($options);
+        $this->validateOptions();
     }
 
     /**
@@ -340,7 +316,7 @@ class Config
      */
     public function getAppVersion()
     {
-        $version = PrettyVersions::getVersion(Versions::ROOT_PACKAGE_NAME);
+        $version = PrettyVersions::getRootPackageVersion();
 
         return $version->getPrettyVersion();
     }

@@ -6,7 +6,6 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
 use Alltube\Exception\ConfigException;
 use Alltube\Stream\ConvertedPlaylistArchiveStream;
 
@@ -24,10 +23,10 @@ class ConvertedPlaylistArchiveStreamTest extends StreamTest
     {
         parent::setUp();
 
-        $config = Config::getInstance();
-        $downloader = $config->getDownloader();
-        $video = $downloader->getVideo('https://www.youtube.com/playlist?list=PL1j4Ff8cAqPu5iowaeUAY8lRgkfT4RybJ');
+        $video = $this->downloader->getVideo(
+            'https://www.youtube.com/playlist?list=PL1j4Ff8cAqPu5iowaeUAY8lRgkfT4RybJ'
+        );
 
-        $this->stream = new ConvertedPlaylistArchiveStream($downloader, $video);
+        $this->stream = new ConvertedPlaylistArchiveStream($this->downloader, $video);
     }
 }
