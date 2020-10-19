@@ -6,6 +6,7 @@ use Alltube\ConfigFactory;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\Controller\JsonController;
+use Alltube\CspMiddleware;
 use Alltube\ErrorHandler;
 use Alltube\LocaleManagerFactory;
 use Alltube\LocaleMiddleware;
@@ -42,6 +43,7 @@ try {
     // Middlewares.
     $app->add(new LocaleMiddleware($container));
     $app->add(new RouterPathMiddleware($container));
+    $app->add(new CspMiddleware($container));
 
     // Controllers.
     $frontController = new FrontController($container);

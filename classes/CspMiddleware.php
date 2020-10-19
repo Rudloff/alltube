@@ -1,0 +1,65 @@
+<?php
+
+namespace Alltube;
+
+use ParagonIE\CSPBuilder\CSPBuilder;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\MessageInterface;
+use Slim\Http\Request;
+use Slim\Http\Response;
+
+/**
+ * Class CspMiddleware
+ * @package Alltube
+ */
+class CspMiddleware
+{
+
+    /**
+     * @var Config
+     */
+    private $config;
+
+    /**
+     * CspMiddleware constructor.
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->config = $container->get('config');
+    }
+
+    /**
+     * @param Response $response
+     * @return MessageInterface
+     */
+    public function applyHeader(Response $response)
+    {
+        $csp = new CSPBuilder();
+        $csp->addDirective('default-src', [])
+            ->addDirective('font-src', ['self' => true])
+            ->addDirective('style-src', ['self' => true])
+            ->addSource('img-src', '*');
+
+        if ($this->config->debug) {
+            // So symfony/debug and symfony/error-handler can work.
+            $csp->setDirective('script-src', ['unsafe-inline' => true])
+                ->setDirective('style-src', ['self' => true, 'unsafe-inline' => true]);
+        }
+
+        return $csp->injectCSPHeader($response);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param callable $next
+     * @return mixed
+     */
+    public function __invoke(Request $request, Response $response, callable $next)
+    {
+        $response = $this->applyHeader($response);
+
+        return $next($request, $response);
+    }
+}

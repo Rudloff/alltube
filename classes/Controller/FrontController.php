@@ -6,6 +6,7 @@
 
 namespace Alltube\Controller;
 
+use Alltube\CspMiddleware;
 use Alltube\Library\Exception\PasswordException;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Library\Exception\WrongPasswordException;
@@ -294,6 +295,12 @@ class FrontController extends BaseController
     public function error(Request $request, Response $response, Throwable $error)
     {
         $this->logger->error($error);
+
+        // We apply the CSP manually because middlewares are not called on error pages.
+        $cspMiddleware = new CspMiddleware($this->container);
+
+        /** @var Response $response */
+        $response = $cspMiddleware->applyHeader($response);
 
         if ($this->config->debug) {
             $renderer = new HtmlErrorRenderer(true);
