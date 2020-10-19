@@ -35,7 +35,9 @@ class RouterPathMiddleware
      */
     public function __invoke(Request $request, Response $response, callable $next)
     {
-        $this->router->setBasePath(current($request->getHeader('X-Forwarded-Path')));
+        if ($path = current($request->getHeader('X-Forwarded-Path'))) {
+            $this->router->setBasePath($path);
+        }
 
         return $next($request, $response);
     }
