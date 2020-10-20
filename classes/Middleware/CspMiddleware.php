@@ -1,7 +1,8 @@
 <?php
 
-namespace Alltube;
+namespace Alltube\Middleware;
 
+use Alltube\Config;
 use ParagonIE\CSPBuilder\CSPBuilder;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\MessageInterface;

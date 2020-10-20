@@ -6,11 +6,11 @@
 
 namespace Alltube\Controller;
 
-use Alltube\CspMiddleware;
 use Alltube\Library\Exception\PasswordException;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Library\Exception\WrongPasswordException;
 use Alltube\Locale;
+use Alltube\Middleware\CspMiddleware;
 use Exception;
 use Slim\Http\StatusCode;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;

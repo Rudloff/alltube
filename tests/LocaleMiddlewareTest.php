@@ -7,7 +7,7 @@
 namespace Alltube\Test;
 
 use Alltube\LocaleManager;
-use Alltube\LocaleMiddleware;
+use Alltube\Middleware\LocaleMiddleware;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;

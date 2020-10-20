@@ -4,8 +4,10 @@
  * LocaleMiddleware class.
  */
 
-namespace Alltube;
+namespace Alltube\Middleware;
 
+use Alltube\Locale;
+use Alltube\LocaleManager;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;

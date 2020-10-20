@@ -1,6 +1,6 @@
 <?php
 
-namespace Alltube;
+namespace Alltube\Middleware;
 
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
