@@ -43,9 +43,9 @@ try {
 
     // Middlewares.
     $app->add(new LocaleMiddleware($container));
-    $app->add(new RouterPathMiddleware($container));
     $app->add(new CspMiddleware($container));
     $app->add(new LinkHeaderMiddleware($container));
+    $app->add(new RouterPathMiddleware($container));
 
     // Controllers.
     $frontController = new FrontController($container);
