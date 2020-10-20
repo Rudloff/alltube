@@ -1,8 +1,9 @@
 <?php
 
-namespace Alltube;
+namespace Alltube\Factory;
 
 use Alltube\Exception\DependencyException;
+use Alltube\LocaleManager;
 
 /**
  * Class LocaleManagerFactory

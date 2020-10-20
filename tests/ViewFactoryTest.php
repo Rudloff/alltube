@@ -6,8 +6,8 @@
 
 namespace Alltube\Test;
 
+use Alltube\Factory\ViewFactory;
 use Alltube\LocaleManager;
-use Alltube\ViewFactory;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;

@@ -2,18 +2,18 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Alltube\ConfigFactory;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\Controller\JsonController;
 use Alltube\ErrorHandler;
-use Alltube\LocaleManagerFactory;
-use Alltube\LoggerFactory;
+use Alltube\Factory\ConfigFactory;
+use Alltube\Factory\LocaleManagerFactory;
+use Alltube\Factory\LoggerFactory;
+use Alltube\Factory\ViewFactory;
 use Alltube\Middleware\CspMiddleware;
 use Alltube\Middleware\LinkHeaderMiddleware;
 use Alltube\Middleware\LocaleMiddleware;
 use Alltube\Middleware\RouterPathMiddleware;
-use Alltube\ViewFactory;
 use Slim\App;
 use Slim\Container;
 

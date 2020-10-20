@@ -1,7 +1,10 @@
 <?php
 
-namespace Alltube;
+namespace Alltube\Factory;
 
+use Alltube\Config;
+use Alltube\Exception\ConfigException;
+use Alltube\UglyRouter;
 use Slim\Container;
 use Symfony\Component\ErrorHandler\Debug;
 
@@ -13,12 +16,13 @@ class ConfigFactory
 {
 
     /**
+     * @param Container $container
      * @return Config
-     * @throws Exception\ConfigException
+     * @throws ConfigException
      */
     public static function create(Container $container)
     {
-        $configPath = __DIR__ . '/../config/config.yml';
+        $configPath = __DIR__ . '/../../config/config.yml';
         if (is_file($configPath)) {
             $config = Config::fromFile($configPath);
         } else {

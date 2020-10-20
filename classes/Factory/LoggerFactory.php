@@ -1,6 +1,6 @@
 <?php
 
-namespace Alltube;
+namespace Alltube\Factory;
 
 use Consolidation\Log\Logger;
 use Consolidation\Log\LogOutputStyler;
