@@ -8,6 +8,7 @@ use Alltube\Controller\FrontController;
 use Alltube\Controller\JsonController;
 use Alltube\CspMiddleware;
 use Alltube\ErrorHandler;
+use Alltube\LinkHeaderMiddleware;
 use Alltube\LocaleManagerFactory;
 use Alltube\LocaleMiddleware;
 use Alltube\LoggerFactory;
@@ -44,6 +45,7 @@ try {
     $app->add(new LocaleMiddleware($container));
     $app->add(new RouterPathMiddleware($container));
     $app->add(new CspMiddleware($container));
+    $app->add(new LinkHeaderMiddleware($container));
 
     // Controllers.
     $frontController = new FrontController($container);
