@@ -13,6 +13,7 @@ use Alltube\Locale;
 use Alltube\Middleware\CspMiddleware;
 use Exception;
 use Slim\Http\StatusCode;
+use Slim\Http\Uri;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
 use Psr\Container\ContainerInterface;
@@ -332,19 +333,11 @@ class FrontController extends BaseController
      */
     private function getCanonicalUrl(Request $request)
     {
+        /** @var Uri $uri */
         $uri = $request->getUri();
-        $return = 'https://alltubedownload.net/';
 
-        $path = $uri->getPath();
-        if ($path != '/') {
-            $return .= $path;
-        }
-
-        $query = $uri->getQuery();
-        if (!empty($query)) {
-            $return .= '?' . $query;
-        }
-
-        return $return;
+        return $uri->withBasePath('')
+            ->withHost('alltubedownload.net')
+            ->withScheme('https');
     }
 }
