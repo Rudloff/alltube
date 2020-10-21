@@ -6,7 +6,9 @@
 
 namespace Alltube\Test;
 
+use Alltube\Exception\ConfigException;
 use Alltube\Exception\DependencyException;
+use Alltube\Factory\ConfigFactory;
 use Alltube\Factory\LocaleManagerFactory;
 use Alltube\Factory\SessionFactory;
 use Alltube\Factory\ViewFactory;
@@ -27,12 +29,14 @@ class ViewFactoryTest extends BaseTest
      * @return void
      * @throws SmartyException
      * @throws DependencyException
+     * @throws ConfigException
      */
     public function testCreate()
     {
         $container = new Container();
         $container['session'] = SessionFactory::create($container);
         $container['locale'] = LocaleManagerFactory::create($container);
+        $container['config'] = ConfigFactory::create($container);
         $view = ViewFactory::create($container);
         $this->assertInstanceOf(Smarty::class, $view);
     }
@@ -43,12 +47,14 @@ class ViewFactoryTest extends BaseTest
      * @return void
      * @throws SmartyException
      * @throws DependencyException
+     * @throws ConfigException
      */
     public function testCreateWithXForwardedProto()
     {
         $container = new Container();
         $container['session'] = SessionFactory::create($container);
         $container['locale'] = LocaleManagerFactory::create($container);
+        $container['config'] = ConfigFactory::create($container);
         $request = Request::createFromEnvironment(Environment::mock());
         $view = ViewFactory::create($container, $request->withHeader('X-Forwarded-Proto', 'https'));
         $this->assertInstanceOf(Smarty::class, $view);
