@@ -42,7 +42,7 @@
     <div id="bookmarklet" class="bookmarklet_wrapper">
         <p> {t}Drag this to your bookmarks bar:{/t} </p>
         <a class="bookmarklet small-font"
-           href="javascript:window.location='{$domain}{path_for name='info'}?url='+encodeURIComponent(location.href);">{t}Bookmarklet{/t}</a>
+           href="javascript:window.location='{$domain}{path_for name='info' queryParams=['url' => '%url%']}'.replace('%url%', encodeURIComponent(location.href));">{t}Bookmarklet{/t}</a>
     </div>
 
 </main>
