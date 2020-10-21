@@ -54,7 +54,6 @@ class FrontController extends BaseController
      */
     public function index(Request $request, Response $response)
     {
-        $uri = $request->getUri()->withUserInfo('');
         $this->view->render(
             $response,
             'index.tpl',
@@ -63,7 +62,6 @@ class FrontController extends BaseController
                 'description' => $this->localeManager->t(
                     'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
                 ),
-                'domain' => $uri->getScheme() . '://' . $uri->getAuthority(),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
             ]
         );

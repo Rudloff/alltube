@@ -83,6 +83,7 @@ class ViewFactory
         $view->offsetSet('canonical', self::getCanonicalUrl($request));
         $view->offsetSet('locale', $container->get('locale')->getLocale());
         $view->offsetSet('config', $container->get('config'));
+        $view->offsetSet('domain', $uri->withPath('')->withBasePath(''));
 
         return $view;
     }
