@@ -34,7 +34,7 @@ try {
     $container['config'] = ConfigFactory::create($container);
 
     // Session.
-    $container['session'] = SessionFactory::create();
+    $container['session'] = SessionFactory::create($container);
 
     // Locales.
     $container['locale'] = LocaleManagerFactory::create($container);

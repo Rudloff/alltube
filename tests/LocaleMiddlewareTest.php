@@ -41,7 +41,7 @@ class LocaleMiddlewareTest extends BaseTest
     protected function setUp(): void
     {
         $this->container = new Container();
-        $this->container['session'] = SessionFactory::create();
+        $this->container['session'] = SessionFactory::create($this->container);
         $this->container['locale'] = LocaleManagerFactory::create($this->container);
         $this->middleware = new LocaleMiddleware($this->container);
     }

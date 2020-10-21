@@ -9,6 +9,7 @@ namespace Alltube\Test;
 use Alltube\Factory\SessionFactory;
 use Alltube\Locale;
 use Alltube\LocaleManager;
+use Slim\Container;
 
 /**
  * Unit tests for the LocaleManagerTest class.
@@ -28,7 +29,7 @@ class LocaleManagerTest extends BaseTest
     protected function setUp(): void
     {
         $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
-        $this->localeManager = new LocaleManager(SessionFactory::create());
+        $this->localeManager = new LocaleManager(SessionFactory::create(new Container()));
     }
 
     /**

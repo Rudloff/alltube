@@ -68,7 +68,7 @@ abstract class ControllerTest extends BaseTest
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
         $this->container['config'] = Config::fromFile($this->getConfigFile());
-        $this->container['session'] = SessionFactory::create();
+        $this->container['session'] = SessionFactory::create($this->container);
         $this->container['locale'] = LocaleManagerFactory::create($this->container);
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
         $this->container['logger'] = new NullLogger();
