@@ -8,6 +8,7 @@ namespace Alltube\Test;
 
 use Alltube\Controller\FrontController;
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Exception;
 use Slim\Http\Environment;
@@ -28,6 +29,7 @@ class FrontControllerTest extends ControllerTest
     /**
      * Prepare tests.
      * @throws ConfigException|SmartyException
+     * @throws DependencyException
      */
     protected function setUp(): void
     {

@@ -15,7 +15,6 @@ use Alltube\Exception\DependencyException;
 use Alltube\Factory\LocaleManagerFactory;
 use Alltube\Factory\SessionFactory;
 use Alltube\Factory\ViewFactory;
-use Alltube\LocaleManager;
 use Psr\Log\NullLogger;
 use Slim\Container;
 use Slim\Http\Environment;
