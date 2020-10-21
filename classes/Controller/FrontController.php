@@ -13,6 +13,7 @@ use Alltube\Locale;
 use Alltube\Middleware\CspMiddleware;
 use Exception;
 use Slim\Http\StatusCode;
+use Slim\Http\Uri;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
 use Psr\Container\ContainerInterface;
@@ -82,7 +83,7 @@ class FrontController extends BaseController
     {
         $this->localeManager->setLocale(new Locale($data['locale']));
 
-        return $response->withRedirect($this->container->get('router')->pathFor('index'));
+        return $response->withRedirect($this->router->pathFor('index'));
     }
 
     /**
@@ -209,14 +210,13 @@ class FrontController extends BaseController
             if ($this->config->convert && $request->getQueryParam('audio')) {
                 // We skip the info page and get directly to the download.
                 return $response->withRedirect(
-                    $this->container->get('router')->pathFor('download') .
-                    '?' . http_build_query($request->getQueryParams())
+                    $this->router->pathFor('download', [], $request->getQueryParams())
                 );
             } else {
                 return $this->getInfoResponse($request, $response);
             }
         } else {
-            return $response->withRedirect($this->container->get('router')->pathFor('index'));
+            return $response->withRedirect($this->router->pathFor('index'));
         }
     }
 
