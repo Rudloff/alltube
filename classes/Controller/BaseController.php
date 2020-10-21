@@ -10,7 +10,7 @@ use Alltube\Config;
 use Alltube\Library\Downloader;
 use Alltube\Library\Video;
 use Alltube\LocaleManager;
-use Alltube\SessionManager;
+use Alltube\SessionFactory;
 use Aura\Session\Segment;
 use Consolidation\Log\Logger;
 use Psr\Container\ContainerInterface;
@@ -85,7 +85,7 @@ abstract class BaseController
     {
         $this->config = $container->get('config');
         $this->container = $container;
-        $session = SessionManager::getSession();
+        $session = $container->get('session');
         $this->sessionSegment = $session->getSegment(self::class);
         $this->localeManager = $this->container->get('locale');
         $this->downloader = $this->config->getDownloader();

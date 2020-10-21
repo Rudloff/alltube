@@ -7,6 +7,7 @@
 namespace Alltube;
 
 use Aura\Session\Segment;
+use Aura\Session\Session;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\PoFileLoader;
@@ -52,10 +53,10 @@ class LocaleManager
 
     /**
      * LocaleManager constructor.
+     * @param Session $session
      */
-    public function __construct()
+    public function __construct(Session $session)
     {
-        $session = SessionManager::getSession();
         $this->sessionSegment = $session->getSegment(self::class);
         $cookieLocale = $this->sessionSegment->get('locale');
 

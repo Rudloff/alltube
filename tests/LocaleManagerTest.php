@@ -6,6 +6,7 @@
 
 namespace Alltube\Test;
 
+use Alltube\Factory\SessionFactory;
 use Alltube\Locale;
 use Alltube\LocaleManager;
 
@@ -27,7 +28,7 @@ class LocaleManagerTest extends BaseTest
     protected function setUp(): void
     {
         $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
-        $this->localeManager = new LocaleManager();
+        $this->localeManager = new LocaleManager(SessionFactory::create());
     }
 
     /**

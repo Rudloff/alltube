@@ -9,6 +9,7 @@ use Alltube\ErrorHandler;
 use Alltube\Factory\ConfigFactory;
 use Alltube\Factory\LocaleManagerFactory;
 use Alltube\Factory\LoggerFactory;
+use Alltube\Factory\SessionFactory;
 use Alltube\Factory\ViewFactory;
 use Alltube\Middleware\CspMiddleware;
 use Alltube\Middleware\LinkHeaderMiddleware;
@@ -32,8 +33,11 @@ try {
     // Config.
     $container['config'] = ConfigFactory::create($container);
 
+    // Session.
+    $container['session'] = SessionFactory::create();
+
     // Locales.
-    $container['locale'] = LocaleManagerFactory::create();
+    $container['locale'] = LocaleManagerFactory::create($container);
 
     // Smarty.
     $container['view'] = ViewFactory::create($container);

@@ -11,6 +11,9 @@ use Alltube\Controller\BaseController;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
+use Alltube\Factory\LocaleManagerFactory;
+use Alltube\Factory\SessionFactory;
 use Alltube\Factory\ViewFactory;
 use Alltube\LocaleManager;
 use Psr\Log\NullLogger;
@@ -55,6 +58,7 @@ abstract class ControllerTest extends BaseTest
     /**
      * Prepare tests.
      * @throws ConfigException|SmartyException
+     * @throws DependencyException
      */
     protected function setUp(): void
     {
@@ -64,7 +68,8 @@ abstract class ControllerTest extends BaseTest
         $this->request = Request::createFromEnvironment(Environment::mock());
         $this->response = new Response();
         $this->container['config'] = Config::fromFile($this->getConfigFile());
-        $this->container['locale'] = new LocaleManager();
+        $this->container['session'] = SessionFactory::create();
+        $this->container['locale'] = LocaleManagerFactory::create($this->container);
         $this->container['view'] = ViewFactory::create($this->container, $this->request);
         $this->container['logger'] = new NullLogger();
 
