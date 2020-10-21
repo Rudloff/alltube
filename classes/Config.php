@@ -124,7 +124,11 @@ class Config
      *
      * @var string[]
      */
-    public $genericFormats = [];
+    public $genericFormats = [
+        'best/bestvideo' => 'Best',
+        'bestvideo+bestaudio' => 'Remux best video with best audio',
+        'worst/worstvideo' => 'Worst',
+    ];
 
     /**
      * Enable debug mode.
@@ -158,16 +162,6 @@ class Config
         $this->applyOptions($options);
         $this->getEnv();
         $this->validateOptions();
-        $localeManager = new LocaleManager();
-
-        if (empty($this->genericFormats)) {
-            // We don't put this in the class definition so it can be detected by xgettext.
-            $this->genericFormats = [
-                'best/bestvideo' => $localeManager->t('Best'),
-                'bestvideo+bestaudio' => $localeManager->t('Remux best video with best audio'),
-                'worst/worstvideo' => $localeManager->t('Worst'),
-            ];
-        }
 
         foreach ($this->genericFormats as $format => $name) {
             if (strpos($format, '+') !== false) {

@@ -30,6 +30,12 @@
                     <select name="format" id="format" class="formats monospace">
                         <optgroup label="{t}Generic formats{/t}">
                             {foreach $config->genericFormats as $format => $name}
+                                {*
+                                To make the default generic formats translatable:
+                                {t}Best{/t}
+                                {t}Remux best video with best audio{/t}
+                                {t}Worst{/t}
+                                *}
                                 <option value="{$format}">{t}{$name}{/t}</option>
                             {/foreach}
                         </optgroup>

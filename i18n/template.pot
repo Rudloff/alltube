@@ -45,43 +45,55 @@ msgstr ""
 msgid "Generic formats"
 msgstr ""
 
+#: templates/info.tpl:35
+msgid "Best"
+msgstr ""
+
 #: templates/info.tpl:36
+msgid "Remux best video with best audio"
+msgstr ""
+
+#: templates/info.tpl:37
+msgid "Worst"
+msgstr ""
+
+#: templates/info.tpl:42
 msgid "Detailed formats"
 msgstr ""
 
-#: templates/info.tpl:80
+#: templates/info.tpl:86
 msgid "Stream the video through the server"
 msgstr ""
 
-#: templates/info.tpl:86
+#: templates/info.tpl:92
 msgid "Convert into a custom format:"
 msgstr ""
 
-#: templates/info.tpl:87
+#: templates/info.tpl:93
 msgid "Custom format"
 msgstr ""
 
-#: templates/info.tpl:87
+#: templates/info.tpl:93
 msgid "Format to convert to"
 msgstr ""
 
-#: templates/info.tpl:92
+#: templates/info.tpl:98
 msgid "with"
 msgstr ""
 
-#: templates/info.tpl:93
+#: templates/info.tpl:99
 msgid "Bit rate"
 msgstr ""
 
-#: templates/info.tpl:94
+#: templates/info.tpl:100
 msgid "Custom bitrate"
 msgstr ""
 
-#: templates/info.tpl:97
+#: templates/info.tpl:103
 msgid "kbit/s audio"
 msgstr ""
 
-#: templates/info.tpl:101 templates/playlist.tpl:38 templates/password.tpl:11
+#: templates/info.tpl:107 templates/playlist.tpl:38 templates/password.tpl:11
 #: templates/index.tpl:19
 msgid "Download"
 msgstr ""
@@ -140,18 +152,6 @@ msgstr ""
 
 #: templates/index.tpl:45
 msgid "Bookmarklet"
-msgstr ""
-
-#: classes/Config.php:166
-msgid "Best"
-msgstr ""
-
-#: classes/Config.php:167
-msgid "Remux best video with best audio"
-msgstr ""
-
-#: classes/Config.php:168
-msgid "Worst"
 msgstr ""
 
 #: classes/Controller/DownloadController.php:64
