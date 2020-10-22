@@ -13,7 +13,6 @@ use Alltube\Locale;
 use Alltube\Middleware\CspMiddleware;
 use Exception;
 use Slim\Http\StatusCode;
-use Slim\Http\Uri;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
 use Psr\Container\ContainerInterface;

@@ -8,6 +8,7 @@ namespace Alltube\Test;
 
 use Alltube\Config;
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Library\Downloader;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Library\Exception\AvconvException;
@@ -18,13 +19,14 @@ use Alltube\Library\Exception\RemuxException;
 use Alltube\Library\Exception\WrongPasswordException;
 use Alltube\Library\Exception\YoutubedlException;
 use Alltube\Library\Video;
+use SmartyException;
 
 /**
  * Unit tests for the Video class.
  * @requires download
  * @todo Split Downloader and Video tests.
  */
-class VideoTest extends BaseTest
+class VideoTest extends ContainerTest
 {
     /**
      * Downloader instance used in tests.
@@ -42,15 +44,16 @@ class VideoTest extends BaseTest
 
     /**
      * Prepare tests.
+     *
      * @throws ConfigException
+     * @throws DependencyException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        // So ffmpeg does not spam the output with broken pipe errors.
-        $config = new Config(['ffmpegVerbosity' => 'fatal']);
-        $this->downloader = $config->getDownloader();
+        $this->downloader = $this->container->get('config')->getDownloader();
         $this->format = 'best';
     }
 

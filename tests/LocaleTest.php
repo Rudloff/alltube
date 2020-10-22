@@ -6,12 +6,15 @@
 
 namespace Alltube\Test;
 
+use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Locale;
+use SmartyException;
 
 /**
  * Unit tests for the LocaleTest class.
  */
-class LocaleTest extends BaseTest
+class LocaleTest extends ContainerTest
 {
     /**
      * Locale class instance.
@@ -22,9 +25,15 @@ class LocaleTest extends BaseTest
 
     /**
      * Prepare tests.
+     *
+     * @throws DependencyException
+     * @throws ConfigException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->localeObject = new Locale('fr_FR');
     }
 

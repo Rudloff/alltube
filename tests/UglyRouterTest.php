@@ -6,14 +6,17 @@
 
 namespace Alltube\Test;
 
+use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\UglyRouter;
 use Slim\Http\Environment;
 use Slim\Http\Request;
+use SmartyException;
 
 /**
  * Unit tests for the UglyRouter class.
  */
-class UglyRouterTest extends BaseTest
+class UglyRouterTest extends ContainerTest
 {
     /**
      * UglyRouter instance.
@@ -24,9 +27,15 @@ class UglyRouterTest extends BaseTest
 
     /**
      * Prepare tests.
+     *
+     * @throws ConfigException
+     * @throws DependencyException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->router = new UglyRouter();
         $this->router->map(['GET'], '/foo', 'print')->setName('foo');
     }

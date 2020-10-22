@@ -6,13 +6,15 @@
 
 namespace Alltube\Test;
 
-use Alltube\Config;
+use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Library\Downloader;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Library\Exception\PopenStreamException;
 use Alltube\Library\Video;
 use Mockery;
 use phpmock\mockery\PHPMockery;
+use SmartyException;
 
 /**
  * Unit tests for the Video class.
@@ -20,7 +22,7 @@ use phpmock\mockery\PHPMockery;
  *
  * @requires download
  */
-class VideoStubsTest extends BaseTest
+class VideoStubsTest extends ContainerTest
 {
     /**
      * Video used in many tests.
@@ -38,6 +40,10 @@ class VideoStubsTest extends BaseTest
 
     /**
      * Initialize properties used by test.
+     *
+     * @throws ConfigException
+     * @throws DependencyException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {
@@ -46,8 +52,7 @@ class VideoStubsTest extends BaseTest
         PHPMockery::mock('Alltube\Library', 'popen');
         PHPMockery::mock('Alltube\Library', 'fopen');
 
-        $config = new Config();
-        $this->downloader = $config->getDownloader();
+        $this->downloader = $this->container->get('config')->getDownloader();
         $this->video = $this->downloader->getVideo('https://www.youtube.com/watch?v=XJC9_JkzugE');
     }
 
@@ -58,6 +63,8 @@ class VideoStubsTest extends BaseTest
      */
     protected function tearDown(): void
     {
+        parent::tearDown();
+
         Mockery::close();
     }
 

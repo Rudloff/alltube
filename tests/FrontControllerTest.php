@@ -81,7 +81,7 @@ class FrontControllerTest extends ControllerTest
             Request::createFromEnvironment(
                 Environment::mock(['REQUEST_URI' => '/foo', 'QUERY_STRING' => 'foo=bar'])
             ),
-            $this->response
+            $this->container->get('response')
         );
         $this->assertTrue($result->isOk());
     }
@@ -189,9 +189,9 @@ class FrontControllerTest extends ControllerTest
     public function testInfoWithPassword()
     {
         $result = $this->controller->info(
-            $this->request->withQueryParams(['url' => 'http://vimeo.com/68375962'])
+            $this->container->get('request')->withQueryParams(['url' => 'http://vimeo.com/68375962'])
                 ->withParsedBody(['password' => 'youtube-dl']),
-            $this->response
+            $this->container->get('response')
         );
         $this->assertTrue($result->isOk());
     }
@@ -247,7 +247,11 @@ class FrontControllerTest extends ControllerTest
      */
     public function testError()
     {
-        $result = $this->controller->error($this->request, $this->response, new Exception('foo'));
+        $result = $this->controller->error(
+            $this->container->get('request'),
+            $this->container->get('response'),
+            new Exception('foo')
+        );
         $this->assertTrue($result->isServerError());
     }
 
@@ -260,8 +264,8 @@ class FrontControllerTest extends ControllerTest
     {
         $this->assertTrue(
             $this->controller->locale(
-                $this->request,
-                $this->response,
+                $this->container->get('request'),
+                $this->container->get('response'),
                 ['locale' => 'fr_FR']
             )->isRedirect()
         );

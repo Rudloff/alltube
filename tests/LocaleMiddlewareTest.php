@@ -6,19 +6,17 @@
 
 namespace Alltube\Test;
 
+use Alltube\Exception\ConfigException;
 use Alltube\Exception\DependencyException;
-use Alltube\Factory\LocaleManagerFactory;
-use Alltube\Factory\SessionFactory;
 use Alltube\Middleware\LocaleMiddleware;
-use Slim\Container;
-use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use SmartyException;
 
 /**
  * Unit tests for the FrontController class.
  */
-class LocaleMiddlewareTest extends BaseTest
+class LocaleMiddlewareTest extends ContainerTest
 {
     /**
      * LocaleMiddleware instance.
@@ -28,21 +26,16 @@ class LocaleMiddlewareTest extends BaseTest
     private $middleware;
 
     /**
-     * Slim dependency container.
-     *
-     * @var Container
-     */
-    private $container;
-
-    /**
      * Prepare tests.
+     *
      * @throws DependencyException
+     * @throws ConfigException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {
-        $this->container = new Container();
-        $this->container['session'] = SessionFactory::create($this->container);
-        $this->container['locale'] = LocaleManagerFactory::create($this->container);
+        parent::setUp();
+
         $this->middleware = new LocaleMiddleware($this->container);
     }
 
@@ -53,7 +46,9 @@ class LocaleMiddlewareTest extends BaseTest
      */
     protected function tearDown(): void
     {
-        $this->container['locale']->unsetLocale();
+        parent::tearDown();
+
+        $this->container->get('locale')->unsetLocale();
     }
 
     /**
@@ -66,7 +61,7 @@ class LocaleMiddlewareTest extends BaseTest
     {
         $locale = [
             'language' => 'en',
-            'region'   => 'US',
+            'region' => 'US',
         ];
         $this->assertEquals('en_US', $this->middleware->testLocale($locale));
     }
@@ -80,7 +75,7 @@ class LocaleMiddlewareTest extends BaseTest
     {
         $locale = [
             'language' => 'foo',
-            'region'   => 'BAR',
+            'region' => 'BAR',
         ];
         $this->assertNull($this->middleware->testLocale($locale));
         $this->assertNull($this->middleware->testLocale([]));
@@ -119,9 +114,8 @@ class LocaleMiddlewareTest extends BaseTest
      */
     public function testInvoke()
     {
-        $request = Request::createFromEnvironment(Environment::mock());
         $this->middleware->__invoke(
-            $request->withHeader('Accept-Language', 'foo-BAR'),
+            $this->container->get('request')->withHeader('Accept-Language', 'foo-BAR'),
             new Response(),
             [$this, 'assertHeader']
         );
@@ -134,9 +128,8 @@ class LocaleMiddlewareTest extends BaseTest
      */
     public function testInvokeWithoutHeader()
     {
-        $request = Request::createFromEnvironment(Environment::mock());
         $this->middleware->__invoke(
-            $request->withoutHeader('Accept-Language'),
+            $this->container->get('request')->withoutHeader('Accept-Language'),
             new Response(),
             [$this, 'assertNoHeader']
         );
