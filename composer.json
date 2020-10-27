@@ -30,7 +30,7 @@
     "oomphinc/composer-installers-extender": "^2.0",
     "paragonie/csp-builder": "^2.5",
     "rinvex/countries": "^6.1",
-    "rudloff/alltube-library": "dev-develop",
+    "rudloff/alltube-library": "^0.1.1",
     "symfony/finder": "^5.0",
     "symfony/translation": "^4.0",
     "symfony/yaml": "^4.0",
