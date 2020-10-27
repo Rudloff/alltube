@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c2fabffdbf381b138354a986accc302",
+    "content-hash": "f5b6e1c6bffa544b0a74305489ea1350",
     "packages": [
         {
             "name": "aura/session",
@@ -2428,8 +2428,8 @@
             "name": "ytdl-org/youtube-dl",
             "version": "2020.09.20",
             "dist": {
-                "type": "zip",
-                "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.09.20.zip"
+                "type": "tar",
+                "url": "https://files.pythonhosted.org/packages/12/8b/51cae2929739d637fdfbc706b2d5f8925b5710d8f408b5319a07ea45fe99/youtube_dl-2020.9.20.tar.gz"
             },
             "type": "library"
         },
@@ -7118,5 +7118,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.3.11"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
