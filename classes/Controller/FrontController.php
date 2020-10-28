@@ -54,20 +54,15 @@ class FrontController extends BaseController
      */
     public function index(Request $request, Response $response)
     {
-        $uri = $request->getUri()->withUserInfo('');
         $this->view->render(
             $response,
             'index.tpl',
             [
-                'config' => $this->config,
                 'class' => 'index',
                 'description' => $this->localeManager->t(
                     'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
                 ),
-                'domain' => $uri->getScheme() . '://' . $uri->getAuthority(),
-                'canonical' => $this->getCanonicalUrl($request),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
-                'locale' => $this->localeManager->getLocale(),
             ]
         );
 
@@ -87,7 +82,7 @@ class FrontController extends BaseController
     {
         $this->localeManager->setLocale(new Locale($data['locale']));
 
-        return $response->withRedirect($this->container->get('router')->pathFor('index'));
+        return $response->withRedirect($this->router->pathFor('index'));
     }
 
     /**
@@ -105,14 +100,11 @@ class FrontController extends BaseController
             $response,
             'extractors.tpl',
             [
-                'config' => $this->config,
                 'extractors' => $this->downloader->getExtractors(),
                 'class' => 'extractors',
                 'title' => $this->localeManager->t('Supported websites'),
                 'description' => $this->localeManager->t('List of all supported websites from which Alltube Download ' .
                     'can extract video or audio files'),
-                'canonical' => $this->getCanonicalUrl($request),
-                'locale' => $this->localeManager->getLocale(),
             ]
         );
 
@@ -133,14 +125,11 @@ class FrontController extends BaseController
             $response,
             'password.tpl',
             [
-                'config' => $this->config,
                 'class' => 'password',
                 'title' => $this->localeManager->t('Password prompt'),
                 'description' => $this->localeManager->t(
                     'You need a password in order to download this video with Alltube Download'
                 ),
-                'canonical' => $this->getCanonicalUrl($request),
-                'locale' => $this->localeManager->getLocale(),
             ]
         );
 
@@ -194,9 +183,6 @@ class FrontController extends BaseController
                 'class' => 'info',
                 'title' => $title,
                 'description' => $description,
-                'config' => $this->config,
-                'canonical' => $this->getCanonicalUrl($request),
-                'locale' => $this->localeManager->getLocale(),
                 'defaultFormat' => $this->defaultFormat,
             ]
         );
@@ -223,14 +209,13 @@ class FrontController extends BaseController
             if ($this->config->convert && $request->getQueryParam('audio')) {
                 // We skip the info page and get directly to the download.
                 return $response->withRedirect(
-                    $this->container->get('router')->pathFor('download') .
-                    '?' . http_build_query($request->getQueryParams())
+                    $this->router->pathFor('download', [], $request->getQueryParams())
                 );
             } else {
                 return $this->getInfoResponse($request, $response);
             }
         } else {
-            return $response->withRedirect($this->container->get('router')->pathFor('index'));
+            return $response->withRedirect($this->router->pathFor('index'));
         }
     }
 
@@ -249,12 +234,9 @@ class FrontController extends BaseController
             $response,
             'error.tpl',
             [
-                'config' => $this->config,
                 'error' => $message,
                 'class' => 'video',
                 'title' => $this->localeManager->t('Error'),
-                'canonical' => $this->getCanonicalUrl($request),
-                'locale' => $this->localeManager->getLocale(),
             ]
         );
 
@@ -321,30 +303,5 @@ class FrontController extends BaseController
 
             return $this->displayError($request, $response, $message);
         }
-    }
-
-    /**
-     * Generate the canonical URL of the current page.
-     *
-     * @param Request $request PSR-7 Request
-     *
-     * @return string URL
-     */
-    private function getCanonicalUrl(Request $request)
-    {
-        $uri = $request->getUri();
-        $return = 'https://alltubedownload.net/';
-
-        $path = $uri->getPath();
-        if ($path != '/') {
-            $return .= $path;
-        }
-
-        $query = $uri->getQuery();
-        if (!empty($query)) {
-            $return .= '?' . $query;
-        }
-
-        return $return;
     }
 }

@@ -9,6 +9,7 @@ namespace Alltube;
 use InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
+use Slim\Http\Uri;
 use Slim\Router;
 
 /**
@@ -27,15 +28,17 @@ class UglyRouter extends Router
      */
     public function dispatch(ServerRequestInterface $request)
     {
-        parse_str($request->getUri()->getQuery(), $args);
-        $uri = '/';
-        if (isset($args['page'])) {
-            $uri .= $args['page'];
+        $params = $request->getQueryParams();
+        $uri = new Uri('', '');
+
+        if (isset($params['page'])) {
+            // Build an URI that the router can understand.
+            $uri = $uri->withPath($params['page']);
         }
 
         return $this->createDispatcher()->dispatch(
             $request->getMethod(),
-            $uri
+            (string) $uri
         );
     }
 
@@ -52,10 +55,11 @@ class UglyRouter extends Router
      */
     public function pathFor($name, array $data = [], array $queryParams = [])
     {
-        $url = str_replace('/', '/?page=', $this->relativePathFor($name, $data, $queryParams));
+        $queryParams['page'] = $name;
+        $url = Uri::createFromString($this->relativePathFor($name, $data, $queryParams))->withPath('');
 
         if ($this->basePath) {
-            $url = $this->basePath . $url;
+            $url = $url->withBasePath($this->basePath);
         }
 
         return $url;

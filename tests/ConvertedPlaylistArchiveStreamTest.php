@@ -7,7 +7,9 @@
 namespace Alltube\Test;
 
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Stream\ConvertedPlaylistArchiveStream;
+use SmartyException;
 
 /**
  * Unit tests for the ConvertedPlaylistArchiveStream class.
@@ -15,9 +17,13 @@ use Alltube\Stream\ConvertedPlaylistArchiveStream;
  */
 class ConvertedPlaylistArchiveStreamTest extends StreamTest
 {
+
     /**
      * Prepare tests.
+     *
      * @throws ConfigException
+     * @throws DependencyException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {

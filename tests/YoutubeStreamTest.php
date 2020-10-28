@@ -7,8 +7,10 @@
 namespace Alltube\Test;
 
 use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Alltube\Stream\YoutubeStream;
+use SmartyException;
 
 /**
  * Unit tests for the YoutubeStream class.
@@ -18,8 +20,11 @@ class YoutubeStreamTest extends StreamTest
 {
     /**
      * Prepare tests.
+     *
      * @throws AlltubeLibraryException
      * @throws ConfigException
+     * @throws DependencyException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {

@@ -10,12 +10,12 @@ use Alltube\Config;
 use Alltube\Library\Downloader;
 use Alltube\Library\Video;
 use Alltube\LocaleManager;
-use Alltube\SessionFactory;
 use Aura\Session\Segment;
 use Consolidation\Log\Logger;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Router;
 
 /**
  * Abstract class used by every controller.
@@ -77,6 +77,11 @@ abstract class BaseController
     protected $logger;
 
     /**
+     * @var Router
+     */
+    protected $router;
+
+    /**
      * BaseController constructor.
      *
      * @param ContainerInterface $container Slim dependency container
@@ -89,6 +94,7 @@ abstract class BaseController
         $this->sessionSegment = $session->getSegment(self::class);
         $this->localeManager = $this->container->get('locale');
         $this->downloader = $this->config->getDownloader();
+        $this->router = $this->container->get('router');
         $this->logger = $this->container->get('logger');
         $this->downloader->setLogger($this->logger);
 

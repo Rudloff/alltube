@@ -86,7 +86,7 @@ class DownloadController extends BaseController
                 }
             }
         } else {
-            return $response->withRedirect($this->container->get('router')->pathFor('index'));
+            return $response->withRedirect($this->router->pathFor('index'));
         }
     }
 

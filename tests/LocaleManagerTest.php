@@ -6,15 +6,17 @@
 
 namespace Alltube\Test;
 
+use Alltube\Exception\ConfigException;
+use Alltube\Exception\DependencyException;
 use Alltube\Factory\SessionFactory;
 use Alltube\Locale;
 use Alltube\LocaleManager;
-use Slim\Container;
+use SmartyException;
 
 /**
  * Unit tests for the LocaleManagerTest class.
  */
-class LocaleManagerTest extends BaseTest
+class LocaleManagerTest extends ContainerTest
 {
     /**
      * LocaleManager class instance.
@@ -25,11 +27,17 @@ class LocaleManagerTest extends BaseTest
 
     /**
      * Prepare tests.
+     *
+     * @throws ConfigException
+     * @throws DependencyException
+     * @throws SmartyException
      */
     protected function setUp(): void
     {
+        parent::setUp();
+
         $_SESSION[LocaleManager::class]['locale'] = 'foo_BAR';
-        $this->localeManager = new LocaleManager(SessionFactory::create(new Container()));
+        $this->localeManager = new LocaleManager(SessionFactory::create($this->container));
     }
 
     /**
@@ -39,6 +47,8 @@ class LocaleManagerTest extends BaseTest
      */
     protected function tearDown(): void
     {
+        parent::tearDown();
+
         $this->localeManager->unsetLocale();
     }
 

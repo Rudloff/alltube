@@ -20,6 +20,23 @@ use SmartyException;
 class ViewFactory
 {
     /**
+     * Generate the canonical URL of the current page.
+     *
+     * @param Request $request PSR-7 Request
+     *
+     * @return string URL
+     */
+    private static function getCanonicalUrl(Request $request)
+    {
+        /** @var Uri $uri */
+        $uri = $request->getUri();
+
+        return $uri->withBasePath('')
+            ->withHost('alltubedownload.net')
+            ->withScheme('https');
+    }
+
+    /**
      * Create Smarty view object.
      *
      * @param ContainerInterface $container Slim dependency container
@@ -62,6 +79,11 @@ class ViewFactory
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
         $view->registerPlugin('function', 'base_url', [$smartyPlugins, 'baseUrl']);
         $view->registerPlugin('block', 't', [$localeManager, 'smartyTranslate']);
+
+        $view->offsetSet('canonical', self::getCanonicalUrl($request));
+        $view->offsetSet('locale', $container->get('locale')->getLocale());
+        $view->offsetSet('config', $container->get('config'));
+        $view->offsetSet('domain', $uri->withBasePath('')->getBaseUrl());
 
         return $view;
     }
