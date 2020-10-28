@@ -19,6 +19,7 @@
     }
   ],
   "require": {
+    "php": ">=7.3",
     "ext-intl": "*",
     "ext-json": "*",
     "aura/session": "^2.1",
