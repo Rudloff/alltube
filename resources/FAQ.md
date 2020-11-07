@@ -91,7 +91,7 @@ You need to add this to your `config.yml` file:
 stream: true
 ```
 
-Note that this can use a lot of ressources on your server.
+Note that this can use a lot of resources on your server.
 
 ## Download M3U videos
 
