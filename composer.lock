@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7406ade7ebe715bf39821390ff077f12",
+    "content-hash": "4d4a059d0ba300ec08f5967c60824b91",
     "packages": [
         {
             "name": "aura/session",
@@ -3894,16 +3894,16 @@
         },
         {
             "name": "insite/composer-dangling-locked-deps",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prudloff-insite/composer-dangling-locked-deps.git",
-                "reference": "373820e7680f2e98e1fe8259f04474cea5745806"
+                "reference": "73e0f7096f860ff7c326194463373c364923f3fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prudloff-insite/composer-dangling-locked-deps/zipball/373820e7680f2e98e1fe8259f04474cea5745806",
-                "reference": "373820e7680f2e98e1fe8259f04474cea5745806",
+                "url": "https://api.github.com/repos/prudloff-insite/composer-dangling-locked-deps/zipball/73e0f7096f860ff7c326194463373c364923f3fc",
+                "reference": "73e0f7096f860ff7c326194463373c364923f3fc",
                 "shasum": ""
             },
             "require": {
@@ -3911,7 +3911,7 @@
                 "ocramius/package-versions": "^1.4"
             },
             "require-dev": {
-                "composer/composer": "^1.10",
+                "composer/composer": "^2.0",
                 "phpro/grumphp": "^0.21.0"
             },
             "type": "composer-plugin",
@@ -3929,7 +3929,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Detect dangling Composer locked dependencies",
-            "time": "2020-10-05T10:24:52+00:00"
+            "time": "2020-11-16T13:45:00+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
