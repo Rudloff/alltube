@@ -44,7 +44,7 @@
     "ergebnis/composer-normalize": "^2.6",
     "insite/composer-dangling-locked-deps": "^0.2.1",
     "php-mock/php-mock-mockery": "^1.3",
-    "phpro/grumphp": "^1.0",
+    "phpro/grumphp": "^1.1",
     "phpstan/phpstan": "^0.12.25",
     "phpunit/phpunit": "^8.4",
     "sensiolabs/security-checker": "^6.0",
