@@ -89,7 +89,7 @@
         "name": "ytdl-org/youtube-dl",
         "version": "2020.11.12",
         "dist": {
-          "type": "tar",
+          "type": "zip",
           "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.11.12.zip"
         }
       }
