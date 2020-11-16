@@ -28,11 +28,10 @@ class ReleaseCommand extends Tasks
         $result = $gitTask
             ->arg('describe')
             ->run();
-        $result->provideOutputdata();
 
         $tmpDir = $this->_tmpDir();
 
-        $filename = 'alltube-' . trim((string)$result->getOutputData()) . '.zip';
+        $filename = 'alltube-' . trim((string)$result->getMessage()) . '.zip';
 
         /** @var FilesystemStack $rmTask */
         $rmTask = $this->taskFilesystemStack();
