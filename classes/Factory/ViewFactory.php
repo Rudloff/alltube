@@ -81,7 +81,7 @@ class ViewFactory
         $view->registerPlugin('block', 't', [$localeManager, 'smartyTranslate']);
 
         $view->offsetSet('canonical', self::getCanonicalUrl($request));
-        $view->offsetSet('locale', $container->get('locale')->getLocale());
+        $view->offsetSet('locale', $container->get('locale'));
         $view->offsetSet('config', $container->get('config'));
         $view->offsetSet('domain', $uri->withBasePath('')->getBaseUrl());
 
