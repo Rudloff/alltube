@@ -60,7 +60,7 @@ class FrontController extends BaseController
             [
                 'class' => 'index',
                 'description' => $this->localeManager->t(
-                    'Easily download videos from Youtube, Dailymotion, Vimeo and other websites.'
+                    'Easily download videos from YouTube, Dailymotion, Vimeo and other websites.'
                 ),
                 'supportedLocales' => $this->localeManager->getSupportedLocales(),
             ]
@@ -103,7 +103,7 @@ class FrontController extends BaseController
                 'extractors' => $this->downloader->getExtractors(),
                 'class' => 'extractors',
                 'title' => $this->localeManager->t('Supported websites'),
-                'description' => $this->localeManager->t('List of all supported websites from which Alltube Download ' .
+                'description' => $this->localeManager->t('List of all supported websites from which AllTube Download ' .
                     'can extract video or audio files'),
             ]
         );
@@ -128,7 +128,7 @@ class FrontController extends BaseController
                 'class' => 'password',
                 'title' => $this->localeManager->t('Password prompt'),
                 'description' => $this->localeManager->t(
-                    'You need a password in order to download this video with Alltube Download'
+                    'You need a password in order to download this video with AllTube Download'
                 ),
             ]
         );
