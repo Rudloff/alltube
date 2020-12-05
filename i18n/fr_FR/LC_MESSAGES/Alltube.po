@@ -70,7 +70,7 @@ msgstr "Mot de passe de la vidéo"
 
 #: templates/index.tpl:8
 msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
-msgstr "Copiez ici l'URL de votre vidéo (Youtube, Dailymotion, etc.)"
+msgstr "Copiez ici l'URL de votre vidéo (YouTube, Dailymotion, etc.)"
 
 #: templates/index.tpl:25
 msgid "Audio only (MP3)"
@@ -221,15 +221,15 @@ msgstr "Impossible de trouver l'URL de la vidéo."
 msgid ""
 "Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
 msgstr ""
-"Téléchargez facilement des vidéos depuis Youtube, Dailymotion, Vimeo et "
+"Téléchargez facilement des vidéos depuis YouTube, Dailymotion, Vimeo et "
 "d'autres sites web."
 
 #: controllers/FrontController.php:110
 msgid ""
-"List of all supported websites from which Alltube Download can extract video "
+"List of all supported websites from which AllTube Download can extract video "
 "or audio files"
 msgstr ""
-"Liste de tous les sites web depuis lesquels Alltube Download peut extraire "
+"Liste de tous les sites web depuis lesquels AllTube Download peut extraire "
 "des fichiers vidéo ou audio"
 
 #: controllers/FrontController.php:136
@@ -240,7 +240,7 @@ msgstr "Demande de mot de passe"
 msgid ""
 "You need a password in order to download this video with Alltube Download"
 msgstr ""
-"Vous avez besoin d'un mot de passe pour télécharger cette vidéo avec Alltube "
+"Vous avez besoin d'un mot de passe pour télécharger cette vidéo avec AllTube "
 "Download"
 
 #: controllers/FrontController.php:169
