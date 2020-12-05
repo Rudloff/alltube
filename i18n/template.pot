@@ -127,7 +127,7 @@ msgid "Video password"
 msgstr ""
 
 #: templates/index.tpl:8
-msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
 msgstr ""
 
 #: templates/index.tpl:25
@@ -173,12 +173,12 @@ msgstr ""
 
 #: classes/Controller/FrontController.php:65
 msgid ""
-"Easily download videos from Youtube, Dailymotion, Vimeo and other websites."
+"Easily download videos from YouTube, Dailymotion, Vimeo and other websites."
 msgstr ""
 
 #: classes/Controller/FrontController.php:112
 msgid ""
-"List of all supported websites from which Alltube Download can extract video "
+"List of all supported websites from which AllTube Download can extract video "
 "or audio files"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 
 #: classes/Controller/FrontController.php:140
 msgid ""
-"You need a password in order to download this video with Alltube Download"
+"You need a password in order to download this video with AllTube Download"
 msgstr ""
 
 #: classes/Controller/FrontController.php:174
