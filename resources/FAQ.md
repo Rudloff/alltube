@@ -12,7 +12,7 @@ You can usually download the video by doing *File > Save to* or *ctrl + S*.
 so it has low RAM and CPU.
 
 AllTube probably won't switch to a more expensive hosting
-because this project does not earn any financial ressources
+because this project does not earn any financial resources
 (although [donations are welcome](https://liberapay.com/Rudloff/))
 and you are encouraged to host it yourself.
 
@@ -91,7 +91,7 @@ You need to add this to your `config.yml` file:
 stream: true
 ```
 
-Note that this can use a lot of ressources on your server.
+Note that this can use a lot of resources on your server.
 
 ## Download M3U videos
 
@@ -129,7 +129,7 @@ remux: true
 ## Convert videos to something other than MP3
 
 By default the `convert` option only allows converting to MP3,
-in order to keep things simple and ressources usage low.
+in order to keep things simple and resources usage low.
 However, you can use the `convertAdvanced` option like this:
 
 ```yaml

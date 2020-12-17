@@ -2,8 +2,8 @@
     {if isset($supportedLocales) AND count($supportedLocales) > 1}
         <div class="locales small-font">
             <button class="localesBtn small-font" title="{t}Switch language{/t}">
-                {if isset($locale) AND $locale->getCountry()}
-                    {$locale->getCountry()->getEmoji()}
+                {if $locale->getLocale()->getCountry()}
+                    {$locale->getLocale()->getCountry()->getEmoji()}
                 {else}
                     {t}Set language{/t}
                 {/if}

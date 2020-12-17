@@ -6,6 +6,7 @@
 
 namespace Alltube\Test;
 
+use Alltube\Locale;
 use Alltube\Controller\BaseController;
 use Alltube\Controller\DownloadController;
 use Alltube\Controller\FrontController;
@@ -33,6 +34,8 @@ abstract class ControllerTest extends ContainerTest
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->container->get('locale')->setLocale(new Locale('en_US'));
 
         $frontController = new FrontController($this->container);
         $downloadController = new DownloadController($this->container);
