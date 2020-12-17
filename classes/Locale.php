@@ -48,7 +48,7 @@ class Locale
      *
      * @return string ISO 15897 code
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getIso15897();
     }
@@ -58,7 +58,7 @@ class Locale
      *
      * @return string
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return PHPLocale::getDisplayName($this->getIso15897(), $this->getIso15897());
     }
@@ -68,7 +68,7 @@ class Locale
      *
      * @return string
      */
-    public function getIso15897()
+    public function getIso15897(): string
     {
         if (isset($this->region)) {
             return $this->language . '_' . $this->region;
@@ -82,7 +82,7 @@ class Locale
      *
      * @return string
      */
-    public function getBcp47()
+    public function getBcp47(): string
     {
         if (isset($this->region)) {
             return $this->language . '-' . $this->region;
@@ -96,7 +96,7 @@ class Locale
      *
      * @return string
      */
-    public function getIso3166()
+    public function getIso3166(): string
     {
         return strtolower($this->region);
     }

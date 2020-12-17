@@ -85,26 +85,32 @@ class LocaleMiddlewareTest extends ContainerTest
      * Check that the request contains an Accept-Language header.
      *
      * @param Request $request PSR-7 request
+     * @param Response $response
      *
-     * @return void
+     * @return Response
      */
-    public function assertHeader(Request $request)
+    public function assertHeader(Request $request, Response $response): Response
     {
         $header = $request->getHeader('Accept-Language');
         $this->assertEquals('foo-BAR', $header[0]);
+
+        return $response;
     }
 
     /**
      * Check that the request contains no Accept-Language header.
      *
      * @param Request $request PSR-7 request
+     * @param Response $response
      *
-     * @return void
+     * @return Response
      */
-    public function assertNoHeader(Request $request)
+    public function assertNoHeader(Request $request, Response $response): Response
     {
         $header = $request->getHeader('Accept-Language');
         $this->assertEmpty($header);
+
+        return $response;
     }
 
     /**

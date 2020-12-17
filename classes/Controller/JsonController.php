@@ -25,7 +25,7 @@ class JsonController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    public function json(Request $request, Response $response)
+    public function json(Request $request, Response $response): Response
     {
         $url = $request->getQueryParam('url');
 

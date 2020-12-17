@@ -157,7 +157,7 @@ class VideoTest extends ContainerTest
      *
      * @return array[]
      */
-    public function urlProvider()
+    public function urlProvider(): array
     {
         return [
             [
@@ -193,7 +193,7 @@ class VideoTest extends ContainerTest
      *
      * @return array[]
      */
-    public function remuxUrlProvider()
+    public function remuxUrlProvider(): array
     {
         return [
             [
@@ -210,7 +210,7 @@ class VideoTest extends ContainerTest
      *
      * @return array[]
      */
-    public function m3uUrlProvider()
+    public function m3uUrlProvider(): array
     {
         return [
             [
@@ -227,7 +227,7 @@ class VideoTest extends ContainerTest
      *
      * @return array[]
      */
-    public function rtmpUrlProvider()
+    public function rtmpUrlProvider(): array
     {
         return [
             [
@@ -244,7 +244,7 @@ class VideoTest extends ContainerTest
      *
      * @return array[]
      */
-    public function errorUrlProvider()
+    public function errorUrlProvider(): array
     {
         return [
             ['http://example.com/video'],

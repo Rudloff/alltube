@@ -34,7 +34,7 @@ class CspMiddleware
      * @param Response $response
      * @return MessageInterface
      */
-    public function applyHeader(Response $response)
+    public function applyHeader(Response $response): MessageInterface
     {
         $csp = new CSPBuilder();
         $csp->addDirective('default-src', [])

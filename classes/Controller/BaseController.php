@@ -111,7 +111,7 @@ abstract class BaseController
      *
      * @return string format
      */
-    protected function getFormat(Request $request)
+    protected function getFormat(Request $request): string
     {
         $format = $request->getQueryParam('format');
         if (!isset($format)) {
@@ -126,9 +126,9 @@ abstract class BaseController
      *
      * @param Request $request PSR-7 request
      *
-     * @return string Password
+     * @return string|null Password
      */
-    protected function getPassword(Request $request)
+    protected function getPassword(Request $request): ?string
     {
         $url = $request->getQueryParam('url');
 
@@ -151,7 +151,7 @@ abstract class BaseController
      *
      * @return Response HTTP response
      */
-    protected function displayError(Request $request, Response $response, string $message)
+    protected function displayError(Request $request, Response $response, string $message): Response
     {
         $controller = new FrontController($this->container);
 

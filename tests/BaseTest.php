@@ -18,7 +18,7 @@ abstract class BaseTest extends TestCase
      *
      * @return string Path to file
      */
-    protected function getConfigFile()
+    protected function getConfigFile(): string
     {
         return __DIR__ . '/../config/config_test.yml';
     }

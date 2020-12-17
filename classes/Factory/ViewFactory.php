@@ -26,7 +26,7 @@ class ViewFactory
      *
      * @return string URL
      */
-    private static function getCanonicalUrl(Request $request)
+    private static function getCanonicalUrl(Request $request): string
     {
         /** @var Uri $uri */
         $uri = $request->getUri();
@@ -45,7 +45,7 @@ class ViewFactory
      * @return Smarty
      * @throws SmartyException
      */
-    public static function create(ContainerInterface $container, Request $request = null)
+    public static function create(ContainerInterface $container, Request $request = null): Smarty
     {
         if (!isset($request)) {
             $request = $container->get('request');

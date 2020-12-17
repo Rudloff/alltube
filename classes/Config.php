@@ -187,7 +187,7 @@ class Config
      *
      * @return string
      */
-    public static function addHttpToFormat(string $format)
+    public static function addHttpToFormat(string $format): string
     {
         $newFormat = [];
         foreach (explode('/', $format) as $subformat) {
@@ -266,7 +266,7 @@ class Config
      * @return Config
      * @throws ConfigException
      */
-    public static function fromFile(string $file)
+    public static function fromFile(string $file): Config
     {
         if (is_file($file)) {
             return new self(Yaml::parse(strval(file_get_contents($file))));
@@ -293,7 +293,7 @@ class Config
      *
      * @return Downloader
      */
-    public function getDownloader()
+    public function getDownloader(): Downloader
     {
         return new Downloader(
             $this->youtubedl,
@@ -308,7 +308,7 @@ class Config
     /**
      * @return string
      */
-    public function getAppVersion()
+    public function getAppVersion(): string
     {
         $version = PrettyVersions::getRootPackageVersion();
 

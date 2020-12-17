@@ -20,7 +20,7 @@ class ConfigFactory
      * @return Config
      * @throws ConfigException
      */
-    public static function create(Container $container)
+    public static function create(Container $container): Config
     {
         $configPath = __DIR__ . '/../../config/config.yml';
         if (is_file($configPath)) {

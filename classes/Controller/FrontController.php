@@ -52,7 +52,7 @@ class FrontController extends BaseController
      *
      * @return Response HTTP response
      */
-    public function index(Request $request, Response $response)
+    public function index(Request $request, Response $response): Response
     {
         $this->view->render(
             $response,
@@ -78,7 +78,7 @@ class FrontController extends BaseController
      *
      * @return Response
      */
-    public function locale(Request $request, Response $response, array $data)
+    public function locale(Request $request, Response $response, array $data): Response
     {
         $this->localeManager->setLocale(new Locale($data['locale']));
 
@@ -94,7 +94,7 @@ class FrontController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    public function extractors(Request $request, Response $response)
+    public function extractors(Request $request, Response $response): Response
     {
         $this->view->render(
             $response,
@@ -119,7 +119,7 @@ class FrontController extends BaseController
      *
      * @return Response HTTP response
      */
-    public function password(Request $request, Response $response)
+    public function password(Request $request, Response $response): Response
     {
         $this->view->render(
             $response,
@@ -199,7 +199,7 @@ class FrontController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    public function info(Request $request, Response $response)
+    public function info(Request $request, Response $response): Response
     {
         $url = $request->getQueryParam('url') ?: $request->getQueryParam('v');
 
@@ -228,7 +228,7 @@ class FrontController extends BaseController
      *
      * @return Response HTTP response
      */
-    protected function displayError(Request $request, Response $response, string $message)
+    protected function displayError(Request $request, Response $response, string $message): Response
     {
         $this->view->render(
             $response,
@@ -248,7 +248,7 @@ class FrontController extends BaseController
      * @param Response $response
      * @return Response
      */
-    public function notFound(Request $request, Response $response)
+    public function notFound(Request $request, Response $response): Response
     {
         return $this->displayError($request, $response, $this->localeManager->t('Page not found'))
             ->withStatus(StatusCode::HTTP_NOT_FOUND);
@@ -259,7 +259,7 @@ class FrontController extends BaseController
      * @param Response $response
      * @return Response
      */
-    public function notAllowed(Request $request, Response $response)
+    public function notAllowed(Request $request, Response $response): Response
     {
         return $this->displayError($request, $response, $this->localeManager->t('Method not allowed'))
             ->withStatus(StatusCode::HTTP_METHOD_NOT_ALLOWED);
@@ -274,7 +274,7 @@ class FrontController extends BaseController
      *
      * @return Response HTTP response
      */
-    public function error(Request $request, Response $response, Throwable $error)
+    public function error(Request $request, Response $response, Throwable $error): Response
     {
         $this->logger->error($error);
 

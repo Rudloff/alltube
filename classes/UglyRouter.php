@@ -26,7 +26,7 @@ class UglyRouter extends Router
      *
      * @link   https://github.com/nikic/FastRoute/blob/master/src/Dispatcher.php
      */
-    public function dispatch(ServerRequestInterface $request)
+    public function dispatch(ServerRequestInterface $request): array
     {
         $params = $request->getQueryParams();
         $uri = new Uri('', '');
@@ -53,7 +53,7 @@ class UglyRouter extends Router
      * @throws InvalidArgumentException If required data not provided
      * @throws RuntimeException         If named route does not exist
      */
-    public function pathFor($name, array $data = [], array $queryParams = [])
+    public function pathFor($name, array $data = [], array $queryParams = []): string
     {
         $queryParams['page'] = $name;
         $url = Uri::createFromString($this->relativePathFor($name, $data, $queryParams))->withPath('');

@@ -80,7 +80,7 @@ class LocaleManager
      *
      * @return Locale[]
      */
-    public function getSupportedLocales()
+    public function getSupportedLocales(): array
     {
         $return = [
             new Locale('en_US')
@@ -103,7 +103,7 @@ class LocaleManager
      *
      * @return Locale|null
      */
-    public function getLocale()
+    public function getLocale(): ?Locale
     {
         return $this->curLocale;
     }
@@ -140,7 +140,7 @@ class LocaleManager
      *
      * @return string Translated string
      */
-    public function smartyTranslate(array $params, string $text = null)
+    public function smartyTranslate(array $params, string $text = null): string
     {
         if (isset($params['params'])) {
             return $this->t($text, $params['params']);
@@ -157,7 +157,7 @@ class LocaleManager
      * @param mixed[] $params
      * @return string Translated string
      */
-    public function t(string $string = null, array $params = [])
+    public function t(string $string = null, array $params = []): string
     {
         if (isset($string)) {
             return $this->translator->trans($string, $params);

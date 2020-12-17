@@ -42,7 +42,7 @@ class LocaleMiddleware
      *
      * @return Locale|null Locale if chosen, nothing otherwise
      */
-    public function testLocale(array $proposedLocale)
+    public function testLocale(array $proposedLocale): ?Locale
     {
         foreach ($this->localeManager->getSupportedLocales() as $locale) {
             $parsedLocale = AcceptLanguage::parse($locale);
@@ -67,7 +67,7 @@ class LocaleMiddleware
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next): Response
     {
         $headers = $request->getHeader('Accept-Language');
         $curLocale = $this->localeManager->getLocale();

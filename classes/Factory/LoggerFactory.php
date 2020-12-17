@@ -18,7 +18,7 @@ class LoggerFactory
      * @param Container $container
      * @return Logger
      */
-    public static function create(Container $container)
+    public static function create(Container $container): Logger
     {
         $config = $container->get('config');
         if ($config->debug) {

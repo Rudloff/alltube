@@ -69,7 +69,7 @@ abstract class ControllerTest extends ContainerTest
      *
      * @return Response HTTP response
      */
-    protected function getRequestResult(string $request, array $params)
+    protected function getRequestResult(string $request, array $params): Response
     {
         return $this->controller->$request(
             $this->container->get('request')->withQueryParams($params),
