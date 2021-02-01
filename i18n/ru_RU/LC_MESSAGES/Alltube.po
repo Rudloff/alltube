@@ -1,0 +1,231 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"Last-Translator: progit <pash.vld@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru_RU\n"
+
+#: templates/inc/footer.tpl:8
+msgid "Code by @dev"
+msgstr "Код @dev"
+
+#: templates/inc/footer.tpl:16
+msgid "Design by @designer"
+msgstr "Дизайн @designer"
+
+#: templates/inc/footer.tpl:21
+msgid "Get the code"
+msgstr "Получить код"
+
+#: templates/inc/footer.tpl:29
+msgid "Based on @youtubedl"
+msgstr "На основе @youtubedl"
+
+#: templates/inc/footer.tpl:33
+msgid "Donate using Liberapay"
+msgstr "Пожертвовать с помощью Liberapay"
+
+#: templates/inc/footer.tpl:35
+msgid "Donate"
+msgstr "Пожертвовать"
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "Смена языка"
+
+#: templates/inc/header.tpl:8
+msgid "Set language"
+msgstr "Установить язык"
+
+#: templates/info.tpl:11
+msgid "You are going to download @title."
+msgstr "Вы собираетесь скачать @title."
+
+#: templates/info.tpl:29
+msgid "Available formats:"
+msgstr "Доступные форматы:"
+
+#: templates/info.tpl:31
+msgid "Generic formats"
+msgstr "Общие форматы"
+
+#: templates/info.tpl:35
+msgid "Best"
+msgstr "Лучшее качество"
+
+#: templates/info.tpl:36
+msgid "Remux best video with best audio"
+msgstr "Перекодировать лучшее видео с лучшим звуком"
+
+#: templates/info.tpl:37
+msgid "Worst"
+msgstr "Худшее качество"
+
+#: templates/info.tpl:42
+msgid "Detailed formats"
+msgstr "Другие форматы"
+
+#: templates/info.tpl:86
+msgid "Stream the video through the server"
+msgstr "Потоковое видео через сервер"
+
+#: templates/info.tpl:92
+msgid "Convert into a custom format:"
+msgstr "Преобразовать в пользовательский формат:"
+
+#: templates/info.tpl:93
+msgid "Custom format"
+msgstr "Пользовательский формат"
+
+#: templates/info.tpl:93
+msgid "Format to convert to"
+msgstr "Формат для преобразования в"
+
+#: templates/info.tpl:98
+msgid "with"
+msgstr "с"
+
+#: templates/info.tpl:99
+msgid "Bit rate"
+msgstr "Битрейт"
+
+#: templates/info.tpl:100
+msgid "Custom bitrate"
+msgstr "Пользовательский битрейт"
+
+#: templates/info.tpl:103
+msgid "kbit/s audio"
+msgstr "кбит/с аудио"
+
+#: templates/info.tpl:107 templates/playlist.tpl:38 templates/password.tpl:11
+#: templates/index.tpl:19
+msgid "Download"
+msgstr "Скачать"
+
+#: templates/playlist.tpl:12
+msgid "Videos extracted from @title:"
+msgstr "Извлеченные видео из @title:"
+
+#: templates/playlist.tpl:39
+msgid "More options"
+msgstr "Больше вариантов"
+
+#: templates/extractors.tpl:4 classes/Controller/FrontController.php:111
+msgid "Supported websites"
+msgstr "Поддерживаемые сайты"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "Произошла ошибка"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "Это видео защищено"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "Чтобы скачать это видео, вам нужен пароль."
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "Пароль для видео"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
+msgstr "Скопируйте сюда URL вашего видео (YouTube, Dailymotion и т. д.)"
+
+#: templates/index.tpl:25
+msgid "Audio only (MP3)"
+msgstr "Только звук (MP3)"
+
+#: templates/index.tpl:29
+msgid "From"
+msgstr "Из"
+
+#: templates/index.tpl:32
+msgid "to"
+msgstr "в"
+
+#: templates/index.tpl:41
+msgid "See all supported websites"
+msgstr "Просмотреть все поддерживаемые веб-сайты"
+
+#: templates/index.tpl:43
+msgid "Drag this to your bookmarks bar:"
+msgstr "Перетащите это на панель закладок:"
+
+#: templates/index.tpl:45
+msgid "Bookmarklet"
+msgstr "Букмарклет"
+
+#: classes/Controller/DownloadController.php:64
+#: classes/Controller/FrontController.php:166
+msgid "Wrong password"
+msgstr "Неправильный пароль"
+
+#: classes/Controller/DownloadController.php:69
+msgid "Conversion of playlists is not supported."
+msgstr "Конвертация плейлистов не поддерживается."
+
+#: classes/Controller/DownloadController.php:76
+msgid "Conversion of M3U8 files is not supported."
+msgstr "Конвертация файлов M3U8 не поддерживается."
+
+#: classes/Controller/DownloadController.php:82
+msgid "Conversion of DASH segments is not supported."
+msgstr "Конвертация сегментов DASH не поддерживается."
+
+#: classes/Controller/FrontController.php:65
+msgid ""
+"Easily download videos from YouTube, Dailymotion, Vimeo and other websites."
+msgstr "Легко скачивайте видео с YouTube, Dailymotion, Vimeo и других сайтов."
+
+#: classes/Controller/FrontController.php:112
+msgid ""
+"List of all supported websites from which AllTube Download can extract video "
+"or audio files"
+msgstr ""
+"Список всех поддерживаемых веб-сайтов, с которых AllTube Download может "
+"извлекать видео или аудио файлы"
+
+#: classes/Controller/FrontController.php:138
+msgid "Password prompt"
+msgstr "Запрос пароля"
+
+#: classes/Controller/FrontController.php:140
+msgid ""
+"You need a password in order to download this video with AllTube Download"
+msgstr ""
+"Чтобы скачать это видео с помощью AllTube Download, вам потребуется пароль"
+
+#: classes/Controller/FrontController.php:174
+msgid "Video download"
+msgstr "Скачать видео"
+
+#: classes/Controller/FrontController.php:176
+msgid "Download video from @extractor"
+msgstr "Скачать видео из @extractor"
+
+#: classes/Controller/FrontController.php:182
+msgid "Download @title from @extractor"
+msgstr "Скачать @title из @extractor"
+
+#: classes/Controller/FrontController.php:255
+msgid "Error"
+msgstr "Ошибка"
+
+#: classes/Controller/FrontController.php:271
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: classes/Controller/FrontController.php:282
+msgid "Method not allowed"
+msgstr "Метод не разрешен"
