@@ -37,5 +37,8 @@
     </div>
 </footer>
 </div>
+{if isset($debug_render)}
+    {$debug_render->render()}
+{/if}
 </body>
 </html>

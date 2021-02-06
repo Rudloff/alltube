@@ -85,6 +85,14 @@ class ViewFactory
         $view->offsetSet('config', $container->get('config'));
         $view->offsetSet('domain', $uri->withBasePath('')->getBaseUrl());
 
+        if ($container->has('debugbar')) {
+            $view->offsetSet(
+                'debug_render',
+                $container->get('debugbar')
+                    ->getJavascriptRenderer($uri->getBaseUrl() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/')
+            );
+        }
+
         return $view;
     }
 }

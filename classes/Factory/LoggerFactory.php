@@ -3,6 +3,7 @@
 namespace Alltube\Factory;
 
 use Consolidation\Log\Logger;
+use Consolidation\Log\LoggerManager;
 use Consolidation\Log\LogOutputStyler;
 use Slim\Container;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -16,9 +17,9 @@ class LoggerFactory
 
     /**
      * @param Container $container
-     * @return Logger
+     * @return LoggerManager
      */
-    public static function create(Container $container): Logger
+    public static function create(Container $container): LoggerManager
     {
         $config = $container->get('config');
         if ($config->debug) {
@@ -27,9 +28,13 @@ class LoggerFactory
             $verbosity = ConsoleOutput::VERBOSITY_NORMAL;
         }
 
+        $loggerManager = new LoggerManager();
+
         $logger = new Logger(new ConsoleOutput($verbosity));
         $logger->setLogOutputStyler(new LogOutputStyler());
 
-        return $logger;
+        $loggerManager->add('default', $logger);
+
+        return $loggerManager;
     }
 }
