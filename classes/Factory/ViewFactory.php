@@ -7,6 +7,7 @@
 namespace Alltube\Factory;
 
 use Alltube\LocaleManager;
+use Junker\DebugBar\Bridge\SmartyCollector;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Uri;
@@ -86,10 +87,15 @@ class ViewFactory
         $view->offsetSet('domain', $uri->withBasePath('')->getBaseUrl());
 
         if ($container->has('debugbar')) {
+            $debugBar = $container->get('debugbar');
+
+            $debugBar->addCollector(new SmartyCollector($view->getSmarty()));
+
             $view->offsetSet(
                 'debug_render',
-                $container->get('debugbar')
-                    ->getJavascriptRenderer($uri->getBaseUrl() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/')
+                $debugBar->getJavascriptRenderer(
+                    $uri->getBaseUrl() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/'
+                )
             );
         }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f0982143c6c873f68d41017e195387a",
+    "content-hash": "ce151882c06d9b14d20fee47cb22be42",
     "packages": [
         {
             "name": "aura/session",
@@ -4000,6 +4000,45 @@
             "time": "2020-11-16T13:45:00+00:00"
         },
         {
+            "name": "junker/debugbar-smarty",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Junker/php-debugbar-smarty.git",
+                "reference": "82fb0d47799d2e030ecaa95cb16ad0ad53261e79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Junker/php-debugbar-smarty/zipball/82fb0d47799d2e030ecaa95cb16ad0ad53261e79",
+                "reference": "82fb0d47799d2e030ecaa95cb16ad0ad53261e79",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Junker": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Kosenkov",
+                    "email": "dk-junker@ya.ru"
+                }
+            ],
+            "description": "Smarty Collector for PHP DebugBar",
+            "keywords": [
+                "PHP debugbar",
+                "collector",
+                "debugbar",
+                "smarty"
+            ],
+            "time": "2021-02-06T14:00:09+00:00"
+        },
+        {
             "name": "justinrainbow/json-schema",
             "version": "5.2.10",
             "source": {
@@ -7064,7 +7103,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "junker/debugbar-smarty": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
