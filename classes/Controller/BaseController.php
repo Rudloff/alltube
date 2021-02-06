@@ -11,8 +11,8 @@ use Alltube\Library\Downloader;
 use Alltube\Library\Video;
 use Alltube\LocaleManager;
 use Aura\Session\Segment;
-use Consolidation\Log\Logger;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Router;
@@ -72,7 +72,7 @@ abstract class BaseController
     protected $downloader;
 
     /**
-     * @var Logger
+     * @var LoggerInterface
      */
     protected $logger;
 
