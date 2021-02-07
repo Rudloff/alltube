@@ -301,7 +301,14 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
                 }
             } else {
                 // Start streaming the first video.
-                $this->startVideoStream(current($this->videos));
+                $video = current($this->videos);
+                if ($video) {
+                    $this->startVideoStream($video);
+                } else {
+                    $this->push_error('Playlist was empty');
+                    $this->finish();
+                    $this->isComplete = true;
+                }
             }
         }
 
