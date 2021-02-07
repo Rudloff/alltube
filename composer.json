@@ -48,7 +48,7 @@
     "kitchenu/slim-debugbar": "^1.1",
     "maximebf/debugbar": "^1.16",
     "php-mock/php-mock-mockery": "^1.3",
-    "phpro/grumphp": "^1.1",
+    "phpro/grumphp": "^1.3",
     "phpstan/phpstan": "^0.12.72",
     "phpunit/phpunit": "^8.4",
     "smarty-gettext/smarty-gettext": "^1.6",
