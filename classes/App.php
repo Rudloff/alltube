@@ -37,6 +37,8 @@ class App extends \Slim\App
         /** @var Container $container */
         $container = $this->getContainer();
 
+        $container['root_path'] = $this->getRootPath();
+
         // Config.
         $container['config'] = ConfigFactory::create($container);
 
@@ -109,5 +111,18 @@ class App extends \Slim\App
             '/json',
             [$jsonController, 'json']
         )->setName('json');
+    }
+
+    /**
+     * @return string|null
+     */
+    private function getRootPath(): ?string
+    {
+        // realpath() can return false but we prefer using null.
+        if ($rootPath = realpath(__DIR__ . '/../')) {
+            return $rootPath;
+        }
+
+        return null;
     }
 }

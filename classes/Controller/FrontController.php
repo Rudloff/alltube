@@ -285,7 +285,7 @@ class FrontController extends BaseController
         $response = $cspMiddleware->applyHeader($response);
 
         if ($this->config->debug) {
-            $renderer = new HtmlErrorRenderer(true);
+            $renderer = new HtmlErrorRenderer(true, null, null, $this->container->get('root_path'));
             $exception = $renderer->render($error);
 
             $response->getBody()->write($exception->getAsString());

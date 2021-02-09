@@ -23,7 +23,7 @@ class ErrorHandler
 
         if (class_exists(HtmlErrorRenderer::class)) {
             // If dev dependencies are loaded, we can use symfony/error-handler.
-            $renderer = new HtmlErrorRenderer(true);
+            $renderer = new HtmlErrorRenderer(true, null, null, dirname(__DIR__));
             $exception = $renderer->render($e);
 
             http_response_code($exception->getStatusCode());
