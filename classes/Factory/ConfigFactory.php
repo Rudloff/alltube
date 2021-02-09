@@ -22,7 +22,7 @@ class ConfigFactory
      */
     public static function create(Container $container): Config
     {
-        $configPath = __DIR__ . '/../../config/config.yml';
+        $configPath = $container->get('root_path') . '/config/config.yml';
         if (is_file($configPath)) {
             $config = Config::fromFile($configPath);
         } else {

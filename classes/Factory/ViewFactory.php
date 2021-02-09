@@ -52,7 +52,7 @@ class ViewFactory
             $request = $container->get('request');
         }
 
-        $view = new Smarty(__DIR__ . '/../../templates/');
+        $view = new Smarty($container->get('root_path') . '/templates/');
 
         /** @var Uri $uri */
         $uri = $request->getUri();
