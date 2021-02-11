@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23e282a60abf091cf5171fa3628de398",
+    "content-hash": "0a9125b1ada00d075fb697f43816a054",
     "packages": [
         {
             "name": "aura/session",
@@ -3996,16 +3996,16 @@
         },
         {
             "name": "junker/debugbar-smarty",
-            "version": "dev-master",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Junker/php-debugbar-smarty.git",
-                "reference": "82fb0d47799d2e030ecaa95cb16ad0ad53261e79"
+                "reference": "cf43c79e25770884cf22036ee461b8585588cd19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Junker/php-debugbar-smarty/zipball/82fb0d47799d2e030ecaa95cb16ad0ad53261e79",
-                "reference": "82fb0d47799d2e030ecaa95cb16ad0ad53261e79",
+                "url": "https://api.github.com/repos/Junker/php-debugbar-smarty/zipball/cf43c79e25770884cf22036ee461b8585588cd19",
+                "reference": "cf43c79e25770884cf22036ee461b8585588cd19",
                 "shasum": ""
             },
             "type": "library",
@@ -4031,7 +4031,7 @@
                 "debugbar",
                 "smarty"
             ],
-            "time": "2021-02-06T14:00:09+00:00"
+            "time": "2021-02-10T07:02:47+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -7117,9 +7117,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "junker/debugbar-smarty": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

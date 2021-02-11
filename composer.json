@@ -44,7 +44,7 @@
     "enlightn/security-checker": "^1.4",
     "ergebnis/composer-normalize": "^2.6",
     "insite/composer-dangling-locked-deps": "^0.2.1",
-    "junker/debugbar-smarty": "dev-master",
+    "junker/debugbar-smarty": "^0.1.0",
     "kitchenu/slim-debugbar": "^1.1",
     "maximebf/debugbar": "^1.16",
     "php-mock/php-mock-mockery": "^1.3",
