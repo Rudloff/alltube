@@ -27,13 +27,6 @@
             youtube-dl
         </a>"}
         {t params=['@youtubedl'=>$youtubedl]}Based on @youtubedl{/t}
-
-        &middot;
-
-        <a rel="noopener" target="_blank" title="{t}Donate using Liberapay{/t}"
-           href="https://liberapay.com/Rudloff/donate">
-            {t}Donate{/t}
-        </a>
     </div>
 </footer>
 </div>

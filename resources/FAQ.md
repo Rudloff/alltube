@@ -13,7 +13,6 @@ so it has low RAM and CPU.
 
 AllTube probably won't switch to a more expensive hosting
 because this project does not earn any financial resources
-(although [donations are welcome](https://liberapay.com/Rudloff/))
 and you are encouraged to host it yourself.
 
 ## alltubedownload.net often says "An error occurred in the application…"
