@@ -36,7 +36,7 @@
     "symfony/translation": "^4.0",
     "symfony/yaml": "^4.0",
     "webfontkit/open-sans": "^1.0",
-    "ytdl-org/youtube-dl": "^2020.11",
+    "ytdl-org/youtube-dl": "^2021.04",
     "zonuexe/http-accept-language": "^0.4.1"
   },
   "require-dev": {
@@ -90,10 +90,10 @@
       "type": "package",
       "package": {
         "name": "ytdl-org/youtube-dl",
-        "version": "2020.11.12",
+        "version": "2021.04.01",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/ytdl-org/youtube-dl/archive/2020.11.12.zip"
+          "url": "https://github.com/ytdl-org/youtube-dl/archive/2021.04.01.zip"
         }
       }
     }
