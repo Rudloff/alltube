@@ -38,7 +38,7 @@ class DownloadController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    public function download(Request $request, Response $response)
+    public function download(Request $request, Response $response): Response
     {
         $url = $request->getQueryParam('url');
 
@@ -99,7 +99,7 @@ class DownloadController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    private function getConvertedAudioResponse(Request $request, Response $response)
+    private function getConvertedAudioResponse(Request $request, Response $response): Response
     {
         $from = null;
         $to = null;
@@ -135,7 +135,7 @@ class DownloadController extends BaseController
      * @throws PasswordException
      * @throws WrongPasswordException
      */
-    private function getAudioResponse(Request $request, Response $response)
+    private function getAudioResponse(Request $request, Response $response): Response
     {
         if (!empty($request->getQueryParam('from')) || !empty($request->getQueryParam('to'))) {
             // Force convert when we need to seek.
@@ -174,7 +174,7 @@ class DownloadController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    private function getStream(Request $request, Response $response)
+    private function getStream(Request $request, Response $response): Response
     {
         if (isset($this->video->entries)) {
             if ($this->config->convert && $request->getQueryParam('audio')) {
@@ -240,7 +240,7 @@ class DownloadController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    private function getRemuxStream(Request $request, Response $response)
+    private function getRemuxStream(Request $request, Response $response): Response
     {
         if (!$this->config->remux) {
             throw new RemuxException('You need to enable remux mode to merge two formats.');
@@ -267,7 +267,7 @@ class DownloadController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    private function getDownloadResponse(Request $request, Response $response)
+    private function getDownloadResponse(Request $request, Response $response): Response
     {
         try {
             $videoUrls = $this->video->getUrl();
@@ -306,7 +306,7 @@ class DownloadController extends BaseController
      * @throws YoutubedlException
      * @throws PopenStreamException
      */
-    private function getConvertedResponse(Request $request, Response $response)
+    private function getConvertedResponse(Request $request, Response $response): Response
     {
         $response = $response->withHeader(
             'Content-Disposition',

@@ -22,6 +22,10 @@
     <meta name="theme-color" content="#4F4F4F"/>
     <link rel="manifest" href="{base_url}/resources/manifest.json"/>
     <meta name="generator" content="AllTube Download ({$config->getAppVersion()})"/>
+
+    {if isset($debug_render)}
+        {$debug_render->renderHead()}
+    {/if}
 </head>
 <body>
 <div class="page {$class}">

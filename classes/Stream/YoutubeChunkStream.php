@@ -39,7 +39,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return string
      */
-    public function read($length)
+    public function read($length): string
     {
         $size = intval($this->response->getHeader('Content-Length')[0]);
         if ($size - $this->tell() < $length) {
@@ -53,7 +53,7 @@ class YoutubeChunkStream implements StreamInterface
     /**
      * Reads all data from the stream into a string, from the beginning to end.
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string)$this->response->getBody();
     }
@@ -83,7 +83,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return int|null
      */
-    public function getSize()
+    public function getSize(): ?int
     {
         return $this->response->getBody()->getSize();
     }
@@ -93,7 +93,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return int
      */
-    public function tell()
+    public function tell(): int
     {
         return $this->response->getBody()->tell();
     }
@@ -103,7 +103,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return bool
      */
-    public function eof()
+    public function eof(): bool
     {
         return $this->response->getBody()->eof();
     }
@@ -113,7 +113,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return bool
      */
-    public function isSeekable()
+    public function isSeekable(): bool
     {
         return $this->response->getBody()->isSeekable();
     }
@@ -146,7 +146,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return bool
      */
-    public function isWritable()
+    public function isWritable(): bool
     {
         return $this->response->getBody()->isWritable();
     }
@@ -168,7 +168,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return bool
      */
-    public function isReadable()
+    public function isReadable(): bool
     {
         return $this->response->getBody()->isReadable();
     }
@@ -178,7 +178,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return string
      */
-    public function getContents()
+    public function getContents(): string
     {
         return $this->response->getBody()->getContents();
     }
@@ -188,7 +188,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @param string|null $key Specific metadata to retrieve.
      *
-     * @return array|mixed|null
+     * @return mixed|null
      */
     public function getMetadata($key = null)
     {

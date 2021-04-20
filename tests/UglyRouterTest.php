@@ -37,7 +37,16 @@ class UglyRouterTest extends ContainerTest
         parent::setUp();
 
         $this->router = new UglyRouter();
-        $this->router->map(['GET'], '/foo', 'print')->setName('foo');
+        $this->router->map(['GET'], '/foo', [$this, 'fakeHandler'])->setName('foo');
+    }
+
+    /**
+     * Empty function that only exists so that our route can have a handler.
+     *
+     * @return void
+     */
+    private function fakeHandler()
+    {
     }
 
     /**
@@ -54,7 +63,7 @@ class UglyRouterTest extends ContainerTest
                     Environment::mock(
                         [
                             'REQUEST_METHOD' => 'GET',
-                            'QUERY_STRING'   => 'page=foo',
+                            'QUERY_STRING' => 'page=foo',
                         ]
                     )
                 )

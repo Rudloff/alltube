@@ -8,6 +8,7 @@ use Alltube\Controller\JsonController;
 use Alltube\Exception\ConfigException;
 use Alltube\Exception\DependencyException;
 use Alltube\Factory\ConfigFactory;
+use Alltube\Factory\DebugBarFactory;
 use Alltube\Factory\LocaleManagerFactory;
 use Alltube\Factory\LoggerFactory;
 use Alltube\Factory\SessionFactory;
@@ -16,6 +17,7 @@ use Alltube\Middleware\CspMiddleware;
 use Alltube\Middleware\LinkHeaderMiddleware;
 use Alltube\Middleware\LocaleMiddleware;
 use Alltube\Middleware\RouterPathMiddleware;
+use DebugBar\DebugBarException;
 use Slim\Container;
 use SmartyException;
 
@@ -26,6 +28,7 @@ class App extends \Slim\App
      * @throws ConfigException
      * @throws DependencyException
      * @throws SmartyException
+     * @throws DebugBarException
      */
     public function __construct()
     {
@@ -33,6 +36,8 @@ class App extends \Slim\App
 
         /** @var Container $container */
         $container = $this->getContainer();
+
+        $container['root_path'] = $this->getRootPath();
 
         // Config.
         $container['config'] = ConfigFactory::create($container);
@@ -43,11 +48,16 @@ class App extends \Slim\App
         // Locales.
         $container['locale'] = LocaleManagerFactory::create($container);
 
-        // Smarty.
-        $container['view'] = ViewFactory::create($container);
-
         // Logger.
         $container['logger'] = LoggerFactory::create($container);
+
+        if ($container->get('config')->debug) {
+            // Debug bar.
+            $container['debugbar'] = DebugBarFactory::create($container);
+        }
+
+        // Smarty.
+        $container['view'] = ViewFactory::create($container);
 
         // Middlewares.
         $this->add(new LocaleMiddleware($container));
@@ -101,5 +111,18 @@ class App extends \Slim\App
             '/json',
             [$jsonController, 'json']
         )->setName('json');
+    }
+
+    /**
+     * @return string|null
+     */
+    private function getRootPath(): ?string
+    {
+        // realpath() can return false but we prefer using null.
+        if ($rootPath = realpath(__DIR__ . '/../')) {
+            return $rootPath;
+        }
+
+        return null;
     }
 }

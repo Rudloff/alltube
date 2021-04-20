@@ -1,0 +1,218 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Alltube Download\n"
+"Language: ja-JP\n"
+
+#: templates/inc/footer.tpl:8
+msgid "Code by @dev"
+msgstr "作成: @dev"
+
+#: templates/inc/footer.tpl:16
+msgid "Design by @designer"
+msgstr "デザイン: @designer"
+
+#: templates/inc/footer.tpl:21
+msgid "Get the code"
+msgstr "プログラムをダウンロード"
+
+#: templates/inc/footer.tpl:29
+msgid "Based on @youtubedl"
+msgstr "本ソフトは@youtubedlを基に構成されています。"
+
+#: templates/inc/footer.tpl:33
+msgid "Donate using Liberapay"
+msgstr "Liberapayで寄付"
+
+#: templates/inc/footer.tpl:35
+msgid "Donate"
+msgstr "寄付"
+
+#: templates/inc/header.tpl:4
+msgid "Switch language"
+msgstr "言語の変更"
+
+#: templates/inc/header.tpl:8
+msgid "Set language"
+msgstr "言語を設定"
+
+#: templates/info.tpl:11
+msgid "You are going to download @title."
+msgstr "ダウンロード対象: @title"
+
+#: templates/info.tpl:29
+msgid "Available formats:"
+msgstr "ダウンロード可能な形式"
+
+#: templates/info.tpl:31
+msgid "Generic formats"
+msgstr "よく使われる形式"
+
+#: templates/info.tpl:35
+msgid "Best"
+msgstr "最高品質"
+
+#: templates/info.tpl:36
+msgid "Remux best video with best audio"
+msgstr "最高品質に再エンコード"
+
+#: templates/info.tpl:37
+msgid "Worst"
+msgstr "最低品質"
+
+#: templates/info.tpl:42
+msgid "Detailed formats"
+msgstr "その他の形式"
+
+#: templates/info.tpl:86
+msgid "Stream the video through the server"
+msgstr "ビデオをサーバーに設置してダウンロード"
+
+#: templates/info.tpl:92
+msgid "Convert into a custom format:"
+msgstr "指定した形式への変換"
+
+#: templates/info.tpl:93
+msgid "Custom format"
+msgstr "カスタム形式"
+
+#: templates/info.tpl:93
+msgid "Format to convert to"
+msgstr "ファイル形式の変換"
+
+#: templates/info.tpl:98
+msgid "with"
+msgstr "と"
+
+#: templates/info.tpl:99
+msgid "Bit rate"
+msgstr "ビットレート"
+
+#: templates/info.tpl:100
+msgid "Custom bitrate"
+msgstr "カスタム・ビットレート"
+
+#: templates/info.tpl:103
+msgid "kbit/s audio"
+msgstr "kbps 音声"
+
+#: templates/info.tpl:107 templates/playlist.tpl:38 templates/password.tpl:11
+#: templates/index.tpl:19
+msgid "Download"
+msgstr "ダウンロード"
+
+#: templates/playlist.tpl:12
+msgid "Videos extracted from @title:"
+msgstr "デコードの対象: @title"
+
+#: templates/playlist.tpl:39
+msgid "More options"
+msgstr "詳細設定"
+
+#: templates/extractors.tpl:4 classes/Controller/FrontController.php:111
+msgid "Supported websites"
+msgstr "ダウンロードに対応しているサイト"
+
+#: templates/error.tpl:5
+msgid "An error occurred"
+msgstr "予期せぬエラーが発生しました。"
+
+#: templates/password.tpl:5
+msgid "This video is protected"
+msgstr "このビデオにはプロテクトがかかっています。"
+
+#: templates/password.tpl:6
+msgid "You need a password in order to download this video."
+msgstr "このビデオをダウンロードするには閲覧用のパスワードが必要です。"
+
+#: templates/password.tpl:8
+msgid "Video password"
+msgstr "閲覧用パスワード"
+
+#: templates/index.tpl:8
+msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
+msgstr "動画のリンク(URL)を入力欄に入力してください。(例:Youtube,Dailymotion等。)"
+
+#: templates/index.tpl:25
+msgid "Audio only (MP3)"
+msgstr "音声のみのダウンロード(mp3形式)"
+
+#: templates/index.tpl:29
+msgid "From"
+msgstr "から"
+
+#: templates/index.tpl:32
+msgid "to"
+msgstr "へ"
+
+#: templates/index.tpl:41
+msgid "See all supported websites"
+msgstr "ダウンロード可能なサイトを見る"
+
+#: templates/index.tpl:43
+msgid "Drag this to your bookmarks bar:"
+msgstr "ブックマークバーにドラッグして登録"
+
+#: templates/index.tpl:45
+msgid "Bookmarklet"
+msgstr "ブックマークボタン"
+
+#: classes/Controller/DownloadController.php:64
+#: classes/Controller/FrontController.php:166
+msgid "Wrong password"
+msgstr "パスワードが間違っています。"
+
+#: classes/Controller/DownloadController.php:69
+msgid "Conversion of playlists is not supported."
+msgstr "プレイリストからの読み出しには対応しておりません。"
+
+#: classes/Controller/DownloadController.php:76
+msgid "Conversion of M3U8 files is not supported."
+msgstr "HLS(m3u8)プレイリストファイルからの読み出しには対応しておりません。"
+
+#: classes/Controller/DownloadController.php:82
+msgid "Conversion of DASH segments is not supported."
+msgstr "MPEG DASHストリーミングからの読み出しには対応しておりません。"
+
+#: classes/Controller/FrontController.php:65
+msgid "Easily download videos from YouTube, Dailymotion, Vimeo and other websites."
+msgstr "Youtubeから動画を簡単にダウンロード!、DailymotionやVimeo等にも対応しております"
+
+#: classes/Controller/FrontController.php:112
+msgid "List of all supported websites from which AllTube Download can extract video or audio files"
+msgstr "AllTube上でのダウンロードおよびファイルの変換に対応している音声または動画ファイルのサイト"
+
+#: classes/Controller/FrontController.php:138
+msgid "Password prompt"
+msgstr "パスワード画面"
+
+#: classes/Controller/FrontController.php:140
+msgid "You need a password in order to download this video with AllTube Download"
+msgstr "このビデオをAllTubeでダウンロードするにはパスワードが必要です。"
+
+#: classes/Controller/FrontController.php:174
+msgid "Video download"
+msgstr "動画をダウンロード"
+
+#: classes/Controller/FrontController.php:176
+msgid "Download video from @extractor"
+msgstr "@extractor からダウンロードします。"
+
+#: classes/Controller/FrontController.php:182
+msgid "Download @title from @extractor"
+msgstr "@extractor から @title をダウンロードします"
+
+#: classes/Controller/FrontController.php:255
+msgid "Error"
+msgstr "エラーが発生しました。"
+
+#: classes/Controller/FrontController.php:271
+msgid "Page not found"
+msgstr "存在しないページです。"
+
+#: classes/Controller/FrontController.php:282
+msgid "Method not allowed"
+msgstr "無効なリクエストです。"

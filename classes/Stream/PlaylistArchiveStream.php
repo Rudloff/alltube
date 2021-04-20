@@ -113,7 +113,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @return int|null
      */
-    public function getSize()
+    public function getSize(): ?int
     {
         return null;
     }
@@ -123,7 +123,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @return bool
      */
-    public function isSeekable()
+    public function isSeekable(): bool
     {
         return true;
     }
@@ -143,7 +143,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @return bool
      */
-    public function isWritable()
+    public function isWritable(): bool
     {
         return true;
     }
@@ -153,7 +153,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @return bool
      */
-    public function isReadable()
+    public function isReadable(): bool
     {
         return true;
     }
@@ -173,7 +173,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @param string|null $key string $key Specific metadata to retrieve.
      *
-     * @return array|mixed|null
+     * @return mixed|null
      */
     public function getMetadata($key = null)
     {
@@ -208,7 +208,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $this->rewind();
 
@@ -243,7 +243,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @return bool
      */
-    public function eof()
+    public function eof(): bool
     {
         return $this->isComplete && feof($this->buffer);
     }
@@ -272,12 +272,12 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
     /**
      * Read data from the stream.
      *
-     * @param mixed $count Number of bytes to read
+     * @param mixed $length Number of bytes to read
      *
      * @return string|false
      * @throws AlltubeLibraryException
      */
-    public function read($count)
+    public function read($length)
     {
         // If the archive is complete, we only read the remaining buffer.
         if (!$this->isComplete) {
@@ -297,15 +297,22 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
                     }
                 } else {
                     // Continue streaming the current video.
-                    $this->stream_file_part($this->curVideoStream->read($count));
+                    $this->stream_file_part($this->curVideoStream->read($length));
                 }
             } else {
                 // Start streaming the first video.
-                $this->startVideoStream(current($this->videos));
+                $video = current($this->videos);
+                if ($video) {
+                    $this->startVideoStream($video);
+                } else {
+                    $this->push_error('Playlist was empty');
+                    $this->finish();
+                    $this->isComplete = true;
+                }
             }
         }
 
-        return fread($this->buffer, $count);
+        return fread($this->buffer, $length);
     }
 
     /**

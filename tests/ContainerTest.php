@@ -40,6 +40,7 @@ abstract class ContainerTest extends BaseTest
         $this->checkRequirements();
 
         $this->container = new Container(['environment' => Environment::mock()]);
+        $this->container['root_path'] = dirname(__DIR__);
         $this->container['config'] = Config::fromFile($this->getConfigFile());
         $this->container['session'] = SessionFactory::create($this->container);
         $this->container['locale'] = LocaleManagerFactory::create($this->container);

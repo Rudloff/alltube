@@ -13,6 +13,7 @@ use Alltube\Controller\FrontController;
 use Alltube\Exception\ConfigException;
 use Alltube\Exception\DependencyException;
 use Slim\Http\Response;
+use Slim\Views\Smarty;
 use SmartyException;
 
 /**
@@ -52,6 +53,12 @@ abstract class ControllerTest extends ContainerTest
             ->setName('locale');
         $router->map(['GET'], '/redirect', [$downloadController, 'download'])
             ->setName('download');
+
+        /** @var Smarty $view */
+        $view = $this->container->get('view');
+
+        // Make sure we start the tests without compiled templates.
+        $view->getSmarty()->clearCompiledTemplate();
     }
 
     /**
@@ -62,7 +69,7 @@ abstract class ControllerTest extends ContainerTest
      *
      * @return Response HTTP response
      */
-    protected function getRequestResult(string $request, array $params)
+    protected function getRequestResult(string $request, array $params): Response
     {
         return $this->controller->$request(
             $this->container->get('request')->withQueryParams($params),

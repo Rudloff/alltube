@@ -7,6 +7,7 @@
 namespace Alltube\Factory;
 
 use Alltube\LocaleManager;
+use Junker\DebugBar\Bridge\SmartyCollector;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Uri;
@@ -26,7 +27,7 @@ class ViewFactory
      *
      * @return string URL
      */
-    private static function getCanonicalUrl(Request $request)
+    private static function getCanonicalUrl(Request $request): string
     {
         /** @var Uri $uri */
         $uri = $request->getUri();
@@ -45,13 +46,13 @@ class ViewFactory
      * @return Smarty
      * @throws SmartyException
      */
-    public static function create(ContainerInterface $container, Request $request = null)
+    public static function create(ContainerInterface $container, Request $request = null): Smarty
     {
         if (!isset($request)) {
             $request = $container->get('request');
         }
 
-        $view = new Smarty(__DIR__ . '/../../templates/');
+        $view = new Smarty($container->get('root_path') . '/templates/');
 
         /** @var Uri $uri */
         $uri = $request->getUri();
@@ -84,6 +85,19 @@ class ViewFactory
         $view->offsetSet('locale', $container->get('locale'));
         $view->offsetSet('config', $container->get('config'));
         $view->offsetSet('domain', $uri->withBasePath('')->getBaseUrl());
+
+        if ($container->has('debugbar')) {
+            $debugBar = $container->get('debugbar');
+
+            $debugBar->addCollector(new SmartyCollector($view->getSmarty()));
+
+            $view->offsetSet(
+                'debug_render',
+                $debugBar->getJavascriptRenderer(
+                    $uri->getBaseUrl() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/'
+                )
+            );
+        }
 
         return $view;
     }

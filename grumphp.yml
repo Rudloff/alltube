@@ -10,7 +10,7 @@ grumphp:
     xmllint: ~
     yamllint: ~
     composer: ~
-    securitychecker: ~
+    securitychecker_enlightn: ~
     composer_normalize: ~
     composer_dangling_locked_deps: ~
     phpcs:

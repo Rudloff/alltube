@@ -21,7 +21,7 @@ class SessionFactory
      * @param Container $container
      * @return Session
      */
-    public static function create(Container $container)
+    public static function create(Container $container): Session
     {
         $session_factory = new \Aura\Session\SessionFactory();
         $session = $session_factory->newInstance($_COOKIE);

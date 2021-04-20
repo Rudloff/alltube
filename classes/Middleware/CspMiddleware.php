@@ -34,10 +34,11 @@ class CspMiddleware
      * @param Response $response
      * @return MessageInterface
      */
-    public function applyHeader(Response $response)
+    public function applyHeader(Response $response): MessageInterface
     {
         $csp = new CSPBuilder();
-        $csp->addDirective('default-src', [])
+        $csp->disableOldBrowserSupport()
+            ->addDirective('default-src', [])
             ->addDirective('font-src', ['self' => true])
             ->addDirective('style-src', ['self' => true])
             ->addDirective('manifest-src', ['self' => true])
@@ -47,9 +48,10 @@ class CspMiddleware
             ->addSource('img-src', '*');
 
         if ($this->config->debug) {
-            // So symfony/debug and symfony/error-handler can work.
-            $csp->setDirective('script-src', ['unsafe-inline' => true])
-                ->setDirective('style-src', ['self' => true, 'unsafe-inline' => true]);
+            // So maximebf/debugbar, symfony/debug and symfony/error-handler can work.
+            $csp->setDirective('script-src', ['self' => true, 'unsafe-inline' => true])
+                ->setDirective('style-src', ['self' => true, 'unsafe-inline' => true])
+                ->addSource('img-src', 'data:');
         }
 
         return $csp->injectCSPHeader($response);

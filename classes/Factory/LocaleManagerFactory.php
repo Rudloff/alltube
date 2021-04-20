@@ -15,10 +15,10 @@ class LocaleManagerFactory
 
     /**
      * @param Container $container
-     * @return LocaleManager|null
+     * @return LocaleManager
      * @throws DependencyException
      */
-    public static function create(Container $container)
+    public static function create(Container $container): LocaleManager
     {
         if (!class_exists('Locale')) {
             throw new DependencyException('You need to install the intl extension for PHP.');
