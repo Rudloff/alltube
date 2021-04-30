@@ -9,11 +9,11 @@ msgstr ""
 
 #: templates/inc/footer.tpl:8
 msgid "Code by @dev"
-msgstr "作成: @dev"
+msgstr "制作: @dev"
 
 #: templates/inc/footer.tpl:16
 msgid "Design by @designer"
-msgstr "デザイン: @designer"
+msgstr "Webデザイン: @designer"
 
 #: templates/inc/footer.tpl:21
 msgid "Get the code"
@@ -21,7 +21,7 @@ msgstr "プログラムをダウンロード"
 
 #: templates/inc/footer.tpl:29
 msgid "Based on @youtubedl"
-msgstr "本ソフトは@youtubedlを基に構成されています。"
+msgstr "本ソフトは@youtubedlを基に作成されています。"
 
 #: templates/inc/footer.tpl:33
 msgid "Donate using Liberapay"
@@ -41,7 +41,7 @@ msgstr "言語を設定"
 
 #: templates/info.tpl:11
 msgid "You are going to download @title."
-msgstr "ダウンロード対象: @title"
+msgstr "検出した動画: 「@title」"
 
 #: templates/info.tpl:29
 msgid "Available formats:"
@@ -106,7 +106,7 @@ msgstr "ダウンロード"
 
 #: templates/playlist.tpl:12
 msgid "Videos extracted from @title:"
-msgstr "デコードの対象: @title"
+msgstr "プレイリスト: 「@title」から展開。"
 
 #: templates/playlist.tpl:39
 msgid "More options"
@@ -114,7 +114,7 @@ msgstr "詳細設定"
 
 #: templates/extractors.tpl:4 classes/Controller/FrontController.php:111
 msgid "Supported websites"
-msgstr "ダウンロードに対応しているサイト"
+msgstr "ダウンロードに対応しているWebサイト"
 
 #: templates/error.tpl:5
 msgid "An error occurred"
