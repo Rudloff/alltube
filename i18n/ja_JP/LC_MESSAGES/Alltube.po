@@ -110,7 +110,7 @@ msgstr "プレイリスト: 「@title」から展開。"
 
 #: templates/playlist.tpl:39
 msgid "More options"
-msgstr "詳細設定"
+msgstr "ダウンロード設定"
 
 #: templates/extractors.tpl:4 classes/Controller/FrontController.php:111
 msgid "Supported websites"
