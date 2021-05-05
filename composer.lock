@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93cbba477de92eb8ec3d913b8cd83c82",
+    "content-hash": "11abc1c6c3cf2a8247557363c17829fe",
     "packages": [
         {
             "name": "aura/session",
@@ -1232,16 +1232,16 @@
         },
         {
             "name": "rudloff/alltube-library",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Rudloff/alltube-library.git",
-                "reference": "f0bbd14b06bb4df9e3fbae62a6f09b455fdcc703"
+                "reference": "5c4d39cd2b3f0f680ca55557fc0fc6cd54d3150f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Rudloff/alltube-library/zipball/f0bbd14b06bb4df9e3fbae62a6f09b455fdcc703",
-                "reference": "f0bbd14b06bb4df9e3fbae62a6f09b455fdcc703",
+                "url": "https://api.github.com/repos/Rudloff/alltube-library/zipball/5c4d39cd2b3f0f680ca55557fc0fc6cd54d3150f",
+                "reference": "5c4d39cd2b3f0f680ca55557fc0fc6cd54d3150f",
                 "shasum": ""
             },
             "require": {
@@ -1269,7 +1269,7 @@
             ],
             "description": "PHP wrapper for youtube-dl",
             "homepage": "http://alltubedownload.net/",
-            "time": "2020-10-27T22:25:49+00:00"
+            "time": "2021-05-05T19:34:00+00:00"
         },
         {
             "name": "slim/slim",
