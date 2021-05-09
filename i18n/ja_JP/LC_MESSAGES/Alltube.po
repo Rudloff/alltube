@@ -118,7 +118,7 @@ msgstr "ダウンロードに対応しているWebサイト"
 
 #: templates/error.tpl:5
 msgid "An error occurred"
-msgstr "エラーが発生しました。"
+msgstr "ダウンロードエラー"
 
 #: templates/password.tpl:5
 msgid "This video is protected"
