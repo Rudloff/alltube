@@ -134,7 +134,7 @@ msgstr "閲覧用パスワード"
 
 #: templates/index.tpl:8
 msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
-msgstr "動画のリンク(URL)を入力欄に入力してください。(例:Youtube,Dailymotion等。)"
+msgstr "動画のリンク(URL)を入力欄に入力してください。(例:YouTube,Dailymotion等。)"
 
 #: templates/index.tpl:25
 msgid "Audio only (MP3)"

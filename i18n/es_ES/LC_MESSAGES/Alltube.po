@@ -106,8 +106,8 @@ msgid "Share on Facebook"
 msgstr "Compartir en Facebook"
 
 #: templates/index.tpl:8
-msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
-msgstr "Copia aquí la URL de tu vídeo (Youtube, Dailymotion, etc.)"
+msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
+msgstr "Copia aquí la URL de tu vídeo (YouTube, Dailymotion, etc.)"
 
 #: templates/index.tpl:23
 msgid "Audio only (MP3)"

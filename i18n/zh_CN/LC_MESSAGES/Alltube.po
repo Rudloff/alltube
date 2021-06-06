@@ -105,7 +105,7 @@ msgid "Share on Facebook"
 msgstr "分享到 Facebook"
 
 #: templates/index.tpl:8
-msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
 msgstr "在这里复制您的视频 （Youtube、 Dailymotion 等） 的 URL"
 
 #: templates/index.tpl:23
