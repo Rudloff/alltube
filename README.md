@@ -79,6 +79,7 @@ If you want to serve the application under a basepath and/or with a different in
 * X-Forwarded-Host (ex. `another.domain.com`)
 * X-Forwarded-Path (ex: `/alltube`)
 * X-Forwarded-Port (ex: `5555`)
+* X-Forwarded-Proto (ex: `https`)
 
 ### Apache
 
