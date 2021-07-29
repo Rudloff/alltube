@@ -1,5 +1,6 @@
 msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8\n"
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
 
 #: templates/inc/footer.tpl:8
 # Tlnote: Needs reconsiderations
