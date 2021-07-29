@@ -1,6 +1,6 @@
 # AllTube Download
 
-HTML GUI for youtube-dl ([alltubedownload.net](http://alltubedownload.net/))
+A HTML GUI for youtube-dl. ([alltubedownload.net](http://alltubedownload.net/))
 
 ![Screenshot](img/screenshot.png "AllTube GUI screenshot")
 
