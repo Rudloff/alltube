@@ -132,11 +132,11 @@ msgstr "视频密码"
 #: templates/index.tpl:8
 # I don't think this needs to be a 100% match
 msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
-msgstr "在此处粘贴视频的网址"
+msgstr "在此处粘贴视频网址"
 
 #: templates/index.tpl:25
 msgid "Audio only (MP3)"
-msgstr "仅音频（mp3）"
+msgstr "仅音频（MP3）"
 
 #: templates/index.tpl:29
 # Still check that file for context
@@ -152,7 +152,6 @@ msgid "See all supported websites"
 msgstr "查看所有支持的网站"
 
 #: templates/index.tpl:43
-# Tlnote: Needs reconsiderations
 msgid "Drag this to your bookmarks bar:"
 msgstr "您可以把这个小书签拖到您的书签栏中："
 
@@ -167,16 +166,16 @@ msgstr "密码错误"
 
 #: classes/Controller/DownloadController.php:69
 msgid "Conversion of playlists is not supported."
-msgstr "不支持对播放列表进行转换。"
+msgstr "不支持转换播放列表。"
 
 #: classes/Controller/DownloadController.php:76
 msgid "Conversion of M3U8 files is not supported."
-msgstr "不支持对 m3u8 文件进行转换。"
+msgstr "不支持转换 M3U8 文件。"
 
 #: classes/Controller/DownloadController.php:82
 # ref. Chinese Wikipedia article about DASH
 msgid "Conversion of DASH segments is not supported."
-msgstr "不支持对 DASH 片段进行转换。"
+msgstr "不支持转换 DASH 片段。"
 
 #: classes/Controller/FrontController.php:65
 msgid ""
@@ -226,4 +225,10 @@ msgstr "找不到页面"
 
 #: classes/Controller/FrontController.php:282
 msgid "Method not allowed"
-msgstr "请求方法不被允许"
+msgstr "不允许此请求方法"
+
+#msgid "yes"
+#msgstr "是"
+
+#msgid "no"
+#msgstr "否"
