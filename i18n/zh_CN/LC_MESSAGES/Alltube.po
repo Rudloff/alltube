@@ -41,7 +41,7 @@ msgstr "您将要下载 @title。"
 
 #: templates/info.tpl:29
 msgid "Available formats:"
-msgstr "可用格式"
+msgstr "可用的格式："
 
 #: templates/info.tpl:31
 msgid "Generic formats"
@@ -49,11 +49,11 @@ msgstr "通用格式"
 
 #: templates/info.tpl:35
 msgid "Best"
-msgstr "最优"
+msgstr "最佳"
 
 #: templates/info.tpl:36
 msgid "Remux best video with best audio"
-msgstr "混合最优视频和最优音频"
+msgstr "重新封装最佳视频和最佳音频"
 
 #: templates/info.tpl:37
 msgid "Worst"
@@ -65,7 +65,7 @@ msgstr "详细格式"
 
 #: templates/info.tpl:86
 msgid "Stream the video through the server"
-msgstr "通过服务器流式传输视频"
+msgstr "通过服务器传输视频"
 
 #: templates/info.tpl:92
 msgid "Convert into a custom format:"
@@ -82,7 +82,7 @@ msgstr "要转换的格式"
 #: templates/info.tpl:98
 # Other translators: Please check that file for context
 msgid "with"
-msgstr "，并含"
+msgstr "，并带"
 
 #: templates/info.tpl:99
 msgid "Bit rate"
@@ -115,7 +115,7 @@ msgstr "支持的网站"
 
 #: templates/error.tpl:5
 msgid "An error occurred"
-msgstr "发生错误"
+msgstr "出错了"
 
 #: templates/password.tpl:5
 msgid "This video is protected"
