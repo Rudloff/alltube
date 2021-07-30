@@ -37,7 +37,7 @@ msgstr "设置语言"
 
 #: templates/info.tpl:11
 msgid "You are going to download @title."
-msgstr "你将要下载 @title。"
+msgstr "您将要下载 @title。"
 
 #: templates/info.tpl:29
 msgid "Available formats:"
@@ -82,7 +82,7 @@ msgstr "要转换的格式"
 #: templates/info.tpl:98
 # Other translators: Please check that file for context
 msgid "with"
-msgstr "，并且带"
+msgstr "，并含"
 
 #: templates/info.tpl:99
 msgid "Bit rate"
@@ -153,11 +153,11 @@ msgstr "查看所有支持的网站"
 
 #: templates/index.tpl:43
 msgid "Drag this to your bookmarks bar:"
-msgstr "您可以把这个小书签拖到您的书签栏中："
+msgstr "您可以把这个书签工具拖到您的书签栏中："
 
 #: templates/index.tpl:45
 msgid "Bookmarklet"
-msgstr "小书签"
+msgstr "书签工具"
 
 #: classes/Controller/DownloadController.php:64
 #: classes/Controller/FrontController.php:166
