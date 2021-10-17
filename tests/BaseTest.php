@@ -7,6 +7,7 @@
 namespace Alltube\Test;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Util\Test;
 
 /**
  * Abstract class used by every test.
@@ -37,7 +38,10 @@ abstract class BaseTest extends TestCase
      */
     protected function checkRequirements()
     {
-        $annotations = $this->getAnnotations();
+        $annotations = Test::parseTestMethodAnnotations(
+            static::class,
+            $this->getName()
+        );
         $requires = [];
 
         if (isset($annotations['class']['requires'])) {

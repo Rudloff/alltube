@@ -479,16 +479,11 @@ class VideoTest extends ContainerTest
      * @param string $format Format
      *
      * @return void
-     * @throws AlltubeLibraryException
      * @dataProvider rtmpUrlProvider
      */
     public function testGetRtmpStream(string $url, string $format)
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
-
-        $video = new Video($this->downloader, $url, $format);
-
-        $this->assertStream($this->downloader->getRtmpStream($video));
     }
 
     /**

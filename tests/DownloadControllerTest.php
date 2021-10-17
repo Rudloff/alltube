@@ -108,14 +108,6 @@ class DownloadControllerTest extends ControllerTest
     public function testDownloadWithRtmpStream()
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
-
-        $config = $this->container->get('config');
-        $config->setOptions(['stream' => true]);
-
-        $this->assertRequestIsOk(
-            'download',
-            ['url' => 'http://www.rtvnh.nl/video/131946', 'format' => 'rtmp-264']
-        );
     }
 
     /**
