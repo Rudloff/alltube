@@ -37,9 +37,14 @@ class LinkHeaderMiddleware
     {
         $response = $response->withHeader(
             'Link',
-            '<' . $this->router->getBasePath() . '/css/style.css>; rel=preload; as=style'
+            implode(
+                '; ',
+                [
+                    '<' . $this->router->getBasePath() . '/css/style.css>',
+                    'rel=preload', 'as=style'
+                ]
+            )
         );
-
 
         return $next($request, $response);
     }
