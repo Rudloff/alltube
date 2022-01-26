@@ -88,8 +88,9 @@ class ViewFactory
 
         if ($container->has('debugbar')) {
             $debugBar = $container->get('debugbar');
-
-            $debugBar->addCollector(new SmartyCollector($view->getSmarty()));
+            $collector = new SmartyCollector($view->getSmarty());
+            $collector->useHtmlVarDumper();
+            $debugBar->addCollector($collector);
 
             $view->offsetSet(
                 'debug_render',
