@@ -1,6 +1,6 @@
 {include file="inc/head.tpl"}
 <div class="wrapper">
-    <div itemscope itemtype="http://schema.org/VideoObject">
+    <div itemscope itemtype="https://schema.org/VideoObject">
         <main class="main">
             {include file="inc/logo.tpl"}
             {$title="<i itemprop='name'>
