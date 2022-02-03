@@ -27,4 +27,3 @@
         </div>
     {/if}
 </header>
-<div class="wrapper">

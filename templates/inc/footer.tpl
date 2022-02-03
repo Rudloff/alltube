@@ -1,4 +1,3 @@
-</div>
 <footer class="small-font">
     <div class="footer_wrapper">
         {include file='snippets/dev.tpl' assign=dev}
@@ -21,9 +20,3 @@
         {t params=['@youtubedl'=>$youtubedl]}Based on @youtubedl{/t}
     </div>
 </footer>
-</div>
-{if isset($debug_render)}
-    {$debug_render->render()}
-{/if}
-</body>
-</html>

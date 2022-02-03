@@ -1,5 +1,3 @@
-<!doctype html>
-<html lang="{$locale->getLocale()->getBcp47()}">
 <head>
     <meta charset="UTF-8"/>
     <meta name=viewport content="width=device-width, initial-scale=1"/>
@@ -27,5 +25,3 @@
         {$debug_render->renderHead()}
     {/if}
 </head>
-<body>
-<div class="page {$class}">
