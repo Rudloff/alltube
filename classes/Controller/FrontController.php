@@ -145,7 +145,7 @@ class FrontController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    private function getInfoResponse(Request $request, Response $response)
+    private function getInfoResponse(Request $request, Response $response): Response
     {
         try {
             $this->video->getJson();

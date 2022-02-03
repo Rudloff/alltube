@@ -154,7 +154,7 @@ class Config
     /**
      * Config constructor.
      *
-     * @param mixed[] $options Options
+     * @param scalar[]|scalar[][]|null[] $options Options
      * @throws ConfigException
      */
     public function __construct(array $options = [])
@@ -222,7 +222,7 @@ class Config
     /**
      * Apply the provided options.
      *
-     * @param mixed[] $options Options
+     * @param scalar[]|scalar[][]|null[] $options Options
      *
      * @return void
      */
@@ -278,7 +278,7 @@ class Config
     /**
      * Manually set some options.
      *
-     * @param mixed[] $options Options (see `config/config.example.yml` for available options)
+     * @param scalar[]|scalar[][]|null[] $options Options (see `config/config.example.yml` for available options)
      * @return void
      * @throws ConfigException
      */

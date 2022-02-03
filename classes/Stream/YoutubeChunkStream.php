@@ -156,9 +156,9 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @param mixed $string The string that is to be written
      *
-     * @return mixed
+     * @return int
      */
-    public function write($string)
+    public function write($string): int
     {
         return $this->response->getBody()->write($string);
     }

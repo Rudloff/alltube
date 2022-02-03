@@ -22,7 +22,7 @@ class UglyRouter extends Router
      *
      * @param ServerRequestInterface $request The current HTTP request object
      *
-     * @return mixed[]
+     * @return int[]|string[]|array[]
      *
      * @link   https://github.com/nikic/FastRoute/blob/master/src/Dispatcher.php
      */
