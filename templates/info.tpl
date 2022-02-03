@@ -3,10 +3,7 @@
     <div itemscope itemtype="https://schema.org/VideoObject">
         <main class="main">
             {include file="inc/logo.tpl"}
-            {$title="<i itemprop='name'>
-    <a itemprop='url' id='video_link'
-        href='{$video->webpage_url}'>
-        {$video->title}</a></i>"}
+            {include file='snippets/title.tpl' assign=title}
             <p id="download_intro">
                 {t params=['@title' => $title]}You are going to download @title.{/t}
             </p>

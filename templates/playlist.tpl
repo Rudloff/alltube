@@ -4,10 +4,7 @@
         {include file="inc/logo.tpl"}
 
         {if isset($video->title)}
-            {$title="<i>
-        <a href='{$video->webpage_url}'>
-            {$video->title}</a>
-    </i>"}
+            {include file='snippets/title.tpl' assign=title}
             <p>
                 {t params=['@title'=>$title]}Videos extracted from @title:{/t}
             </p>
