@@ -31,7 +31,7 @@ class ReleaseCommand extends Tasks
 
         $tmpDir = $this->_tmpDir();
 
-        $filename = 'alltube-' . trim((string)$result->getMessage()) . '.zip';
+        $filename = 'alltube-' . trim($result->getMessage()) . '.zip';
 
         /** @var FilesystemStack $rmTask */
         $rmTask = $this->taskFilesystemStack();
