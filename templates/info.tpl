@@ -23,57 +23,13 @@
             {/if}
             {if isset($video->formats) && count($video->formats) > 1}
                 <h3><label for="format">{t}Available formats:{/t}</label></h3>
-                <select name="format" id="format" class="formats monospace">
-                    <optgroup label="{t}Generic formats{/t}">
-                        {foreach $config->genericFormats as $format => $name}
-                            {*
-                            To make the default generic formats translatable:
-                            {t}Best{/t}
-                            {t}Remux best video with best audio{/t}
-                            {t}Worst{/t}
-                            *}
-                            <option value="{$format}">{t}{$name}{/t}</option>
-                        {/foreach}
-                    </optgroup>
-                    <optgroup label="{t}Detailed formats{/t}" class="monospace">
-                        {foreach $video->formats as $format}
-                            {if $config->stream || $format->protocol|in_array:array('http', 'https')}
-                                {strip}
-                                    <option value="{$format->format_id}">
-                                        {$format->ext}
-                                        {for $foo=1 to (5 - ($format->ext|strlen))}
-                                            &nbsp;
-                                        {/for}
-                                        {if isset($format->width)}
-                                            {$format->width}x{$format->height}
-                                            {for $foo=1 to (10 - (("{$format->width}x{$format->height}")|strlen))}
-                                                &nbsp;
-                                            {/for}
-                                        {else}
-                                            {for $foo=1 to 10}
-                                                &nbsp;
-                                            {/for}
-                                        {/if}
-                                        {if isset($format->filesize)}
-                                            {($format->filesize/1000000)|round:2} MB
-                                            {for $foo=1 to (7 - (($format->filesize/1000000)|round:2|strlen))}
-                                                &nbsp;
-                                            {/for}
-                                        {else}
-                                            {for $foo=1 to 10}
-                                                &nbsp;
-                                            {/for}
-                                        {/if}
-                                        {if isset($format->format_note)}
-                                            {$format->format_note}
-                                        {/if}
-                                        &nbsp;({$format->format_id})
-                                    </option>
-                                {/strip}
-                            {/if}
-                        {/foreach}
-                    </optgroup>
-                </select>
+                {*
+                To make the default generic formats translatable:
+                {t}Best{/t}
+                {t}Remux best video with best audio{/t}
+                {t}Worst{/t}
+                *}
+                {html_options name='format' options=$formats selected=$defaultFormat id="format" class="formats monospace"}
                 <br/>
                 <br/>
             {/if}
@@ -86,11 +42,8 @@
             {if $config->convertAdvanced}
                 <input type="checkbox" name="customConvert" id="customConvert"/>
                 <label for="customConvert">{t}Convert into a custom format:{/t}</label>
-                <select title="{t}Custom format{/t}" name="customFormat" aria-label="{t}Format to convert to{/t}">
-                    {foreach $config->convertAdvancedFormats as $format}
-                        <option>{$format}</option>
-                    {/foreach}
-                </select>
+                {html_options name='customFormat' values=$config->convertAdvancedFormats output=$config->convertAdvancedFormats
+                title="{t}Custom format{/t}" name="customFormat" aria-label="{t}Format to convert to{/t}"}
                 {t}with{/t}
                 <label for="customBitrate" class="sr-only">{t}Bit rate{/t}</label>
                 <input type="number" value="{$config->audioBitrate}" title="{t}Custom bitrate{/t}"
