@@ -1,7 +1,8 @@
 {extends file='page.tpl'}
 {block name='main'}
-    <div><img class="logo" src="{base_url}/img/logo.png"
-              alt="{$config->appName}" width="328" height="284"></div>
+    <div>
+        {html_image file='img/logo.png' path_prefix={base_url}|cat:'/' alt=$config->appName class="logo"}
+    </div>
     <form action="{path_for name="info"}">
         <label class="labelurl" for="url">
             {t}Copy here the URL of your video (YouTube, Dailymotion, etc.){/t}

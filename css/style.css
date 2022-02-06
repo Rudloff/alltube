@@ -545,6 +545,7 @@ h1 {
 
 .thumb {
     max-width: 700px;
+    height: auto;
 }
 
 .format {

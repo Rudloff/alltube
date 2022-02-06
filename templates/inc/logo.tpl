@@ -1,8 +1,7 @@
 <h1 class="logobis">
     <a class="logocompatible" href="{base_url}">
         <span class="logocompatiblemask">
-            <img src="{base_url}/img/logocompatiblemask.png" width="447" height="107"
-                 alt="{$config->appName}"/>
+            {html_image file='img/logocompatiblemask.png' path_prefix={base_url}|cat:'/' alt=$config->appName}
         </span>
     </a>
 </h1>

@@ -7,7 +7,7 @@
             {t params=['@title' => $title]}You are going to download @title.{/t}
         </p>
         {if isset($video->thumbnail)}
-            <img itemprop="thumbnailUrl" class="thumb" src="{$video->thumbnail}" alt=""/>
+            {html_image file=$video->thumbnail itemprop="thumbnailUrl" class="thumb"}
         {/if}
         {if isset($video->description)}
             <meta itemprop="description" content="{$video->description|escape}"/>
