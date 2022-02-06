@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ef5b9e86d63584d9a5838de62251f23",
+    "content-hash": "84611c933695810ca81edd49eb1ae8aa",
     "packages": [
         {
             "name": "aura/session",
@@ -715,22 +715,22 @@
         },
         {
             "name": "mathmarques/smarty-view",
-            "version": "1.1.2",
+            "version": "1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mathmarques/Smarty-View.git",
-                "reference": "2ab996e79efcc600cc324b6469c1cdbcd189c9fe"
+                "reference": "594b7f427a239f29146d0b5bf4b3c9f36d3fda8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mathmarques/Smarty-View/zipball/2ab996e79efcc600cc324b6469c1cdbcd189c9fe",
-                "reference": "2ab996e79efcc600cc324b6469c1cdbcd189c9fe",
+                "url": "https://api.github.com/repos/mathmarques/Smarty-View/zipball/594b7f427a239f29146d0b5bf4b3c9f36d3fda8a",
+                "reference": "594b7f427a239f29146d0b5bf4b3c9f36d3fda8a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.0",
                 "slim/slim": "^3.0",
-                "smarty/smarty": "~3.1"
+                "smarty/smarty": "^3.1|^4.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.0"
@@ -763,9 +763,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mathmarques/Smarty-View/issues",
-                "source": "https://github.com/mathmarques/Smarty-View/tree/1.1.2"
+                "source": "https://github.com/mathmarques/Smarty-View/tree/1.2"
             },
-            "time": "2019-03-31T14:42:41+00:00"
+            "time": "2022-02-04T19:41:18+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -1464,29 +1464,29 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v3.1.43",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "273f7e00fec034f6d61112552e9caf08d19565b7"
+                "reference": "cdf0f2b164fbb9a96f86be97713a2426f0bb0c97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/273f7e00fec034f6d61112552e9caf08d19565b7",
-                "reference": "273f7e00fec034f6d61112552e9caf08d19565b7",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/cdf0f2b164fbb9a96f86be97713a2426f0bb0c97",
+                "reference": "cdf0f2b164fbb9a96f86be97713a2426f0bb0c97",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.5 || ^6.5 || ^5.7 || ^4.8",
+                "phpunit/phpunit": "^8.5 || ^7.5",
                 "smarty/smarty-lexer": "^3.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -1510,20 +1510,23 @@
                 {
                     "name": "Rodney Rehm",
                     "email": "rodney.rehm@medialize.de"
+                },
+                {
+                    "name": "Simon Wisselink",
+                    "homepage": "https://www.iwink.nl/"
                 }
             ],
             "description": "Smarty - the compiling PHP template engine",
-            "homepage": "http://www.smarty.net",
+            "homepage": "https://smarty-php.github.io/smarty/",
             "keywords": [
                 "templating"
             ],
             "support": {
-                "forum": "http://www.smarty.net/forums/",
-                "irc": "irc://irc.freenode.org/smarty",
+                "forum": "https://github.com/smarty-php/smarty/discussions",
                 "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v3.1.43"
+                "source": "https://github.com/smarty-php/smarty/tree/v4.0.4"
             },
-            "time": "2022-01-10T09:52:40+00:00"
+            "time": "2022-01-17T23:17:19+00:00"
         },
         {
             "name": "symfony/console",
