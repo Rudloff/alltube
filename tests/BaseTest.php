@@ -6,6 +6,7 @@
 
 namespace Alltube\Test;
 
+use OndraM\CiDetector\CiDetector;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Util\Test;
 
@@ -38,6 +39,7 @@ abstract class BaseTest extends TestCase
      */
     protected function checkRequirements()
     {
+        $ciDetector = new CiDetector();
         $annotations = Test::parseTestMethodAnnotations(
             static::class,
             $this->getName()
@@ -52,7 +54,7 @@ abstract class BaseTest extends TestCase
         }
 
         foreach ($requires as $require) {
-            if ($require == 'download' && getenv('CI')) {
+            if ($require == 'download' && $ciDetector->isCiDetected()) {
                 $this->markTestSkipped('Do not run tests that download videos on CI.');
             }
         }
