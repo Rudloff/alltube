@@ -1,0 +1,24 @@
+---
+name: Tests
+on:
+  - push
+  - pull_request
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version:
+          - '7.3'
+          - '7.4'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer
+      - run: composer install --no-progress
+      - run: composer check-platform-reqs
+      - run: composer lint
+      - run: composer test
