@@ -2,7 +2,7 @@
   "name": "rudloff/alltube",
   "type": "project",
   "description": "HTML GUI for youtube-dl",
-  "homepage": "http://alltubedownload.net/",
+  "homepage": "https://alltubedownload.net/",
   "license": "GPL-3.0-only",
   "authors": [
     {
@@ -14,7 +14,7 @@
     {
       "name": "Olivier Haquette",
       "email": "contact@olivierhaquette.fr",
-      "homepage": "http://olivierhaquette.fr/",
+      "homepage": "https://ographik.fr/",
       "role": "Designer"
     }
   ],
