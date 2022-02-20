@@ -45,12 +45,21 @@ class ViewFactory
     {
         $basePath = $uri->getBasePath();
         if (str_ends_with($basePath, 'index.php')) {
+            $basePath = dirname($basePath);
+            if ($basePath == '/') {
+                /*
+                 * Calling withBasePath('/') does nothing,
+                 * we have to use an empty string instead.
+                 */
+                $basePath = '';
+            }
+
             /*
              * When the base path ends with index.php,
              * routing works correctly, but it breaks the URL of static assets using {base_url}.
              * So we alter the base path but only in the URI used by SmartyPlugins.
              */
-            $uri = $uri->withBasePath(dirname($basePath));
+            $uri = $uri->withBasePath($basePath);
         }
 
         return $uri;
