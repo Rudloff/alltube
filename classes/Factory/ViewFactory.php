@@ -57,22 +57,13 @@ class ViewFactory
     }
 
     /**
-     * Create Smarty view object.
+     * Create a URI suitable for templates.
      *
-     * @param ContainerInterface $container Slim dependency container
-     * @param Request|null $request PSR-7 request
-     *
-     * @return Smarty
-     * @throws SmartyException
+     * @param Request $request
+     * @return Uri
      */
-    public static function create(ContainerInterface $container, Request $request = null): Smarty
+    public static function prepareUri(Request $request): Uri
     {
-        if (!isset($request)) {
-            $request = $container->get('request');
-        }
-
-        $view = new Smarty($container->get('root_path') . '/templates/');
-
         /** @var Uri $uri */
         $uri = $request->getUri();
         if (in_array('https', $request->getHeader('X-Forwarded-Proto'))) {
@@ -92,10 +83,30 @@ class ViewFactory
             $uri = $uri->withBasePath($path);
         }
 
+        return self::cleanBasePath($uri);
+    }
+
+    /**
+     * Create Smarty view object.
+     *
+     * @param ContainerInterface $container Slim dependency container
+     * @param Request|null $request PSR-7 request
+     *
+     * @return Smarty
+     * @throws SmartyException
+     */
+    public static function create(ContainerInterface $container, Request $request = null): Smarty
+    {
+        if (!isset($request)) {
+            $request = $container->get('request');
+        }
+
+        $view = new Smarty($container->get('root_path') . '/templates/');
+
+        $uri = self::prepareUri($request);
+
         /** @var LocaleManager $localeManager */
         $localeManager = $container->get('locale');
-
-        $uri = self::cleanBasePath($uri);
 
         $smartyPlugins = new SmartyPlugins($container->get('router'), $uri->withUserInfo(''));
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);

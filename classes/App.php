@@ -62,7 +62,7 @@ class App extends \Slim\App
         // Middlewares.
         $this->add(new LocaleMiddleware($container));
         $this->add(new CspMiddleware($container));
-        $this->add(new LinkHeaderMiddleware($container));
+        $this->add(new LinkHeaderMiddleware());
         $this->add(new RouterPathMiddleware($container));
 
         // Controllers.

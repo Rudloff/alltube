@@ -2,6 +2,7 @@
 
 namespace Alltube\Middleware;
 
+use Alltube\Factory\ViewFactory;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -13,19 +14,6 @@ use Slim\Router;
  */
 class LinkHeaderMiddleware
 {
-    /**
-     * @var Router
-     */
-    private $router;
-
-    /**
-     * LinkHeaderMiddleware constructor.
-     * @param ContainerInterface $container
-     */
-    public function __construct(ContainerInterface $container)
-    {
-        $this->router = $container->get('router');
-    }
 
     /**
      * @param Request $request
@@ -35,12 +23,14 @@ class LinkHeaderMiddleware
      */
     public function __invoke(Request $request, Response $response, callable $next)
     {
+        $uri = ViewFactory::prepareUri($request);
+
         $response = $response->withHeader(
             'Link',
             implode(
                 '; ',
                 [
-                    '<' . $this->router->getBasePath() . '/css/style.css>',
+                    '<' . $uri->getBasePath() . '/css/style.css>',
                     'rel=preload', 'as=style'
                 ]
             )
