@@ -38,6 +38,25 @@ class ViewFactory
     }
 
     /**
+     * @param Uri $uri
+     * @return Uri
+     */
+    private static function cleanBasePath(Uri $uri): Uri
+    {
+        $basePath = $uri->getBasePath();
+        if (str_ends_with($basePath, 'index.php')) {
+            /*
+             * When the base path ends with index.php,
+             * routing works correctly, but it breaks the URL of static assets using {base_url}.
+             * So we alter the base path but only in the URI used by SmartyPlugins.
+             */
+            $uri = $uri->withBasePath(dirname($basePath));
+        }
+
+        return $uri;
+    }
+
+    /**
      * Create Smarty view object.
      *
      * @param ContainerInterface $container Slim dependency container
@@ -75,6 +94,8 @@ class ViewFactory
 
         /** @var LocaleManager $localeManager */
         $localeManager = $container->get('locale');
+
+        $uri = self::cleanBasePath($uri);
 
         $smartyPlugins = new SmartyPlugins($container->get('router'), $uri->withUserInfo(''));
         $view->registerPlugin('function', 'path_for', [$smartyPlugins, 'pathFor']);
