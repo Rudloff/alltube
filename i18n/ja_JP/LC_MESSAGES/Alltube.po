@@ -53,11 +53,11 @@ msgstr "よく使われる形式"
 
 #: templates/info.tpl:35
 msgid "Best"
-msgstr "最高品質"
+msgstr "通常品質(mp4)"
 
 #: templates/info.tpl:36
 msgid "Remux best video with best audio"
-msgstr "最高品質に再エンコード"
+msgstr "最高品質(映像形式の指定不可)"
 
 #: templates/info.tpl:37
 msgid "Worst"
@@ -69,11 +69,11 @@ msgstr "その他の形式"
 
 #: templates/info.tpl:86
 msgid "Stream the video through the server"
-msgstr "ビデオをサーバーに設置してダウンロード"
+msgstr "サーバーを経由してダウンロード<br>(ダウンロードできない場合はこちらを有効にしてください。)"
 
 #: templates/info.tpl:92
 msgid "Convert into a custom format:"
-msgstr "指定した形式への変換"
+msgstr "指定した形式に変換してダウンロード"
 
 #: templates/info.tpl:93
 msgid "Custom format"
@@ -138,15 +138,15 @@ msgstr "動画のリンク(URL)を入力欄に入力してください。(例:Yo
 
 #: templates/index.tpl:25
 msgid "Audio only (MP3)"
-msgstr "音声のみのダウンロード(mp3形式)"
+msgstr "音声のみをmp3形式でダウンロード"
 
 #: templates/index.tpl:29
 msgid "From"
-msgstr "から"
+msgstr "開始時間"
 
 #: templates/index.tpl:32
 msgid "to"
-msgstr "へ"
+msgstr "終了時間"
 
 #: templates/index.tpl:41
 msgid "See all supported websites"
@@ -179,7 +179,7 @@ msgstr "MPEG DASHストリーミングからの読み出しには対応してお
 
 #: classes/Controller/FrontController.php:65
 msgid "Easily download videos from YouTube, Dailymotion, Vimeo and other websites."
-msgstr "Youtubeから動画を簡単にダウンロード!、DailymotionやVimeo等にも対応しております"
+msgstr "Youtubeから動画を簡単にダウンロード!!、DailymotionやVimeo等にも対応しております"
 
 #: classes/Controller/FrontController.php:112
 msgid "List of all supported websites from which AllTube Download can extract video or audio files"
@@ -191,7 +191,7 @@ msgstr "パスワード画面"
 
 #: classes/Controller/FrontController.php:140
 msgid "You need a password in order to download this video with AllTube Download"
-msgstr "このビデオをAllTubeでダウンロードするにはパスワードが必要です。"
+msgstr "AllTubeでこのビデオをダウンロードするにはパスワードが必要です。"
 
 #: classes/Controller/FrontController.php:174
 msgid "Video download"
