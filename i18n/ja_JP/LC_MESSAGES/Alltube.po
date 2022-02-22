@@ -53,11 +53,11 @@ msgstr "よく使われる形式"
 
 #: templates/info.tpl:35
 msgid "Best"
-msgstr "通常品質(mp4)"
+msgstr "最高品質(mp4形式,おすすめ)"
 
 #: templates/info.tpl:36
 msgid "Remux best video with best audio"
-msgstr "最高品質(映像形式の指定不可)"
+msgstr "最高品質の音声と動画をmkvに再エンコード"
 
 #: templates/info.tpl:37
 msgid "Worst"
@@ -69,7 +69,7 @@ msgstr "その他の形式"
 
 #: templates/info.tpl:86
 msgid "Stream the video through the server"
-msgstr "サーバーを経由してダウンロード<br>(ダウンロードできない場合はこちらを有効にしてください。)"
+msgstr "サーバーを経由してダウンロード"
 
 #: templates/info.tpl:92
 msgid "Convert into a custom format:"
@@ -167,15 +167,15 @@ msgstr "パスワードが間違っています。"
 
 #: classes/Controller/DownloadController.php:69
 msgid "Conversion of playlists is not supported."
-msgstr "プレイリストからの読み出しには対応しておりません。"
+msgstr "プレイリストからの読み出しおよび変換には対応しておりません。"
 
 #: classes/Controller/DownloadController.php:76
 msgid "Conversion of M3U8 files is not supported."
-msgstr "HLS(m3u8)プレイリストファイルからの読み出しには対応しておりません。"
+msgstr "HLS(m3u8)プレイリストファイルからの読み出しおよび変換には対応しておりません。"
 
 #: classes/Controller/DownloadController.php:82
 msgid "Conversion of DASH segments is not supported."
-msgstr "MPEG DASHストリーミングからの読み出しには対応しておりません。"
+msgstr "MPEG DASHストリーミングからの読み出しおよび変換には対応しておりません。"
 
 #: classes/Controller/FrontController.php:65
 msgid "Easily download videos from YouTube, Dailymotion, Vimeo and other websites."
@@ -187,7 +187,7 @@ msgstr "AllTube上でのダウンロードおよびファイルの変換に対�
 
 #: classes/Controller/FrontController.php:138
 msgid "Password prompt"
-msgstr "パスワード画面"
+msgstr "パスワード入力"
 
 #: classes/Controller/FrontController.php:140
 msgid "You need a password in order to download this video with AllTube Download"
