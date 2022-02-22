@@ -53,7 +53,7 @@ msgstr "よく使われる形式"
 
 #: templates/info.tpl:35
 msgid "Best"
-msgstr "最高品質(mp4形式,おすすめ)"
+msgstr "最高品質(mp4形式)"
 
 #: templates/info.tpl:36
 msgid "Remux best video with best audio"
