@@ -55,7 +55,7 @@ class UglyRouter extends Router
      */
     public function pathFor($name, array $data = [], array $queryParams = []): string
     {
-        $queryParams['page'] = $name;
+        $queryParams['page'] = $this->relativePathFor($name, $data);
         $url = Uri::createFromString($this->relativePathFor($name, $data, $queryParams))->withPath('');
 
         if ($this->basePath) {

@@ -79,7 +79,7 @@ class UglyRouterTest extends ContainerTest
     public function testPathFor()
     {
         $this->assertEquals(
-            '/?page=foo',
+            '/?page=%2Ffoo',
             $this->router->pathFor('foo', [], [])
         );
     }
@@ -93,7 +93,7 @@ class UglyRouterTest extends ContainerTest
     {
         $this->router->setBasePath('/bar');
         $this->assertEquals(
-            '/bar/?page=foo',
+            '/bar/?page=%2Ffoo',
             $this->router->pathFor('foo', [], [])
         );
     }
