@@ -49,7 +49,7 @@ class JsonControllerTest extends ControllerTest
     public function testJsonWithError()
     {
         $this->expectException(YoutubedlException::class);
-        $this->getRequestResult('json', ['url' => 'http://example.com/foo']);
+        $this->getRequestResult('json', ['url' => 'https://example.com/foo']);
     }
 
     /**

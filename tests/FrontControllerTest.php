@@ -191,7 +191,7 @@ class FrontControllerTest extends ControllerTest
     public function testInfoWithPassword()
     {
         $result = $this->controller->info(
-            $this->container->get('request')->withQueryParams(['url' => 'http://vimeo.com/68375962'])
+            $this->container->get('request')->withQueryParams(['url' => 'https://vimeo.com/68375962'])
                 ->withParsedBody(['password' => 'youtube-dl']),
             $this->container->get('response')
         );
@@ -206,8 +206,8 @@ class FrontControllerTest extends ControllerTest
      */
     public function testInfoWithMissingPassword()
     {
-        $this->assertRequestIsClientError('info', ['url' => 'http://vimeo.com/68375962']);
-        $this->assertRequestIsClientError('info', ['url' => 'http://vimeo.com/68375962', 'audio' => true]);
+        $this->assertRequestIsClientError('info', ['url' => 'https://vimeo.com/68375962']);
+        $this->assertRequestIsClientError('info', ['url' => 'https://vimeo.com/68375962', 'audio' => true]);
     }
 
     /**
