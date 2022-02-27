@@ -11,6 +11,9 @@ use Alltube\Library\Downloader;
 use Alltube\Library\Video;
 use Alltube\LocaleManager;
 use Aura\Session\Segment;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Options;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Url;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Http\Request;
@@ -127,10 +130,11 @@ abstract class BaseController
      * @param Request $request PSR-7 request
      *
      * @return string|null Password
+     * @throws InvalidURLException
      */
     protected function getPassword(Request $request): ?string
     {
-        $url = $request->getQueryParam('url');
+        $url = $this->getVideoPageUrl($request);
 
         $password = $request->getParam('password');
         if (isset($password)) {
@@ -156,5 +160,20 @@ abstract class BaseController
         $controller = new FrontController($this->container);
 
         return $controller->displayError($request, $response, $message);
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     * @throws InvalidURLException
+     */
+    protected function getVideoPageUrl(Request $request): string
+    {
+        $url = $request->getQueryParam('url') ?: $request->getQueryParam('v');
+
+        // Prevent SSRF attacks.
+        $parts = Url::validateUrl($url, new Options());
+
+        return $parts['url'];
     }
 }

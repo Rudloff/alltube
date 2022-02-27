@@ -19,6 +19,7 @@ use Alltube\Library\Exception\YoutubedlException;
 use Alltube\Stream\ConvertedPlaylistArchiveStream;
 use Alltube\Stream\PlaylistArchiveStream;
 use Alltube\Stream\YoutubeStream;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\StatusCode;
@@ -37,56 +38,53 @@ class DownloadController extends BaseController
      *
      * @return Response HTTP response
      * @throws AlltubeLibraryException
+     * @throws InvalidURLException
      */
     public function download(Request $request, Response $response): Response
     {
-        $url = $request->getQueryParam('url');
+        $url = $this->getVideoPageUrl($request);
 
-        if (isset($url)) {
-            $this->video = $this->downloader->getVideo($url, $this->getFormat($request), $this->getPassword($request));
+        $this->video = $this->downloader->getVideo($url, $this->getFormat($request), $this->getPassword($request));
 
-            try {
-                if ($this->config->convert && $request->getQueryParam('audio')) {
-                    // Audio convert.
-                    return $this->getAudioResponse($request, $response);
-                } elseif ($this->config->convertAdvanced && !is_null($request->getQueryParam('customConvert'))) {
-                    // Advance convert.
-                    return $this->getConvertedResponse($request, $response);
-                }
+        try {
+            if ($this->config->convert && $request->getQueryParam('audio')) {
+                // Audio convert.
+                return $this->getAudioResponse($request, $response);
+            } elseif ($this->config->convertAdvanced && !is_null($request->getQueryParam('customConvert'))) {
+                // Advance convert.
+                return $this->getConvertedResponse($request, $response);
+            }
 
-                // Regular download.
-                return $this->getDownloadResponse($request, $response);
-            } catch (PasswordException $e) {
-                $frontController = new FrontController($this->container);
+            // Regular download.
+            return $this->getDownloadResponse($request, $response);
+        } catch (PasswordException $e) {
+            $frontController = new FrontController($this->container);
 
-                return $frontController->password($request, $response);
-            } catch (WrongPasswordException $e) {
-                return $this->displayError($request, $response, $this->localeManager->t('Wrong password'));
-            } catch (PlaylistConversionException $e) {
+            return $frontController->password($request, $response);
+        } catch (WrongPasswordException $e) {
+            return $this->displayError($request, $response, $this->localeManager->t('Wrong password'));
+        } catch (PlaylistConversionException $e) {
+            return $this->displayError(
+                $request,
+                $response,
+                $this->localeManager->t('Conversion of playlists is not supported.')
+            );
+        } catch (InvalidProtocolConversionException $e) {
+            if (in_array($this->video->protocol, ['m3u8', 'm3u8_native'])) {
                 return $this->displayError(
                     $request,
                     $response,
-                    $this->localeManager->t('Conversion of playlists is not supported.')
+                    $this->localeManager->t('Conversion of M3U8 files is not supported.')
                 );
-            } catch (InvalidProtocolConversionException $e) {
-                if (in_array($this->video->protocol, ['m3u8', 'm3u8_native'])) {
-                    return $this->displayError(
-                        $request,
-                        $response,
-                        $this->localeManager->t('Conversion of M3U8 files is not supported.')
-                    );
-                } elseif ($this->video->protocol == 'http_dash_segments') {
-                    return $this->displayError(
-                        $request,
-                        $response,
-                        $this->localeManager->t('Conversion of DASH segments is not supported.')
-                    );
-                } else {
-                    throw $e;
-                }
+            } elseif ($this->video->protocol == 'http_dash_segments') {
+                return $this->displayError(
+                    $request,
+                    $response,
+                    $this->localeManager->t('Conversion of DASH segments is not supported.')
+                );
+            } else {
+                throw $e;
             }
-        } else {
-            return $response->withRedirect($this->router->pathFor('index'));
         }
     }
 

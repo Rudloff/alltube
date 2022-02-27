@@ -25,6 +25,7 @@
     "aura/session": "^2.1",
     "barracudanetworks/archivestream-php": "^1.0",
     "consolidation/log": "^2.0",
+    "j0k3r/httplug-ssrf-plugin": "^2.0",
     "jawira/case-converter": "^3.4",
     "jean85/pretty-package-versions": "^1.3",
     "mathmarques/smarty-view": "^1.1",
