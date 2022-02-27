@@ -186,7 +186,7 @@ class FrontControllerTest extends ControllerTest
      *
      * @return void
      * @requires download
-     * @throws AlltubeLibraryException
+     * @throws AlltubeLibraryException|InvalidURLException
      */
     public function testInfoWithPassword()
     {
