@@ -3,10 +3,8 @@
 namespace Alltube\Middleware;
 
 use Alltube\Factory\ViewFactory;
-use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Router;
 
 /**
  * Class LinkHeaderMiddleware
