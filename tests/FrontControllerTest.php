@@ -11,6 +11,7 @@ use Alltube\Exception\ConfigException;
 use Alltube\Exception\DependencyException;
 use Alltube\Library\Exception\AlltubeLibraryException;
 use Exception;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use SmartyException;
@@ -113,7 +114,8 @@ class FrontControllerTest extends ControllerTest
      */
     public function testInfoWithoutUrl()
     {
-        $this->assertRequestIsRedirect('info');
+        $this->expectException(InvalidURLException::class);
+        $this->getRequestResult('info', []);
     }
 
     /**

@@ -12,6 +12,7 @@ use Alltube\Library\Exception\WrongPasswordException;
 use Alltube\Locale;
 use Alltube\Middleware\CspMiddleware;
 use Exception;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
 use Slim\Http\StatusCode;
 use stdClass;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
@@ -241,24 +242,21 @@ class FrontController extends BaseController
      *
      * @return Response HTTP response
      * @throws AlltubeLibraryException
+     * @throws InvalidURLException
      */
     public function info(Request $request, Response $response): Response
     {
-        $url = $request->getQueryParam('url') ?: $request->getQueryParam('v');
+        $url = $this->getVideoPageUrl($request);
 
-        if (isset($url) && !empty($url)) {
-            $this->video = $this->downloader->getVideo($url, $this->getFormat($request), $this->getPassword($request));
+        $this->video = $this->downloader->getVideo($url, $this->getFormat($request), $this->getPassword($request));
 
-            if ($this->config->convert && $request->getQueryParam('audio')) {
-                // We skip the info page and get directly to the download.
-                return $response->withRedirect(
-                    $this->router->pathFor('download', [], $request->getQueryParams())
-                );
-            } else {
-                return $this->getInfoResponse($request, $response);
-            }
+        if ($this->config->convert && $request->getQueryParam('audio')) {
+            // We skip the info page and get directly to the download.
+            return $response->withRedirect(
+                $this->router->pathFor('download', [], $request->getQueryParams())
+            );
         } else {
-            return $response->withRedirect($this->router->pathFor('index'));
+            return $this->getInfoResponse($request, $response);
         }
     }
 

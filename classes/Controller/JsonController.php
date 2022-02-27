@@ -7,6 +7,8 @@
 namespace Alltube\Controller;
 
 use Alltube\Library\Exception\AlltubeLibraryException;
+use Exception;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\StatusCode;
@@ -23,13 +25,12 @@ class JsonController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
-     * @throws AlltubeLibraryException
      */
     public function json(Request $request, Response $response): Response
     {
-        $url = $request->getQueryParam('url');
+        try {
+            $url = $this->getVideoPageUrl($request);
 
-        if (isset($url)) {
             $this->video = $this->downloader->getVideo(
                 $url,
                 $this->getFormat($request),
@@ -37,8 +38,8 @@ class JsonController extends BaseController
             );
 
             return $response->withJson($this->video->getJson());
-        } else {
-            return $response->withJson(['error' => 'You need to provide the url parameter'])
+        } catch (InvalidURLException $e) {
+            return $response->withJson(['error' => $e->getMessage()])
                 ->withStatus(StatusCode::HTTP_BAD_REQUEST);
         }
     }
