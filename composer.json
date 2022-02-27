@@ -25,6 +25,7 @@
     "aura/session": "^2.1",
     "barracudanetworks/archivestream-php": "^1.0",
     "consolidation/log": "^2.0",
+    "cweagans/composer-patches": "^1.7",
     "j0k3r/httplug-ssrf-plugin": "^2.0",
     "jawira/case-converter": "^3.4",
     "jean85/pretty-package-versions": "^1.3",
@@ -74,7 +75,12 @@
     },
     "installer-types": [
       "library"
-    ]
+    ],
+    "patches": {
+      "ytdl-org/youtube-dl": {
+        "Disable redirects in generic extractor": "patches/youtube-dl-redirect.diff"
+      }
+    }
   },
   "autoload": {
     "psr-4": {

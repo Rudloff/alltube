@@ -1,0 +1,12 @@
+diff --git a/youtube_dl/extractor/generic.py b/youtube_dl/extractor/generic.py
+index f99d887ca..749ed6ecf 100644
+--- a/youtube_dl/extractor/generic.py
++++ b/youtube_dl/extractor/generic.py
+@@ -2252,6 +2252,7 @@ class GenericIE(InfoExtractor):
+ 
+     def report_following_redirect(self, new_url):
+         """Report information extraction."""
++        raise UnsupportedError('Redirects are not allowed')
+         self._downloader.to_screen('[redirect] Following redirect to %s' % new_url)
+ 
+     def _extract_rss(self, url, video_id, doc):
