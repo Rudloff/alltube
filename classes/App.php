@@ -94,7 +94,7 @@ class App extends \Slim\App
 
         $this->any(
             '/watch',
-            [$frontController, 'info']
+            [$frontController, 'watch']
         );
 
         $this->any(

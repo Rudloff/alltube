@@ -14,6 +14,7 @@ use Alltube\Middleware\CspMiddleware;
 use Exception;
 use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
 use Slim\Http\StatusCode;
+use Slim\Http\Uri;
 use stdClass;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
@@ -344,5 +345,25 @@ class FrontController extends BaseController
 
             return $this->displayError($request, $response, $message);
         }
+    }
+
+    /**
+     * Route that mimics YouTube video URLs ("/watch?v=foo")
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function watch(Request $request, Response $response): Response
+    {
+        // We build a full YouTube URL from the video ID.
+        $youtubeUri = Uri::createFromString('https://www.youtube.com/watch')
+            ->withQuery(http_build_query(['v' => $request->getQueryParam('v')]));
+
+        // Then pass it to the info route.
+        return $response->withRedirect(
+            Uri::createFromString($this->router->pathFor('info'))
+                ->withQuery(http_build_query(['url' => strval($youtubeUri)]))
+        );
     }
 }
