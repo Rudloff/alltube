@@ -187,35 +187,38 @@ class FrontController extends BaseController
             $formats[$genericFormatsLabel][$id] = $this->localeManager->t($genericFormat);
         }
 
-        /** @var stdClass $format */
-        foreach ($this->video->getJson()->formats as $format) {
-            if ($this->config->stream || in_array($format->protocol, ['http', 'https'])) {
-                $formatParts = [
-                    // File extension
-                    $format->ext,
-                ];
+        $json = $this->video->getJson();
+        if (isset($json->formats)) {
+            /** @var stdClass $format */
+            foreach ($json->formats as $format) {
+                if ($this->config->stream || in_array($format->protocol, ['http', 'https'])) {
+                    $formatParts = [
+                        // File extension
+                        $format->ext,
+                    ];
 
-                if (isset($format->width) || isset($format->height)) {
-                    // Video dimensions
-                    $formatParts[] = implode('x', array_filter([$format->width, $format->height]));
+                    if (isset($format->width) || isset($format->height)) {
+                        // Video dimensions
+                        $formatParts[] = implode('x', array_filter([$format->width, $format->height]));
+                    }
+
+                    if (isset($format->filesize)) {
+                        // File size
+                        $formatParts[] = round($format->filesize / 1000000, 2) . ' MB';
+                    }
+
+                    if (isset($format->format_note)) {
+                        // Format name
+                        $formatParts[] = $format->format_note;
+                    }
+
+                    if (isset($format->format_id)) {
+                        // Format ID
+                        $formatParts[] = '(' . $format->format_id . ')';
+                    }
+
+                    $formats[$detailedFormatsLabel][$format->format_id] = implode(' ', $formatParts);
                 }
-
-                if (isset($format->filesize)) {
-                    // File size
-                    $formatParts[] = round($format->filesize / 1000000, 2) . ' MB';
-                }
-
-                if (isset($format->format_note)) {
-                    // Format name
-                    $formatParts[] = $format->format_note;
-                }
-
-                if (isset($format->format_id)) {
-                    // Format ID
-                    $formatParts[] = '(' . $format->format_id . ')';
-                }
-
-                $formats[$detailedFormatsLabel][$format->format_id] = implode(' ', $formatParts);
             }
         }
 
