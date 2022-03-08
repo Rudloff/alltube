@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5c12c24e723e5246b8003cd84de873f",
+    "content-hash": "87b2074ab1d8a7ee59f719e26130ca36",
     "packages": [
         {
             "name": "aura/session",
@@ -4086,12 +4086,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Serialization\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Serialization\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
