@@ -78,7 +78,7 @@
     ],
     "patches": {
       "ytdl-org/youtube-dl": {
-        "Disable redirects in generic extractor": "patches/youtube-dl-redirect.diff"
+        "Disable the generic extractor": "patches/youtube-dl-disable-generic.diff"
       }
     }
   },
