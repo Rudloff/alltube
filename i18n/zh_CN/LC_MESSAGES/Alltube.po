@@ -189,8 +189,8 @@ msgid ""
 "List of all supported websites from which AllTube Download can extract video "
 "or audio files"
 msgstr ""
-"AllTube Download 能够从中提取视频"
-"或音频文件的的所有受支持网站的列表"
+"AllTube Download 能够提取视频"
+"或音频文件的的所有网站的列表"
 
 #: classes/Controller/FrontController.php:138
 msgid "Password prompt"
