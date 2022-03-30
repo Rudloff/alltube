@@ -77,7 +77,7 @@ msgstr "自定义格式"
 
 #: templates/info.tpl:93
 msgid "Format to convert to"
-msgstr "要转换的格式"
+msgstr "要转换到的格式"
 
 #: templates/info.tpl:98
 # Other translators: Please check that file for context
