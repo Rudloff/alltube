@@ -3,7 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
 #: templates/inc/footer.tpl:8
-# Tlnote: Needs reconsiderations
 msgid "Code by @dev"
 msgstr "由 @dev 开发"
 
@@ -226,9 +225,3 @@ msgstr "找不到页面"
 #: classes/Controller/FrontController.php:282
 msgid "Method not allowed"
 msgstr "不允许此请求方法"
-
-#msgid "yes"
-#msgstr "是"
-
-#msgid "no"
-#msgstr "否"
