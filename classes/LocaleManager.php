@@ -114,7 +114,7 @@ class LocaleManager
      * @param Locale $locale Locale
      * @return void
      */
-    public function setLocale(Locale $locale)
+    public function setLocale(Locale $locale): void
     {
         $this->translator->setLocale($locale->getIso15897());
         $this->curLocale = $locale;
@@ -125,7 +125,7 @@ class LocaleManager
      * Unset the current locale.
      * @return void
      */
-    public function unsetLocale()
+    public function unsetLocale(): void
     {
         $this->translator->setLocale(self::DEFAULT_LOCALE);
         $this->curLocale = null;

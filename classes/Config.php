@@ -205,7 +205,7 @@ class Config
      * @throws ConfigException If Python is missing
      * @throws ConfigException If youtube-dl is missing
      */
-    private function validateOptions()
+    private function validateOptions(): void
     {
         if (!is_file($this->youtubedl)) {
             throw new ConfigException("Can't find youtube-dl at " . $this->youtubedl);
@@ -226,7 +226,7 @@ class Config
      *
      * @return void
      */
-    private function applyOptions(array $options)
+    private function applyOptions(array $options): void
     {
         foreach ($options as $option => $value) {
             if (isset($this->$option) && isset($value)) {
@@ -243,7 +243,7 @@ class Config
      * @return void
      * @throws ConfigException
      */
-    private function getEnv()
+    private function getEnv(): void
     {
         foreach (get_object_vars($this) as $prop => $value) {
             try {
@@ -282,7 +282,7 @@ class Config
      * @return void
      * @throws ConfigException
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->applyOptions($options);
         $this->validateOptions();

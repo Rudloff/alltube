@@ -18,7 +18,7 @@ class ErrorHandler
      * @param Throwable $e
      * @return void
      */
-    public static function handle(Throwable $e)
+    public static function handle(Throwable $e): void
     {
         error_log($e);
 

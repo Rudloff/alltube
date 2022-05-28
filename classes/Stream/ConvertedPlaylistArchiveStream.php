@@ -23,7 +23,7 @@ class ConvertedPlaylistArchiveStream extends PlaylistArchiveStream
      * @return void
      * @throws AlltubeLibraryException
      */
-    protected function startVideoStream(Video $video)
+    protected function startVideoStream(Video $video): void
     {
         $this->curVideoStream = new Stream($this->downloader->getAudioStream($video));
 
