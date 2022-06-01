@@ -34,7 +34,8 @@ class ViewFactory
 
         return $uri->withBasePath('')
             ->withHost('alltubedownload.net')
-            ->withScheme('https');
+            ->withScheme('https')
+            ->withPort(443);
     }
 
     /**
