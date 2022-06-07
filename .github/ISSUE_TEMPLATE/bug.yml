@@ -1,0 +1,64 @@
+---
+name: New issue
+description: Please answer these questions when reporting a new issue.
+body:
+  - type: input
+    attributes:
+      label: What is your operating system (Windows, Linux, OSX, etc.)?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: What is your web server (Apache, IIS, etc.)?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: What version of AllTube are you using?
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: How did you install AllTube?
+      options:
+        - Git
+        - Release package
+        - Docker
+        - Other (please specify)
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: What version of PHP are you using?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: What version of Python are you using?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: What version of youtube-dl are you using?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Do you get any PHP-related errors in your webserver's logs?
+      description: If so, paste them here.
+      render: plain text
+  - type: textarea
+    attributes:
+      label: What is the content of your "config/config.yml" file?
+      description: If you don't have this file, you can ignore this question.
+      render: yml
+  - type: input
+    attributes:
+      label: Please provide the URL of a video that causes the issue.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe your issue
+    validations:
+      required: true
