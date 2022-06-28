@@ -83,6 +83,14 @@
     }
   },
   "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "ergebnis/composer-normalize": true,
+      "insite/composer-dangling-locked-deps": true,
+      "oomphinc/composer-installers-extender": true,
+      "phpro/grumphp": true
+    },
     "platform": {
       "php": "7.3.11"
     },
