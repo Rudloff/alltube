@@ -9,11 +9,11 @@ msgstr ""
 
 #: templates/inc/footer.tpl:8
 msgid "Code by @dev"
-msgstr "作成: @dev"
+msgstr "制作: @dev"
 
 #: templates/inc/footer.tpl:16
 msgid "Design by @designer"
-msgstr "デザイン: @designer"
+msgstr "Webデザイン: @designer"
 
 #: templates/inc/footer.tpl:21
 msgid "Get the code"
@@ -21,7 +21,7 @@ msgstr "プログラムをダウンロード"
 
 #: templates/inc/footer.tpl:29
 msgid "Based on @youtubedl"
-msgstr "本ソフトは@youtubedlを基に構成されています。"
+msgstr "本ソフトは@youtubedlを基に作成されています。"
 
 #: templates/inc/footer.tpl:33
 msgid "Donate using Liberapay"
@@ -41,7 +41,7 @@ msgstr "言語を設定"
 
 #: templates/info.tpl:11
 msgid "You are going to download @title."
-msgstr "ダウンロード対象: @title"
+msgstr "検出した動画: 「@title」"
 
 #: templates/info.tpl:29
 msgid "Available formats:"
@@ -53,11 +53,11 @@ msgstr "よく使われる形式"
 
 #: templates/info.tpl:35
 msgid "Best"
-msgstr "最高品質"
+msgstr "最高品質(mp4形式)"
 
 #: templates/info.tpl:36
 msgid "Remux best video with best audio"
-msgstr "最高品質に再エンコード"
+msgstr "最高品質の音声と動画をmkvに再エンコード"
 
 #: templates/info.tpl:37
 msgid "Worst"
@@ -69,11 +69,11 @@ msgstr "その他の形式"
 
 #: templates/info.tpl:86
 msgid "Stream the video through the server"
-msgstr "ビデオをサーバーに設置してダウンロード"
+msgstr "サーバーを経由してダウンロード"
 
 #: templates/info.tpl:92
 msgid "Convert into a custom format:"
-msgstr "指定した形式への変換"
+msgstr "指定した形式に変換してダウンロード"
 
 #: templates/info.tpl:93
 msgid "Custom format"
@@ -106,19 +106,19 @@ msgstr "ダウンロード"
 
 #: templates/playlist.tpl:12
 msgid "Videos extracted from @title:"
-msgstr "デコードの対象: @title"
+msgstr "プレイリスト: 「@title」から展開。"
 
 #: templates/playlist.tpl:39
 msgid "More options"
-msgstr "詳細設定"
+msgstr "ダウンロード設定"
 
 #: templates/extractors.tpl:4 classes/Controller/FrontController.php:111
 msgid "Supported websites"
-msgstr "ダウンロードに対応しているサイト"
+msgstr "ダウンロードに対応しているWebサイト"
 
 #: templates/error.tpl:5
 msgid "An error occurred"
-msgstr "予期せぬエラーが発生しました。"
+msgstr "ダウンロードエラー"
 
 #: templates/password.tpl:5
 msgid "This video is protected"
@@ -138,15 +138,15 @@ msgstr "動画のリンク(URL)を入力欄に入力してください。(例:Yo
 
 #: templates/index.tpl:25
 msgid "Audio only (MP3)"
-msgstr "音声のみのダウンロード(mp3形式)"
+msgstr "音声のみをmp3形式でダウンロード"
 
 #: templates/index.tpl:29
 msgid "From"
-msgstr "から"
+msgstr "開始時間"
 
 #: templates/index.tpl:32
 msgid "to"
-msgstr "へ"
+msgstr "終了時間"
 
 #: templates/index.tpl:41
 msgid "See all supported websites"
@@ -167,19 +167,19 @@ msgstr "パスワードが間違っています。"
 
 #: classes/Controller/DownloadController.php:69
 msgid "Conversion of playlists is not supported."
-msgstr "プレイリストからの読み出しには対応しておりません。"
+msgstr "プレイリストからの読み出しおよび変換には対応しておりません。"
 
 #: classes/Controller/DownloadController.php:76
 msgid "Conversion of M3U8 files is not supported."
-msgstr "HLS(m3u8)プレイリストファイルからの読み出しには対応しておりません。"
+msgstr "HLS(m3u8)プレイリストファイルからの読み出しおよび変換には対応しておりません。"
 
 #: classes/Controller/DownloadController.php:82
 msgid "Conversion of DASH segments is not supported."
-msgstr "MPEG DASHストリーミングからの読み出しには対応しておりません。"
+msgstr "MPEG DASHストリーミングからの読み出しおよび変換には対応しておりません。"
 
 #: classes/Controller/FrontController.php:65
 msgid "Easily download videos from YouTube, Dailymotion, Vimeo and other websites."
-msgstr "Youtubeから動画を簡単にダウンロード!、DailymotionやVimeo等にも対応しております"
+msgstr "Youtubeから動画を簡単にダウンロード!!、DailymotionやVimeo等にも対応しております"
 
 #: classes/Controller/FrontController.php:112
 msgid "List of all supported websites from which AllTube Download can extract video or audio files"
@@ -187,11 +187,11 @@ msgstr "AllTube上でのダウンロードおよびファイルの変換に対�
 
 #: classes/Controller/FrontController.php:138
 msgid "Password prompt"
-msgstr "パスワード画面"
+msgstr "パスワード入力"
 
 #: classes/Controller/FrontController.php:140
 msgid "You need a password in order to download this video with AllTube Download"
-msgstr "このビデオをAllTubeでダウンロードするにはパスワードが必要です。"
+msgstr "AllTubeでこのビデオをダウンロードするにはパスワードが必要です。"
 
 #: classes/Controller/FrontController.php:174
 msgid "Video download"
