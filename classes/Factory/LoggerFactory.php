@@ -7,6 +7,7 @@ use Consolidation\Log\LoggerManager;
 use Consolidation\Log\LogOutputStyler;
 use Slim\Container;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class LoggerFactory
@@ -23,9 +24,9 @@ class LoggerFactory
     {
         $config = $container->get('config');
         if ($config->debug) {
-            $verbosity = ConsoleOutput::VERBOSITY_DEBUG;
+            $verbosity = OutputInterface::VERBOSITY_DEBUG;
         } else {
-            $verbosity = ConsoleOutput::VERBOSITY_NORMAL;
+            $verbosity = OutputInterface::VERBOSITY_NORMAL;
         }
 
         $loggerManager = new LoggerManager();

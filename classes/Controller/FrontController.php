@@ -14,6 +14,8 @@ use Alltube\Middleware\CspMiddleware;
 use Exception;
 use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
 use Slim\Http\StatusCode;
+use Slim\Http\Uri;
+use stdClass;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Throwable;
 use Psr\Container\ContainerInterface;
@@ -146,7 +148,7 @@ class FrontController extends BaseController
      * @return Response HTTP response
      * @throws AlltubeLibraryException
      */
-    private function getInfoResponse(Request $request, Response $response)
+    private function getInfoResponse(Request $request, Response $response): Response
     {
         try {
             $this->video->getJson();
@@ -176,6 +178,50 @@ class FrontController extends BaseController
                 ]
             );
         }
+
+        $formats = [];
+        $genericFormatsLabel = $this->localeManager->t('Generic formats');
+        $detailedFormatsLabel = $this->localeManager->t('Detailed formats');
+
+        foreach ($this->config->genericFormats as $id => $genericFormat) {
+            $formats[$genericFormatsLabel][$id] = $this->localeManager->t($genericFormat);
+        }
+
+        $json = $this->video->getJson();
+        if (isset($json->formats)) {
+            /** @var stdClass $format */
+            foreach ($json->formats as $format) {
+                if ($this->config->stream || in_array($format->protocol, ['http', 'https'])) {
+                    $formatParts = [
+                        // File extension
+                        $format->ext,
+                    ];
+
+                    if (isset($format->width) || isset($format->height)) {
+                        // Video dimensions
+                        $formatParts[] = implode('x', array_filter([$format->width, $format->height]));
+                    }
+
+                    if (isset($format->filesize)) {
+                        // File size
+                        $formatParts[] = round($format->filesize / 1000000, 2) . ' MB';
+                    }
+
+                    if (isset($format->format_note)) {
+                        // Format name
+                        $formatParts[] = $format->format_note;
+                    }
+
+                    if (isset($format->format_id)) {
+                        // Format ID
+                        $formatParts[] = '(' . $format->format_id . ')';
+                    }
+
+                    $formats[$detailedFormatsLabel][$format->format_id] = implode(' ', $formatParts);
+                }
+            }
+        }
+
         $this->view->render(
             $response,
             $template,
@@ -185,6 +231,7 @@ class FrontController extends BaseController
                 'title' => $title,
                 'description' => $description,
                 'defaultFormat' => $this->defaultFormat,
+                'formats' => $formats
             ]
         );
 
@@ -301,5 +348,25 @@ class FrontController extends BaseController
 
             return $this->displayError($request, $response, $message);
         }
+    }
+
+    /**
+     * Route that mimics YouTube video URLs ("/watch?v=foo")
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function watch(Request $request, Response $response): Response
+    {
+        // We build a full YouTube URL from the video ID.
+        $youtubeUri = Uri::createFromString('https://www.youtube.com/watch')
+            ->withQuery(http_build_query(['v' => $request->getQueryParam('v')]));
+
+        // Then pass it to the info route.
+        return $response->withRedirect(
+            Uri::createFromString($this->router->pathFor('info'))
+                ->withQuery(http_build_query(['url' => strval($youtubeUri)]))
+        );
     }
 }

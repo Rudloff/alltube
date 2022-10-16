@@ -1,5 +1,3 @@
-<!doctype html>
-<html lang="{$locale->getLocale()->getBcp47()}">
 <head>
     <meta charset="UTF-8"/>
     <meta name=viewport content="width=device-width, initial-scale=1"/>
@@ -11,7 +9,6 @@
     <link rel="stylesheet" href="{base_url}/assets/open-sans/open-sans.css"/>
     <link rel="stylesheet" href="{base_url}/css/style.css"/>
     <title>{$config->appName}{if isset($title)} - {$title|escape}{/if}</title>
-    <link rel="canonical" href="{$canonical}"/>
     <link rel="icon" href="{base_url}/img/favicon.png"/>
     <meta property="og:title" content="{$config->appName}{if isset($title)} - {$title|escape}{/if}"/>
     <meta property="og:image" content="{base_url}/img/logo.png"/>
@@ -27,5 +24,3 @@
         {$debug_render->renderHead()}
     {/if}
 </head>
-<body>
-<div class="page {$class}">

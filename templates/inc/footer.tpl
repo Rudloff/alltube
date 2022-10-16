@@ -1,18 +1,11 @@
-</div>
 <footer class="small-font">
     <div class="footer_wrapper">
-        {$dev="<a rel='author' target='blank'
-            href='http://rudloff.pro/'>
-            Pierre Rudloff
-        </a>"}
+        {include file='snippets/dev.tpl' assign=dev}
         {t params=['@dev'=>$dev]}Code by @dev{/t}
 
         &middot;
 
-        {$designer="<a rel='author' target='blank'
-            href='http://olivierhaquette.fr'>
-            Olivier Haquette
-        </a>"}
+        {include file='snippets/designer.tpl' assign=designer}
         {t params=['@designer' => $designer]}Design by @designer{/t}
 
         &middot;
@@ -23,15 +16,7 @@
 
         &middot;
 
-        {$youtubedl="<a href='http://ytdl-org.github.io/youtube-dl/'>
-            youtube-dl
-        </a>"}
+        {include file='snippets/youtubedl.tpl' assign=youtubedl}
         {t params=['@youtubedl'=>$youtubedl]}Based on @youtubedl{/t}
     </div>
 </footer>
-</div>
-{if isset($debug_render)}
-    {$debug_render->render()}
-{/if}
-</body>
-</html>

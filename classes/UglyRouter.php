@@ -22,7 +22,7 @@ class UglyRouter extends Router
      *
      * @param ServerRequestInterface $request The current HTTP request object
      *
-     * @return mixed[]
+     * @return int[]|string[]|array[]
      *
      * @link   https://github.com/nikic/FastRoute/blob/master/src/Dispatcher.php
      */
@@ -55,7 +55,7 @@ class UglyRouter extends Router
      */
     public function pathFor($name, array $data = [], array $queryParams = []): string
     {
-        $queryParams['page'] = $name;
+        $queryParams['page'] = $this->relativePathFor($name, $data);
         $url = Uri::createFromString($this->relativePathFor($name, $data, $queryParams))->withPath('');
 
         if ($this->basePath) {

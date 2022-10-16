@@ -104,7 +104,7 @@ class VideoTest extends ContainerTest
      */
     public function testgetUrlWithPassword()
     {
-        $video = new Video($this->downloader, 'http://vimeo.com/68375962', 'best', 'youtube-dl');
+        $video = new Video($this->downloader, 'https://vimeo.com/68375962', 'best', 'youtube-dl');
         foreach ($video->getUrl() as $videoURL) {
             $this->assertStringContainsString('vimeocdn.com', $videoURL);
         }
@@ -119,7 +119,7 @@ class VideoTest extends ContainerTest
     public function testgetUrlWithMissingPassword()
     {
         $this->expectException(PasswordException::class);
-        $video = new Video($this->downloader, 'http://vimeo.com/68375962', $this->format);
+        $video = new Video($this->downloader, 'https://vimeo.com/68375962', $this->format);
         $video->getUrl();
     }
 
@@ -132,7 +132,7 @@ class VideoTest extends ContainerTest
     public function testgetUrlWithWrongPassword()
     {
         $this->expectException(WrongPasswordException::class);
-        $video = new Video($this->downloader, 'http://vimeo.com/68375962', 'best', 'foo');
+        $video = new Video($this->downloader, 'https://vimeo.com/68375962', 'best', 'foo');
         $video->getUrl();
     }
 
@@ -174,7 +174,7 @@ class VideoTest extends ContainerTest
                 'googlevideo.com',
             ],
             [
-                'http://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
+                'https://www.bbc.co.uk/programmes/b039g8p7', 'bestaudio/best',
                 'Kaleidoscope_Leonard_Cohen-b039d07m',
                 'flv',
                 'bbcodspdns.fcod.llnwd.net',
@@ -247,7 +247,7 @@ class VideoTest extends ContainerTest
     public function errorUrlProvider(): array
     {
         return [
-            ['http://example.com/video'],
+            ['https://example.com/video'],
         ];
     }
 
@@ -479,16 +479,11 @@ class VideoTest extends ContainerTest
      * @param string $format Format
      *
      * @return void
-     * @throws AlltubeLibraryException
      * @dataProvider rtmpUrlProvider
      */
     public function testGetRtmpStream(string $url, string $format)
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
-
-        $video = new Video($this->downloader, $url, $format);
-
-        $this->assertStream($this->downloader->getRtmpStream($video));
     }
 
     /**

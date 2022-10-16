@@ -2,7 +2,6 @@
   "name": "AllTube Download",
   "description": "HTML GUI for youtube-dl",
   "repository": "https://github.com/Rudloff/alltube.git",
-  "logo": "https://alltubedownload.net/img/logo.png",
   "keywords": [
     "alltube",
     "download",
@@ -28,6 +27,5 @@
       "value": "false",
       "required": false
     }
-  },
-  "website": "https://alltubedownload.net/"
+  }
 }

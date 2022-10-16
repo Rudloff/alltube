@@ -63,7 +63,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return void
      */
-    public function close()
+    public function close(): void
     {
         $this->response->getBody()->close();
     }
@@ -126,7 +126,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return void
      */
-    public function seek($offset, $whence = SEEK_SET)
+    public function seek($offset, $whence = SEEK_SET): void
     {
         $this->response->getBody()->seek($offset, $whence);
     }
@@ -136,7 +136,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->response->getBody()->rewind();
     }
@@ -156,9 +156,9 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @param mixed $string The string that is to be written
      *
-     * @return mixed
+     * @return int
      */
-    public function write($string)
+    public function write($string): int
     {
         return $this->response->getBody()->write($string);
     }

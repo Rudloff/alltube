@@ -7,7 +7,6 @@
 namespace Alltube\Controller;
 
 use Alltube\Library\Exception\AlltubeLibraryException;
-use Exception;
 use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\Exception\InvalidURLException;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -25,6 +24,7 @@ class JsonController extends BaseController
      * @param Response $response PSR-7 response
      *
      * @return Response HTTP response
+     * @throws AlltubeLibraryException
      */
     public function json(Request $request, Response $response): Response
     {

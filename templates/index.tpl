@@ -1,8 +1,8 @@
-{include file='inc/head.tpl'}
-{include file='inc/header.tpl'}
-<main class="main">
-    <div><img class="logo" src="{base_url}/img/logo.png"
-              alt="{$config->appName}" width="328" height="284"></div>
+{extends file='page.tpl'}
+{block name='main'}
+    <div>
+        {html_image file='img/logo.png' path_prefix={base_url}|cat:'/' alt=$config->appName class="logo"}
+    </div>
     <form action="{path_for name="info"}">
         <label class="labelurl" for="url">
             {t}Copy here the URL of your video (YouTube, Dailymotion, etc.){/t}
@@ -11,7 +11,7 @@
         <span class="URLinput_wrapper">
             <!-- We used to have an autofocus attribute on this field but it triggerd a very specific CSS bug: https://github.com/Rudloff/alltube/issues/117 -->
             <input class="URLinput large-font" type="url" name="url" id="url"
-                   required placeholder="http://example.com/video"/>
+                   required placeholder="https://example.com/video"/>
         </span>
             {if $config->uglyUrls}
                 <input type="hidden" name="page" value="info"/>
@@ -20,18 +20,23 @@
             {if $config->convert}
                 <div class="mp3 small-font">
                     <div class="mp3-inner">
-                        <input type="checkbox" id="audio" class="audio" name="audio" {($config->defaultAudio) ? 'checked' : ''}>
+                        <input type="checkbox" id="audio" class="audio"
+                               name="audio" {($config->defaultAudio) ? 'checked' : ''}>
                         <label for="audio"><span class="ui"></span>
                             {t}Audio only (MP3){/t}
                         </label>
-                       {if $config->convertSeek}
-                        <div class="seekOptions">
-                            <label for="from">{t}From{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?"
-                                                                         placeholder="HH:MM:SS" value="" name="from"
-                                                                         id="from"/>
-                            <label for="to">{t}to{/t}</label> <input type="text" pattern="(\d+:)?(\d+:)?\d+(\.\d+)?"
-                                                                     placeholder="HH:MM:SS" value="" name="to" id="to"/>
-                        </div>
+                        {if $config->convertSeek}
+                            <div class="seekOptions">
+                                <label for="from">{t}From{/t}</label> <input type="text"
+                                                                             pattern="(\d+:)?(\d+:)?\d+(\.\d+)?"
+                                                                             placeholder="HH:MM:SS" value=""
+                                                                             name="from"
+                                                                             id="from"/>
+                                <label for="to">{t}to{/t}</label> <input type="text"
+                                                                         pattern="(\d+:)?(\d+:)?\d+(\.\d+)?"
+                                                                         placeholder="HH:MM:SS" value="" name="to"
+                                                                         id="to"/>
+                            </div>
                         {/if}
                     </div>
                 </div>
@@ -44,6 +49,4 @@
         <a class="bookmarklet small-font"
            href="javascript:window.location='{$domain}{path_for name='info' queryParams=['url' => '%url%']}'.replace('%url%', encodeURIComponent(location.href));">{t}Bookmarklet{/t}</a>
     </div>
-
-</main>
-{include file='inc/footer.tpl'}
+{/block}

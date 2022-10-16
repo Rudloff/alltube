@@ -38,7 +38,7 @@ class LocaleMiddleware
     /**
      * Test if a locale can be used for the current user.
      *
-     * @param mixed[] $proposedLocale Locale array created by AcceptLanguage::parse()
+     * @param string[] $proposedLocale Locale array created by AcceptLanguage::parse()
      *
      * @return Locale|null Locale if chosen, nothing otherwise
      */

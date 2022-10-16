@@ -220,13 +220,12 @@ class DownloadController extends BaseController
         if ($request->isGet()) {
             $response = $response->withBody($body);
         }
-        $response = $response->withHeader(
+
+        return $response->withHeader(
             'Content-Disposition',
             'attachment; filename="' .
             $this->video->getFilename() . '"'
         );
-
-        return $response;
     }
 
     /**

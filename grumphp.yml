@@ -13,6 +13,7 @@ grumphp:
     securitychecker_enlightn: ~
     composer_normalize: ~
     composer_dangling_locked_deps: ~
+    phpmnd: ~
     phpcs:
       standard: PSR12
     phpstan:

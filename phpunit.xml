@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<phpunit bootstrap="tests/bootstrap.php">
-    <filter>
-        <whitelist>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/bootstrap.php"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage>
+        <include>
             <directory>classes/</directory>
-        </whitelist>
-    </filter>
+        </include>
+    </coverage>
     <testsuites>
         <testsuite name="Tests">
             <directory>tests/</directory>

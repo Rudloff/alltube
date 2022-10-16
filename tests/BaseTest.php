@@ -6,7 +6,9 @@
 
 namespace Alltube\Test;
 
+use OndraM\CiDetector\CiDetector;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Util\Test;
 
 /**
  * Abstract class used by every test.
@@ -37,7 +39,11 @@ abstract class BaseTest extends TestCase
      */
     protected function checkRequirements()
     {
-        $annotations = $this->getAnnotations();
+        $ciDetector = new CiDetector();
+        $annotations = Test::parseTestMethodAnnotations(
+            static::class,
+            $this->getName()
+        );
         $requires = [];
 
         if (isset($annotations['class']['requires'])) {
@@ -48,7 +54,7 @@ abstract class BaseTest extends TestCase
         }
 
         foreach ($requires as $require) {
-            if ($require == 'download' && getenv('CI')) {
+            if ($require == 'download' && $ciDetector->isCiDetected()) {
                 $this->markTestSkipped('Do not run tests that download videos on CI.');
             }
         }

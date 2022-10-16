@@ -108,14 +108,6 @@ class DownloadControllerTest extends ControllerTest
     public function testDownloadWithRtmpStream()
     {
         $this->markTestIncomplete('We need to find another RTMP video.');
-
-        $config = $this->container->get('config');
-        $config->setOptions(['stream' => true]);
-
-        $this->assertRequestIsOk(
-            'download',
-            ['url' => 'http://www.rtvnh.nl/video/131946', 'format' => 'rtmp-264']
-        );
     }
 
     /**
@@ -161,7 +153,7 @@ class DownloadControllerTest extends ControllerTest
      */
     public function testDownloadWithMissingPassword()
     {
-        $this->assertRequestIsClientError('download', ['url' => 'http://vimeo.com/68375962']);
+        $this->assertRequestIsClientError('download', ['url' => 'https://vimeo.com/68375962']);
     }
 
     /**
@@ -172,7 +164,7 @@ class DownloadControllerTest extends ControllerTest
     public function testDownloadWithError()
     {
         $this->expectException(YoutubedlException::class);
-        $this->getRequestResult('download', ['url' => 'http://example.com/foo']);
+        $this->getRequestResult('download', ['url' => 'https://example.com/foo']);
     }
 
     /**

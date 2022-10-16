@@ -98,7 +98,7 @@ msgid "Share on Facebook"
 msgstr "شاركها على فيسبوك"
 
 #: templates/index.tpl:8
-msgid "Copy here the URL of your video (Youtube, Dailymotion, etc.)"
+msgid "Copy here the URL of your video (YouTube, Dailymotion, etc.)"
 msgstr "انسخ هنا رابط الفيديو (يوتيوب، انستقرام، وغيرها)"
 
 #: templates/index.tpl:25

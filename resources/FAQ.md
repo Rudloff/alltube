@@ -6,19 +6,6 @@ Most recent browsers automatically play a video
 if it is a format they know how to play.
 You can usually download the video by doing *File > Save to* or *ctrl + S*.
 
-## [alltubedownload.net](https://alltubedownload.net) is too slow
-
-[alltubedownload.net](https://alltubedownload.net) is hosted on a free [Heroku server](https://www.heroku.com/pricing)
-so it has low RAM and CPU.
-
-AllTube probably won't switch to a more expensive hosting
-because this project does not earn any financial resources
-and you are encouraged to host it yourself.
-
-## alltubedownload.net often says "An error occurred in the application…"
-
-See above.
-
 ## Change config parameters
 
 You need to create a YAML file called `config.yml` in the `config/` folder.
@@ -68,8 +55,7 @@ There are two known workarounds:
 
 * You can run AllTube locally on your computer.
 * You can enable streaming videos through the server (see below).
-  Please note that this can use a lot of resources on the server
-  (which is why we won't enable it on alltubedownload.net).
+  Please note that this can use a lot of resources on the server.
 
 ## I get a 404 error on every page except the index
 

@@ -1,9 +1,8 @@
 {
   "name": "rudloff/alltube",
-  "type": "project",
   "description": "HTML GUI for youtube-dl",
-  "homepage": "http://alltubedownload.net/",
   "license": "GPL-3.0-only",
+  "type": "project",
   "authors": [
     {
       "name": "Pierre Rudloff",
@@ -14,7 +13,7 @@
     {
       "name": "Olivier Haquette",
       "email": "contact@olivierhaquette.fr",
-      "homepage": "http://olivierhaquette.fr/",
+      "homepage": "https://ographik.fr/",
       "role": "Designer"
     }
   ],
@@ -29,22 +28,22 @@
     "j0k3r/httplug-ssrf-plugin": "^2.0",
     "jawira/case-converter": "^3.4",
     "jean85/pretty-package-versions": "^1.3",
-    "mathmarques/smarty-view": "^1.1",
+    "mathmarques/smarty-view": "^1.2",
     "oomphinc/composer-installers-extender": "^2.0",
     "paragonie/csp-builder": "^2.5",
     "rinvex/countries": "^6.1",
-    "rudloff/alltube-library": "^0.1.1",
-    "symfony/finder": "^5.0",
+    "rudloff/alltube-library": "^0.1.3",
+    "symfony/finder": "^5.4",
     "symfony/translation": "^4.0",
     "symfony/yaml": "^4.0",
     "webfontkit/open-sans": "^1.0",
-    "ytdl-org/youtube-dl": "^2021.04",
+    "ytdl-org/youtube-dl": "^2021.12",
     "zonuexe/http-accept-language": "^0.4.1"
   },
   "require-dev": {
     "consolidation/robo": "^2.1",
     "enlightn/security-checker": "^1.4",
-    "ergebnis/composer-normalize": "^2.6",
+    "ergebnis/composer-normalize": "^2.20",
     "insite/composer-dangling-locked-deps": "^0.2.1",
     "junker/debugbar-smarty": "^0.1.0",
     "kitchenu/slim-debugbar": "^1.1",
@@ -52,13 +51,45 @@
     "php-mock/php-mock-mockery": "^1.3",
     "phpro/grumphp": "^1.3",
     "phpstan/phpstan": "^0.12.72",
-    "phpunit/phpunit": "^8.4",
+    "phpunit/phpunit": "^9.5",
+    "povils/phpmnd": "^2.5",
     "smarty-gettext/smarty-gettext": "^1.6",
     "squizlabs/php_codesniffer": "^3.5",
-    "symfony/error-handler": "^5.0",
-    "symfony/var-dumper": "^5.0"
+    "symfony/error-handler": "^5.4",
+    "symfony/var-dumper": "^5.4"
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "ytdl-org/youtube-dl",
+        "version": "2021.12.17",
+        "dist": {
+          "type": "tar",
+          "url": "https://yt-dl.org/downloads/2021.12.17/youtube-dl-2021.12.17.tar.gz"
+        }
+      }
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Alltube\\": "classes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Alltube\\Test\\": "tests/"
+    }
   },
   "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "ergebnis/composer-normalize": true,
+      "insite/composer-dangling-locked-deps": true,
+      "oomphinc/composer-installers-extender": true,
+      "phpro/grumphp": true
+    },
     "platform": {
       "php": "7.3.11"
     },
@@ -82,29 +113,6 @@
       }
     }
   },
-  "autoload": {
-    "psr-4": {
-      "Alltube\\": "classes/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Alltube\\Test\\": "tests/"
-    }
-  },
-  "repositories": [
-    {
-      "type": "package",
-      "package": {
-        "name": "ytdl-org/youtube-dl",
-        "version": "2021.04.01",
-        "dist": {
-          "type": "zip",
-          "url": "https://github.com/ytdl-org/youtube-dl/archive/2021.04.01.zip"
-        }
-      }
-    }
-  ],
   "scripts": {
     "lint": "grumphp run --ansi",
     "release": "robo release --ansi",

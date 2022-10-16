@@ -169,10 +169,8 @@ abstract class BaseController
      */
     protected function getVideoPageUrl(Request $request): string
     {
-        $url = $request->getQueryParam('url') ?: $request->getQueryParam('v');
-
         // Prevent SSRF attacks.
-        $parts = Url::validateUrl($url, new Options());
+        $parts = Url::validateUrl($request->getQueryParam('url'), new Options());
 
         return $parts['url'];
     }
