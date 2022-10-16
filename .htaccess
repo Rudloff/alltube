@@ -18,9 +18,6 @@ FileETag None
 <ifmodule mod_rewrite.c>
     RewriteEngine On
 
-    RewriteCond %{HTTP_HOST} ^alltube\.herokuapp\.com$ [NC]
-    RewriteRule ^(.*)$ https://www.alltubedownload.net/$1 [R=301,L]
-
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
 </ifmodule>
