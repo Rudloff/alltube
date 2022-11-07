@@ -10,4 +10,6 @@ COPY resources/php.ini /usr/local/etc/php/
 COPY . /var/www/html/
 RUN php composer.phar check-platform-reqs --no-dev
 RUN php composer.phar install --prefer-dist --no-progress --no-dev --optimize-autoloader
+RUN mkdir /var/www/html/templates_c/
+RUN chmod 770 -R /var/www/html/templates_c/
 ENV CONVERT=1
