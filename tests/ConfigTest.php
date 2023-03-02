@@ -14,7 +14,6 @@ use Alltube\Exception\ConfigException;
  */
 class ConfigTest extends BaseTest
 {
-
     /**
      * Test the getInstance function.
      *

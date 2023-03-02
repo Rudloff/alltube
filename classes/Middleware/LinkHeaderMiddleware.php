@@ -12,7 +12,6 @@ use Slim\Http\Response;
  */
 class LinkHeaderMiddleware
 {
-
     /**
      * @param Request $request
      * @param Response $response

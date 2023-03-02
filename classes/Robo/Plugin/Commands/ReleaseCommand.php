@@ -14,7 +14,6 @@ use Robo\Tasks;
  */
 class ReleaseCommand extends Tasks
 {
-
     /**
      * Create release archive
      * @return void

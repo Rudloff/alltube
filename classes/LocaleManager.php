@@ -17,7 +17,6 @@ use Symfony\Component\Translation\Loader\PoFileLoader;
  */
 class LocaleManager
 {
-
     /**
      * Path to locales.
      */

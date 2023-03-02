@@ -15,7 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class LoggerFactory
 {
-
     /**
      * @param Container $container
      * @return LoggerManager
