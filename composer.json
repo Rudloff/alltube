@@ -88,6 +88,7 @@
       "ergebnis/composer-normalize": true,
       "insite/composer-dangling-locked-deps": true,
       "oomphinc/composer-installers-extender": true,
+      "php-http/discovery": true,
       "phpro/grumphp": true
     },
     "platform": {
