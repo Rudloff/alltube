@@ -41,7 +41,7 @@
     "zonuexe/http-accept-language": "^0.4.1"
   },
   "require-dev": {
-    "consolidation/robo": "^2.1",
+    "consolidation/robo": "^3.0",
     "enlightn/security-checker": "^1.4",
     "ergebnis/composer-normalize": "^2.20",
     "insite/composer-dangling-locked-deps": "^0.2.1",
@@ -88,6 +88,7 @@
       "ergebnis/composer-normalize": true,
       "insite/composer-dangling-locked-deps": true,
       "oomphinc/composer-installers-extender": true,
+      "php-http/discovery": true,
       "phpro/grumphp": true
     },
     "platform": {

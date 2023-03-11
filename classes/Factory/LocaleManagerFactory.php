@@ -13,7 +13,6 @@ use Slim\Container;
  */
 class LocaleManagerFactory
 {
-
     /**
      * @param Container $container
      * @return LocaleManager

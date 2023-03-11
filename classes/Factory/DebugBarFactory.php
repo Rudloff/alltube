@@ -18,7 +18,6 @@ use Slim\Container;
  */
 class DebugBarFactory
 {
-
     /**
      * @param Container $container
      * @return DebugBar

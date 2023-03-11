@@ -19,7 +19,6 @@ use Jawira\CaseConverter\Convert;
  */
 class Config
 {
-
     /**
      * youtube-dl binary path.
      *

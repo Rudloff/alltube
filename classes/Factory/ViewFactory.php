@@ -20,7 +20,6 @@ use SmartyException;
  */
 class ViewFactory
 {
-
     /**
      * @param Uri $uri
      * @return Uri

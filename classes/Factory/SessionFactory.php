@@ -15,7 +15,6 @@ use Slim\Container;
  */
 class SessionFactory
 {
-
     /**
      * Get the current session.
      *

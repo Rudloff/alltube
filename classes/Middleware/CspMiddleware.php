@@ -15,7 +15,6 @@ use Slim\Http\Response;
  */
 class CspMiddleware
 {
-
     /**
      * @var Config
      */

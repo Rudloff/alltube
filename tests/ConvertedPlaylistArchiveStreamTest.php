@@ -17,7 +17,6 @@ use SmartyException;
  */
 class ConvertedPlaylistArchiveStreamTest extends StreamTest
 {
-
     /**
      * Prepare tests.
      *

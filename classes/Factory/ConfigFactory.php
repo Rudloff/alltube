@@ -14,7 +14,6 @@ use Symfony\Component\ErrorHandler\Debug;
  */
 class ConfigFactory
 {
-
     /**
      * @param Container $container
      * @return Config

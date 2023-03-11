@@ -12,7 +12,6 @@ use Throwable;
  */
 class ErrorHandler
 {
-
     /**
      * Last resort if the error has not been caught by the Slim error handler for some reason.
      * @param Throwable $e

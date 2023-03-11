@@ -10,5 +10,4 @@ use Exception;
  */
 class DependencyException extends Exception
 {
-
 }
