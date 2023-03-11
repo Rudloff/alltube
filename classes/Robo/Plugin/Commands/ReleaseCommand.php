@@ -26,6 +26,7 @@ class ReleaseCommand extends Tasks
         $gitTask = $this->taskExec('git');
         $result = $gitTask
             ->arg('describe')
+            ->interactive(false)
             ->run();
 
         $tmpDir = $this->_tmpDir();
