@@ -24,7 +24,7 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @var Video[]
      */
-    private $videos = [];
+    private array $videos = [];
 
     /**
      * Stream used to store data before it is sent to the browser.
@@ -38,21 +38,21 @@ class PlaylistArchiveStream extends ZipArchive implements StreamInterface
      *
      * @var StreamInterface
      */
-    protected $curVideoStream;
+    protected StreamInterface $curVideoStream;
 
     /**
      * True if the archive is complete.
      *
      * @var bool
      */
-    private $isComplete = false;
+    private bool $isComplete = false;
 
     /**
      * Downloader object.
      *
      * @var Downloader
      */
-    protected $downloader;
+    protected Downloader $downloader;
 
     /**
      * PlaylistArchiveStream constructor.
