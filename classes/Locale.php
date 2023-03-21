@@ -60,7 +60,7 @@ class Locale
      */
     public function getFullName(): string
     {
-        return PHPLocale::getDisplayName($this->getIso15897(), $this->getIso15897());
+        return mb_convert_case(PHPLocale::getDisplayName($this->getIso15897(), $this->getIso15897()), MB_CASE_TITLE);
     }
 
     /**
