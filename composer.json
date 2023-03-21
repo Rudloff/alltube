@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": ">=7.3",
+    "php": ">=7.4",
     "ext-intl": "*",
     "ext-json": "*",
     "aura/session": "^2.1",
@@ -31,7 +31,7 @@
     "mathmarques/smarty-view": "^1.2",
     "oomphinc/composer-installers-extender": "^2.0",
     "paragonie/csp-builder": "^2.5",
-    "rinvex/countries": "^6.1",
+    "rinvex/countries": "^7.3",
     "rudloff/alltube-library": "^0.1.3",
     "symfony/finder": "^5.4",
     "symfony/translation": "^4.0",
@@ -92,7 +92,7 @@
       "phpro/grumphp": true
     },
     "platform": {
-      "php": "7.3.11"
+      "php": "7.4.33"
     },
     "sort-packages": true
   },

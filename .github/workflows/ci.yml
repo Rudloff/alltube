@@ -9,8 +9,9 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '7.3'
           - '7.4'
+          - '8.0'
+          - '8.1'
     steps:
       - uses: actions/checkout@v2
       - name: Use PHP ${{ matrix.php-version }}
