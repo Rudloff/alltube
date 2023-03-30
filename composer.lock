@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "454753ac2a4d31f21bf2e197b7ce24d1",
+    "content-hash": "02f288a60af3784e20ca7e1ba9afac4a",
     "packages": [
         {
             "name": "aura/session",
@@ -3772,11 +3772,11 @@
             "time": "2014-08-20T20:43:34+00:00"
         },
         {
-            "name": "ytdl-org/youtube-dl",
-            "version": "2021.12.17",
+            "name": "yt-dlp/yt-dlp",
+            "version": "2023.03.04",
             "dist": {
                 "type": "tar",
-                "url": "https://yt-dl.org/downloads/2021.12.17/youtube-dl-2021.12.17.tar.gz"
+                "url": "https://github.com/yt-dlp/yt-dlp/releases/download/2023.03.04/yt-dlp.tar.gz"
             },
             "type": "library"
         },

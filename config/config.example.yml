@@ -1,6 +1,6 @@
 ---
 # Path to your youtube-dl binary
-youtubedl: vendor/ytdl-org/youtube-dl/youtube_dl/__main__.py
+youtubedl: vendor/yt-dlp/yt-dlp/yt_dlp/__main__.py
 
 # Path to your python binary
 python: /usr/bin/python
@@ -12,6 +12,8 @@ params:
     - --flat-playlist
     - --restrict-filenames
     - --no-playlist
+    - --use-extractors
+    - default,-generic
 
 # True to enable audio conversion
 convert: false

@@ -24,7 +24,7 @@ class Config
      *
      * @var string
      */
-    public string $youtubedl = 'vendor/ytdl-org/youtube-dl/youtube_dl/__main__.py';
+    public string $youtubedl = 'vendor/yt-dlp/yt-dlp/yt_dlp/__main__.py';
 
     /**
      * python binary path.
@@ -39,7 +39,13 @@ class Config
      * @var string[]
      */
     public array $params = [
-        '--no-warnings', '--ignore-errors', '--flat-playlist', '--restrict-filenames', '--no-playlist'
+        '--no-warnings',
+        '--ignore-errors',
+        '--flat-playlist',
+        '--restrict-filenames',
+        '--no-playlist',
+        '--use-extractors',
+        'default,-generic',
     ];
 
     /**
