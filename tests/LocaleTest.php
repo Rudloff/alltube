@@ -54,7 +54,7 @@ class LocaleTest extends ContainerTest
      */
     public function testGetFullName()
     {
-        $this->assertEquals('français (France)', $this->localeObject->getFullName());
+        $this->assertEquals('Français (France)', $this->localeObject->getFullName());
     }
 
     /**

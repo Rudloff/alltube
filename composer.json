@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": ">=7.3",
+    "php": ">=7.4",
     "ext-intl": "*",
     "ext-json": "*",
     "aura/session": "^2.1",
@@ -31,13 +31,13 @@
     "mathmarques/smarty-view": "^1.2",
     "oomphinc/composer-installers-extender": "^2.0",
     "paragonie/csp-builder": "^2.5",
-    "rinvex/countries": "^6.1",
+    "rinvex/countries": "^7.3",
     "rudloff/alltube-library": "^0.1.3",
     "symfony/finder": "^5.4",
     "symfony/translation": "^4.0",
     "symfony/yaml": "^4.0",
     "webfontkit/open-sans": "^1.0",
-    "ytdl-org/youtube-dl": "^2021.12",
+    "yt-dlp/yt-dlp": "^2023.03",
     "zonuexe/http-accept-language": "^0.4.1"
   },
   "require-dev": {
@@ -62,11 +62,11 @@
     {
       "type": "package",
       "package": {
-        "name": "ytdl-org/youtube-dl",
-        "version": "2021.12.17",
+        "name": "yt-dlp/yt-dlp",
+        "version": "2023.03.04",
         "dist": {
           "type": "tar",
-          "url": "https://yt-dl.org/downloads/2021.12.17/youtube-dl-2021.12.17.tar.gz"
+          "url": "https://github.com/yt-dlp/yt-dlp/releases/download/2023.03.04/yt-dlp.tar.gz"
         }
       }
     }
@@ -92,7 +92,7 @@
       "phpro/grumphp": true
     },
     "platform": {
-      "php": "7.3.11"
+      "php": "7.4.33"
     },
     "sort-packages": true
   },
@@ -108,11 +108,7 @@
     "installer-types": [
       "library"
     ],
-    "patches": {
-      "ytdl-org/youtube-dl": {
-        "Disable the generic extractor": "patches/youtube-dl-disable-generic.diff"
-      }
-    }
+    "patches": {}
   },
   "scripts": {
     "lint": "grumphp run --ansi",

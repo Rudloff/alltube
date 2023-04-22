@@ -20,7 +20,7 @@ class YoutubeChunkStream implements StreamInterface
      *
      * @var ResponseInterface
      */
-    private $response;
+    private ResponseInterface $response;
 
     /**
      * YoutubeChunkStream constructor.

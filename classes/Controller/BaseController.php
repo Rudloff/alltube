@@ -30,21 +30,21 @@ abstract class BaseController
      *
      * @var Video
      */
-    protected $video;
+    protected Video $video;
 
     /**
      * Default youtube-dl format.
      *
      * @var string
      */
-    protected $defaultFormat = 'best/bestvideo';
+    protected string $defaultFormat = 'best/bestvideo';
 
     /**
      * Slim dependency container.
      *
      * @var ContainerInterface
      */
-    protected $container;
+    protected ContainerInterface $container;
 
     /**
      * Config instance.

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f7b900aafa876f17e0815ca6fa044a5",
+    "content-hash": "02f288a60af3784e20ca7e1ba9afac4a",
     "packages": [
         {
             "name": "aura/session",
@@ -2037,25 +2037,24 @@
         },
         {
             "name": "rinvex/countries",
-            "version": "v6.1.2",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rinvex/countries.git",
-                "reference": "0dd9da817c1faa33429fe56b8ba059fdabe6e0fe"
+                "reference": "4696d23976e27d6cedf7e55db3fa24e11924b727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rinvex/countries/zipball/0dd9da817c1faa33429fe56b8ba059fdabe6e0fe",
-                "reference": "0dd9da817c1faa33429fe56b8ba059fdabe6e0fe",
+                "url": "https://api.github.com/repos/rinvex/countries/zipball/4696d23976e27d6cedf7e55db3fa24e11924b727",
+                "reference": "4696d23976e27d6cedf7e55db3fa24e11924b727",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.0"
+                "php": "^7.4.0 || ^8.0.0"
             },
             "require-dev": {
-                "codedungeon/phpunit-result-printer": "^0.26.0",
-                "laravel/helpers": "^1.1.0",
-                "phpunit/phpunit": "^8.3.0"
+                "codedungeon/phpunit-result-printer": "^0.30.0",
+                "phpunit/phpunit": "^9.5.0"
             },
             "type": "library",
             "extra": {
@@ -2117,7 +2116,7 @@
                 "issues": "https://github.com/rinvex/countries/issues",
                 "source": "https://github.com/rinvex/countries"
             },
-            "time": "2020-03-13T18:04:45+00:00"
+            "time": "2020-12-25T01:36:24+00:00"
         },
         {
             "name": "rudloff/alltube-library",
@@ -3768,11 +3767,11 @@
             "time": "2014-08-20T20:43:34+00:00"
         },
         {
-            "name": "ytdl-org/youtube-dl",
-            "version": "2021.12.17",
+            "name": "yt-dlp/yt-dlp",
+            "version": "2023.03.04",
             "dist": {
                 "type": "tar",
-                "url": "https://yt-dl.org/downloads/2021.12.17/youtube-dl-2021.12.17.tar.gz"
+                "url": "https://github.com/yt-dlp/yt-dlp/releases/download/2023.03.04/yt-dlp.tar.gz"
             },
             "type": "library"
         },
@@ -9354,13 +9353,13 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "ext-intl": "*",
         "ext-json": "*"
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.3.11"
+        "php": "7.4.33"
     },
     "plugin-api-version": "2.3.0"
 }

@@ -27,14 +27,14 @@ class LocaleManager
      *
      * @var Locale|null
      */
-    private $curLocale;
+    private ?Locale $curLocale = null;
 
     /**
      * Session segment used to store session variables.
      *
      * @var Segment
      */
-    private $sessionSegment;
+    private Segment $sessionSegment;
 
     /**
      * Default locale.
@@ -48,7 +48,7 @@ class LocaleManager
      *
      * @var Translator
      */
-    private $translator;
+    private Translator $translator;
 
     /**
      * LocaleManager constructor.
